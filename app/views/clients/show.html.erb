@@ -1,0 +1,45 @@
+<%- model_class = Client -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:organization) %>:</strong></dt>
+  <dd><%= @client.organization %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
+  <dd><%= @client.first_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
+  <dd><%= @client.last_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @client.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_name) %>:</strong></dt>
+  <dd><%= @client.user_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:password) %>:</strong></dt>
+  <dd><%= @client.password %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sec_adrs_street_address_1) %>:</strong></dt>
+  <dd><%= @client.sec_adrs_street_address_1 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sec_adrs_street_address_2) %>:</strong></dt>
+  <dd><%= @client.sec_adrs_street_address_2 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sec_adrs_city) %>:</strong></dt>
+  <dd><%= @client.sec_adrs_city %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sec_adrs_province_or_state) %>:</strong></dt>
+  <dd><%= @client.sec_adrs_province_or_state %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sec_adrs_post_or_zip_code) %>:</strong></dt>
+  <dd><%= @client.sec_adrs_post_or_zip_code %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @client.status %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:last_login) %>:</strong></dt>
+  <dd><%= @client.last_login %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              clients_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_client_path(@client), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              client_path(@client),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
