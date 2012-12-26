@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221153111) do
+ActiveRecord::Schema.define(:version => 20121226164642) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "category"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "client_additional_contacts", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone_1"
+    t.string   "phone_2"
+    t.string   "user_name"
+    t.string   "password"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "client_billing_infos", :force => true do |t|
     t.string   "country"
@@ -46,6 +65,108 @@ ActiveRecord::Schema.define(:version => 20121221153111) do
     t.datetime "last_login"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "company_profiles", :force => true do |t|
+    t.string   "org_name"
+    t.string   "country"
+    t.string   "street_address_1"
+    t.string   "street_address_2"
+    t.string   "city"
+    t.string   "province_or_state"
+    t.string   "postal_or_zip_code"
+    t.string   "profession"
+    t.string   "phone_business"
+    t.string   "phone_mobile"
+    t.string   "fax"
+    t.string   "email"
+    t.string   "time_zone"
+    t.boolean  "auto_dst_adjustment"
+    t.string   "currency_code"
+    t.string   "currecy_symbol"
+    t.string   "admin_first_name"
+    t.string   "admin_last_name"
+    t.string   "admin_email"
+    t.decimal  "admin_billing_rate_per_hour", :precision => 10, :scale => 0
+    t.string   "admin_user_name"
+    t.string   "admin_password"
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+  end
+
+  create_table "invoice_line_items", :force => true do |t|
+    t.integer  "invoice_id"
+    t.integer  "item_id"
+    t.string   "item_name"
+    t.string   "item_description"
+    t.decimal  "item_unit_cost",   :precision => 10, :scale => 0
+    t.decimal  "item_quantity",    :precision => 10, :scale => 0
+    t.integer  "tax_1"
+    t.integer  "tax_2"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "invoices", :force => true do |t|
+    t.string   "invoice_number"
+    t.datetime "invoice_date"
+    t.string   "po_number"
+    t.decimal  "discount_percentage", :precision => 10, :scale => 0
+    t.integer  "client_id"
+    t.text     "tems"
+    t.text     "notes"
+    t.string   "status"
+    t.decimal  "sub_total",           :precision => 10, :scale => 0
+    t.decimal  "discount_amount",     :precision => 10, :scale => 0
+    t.decimal  "tax_amount",          :precision => 10, :scale => 0
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+  end
+
+  create_table "items", :force => true do |t|
+    t.string   "item_name"
+    t.string   "item_description"
+    t.decimal  "unit_cost",        :precision => 10, :scale => 0
+    t.integer  "quantity"
+    t.integer  "tax_1"
+    t.integer  "tax_2"
+    t.boolean  "track_invetory"
+    t.integer  "inventory"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "recurring_profile_line_items", :force => true do |t|
+    t.integer  "invoice_id"
+    t.integer  "item_id"
+    t.string   "item_name"
+    t.string   "item_description"
+    t.decimal  "item_unit_cost",   :precision => 10, :scale => 0
+    t.decimal  "item_quantity",    :precision => 10, :scale => 0
+    t.integer  "tax_1"
+    t.integer  "tax_2"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "recurring_profiles", :force => true do |t|
+    t.datetime "first_invoice_date"
+    t.string   "po_number"
+    t.decimal  "discount_percentage", :precision => 10, :scale => 0
+    t.string   "frequency"
+    t.integer  "occurrences"
+    t.boolean  "prorate"
+    t.decimal  "prorate_for",         :precision => 10, :scale => 0
+    t.integer  "gateway_id"
+    t.integer  "client_id"
+    t.text     "tems"
+    t.text     "notes"
+    t.string   "status"
+    t.decimal  "sub_total",           :precision => 10, :scale => 0
+    t.decimal  "discount_amount",     :precision => 10, :scale => 0
+    t.decimal  "tax_amount",          :precision => 10, :scale => 0
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
 end

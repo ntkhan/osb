@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invoice number:</b>
+  <%= @invoice.invoice_number %>
+</p>
+
+<p>
+  <b>Invoice date:</b>
+  <%= @invoice.invoice_date %>
+</p>
+
+<p>
+  <b>Po number:</b>
+  <%= @invoice.po_number %>
+</p>
+
+<p>
+  <b>Discount percentage:</b>
+  <%= @invoice.discount_percentage %>
+</p>
+
+<p>
+  <b>Client:</b>
+  <%= @invoice.client_id %>
+</p>
+
+<p>
+  <b>Tems:</b>
+  <%= @invoice.tems %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @invoice.notes %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @invoice.status %>
+</p>
+
+<p>
+  <b>Sub total:</b>
+  <%= @invoice.sub_total %>
+</p>
+
+<p>
+  <b>Discount amount:</b>
+  <%= @invoice.discount_amount %>
+</p>
+
+<p>
+  <b>Tax amount:</b>
+  <%= @invoice.tax_amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

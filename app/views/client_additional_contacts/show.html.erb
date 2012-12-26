@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Client:</b>
+  <%= @client_additional_contact.client_id %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%= @client_additional_contact.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @client_additional_contact.last_name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @client_additional_contact.email %>
+</p>
+
+<p>
+  <b>Phone 1:</b>
+  <%= @client_additional_contact.phone_1 %>
+</p>
+
+<p>
+  <b>Phone 2:</b>
+  <%= @client_additional_contact.phone_2 %>
+</p>
+
+<p>
+  <b>User name:</b>
+  <%= @client_additional_contact.user_name %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @client_additional_contact.password %>
+</p>
+
+
+<%= link_to 'Edit', edit_client_additional_contact_path(@client_additional_contact) %> |
+<%= link_to 'Back', client_additional_contacts_path %>

@@ -1,4 +1,28 @@
 Osb::Application.routes.draw do
+  resources :categories
+
+
+  resources :items
+
+
+  resources :recurring_profile_line_items
+
+
+  resources :recurring_profiles
+
+
+  resources :invoice_line_items
+
+
+  resources :invoices
+
+
+  resources :company_profiles
+
+
+  resources :client_additional_contacts
+
+
   resources :client_billing_infos
 
 
