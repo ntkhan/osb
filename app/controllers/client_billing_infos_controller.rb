@@ -1,4 +1,5 @@
 class ClientBillingInfosController < ApplicationController
+  before_filter :authenticate_user!
   # GET /client_billing_infos
   # GET /client_billing_infos.json
   def index

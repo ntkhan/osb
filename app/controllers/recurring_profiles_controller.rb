@@ -1,4 +1,5 @@
 class RecurringProfilesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /recurring_profiles
   # GET /recurring_profiles.json
   def index
