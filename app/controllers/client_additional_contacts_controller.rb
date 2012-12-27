@@ -1,4 +1,5 @@
 class ClientAdditionalContactsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /client_additional_contacts
   # GET /client_additional_contacts.json
   def index

@@ -1,4 +1,5 @@
 class RecurringProfileLineItemsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /recurring_profile_line_items
   # GET /recurring_profile_line_items.json
   def index
