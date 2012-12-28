@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
     clients_path
   end
 
-  def after_sign_out_path_for(user)
-    categories_path
-  end
+  #def after_sign_out_path_for(user)
+  #  categories_path
+  #end
 
 end
