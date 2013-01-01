@@ -6,11 +6,20 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:organization) %></th>
-      <th><%= model_class.human_attribute_name(:first_name) %></th>
-      <th><%= model_class.human_attribute_name(:last_name) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:user_name) %></th>
+      <th><%= model_class.human_attribute_name(:organization_name) %></th>
+      <th><%= model_class.human_attribute_name(:send_invoice_by) %></th>
+      <th><%= model_class.human_attribute_name(:country) %></th>
+      <th><%= model_class.human_attribute_name(:address_street1) %></th>
+      <th><%= model_class.human_attribute_name(:address_street2) %></th>
+      <th><%= model_class.human_attribute_name(:city) %></th>
+      <th><%= model_class.human_attribute_name(:province_state) %></th>
+      <th><%= model_class.human_attribute_name(:postal_zip_code) %></th>
+      <th><%= model_class.human_attribute_name(:industry) %></th>
+      <th><%= model_class.human_attribute_name(:company_size) %></th>
+      <th><%= model_class.human_attribute_name(:business_phone) %></th>
+      <th><%= model_class.human_attribute_name(:fax) %></th>
+      <th><%= model_class.human_attribute_name(:internal_notes) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,11 +27,20 @@
     <% @clients.each do |client| %>
       <tr>
         <td><%= link_to client.id, client_path(client) %></td>
-        <td><%= client.organization %></td>
-        <td><%= client.first_name %></td>
-        <td><%= client.last_name %></td>
-        <td><%= client.email %></td>
-        <td><%= client.user_name %></td>
+        <td><%= client.organization_name %></td>
+        <td><%= client.send_invoice_by %></td>
+        <td><%= client.country %></td>
+        <td><%= client.address_street1 %></td>
+        <td><%= client.address_street2 %></td>
+        <td><%= client.city %></td>
+        <td><%= client.province_state %></td>
+        <td><%= client.postal_zip_code %></td>
+        <td><%= client.industry %></td>
+        <td><%= client.company_size %></td>
+        <td><%= client.business_phone %></td>
+        <td><%= client.fax %></td>
+        <td><%= client.internal_notes %></td>
+        <td><%=l client.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_client_path(client), :class => 'btn btn-mini' %>

@@ -1,4 +1,10 @@
 Osb::Application.routes.draw do
+  resources :clients
+
+
+  resources :client_contacts
+
+
   devise_for :users
 
   devise_scope :user do
@@ -20,7 +26,9 @@ Osb::Application.routes.draw do
   resources :invoice_line_items
 
 
-  resources :invoices
+  resources :invoices do
+    resources :invoice_line_items
+  end
 
 
   resources :company_profiles

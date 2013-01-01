@@ -1,3 +1,4 @@
 class Client < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_login, :last_name, :organization, :password, :sec_adrs_city, :sec_adrs_country, :sec_adrs_post_or_zip_code, :sec_adrs_province_or_state, :sec_adrs_street_address_1, :sec_adrs_street_address_2, :status, :user_name
+  attr_accessible :address_street1, :address_street2, :business_phone, :city, :company_size, :country, :fax, :industry, :internal_notes, :organization_name, :postal_zip_code, :province_state, :send_invoice_by
+  has_many :invoices
 end

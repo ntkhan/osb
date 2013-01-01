@@ -1,5 +1,5 @@
 class InvoiceLineItemsController < ApplicationController
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
   # GET /invoice_line_items
   # GET /invoice_line_items.json
   def index

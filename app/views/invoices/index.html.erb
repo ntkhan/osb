@@ -1,43 +1,56 @@
-<h1>Listing invoices</h1>
-
-<table>
-  <tr>
-    <th>Invoice number</th>
-    <th>Invoice date</th>
-    <th>Po number</th>
-    <th>Discount percentage</th>
-    <th>Client</th>
-    <th>Tems</th>
-    <th>Notes</th>
-    <th>Status</th>
-    <th>Sub total</th>
-    <th>Discount amount</th>
-    <th>Tax amount</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @invoices.each do |invoice| %>
-  <tr>
-    <td><%= invoice.invoice_number %></td>
-    <td><%= invoice.invoice_date %></td>
-    <td><%= invoice.po_number %></td>
-    <td><%= invoice.discount_percentage %></td>
-    <td><%= invoice.client_id %></td>
-    <td><%= invoice.tems %></td>
-    <td><%= invoice.notes %></td>
-    <td><%= invoice.status %></td>
-    <td><%= invoice.sub_total %></td>
-    <td><%= invoice.discount_amount %></td>
-    <td><%= invoice.tax_amount %></td>
-    <td><%= link_to 'Show', invoice %></td>
-    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-    <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Invoice -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:invoice_number) %></th>
+      <th><%= model_class.human_attribute_name(:invoice_date) %></th>
+      <th><%= model_class.human_attribute_name(:po_number) %></th>
+      <th><%= model_class.human_attribute_name(:discount_percentage) %></th>
+      <th><%= model_class.human_attribute_name(:client_id) %></th>
+      <th><%= model_class.human_attribute_name(:tems) %></th>
+      <th><%= model_class.human_attribute_name(:notes) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:sub_total) %></th>
+      <th><%= model_class.human_attribute_name(:discount_amount) %></th>
+      <th><%= model_class.human_attribute_name(:tax_amount) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to invoice.id, invoice_path(invoice) %></td>
+        <td><%= invoice.invoice_number %></td>
+        <td><%= invoice.invoice_date %></td>
+        <td><%= invoice.po_number %></td>
+        <td><%= invoice.discount_percentage %></td>
+        <td><%= invoice.client_id %></td>
+        <td><%= invoice.tems %></td>
+        <td><%= invoice.notes %></td>
+        <td><%= invoice.status %></td>
+        <td><%= invoice.sub_total %></td>
+        <td><%= invoice.discount_amount %></td>
+        <td><%= invoice.tax_amount %></td>
+        <td><%=l invoice.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_invoice_path(invoice), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      invoice_path(invoice),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Invoice', new_invoice_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_invoice_path,
+            :class => 'btn btn-primary' %>

@@ -18,7 +18,7 @@ class ClientsControllerTest < ActionController::TestCase
 
   test "should create client" do
     assert_difference('Client.count') do
-      post :create, client: { email: @client.email, first_name: @client.first_name, last_login: @client.last_login, last_name: @client.last_name, organization: @client.organization, password: @client.password, sec_adrs_city: @client.sec_adrs_city, sec_adrs_country: @client.sec_adrs_country, sec_adrs_post_or_zip_code: @client.sec_adrs_post_or_zip_code, sec_adrs_province_or_state: @client.sec_adrs_province_or_state, sec_adrs_street_address_1: @client.sec_adrs_street_address_1, sec_adrs_street_address_2: @client.sec_adrs_street_address_2, status: @client.status, user_name: @client.user_name }
+      post :create, client: { address_street1: @client.address_street1, address_street2: @client.address_street2, business_phone: @client.business_phone, city: @client.city, company_size: @client.company_size, country: @client.country, fax: @client.fax, industry: @client.industry, internal_notes: @client.internal_notes, organization_name: @client.organization_name, postal_zip_code: @client.postal_zip_code, province_state: @client.province_state, send_invoice_by: @client.send_invoice_by }
     end
 
     assert_redirected_to client_path(assigns(:client))
@@ -35,7 +35,7 @@ class ClientsControllerTest < ActionController::TestCase
   end
 
   test "should update client" do
-    put :update, id: @client, client: { email: @client.email, first_name: @client.first_name, last_login: @client.last_login, last_name: @client.last_name, organization: @client.organization, password: @client.password, sec_adrs_city: @client.sec_adrs_city, sec_adrs_country: @client.sec_adrs_country, sec_adrs_post_or_zip_code: @client.sec_adrs_post_or_zip_code, sec_adrs_province_or_state: @client.sec_adrs_province_or_state, sec_adrs_street_address_1: @client.sec_adrs_street_address_1, sec_adrs_street_address_2: @client.sec_adrs_street_address_2, status: @client.status, user_name: @client.user_name }
+    put :update, id: @client, client: { address_street1: @client.address_street1, address_street2: @client.address_street2, business_phone: @client.business_phone, city: @client.city, company_size: @client.company_size, country: @client.country, fax: @client.fax, industry: @client.industry, internal_notes: @client.internal_notes, organization_name: @client.organization_name, postal_zip_code: @client.postal_zip_code, province_state: @client.province_state, send_invoice_by: @client.send_invoice_by }
     assert_redirected_to client_path(assigns(:client))
   end
 

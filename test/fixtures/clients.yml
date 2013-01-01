@@ -1,33 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  organization: MyString
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  user_name: MyString
-  password: MyString
-  sec_adrs_country: MyString
-  sec_adrs_street_address_1: MyString
-  sec_adrs_street_address_2: MyString
-  sec_adrs_city: MyString
-  sec_adrs_province_or_state: MyString
-  sec_adrs_post_or_zip_code: MyString
-  status: MyString
-  last_login: 2012-12-21 20:30:27
+  organization_name: MyString
+  send_invoice_by: MyString
+  country: MyString
+  address_street1: MyString
+  address_street2: MyString
+  city: MyString
+  province_state: MyString
+  postal_zip_code: MyString
+  industry: MyString
+  company_size: MyString
+  business_phone: MyString
+  fax: MyString
+  internal_notes: MyText
 
 two:
-  organization: MyString
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  user_name: MyString
-  password: MyString
-  sec_adrs_country: MyString
-  sec_adrs_street_address_1: MyString
-  sec_adrs_street_address_2: MyString
-  sec_adrs_city: MyString
-  sec_adrs_province_or_state: MyString
-  sec_adrs_post_or_zip_code: MyString
-  status: MyString
-  last_login: 2012-12-21 20:30:27
+  organization_name: MyString
+  send_invoice_by: MyString
+  country: MyString
+  address_street1: MyString
+  address_street2: MyString
+  city: MyString
+  province_state: MyString
+  postal_zip_code: MyString
+  industry: MyString
+  company_size: MyString
+  business_phone: MyString
+  fax: MyString
+  internal_notes: MyText

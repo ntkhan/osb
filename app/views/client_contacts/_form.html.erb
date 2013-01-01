@@ -1,10 +1,10 @@
-<%= form_for(@client_additional_contact) do |f| %>
-  <% if @client_additional_contact.errors.any? %>
+<%= form_for(@client_contact) do |f| %>
+  <% if @client_contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@client_additional_contact.errors.count, "error") %> prohibited this client_additional_contact from being saved:</h2>
+      <h2><%= pluralize(@client_contact.errors.count, "error") %> prohibited this client_contact from being saved:</h2>
 
       <ul>
-      <% @client_additional_contact.errors.full_messages.each do |msg| %>
+      <% @client_contact.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -28,20 +28,12 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :phone_1 %><br />
-    <%= f.text_field :phone_1 %>
+    <%= f.label :phone1 %><br />
+    <%= f.text_field :phone1 %>
   </div>
   <div class="field">
-    <%= f.label :phone_2 %><br />
-    <%= f.text_field :phone_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.label :phone2 %><br />
+    <%= f.text_field :phone2 %>
   </div>
   <div class="actions">
     <%= f.submit %>
