@@ -15,3 +15,12 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require jquery_nested_form
+
+jQuery(function(){
+
+    //override default behavior of inserting new subforms into form    
+    window.NestedFormEvents.prototype.insertFields = function(content, assoc, link) {
+        var $tr = $(link).closest('tr');
+        return $(content).insertBefore($tr);
+    }
+});

@@ -37,17 +37,25 @@
     </div>
   </div><!-- rigt -->
 
-  <div style="width:100%; clear:both; height:300px; border: 1px solid #CCCCCC; border-radius:5px; margin: 0 0 20px 0;">
+  <div class="invoice_grid_wrapper" style="">
     <table class="invoice_grid_fields">
-      <%= f.fields_for :invoice_line_items %>
+      <tbody>
+      <thead><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax</th><th>Tax</th><th>Total</th></thead>
+      </tbody>
+        <%= f.fields_for :invoice_line_items, :wrapper => false %>
+      <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>      
     </table>
-    <%= f.link_to_add "+", :invoice_line_items %>
+  <%#= f.link_to_add "+", :invoice_line_items %>
   </div><!-- task -->
 
+  <div class="invoice_balance">
 
+  </div> <!-- invoice balance -->
+
+  <div class="terms_notes">
   <div style="float:left;">
     <div class="control-group">
-      <%= f.label :tems, :class => 'control-label' %>
+      <%= f.label :terms, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_area :tems, :class => 'text_area' %>
       </div>
@@ -63,6 +71,7 @@
       </div>
     </div>
   </div><!-- notes -->
+  </div> <!-- Terms notes -->
 
   <div class="control-group" style="clear:both;">
     <%= f.label :status, :class => 'control-label' %>
