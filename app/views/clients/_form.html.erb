@@ -1,80 +1,80 @@
 <%= form_for @client, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
-    <%= f.label :organization, :class => 'control-label' %>
+    <%= f.label :organization_name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :organization, :class => 'text_field' %>
+      <%= f.text_field :organization_name, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :first_name, :class => 'control-label' %>
+    <%= f.label :send_invoice_by, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :first_name, :class => 'text_field' %>
+      <%= f.text_field :send_invoice_by, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :last_name, :class => 'control-label' %>
+    <%= f.label :country, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :last_name, :class => 'text_field' %>
+      <%= f.text_field :country, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
+    <%= f.label :address_street1, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
+      <%= f.text_field :address_street1, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :user_name, :class => 'control-label' %>
+    <%= f.label :address_street2, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :user_name, :class => 'text_field' %>
+      <%= f.text_field :address_street2, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :password, :class => 'control-label' %>
+    <%= f.label :city, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :password, :class => 'text_field' %>
+      <%= f.text_field :city, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :sec_adrs_street_address_1, :class => 'control-label' %>
+    <%= f.label :province_state, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :sec_adrs_street_address_1, :class => 'text_field' %>
+      <%= f.text_field :province_state, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :sec_adrs_street_address_2, :class => 'control-label' %>
+    <%= f.label :postal_zip_code, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :sec_adrs_street_address_2, :class => 'text_field' %>
+      <%= f.text_field :postal_zip_code, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :sec_adrs_city, :class => 'control-label' %>
+    <%= f.label :industry, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :sec_adrs_city, :class => 'text_field' %>
+      <%= f.text_field :industry, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :sec_adrs_province_or_state, :class => 'control-label' %>
+    <%= f.label :company_size, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :sec_adrs_province_or_state, :class => 'text_field' %>
+      <%= f.text_field :company_size, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :sec_adrs_post_or_zip_code, :class => 'control-label' %>
+    <%= f.label :business_phone, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :sec_adrs_post_or_zip_code, :class => 'text_field' %>
+      <%= f.text_field :business_phone, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :status, :class => 'control-label' %>
+    <%= f.label :fax, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :status, :class => 'text_field' %>
+      <%= f.text_field :fax, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :last_login, :class => 'control-label' %>
+    <%= f.label :internal_notes, :class => 'control-label' %>
     <div class="controls">
-      <%= f.datetime_select :last_login, :class => 'datetime_select' %>
+      <%= f.text_area :internal_notes, :class => 'text_area' %>
     </div>
   </div>
 

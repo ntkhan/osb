@@ -1,0 +1,36 @@
+<tr class="fields">
+  <td>
+    <%= f.link_to_remove "x" %>
+  </td>
+  <td>
+    <div class="field item">
+      <%=f.collection_select :item_id, Item.all, :id, :item_name, :prompt => "Select an item" %>
+    </div>
+  </td>
+  <td>
+    <div class="field description">
+      <%= f.text_field :item_description %>
+    </div>
+  </td>
+  <td>
+    <div class="field unit_cost">
+      <%= f.text_field :item_unit_cost %>
+    </div>
+  </td>
+  <td>
+    <div class="field quantity">
+      <%= f.text_field :item_quantity %>
+    </div>
+  </td>
+  <td>
+    <div class="field tax1">
+      <%= f.number_field :tax_1 %>
+    </div>
+  </td>
+  <td>
+
+    <div class="field tax2">
+      <%= f.number_field :tax_2 %>
+    </div>
+  </td>
+</tr>

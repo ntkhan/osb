@@ -1,61 +1,106 @@
-<%= form_for(@invoice) do |f| %>
-  <% if @invoice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
-
-      <ul>
-      <% @invoice.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= nested_form_for @invoice, :html => { :class => 'form-horizontal' } do |f| %>
+  <% @parent_f = f %>
+  <div style="float:left;">
+    <div class="control-group">
+      <%= f.label :client_id, :class => 'control-label' %>
+      <div class="controls">
+        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, :prompt => "Select a client" %>
+      </div>
     </div>
-  <% end %>
+  </div><!-- left -->
 
-  <div class="field">
-    <%= f.label :invoice_number %><br />
-    <%= f.text_field :invoice_number %>
+
+  <div style="float:right;">
+    <div class="control-group">
+      <%= f.label :invoice_number, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :invoice_number, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :invoice_date, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :invoice_date, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :po_number, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :po_number, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :discount_percentage, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :discount_percentage, :class => 'number_field' %>
+      </div>
+    </div>
+  </div><!-- rigt -->
+
+  <div class="invoice_grid_wrapper" style="">
+    <table class="invoice_grid_fields">
+      <tbody>
+      <thead><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax</th><th>Tax</th><th>Total</th></thead>
+      </tbody>
+        <%= f.fields_for :invoice_line_items, :wrapper => false %>
+      <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>      
+    </table>
+  <%#= f.link_to_add "+", :invoice_line_items %>
+  </div><!-- task -->
+
+  <div class="invoice_balance">
+
+  </div> <!-- invoice balance -->
+
+  <div class="terms_notes">
+  <div style="float:left;">
+    <div class="control-group">
+      <%= f.label :terms, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :tems, :class => 'text_area' %>
+      </div>
+    </div>
+  </div><!-- terms -->
+
+
+  <div style="float:right;">
+    <div class="control-group">
+      <%= f.label :notes, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :notes, :class => 'text_area' %>
+      </div>
+    </div>
+  </div><!-- notes -->
+  </div> <!-- Terms notes -->
+
+  <div class="control-group" style="clear:both;">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :status, :class => 'text_field' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :invoice_date %><br />
-    <%= f.datetime_select :invoice_date %>
+  <div class="control-group">
+    <%= f.label :sub_total, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :sub_total, :class => 'number_field' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :po_number %><br />
-    <%= f.text_field :po_number %>
+  <div class="control-group">
+    <%= f.label :discount_amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :discount_amount, :class => 'number_field' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :discount_percentage %><br />
-    <%= f.text_field :discount_percentage %>
+  <div class="control-group">
+    <%= f.label :tax_amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :tax_amount, :class => 'number_field' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :client_id %><br />
-    <%= f.number_field :client_id %>
-  </div>
-  <div class="field">
-    <%= f.label :tems %><br />
-    <%= f.text_area :tems %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :sub_total %><br />
-    <%= f.text_field :sub_total %>
-  </div>
-  <div class="field">
-    <%= f.label :discount_amount %><br />
-    <%= f.text_field :discount_amount %>
-  </div>
-  <div class="field">
-    <%= f.label :tax_amount %><br />
-    <%= f.text_field :tax_amount %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      invoices_path, :class => 'btn' %>
   </div>
 <% end %>

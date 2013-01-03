@@ -24,6 +24,7 @@ group :assets do
 end
 gem 'active_link_to'
 gem 'jquery-rails'
+gem "nested_form"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

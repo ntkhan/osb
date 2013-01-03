@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
   # GET /invoices
   # GET /invoices.json
   def index
@@ -25,7 +25,10 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
-    @invoice = Invoice.new
+    @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
+    3.times do
+      @invoice.invoice_line_items.build()
+    end
 
     respond_to do |format|
       format.html # new.html.erb

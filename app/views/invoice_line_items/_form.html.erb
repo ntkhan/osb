@@ -4,20 +4,17 @@
       <h2><%= pluralize(@invoice_line_item.errors.count, "error") %> prohibited this invoice_line_item from being saved:</h2>
 
       <ul>
-      <% @invoice_line_item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @invoice_line_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :invoice_id %><br />
-    <%= f.number_field :invoice_id %>
-  </div>
-  <div class="field">
     <%= f.label :item_id %><br />
     <%= f.number_field :item_id %>
+    <%=collection_select :invoice_line_item, :item_id, Item.all, :id, :item_name, :prompt => "Select an item" %>
   </div>
   <div class="field">
     <%= f.label :item_name %><br />
@@ -43,7 +40,6 @@
     <%= f.label :tax_2 %><br />
     <%= f.number_field :tax_2 %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.link_to_remove "x" %>
+  <%= f.link_to_add "+", :invoice_line_items %>
 <% end %>

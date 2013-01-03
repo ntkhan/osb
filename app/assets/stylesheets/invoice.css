@@ -1,0 +1,40 @@
+/*
+    Document   : invoice
+    Created on : Jan 1, 2013, 10:11:51 AM
+    Author     : imran
+    Description:
+        Invoice page styling.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.invoice_grid_fields td{padding-right: 5px;}
+.invoice_grid_fields .name input{width: 150px}
+.invoice_grid_fields .description input{width: 300px}
+.invoice_grid_fields .unit_cost input{width: 100px}
+.invoice_grid_fields .quantity input{width: 100px}
+.invoice_grid_fields .tax1 input{width: 50px}
+.invoice_grid_fields .tax2 input{width: 50px}
+
+table.invoice_grid_fields{ margin: 20px;}
+.invoice_grid_wrapper, .invoice_balance{
+    width:100%;
+    clear:both;
+    min-height: 300px;
+    border: 1px solid #CCCCCC;
+    border-radius:5px 5px 0 5px;
+    float: right;
+}
+.invoice_balance{
+    border-radius:0 0 5px 5px;
+    border: 1px solid #CCCCCC;
+    border-top: 0 none;
+    margin: 0 0 20px 0;
+    min-height: 100px;
+    width: 500px;
+}
+.terms_notes{width: 100%; float: left;}
+
