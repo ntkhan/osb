@@ -4,7 +4,7 @@
     <div class="control-group">
       <%= f.label :client_id, :class => 'control-label' %>
       <div class="controls">
-        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, :prompt => "Select a client" %>
+        <%=collection_select :invoice, :client_id, Client.all, :id, :organization, :prompt => "Select a client" %>
       </div>
     </div>
   </div><!-- left -->
@@ -40,37 +40,49 @@
   <div class="invoice_grid_wrapper" style="">
     <table class="invoice_grid_fields">
       <tbody>
-      <thead><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax</th><th>Tax</th><th>Total</th></thead>
+      <thead><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax</th><th>Tax</th><th>Line Total</th></thead>
       </tbody>
-        <%= f.fields_for :invoice_line_items, :wrapper => false %>
-      <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>      
+      <%= f.fields_for :invoice_line_items, :wrapper => false %>
+      <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>
     </table>
-  <%#= f.link_to_add "+", :invoice_line_items %>
   </div><!-- task -->
 
   <div class="invoice_balance">
-
+    <table>
+      <tr>
+        <td>Subtotal</td>
+        <td><%= f.number_field :sub_total, :class => 'number_field',:disabled => true %></td>
+      </tr>
+      <tr>
+        <td>Discount</td>
+        <td><%= f.number_field :discount_amount, :class => 'number_field',:disabled => true %></td>
+      </tr>
+      <tr>
+        <td><b>Balance</b></td>
+        <td><b><%= text_field_tag 'invoice_total','0.00',:disabled => true %></b></td>
+      </tr>
+    </table>
   </div> <!-- invoice balance -->
 
   <div class="terms_notes">
-  <div style="float:left;">
-    <div class="control-group">
-      <%= f.label :terms, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :tems, :class => 'text_area' %>
+    <div style="float:left;">
+      <div class="control-group">
+        <%= f.label :terms, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :tems, :class => 'text_area' %>
+        </div>
       </div>
-    </div>
-  </div><!-- terms -->
+    </div><!-- terms -->
 
 
-  <div style="float:right;">
-    <div class="control-group">
-      <%= f.label :notes, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :notes, :class => 'text_area' %>
+    <div style="float:right;">
+      <div class="control-group">
+        <%= f.label :notes, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :notes, :class => 'text_area' %>
+        </div>
       </div>
-    </div>
-  </div><!-- notes -->
+    </div><!-- notes -->
   </div> <!-- Terms notes -->
 
   <div class="control-group" style="clear:both;">
@@ -82,13 +94,13 @@
   <div class="control-group">
     <%= f.label :sub_total, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :sub_total, :class => 'number_field' %>
+      
     </div>
   </div>
   <div class="control-group">
     <%= f.label :discount_amount, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :discount_amount, :class => 'number_field' %>
+      
     </div>
   </div>
   <div class="control-group">

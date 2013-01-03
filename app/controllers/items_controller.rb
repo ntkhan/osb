@@ -81,4 +81,10 @@ class ItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # Load invoice line items data when an item is selected from drop down list
+  def load_item_data
+    item = Item.find(params[:id])
+    render :text => [item.item_description,item.unit_cost,item.quantity,item.tax_1,item.tax_2]
+  end
 end
