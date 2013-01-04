@@ -4,7 +4,7 @@
     <div class="control-group">
       <%= f.label :client_id, :class => 'control-label' %>
       <div class="controls">
-        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, :prompt => "Select a client" %>
+        <%=collection_select :invoice, :client_id, Client.all, :id, :organization, :prompt => "Select a client" %>
       </div>
     </div>
   </div><!-- left -->

@@ -16,7 +16,9 @@
 
     <div class="invheader-lower">
       <div class="invheader-address-client">
-        Hyperconversion<br>Imran Malik<br>54-M Gulberge III<br>Lahore&nbsp;&nbsp;454500
+         <%= @invoice.client.organization %><br> <%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %><br>
+         <%= @invoice.client.sec_adrs_street_address_1.to_s+ " " +@invoice.client.sec_adrs_street_address_2.to_s %><br>
+         <%= @invoice.client.sec_adrs_city %>&nbsp;&nbsp;<%= @invoice.client.sec_adrs_post_or_zip_code %>
       </div>
       <div class="invheader-invoicedetails">
         <table cellspacing="0">
@@ -74,27 +76,28 @@
         <tr class="invbody-summary-subtotal">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;"><strong>Subtotal</strong></th>
-          <td style="width: 120px;"><strong>58,500.00</strong></td>
+          <td style="width: 120px;"><strong><%= @invoice.sub_total %></strong></td>
         </tr>
         <tr>
           <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;">Discount - 5%</th>
-          <td style="width: 120px;">-2,925.00</td>
+          <th style="width: 150px;">Discount - <%= @invoice.discount_percentage.to_s + "%" %></th>
+          <td style="width: 120px;"><%= @invoice.discount_amount %></td>
         </tr>
         <tr>
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;">VAT (RT710)2%</th>
-          <td style="width: 120px;">427.50</td>
+          <td style="width: 120px;"><%= @invoice.tax_amount %></td>
         </tr>
         <tr>
+          <% total=  @invoice.sub_total.to_i+@invoice.discount_amount.to_i+@invoice.tax_amount.to_i %>
           <td class="invbody-summary-clean">&nbsp;</td>
           <th class="border" style="width: 150px;"><strong>Total</strong></th>
-          <td class="border" style="width: 120px;"><strong>56,002.50</strong></td>
+          <td class="border" style="width: 120px;"><strong><%= total %></strong></td>
         </tr>
         <tr class="invbody-summary-paid">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;">Amount Paid</th>
-          <td style="width: 120px;">-56,002.50</td>
+          <td style="width: 120px;">-<%= total %></td>
         </tr>
         <tr class="invbody-summary-total">
           <td class="invbody-summary-clean">&nbsp;</td>
@@ -116,28 +119,6 @@
       </div>
     </div>
   </div>
-  <dt><strong><%= model_class.human_attribute_name(:invoice_number) %>:</strong></dt>
-  <dd><%= @invoice.invoice_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:invoice_date) %>:</strong></dt>
-  <dd><%= @invoice.invoice_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:po_number) %>:</strong></dt>
-  <dd><%= @invoice.po_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:discount_percentage) %>:</strong></dt>
-  <dd><%= @invoice.discount_percentage %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:client_id) %>:</strong></dt>
-  <dd><%= @invoice.client_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tems) %>:</strong></dt>
-  <dd><%= @invoice.tems %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:notes) %>:</strong></dt>
-  <dd><%= @invoice.notes %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @invoice.status %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sub_total) %>:</strong></dt>
-  <dd><%= @invoice.sub_total %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:discount_amount) %>:</strong></dt>
-  <dd><%= @invoice.discount_amount %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tax_amount) %>:</strong></dt>
-  <dd><%= @invoice.tax_amount %></dd>
 </div>
 <%#*<div class="form-actions">%>
 <%#= link_to t('.back', :default => t("helpers.links.back")),
