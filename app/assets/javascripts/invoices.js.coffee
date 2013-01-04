@@ -37,10 +37,13 @@ jQuery ->
       tax = jQuery(this).find("input.tax1").val() + jQuery(this).find("input.tax2").val()
       alert tax
 
-  # Prevent form submission if enter key is press in cost,quantity or tax inputs.
+  # Update line and grand total if line item fields are changed
    jQuery("input.cost, input.qty, input.tax1, input.tax2").live "blur", (e) ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
+
+  # Prevent form submission if enter key is press in cost,quantity or tax inputs.
+   jQuery("input.cost, input.qty, input.tax1, input.tax2").live "keypress", (e) ->
      if e.which is 13
        e.preventDefault()
        false
