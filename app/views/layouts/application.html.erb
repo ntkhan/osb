@@ -4,37 +4,52 @@
     <title>Open Source Billing</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag :defaults, "nested_form" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Open Source Billing</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <%= active_link_to "Invoices", "/invoices", :wrap_tag => :li %>
-              <%= active_link_to "Clients", "/clients", :wrap_tag => :li %>
-              <%= active_link_to "Staff", "/staffs", :wrap_tag => :li %>
-              <%= active_link_to "Items", items_path, :wrap_tag => :li %>
-              <%= active_link_to "Reports", "/reports", :wrap_tag => :li %>
-              <%= active_link_to "Help", "/help", :wrap_tag => :li %>
-              <%= active_link_to "Sign Out", destroy_user_session_path, :method=>'delete', :wrap_tag=>:li if user_signed_in? %>
-              <%= active_link_to "Sign in", new_session_path(:user), :wrap_tag=>:li unless user_signed_in? %>
-            </ul>
-          </div>
+    <!-- MAIN CONTAINER START-->
+    <div class="mainContainer">
+      <!-- HEADER START -->
+      <div class="header">
+        <div class="logo">
+          <%= image_tag "logo.png", :size => "185x30" %>
+        </div>
+        <div class="header_menu">
+          <ul>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
         </div>
       </div>
+      <!-- HEADER END -->
+      <!-- NAVIGATION START -->
+      <div class="naviagion">
+        <div id="nav">
+          <ul class="select">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Clients</a>
+              <ul class="sub">
+                <li><a href="#">Staff and Contractors </a></li>
+                <li><a class="active" href="#">Assign Clients</a></li>
+                <li><a href="#">Sent Emails</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Invoices</a></li>
+            <li><a href="#">Payments</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- NAVIGATION END -->
+      <!-- CONTENT AREA START-->
+      <div class="content">
+        <p class="notice"><%= notice %></p>
+        <%= yield %>
+      </div>
+      <!-- CONTENT AREA END-->
+
     </div>
-    <div class="container">
-      <p class="notice"><%= notice %></p>
-      <%= yield %>
-    </div>
+    <!-- MAIN CONTAINER END -->
   </body>
 </html>

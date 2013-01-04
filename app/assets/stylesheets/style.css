@@ -1,0 +1,320 @@
+/*
+    Document   : style
+    Created on : Jan 03, 2013
+    Author     : sohail.asghar
+    Description: OpenSourceBilling
+*/
+
+/*Custom fonts CSS Starts*/
+    @import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
+/*Custom fonts CSS Starts*/
+
+/*General CSS Starts*/
+*{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    list-style: none;
+}
+img{
+    border: none;
+}
+a{
+    text-decoration: none;
+    outline: none;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #7d7d7d;
+}
+.mainContainer{
+    width: 100%;
+}
+h1{
+    font-family: 'Dosis', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 24px;
+    color: #00bde5;
+    line-height: 1.2;
+    letter-spacing: -0.21px;
+    font-weight: normal;
+}
+h1.secondary{
+    font-size: 20px;
+    color: #464646;
+    text-transform: uppercase;
+}
+/* General CSS Ends */
+
+/*Header CSS Starts*/
+.header{
+    clear: both;
+    width: 758px;
+    margin: auto;
+    overflow: hidden;
+}
+.logo{
+    float: left;
+    padding: 29px 0 23px 0;
+}
+.header_menu{
+    float: right;
+    padding: 36px 0 33px 0;
+}
+.header_menu ul li{
+    float: left;
+    padding: 0 0 0 14px;
+}
+.header_menu ul li a{
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #7d7d7d;
+}
+/*Header CSS Ends*/
+
+/*Navigation CSS Starts*/
+.naviagion{
+    clear: both;
+    width: 100%;
+}
+#nav {
+    height:43px; 
+    position:relative;
+    z-index:500;
+    width: 100%;
+    background: url(/assets/nav_bg.png) repeat-x top;
+}
+#nav .select {
+    white-space:nowrap;
+    width: 758px;
+    margin: auto;
+}
+#nav li {
+    float:left;
+     padding: 0 20px 0 0;
+}
+#nav .select a {
+    display:block;
+    white-space:nowrap;
+}
+#nav .select a {
+    display:block;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: normal;
+    line-height: 38px;
+    min-width: 39px;
+    text-align: center;
+    cursor: pointer;
+}
+#nav .select li:hover a, #nav .select li.active a {
+    display:block;
+    background: url(/assets/nav_hover.png) no-repeat center;
+    height: 43px;
+}
+
+#nav .sub {
+    display:none;
+    margin:0;
+    padding-left: 26%;
+    list-style:none;
+    width: 100%;
+    background: url(/assets/sub_bg.png) repeat-x bottom;
+}
+#nav .select li:hover .sub {
+    height:43px;
+    display:block;
+    position:absolute;
+    top:43px;
+    left:0;
+    text-align:center;
+}
+#nav .select li:hover .sub li a {
+    display:block;
+    float:left;
+    background:transparent url(transparent.gif);
+    font-family: 'Dosis', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 15px;
+    color: #7d7d7d;
+    font-weight: normal;
+    line-height: 34px;
+    min-width: 39px;
+}
+#nav .select li:hover .sub li a:hover, #nav .select li.active .sub li a.active {
+    display: block;
+    color:#00ace5;
+    background: url(/assets/sub_hover.png) no-repeat bottom center;
+}
+/* Navigation CSS Ends */
+
+/* Content CSS Starts */
+.content{
+    clear: both;
+    width: 758px;
+    margin: auto;
+    overflow: hidden;
+    padding: 50px 0 40px 0;
+}
+.content_heading{
+    float: left;
+    width: 100%;
+}
+.content_heading h1{
+    border-bottom: 1px solid #99e5f5;
+    padding: 0 0 6px 0;
+}
+.content_box{
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #99e5f5;
+    padding: 30px 0 10px 0;
+}
+.content_inner{
+    width: 640px;
+    margin: auto;
+}
+.inner_heading{
+    float: left;
+    width: 100%;
+    padding: 0 0 30px 0;
+}
+.inner_form{
+    float: left;
+    width: 100%;
+}
+form table tr td{
+    vertical-align: top;
+}
+.form_title{
+    width: 130px;
+    font-weight: bold;
+    color: #464646;
+    vertical-align: top;
+    padding: 7px 0 0 0;
+}
+.form_title span{
+    font-size: 24px;
+    font-weight: bold;
+    color: #dd0c1d;
+}
+.title_small{
+    width: 90px;
+    padding: 7px 0 0 20px;
+}
+
+.form_field{
+    padding: 0 0 20px 0;
+}
+
+.form_field p{
+    float: left;
+    padding: 5px 30px 0 6px;
+    color: #464646;
+}
+.form_field a{
+    clear: both;
+    float: left;
+    width: 100%;
+    display: block;
+    line-height: 13px;
+    margin: 20px 0 0 0;
+    padding: 0 0 0 19px;
+}
+.remove{
+    background: url(/assets/add_remove.png) no-repeat;
+    color: #dd0c1d;
+}
+.add{
+    background: url(/assets/add_remove.png) no-repeat 0px -13px;
+    color: #197b30;
+}
+.show{
+    background: url(/assets/add_remove.png) no-repeat 0px -26px;
+    color: #00ace5;
+}
+.field_des{
+    float: left;
+    padding: 6px 0 0 10px;
+    font-size: 10px;
+    color: #959595;
+}
+.field_des li{
+    float: left;
+    display: block;
+    background: url(/assets/f_sep.png) no-repeat right;
+    padding: 0 10px 0 0;
+}
+.no_bg{
+    background: none !important;
+    padding: 0 0 0 9px !important;
+}
+.no_border{
+    border-bottom: none !important;
+}
+input, select, textarea{
+    width: 490px;
+    height: 28px;
+    border: 1px solid #d7d7d7;
+    padding: 0 9px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #464646;
+    font-size: 13px;
+    line-height: 28px;
+    border-radius: 3px;
+}
+input.medium, select.medium{
+    width: 250px;
+}
+select{
+    padding: 5px 5px 5px 2px;
+}
+input.small{
+    width: 110px;
+}
+input.checkbox{
+    float: left;
+    width: 13px;
+    border: none;
+}
+textarea{
+    min-height: 90px;
+    overflow: auto;
+    resize: none;
+}
+
+.form_btn{
+    clear: both;
+    width: 100%;
+    text-align: center;
+}
+.form_btn a{
+    display: inline-block;
+    background: #00bde5;
+    padding: 0 100px;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 50px;
+    border-radius: 3px;
+}
+/* Content CSS Ends */
+
+#adCntcts, #add_Detail{
+    display: none;
+}
+#contact, #detail{
+    cursor: pointer;
+}

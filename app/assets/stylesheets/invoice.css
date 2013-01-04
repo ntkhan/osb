@@ -34,7 +34,7 @@ h1, h2 {
 .invoice_grid_wrapper, .invoice_balance{
     width:100%;
     clear:both;
-    min-height: 300px;
+    min-height: 200px;
     border: 1px solid #CCCCCC;
     border-radius:5px 5px 0 5px;
     float: right;
@@ -45,9 +45,15 @@ h1, h2 {
     border-top: 0 none;
     margin: 0 0 20px 0;
     min-height: 100px;
-    width: 500px;
+    padding: 10px 0 10px 10px;
+    width: 272px;
 }
 .terms_notes{width: 100%; float: left;}
+
+.invoice_grid_fields input{text-align: center;}
+.invoice_balance input{ width: 100px; text-align: center;}
+.ui-datepicker-trigger{cursor:pointer}
+
 .page-contents{
     color: #000000;
     font-family: Verdana,sans-serif;
