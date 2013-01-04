@@ -6,7 +6,7 @@
   <div class="invheader">
     <div class="invheader-upper">
       <div class="invheader-address-account">
-       <%= @invoice.client.organization %> <br><%= @invoice.client.sec_adrs_street_address_1 %><br><%= @invoice.client.sec_adrs_city %>
+       <%= @invoice.client.organization_name %> <br><%= @invoice.client.sec_adrs_street_address_1 %><br><%= @invoice.client.sec_adrs_city %>
       </div>
       <div class="invheader-logo-container">
         <div class="invheader-logo">
@@ -16,7 +16,7 @@
 
     <div class="invheader-lower">
       <div class="invheader-address-client">
-         <%= @invoice.client.organization %><br> <%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %><br>
+         <%= @invoice.client.organization_name %><br> <%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %><br>
          <%= @invoice.client.sec_adrs_street_address_1.to_s+ " " +@invoice.client.sec_adrs_street_address_2.to_s %><br>
          <%= @invoice.client.sec_adrs_city %>&nbsp;&nbsp;<%= @invoice.client.sec_adrs_post_or_zip_code %>
       </div>
