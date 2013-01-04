@@ -23,7 +23,7 @@ test:
   database: osb_test
   pool: 5
   username: root
-  password: root
+  password: 
   host: localhost
 
 production:
@@ -33,6 +33,6 @@ production:
   database: osb_production
   pool: 5
   username: root
-  password: root
+  password: 
   host: localhost
 
