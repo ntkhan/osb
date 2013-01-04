@@ -16,8 +16,9 @@
 .invoice_grid_fields .description input{width: 300px}
 .invoice_grid_fields .unit_cost input{width: 100px}
 .invoice_grid_fields .quantity input{width: 100px}
-.invoice_grid_fields .tax1 input{width: 50px}
+.invoice_grid_fields .tax1 input,
 .invoice_grid_fields .tax2 input{width: 50px}
+.invoice_grid_fields .linetotal input{width: 100px}
 
 table.invoice_grid_fields{ margin: 20px;}
 h1, h2 {
