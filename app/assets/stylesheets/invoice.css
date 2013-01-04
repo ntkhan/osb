@@ -11,16 +11,7 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-.invoice_grid_fields td{padding-right: 5px;}
-.invoice_grid_fields .name input{width: 150px}
-.invoice_grid_fields .description input{width: 300px}
-.invoice_grid_fields .unit_cost input{width: 100px}
-.invoice_grid_fields .quantity input{width: 100px}
-.invoice_grid_fields .tax1 input,
-.invoice_grid_fields .tax2 input{width: 50px}
-.invoice_grid_fields .linetotal input{width: 100px}
-
-table.invoice_grid_fields{ margin: 20px;}
+table.invoice_grid_fields{ margin: 20px 0;}
 h1, h2 {
     color: #000000;
     font-family: Arial,Helvetica,sans-serif;
@@ -32,7 +23,7 @@ h1, h2 {
     padding-bottom: 9px;
 }
 .invoice_grid_wrapper, .invoice_balance{
-    width:100%;
+    /*width:100%;*/
     clear:both;
     min-height: 200px;
     border: 1px solid #CCCCCC;
@@ -243,3 +234,11 @@ p, ol, ul, td {
     padding-right: 5px;
     text-align: right;
 }
+/*.invoice_grid_fields td{padding-right: 5px;}*/
+.invoice_grid_fields .name input{width: 150px}
+.invoice_grid_fields .description input{width: 110px}
+.invoice_grid_fields .unit_cost input{width: 50px}
+.invoice_grid_fields .quantity input{width: 50px}
+.invoice_grid_fields .tax1 input,
+.invoice_grid_fields .tax2 input{width: 50px}
+.invoice_grid_fields .linetotal input{width: 50px}
