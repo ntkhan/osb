@@ -1,279 +1,162 @@
-<%= form_for @client, :html => { :id => 'newClient' } do |f| %>
-  <form action="" method="Post" name="newClient" id="newClient">
-    <div class="content_box">
-      <div class="content_inner">
-        <div class="inner_heading">
-          <h1 class="secondary">
-            Organization
-          </h1>
-        </div>
-        <div class="inner_form">
-          <table cellspacing="0" cellpadding="0">
-            <tbody><tr>
-                <td class="form_title">Organization Name</td>
-                <td colspan="4" class="form_field">
-                   <%= f.text_field :organization_name, :class => 'text_field' %>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Email <span>*</span></td>
-                <td colspan="2" class="form_field">
-                  <%= f.text_field :organization_name, :class => 'medium' %>
-                </td>
-                <td class="form_title title_small">Home Phone</td>
-                <td class="form_field">
-                  <%= f.text_field :organization_name, :class => 'small' %>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Contact Name</td>
-                <td class="form_field">
-                    <%= f.text_field :organization_name, :class => 'small' %>
-                  <div class="field_des">First Name</div>
-                </td>
-                <td align="right" class="form_field">
-                    <%= f.text_field :organization_name, :class => 'small' %>
-                  <div class="field_des">Last Name</div>
-                </td>
-                <td class="form_title title_small">Mobile</td>
-                <td class="form_field">
-                  <%= f.text_field :organization_name, :class => 'small' %>
-                </td>
-              </tr>
+<%= nested_form_for @client, :html => { :id => 'newClient' } do |f| %>
+  <% @parent_f = f %>
+  <div class="content_box">
+    <div class="content_inner">
+      <div class="inner_heading">
+        <h1 class="secondary">
+          Organization
+        </h1>
+      </div>
+      <div class="inner_form">
+        <table cellspacing="0" cellpadding="0">
+          <tbody><tr>
+              <td class="form_title">Organization Name</td>
+              <td colspan="4" class="form_field">
+                <%= f.text_field :organization_name, :class => 'text_field' %>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Email <span>*</span></td>
+              <td colspan="2" class="form_field">
+                <%= f.text_field :email, :class => 'medium' %>
+              </td>
+              <td class="form_title title_small">Home Phone</td>
+              <td class="form_field">
+                <%= f.text_field :home_phone, :class => 'small' %>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Contact Name</td>
+              <td class="form_field">
+                <%= f.text_field :first_name, :class => 'small' %>
+                <div class="field_des">First Name</div>
+              </td>
+              <td align="right" class="form_field">
+                <%= f.text_field :last_name, :class => 'small' %>
+                <div class="field_des">Last Name</div>
+              </td>
+              <td class="form_title title_small">Mobile</td>
+              <td class="form_field">
+                <%= f.text_field :mobile_number, :class => 'small' %>
+              </td>
+            </tr>
 
-            </tbody></table>
-        </div><!--inner_form-->
-      </div><!--content_inner-->
-    </div><!--content_box-->
-
-
-
-    <div class="content_box">
-      <div class="content_inner">
-        <div id="contact" class="inner_heading">
-          <h1 class="secondary">
-            Additional Contacts
-          </h1>
-        </div>
-        <div id="adCntcts" class="inner_form" style="display: none;">
-          <table cellspacing="0" cellpadding="0">
-            <tbody><tr>
-                <td class="form_title">Email <span>*</span></td>
-                <td colspan="2" class="form_field">
-                  <input type="text" id="Email" name="Email" class="medium">
-                </td>
-                <td class="form_title title_small">Home Phone</td>
-                <td class="form_field">
-                  <input type="text" id="Hphone" name="Hphone" class="small">
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Contact Name</td>
-                <td class="form_field">
-                  <input type="text" id="cName" name="cName" class="small">
-                  <div class="field_des">First Name</div>
-                </td>
-                <td class="form_field">
-                  <input type="text" id="Email" name="Email" class="small">
-                  <div class="field_des">Last Name</div>
-                </td>
-                <td class="form_title title_small">Mobile</td>
-                <td class="form_field">
-                  <input type="text" id="mobile" name="mobile" class="small">
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">&nbsp;</td>
-                <td colspan="2" class="form_field">
-                  <a class="remove" href="#">Remove this contact</a>
-                  <a class="add" href="#">Add new contact</a>
-                </td>
-              </tr>
-            </tbody></table>
-        </div><!--inner_form-->
-      </div><!--content_inner-->
-    </div><!--content_box-->
+          </tbody></table>
+      </div><!--inner_form-->
+    </div><!--content_inner-->
+  </div><!--content_box-->
 
 
-    <div class="content_box no_border">
-      <div class="content_inner">
-        <div class="inner_heading">
-          <h1 id="detail" class="secondary">
-            Details
-          </h1>
-        </div>
-        <div id="add_Detail" class="inner_form">
-          <table cellspacing="0" cellpadding="0">
-            <tbody><tr>
-                <td class="form_title">Country</td>
-                <td colspan="3" class="form_field">
-                   <%#= f.collection_select :client, :country, {}, :id, :country, {:prompt => "Choose One"},{:class => "medium"} %>
-                  <select id="country" name="client[country]" class="medium">
-                    <option value="ChosseOne" >Choose One</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Address</td>
-                <td colspan="3" class="form_field">
-                  <%= f.text_field :address_street1, :class => 'text_field' %>
-                  <div class="field_des">Street#1</div>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">&nbsp;</td>
-                <td colspan="3" class="form_field">
+
+  <div class="content_box">
+    <div class="content_inner">
+      <div id="contact" class="inner_heading">
+        <h1 class="secondary">
+          Additional Contacts
+        </h1>
+      </div>
+      <div id="adCntcts" class="inner_form" style="display: none;">
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+            <%= f.fields_for :client_contacts, :wrapper => false %>
+            <tr>
+              <td class="form_title">&nbsp;</td>
+              <td colspan="2" class="form_field">
+                <%= f.link_to_add "Add new contact", :client_contacts,:class=>'add' %>
+              </td>
+            </tr>
+          </tbody></table>
+      </div><!--inner_form-->
+    </div><!--content_inner-->
+  </div><!--content_box-->
+
+
+  <div class="content_box no_border">
+    <div class="content_inner">
+      <div class="inner_heading">
+        <h1 id="detail" class="secondary">
+          Details
+        </h1>
+      </div>
+      <div id="add_Detail" class="inner_form">
+        <table cellspacing="0" cellpadding="0">
+          <tbody><tr>
+              <td class="form_title">Country</td>
+              <td colspan="3" class="form_field">
+                <%= f.select :country, COUNTRY_LIST ,{},{:class => "medium"}%>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Address</td>
+              <td colspan="3" class="form_field">
+                <%= f.text_field :address_street1, :class => 'text_field' %>
+                <div class="field_des">Street#1</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">&nbsp;</td>
+              <td colspan="3" class="form_field">
                 <%= f.text_field :address_street2, :class => 'text_field' %>
-                  <div class="field_des">Street#2</div>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">&nbsp;</td>
-                <td class="form_field">
-                   <%= f.text_field :city, :class => 'small' %>
-                  <div class="field_des">City</div>
-                </td>
-                <td class="form_field">
-                  <%= f.text_field :province_state, :class => 'small' %>
-                  <div class="field_des">Provice / State</div>
-                </td>
-                <td class="form_field">
-                  <%= f.text_field :postal_zip_code, :class => 'small' %>
-                  <div class="field_des">Postal / Zip Code</div>
-                </td>
-              </tr>
-              <%#*<tr>%>
-                <%#*<td class="form_title">&nbsp;</td>%>
-                <%#*<td colspan="2" class="form_field">%>
-                  <%#*<a class="show" href="#">Show secondary address</a>%>
-                <%#*</td>%>
-              <%#*</tr>%>
-              <tr>
-                <td class="form_title">Industry</td>
-                <td colspan="3" class="form_field">
-                  <select id="country" name="country" class="medium">
-                    <option value="ChosseOne">Choose One</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Company Size</td>
-                <td colspan="3" class="form_field">
-                  <select id="country" name="country" class="medium">
-                    <option value="ChosseOne">Choose One</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Business Phone</td>
-                <td class="form_field">
-                 <%= f.text_field :business_phone, :class => 'small' %>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Fax</td>
-                <td class="form_field">
-                 <%= f.text_field :fax, :class => 'small' %>
-                </td>
-              </tr>
-              <tr>
-                <td class="form_title">Internal Notes</td>
-                <td colspan="3" class="form_field">
-                  <%= f.text_area :internal_notes%>
-                </td>
-              </tr>
-            </tbody></table>
-        </div><!--inner_form-->
-      </div><!--content_inner-->
-    </div><!--content_box-->
+                <div class="field_des">Street#2</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">&nbsp;</td>
+              <td class="form_field">
+                <%= f.text_field :city, :class => 'small' %>
+                <div class="field_des">City</div>
+              </td>
+              <td class="form_field">
+                <%= f.text_field :province_state, :class => 'small' %>
+                <div class="field_des">Provice / State</div>
+              </td>
+              <td class="form_field">
+                <%= f.text_field :postal_zip_code, :class => 'small' %>
+                <div class="field_des">Postal / Zip Code</div>
+              </td>
+            </tr>
+  <%#*<tr>%>
+  <%#*<td class="form_title">&nbsp;</td>%>
+  <%#*<td colspan="2" class="form_field">%>
+  <%#*<a class="show" href="#">Show secondary address</a>%>
+  <%#*</td>%>
+  <%#*</tr>%>
+            <tr>
+              <td class="form_title">Industry</td>
+              <td colspan="3" class="form_field">
+                <%= f.select :industry, INDUSTRY_LIST ,{},{:class => "medium"}%>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Company Size</td>
+              <td colspan="3" class="form_field">
+                <%= f.select :company_size, COMPANY_SIZE ,{},{:class => "medium"}%>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Business Phone</td>
+              <td class="form_field">
+                <%= f.text_field :business_phone, :class => 'small' %>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Fax</td>
+              <td class="form_field">
+                <%= f.text_field :fax, :class => 'small' %>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_title">Internal Notes</td>
+              <td colspan="3" class="form_field">
+                <%= f.text_area :internal_notes%>
+              </td>
+            </tr>
+          </tbody></table>
+      </div><!--inner_form-->
+    </div><!--content_inner-->
+  </div><!--content_box-->
   </form>
   <div class="form_btn">
     <a href="javascript:" id="submit_form">Save</a>
   </div>
 <% end %>
-<%#= form_for @client, :html => { :class => 'form-horizontal' } do |f| %>
-  <%#*<div class="control-group">%>
-    <%#= f.label :organization_name, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :organization_name, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :send_invoice_by, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :send_invoice_by, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :country, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :country, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :address_street1, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :address_street1, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :address_street2, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :address_street2, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :city, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :city, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :province_state, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :province_state, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :postal_zip_code, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :postal_zip_code, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :industry, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :industry, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :company_size, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :company_size, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :business_phone, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :business_phone, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :fax, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_field :fax, :class => 'text_field' %>
-    <%#*</div>%>
-  <%#*</div>%>
-  <%#*<div class="control-group">%>
-    <%#= f.label :internal_notes, :class => 'control-label' %>
-    <%#*<div class="controls">%>
-      <%#= f.text_area :internal_notes, :class => 'text_area' %>
-    <%#*</div>%>
-  <%#*</div>%>
-
-  <%#*<div class="form-actions">%>
-    <%#= f.submit nil, :class => 'btn btn-primary' %>
-    <%#= link_to t('.cancel', :default => t("helpers.links.cancel")),
-      clients_path, :class => 'btn' %>
-  <%#*</div>%>
-<%# end %>

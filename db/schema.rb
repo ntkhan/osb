@@ -24,14 +24,19 @@ ActiveRecord::Schema.define(:version => 20121228150402) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "phone1"
-    t.string   "phone2"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "home_phone"
+    t.string   "mobile_number"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "clients", :force => true do |t|
     t.string   "organization_name"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "home_phone"
+    t.string   "mobile_number"
     t.string   "send_invoice_by"
     t.string   "country"
     t.string   "address_street1"

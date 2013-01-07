@@ -5,8 +5,8 @@ class CreateClientContacts < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :email
-      t.string :phone1
-      t.string :phone2
+      t.string :home_phone
+      t.string :mobile_number
 
       t.timestamps
     end
