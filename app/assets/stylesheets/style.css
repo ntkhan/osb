@@ -258,6 +258,7 @@ form table tr td{
     padding: 6px 0 0 10px;
     font-size: 10px;
     color: #959595;
+    line-height: normal;
 }
 .field_des li{
     float: left;
