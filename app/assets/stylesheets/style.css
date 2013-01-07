@@ -113,11 +113,13 @@ h1.secondary{
     min-width: 39px;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
 }
-#nav .select li:hover a, #nav .select li.active a {
+#nav .select li:hover a, #nav .select li a.active {
     display:block;
     background: url(/assets/nav_hover.png) no-repeat center;
     height: 43px;
+    text-decoration: none;
 }
 
 #nav .sub {
