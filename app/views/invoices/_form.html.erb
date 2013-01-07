@@ -48,52 +48,53 @@
   </div><!-- task -->
 
   <div class="invoice_balance">
-    <table cellpadding="3">
+    <table cellpadding="3" style="margin: 10px 0 5px 10px;width: 88%;">
       <tr>
         <td>Subtotal</td>
-        <td><%= f.number_field :sub_total, :class => 'number_field',:readonly => true %></td>
+        <td><%#= f.number_field :sub_total, :class => 'number_field',:readonly => true %>
+          <%= label_tag '','',:id => 'invoice_sub_total' %>
+        </td>
       </tr>
       <tr>
         <td>Discount</td>
-        <td><%= f.number_field :discount_amount, :class => 'number_field',:readonly => true %></td>
+        <td><%#= f.number_field :discount_amount, :class => 'number_field',:readonly => true %>
+        <%= label_tag '','',:id => 'invoice_discount_amount' %>
+        </td>
       </tr>
       <tr>
         <td>Tax</td>
-        <td><%= f.number_field :tax_amount, :class => 'number_field',:readonly => true %></td>
+        <td><%#= f.number_field :tax_amount, :class => 'number_field',:readonly => true %>
+        <%= label_tag '','', :id => 'invoice_tax_amount' %>
+        </td>
       </tr>
-      <tr>
+      <tr class="invoice_total">
         <td><b>Balance</b></td>
-        <td><b><%= text_field_tag 'invoice_total','0.00',:disabled => true %></b></td>
+        <td><b><%#= text_field_tag 'invoice_total','0.00',:disabled => true %></b>
+          <b><%= label_tag '','', :id => 'invoice_total' %></b>
+        </td>
       </tr>
     </table>
   </div> <!-- invoice balance -->
 
   <div class="terms_notes">
-    <div style="float:left;">
-      <div class="control-group">
-        <%= f.label :terms, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_area :tems, :class => 'text_area', :rows => 5 %>
-        </div>
+    <div class="terms_div">
+      <%= f.label :terms, :class => 'txt_label' %>
+      <div class="txt_controls">
+        <%= f.text_area :tems, :class => 'text_area', :rows => 5 %>
       </div>
     </div><!-- terms -->
 
 
-    <div style="float:right;">
-      <div class="control-group">
-        <%= f.label :notes, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_area :notes, :class => 'text_area', :rows => 5 %>
-        </div>
+    <div class="notes_div">
+      <%= f.label :notes, :class => 'txt_label' %>
+      <div class="txt_controls">
+        <%= f.text_area :notes, :class => 'text_area', :rows => 5 %>
       </div>
     </div><!-- notes -->
   </div> <!-- Terms notes -->
 
   <div class="control-group" style="clear:both;">
-    <%= f.label :status, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :status, :class => 'text_field' %>
-    </div>
+
   </div>
 
   <div class="form-actions">

@@ -11,7 +11,8 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-table.invoice_grid_fields{ margin: 20px 0;}
+table.invoice_grid_fields{ margin: 20px 0 0 10px;}
+table.invoice_grid_fields select{ width: 230px;}
 h1, h2 {
     color: #000000;
     font-family: Arial,Helvetica,sans-serif;
@@ -23,12 +24,14 @@ h1, h2 {
     padding-bottom: 9px;
 }
 .invoice_grid_wrapper, .invoice_balance{
-    /*width:100%;*/
     clear:both;
     min-height: 200px;
     border: 1px solid #CCCCCC;
     border-radius:5px 5px 0 5px;
     float: right;
+}
+.invoice_grid_wrapper{
+    width: 99%;
 }
 .invoice_balance{
     border-radius:0 0 5px 5px;
@@ -36,11 +39,17 @@ h1, h2 {
     border-top: 0 none;
     margin: 0 0 20px 0;
     min-height: 100px;
-    padding: 10px 0 10px 10px;
-    width: 272px;
+    /*padding: 10px 0 10px 10px;*/
+    width: 186px;
 }
-.terms_notes{width: 100%; float: left;}
+.invoice_balance tr.invoice_total{border-top: 1px solid #CCCCCC; font-weight: bold;}
 
+.invoice_balance label{text-align: right;font-size: 13px;color: #464646; margin-bottom: 0}
+.terms_notes{width: 100%; float: left;}
+.terms_notes textarea{width: 270px;}
+.terms_div,.notes_div{width: 50%; float: left;}
+.terms_div label{margin-left: 0;}
+.notes_div{float: right;}
 .invoice_grid_fields input{text-align: center;}
 .invoice_balance input{ width: 100px; text-align: center;}
 .ui-datepicker-trigger{cursor:pointer}
@@ -168,8 +177,7 @@ h1, h2 {
 }
 p, ol, ul, td {
     font-family: Arial,"Arial Unicode","Arial Unicode MS",Helvetica,sans-serif !important;
-    font-size: 12px !important;
-    line-height: 18px !important;
+    line-height: 18px;
 }
 .invbody-items td, .invbody-expenses td, .invbody-timeentries td {
     border-bottom: 1px solid #E5E5E5;
@@ -241,4 +249,19 @@ p, ol, ul, td {
 .invoice_grid_fields .quantity input{width: 50px}
 .invoice_grid_fields .tax1 input,
 .invoice_grid_fields .tax2 input{width: 50px}
-.invoice_grid_fields .linetotal input{width: 50px}
+.invoice_grid_fields .linetotal label{
+    width: 50px;
+    text-align: right;
+    height: 28px;
+    line-height: 28px;
+    font-size: 13px;
+    color: #464646;
+}
+.txt_label{
+    float: left;
+    padding-top: 5px;
+    text-align: right;
+    width: auto;
+    margin-left: 14px;
+}
+.txt_controls{margin-left: 88px;}
