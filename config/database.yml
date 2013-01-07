@@ -10,7 +10,7 @@ development:
   database: osb_development
   pool: 5
   username: root
-  password: root
+  password: 
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -33,6 +33,6 @@ production:
   database: osb_production
   pool: 5
   username: root
-  password: root
+  password: 
   host: localhost
 
