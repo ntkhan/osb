@@ -1,4 +1,6 @@
 Osb::Application.routes.draw do
+  match "items/load_item_data" => "items#load_item_data"
+
   resources :clients
 
 

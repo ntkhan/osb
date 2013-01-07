@@ -1,36 +1,42 @@
 <tr class="fields">
   <td>
     <%= f.link_to_remove "x" %>
+    <%= image_tag "/assets/sort-arrow.gif", :class => "sort_icon" %>
   </td>
   <td>
     <div class="field item">
-      <%=f.collection_select :item_id, Item.all, :id, :item_name, :prompt => "Select an item" %>
+      <%=f.collection_select(:item_id, Item.all, :id, :item_name, {:prompt => "Select an item"}, {:class => "medium"}) %>
     </div>
   </td>
   <td>
     <div class="field description">
-      <%= f.text_field :item_description %>
+      <%= f.text_field :item_description, :class => "description" %>
     </div>
   </td>
   <td>
     <div class="field unit_cost">
-      <%= f.text_field :item_unit_cost %>
+      <%= f.text_field :item_unit_cost, :class => 'cost' %>
     </div>
   </td>
   <td>
     <div class="field quantity">
-      <%= f.text_field :item_quantity %>
+      <%= f.text_field :item_quantity, :class => 'qty' %>
     </div>
   </td>
   <td>
     <div class="field tax1">
-      <%= f.number_field :tax_1 %>
+      <%= f.number_field :tax_1, :class => 'tax1' %>
     </div>
   </td>
   <td>
 
     <div class="field tax2">
-      <%= f.number_field :tax_2 %>
+      <%= f.number_field :tax_2, :class => 'tax2' %>
+    </div>
+  </td>
+  <td>
+    <div class="field linetotal">
+      <%= text_field_tag 'line total','0.00', :disabled => true, :class => 'line_total' %>
     </div>
   </td>
 </tr>
