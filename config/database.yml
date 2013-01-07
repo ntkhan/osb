@@ -9,9 +9,9 @@ development:
   reconnect: false
   database: osb_development
   pool: 5
-  username: root
-  password: 
-  host: localhost
+  username: noshad
+  password: root
+  host: 10.28.94.53
 
 
 # Warning: The database defined as "test" will be erased and

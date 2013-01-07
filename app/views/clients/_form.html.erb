@@ -115,25 +115,25 @@
               <tr>
                 <td class="form_title">Address</td>
                 <td colspan="3" class="form_field">
-                  <input type="text" id="org" name="org">
+                  <%= f.text_field :address_street1, :class => 'text_field' %>
                   <div class="field_des">Street#1</div>
                 </td>
               </tr>
               <tr>
                 <td class="form_title">&nbsp;</td>
                 <td colspan="3" class="form_field">
-                  <input type="text" id="org" name="org">
+                <%= f.text_field :address_street2, :class => 'text_field' %>
                   <div class="field_des">Street#2</div>
                 </td>
               </tr>
               <tr>
                 <td class="form_title">&nbsp;</td>
                 <td class="form_field">
-                  <input type="text" id="cName" name="cName" class="small">
+                   <%= f.text_field :city, :class => 'small' %>
                   <div class="field_des">City</div>
                 </td>
                 <td class="form_field">
-                  <input type="text" id="Email" name="Email" class="small">
+                  <%= f.text_field :city, :class => 'small' %>
                   <div class="field_des">Provice / State</div>
                 </td>
                 <td class="form_field">
