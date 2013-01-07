@@ -52,19 +52,20 @@
       <tr>
         <td>Subtotal</td>
         <td><%#= f.number_field :sub_total, :class => 'number_field',:readonly => true %>
-          <%= label_tag '','',:id => 'invoice_sub_total' %>
+          <%= f.hidden_field :sub_total %>
+          <%= label_tag '','',:id => 'invoice_sub_total_lbl' %>
         </td>
       </tr>
       <tr>
         <td>Discount</td>
-        <td><%#= f.number_field :discount_amount, :class => 'number_field',:readonly => true %>
-        <%= label_tag '','',:id => 'invoice_discount_amount' %>
+        <td><%= f.hidden_field :discount_amount %>
+        <%= label_tag '','',:id => 'invoice_discount_amount_lbl' %>
         </td>
       </tr>
       <tr>
         <td>Tax</td>
-        <td><%#= f.number_field :tax_amount, :class => 'number_field',:readonly => true %>
-        <%= label_tag '','', :id => 'invoice_tax_amount' %>
+        <td><%= f.hidden_field :tax_amount%>
+        <%= label_tag '','', :id => 'invoice_tax_amount_lbl' %>
         </td>
       </tr>
       <tr class="invoice_total">
