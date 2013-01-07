@@ -9,9 +9,10 @@ development:
   reconnect: false
   database: osb_development
   pool: 5
-  username: noshad
-  password: root
-  host: 10.28.94.53
+  username: root
+  password: 
+  host: localhost
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

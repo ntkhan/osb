@@ -5,7 +5,7 @@
   </td>
   <td>
     <div class="field item">
-      <%=f.collection_select :item_id, Item.all, :id, :item_name, :prompt => "Select an item" %>
+      <%=f.collection_select(:item_id, Item.all, :id, :item_name, {:prompt => "Select an item"}, {:class => "medium"}) %>
     </div>
   </td>
   <td>
