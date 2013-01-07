@@ -9,4 +9,12 @@ class Invoice < ActiveRecord::Base
       ((Invoice.maximum("id") || 0) + 1).to_s.rjust(5, "0")
     end
   end
+
+  def description
+    "Invoice Description"
+  end
+
+  def total
+    self.invoice_line_items.sum{|li| (li.item_unit_cost || 0) *(li.item_quantity || 0)}
+  end
 end

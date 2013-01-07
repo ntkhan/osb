@@ -5,38 +5,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:invoice_number) %></th>
-      <th><%= model_class.human_attribute_name(:invoice_date) %></th>
-      <th><%= model_class.human_attribute_name(:po_number) %></th>
-      <th><%= model_class.human_attribute_name(:discount_percentage) %></th>
-      <th><%= model_class.human_attribute_name(:client_id) %></th>
-      <th><%= model_class.human_attribute_name(:tems) %></th>
-      <th><%= model_class.human_attribute_name(:notes) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:sub_total) %></th>
-      <th><%= model_class.human_attribute_name(:discount_amount) %></th>
-      <th><%= model_class.human_attribute_name(:tax_amount) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>Invoice</th>
+      <th>Client</th>
+      <th>Description</th>
+      <th>Total</th>
+      <th>Date</th>
+      <th>Status</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @invoices.each do |invoice| %>
       <tr>
-        <td><%= link_to invoice.id, invoice_path(invoice) %></td>
-        <td><%= invoice.invoice_number %></td>
-        <td><%= invoice.invoice_date %></td>
-        <td><%= invoice.po_number %></td>
-        <td><%= invoice.discount_percentage %></td>
-        <td><%= invoice.client_id %></td>
-        <td><%= invoice.tems %></td>
-        <td><%= invoice.notes %></td>
+        <td><%= link_to invoice.invoice_number, invoice_path(invoice) %></td>
+        <td><%= invoice.client.organization_name %></td>
+        <td><%= invoice.description %></td>
+        <td><%= invoice.total %></td>
+        <td><%= invoice.invoice_date.to_time.strftime("%m/%d/%Y")%></td>
         <td><%= invoice.status %></td>
-        <td><%= invoice.sub_total %></td>
-        <td><%= invoice.discount_amount %></td>
-        <td><%= invoice.tax_amount %></td>
-        <td><%=l invoice.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_invoice_path(invoice), :class => 'btn btn-mini' %>
