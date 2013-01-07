@@ -26,7 +26,8 @@ jQuery ->
     jQuery("table.invoice_grid_fields tr:visible").each ->
       total_tax += lineTotalTax(jQuery(this))
     tax_amount = subtotal * (parseFloat(total_tax) / 100)
-    jQuery("#invoice_tax_amount").text(tax_amount)
+    jQuery("#invoice_tax_amount_lbl").text(tax_amount)
+    jQuery("#invoice_tax_amount").val(tax_amount)
     total_balance = parseFloat(jQuery("#invoice_total").text()) + tax_amount
     jQuery("#invoice_total").text(total_balance)
     
@@ -36,7 +37,8 @@ jQuery ->
     total = 0
     jQuery("table.invoice_grid_fields tr:visible .line_total").each ->
       total += parseFloat(jQuery(this).text())
-      jQuery("#invoice_sub_total").text(total)
+      jQuery("#invoice_sub_total").val(total)
+      jQuery("#invoice_sub_total_lbl").text(total)
       jQuery(".invoice_balance #invoice_total").text(total)
       applyDiscount(total)
       applyTax(total)
@@ -46,7 +48,8 @@ jQuery ->
     discount_percentage = jQuery("#invoice_discount_percentage").val()
     discount_percentage = 0 if not discount_percentage? or discount_percentage is ""    
     discount_amount = subtotal * (parseFloat(discount_percentage)/100)
-    jQuery("#invoice_discount_amount").text(discount_amount * -1)
+    jQuery("#invoice_discount_amount_lbl").text(discount_amount * -1)
+    jQuery("#invoice_discount_amount").val(discount_amount * -1)
     invoice_total = jQuery(".invoice_balance #invoice_total")
     invoice_total.text(invoice_total.text() - discount_amount)
 
