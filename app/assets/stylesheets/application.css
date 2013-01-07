@@ -12,5 +12,5 @@
  *= require_tree .
  *= invoice.css
  *= style.css
- 
+ *= client.css.scss
 */

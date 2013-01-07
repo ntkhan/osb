@@ -177,8 +177,7 @@ h1, h2 {
 }
 p, ol, ul, td {
     font-family: Arial,"Arial Unicode","Arial Unicode MS",Helvetica,sans-serif !important;
-    font-size: 12px !important;
-    line-height: 18px !important;
+    line-height: 18px;
 }
 .invbody-items td, .invbody-expenses td, .invbody-timeentries td {
     border-bottom: 1px solid #E5E5E5;
