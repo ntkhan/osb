@@ -6,10 +6,11 @@ jQuery ->
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
-    cost = parseFloat(jQuery(container).find("input.cost").val())
+    cost = jQuery(container).find("input.cost").val()
     qty = jQuery(container).find("input.qty").val()
-    #line_total_tax = lineTotalTax(jQuery(container))
-    line_total = (cost * qty)
+    cost = 0 if not cost? or cost is ""
+    qty = 0 if not qty? or qty is ""
+    line_total = (parseFloat(cost) * parseFloat(qty))
     jQuery(container).find(".line_total").text(line_total)
 
   # Calculate tax amount for line total
