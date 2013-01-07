@@ -107,8 +107,9 @@
             <tbody><tr>
                 <td class="form_title">Country</td>
                 <td colspan="3" class="form_field">
-                  <select id="country" name="country" class="medium">
-                    <option value="ChosseOne">Choose One</option>
+                   <%#= f.collection_select :client, :country, {}, :id, :country, {:prompt => "Choose One"},{:class => "medium"} %>
+                  <select id="country" name="client[country]" class="medium">
+                    <option value="ChosseOne" >Choose One</option>
                   </select>
                 </td>
               </tr>
@@ -133,20 +134,20 @@
                   <div class="field_des">City</div>
                 </td>
                 <td class="form_field">
-                  <%= f.text_field :city, :class => 'small' %>
+                  <%= f.text_field :province_state, :class => 'small' %>
                   <div class="field_des">Provice / State</div>
                 </td>
                 <td class="form_field">
-                  <input type="text" id="Email" name="Email" class="small">
+                  <%= f.text_field :postal_zip_code, :class => 'small' %>
                   <div class="field_des">Postal / Zip Code</div>
                 </td>
               </tr>
-              <tr>
-                <td class="form_title">&nbsp;</td>
-                <td colspan="2" class="form_field">
-                  <a class="show" href="#">Show secondary address</a>
-                </td>
-              </tr>
+              <%#*<tr>%>
+                <%#*<td class="form_title">&nbsp;</td>%>
+                <%#*<td colspan="2" class="form_field">%>
+                  <%#*<a class="show" href="#">Show secondary address</a>%>
+                <%#*</td>%>
+              <%#*</tr>%>
               <tr>
                 <td class="form_title">Industry</td>
                 <td colspan="3" class="form_field">
@@ -166,19 +167,19 @@
               <tr>
                 <td class="form_title">Business Phone</td>
                 <td class="form_field">
-                  <input type="text" id="cName" name="cName" class="small">
+                 <%= f.text_field :business_phone, :class => 'small' %>
                 </td>
               </tr>
               <tr>
                 <td class="form_title">Fax</td>
                 <td class="form_field">
-                  <input type="text" id="cName" name="cName" class="small">
+                 <%= f.text_field :fax, :class => 'small' %>
                 </td>
               </tr>
               <tr>
                 <td class="form_title">Internal Notes</td>
                 <td colspan="3" class="form_field">
-                  <textarea id="internal" name="internal"></textarea>
+                  <%= f.text_area :internal_notes%>
                 </td>
               </tr>
             </tbody></table>
