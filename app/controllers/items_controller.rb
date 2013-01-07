@@ -85,6 +85,6 @@ class ItemsController < ApplicationController
   # Load invoice line items data when an item is selected from drop down list
   def load_item_data
     item = Item.find(params[:id])
-    render :text => [item.item_description,item.unit_cost,item.quantity,item.tax_1,item.tax_2]
+    render :text => [item.item_description || "",item.unit_cost || 1,item.quantity || 1,item.tax_1 || 0,item.tax_2 || 0]
   end
 end

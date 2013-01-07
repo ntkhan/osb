@@ -10,7 +10,7 @@ jQuery ->
     qty = jQuery(container).find("input.qty").val()
     #line_total_tax = lineTotalTax(jQuery(container))
     line_total = (cost * qty)
-    jQuery(container).find("input.line_total").val(line_total)
+    jQuery(container).find(".line_total").text(line_total)
 
   # Calculate tax amount for line total
   lineTotalTax = (container) ->
@@ -26,18 +26,18 @@ jQuery ->
     jQuery("table.invoice_grid_fields tr:visible").each ->
       total_tax += lineTotalTax(jQuery(this))
     tax_amount = subtotal * (parseFloat(total_tax) / 100)
-    jQuery("#invoice_tax_amount").val(tax_amount)
-    total_balance = parseFloat(jQuery("#invoice_total").val()) + tax_amount
-    jQuery("#invoice_total").val(total_balance)
+    jQuery("#invoice_tax_amount").text(tax_amount)
+    total_balance = parseFloat(jQuery("#invoice_total").text()) + tax_amount
+    jQuery("#invoice_total").text(total_balance)
     
 
   # Calculate grand total from line totals
   updateInvoiceTotal = ->
     total = 0
     jQuery("table.invoice_grid_fields tr:visible .line_total").each ->
-      total += parseFloat(jQuery(this).val())
-      jQuery("input#invoice_sub_total").val(total)      
-      jQuery(".invoice_balance #invoice_total").val(total)
+      total += parseFloat(jQuery(this).text())
+      jQuery("#invoice_sub_total").text(total)
+      jQuery(".invoice_balance #invoice_total").text(total)
       applyDiscount(total)
       applyTax(total)
 
@@ -46,9 +46,9 @@ jQuery ->
     discount_percentage = jQuery("#invoice_discount_percentage").val()
     discount_percentage = 0 if not discount_percentage? or discount_percentage is ""    
     discount_amount = subtotal * (parseFloat(discount_percentage)/100)
-    jQuery("#invoice_discount_amount").val(discount_amount * -1)
+    jQuery("#invoice_discount_amount").text(discount_amount * -1)
     invoice_total = jQuery(".invoice_balance #invoice_total")
-    invoice_total.val(invoice_total.val() - discount_amount)
+    invoice_total.text(invoice_total.text() - discount_amount)
 
   # Update line and grand total if line item fields are changed
    jQuery("input.cost, input.qty, input.tax1, input.tax2").live "blur", (e) ->
@@ -93,11 +93,9 @@ jQuery ->
 
   # Add date picker to invoice date field
    jQuery("#invoice_invoice_date").datepicker
-     showOn: "button"
-     buttonImage: "/assets/calendar.gif"
-     buttonImageOnly: true
      dateFormat: 'yy-mm-dd'
 
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
+    axis: "y"
