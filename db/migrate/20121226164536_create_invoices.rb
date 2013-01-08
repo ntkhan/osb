@@ -6,7 +6,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.string :po_number
       t.decimal :discount_percentage
       t.integer :client_id
-      t.text :tems
+      t.text :terms
       t.text :notes
       t.string :status
       t.decimal :sub_total

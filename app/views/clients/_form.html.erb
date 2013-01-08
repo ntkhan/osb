@@ -40,12 +40,10 @@
                 <%= f.text_field :mobile_number, :class => 'small' %>
               </td>
             </tr>
-
           </tbody></table>
       </div><!--inner_form-->
     </div><!--content_inner-->
   </div><!--content_box-->
-
   <div class="content_box">
     <div class="content_inner">
       <div id="contact" class="inner_heading">
@@ -152,8 +150,7 @@
       </div><!--inner_form-->
     </div><!--content_inner-->
   </div><!--content_box-->
-  </form>
   <div class="form_btn">
-    <a href="javascript:" id="submit_form">Save</a>
+    <%= f.submit "SAVE" %>
   </div>
 <% end %>

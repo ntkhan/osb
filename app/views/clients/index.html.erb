@@ -5,42 +5,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:organization_name) %></th>
-      <th><%= model_class.human_attribute_name(:send_invoice_by) %></th>
-      <th><%= model_class.human_attribute_name(:country) %></th>
-      <th><%= model_class.human_attribute_name(:address_street1) %></th>
-      <th><%= model_class.human_attribute_name(:address_street2) %></th>
-      <th><%= model_class.human_attribute_name(:city) %></th>
-      <th><%= model_class.human_attribute_name(:province_state) %></th>
-      <th><%= model_class.human_attribute_name(:postal_zip_code) %></th>
-      <th><%= model_class.human_attribute_name(:industry) %></th>
-      <th><%= model_class.human_attribute_name(:company_size) %></th>
-      <th><%= model_class.human_attribute_name(:business_phone) %></th>
-      <th><%= model_class.human_attribute_name(:fax) %></th>
-      <th><%= model_class.human_attribute_name(:internal_notes) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>Organization</th>
+      <th>Contact</th>
+      <th>Email</th>
+      <th>Phone</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @clients.each do |client| %>
       <tr>
-        <td><%= link_to client.id, client_path(client) %></td>
-        <td><%= client.organization_name %></td>
-        <td><%= client.send_invoice_by %></td>
-        <td><%= client.country %></td>
-        <td><%= client.address_street1 %></td>
-        <td><%= client.address_street2 %></td>
-        <td><%= client.city %></td>
-        <td><%= client.province_state %></td>
-        <td><%= client.postal_zip_code %></td>
-        <td><%= client.industry %></td>
-        <td><%= client.company_size %></td>
+        <td><%= link_to client.organization_name, client_path(client) %></td>
+        <td><%= client.contact_name %></td>
+        <td><%= client.email %></td>
         <td><%= client.business_phone %></td>
-        <td><%= client.fax %></td>
-        <td><%= client.internal_notes %></td>
-        <td><%=l client.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_client_path(client), :class => 'btn btn-mini' %>
@@ -55,6 +33,4 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_client_path,
-            :class => 'btn btn-primary' %>
+<%= link_to "New Client",new_client_path, :class => 'btn btn-primary' %>
