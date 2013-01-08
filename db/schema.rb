@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20121228150402) do
     t.string   "po_number"
     t.decimal  "discount_percentage", :precision => 10, :scale => 0
     t.integer  "client_id"
-    t.text     "tems"
+    t.text     "terms"
     t.text     "notes"
     t.string   "status"
     t.decimal  "sub_total",           :precision => 10, :scale => 0
