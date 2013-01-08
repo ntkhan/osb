@@ -242,6 +242,7 @@ form table tr td{
     line-height: 13px;
     margin: 20px 0 0 0;
     padding: 0 0 0 19px;
+    text-decoration: none;
 }
 .remove{
     background: url(/assets/add_remove.png) no-repeat;
