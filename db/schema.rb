@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20130108103358) do
 
   create_table "categories", :force => true do |t|
@@ -120,6 +121,18 @@ ActiveRecord::Schema.define(:version => 20130108103358) do
     t.integer  "inventory"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "invoice_id"
+    t.decimal  "payment_amount",            :precision => 8, :scale => 2
+    t.string   "payment_method"
+    t.date     "payment_date"
+    t.text     "notes"
+    t.boolean  "send_payment_notification"
+    t.boolean  "paid_full"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "recurring_profile_line_items", :force => true do |t|
