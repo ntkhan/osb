@@ -3,4 +3,8 @@ class Client < ActiveRecord::Base
   has_many :invoices
   has_many :client_contacts
   accepts_nested_attributes_for :client_contacts, :allow_destroy => true
+
+  def contact_name
+    "#{self.first_name} #{self.last_name}"
+  end
 end
