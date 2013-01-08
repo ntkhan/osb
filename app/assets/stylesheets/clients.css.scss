@@ -12,16 +12,29 @@
     line-height: 28px;
     border-radius: 3px;
     margin-bottom:0px;
-}
-textarea, input[type="text"],textarea:focus{
-    border: 1px solid #D7D7D7;
-    background-color: #FFFFFF;
     box-shadow: none;
-    transition: none;
 }
 h1, h2, h3, h4, h5, h6 {
     margin: 0px;
 }
 .form_title {
  line-height:normal;
+}
+label.form_title {
+    padding:0;
+    margin-bottom:0px;
+    width:auto;
+    float:left;
+    padding-bottom: 5px;
+    font-size:13px;
+    font-weight:bold;
+}
+.form_title span {
+    margin-top:-3px;
+    margin-left:3px;
+    float:left;
+}
+
+.page-header {
+    margin: 0px;
 }

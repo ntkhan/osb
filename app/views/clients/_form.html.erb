@@ -10,23 +10,23 @@
       <div class="inner_form">
         <table cellspacing="0" cellpadding="0">
           <tbody><tr>
-              <td class="form_title">Organization Name</td>
+              <td class="form_title"><label class="form_title" for="client_organization_name">Organization Name</label></td>
               <td colspan="4" class="form_field">
                 <%= f.text_field :organization_name, :class => 'text_field' %>
               </td>
             </tr>
             <tr>
-              <td class="form_title">Email <span>*</span></td>
+              <td class="form_title"><label class="form_title" for="client_email">Email</label> <span>*</span></td>
               <td colspan="2" class="form_field">
                 <%= f.text_field :email, :class => 'medium' %>
               </td>
-              <td class="form_title title_small">Home Phone</td>
+              <td class="form_title title_small"><label class="form_title" for="client_home_phone">Home Phone</label></td>
               <td class="form_field">
                 <%= f.text_field :home_phone, :class => 'small' %>
               </td>
             </tr>
             <tr>
-              <td class="form_title">Contact Name</td>
+              <td class="form_title"><label class="form_title" for="client_first_name">Contact Name<label></td>
               <td class="form_field">
                 <%= f.text_field :first_name, :class => 'small' %>
                 <div class="field_des">First Name</div>
@@ -35,7 +35,7 @@
                 <%= f.text_field :last_name, :class => 'small' %>
                 <div class="field_des">Last Name</div>
               </td>
-              <td class="form_title title_small">Mobile</td>
+              <td class="form_title title_small"><label class="form_title" for="client_mobile_number">Mobile</label></td>
               <td class="form_field">
                 <%= f.text_field :mobile_number, :class => 'small' %>
               </td>
@@ -53,15 +53,14 @@
       </div>
       <div id="adCntcts" class="inner_form" style="display: none;">
         <table cellspacing="0" cellpadding="0">
-          <tbody>
-            <%= f.fields_for :client_contacts, :wrapper => false %>
-            <tr>
-              <td class="form_title">&nbsp;</td>
-              <td colspan="2" class="form_field">
-                <%= f.link_to_add "Add new contact", :client_contacts,:class=>'add' %>
-              </td>
-            </tr>
-          </tbody></table>
+          <%= f.fields_for :client_contacts, :wrapper => false %>
+          <tr>
+            <td class="form_title">&nbsp;</td>
+            <td colspan="2" class="form_field">
+              <%= f.link_to_add "Add new contact", :client_contacts,:class=>'add' %>
+            </td>
+          </tr>
+        </table>
       </div><!--inner_form-->
     </div><!--content_inner-->
   </div><!--content_box-->
