@@ -21,11 +21,10 @@ h1, h2, h3, h4, h5, h6 {
  line-height:normal;
 }
 label.form_title {
-    padding:0;
+    padding: 0 0 10px;
     margin-bottom:0px;
     width:auto;
     float:left;
-    padding-bottom: 5px;
     font-size:13px;
     font-weight:bold;
 }
@@ -38,3 +37,19 @@ label.form_title {
 .page-header {
     margin: 0px;
 }
+.client_contacts_table .form_title {
+   float:left;
+}
+.client_contacts_table #add_new_contact{
+  float:left;
+}
+.client_contacts_table #add_new_contact a{
+margin-top:0px;
+}
+.add:hover {
+    color: #197B30;
+}
+.remove:hover {
+    color: #DD0C1D;
+}
+
