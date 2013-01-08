@@ -18,7 +18,6 @@
 //= require nav
 
 jQuery(function(){
-
     //override default behavior of inserting new subforms into form    
     window.NestedFormEvents.prototype.insertFields = function(content, assoc, link) {
         var $tr = $(link).closest('tr');

@@ -39,9 +39,7 @@
 
   <div class="invoice_grid_wrapper" style="">
     <table class="invoice_grid_fields" id="invoice_grid_fields">
-      <tbody>
       <thead><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax</th><th>Tax</th><th>Line Total</th></thead>
-      </tbody>
       <%= f.fields_for :invoice_line_items, :wrapper => false %>
       <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>
     </table>
@@ -81,7 +79,7 @@
     <div class="terms_div">
       <%= f.label :terms, :class => 'txt_label' %>
       <div class="txt_controls">
-        <%= f.text_area :tems, :class => 'text_area', :rows => 5 %>
+        <%= f.text_area :terms, :class => 'text_area', :rows => 5 %>
       </div>
     </div><!-- terms -->
 
