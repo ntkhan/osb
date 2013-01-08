@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(:version => 20121228150402) do
 
   create_table "clients", :force => true do |t|
     t.string   "organization_name"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "home_phone"
+    t.string   "mobile_number"
     t.string   "send_invoice_by"
     t.string   "country"
     t.string   "address_street1"
