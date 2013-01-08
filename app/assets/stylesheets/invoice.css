@@ -12,7 +12,9 @@
 */
 
 table.invoice_grid_fields{ margin: 20px 0 0 10px;}
-table.invoice_grid_fields select{ width: 230px;}
+table.invoice_grid_fields select{ width: 225px;}
+table.invoice_grid_fields select.tax1,
+table.invoice_grid_fields select.tax2{ width: 80px;}
 h1, h2 {
     color: #000000;
     font-family: Arial,Helvetica,sans-serif;

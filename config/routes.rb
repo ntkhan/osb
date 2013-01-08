@@ -1,4 +1,7 @@
 Osb::Application.routes.draw do
+  resources :taxes
+
+
   match "items/load_item_data" => "items#load_item_data"
 
   resources :clients
