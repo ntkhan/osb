@@ -1,3 +1,28 @@
 // Place all the styles related to the payments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#invoices_container{
+position:absolute;
+width:600px;
+height:auto;
+z-index: 1101;
+display:none;
+border: 1px solid #ccc;
+background-color:#FFF;
+}
+td {
+text-align: center;
+ padding: 7px 3px;}
+#close_popup{
+cursor:pointer;
+padding:3px;
+float:right;}
+table.index{
+clear:both;}
+.invoices_list{
+padding: 10px 15px;
+}
+table.index th{
+   background-color: #00BDE5;
+    color: #FFF;
+}
