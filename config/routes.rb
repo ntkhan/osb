@@ -1,6 +1,12 @@
 Osb::Application.routes.draw do
-  resources :payments
+  resources :payments do
+    collection do
+      post 'enter_payment'
+      put 'update_individual_payment'
+    end
+  end
 
+  match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
   match "items/load_item_data" => "items#load_item_data"
 

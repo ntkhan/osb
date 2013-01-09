@@ -1,0 +1,10 @@
+<%= form_tag "update_individual_payment", :method => :put do %>
+  <% for payment in @payments %>
+    <%= fields_for "payments[]", payment do |f| %>
+      <h2>Invoice #<%=h payment.invoice.invoice_number %> for <%=h payment.client_name %></h2>
+      <%= render "fields", :f => f %>
+    <% end %>
+  <% end %>
+  <p><%= submit_tag "Submit" %></p>
+<% end %>
+

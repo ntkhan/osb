@@ -84,4 +84,12 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def unpaid_invoices
+    @invoices = Invoice.where("status != 'paid' or status is null").all
+    respond_to do |format|
+      format.js
+      format.html
+      #format.json { render json: @invoices }
+    end
+  end
 end
