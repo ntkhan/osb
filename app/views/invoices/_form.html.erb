@@ -39,7 +39,7 @@
 
   <div class="invoice_grid_wrapper" style="">
     <table class="invoice_grid_fields" id="invoice_grid_fields">
-      <thead><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax1</th><th>Tax2</th><th>Line Total</th></thead>
+      <thead><tr class="grid_head"><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax1</th><th>Tax2</th><th>Line Total</th></tr></thead>
       <%= f.fields_for :invoice_line_items, :wrapper => false %>
       <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>
     </table>

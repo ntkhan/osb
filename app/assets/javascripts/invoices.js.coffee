@@ -10,64 +10,44 @@ jQuery ->
     qty = jQuery(container).find("input.qty").val()
     cost = 0 if not cost? or cost is ""
     qty = 0 if not qty? or qty is ""
-    line_total = (parseFloat(cost) * parseFloat(qty))
+    line_total = ((parseFloat(cost) * parseFloat(qty))).toFixed(2)
     jQuery(container).find(".line_total").text(line_total)
-
-  # Calculate tax amount for line total
-  #lineTotalTax = (container) ->
-    #tax1 = container.find("select.tax1 option:selected").val()
-    #tax2 = container.find("select.tax2 option:selected").val()
-    #tax1 = 0 if not tax1? or tax1 is ""
-    #tax2 = 0 if not tax2? or tax2 is ""
-    #(parseFloat(tax1) + parseFloat(tax2))
-
-  # Apply Tax on subtotals
-  #applyTax = (subtotal) ->
-    #total_tax = 0
-    #jQuery("table.invoice_grid_fields tr:visible").each ->
-      #total_tax += lineTotalTax(jQuery(this))
-    #tax_amount = subtotal * (parseFloat(total_tax) / 100)
-    #jQuery("#invoice_tax_amount_lbl").text(tax_amount)
-    #jQuery("#invoice_tax_amount").val(tax_amount)
-    #total_balance = parseFloat(jQuery("#invoice_total").text()) + tax_amount
-    #jQuery("#invoice_total").text(total_balance)
-    
 
   # Calculate grand total from line totals
   updateInvoiceTotal = ->
     total = 0
+    tax_amount = 0
+    discount_amount = 0
     jQuery("table.invoice_grid_fields tr:visible .line_total").each ->
       line_total = parseFloat(jQuery(this).text())
       total += line_total
-      jQuery("#invoice_sub_total").val(total)
-      jQuery("#invoice_sub_total_lbl").text(total)
-      jQuery(".invoice_balance #invoice_total").text(total)
-      applyDiscount(total)
-      applyTax(line_total,jQuery(this))
+      jQuery("#invoice_sub_total").val(total.toFixed(2))
+      jQuery("#invoice_sub_total_lbl").text(total.toFixed(2))
+      jQuery(".invoice_balance #invoice_total").text(total.toFixed(2))
+      tax_amount += applyTax(line_total,jQuery(this))
+    discount_amount = applyDiscount(total)
+    jQuery("#invoice_tax_amount_lbl").text(tax_amount.toFixed(2))
+    jQuery("#invoice_tax_amount").val(tax_amount.toFixed(2))
+    jQuery("#invoice_discount_amount_lbl").text((discount_amount * -1).toFixed(2))
+    jQuery("#invoice_discount_amount").val((discount_amount * -1).toFixed(2))
+    total_balance = (parseFloat(jQuery("#invoice_total").text() - discount_amount) + tax_amount)
+    jQuery("#invoice_total").text(total_balance.toFixed(2))
 
   # Apply Tax on totals
   applyTax = (line_total,elem) ->
-    tax1 = elem.parents("tr").find("select.tax1 option:selected").val()
-    tax2 = elem.parents("tr").find("select.tax2 option:selected").val()
+    tax1 = elem.parents("tr").find("select.tax1 option:selected").attr('data-tax_1')
+    tax2 = elem.parents("tr").find("select.tax2 option:selected").attr('data-tax_2')
     tax1 = 0 if not tax1? or tax1 is ""
     tax2 = 0 if not tax2? or tax2 is ""
+    discount_amount = applyDiscount(line_total)
     total_tax = (parseFloat(tax1) + parseFloat(tax2))
-    tax_amount = line_total * (parseFloat(total_tax) / 100)
-    jQuery("#invoice_tax_amount_lbl").text(tax_amount)
-    jQuery("#invoice_tax_amount").val(tax_amount)
-    total_balance = parseFloat(jQuery("#invoice_total").text()) + tax_amount
-    jQuery("#invoice_total").text(total_balance)    
-  
-
+    ((line_total - discount_amount) * (parseFloat(total_tax) / 100))
+      
   # Apply discount percentage on subtotals
   applyDiscount = (subtotal) ->
     discount_percentage = jQuery("#invoice_discount_percentage").val()
     discount_percentage = 0 if not discount_percentage? or discount_percentage is ""    
-    discount_amount = subtotal * (parseFloat(discount_percentage)/100)
-    jQuery("#invoice_discount_amount_lbl").text(discount_amount * -1)
-    jQuery("#invoice_discount_amount").val(discount_amount * -1)
-    invoice_total = jQuery(".invoice_balance #invoice_total")
-    invoice_total.text(invoice_total.text() - discount_amount)
+    (subtotal * (parseFloat(discount_percentage)/100))
 
   # Update line and grand total if line item fields are changed
    jQuery("input.cost, input.qty").live "blur", ->
@@ -76,9 +56,7 @@ jQuery ->
 
   # Update line and grand total when tax is selected from dropdown
    jQuery("select.tax1, select.tax2").live "change", ->
-     #updateLineTotal(jQuery(this))
      updateInvoiceTotal()
-     #applyTax()
 
   # Prevent form submission if enter key is press in cost,quantity or tax inputs.
    jQuery("input.cost, input.qty").live "keypress", (e) ->
@@ -99,10 +77,8 @@ jQuery ->
         item = JSON.parse(data)
         container = elem.parents("tr.fields")
         container.find("input.description").val(item[0])
-        container.find("input.cost").val(item[1])
+        container.find("input.cost").val(item[1].toFixed(2))
         container.find("input.qty").val(item[2])
-        #container.find("input.tax1").val(item[3])
-        #container.find("input.tax2").val(item[4])
         updateLineTotal(elem)
         updateInvoiceTotal()
 
