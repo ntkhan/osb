@@ -17,8 +17,8 @@
     <div class="invheader-lower">
       <div class="invheader-address-client">
          <%= @invoice.client.organization_name %><br> <%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %><br>
-         <%= @invoice.client.sec_adrs_street_address_1.to_s+ " " +@invoice.client.address_street2.to_s %><br>
-         <%= @invoice.client.sec_adrs_city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %>
+         <%= @invoice.client.address_street1.to_s+ " " +@invoice.client.address_street2.to_s %><br>
+         <%= @invoice.client.city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %>
       </div>
       <div class="invheader-invoicedetails">
         <table cellspacing="0">
