@@ -5,8 +5,11 @@ Osb::Application.routes.draw do
       put 'update_individual_payment'
     end
   end
+  resources :taxes
+
 
   match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
+
 
   match "items/load_item_data" => "items#load_item_data"
 
