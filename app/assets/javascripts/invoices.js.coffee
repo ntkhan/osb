@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery ->
+jQuery ->  
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
@@ -100,3 +100,8 @@ jQuery ->
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
     axis: "y"
+
+  # Calculate line total and invoice total on page load
+  jQuery(".invoice_grid_fields tr:visible .line_total").each ->
+    updateLineTotal(jQuery(this))
+  updateInvoiceTotal()

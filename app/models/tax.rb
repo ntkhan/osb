@@ -1,5 +1,5 @@
 class Tax < ActiveRecord::Base
   attr_accessible :name, :percentage
-  belongs_to :line_items
-  belongs_to :items
+  has_many :invoice_line_items
+  has_many :items
 end

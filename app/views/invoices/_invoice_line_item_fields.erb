@@ -25,14 +25,14 @@
   </td>
   <td>
     <div class="field tax1">
-      <%=f.select(:tax_1, options_for_select(Tax.all.map{|tax| [tax.name, tax.id,{'data-tax_1'=>tax.percentage}]}),{:prompt => ""},{:class => "tax1"}) %>
+      <%= f.select(:tax_1, options_for_select(Tax.all.map{|tax| [tax.name, tax.id,{'data-tax_1'=>tax.percentage}]}, :selected => f.object.tax_1),{:prompt => ""},{:class => "tax1"}) %>
     </div>
   </td>
   <td>
 
     <div class="field tax2">
       <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
-      <%=f.select(:tax_2, options_for_select(Tax.all.map{|tax| [tax.name, tax.id,{'data-tax_2'=>tax.percentage}]}),{:prompt => ""},{:class => "tax2"}) %>
+      <%= f.select(:tax_2, options_for_select(Tax.all.map{|tax| [tax.name, tax.id,{'data-tax_2'=>tax.percentage}]}, :selected => f.object.tax_2),{:prompt => ""},{:class => "tax2"}) %>
     </div>
   </td>
   <td>
