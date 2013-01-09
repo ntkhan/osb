@@ -29,11 +29,13 @@
   </div>
   <div class="field">
     <%= f.label :tax_1 %><br />
-    <%= f.number_field :tax_1 %>
+    <%#= f.number_field :tax_1 %>
+    <%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax1 medium"}) %>
   </div>
   <div class="field">
     <%= f.label :tax_2 %><br />
-    <%= f.number_field :tax_2 %>
+    <%#= f.number_field :tax_2 %>
+    <%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax2 medium"}) %>
   </div>
   <div class="field">
     <%= f.label :track_invetory %><br />

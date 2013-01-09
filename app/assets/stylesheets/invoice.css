@@ -11,10 +11,16 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-table.invoice_grid_fields{ margin: 20px 0 0 10px;}
-table.invoice_grid_fields select{ width: 225px;}
+table.invoice_grid_fields{ margin: 20px 0 0 10px; border-collapse: collapse; border: 1px solid #CCCCCC;}
+table.invoice_grid_fields td, table.invoice_grid_fields th {
+  border: 1px solid #CCCCCC; height: 20px;
+}
+table.invoice_grid_fields select{ width: 225px; border: none;}
+table.invoice_grid_fields input[type=text]{border: none;}
 table.invoice_grid_fields select.tax1,
 table.invoice_grid_fields select.tax2{ width: 80px;}
+table.invoice_grid_fields div.field{margin-bottom: 0;}
+table.invoice_grid_fields tr.grid_head{background-color: #00BDE5; color: #FFFFFF;}
 h1, h2 {
     color: #000000;
     font-family: Arial,Helvetica,sans-serif;
@@ -27,8 +33,8 @@ h1, h2 {
 }
 .invoice_grid_wrapper, .invoice_balance{
     clear:both;
-    min-height: 200px;
-    border: 1px solid #CCCCCC;
+    /*min-height: 200px;*/
+    /*border: 1px solid #CCCCCC;*/
     border-radius:5px 5px 0 5px;
     float: right;
 }
@@ -39,14 +45,14 @@ h1, h2 {
     border-radius:0 0 5px 5px;
     border: 1px solid #CCCCCC;
     border-top: 0 none;
-    margin: 0 0 20px 0;
-    min-height: 100px;
+    margin: 0 2px 20px 0;
+    /*min-height: 100px;*/
     /*padding: 10px 0 10px 10px;*/
     width: 186px;
 }
 .invoice_balance tr.invoice_total{border-top: 1px solid #CCCCCC; font-weight: bold;}
 
-.invoice_balance label{text-align: right;font-size: 13px;color: #464646; margin-bottom: 0}
+.invoice_balance label{text-align: right;font-size: 13px;color: #464646; margin-bottom: 0; font-weight: bold;}
 .terms_notes{width: 100%; float: left;}
 .terms_notes textarea{width: 270px;}
 .terms_div,.notes_div{width: 50%; float: left;}
@@ -258,6 +264,7 @@ p, ol, ul, td {
     line-height: 28px;
     font-size: 13px;
     color: #464646;
+    font-weight: bold;
 }
 .txt_label{
     float: left;

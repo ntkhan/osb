@@ -25,15 +25,14 @@
   </td>
   <td>
     <div class="field tax1">
-      <%#= f.number_field :tax_1, :class => 'tax1' %>
-      <%=f.collection_select(:tax_1, Tax.all, :percentage, :name, {:prompt => ""}, {:class => "tax1 medium"}) %>
+      <%=f.select(:tax_1, options_for_select(Tax.all.map{|tax| [tax.name, tax.id,{'data-tax_1'=>tax.percentage}]}),{:prompt => ""},{:class => "tax1"}) %>
     </div>
   </td>
   <td>
 
     <div class="field tax2">
-      <%#= f.number_field :tax_2, :class => 'tax2' %>
-      <%=f.collection_select(:tax_2, Tax.all, :percentage, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
+      <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
+      <%=f.select(:tax_2, options_for_select(Tax.all.map{|tax| [tax.name, tax.id,{'data-tax_2'=>tax.percentage}]}),{:prompt => ""},{:class => "tax2"}) %>
     </div>
   </td>
   <td>

@@ -26,9 +26,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
-    3.times do
-      @invoice.invoice_line_items.build()
-    end
+    3.times{@invoice.invoice_line_items.build()}
 
     respond_to do |format|
       format.html # new.html.erb
