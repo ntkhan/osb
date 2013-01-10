@@ -43,7 +43,7 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
-
+    params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }

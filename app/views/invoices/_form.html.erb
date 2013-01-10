@@ -98,6 +98,7 @@
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit 'Save as Draft', :class => 'btn btn-primary', :name => "save_as_draft" %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
       invoices_path, :class => 'btn' %>
   </div>
