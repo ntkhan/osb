@@ -23,15 +23,17 @@ jQuery ->
       total += line_total
       jQuery("#invoice_sub_total").val(total.toFixed(2))
       jQuery("#invoice_sub_total_lbl").text(total.toFixed(2))
-      jQuery(".invoice_balance #invoice_total").text(total.toFixed(2))
+      jQuery("#invoice_invoice_total").val(total.toFixed(2))
+      jQuery("#invoice_total_lbl").text(total.toFixed(2))
       tax_amount += applyTax(line_total,jQuery(this))
     discount_amount = applyDiscount(total)
     jQuery("#invoice_tax_amount_lbl").text(tax_amount.toFixed(2))
     jQuery("#invoice_tax_amount").val(tax_amount.toFixed(2))
     jQuery("#invoice_discount_amount_lbl").text((discount_amount * -1).toFixed(2))
     jQuery("#invoice_discount_amount").val((discount_amount * -1).toFixed(2))
-    total_balance = (parseFloat(jQuery("#invoice_total").text() - discount_amount) + tax_amount)
-    jQuery("#invoice_total").text(total_balance.toFixed(2))
+    total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
+    jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
+    jQuery("#invoice_total_lbl").text(total_balance.toFixed(2))
 
   # Apply Tax on totals
   applyTax = (line_total,elem) ->
@@ -91,6 +93,16 @@ jQuery ->
   # Subtract discount percentage from subtotal
    jQuery("#invoice_discount_percentage").blur ->
      updateInvoiceTotal()
+
+  # Don't allow nagetive value for discount
+   jQuery("#invoice_discount_percentage").keydown (e) ->
+     if e.keyCode is 109 or e.keyCode is 13
+       e.preventDefault()
+       false
+
+  # Don't allow paste and right click in discount field
+   jQuery("#invoice_discount_percentage").bind "paste contextmenu", (e) ->
+     e.preventDefault()
 
   # Add date picker to invoice date field
    jQuery("#invoice_invoice_date").datepicker
