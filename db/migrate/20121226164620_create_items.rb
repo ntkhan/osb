@@ -7,7 +7,7 @@ class CreateItems < ActiveRecord::Migration
       t.integer :quantity
       t.integer :tax_1
       t.integer :tax_2
-      t.boolean :track_invetory
+      t.boolean :track_inventory
       t.integer :inventory
 
       t.timestamps
