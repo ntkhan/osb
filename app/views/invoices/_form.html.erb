@@ -68,8 +68,8 @@
       </tr>
       <tr class="invoice_total">
         <td><b>Balance</b></td>
-        <td><b><%#= text_field_tag 'invoice_total','0.00',:disabled => true %></b>
-          <b><%= label_tag '','', :id => 'invoice_total' %></b>
+        <td><%= f.hidden_field :invoice_total%>
+          <%= label_tag '','', :id => 'invoice_total_lbl' %>
         </td>
       </tr>
     </table>
