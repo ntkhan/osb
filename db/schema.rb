@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20130108103358) do
     t.integer  "quantity"
     t.integer  "tax_1"
     t.integer  "tax_2"
-    t.boolean  "track_invetory"
+    t.boolean  "track_inventory"
     t.integer  "inventory"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
