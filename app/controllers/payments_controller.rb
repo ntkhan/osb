@@ -80,4 +80,20 @@ class PaymentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def enter_payment
+    @payments = Payment.find_all_by_invoice_id(params[:invoice_ids])
+    params[:invoice_ids].each do |inv_id|
+      if Payment.find_by_invoice_id(inv_id).blank?
+        payment = Payment.new
+        payment.invoice_id = inv_id
+        payment.save
+      end
+    end
+    @payments = Payment.find_all_by_invoice_id(params[:invoice_ids])
+  end
+  def update_individual_payment
+    @payments = Payment.update(params[:payments].keys, params[:payments].values)
+    redirect_to payments_url
+ 
+  end
 end
