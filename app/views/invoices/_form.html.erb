@@ -41,12 +41,12 @@
     <table class="invoice_grid_fields" id="invoice_grid_fields">
       <thead><tr class="grid_head"><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax1</th><th>Tax2</th><th>Line Total</th></tr></thead>
       <%= f.fields_for :invoice_line_items, :wrapper => false %>
-      <tr><td><%= f.link_to_add "+", :invoice_line_items %></td></tr>
+      <tr style="border:none;"><td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-inverse btn-mini" %></td></tr>
     </table>
   </div><!-- task -->
 
   <div class="invoice_balance">
-    <table cellpadding="3" style="margin: 10px 0 5px 10px;width: 88%;">
+    <table cellpadding="3" style="margin: 10px 0 5px 10px;width: 90%;">
       <tr>
         <td>Subtotal</td>
         <td><%#= f.number_field :sub_total, :class => 'number_field',:readonly => true %>

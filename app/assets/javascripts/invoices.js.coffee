@@ -111,6 +111,7 @@ jQuery ->
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
+    items: "tr.fields"
     axis: "y"
 
   # Calculate line total and invoice total on page load
