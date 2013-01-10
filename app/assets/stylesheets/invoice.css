@@ -12,9 +12,8 @@
 */
 
 table.invoice_grid_fields{ margin: 20px 0 0 10px; border-collapse: collapse; border: 1px solid #CCCCCC;}
-table.invoice_grid_fields td, table.invoice_grid_fields th {
-  border: 1px solid #CCCCCC; height: 20px;
-}
+table.invoice_grid_fields td, table.invoice_grid_fields th {border: 1px solid #CCCCCC; height: 20px; padding: 0;}
+.invoice_balance td{padding: 0; text-align: left;}
 table.invoice_grid_fields select{ width: 225px; border: none;}
 table.invoice_grid_fields input[type=text]{border: none;}
 table.invoice_grid_fields select.tax1,
