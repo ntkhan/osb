@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails osb: development" product="" version="" jdbc-version="" driver-name="" driver-version="" uuid="86825f3c-1f42-4572-93df-faab4d54f1e5">
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://127.0.0.1/osb_development</jdbc-url>
+    <user-name>root</user-name>
+    <libraries />
+  </data-source>
+</component>
