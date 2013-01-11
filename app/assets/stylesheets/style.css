@@ -167,7 +167,8 @@ h1.secondary{
     padding: 50px 0 40px 0;
 }
 .content input[type=text],
-.content input[type=number]{
+.content input[type=number],
+.invoice_grid_fields textarea{
   /*  border: 1px solid #D7D7D7;*/
     border-radius: 3px 3px 3px 3px;
     color: #464646;
