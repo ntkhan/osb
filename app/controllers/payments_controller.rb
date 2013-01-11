@@ -81,7 +81,6 @@ class PaymentsController < ApplicationController
     end
   end
   def enter_payment
-    @payments = Payment.find_all_by_invoice_id(params[:invoice_ids])
     params[:invoice_ids].each do |inv_id|
       if Payment.find_by_invoice_id(inv_id).blank?
         payment = Payment.new
@@ -93,7 +92,7 @@ class PaymentsController < ApplicationController
   end
   def update_individual_payment
     @payments = Payment.update(params[:payments].keys, params[:payments].values)
+    Payment.update_invoice_status @payments
     redirect_to payments_url
- 
   end
 end

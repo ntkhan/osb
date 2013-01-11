@@ -1,27 +1,58 @@
+<div>
+  <div class="left-section">
+    <div class="sub-section">     
+      <%= f.label :payment_amount %>
+      <div class="field">
+        <%= f.text_field :payment_amount, :class => "small full_payment_amount",:value=>''%>
+      </div>
+    </div>
+    <div class="sub-section">
+      <label></label>
+      <div class="field">
+        <%= f.check_box :paid_full ,:class=>'paid_full'%>
+        <div  id="<%= payment.id %>"style="display:none" class="full_payment_amount" value="<%=  payment.invoice.invoice_total%>" ></div>
+        <%= f.label :paid_full,:class=>'text-left' %>
+      </div>
+    </div>
+    <div class="sub-section">
+      <label></label>
+      <div class="field">
+        <%= check_box "apply_credit",1,:class=>'apply_credit'%>
+        <label class='text-left'>Apply from Credit Rs.<%#= client_credit payment.invoice.client.id %> available</label>
+      </div>
+    </div>
+    <div class="sub-section">
+      <%= f.label"Invoice Amount"%>
+      <div class="field invoice_total">
+        <%= payment.invoice.invoice_total %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :payment_amount %><br />
-    <%= f.text_field :payment_amount, :class => "text_field" %>
   </div>
-  <div class="field">
-    <%= f.label :payment_method %><br />
-    <%= f.text_field :payment_method, :class => "text_field" %>
+  <div class="right-section">
+    <div class="sub-section">
+      <%= f.label "Method" %>
+      <div class="field">
+        <%= f.select :payment_method, PAYMENT_METHODS %>
+      </div>
+    </div>
+    <div class="sub-section">
+      <%= f.label "Date" %>
+      <div class="field">
+        <%= f.text_field :payment_date, :class => "small" %>
+      </div>
+    </div>
+    <div class="sub-section">
+      <%= f.label :notes %>
+      <div class="field">
+        <%= f.text_area :notes, :class => "text_area" %>
+      </div>
+    </div>
+<%#*<div class="sub-section">%>
+<%#= f.label :send_payment_notification %>
+<%#*<div class="field">%>
+<%#= f.check_box :send_payment_notification %>
+<%#*</div>%>
+<%#*</div>%>
   </div>
-  <div class="field">
-    <%= f.label :payment_date %><br />
-    <%= f.text_field :payment_date, :class => "text_field" %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes, :class => "text_area" %>
-  </div>
-  <div class="field">
-    <%= f.label :send_payment_notification %><br />
-    <%= f.check_box :send_payment_notification %>
-  </div>
-  <div class="field">
-    <%= f.label :paid_full %><br />
-    <%= f.check_box :paid_full %>
-  </div>
-
-
+</div>
