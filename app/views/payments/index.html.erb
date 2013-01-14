@@ -18,7 +18,7 @@
 
 <% @payments.each do |payment| %>
   <tr>
-    <td><%= link_to payment.invoice_id, payment%></td>
+    <td><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
     <td><%= payment.client_name %></td>
     <td><%= payment.payment_method %></td>
     <td><%= payment.payment_type %></td>

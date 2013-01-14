@@ -546,6 +546,7 @@ table.index th {
 
 .form-horizontal .invoice_top_section .control-label {
     width: auto;
+    font-weight: bold;
 }
 
 .form-horizontal .invoice_top_section .controls {
