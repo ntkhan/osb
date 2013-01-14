@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,19 +21,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="invoice.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="invoice.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="424" column="13" selection-start="7993" selection-end="7993" vertical-scroll-proportion="0.70323485">
+            <state line="3" column="19" selection-start="89" selection-end="89" vertical-scroll-proportion="-1.7419355">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_form.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="16" selection-start="4521" selection-end="4521" vertical-scroll-proportion="-19.333334">
+            <state line="84" column="24" selection-start="3542" selection-end="3542" vertical-scroll-proportion="0.30769232">
               <folding />
             </state>
           </provider>
@@ -44,7 +42,7 @@
       <file leaf-file-name="_invoice_line_item_fields.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="6.6666665">
+            <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="-1.3333334">
               <folding />
             </state>
           </provider>
@@ -64,8 +62,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css" />
+        <option value="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
       </list>
     </option>
   </component>
@@ -386,23 +384,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="16" selection-start="4521" selection-end="4521" vertical-scroll-proportion="-19.333334">
+        <state line="3" column="19" selection-start="89" selection-end="89" vertical-scroll-proportion="-1.7419355">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="6.6666665">
+        <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="-1.3333334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css">
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="424" column="13" selection-start="7993" selection-end="7993" vertical-scroll-proportion="0.70323485">
+        <state line="84" column="24" selection-start="3542" selection-end="3542" vertical-scroll-proportion="0.30769232">
           <folding />
         </state>
       </provider>
