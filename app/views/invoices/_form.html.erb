@@ -1,52 +1,67 @@
 <%= nested_form_for @invoice, :html => { :class => 'form-horizontal' } do |f| %>
   <% @parent_f = f %>
-  <div style="float:left;">
+    <div class="invoice_top_section">
+      <div style="float:left;">
     <div class="control-group">
       <%= f.label :client_id, "Client: ", :class => 'control-label' %>
       <div class="controls">
-        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "Select a client"},{:class => "medium"} %>
+        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "Select a client"},{:class => "medium"} %><br />
+        <span class="hint_text">client you want ot send invoice</span>
       </div>
+    </div>
+    <div class="control-group">
+     <%= f.label :discount_percentage, "Discount %", :class => 'control-label' %>
+     <div class="controls">
+     <%= f.number_field :discount_percentage, :class => 'number_field small' %><br />
+       <span class="hint_text">will be applied to whole invoice amount</span>
+     </div>
     </div>
   </div><!-- left -->
 
 
   <div style="float:right;">
     <div class="control-group">
-      <%= f.label :invoice_number, "Invoice Number:", :class => 'control-label' %>
+      <%= f.label :invoice_number, "Invoice #", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :invoice_number, :class => 'text_field small' %>
+        <%= f.text_field :invoice_number, :class => 'text_field small' %><br />
+        <span class="hint_text">auto generated</span>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :invoice_date, "Invoice Date:", :class => 'control-label' %>
+      <%= f.label :invoice_date, "Invoice Date", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :invoice_date, :class => 'text_field small' %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :po_number, "PO Number:", :title => "Purchase Order Number", :class => 'control-label' %>
+    <!--<div class="control-group">
+      <%#= f.label :po_number, "PO Number:", :title => "Purchase Order Number", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :po_number, :class => 'text_field small' %>
+        <%#= f.text_field :po_number, :class => 'text_field small' %>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :discount_percentage, "Discount Percentage:", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.number_field :discount_percentage, :class => 'number_field small' %>
-      </div>
-    </div>
+    </div>      -->
   </div><!-- rigt -->
+    </div>  <!-- top section -->
 
-  <div class="invoice_grid_wrapper" style="">
-    <table class="invoice_grid_fields" id="invoice_grid_fields">
-      <thead><tr class="grid_head"><th></th><th>Item</th><th>Description</th><th>Unit Cost</th><th>Qty</th><th>Tax1</th><th>Tax2</th><th>Line Total</th></tr></thead>
+  <div class="invoice_grid_wrapper">
+    <table class="invoice_grid_header"><thead>
+    <tr class="grid_head">
+      <th class="invoice_header_items align_left" width="163">Item</th>
+      <th class="invoice_header_items align_left" width="143">Description</th>
+      <th class="invoice_header_items" width="75">Unit Cost</th>
+      <th class="invoice_header_items" width="74">Qty</th>
+      <th class="invoice_header_items" width="84">Tax1</th>
+      <th class="invoice_header_items" width="84">Tax2</th>
+      <th class="invoice_header_items" style="border-right:none;">Line Total</th>
+    </tr>
+    </thead></table>
+    <table class="invoice_grid_fields" id="invoice_grid_fields" cellspacing="5" cellpadding="5">
       <%= f.fields_for :invoice_line_items, :wrapper => false %>
       <tr style="border:none;"><td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-inverse btn-mini" %></td></tr>
     </table>
   </div><!-- task -->
 
   <div class="invoice_balance">
-    <table cellpadding="3" style="margin: 10px 0 5px 10px;width: 90%;">
+    <table cellpadding="3" class="invoice_total">
       <tr>
         <td>Subtotal</td>
         <td><%#= f.number_field :sub_total, :class => 'number_field',:readonly => true %>
@@ -66,7 +81,7 @@
         <%= label_tag '','', :id => 'invoice_tax_amount_lbl' %>
         </td>
       </tr>
-      <tr class="invoice_total">
+      <tr class="invoice_total_tr">
         <td><b>Balance</b></td>
         <td><%= f.hidden_field :invoice_total%>
           <%= label_tag '','', :id => 'invoice_total_lbl' %>
@@ -87,7 +102,7 @@
     <div class="notes_div">
       <%= f.label :notes, :class => 'txt_label' %>
       <div class="txt_controls">
-        <%= f.text_area :notes, :class => 'text_area', :rows => 5 %>
+        <%= f.text_area :notes, :class => 'text_area', :rows => 5, :style => "float:right;" %>
       </div>
     </div><!-- notes -->
   </div> <!-- Terms notes -->
@@ -97,8 +112,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= f.submit 'Save as Draft', :class => 'btn btn-primary', :name => "save_as_draft" %>
+    <%= f.submit 'CREATE INVOICE', :class => 'btn btn-primary' %>
+    <%= f.submit 'SAVE AS DRAFT', :class => 'btn btn-primary', :name => "save_as_draft" %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
       invoices_path, :class => 'btn' %>
   </div>
