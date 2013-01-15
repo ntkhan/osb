@@ -19,6 +19,8 @@ class Payment < ActiveRecord::Base
       end
       py.invoice.status = status
       py.invoice.save
+      paid_amount = self.invoice_paid_amount py.invoice_id
+      py.payment_amount = py.payment_amount - paid_amount
       py.save
     end
   end
@@ -30,7 +32,23 @@ class Payment < ActiveRecord::Base
     credit_pay.payment_amount = amount
     credit_pay.save
   end
-  def client_credit
-   
+  def client_credit client_id
+    invoice_ids =  Invoice.where("client_id = ?",client_id).all
+    # total credit
+    client_payments = Payment.where("payment_type = 'credit' AND invoice_id in (?)", invoice_ids).all
+    client_total_credit =  client_payments.sum{|f| f.payment_amount}
+    # avail credit
+    client_payments = Payment.where("payment_method = 'credit' AND invoice_id in (?)", invoice_ids).all
+    client_avail_credit =  client_payments.sum{|f| f.payment_amount}
+    balance = client_total_credit - client_avail_credit
+    return balance
+  end
+  def self.invoice_paid_amount inv_id
+    invoice_payments = self.invoice_paid_detail(inv_id)
+    invoice_paid_amount =  invoice_payments.sum{|f| f.payment_amount}
+    return  invoice_paid_amount
+  end
+  def self.invoice_paid_detail inv_id
+    Payment.find_all_by_invoice_id inv_id
   end
 end

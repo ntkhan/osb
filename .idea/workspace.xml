@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/invoices/index.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/payments.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/payments.js.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/payment.rb" afterPath="$PROJECT_DIR$/app/models/payment.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_invoice.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/index.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/locales/en.yml" afterPath="$PROJECT_DIR$/config/locales/en.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/_fields.html.erb" afterPath="$PROJECT_DIR$/app/views/payments/_fields.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/index.html.erb" afterPath="$PROJECT_DIR$/app/views/payments/index.html.erb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="482" selection-end="482" vertical-scroll-proportion="-13.333333">
+            <state line="18" column="26" selection-start="472" selection-end="472" vertical-scroll-proportion="0.45314685">
               <folding />
             </state>
           </provider>
@@ -65,16 +60,16 @@
       <file leaf-file-name="_invoice.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="36" selection-start="1000" selection-end="1026" vertical-scroll-proportion="-15.333333">
+            <state line="18" column="9" selection-start="901" selection-end="901" vertical-scroll-proportion="-12.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="71" selection-start="250" selection-end="250" vertical-scroll-proportion="0.04851752">
+            <state line="2" column="71" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -98,12 +93,12 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/views/invoices/_invoices.erb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
         <option value="$PROJECT_DIR$/config/locales/en.yml" />
-        <option value="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
         <option value="$PROJECT_DIR$/app/views/invoices/index.js" />
+        <option value="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
+        <option value="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
       </list>
     </option>
   </component>
@@ -587,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="16" selection-start="346" selection-end="346" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="483" column="10" selection-start="8124" selection-end="8124" vertical-scroll-proportion="0.0">
@@ -601,23 +589,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="482" selection-end="482" vertical-scroll-proportion="-13.333333">
+        <state line="2" column="71" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="36" selection-start="1000" selection-end="1026" vertical-scroll-proportion="-15.333333">
+        <state line="18" column="9" selection-start="901" selection-end="901" vertical-scroll-proportion="-12.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.js">
+    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="71" selection-start="250" selection-end="250" vertical-scroll-proportion="0.04851752">
+        <state line="14" column="16" selection-start="346" selection-end="346" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="26" selection-start="472" selection-end="472" vertical-scroll-proportion="0.45314685">
           <folding />
         </state>
       </provider>
