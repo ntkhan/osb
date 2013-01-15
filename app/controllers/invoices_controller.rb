@@ -3,11 +3,12 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.page(params[:page]).per(3)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @invoices }
+      format.js
+      #format.json { render json: @invoices }
     end
   end
 
