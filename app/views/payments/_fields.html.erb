@@ -1,6 +1,7 @@
 <div>
   <div class="left-section">
-    <div class="sub-section">     
+    <div class="sub-section">
+      <%= f.hidden_field :invoice_id%>
       <%= f.label :payment_amount %>
       <div class="field">
         <%= f.text_field :payment_amount, :class => "small full_payment_amount",:value=>''%>
@@ -10,7 +11,8 @@
       <label></label>
       <div class="field">
         <%= f.check_box :paid_full ,:class=>'paid_full'%>
-        <div  id="<%= payment.id %>"style="display:none" class="full_payment_amount" value="<%=  payment.invoice.invoice_total%>" ></div>
+        <div  id="<%= payment.id %>"style="display:none" class="full_payment_amount" value="<%=  payment.invoice.invoice_total%>"></div>
+        <%= f.hidden_field :payment_amount,:class=>"rem_pay_#{payment.id}",:value=> Payment.invoice_remaining_amount(payment.invoice.id),:disabled=>'disabled' %>
         <%= f.label :paid_full,:class=>'text-left' %>
       </div>
     </div>

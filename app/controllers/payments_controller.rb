@@ -82,17 +82,19 @@ class PaymentsController < ApplicationController
   end
   def enter_payment
     params[:invoice_ids].each do |inv_id|
-      if Payment.find_by_invoice_id(inv_id).blank?
+      if Payment.where("invoice_id =#{inv_id} and payment_amount is null").last.blank?
         payment = Payment.new
         payment.invoice_id = inv_id
         payment.save
       end
     end
-    @payments = Payment.find_all_by_invoice_id(params[:invoice_ids])
+    @payments = Payment.where("payment_amount is null and invoice_id in (?)",params[:invoice_ids]).all
   end
   def update_individual_payment
+    params[:payments].values.each do |pay|
+        Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
+    end   
     @payments = Payment.update(params[:payments].keys, params[:payments].values)
-    Payment.update_invoice_status @payments
     redirect_to payments_url
   end
 end
