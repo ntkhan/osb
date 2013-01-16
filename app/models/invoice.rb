@@ -18,4 +18,11 @@ class Invoice < ActiveRecord::Base
   def total
     self.invoice_line_items.sum{|li| (li.item_unit_cost || 0) *(li.item_quantity || 0)}
   end
+
+  def duplicate_invoice
+    new_invoice = self.dup
+    new_invoice.invoice_line_items << self.invoice_line_items.map{|line_item| line_item.dup}
+    new_invoice.save
+    new_invoice
+  end
 end
