@@ -91,7 +91,6 @@ table.invoice_total {
   margin: 10px 0 5px 10px;
   width: 100%;
   tr {
-    border-bottom: 1px solid #CCCCCC;
     font-weight: normal;
   }
   td {
@@ -99,9 +98,12 @@ table.invoice_total {
     vertical-align: middle;
     padding: 0 17px;
   }
-  .invoice_total_tr {
+  tr.invoice_total_tr {
     font-weight: bold;
+    border-top: 1px solid #cccccc;
+    border-bottom: medium double #cccccc;
   }
+  tr.sub_total_tr { border-top: 1px solid #cccccc;}
 }
 
 .invoice_balance label {
