@@ -9,6 +9,7 @@ table.invoice_grid_fields {
     padding: 0;
     vertical-align: middle;
   }
+  tr.fields td { padding-top: 5px;}
 }
 
 .invoice_balance td {
@@ -82,7 +83,7 @@ h1, h2 {
 }
 
 .invoice_balance {
-  margin: -39px 2px 20px 0;
+  margin: -43px 2px 20px 0;
   width: 186px;
 }
 
@@ -112,20 +113,16 @@ table.invoice_total {
 }
 
 .terms_notes {
-  width: 100%;
-  float: left;
+  width: 720px;
+  float: right;
   textarea {
-    width: 352px;
+    width: 332px;
   }
 }
 
 .terms_div, .notes_div {
   width: 50%;
   float: left;
-}
-
-.terms_div label {
-/*margin-left: 0;*/
 }
 
 .notes_div {
@@ -527,7 +524,7 @@ table.index th {
 .invoice_top_section {
   float: right;
   width: 720px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .form-horizontal .invoice_top_section {
@@ -568,7 +565,11 @@ table.index th {
     line-height: 50px;
     padding: 0;
   }
-  padding-left: 50px;
+  padding-left: 69px;
+}
+
+#new_invoice .invoice_top_section{
+  .control-group{margin-bottom: 12px;}
 }
 
 .paginator{
@@ -585,3 +586,4 @@ table.index th {
     text-align: right
   }
 }
+
