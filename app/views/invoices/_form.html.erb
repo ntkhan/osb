@@ -3,10 +3,10 @@
     <div class="invoice_top_section">
       <div style="float:left;">
     <div class="control-group">
-      <%= f.label :client_id, "Client: ", :class => 'control-label' %>
+      <%= f.label :client_id, "Client", :class => 'control-label' %>
       <div class="controls">
         <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "Select a client"},{:class => "medium"} %><br />
-        <span class="hint_text">client you want ot send invoice</span>
+        <span class="hint_text">client you want to send invoice</span>
       </div>
     </div>
     <div class="control-group">
