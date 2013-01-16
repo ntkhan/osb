@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/invoice.rb" afterPath="$PROJECT_DIR$/app/models/invoice.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="invoice.css.scss" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="invoice.css.scss" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="19" selection-start="1867" selection-end="1867" vertical-scroll-proportion="-18.67742">
+            <state line="428" column="20" selection-start="7733" selection-end="7733" vertical-scroll-proportion="0.4599156">
               <folding />
             </state>
           </provider>
@@ -50,7 +47,7 @@
       <file leaf-file-name="_invoice_line_item_fields.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="7.5555553">
+            <state line="5" column="33" selection-start="221" selection-end="221" vertical-scroll-proportion="-3.3333333">
               <folding />
             </state>
           </provider>
@@ -65,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invoices.js.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="invoices.js.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="5" selection-start="2829" selection-end="2829" vertical-scroll-proportion="0.56334233">
+            <state line="64" column="50" selection-start="2999" selection-end="2999" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -87,7 +84,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/views/invoices/_invoices.erb" />
@@ -98,9 +94,10 @@
         <option value="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
         <option value="$PROJECT_DIR$/app/models/invoice.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
+        <option value="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
       </list>
     </option>
   </component>
@@ -443,7 +440,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949933" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496617" sideWeight="0.67055774" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496617" sideWeight="0.67055774" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -579,13 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="48" selection-end="48" vertical-scroll-proportion="7.5555553">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/environment.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -600,9 +590,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="19" selection-start="1867" selection-end="1867" vertical-scroll-proportion="-18.67742">
+        <state line="64" column="50" selection-start="2999" selection-end="2999" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -614,9 +604,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="5" selection-start="2829" selection-end="2829" vertical-scroll-proportion="0.56334233">
+        <state line="5" column="33" selection-start="221" selection-end="221" vertical-scroll-proportion="-3.3333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="428" column="20" selection-start="7733" selection-end="7733" vertical-scroll-proportion="0.4599156">
           <folding />
         </state>
       </provider>

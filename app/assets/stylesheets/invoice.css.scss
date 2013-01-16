@@ -40,7 +40,7 @@ table {
     }
     .action_links {
       float: left;
-      width: 20px;
+      width: 22px;
     }
   }
   &.invoice_grid_header {
@@ -405,7 +405,7 @@ p, ol, ul, td {
     width: 50px;
   }
   .linetotal label {
-    width: 50px;
+    width: 48px;
     text-align: right;
     height: 28px;
     line-height: 28px;
@@ -416,6 +416,20 @@ p, ol, ul, td {
     padding: 0 9px;
     margin: 1px 0 0;
     cursor: default;
+  }
+  .action_links{
+    a{float: left; width: 10px; height: 12px;}
+    .remove_item {
+      background: url("/assets/del-move-icons.png") no-repeat;
+      width: 7px;
+      &:hover{background-position: 0px -12px;}
+    }
+    .sort_icon {
+      background: url("/assets/del-move-icons.png") no-repeat -7px 0px;
+      margin-left: 5px;
+      &:hover{background-position: -7px -12px;}
+
+    }
   }
 }
 
