@@ -1,25 +1,34 @@
 <%- model_class = Invoice -%>
-<div class="page-header">
+<%= link_to '+ NEW INVOICE',
+            new_invoice_path,
+            :class => 'new_invoice_btn btn_right btn_small' %>
+<div class="page-header header_with_margins">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
+
 </div>
-<table class="table table-striped">
+<table class="table invoice_listing">
   <thead>
   <tr>
+    <th><%= check_box_tag 'select_all' %></th>
     <th>Invoice</th>
-    <th>Client</th>
+    <th width=120>Client</th>
     <th>Description</th>
     <th>Total</th>
     <th>Date</th>
     <th>Status</th>
-    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+    <th width=75><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
   <tbody id="invoice_body">
-    <%= render 'invoice' %>
+  <%= render 'invoice' %>
+  <tr>
+    <td align="center" colspan="8">
+      <%= link_to t('.new', :default => t("helpers.links.new")),
+                  new_invoice_path,
+                  :class => 'new_invoice_btn' %>
+    </td>
+  </tr>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_invoice_path,
-            :class => 'btn btn-primary' %>
 
