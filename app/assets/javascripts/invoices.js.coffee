@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery ->  
+jQuery ->
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
@@ -44,15 +44,19 @@ jQuery ->
     discount_amount = applyDiscount(line_total)
     total_tax = (parseFloat(tax1) + parseFloat(tax2))
     ((line_total - discount_amount) * (parseFloat(total_tax) / 100))
-      
+
   # Apply discount percentage on subtotals
   applyDiscount = (subtotal) ->
     discount_percentage = jQuery("#invoice_discount_percentage").val()
-    discount_percentage = 0 if not discount_percentage? or discount_percentage is ""    
+    discount_percentage = 0 if not discount_percentage? or discount_percentage is ""
     (subtotal * (parseFloat(discount_percentage)/100))
 
   # Update line and grand total if line item fields are changed
    jQuery("input.cost, input.qty").live "blur", ->
+     updateLineTotal(jQuery(this))
+     updateInvoiceTotal()
+
+   jQuery("input.cost, input.qty").live "keyup", ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
 
@@ -65,14 +69,16 @@ jQuery ->
      if e.which is 13
        e.preventDefault()
        false
-  
+
   # Load Items data when an item is selected from dropdown list
    jQuery(".invoice_grid_fields select.items_list").live "change", ->
+     # Add an empty line item row at the end if last item is changed.
      elem = jQuery(this)
+     addLineItemRow(elem)
      jQuery.ajax '/items/load_item_data',
        type: 'POST'
        data: "id=" + jQuery(this).val()
-       dataType: 'html'       
+       dataType: 'html'
        error: (jqXHR, textStatus, errorThrown) ->
         alert "Error: #{textStatus}"
        success: (data, textStatus, jqXHR) ->
@@ -84,7 +90,12 @@ jQuery ->
         updateLineTotal(elem)
         updateInvoiceTotal()
 
-  # Re calculate the total invoice balance if an item is removed
+  # Add empty line item row
+  addLineItemRow = (elem) ->
+   if elem.parents('tr.fields').next('tr.fields:visible').length is 0
+    jQuery(".add_nested_fields").click()
+
+ # Re calculate the total invoice balance if an item is removed
    jQuery(".remove_nested_fields").live "click", ->
     setTimeout (->
      updateInvoiceTotal()
