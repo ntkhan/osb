@@ -5,24 +5,19 @@ class Payment < ActiveRecord::Base
   def client_name
     self.invoice.client.organization_name rescue "credit?"
   end
-  def self.update_invoice_status payments
-    payments.each do |py|
-      diff = py.payment_amount-py.invoice.invoice_total
-      if diff > 0
-        status = 'paid'
-        self.add_credit_payment py.invoice.id, diff
-        py.payment_amount = py.invoice.invoice_total
-      elsif diff < 0
-        status = 'partial'
-      else
-        status = 'paid'
-      end
-      py.invoice.status = status
-      py.invoice.save
-      paid_amount = self.invoice_paid_amount py.invoice_id
-      py.payment_amount = py.payment_amount - paid_amount
-      py.save
+  def self.update_invoice_status inv_id, c_pay
+    invoice = Invoice.find(inv_id)
+    diff =   (self.invoice_paid_amount(invoice.id) + c_pay) - invoice.invoice_total
+    if diff > 0
+      status = 'paid'
+      self.add_credit_payment invoice.id, diff
+    elsif diff < 0
+      status = 'partial'
+    else
+      status = 'paid'
     end
+    invoice.status = status
+    invoice.save
   end
 
   def self.add_credit_payment inv_id, amount
@@ -43,11 +38,29 @@ class Payment < ActiveRecord::Base
     balance = client_total_credit - client_avail_credit
     return balance
   end
+  
+  def self.invoice_remaining_amount inv_id
+    invoice = Invoice.find(inv_id)
+    invoice_payments = self.invoice_paid_detail(inv_id)
+    # invoice_paid_amount =  invoice_payments.sum{|f| f.payment_amount || 0}
+    invoice_paid_amount = 0
+    invoice_payments.each do |inv_p|
+      logger.debug "Before #{inv_p.payment_amount}"
+      invoice_paid_amount= invoice_paid_amount + inv_p.payment_amount unless inv_p.payment_amount.blank?
+      logger.debug "After invoice_paid_amount #{invoice_paid_amount}"
+    end
+    return   invoice.invoice_total - invoice_paid_amount
+  end
+
   def self.invoice_paid_amount inv_id
     invoice_payments = self.invoice_paid_detail(inv_id)
-    invoice_paid_amount =  invoice_payments.sum{|f| f.payment_amount}
-    return  invoice_paid_amount
+    invoice_paid_amount = 0
+    invoice_payments.each do |inv_p|
+      invoice_paid_amount= invoice_paid_amount + inv_p.payment_amount unless inv_p.payment_amount.blank?
+    end
+    return   invoice_paid_amount
   end
+
   def self.invoice_paid_detail inv_id
     Payment.find_all_by_invoice_id inv_id
   end

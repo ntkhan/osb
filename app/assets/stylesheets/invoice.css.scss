@@ -9,7 +9,9 @@ table.invoice_grid_fields {
     padding: 0;
     vertical-align: middle;
   }
-  tr.fields td { padding-top: 5px;}
+  tr.fields td {
+    padding-top: 5px;
+  }
 }
 
 .invoice_balance td {
@@ -103,7 +105,9 @@ table.invoice_total {
     border-top: 1px solid #cccccc;
     border-bottom: medium double #cccccc;
   }
-  tr.sub_total_tr { border-top: 1px solid #cccccc;}
+  tr.sub_total_tr {
+    border-top: 1px solid #cccccc;
+  }
 }
 
 .invoice_balance label {
@@ -417,17 +421,25 @@ p, ol, ul, td {
     margin: 1px 0 0;
     cursor: default;
   }
-  .action_links{
-    a{float: left; width: 10px; height: 12px;}
+  .action_links {
+    a {
+      float: left;
+      width: 10px;
+      height: 12px;
+    }
     .remove_item {
       background: url("/assets/del-move-icons.png") no-repeat;
       width: 7px;
-      &:hover{background-position: 0px -12px;}
+      &:hover {
+        background-position: 0px -12px;
+      }
     }
     .sort_icon {
       background: url("/assets/del-move-icons.png") no-repeat -7px 0px;
       margin-left: 5px;
-      &:hover{background-position: -7px -12px;}
+      &:hover {
+        background-position: -7px -12px;
+      }
 
     }
   }
@@ -584,22 +596,91 @@ table.index th {
   padding-left: 69px;
 }
 
-#new_invoice .invoice_top_section{
-  .control-group{margin-bottom: 12px;}
+#new_invoice .invoice_top_section {
+  .control-group {
+    margin-bottom: 12px;
+  }
 }
 
-.paginator{
+.paginator {
   float: left;
   width: 100%;
   margin: 20px 0;
-  .pagination{
+  .pagination {
     float: left;
     width: 50%;
     margin: 0;
   }
-  .invoice_info{
+  .invoice_info {
     @extend .pagination;
     text-align: right
   }
 }
 
+/******************** Invoice Listing CSS ***************/
+table.invoice_listing {
+  margin: 20px 0;
+  th, td {
+    padding: 7px 5px 4px 10px;
+  }
+  thead {
+    color: #FFFFFF;
+    th {
+      border-right: 1px solid #FFFFFF;
+      background-color: #898989;
+      &:first-child {
+        border-radius: 5px 0 0 5px;
+        padding: 2px 5px 6px 10px;
+      }
+      &:last-child {
+        border-radius: 0 5px 5px 0;
+      }
+    }
+  }
+  .edit_invoice, .del_invoice {
+    color: #00BDE5;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      color: #00BDE5;
+      background: #FFFFFF;
+    }
+  }
+  input[type="checkbox"] {
+    margin: 0;
+  }
+  tbody {
+    tr:first-child td {border-top: none;}
+    tr:last-child td{border-top: none; text-align: center;}
+    tr td:first-child{padding: 5px 5px 4px 10px;}
+  }
+}
+
+a.new_invoice_btn {
+  background-color: #00BDE5;
+  height: 47px;
+  width: 235px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 47px;
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  &:hover{text-decoration: none;
+    color: #FFFFFF;
+    background-color: #00BDE5;}
+}
+a.btn_right{float: right;}
+.header_with_margins{margin: 10px 0;}
+a.btn_small{@extend a.new_invoice_btn;
+  width: 176px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 17px;
+}
+.page-header {
+  border-bottom: 1px solid #00BDE5;
+}
