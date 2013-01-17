@@ -1,17 +1,17 @@
 <h1 class="pt">Enter Payment</h1>
- <% grand_total = 0 %>
+<% grand_total = 0 %>
 <%= form_tag "update_individual_payment", :method => :put do %>
   <% for payment in @payments %>
- <% grand_total = grand_total + payment.invoice.invoice_total %>
+    <% grand_total = grand_total + payment.invoice.invoice_total %>
     <%= fields_for "payments[]", payment do |f| %>
       <div class="payment_heading">Invoice #<%=h payment.invoice.invoice_number %> for <%=h payment.client_name %></div>
       <%= render "fields", :f => f,:payment=>payment%>
     <% end %>
   <% end %>
-      <% if @payments.size > 1 %>
-      <div class="payment_heading">Totals</div>
-      <div class="grand_total"><%=  grand_total %></div>
-      <%  end %>
+  <% if @payments.size > 1 %>
+    <div class="payment_heading">Totals</div>
+    <div class="grand_total"><%=  grand_total %></div>
+  <%  end %>
   <p id="submit_button"><%= submit_tag "Save" %></p>
 <% end %>
 

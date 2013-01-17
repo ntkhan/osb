@@ -7,9 +7,11 @@ jQuery ->
      full_value_id = jQuery(this).next('.full_payment_amount').attr('id')
      if jQuery(this).is ":checked"
         jQuery('#payments_'+full_value_id+'_payment_amount').val(full_value)
-        jQuery('#payments_'+full_value_id+'_payment_amount').attr('readonly','readonly')
+        jQuery('#payments_'+full_value_id+'_payment_amount').attr('disabled','disabled')
+        jQuery('.rem_pay_'+full_value_id).removeAttr('disabled')
      else
-        jQuery('#payments_'+full_value_id+'_payment_amount').removeAttr('readonly')
+        jQuery('.rem_pay_'+full_value_id).attr('disabled','disabled')
+        jQuery('#payments_'+full_value_id+'_payment_amount').removeAttr('disabled')
         jQuery('#payments_'+full_value_id+'_payment_amount').val('')
 #Select credit from method dropdown if apply from credit checkbox is checked
   jQuery(".apply_credit").live "click", ->
