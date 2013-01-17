@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+  jQuery(".chzn-select").chosen({allow_single_deselect: true})
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
@@ -94,6 +95,7 @@ jQuery ->
   addLineItemRow = (elem) ->
    if elem.parents('tr.fields').next('tr.fields:visible').length is 0
     jQuery(".add_nested_fields").click()
+    jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
  # Re calculate the total invoice balance if an item is removed
    jQuery(".remove_nested_fields").live "click", ->
@@ -129,3 +131,15 @@ jQuery ->
   jQuery(".invoice_grid_fields tr:visible .line_total").each ->
     updateLineTotal(jQuery(this))
   updateInvoiceTotal()
+
+  # Don't send an ajax request if an item is deselected.
+  jQuery("tr.fields .item .chzn-select").change ->
+    elem = jQuery(this)
+    if elem.val() is ""
+      container = elem.parents("tr.fields")
+      container.find("textarea.description").val('')
+      container.find("input.cost").val('')
+      container.find("input.qty").val('')
+      updateLineTotal(elem)
+      updateInvoiceTotal()
+      false

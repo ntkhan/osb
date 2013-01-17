@@ -4,7 +4,24 @@
             :class => 'new_invoice_btn btn_right btn_small' %>
 <div class="page-header header_with_margins">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
-
+</div>
+<div class="action_links_wrapper">
+  <div class="invoice_action_links">
+    <p>
+      <a href="#">Archive</a>
+      <a href="#">Delete</a>
+      <span>|</span>
+      <a href="#">Copy</a>
+      <a href="#">Print</a>
+      <a href="#">Send</a>
+      <span>|</span>
+      <a href="#">Enter Payment</a>
+      <a href="#">Pay Online</a>
+    </p>
+  </div>
+  <div class="invoice_search">
+    <%= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
+  </div>
 </div>
 <table class="table invoice_listing">
   <thead>
@@ -21,13 +38,7 @@
   </thead>
   <tbody id="invoice_body">
   <%= render 'invoice' %>
-  <tr>
-    <td align="center" colspan="8">
-      <%= link_to t('.new', :default => t("helpers.links.new")),
-                  new_invoice_path,
-                  :class => 'new_invoice_btn' %>
-    </td>
-  </tr>
+
   </tbody>
 </table>
 
