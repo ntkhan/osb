@@ -6,9 +6,9 @@
       <%= link_to "","javascript:", :class => "sort_icon" %>
     </div>
   </td>
-  <td>
+  <td style="padding-top: 9px;">
     <div class="field item">
-      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select"}) %>
+      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select"}) %>
     </div>
   </td>
   <td>
@@ -29,14 +29,14 @@
   </td>
   <td>
     <div class="field tax1">
-      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {:class => "tax1"}) %>
+      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "Tax1...",:class => "tax1 chzn-select"}) %>
     </div>
   </td>
   <td>
 
     <div class="field tax2">
       <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
-      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {:class => "tax2"}) %>
+      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "Tax2...",:class => "tax2 chzn-select"}) %>
     </div>
   </td>
   <td>

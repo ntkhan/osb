@@ -1,0 +1,14 @@
+tr.fields {
+  .chzn-container-single {
+    .chzn-single, .chzn-results,
+    .chzn-search input[type=text] {
+      text-align: left;
+    }
+    .chz-single{height: 28px;}
+  }
+  .tax1, .tax2 {
+    .chzn-container-single .chzn-single abbr {
+      right: 16px;
+    }
+  }
+}
