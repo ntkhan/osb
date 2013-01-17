@@ -92,7 +92,7 @@ class PaymentsController < ApplicationController
   end
   def update_individual_payment
     params[:payments].values.each do |pay|
-        Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
+       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
     end   
     @payments = Payment.update(params[:payments].keys, params[:payments].values)
     redirect_to payments_url

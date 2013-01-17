@@ -316,6 +316,7 @@ p, ol, ul, td {
 .invbody-items td, .invbody-expenses td, .invbody-timeentries td {
   border-bottom: 1px solid #E5E5E5;
   padding: 3px 0 3px 2px;
+  text-align:left;
 }
 
 .invbody-summary {
@@ -511,7 +512,8 @@ table.index th {
     min-width: 190px;
   }
   input, textarea {
-    width: 150px;
+    width: 20px;
+    height:20px;
   }
   select {
     width: 168px;
@@ -683,4 +685,7 @@ a.btn_small{@extend a.new_invoice_btn;
 }
 .page-header {
   border-bottom: 1px solid #00BDE5;
+}
+td {
+    text-align: left;
 }

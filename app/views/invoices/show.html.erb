@@ -31,13 +31,13 @@
             <tr>
               <th>																				Invoice Date
               </th>
-              <td><%= @invoice.invoice_date %></td>
+              <td><%= @invoice.invoice_date.strftime('%B %d , %Y') %></td>
             </tr>
             <tr class="invheader-invoicedetails-balance">
               <th>
                 <div>Amount Due </div></th>
               <td>
-                <div>Rs.0.00  PKR</div>
+                <div>Rs.<%= @invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id) %>  PKR</div>
               </td>
             </tr>
           </tbody>
@@ -89,20 +89,19 @@
           <td style="width: 120px;"><%= @invoice.tax_amount %></td>
         </tr>
         <tr>
-          <% total=  @invoice.sub_total.to_i+@invoice.discount_amount.to_i+@invoice.tax_amount.to_i %>
           <td class="invbody-summary-clean">&nbsp;</td>
           <th class="border" style="width: 150px;"><strong>Total</strong></th>
-          <td class="border" style="width: 120px;"><strong><%= total %></strong></td>
+          <td class="border" style="width: 120px;"><strong><%= @invoice.invoice_total %></strong></td>
         </tr>
         <tr class="invbody-summary-paid">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;">Amount Paid</th>
-          <td style="width: 120px;">-<%= total %></td>
+          <td style="width: 120px;">-<%= Payment.invoice_paid_amount(@invoice.id) %></td>
         </tr>
         <tr class="invbody-summary-total">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;"><div><strong>Amount Due</strong></div></th>
-          <td style="width: 120px;"><div><strong>Rs.0.00  PKR</strong></div></td>
+          <td style="width: 120px;"><div><strong>Rs.<%= @invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id) %>  PKR</strong></div></td>
         </tr>
       </tbody>
     </table>

@@ -11,8 +11,8 @@
       <label></label>
       <div class="field">
         <%= f.check_box :paid_full ,:class=>'paid_full'%>
-        <div  id="<%= payment.id %>"style="display:none" class="full_payment_amount" value="<%=  payment.invoice.invoice_total%>"></div>
-        <%= f.hidden_field :payment_amount,:class=>"rem_pay_#{payment.id}",:value=> Payment.invoice_remaining_amount(payment.invoice.id),:disabled=>'disabled' %>
+        <div  id="<%= payment.id %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
+        <%#= f.hidden_field :payment_amount,:class=>"rem_pay_#{payment.id}",:value=> Payment.invoice_remaining_amount(payment.invoice.id),:disabled=>'disabled' %>
         <%= f.label :paid_full,:class=>'text-left' %>
       </div>
     </div>
@@ -23,7 +23,7 @@
         <label></label>
         <div class="field">
           <%= check_box " ",payment.id ,:class=>'apply_credit'%>
-          <label class='text-left'>Apply from Credit Rs.<%= client_credit %> available</label>
+          <label class='text-left' id="rem_credit_<%= payment.id %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
         </div>
       </div>
     <% end %>
