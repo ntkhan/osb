@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20130108103358) do
     t.decimal  "sub_total",           :precision => 10, :scale => 0
     t.decimal  "discount_amount",     :precision => 10, :scale => 0
     t.decimal  "tax_amount",          :precision => 10, :scale => 0
+    t.decimal  "invoice_total",       :precision => 10, :scale => 0
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
   end
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130108103358) do
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "payment_amount",            :precision => 8, :scale => 2
+    t.string   "payment_type"
     t.string   "payment_method"
     t.date     "payment_date"
     t.text     "notes"

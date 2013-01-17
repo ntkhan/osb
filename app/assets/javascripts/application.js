@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery_nested_form
 //= require nav
+//= require chosen.jquery
 
 jQuery(function(){
     //override default behavior of inserting new subforms into form    

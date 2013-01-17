@@ -5,7 +5,7 @@
     <div class="control-group">
       <%= f.label :client_id, "Client", :class => 'control-label' %>
       <div class="controls">
-        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "Select a client"},{:class => "medium"} %><br />
+        <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, {},{"data-placeholder" => "Select a client...", :class => "medium chzn-select"} %><br />
         <span class="hint_text">client you want to send invoice</span>
       </div>
     </div>

@@ -8,7 +8,7 @@
   </td>
   <td>
     <div class="field item">
-      <%= f.collection_select(:item_id, Item.all, :id, :item_name, {:prompt => "Select an item"}, {:class => "items_list medium"}) %>
+      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select"}) %>
     </div>
   </td>
   <td>
