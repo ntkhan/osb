@@ -619,7 +619,7 @@ table.index th {
 
 /******************** Invoice Listing CSS ***************/
 table.invoice_listing {
-  margin: 20px 0;
+  margin: 22px 0;
   th, td {
     padding: 7px 5px 4px 10px;
   }
@@ -683,4 +683,18 @@ a.btn_small{@extend a.new_invoice_btn;
 }
 .page-header {
   border-bottom: 1px solid #00BDE5;
+}
+.action_links_wrapper{
+  width: 100%; margin: 29px 0 0; height: 20px;
+  .invoice_action_links{
+    float: left; width: 70%;
+    P{color: #00BDE5; line-height: 29px; }
+    a,span{color: #00BDE5; text-decoration: none; margin-right: 8px;
+     &:hover{text-decoration: none;background-color: #FFFFFF;}
+    }
+  }
+  .invoice_search{
+    float: right; width: 30%;
+    #search_invoice{width: 165px; height: 29px; float: right;}
+  }
 }
