@@ -76,20 +76,24 @@ jQuery ->
      # Add an empty line item row at the end if last item is changed.
      elem = jQuery(this)
      addLineItemRow(elem)
-     jQuery.ajax '/items/load_item_data',
-       type: 'POST'
-       data: "id=" + jQuery(this).val()
-       dataType: 'html'
-       error: (jqXHR, textStatus, errorThrown) ->
-        alert "Error: #{textStatus}"
-       success: (data, textStatus, jqXHR) ->
-        item = JSON.parse(data)
-        container = elem.parents("tr.fields")
-        container.find("textarea.description").val(item[0])
-        container.find("input.cost").val(item[1].toFixed(2))
-        container.find("input.qty").val(item[2])
-        updateLineTotal(elem)
-        updateInvoiceTotal()
+     if elem.val() is ""
+       clearLineTotal(elem)
+       false
+     else
+       jQuery.ajax '/items/load_item_data',
+         type: 'POST'
+         data: "id=" + jQuery(this).val()
+         dataType: 'html'
+         error: (jqXHR, textStatus, errorThrown) ->
+          alert "Error: #{textStatus}"
+         success: (data, textStatus, jqXHR) ->
+          item = JSON.parse(data)
+          container = elem.parents("tr.fields")
+          container.find("textarea.description").val(item[0])
+          container.find("input.cost").val(item[1].toFixed(2))
+          container.find("input.qty").val(item[2])
+          updateLineTotal(elem)
+          updateInvoiceTotal()
 
   # Add empty line item row
   addLineItemRow = (elem) ->
@@ -133,13 +137,10 @@ jQuery ->
   updateInvoiceTotal()
 
   # Don't send an ajax request if an item is deselected.
-  jQuery("tr.fields .item .chzn-select").change ->
-    elem = jQuery(this)
-    if elem.val() is ""
-      container = elem.parents("tr.fields")
-      container.find("textarea.description").val('')
-      container.find("input.cost").val('')
-      container.find("input.qty").val('')
-      updateLineTotal(elem)
-      updateInvoiceTotal()
-      false
+  clearLineTotal = (elem) ->
+    container = elem.parents("tr.fields")
+    container.find("textarea.description").val('')
+    container.find("input.cost").val('')
+    container.find("input.qty").val('')
+    updateLineTotal(elem)
+    updateInvoiceTotal()
