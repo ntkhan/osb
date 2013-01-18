@@ -1,7 +1,7 @@
 <%- model_class = Invoice -%>
 <%= link_to '+ NEW INVOICE',
             new_invoice_path,
-            :class => 'new_invoice_btn btn_right btn_small' %>
+            :class => 'new_btn btn_right btn_small' %>
 <div class="page-header header_with_margins">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
@@ -23,7 +23,7 @@
     <%= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
   </div>
 </div>
-<table class="table invoice_listing">
+<table class="table table_listing invoice_listing">
   <thead>
   <tr>
     <th><%= check_box_tag 'select_all' %></th>
@@ -38,7 +38,6 @@
   </thead>
   <tbody id="invoice_body">
   <%= render 'invoice' %>
-
   </tbody>
 </table>
 

@@ -1,0 +1,36 @@
+<% @payments.each do |payment| %>
+    <tr>
+      <td><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
+      <td><%= payment.client_name %></td>
+      <td><%= payment.payment_method %></td>
+      <td><%= payment.payment_type %></td>
+      <td><%= payment.notes %></td>
+      <td><%= payment.payment_date %></td>
+      <td><%= payment.payment_amount %></td>
+
+      <td>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_payment_path(payment), :class => 'edit_action' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    payment_path(payment),
+                    :method => :delete,
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'del_action' %>
+      </td>
+    </tr>
+<% end %>
+<tr>
+  <td colspan="8">
+    <div class="paginator">
+      <%= paginate @payments, :remote => true %>
+      <div class="paging_info">
+        <%= page_entries_info @payments %>
+      </div>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td align="center" colspan="8">
+    <%= link_to 'New Payment', 'invoices/unpaid_invoices', :class => "new_btn", :remote => true %>
+  </td>
+</tr>

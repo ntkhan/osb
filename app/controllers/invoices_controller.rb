@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   # GET /invoices.json
   layout :choose_layout
   def index
-    @invoices = Invoice.page(params[:page]).per(3)
+    @invoices = Invoice.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,10 +27,6 @@ class InvoicesController < ApplicationController
   def preview
     id = decrypt(params[:inv_id]).to_i
     @invoice = Invoice.find(id)
-    #respond_to do |format|
-    #  format.html # show.html.erb
-    #  format.json { render json: @invoice }
-    #end
   end
 
   # GET /invoices/new
