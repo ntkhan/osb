@@ -3,13 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/chosen-override.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/chosen-override.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/index.html.erb" afterPath="$PROJECT_DIR$/app/views/payments/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/mailers/invoice_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/invoice_mailer.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/invoice.rb" afterPath="$PROJECT_DIR$/app/models/invoice.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb" afterPath="$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environment.rb" afterPath="$PROJECT_DIR$/config/environment.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/development.rb" afterPath="$PROJECT_DIR$/config/environments/development.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,55 +36,82 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="56" selection-start="584" selection-end="584" vertical-scroll-proportion="-3.8148148">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_invoice.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="5" selection-start="1359" selection-end="1359" vertical-scroll-proportion="-24.0">
-              <folding>
-                <marker date="1358402703000" expanded="true" signature="41:936" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="435:926" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="951:1161" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="970:1155" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="998:1147" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="1080:1136" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="1166:1358" placeholder="..." />
-                <marker date="1358402703000" expanded="true" signature="1200:1352" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="101" selection-start="404" selection-end="404" vertical-scroll-proportion="35.333332">
+            <state line="7" column="101" selection-start="404" selection-end="404" vertical-scroll-proportion="-0.6666667">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invoice.css.scss" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="invoice.css.scss" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="659" column="19" selection-start="11329" selection-end="11329" vertical-scroll-proportion="0.45013478">
+            <state line="665" column="19" selection-start="11445" selection-end="11445" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="new_invoice_email.html.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="invoices_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="16" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="27" selection-start="6" selection-end="27" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="preview.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoices/preview.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="73" selection-start="137" selection-end="137" vertical-scroll-proportion="-1.3333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new_invoice_email.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="31" selection-start="147" selection-end="147" vertical-scroll-proportion="-4.0">
+            <state line="9" column="51" selection-start="217" selection-end="217" vertical-scroll-proportion="0.23893805">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="25" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice_mailer.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/mailers/invoice_mailer.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="54" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="development.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="42" selection-start="1775" selection-end="1775" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -99,30 +130,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/models/invoice.rb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/chosen.css.scss" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-        <option value="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/chosen-override.css.scss" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
-        <option value="$PROJECT_DIR$/app/views/invoice_mailer/new_invoice.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
-        <option value="$PROJECT_DIR$/config/environments/development.rb" />
-        <option value="$PROJECT_DIR$/app/mailers/invoice_mailer.rb" />
-        <option value="$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb" />
         <option value="$PROJECT_DIR$/app/views/payments/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss" />
+        <option value="$PROJECT_DIR$/app/views/layouts/invoice_preview.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/preview_mode.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/config/initializers/initializers.rb" />
+        <option value="$PROJECT_DIR$/app/models/invoice.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+        <option value="$PROJECT_DIR$/config/environments/production.rb" />
+        <option value="$PROJECT_DIR$/config/application.rb" />
+        <option value="$PROJECT_DIR$/config/environment.rb" />
+        <option value="$PROJECT_DIR$/app/mailers/invoice_mailer.rb" />
+        <option value="$PROJECT_DIR$/config/environments/development.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="66" />
-    <option name="y" value="-5" />
+    <option name="y" value="24" />
     <option name="width" value="1534" />
-    <option name="height" value="905" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -150,16 +181,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="RailsProjectView">
         <subPane>
           <PATH>
@@ -182,45 +203,38 @@
               <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.AssetsTopLevelFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osb" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osb" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.AssetsTopLevelFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stylesheets" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.AssetsPredefinedGroupFolderNode" />
+              <option name="myItemId" value="Config" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ConfigFolderNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settings.ide.settings.uml" />
     <property name="recentsLimit" value="5" />
-    <property name="options.searchVisible" value="true" />
+    <property name="options.lastSelected" value="reference.settings.ide.settings.uml" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/assets/stylesheets" />
       <recent name="$PROJECT_DIR$/app/views/invoices" />
+      <recent name="$PROJECT_DIR$/app/views/layouts" />
+      <recent name="$PROJECT_DIR$/app/assets/stylesheets" />
     </key>
   </component>
   <component name="RunManager" selected="Rails.Development: osb">
@@ -476,15 +490,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="66" y="-5" width="1534" height="905" extended-state="6" />
-    <editor active="false" />
+    <frame x="66" y="24" width="1534" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294423" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949933" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496617" sideWeight="0.67055774" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24898511" sideWeight="0.67055774" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294423" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -493,6 +506,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294423" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294423" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -552,121 +566,114 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice_line_item_fields.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="5" selection-start="273" selection-end="273" vertical-scroll-proportion="0.026548672">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/chosen-override.css.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="14" selection-start="368" selection-end="368" vertical-scroll-proportion="0.37604457">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="12" selection-start="3587" selection-end="3587" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="5" selection-start="1359" selection-end="1359" vertical-scroll-proportion="-24.0">
-          <folding>
-            <marker date="1358402703000" expanded="true" signature="41:936" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="435:926" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="951:1161" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="970:1155" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="998:1147" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="1080:1136" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="1166:1358" placeholder="..." />
-            <marker date="1358402703000" expanded="true" signature="1200:1352" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="56" selection-start="584" selection-end="584" vertical-scroll-proportion="-3.8148148">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environment.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="69" selection-start="636" selection-end="636" vertical-scroll-proportion="0.4011142">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="23" selection-start="918" selection-end="918" vertical-scroll-proportion="0.65502185">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="56" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.7339833">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/mailers/invoice_mailer.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="26" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="31" selection-start="147" selection-end="147" vertical-scroll-proportion="-4.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="101" selection-start="404" selection-end="404" vertical-scroll-proportion="35.333332">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="592" selection-end="592" vertical-scroll-proportion="0.37604457">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/payments/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="211" selection-end="211" vertical-scroll-proportion="0.15929204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/style.css">
+    <entry file="file://$PROJECT_DIR$/config/initializers/secret_token.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/invoice.css.scss">
+    <entry file="file://$PROJECT_DIR$/config/initializers/mime_types.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="659" column="19" selection-start="11329" selection-end="11329" vertical-scroll-proportion="0.45013478">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/initializers.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="246" column="73" selection-start="3849" selection-end="3849" vertical-scroll-proportion="0.8746518">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="0" selection-start="900" selection-end="900" vertical-scroll-proportion="0.71489364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/devise/sessions_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="6" selection-start="771" selection-end="771" vertical-scroll-proportion="0.5264624">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/application.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="0" selection-start="2798" selection-end="2798" vertical-scroll-proportion="0.8746518">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="148" selection-end="148" vertical-scroll-proportion="0.15041783">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="0" selection-start="2473" selection-end="2473" vertical-scroll-proportion="0.82451254">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mailers/invoice_mailer.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="54" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="27" selection-start="6" selection-end="27" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="42" selection-start="1775" selection-end="1775" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="16" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="101" selection-start="404" selection-end="404" vertical-scroll-proportion="-0.6666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/preview.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="73" selection-start="137" selection-end="137" vertical-scroll-proportion="-1.3333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="25" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoice_mailer/new_invoice_email.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="51" selection-start="217" selection-end="217" vertical-scroll-proportion="0.23893805">
           <folding />
         </state>
       </provider>

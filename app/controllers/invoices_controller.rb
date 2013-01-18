@@ -1,7 +1,8 @@
 class InvoicesController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:preview]
   # GET /invoices
   # GET /invoices.json
+  layout :choose_layout
   def index
     @invoices = Invoice.page(params[:page]).per(3)
 
@@ -21,6 +22,15 @@ class InvoicesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @invoice }
     end
+  end
+
+  def preview
+    id = decrypt(params[:inv_id]).to_i
+    @invoice = Invoice.find(id)
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.json { render json: @invoice }
+    #end
   end
 
   # GET /invoices/new
@@ -47,7 +57,8 @@ class InvoicesController < ApplicationController
     params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
     respond_to do |format|
       if @invoice.save
-        InvoiceMailer.new_invoice_email(@invoice.client,@invoice).deliver
+        encrypted_id = encrypt(@invoice.id)
+        InvoiceMailer.new_invoice_email(@invoice.client,@invoice,encrypted_id,current_user).deliver
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
       else
@@ -91,5 +102,9 @@ class InvoicesController < ApplicationController
       format.html
       #format.json { render json: @invoices }
     end
+  end
+  private
+  def choose_layout
+    action_name == 'preview' ? "preview_mode" : "application"
   end
 end

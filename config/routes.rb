@@ -8,8 +8,9 @@ Osb::Application.routes.draw do
   resources :taxes
 
 
-  match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
+  match "invoices/preview" => "invoices#preview"
 
+  match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
   match "items/load_item_data" => "items#load_item_data"
 
@@ -19,10 +20,10 @@ Osb::Application.routes.draw do
   resources :client_contacts
 
 
-  devise_for :users
+  devise_for :users, :path_names => { :sign_out => 'logout'}
 
   devise_scope :user do
-    #root :to => "devise/sessions#new"
+    root :to => "devise/sessions#new"
   end
 
   resources :categories
