@@ -7,11 +7,56 @@
       <div class="payment_heading">Invoice #<%=h payment.invoice.invoice_number %> for <%=h payment.client_name %></div>
       <%= render "fields", :f => f,:payment=>payment%>
     <% end %>
-  <% end %>
+      <% if Payment.invoice_paid_amount(payment.invoice.id) > 0 %>
+      <br />
+    <table cellspacing="0" cellpadding="0" style="width: 605px; line-height: 24px;margin-left:145px;">
+      <tbody><tr style="background-color: rgb(237, 237, 237);">
+          <td width="100" style="text-indent: 5px;line-height:24px;padding:0px;text-align: left;"><strong>Date</strong></td>
+          <td width="100"><strong>Type</strong></td>
+          <td><strong>Notes</strong></td>
+          <td align="right" width="100"><strong>Amount</strong></td>
+          <td width="10">&nbsp;</td>
+        </tr>
+        <tr>
+          <td bgcolor="#DDDDDD" height="1" colspan="5"  style="line-height:24px;padding:0px;"></td>
+        </tr>
+        <%
+        paid_amount = 0
+        Payment.invoice_paid_detail(payment.invoice_id).each do |pd|
+          unless pd.payment_amount.blank?
+            paid_amount += pd.payment_amount
+          %>
+            <tr>
+              <td style="text-align: left;" ><%= pd.payment_date %></td>
+              <td align="left"><%= pd.payment_method %></td>
+              <td align="left"><%= pd.notes %></td>
+              <td align="right"><%= pd.payment_amount%></td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td bgcolor="#DDDDDD" height="1" colspan="5"  style="line-height:24px;padding:0px;"></td>
+            </tr>
+          <% end
+        end %>
+
+        <tr>
+          <td align="right" colspan="3">Total Paid:</td>
+          <td align="right">Rs.<%= paid_amount %></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="right" colspan="3"><strong>Balance:</strong></td>
+          <td align="right"><strong>Rs.<%= payment.invoice.invoice_total - paid_amount %></strong></td>
+          <td>&nbsp;</td>
+        </tr>
+      </tbody></table>
+  <%
+end
+end %>
   <% if @payments.size > 1 %>
     <div class="payment_heading">Totals</div>
     <div class="grand_total"><%=  grand_total %></div>
   <%  end %>
-  <p id="submit_button"><%= submit_tag "Save" %></p>
+  <p id="submit_button"><%= submit_tag "Save", :id=>'submit_payment_form' %></p>
 <% end %>
 

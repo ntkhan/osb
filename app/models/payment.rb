@@ -11,13 +11,17 @@ class Payment < ActiveRecord::Base
     if diff > 0
       status = 'paid'
       self.add_credit_payment invoice.id, diff
+      return_v =  c_pay - diff
     elsif diff < 0
       status = 'partial'
+      return_v = c_pay
     else
       status = 'paid'
+      return_v = c_pay
     end
     invoice.status = status
     invoice.save
+    return return_v
   end
 
   def self.add_credit_payment inv_id, amount
@@ -45,9 +49,7 @@ class Payment < ActiveRecord::Base
     # invoice_paid_amount =  invoice_payments.sum{|f| f.payment_amount || 0}
     invoice_paid_amount = 0
     invoice_payments.each do |inv_p|
-      logger.debug "Before #{inv_p.payment_amount}"
       invoice_paid_amount= invoice_paid_amount + inv_p.payment_amount unless inv_p.payment_amount.blank?
-      logger.debug "After invoice_paid_amount #{invoice_paid_amount}"
     end
     return   invoice.invoice_total - invoice_paid_amount
   end
@@ -62,6 +64,6 @@ class Payment < ActiveRecord::Base
   end
 
   def self.invoice_paid_detail inv_id
-    Payment.find_all_by_invoice_id inv_id
+    Payment.where("invoice_id = ? and (payment_type is null || payment_type != 'credit')",inv_id).all
   end
 end
