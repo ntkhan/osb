@@ -10,8 +10,9 @@
  *
  *= require_self
  *= require_tree .
- *= invoice.css
- *= style.css
+ *= invoice.css.scss
+ *= payments.css.scss
+ *= style.css.scss
  *= client.css.scss
  *= chosen.css
 */

@@ -338,3 +338,122 @@ textarea{
 #contact, #detail{
     cursor: pointer;
 }
+
+// ************************ table listing css *********************** /
+
+table.table_listing {
+  margin: 22px 0;
+  th, td {
+    padding: 7px 5px 4px 10px;
+  }
+  thead {
+    color: #FFFFFF;
+    th {
+      border-right: 1px solid #FFFFFF;
+      background-color: #898989;
+      &:first-child {
+        border-radius: 5px 0 0 5px;
+        padding: 2px 5px 6px 10px;
+      }
+      &:last-child {
+        border-radius: 0 5px 5px 0;
+      }
+    }
+  }
+  .edit_action, .del_action {
+    color: #00BDE5;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      color: #00BDE5;
+      background: #FFFFFF;
+    }
+  }
+  tbody {
+    tr:first-child td {border-top: none;}
+    tr:last-child td{border-top: none; text-align: center;}
+  }
+  input[type="checkbox"] {
+    margin: 0;
+  }
+}
+
+table.invoice_listing {
+  tbody {
+    tr td:first-child{padding: 5px 5px 4px 10px;}
+  }
+}
+
+table.payment_listing {
+  margin-top: 30px;
+  thead{
+  th{
+    &:first-child {
+      padding: 7px 5px 4px 10px;
+    }
+  }   }
+  tbody {
+    tr td:first-child{padding: 7px 5px 4px 10px;}
+  }
+}
+a.new_btn {
+  background-color: #00BDE5;
+  height: 47px;
+  width: 235px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 47px;
+  text-transform: uppercase;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  &:hover{text-decoration: none;
+    color: #FFFFFF;
+    background-color: #00BDE5;}
+}
+a.btn_right{float: right;}
+.header_with_margins{margin: 10px 0;}
+a.btn_small{@extend a.new_invoice_btn;
+  width: 176px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 17px;
+}
+.page-header {
+  border-bottom: 1px solid #00BDE5;
+}
+td {
+  text-align: left;
+}
+
+.action_links_wrapper{
+  width: 100%; margin: 29px 0 0; height: 20px;
+  .invoice_action_links{
+    float: left; width: 70%;
+    P{color: #00BDE5; line-height: 29px; }
+    a,span{color: #00BDE5; text-decoration: none; margin-right: 8px;
+      &:hover{text-decoration: none;background-color: #FFFFFF;}
+    }
+  }
+  .invoice_search{
+    float: right; width: 30%;
+    #search_invoice{width: 165px; height: 29px; float: right;}
+  }
+}
+
+.paginator {
+  float: left;
+  width: 100%;
+  margin: 20px 0;
+  .pagination {
+    float: left;
+    width: 50%;
+    margin: 0;
+  }
+  .paging_info {
+    @extend .pagination;
+    text-align: right
+  }
+}

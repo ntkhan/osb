@@ -1,10 +1,10 @@
 <%- model_class = Payment -%>
 <div id="invoices_container">default data</div>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
-<table class="table" style="margin-top:20px;">
+<table class="table table_listing payment_listing">
   <thead>
   <th>Invoice</th>
   <th>Client</th>
@@ -13,32 +13,12 @@
   <th>Notes</th>
   <th>Date</th>
   <th>Amount</th>
-  <th>Actions</th>
-</thead>
+  <th width=75>Actions</th>
+  </thead>
 
-<% @payments.each do |payment| %>
-  <tr>
-    <td><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
-    <td><%= payment.client_name %></td>
-    <td><%= payment.payment_method %></td>
-    <td><%= payment.payment_type %></td>
-    <td><%= payment.notes %></td>
-    <td><%= payment.payment_date %></td>
-    <td><%= payment.payment_amount %></td>
-    
-    <td>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-        edit_payment_path(payment), :class => 'btn btn-mini' %>
-      <%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
-        payment_path(invoice),
-        :method => :delete,
-        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-        :class => 'btn btn-mini btn-danger' %>
-    </td>
-  </tr>
-<% end %>
+  <tbody id="payment_body">
+  <%= render 'payment' %>
+  </tbody>
 </table>
 
-<br />
 
-<%= link_to 'New Payment', 'invoices/unpaid_invoices', :class => "btn btn-primary",:remote=>true %>
