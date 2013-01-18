@@ -17,6 +17,7 @@
 //= require jquery_nested_form
 //= require nav
 //= require chosen.jquery
+//= require jquery.css3caching.js
 
 jQuery(function(){
     //override default behavior of inserting new subforms into form    
