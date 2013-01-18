@@ -1,0 +1,29 @@
+<% @items.each do |item| %>
+    <tr>
+      <td><%= item.item_name %></td>
+      <td><%= item.item_description %></td>
+      <td><%= item.unit_cost %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.tax_1 %></td>
+      <td><%= item.tax_2 %></td>
+      <td><%= item.track_inventory %></td>
+      <td><%= item.inventory %></td>
+      <td><%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
+        <%= link_to 'Destroy', item, :method => :delete,:class => "del_action", :data => {:confirm => 'Are you sure?' } %></td>
+    </tr>
+<% end %>
+<tr>
+  <td colspan="9">
+    <div class="paginator">
+      <%= paginate @items, :remote => true %>
+      <div class="paging_info">
+        <%= page_entries_info @items %>
+      </div>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td align="center" colspan="9">
+    <%= link_to 'New Item', new_item_path, :class => "new_btn" %>
+  </td>
+</tr>

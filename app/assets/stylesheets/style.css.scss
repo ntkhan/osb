@@ -398,6 +398,7 @@ table.payment_listing {
     tr td:first-child{padding: 7px 5px 4px 10px;}
   }
 }
+table.item_listing{@extend table.payment_listing}
 a.new_btn {
   background-color: #00BDE5;
   height: 47px;
@@ -456,6 +457,7 @@ td {
   }
   .paging_info {
     @extend .pagination;
-    text-align: right
+    text-align: right;
+    float: right;
   }
 }

@@ -54,7 +54,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.save
         encrypted_id = encrypt(@invoice.id)
-        #InvoiceMailer.new_invoice_email(@invoice.client,@invoice,encrypted_id,current_user).deliver
+        InvoiceMailer.new_invoice_email(@invoice.client,@invoice,encrypted_id,current_user).deliver
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
       else

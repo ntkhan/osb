@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

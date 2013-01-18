@@ -1,7 +1,9 @@
-<h1>Listing items</h1>
+<div class="page-header">
+  <h1>Listing items</h1>
+</div>
 
-<table>
-  <tr>
+<table class="table table_listing item_listing">
+  <thead>
     <th>Item name</th>
     <th>Item description</th>
     <th>Unit cost</th>
@@ -10,28 +12,14 @@
     <th>Tax 2</th>
     <th>Track inventory</th>
     <th>Inventory</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <th>Actions</th>
+  </thead>
 
-<% @items.each do |item| %>
-  <tr>
-    <td><%= item.item_name %></td>
-    <td><%= item.item_description %></td>
-    <td><%= item.unit_cost %></td>
-    <td><%= item.quantity %></td>
-    <td><%= item.tax_1 %></td>
-    <td><%= item.tax_2 %></td>
-    <td><%= item.track_inventory %></td>
-    <td><%= item.inventory %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <tbody id="item_body">
+  <%= render 'items' %>
+  </tbody>
 </table>
 
-<br />
 
-<%= link_to 'New Item', new_item_path %>
+
+
