@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  #before_filter :authenticate_user!, :except => [:preview]
+  before_filter :authenticate_user!, :except => [:preview]
   # GET /invoices
   # GET /invoices.json
   layout :choose_layout
