@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<h2>Dear, <%= @user.first_name %></h2> <br/>
+
+<p>
+  To view your invoice from "<%=@user.organization_name%>" for <%=@invoice.invoice_total%>, or to download a PDF copy for
+  your records, click the link below:
+</p>
+
+<p>
+  <a href="http://{address}/view/{encrypted_invoice_user_email}">http://{address}/view/{encrypted_invoice_user_email}</a>
+</p>
+
+<p>
+  Best regards, <br />
+  {sender_business_name} ({send_email})
+</p>
+
+</body>
+</html>
+
+

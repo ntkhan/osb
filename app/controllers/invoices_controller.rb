@@ -47,6 +47,7 @@ class InvoicesController < ApplicationController
     params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
     respond_to do |format|
       if @invoice.save
+        InvoiceMailer.new_invoice_email(@invoice.client,@invoice).deliver
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
       else

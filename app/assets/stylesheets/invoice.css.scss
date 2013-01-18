@@ -7,11 +7,12 @@ table.invoice_grid_fields {
     border: none;
     height: 20px;
     padding: 0;
-    vertical-align: middle;
+    vertical-align: top;
   }
-  tr.fields td {
+  tr.fields:first-child td {
     padding-top: 5px;
   }
+  tr.fields td:first-child{vertical-align: middle; padding-top: 0;}
 }
 
 .invoice_balance td {
@@ -569,7 +570,7 @@ table.index th {
 
 .hint_text {
   color: #CCCCCC;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 #new_invoice .form-actions {

@@ -6,7 +6,7 @@
       <%= link_to "","javascript:", :class => "sort_icon" %>
     </div>
   </td>
-  <td style="padding-top: 9px;">
+  <td>
     <div class="field item">
       <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select"}) %>
     </div>
