@@ -94,9 +94,11 @@ class PaymentsController < ApplicationController
   end
   def update_individual_payment
     params[:payments].each do |pay|
+      unless pay[:invoice_id].blank?
        pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
        payment = Payment.new(pay)
        payment.save
+      end
     end
 #    params[:payments].values.each do |pay|
 #       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i

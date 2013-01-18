@@ -5,6 +5,9 @@ class Payment < ActiveRecord::Base
   def client_name
     self.invoice.client.organization_name rescue "credit?"
   end
+  def client_full_name
+    "#{self.invoice.client.first_name}  #{self.invoice.client.last_name}"
+  end
   def self.update_invoice_status inv_id, c_pay
     invoice = Invoice.find(inv_id)
     diff =   (self.invoice_paid_amount(invoice.id) + c_pay) - invoice.invoice_total

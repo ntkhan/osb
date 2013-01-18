@@ -1,64 +1,68 @@
-<div>
+<div style="float:left; margin-top:30px;">
   <div class="left-section">
+
     <div class="sub-section">
-      <%= f.hidden_field :invoice_id%>
-      <%= f.label :payment_amount %>
-      <div class="field">
-        <%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small full_payment_amount",:value=>''%>
+      <div class="invoice_number">
+      Invoice#<%=h payment.invoice.invoice_number %>
       </div>
-    </div>
-    <div class="sub-section">
-      <label></label>
-      <div class="field">
-        <%= f.check_box :paid_full ,:class=>'paid_full'%>
-        <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
-        <%= f.label :paid_full,:class=>'text-left' %>
+      <div class="invoice_total">
+      <%=h payment.invoice.invoice_total %>
       </div>
-    </div>
-    <% client_credit = payment.client_credit payment.invoice.client_id
-    if client_credit > 0
-    %>
-      <div class="sub-section">
-        <label></label>
-        <div class="field">
-          <%= check_box " ",index ,:class=>'apply_credit'%>
-          <label class='text-left' id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
-        </div>
+      <div class="client_name">
+      <%= payment.client_name %>
       </div>
-    <% end %>
-    <div class="sub-section">
-      <%= f.label"Invoice Amount"%>
-      <div class="field invoice_total">
-        <%= payment.invoice.invoice_total %>
+      <div class="client_full_name">
+      <%= payment.client_full_name %>
       </div>
     </div>
 
   </div>
   <div class="right-section">
     <div class="sub-section">
+      <%= f.hidden_field :invoice_id%>
+      <%= f.label "Payment(PKR)" %>
+      <div class="field">
+        <%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small full_payment_amount",:value=>''%>
+      </div>
+      <div class="field">
+        <%= f.check_box :paid_full,:id=>"payments_#{index}_paid_full" ,:class=>'paid_full'%>
+        <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
+        <%= f.label :paid_full,:class=>'text-left',:for=>"payments_#{index}_paid_full" %>
+      </div>
+    </div>
+    <div class="sub-section">
       <%= f.label "Method" %>
       <div class="field">
         <%= f.select :payment_method, PAYMENT_METHODS,{},{:id=>"payments_#{index}_payment_method"}%>
       </div>
-    </div>
-    <div class="sub-section">
-      <%= f.label "Date" %>
+       <%= f.label "Date",:style=>'width:50px;' %>
       <div class="field">
         <%= f.text_field :payment_date, :class => "small" %>
       </div>
     </div>
+        <% client_credit = payment.client_credit payment.invoice.client_id
+    if client_credit > 0
+    %>
+      <div class="sub-section">
+        <label></label>
+        <div class="field">
+          <%= check_box " ",index ,:class=>'apply_credit',:id=>"payments_#{index}_apply_credit"%>
+          <label for="payments_<%= index%>_apply_credit" class='text-left' id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
+        </div>
+      </div>
+    <% end %>
     <div class="sub-section">
       <%= f.label :notes %>
       <div class="field">
         <%= f.text_area :notes, :class => "text_area" %>
       </div>
     </div>
-     <%#= payment.invoice_paid_detail payment.invoice_id %>
-<%#*<div class="sub-section">%>
-<%#= f.label :send_payment_notification %>
-<%#*<div class="field">%>
-<%#= f.check_box :send_payment_notification %>
-<%#*</div>%>
-<%#*</div>%>
+    <div class="sub-section">
+        <label></label>
+        <div class="field">
+          <%= f.check_box :send_payment_notification,:id=>"payments_#{index}_send_payment_notification" %>
+         <%= f.label :send_payment_notification, :class=>'text-left',:for=>"payments_#{index}_send_payment_notification" %>
+        </div>
+      </div>
   </div>
 </div>

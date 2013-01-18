@@ -26,7 +26,6 @@ jQuery ->
        if pay_amount > rem_credit
           alert "Payment from credit cannot exceed available credit."
           flag = false
-          break
        else
           flag = true
      flag

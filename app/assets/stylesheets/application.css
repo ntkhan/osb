@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= invoice.css
+ *= payment.css.scss
  *= style.css
  *= client.css.scss
  *= chosen.css
