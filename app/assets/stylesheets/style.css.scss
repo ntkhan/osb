@@ -344,13 +344,15 @@ textarea{
 table.table_listing {
   margin: 22px 0;
   th, td {
-    padding: 7px 5px 4px 10px;
+    padding: 5px 5px 5px 10px;
+    vertical-align: middle;
   }
   thead {
     color: #FFFFFF;
     th {
       border-right: 1px solid #FFFFFF;
       background-color: #898989;
+      vertical-align: middle;
       &:first-child {
         border-radius: 5px 0 0 5px;
         padding: 2px 5px 6px 10px;
@@ -389,7 +391,7 @@ table.payment_listing {
   thead{
   th{
     &:first-child {
-      padding: 7px 5px 4px 10px;
+      padding: 5px 5px 5px 10px;
     }
   }   }
   tbody {
