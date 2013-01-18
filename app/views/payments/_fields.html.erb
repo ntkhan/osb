@@ -4,15 +4,14 @@
       <%= f.hidden_field :invoice_id%>
       <%= f.label :payment_amount %>
       <div class="field">
-        <%= f.text_field :payment_amount, :class => "small full_payment_amount",:value=>''%>
+        <%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small full_payment_amount",:value=>''%>
       </div>
     </div>
     <div class="sub-section">
       <label></label>
       <div class="field">
         <%= f.check_box :paid_full ,:class=>'paid_full'%>
-        <div  id="<%= payment.id %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
-        <%#= f.hidden_field :payment_amount,:class=>"rem_pay_#{payment.id}",:value=> Payment.invoice_remaining_amount(payment.invoice.id),:disabled=>'disabled' %>
+        <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
         <%= f.label :paid_full,:class=>'text-left' %>
       </div>
     </div>
@@ -22,8 +21,8 @@
       <div class="sub-section">
         <label></label>
         <div class="field">
-          <%= check_box " ",payment.id ,:class=>'apply_credit'%>
-          <label class='text-left' id="rem_credit_<%= payment.id %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
+          <%= check_box " ",index ,:class=>'apply_credit'%>
+          <label class='text-left' id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
         </div>
       </div>
     <% end %>
@@ -39,7 +38,7 @@
     <div class="sub-section">
       <%= f.label "Method" %>
       <div class="field">
-        <%= f.select :payment_method, PAYMENT_METHODS %>
+        <%= f.select :payment_method, PAYMENT_METHODS,{},{:id=>"payments_#{index}_payment_method"}%>
       </div>
     </div>
     <div class="sub-section">
