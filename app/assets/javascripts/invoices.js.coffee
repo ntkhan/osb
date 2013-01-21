@@ -136,6 +136,12 @@ jQuery ->
     updateLineTotal(jQuery(this))
   updateInvoiceTotal()
 
+  # Validate client, cost and quantity on invoice save
+  jQuery("form#new_invoice").submit ->
+    if jQuery("#invoice_client_id").val() is ""
+      alert "Please select a client"
+      false
+
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
     container = elem.parents("tr.fields")
