@@ -6,7 +6,8 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @clients }
+      format.js
+      #format.json { render json: @clients }
     end
   end
 
