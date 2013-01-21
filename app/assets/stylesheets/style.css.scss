@@ -461,3 +461,15 @@ td {
     float: right;
   }
 }
+input[type="submit"].new_btn{
+  background-color: #00BDE5;
+  background-image: none;
+  border: medium none;
+  color: #FFFFFF;
+  font-size: 18px;
+  height: 50px;
+  margin-left: 5px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  width: 210px;
+}

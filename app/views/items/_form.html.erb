@@ -11,41 +11,39 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :item_name %><br />
+  <div class="field first_row form_title">
+    <label class="form_title" for="item_item_name"><div>Item name</div><span>*</span></label>
     <%= f.text_field :item_name %>
   </div>
   <div class="field">
-    <%= f.label :item_description %><br />
-    <%= f.text_field :item_description %>
+    <label class="form_title" for="item_item_description">Description</label>
+    <%#= f.label :item_description, :class => "form_title" %>
+    <%= f.text_area :item_description %>
   </div>
   <div class="field">
-    <%= f.label :unit_cost %><br />
-    <%= f.text_field :unit_cost %>
+    <%= f.label :unit_cost, :class => "form_title" %>
+    <%= f.text_field :unit_cost, :class => "form_title small" %>
+
+
+    <%= f.label :quantity, :class => "form_title small" %>
+    <%= f.number_field :quantity, :class => "small" %>
   </div>
   <div class="field">
-    <%= f.label :quantity %><br />
-    <%= f.number_field :quantity %>
+    <label class="form_title">Taxes</label>
+    <%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax1 small"}) %>
+
+    <!--<%#= f.label :tax_2, :class => "form_title" %>-->
+    <%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax2 small"}) %>
   </div>
-  <div class="field">
-    <%= f.label :tax_1 %><br />
-    <%#= f.number_field :tax_1 %>
-    <%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax1 medium"}) %>
-  </div>
-  <div class="field">
-    <%= f.label :tax_2 %><br />
-    <%#= f.number_field :tax_2 %>
-    <%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax2 medium"}) %>
-  </div>
-  <div class="field">
-    <%= f.label :track_inventory %><br />
-    <%= f.check_box :track_inventory %>
-  </div>
-  <div class="field">
-    <%= f.label :inventory %><br />
-    <%= f.number_field :inventory %>
-  </div>
+  <!--<div class="field">-->
+    <%#= f.label :track_inventory %>
+    <%#= f.check_box :track_inventory %>
+  <!--</div>-->
+  <!--<div class="field">-->
+    <!--<%#= f.label :inventory, :class => "form_title" %>-->
+    <!--<%#= f.number_field :inventory %>-->
+  <!--</div>-->
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "SAVE", :class => "new_btn" %>
   </div>
 <% end %>
