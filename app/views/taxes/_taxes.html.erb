@@ -1,0 +1,23 @@
+<% @taxes.each do |taxis| %>
+    <tr>
+      <td><%= taxis.name %></td>
+      <td><%= taxis.percentage %></td>
+      <td><%= link_to 'Edit', edit_taxis_path(taxis) %>
+        <%= link_to 'Destroy', taxis, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+    </tr>
+<% end %>
+<tr>
+  <td colspan="3">
+    <div class="paginator">
+      <%= paginate @taxes, :remote => true %>
+      <div class="paging_info">
+        <%= page_entries_info @taxes %>
+      </div>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td align="center" colspan="3">
+    <%= link_to 'New Tax', new_taxis_path, :class => "new_btn" %>
+  </td>
+</tr>

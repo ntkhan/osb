@@ -2,11 +2,12 @@ class TaxesController < ApplicationController
   # GET /taxes
   # GET /taxes.json
   def index
-    @taxes = Tax.all
+    @taxes = Tax.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @taxes }
+      format.js
+      #format.json { render json: @taxes }
     end
   end
 
@@ -46,6 +47,8 @@ class TaxesController < ApplicationController
       if @taxis.save
         format.html { redirect_to @taxis, notice: 'Tax was successfully created.' }
         format.json { render json: @taxis, status: :created, location: @taxis }
+        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id},:notice => 'Tax was successfully created.')
+        return
       else
         format.html { render action: "new" }
         format.json { render json: @taxis.errors, status: :unprocessable_entity }

@@ -1,57 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Open Source Billing</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <!-- MAIN CONTAINER START-->
-    <div class="mainContainer">
-      <!-- HEADER START -->
-      <div class="header">
-        <div class="logo">
-          <%= image_tag "logo.png", :size => "185x30" %>
-        </div>
-        <div class="header_menu">
-          <ul>
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-          </ul>
-        </div>
-      </div>
-      <!-- HEADER END -->
-      <!-- NAVIGATION START -->
-      <div class="naviagion">
-        <div id="nav">
-          <ul class="select">
-            <li><%= active_link_to "Home", "/" %></li>
-            <li><%= active_link_to "Invoices", invoices_path %></li>
-            <li><%= active_link_to "Clients", clients_path %>
-              <ul class="sub">
-                <li><a href="#">Clients </a></li>
-                <li><a href="#">Staff </a></li>
-                <li><a class="active" href="#">Assign Clients</a></li>
-                <li><a href="#">Sent Emails</a></li>
-              </ul>
-            </li>
-            <li><%= active_link_to "Items", items_path %></li>
-            <li><%= active_link_to "Payments", payments_path %></li>
-            <li><%= active_link_to "Help", "/help" %></li>
-          </ul>
-        </div>
-      </div>
-      <!-- NAVIGATION END -->
-      <!-- CONTENT AREA START-->
-      <div class="content">
-        <!-- <div class="notice"><%#= notice %></div> -->
-        <%= yield %>
-      </div>
-      <!-- CONTENT AREA END-->
-
+<head>
+  <title>Open Source Billing</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<!-- MAIN CONTAINER START-->
+<div class="mainContainer">
+  <!-- HEADER START -->
+  <div class="header">
+    <div class="logo">
+      <%= image_tag "logo.png", :size => "185x30" %>
     </div>
-    <!-- MAIN CONTAINER END -->
-  </body>
+    <div class="header_menu">
+      <ul>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+      </ul>
+    </div>
+  </div>
+  <!-- HEADER END -->
+  <!-- NAVIGATION START -->
+  <div class="naviagion">
+    <div id="nav">
+      <ul class="select">
+        <li><%= active_link_to "Home", "/" %></li>
+        <li><%= active_link_to "Invoices", invoices_path %></li>
+        <li><%= active_link_to "Clients", clients_path %>
+          <ul class="sub">
+            <li><a href="#">Clients </a></li>
+            <li><a href="#">Staff </a></li>
+            <li><a class="active" href="#">Assign Clients</a></li>
+            <li><a href="#">Sent Emails</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Items </a>
+          <ul class="sub">
+            <li><%= active_link_to "Items", items_path %></li>
+            <li><%= active_link_to "Taxes", taxes_path %></li>
+          </ul>
+        </li>
+        <li><%= active_link_to "Payments", payments_path %></li>
+        <li><%= active_link_to "Help", "/help" %></li>
+      </ul>
+    </div>
+  </div>
+  <!-- NAVIGATION END -->
+  <!-- CONTENT AREA START-->
+  <div class="content">
+    <div class="alert alert-success" <% if notice.blank? %> style="display: none;"<% end %>>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= notice %>
+    </div>
+    <%= yield %>
+  </div>
+  <!-- CONTENT AREA END-->
+
+</div>
+<!-- MAIN CONTAINER END -->
+</body>
 </html>
