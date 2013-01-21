@@ -80,7 +80,7 @@
           <tbody><tr>
               <td class="form_title">Country</td>
               <td colspan="3" class="form_field">
-                <%= f.select :country, COUNTRY_LIST ,{},{:class => "medium"}%>
+                <%= f.select :country, COUNTRY_LIST ,{:prompt => ""},{"data-placeholder" => "Select a country...",:class => "medium chzn-select"}%>
               </td>
             </tr>
             <tr>
@@ -121,13 +121,13 @@
             <tr>
               <td class="form_title">Industry</td>
               <td colspan="3" class="form_field">
-                <%= f.select :industry, INDUSTRY_LIST ,{},{:class => "medium"}%>
+                <%= f.select :industry, INDUSTRY_LIST ,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "medium chzn-select"}%>
               </td>
             </tr>
             <tr>
               <td class="form_title">Company Size</td>
               <td colspan="3" class="form_field">
-                <%= f.select :company_size, COMPANY_SIZE ,{},{:class => "medium"}%>
+                <%= f.select :company_size, COMPANY_SIZE ,{:prompt => ""},{"data-placeholder" => "Select company size...",:class => "medium chzn-select"}%>
               </td>
             </tr>
             <tr>

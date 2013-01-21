@@ -30,10 +30,10 @@
   </div>
   <div class="field">
     <label class="form_title">Taxes</label>
-    <%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax1 small"}) %>
+    <%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "tax1 small chzn-select"}) %>
 
     <!--<%#= f.label :tax_2, :class => "form_title" %>-->
-    <%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""}, {:class => "tax2 small"}) %>
+    <%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "tax2 small chzn-select"}) %>
   </div>
   <!--<div class="field">-->
     <%#= f.label :track_inventory %>

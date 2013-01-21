@@ -1,4 +1,4 @@
-tr.fields, .invoice_top_section {
+tr.fields, .invoice_top_section,#add_Detail,.items_wrapper {
   .chzn-container-single {
     .chzn-single, .chzn-results,
     .chzn-search input[type=text] {
@@ -9,6 +9,7 @@ tr.fields, .invoice_top_section {
       border: 1px solid #D7D7D7;
       border-radius: 3px;
       line-height: 28px;
+      margin: 0;
       div b {
         background-position: 0 2px;
       }
@@ -17,7 +18,7 @@ tr.fields, .invoice_top_section {
       }
     }
   }
-  .tax1, .tax2 {
+  .tax1, .tax2, .field {
     .chzn-container-single .chzn-single abbr {
       right: 16px;
     }
