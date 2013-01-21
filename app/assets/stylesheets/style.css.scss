@@ -362,7 +362,7 @@ table.table_listing {
       }
     }
   }
-  .edit_action, .del_action {
+  .edit_action {
     color: #00BDE5;
     text-decoration: none;
     &:hover {
@@ -371,6 +371,16 @@ table.table_listing {
       background: #FFFFFF;
     }
   }
+  .del_action{
+    color: #FF0003;
+    text-decoration: none;
+    &:hover {
+      color: #FF0003;
+      text-decoration: none;
+      background: #FFFFFF;
+    }
+  }
+
   tbody {
     tr:first-child td {border-top: none;}
     tr:last-child td{border-top: none; text-align: center;}

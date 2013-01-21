@@ -2,8 +2,8 @@
     <tr>
       <td><%= taxis.name %></td>
       <td><%= taxis.percentage %></td>
-      <td><%= link_to 'Edit', edit_taxis_path(taxis) %>
-        <%= link_to 'Destroy', taxis, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+      <td><%= link_to 'Edit', edit_taxis_path(taxis), :class => "edit_action" %>
+        <%= link_to 'Delete', taxis, :class => "del_action", :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
     </tr>
 <% end %>
 <tr>
