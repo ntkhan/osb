@@ -3,7 +3,7 @@ class Client < ActiveRecord::Base
   has_many :invoices
   has_many :client_contacts
   accepts_nested_attributes_for :client_contacts, :allow_destroy => true
-
+  paginates_per 4
   def contact_name
     "#{self.first_name} #{self.last_name}"
   end

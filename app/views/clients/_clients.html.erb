@@ -1,0 +1,32 @@
+<% @clients.each do |client| %>
+    <tr>
+      <td><%= link_to client.organization_name, client_path(client) %></td>
+      <td><%= client.contact_name %></td>
+      <td><%= client.email %></td>
+      <td><%= client.business_phone %></td>
+      <td>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                    edit_client_path(client), :class => 'edit_action' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                    client_path(client),
+                    :method => :delete,
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'del_action' %>
+      </td>
+    </tr>
+<% end %>
+<tr>
+  <td colspan="5">
+    <div class="paginator">
+      <%= paginate @clients, :remote => true %>
+      <div class="paging_info">
+        <%= page_entries_info @clients %>
+      </div>
+    </div>
+  </td>
+</tr>
+<tr>
+  <td align="center" colspan="5">
+    <%= link_to "New Client",new_client_path, :class => 'new_btn' %>
+  </td>
+</tr>
