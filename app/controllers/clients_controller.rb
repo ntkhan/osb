@@ -2,11 +2,12 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @clients }
+      format.js
+      #format.json { render json: @clients }
     end
   end
 
@@ -46,6 +47,8 @@ class ClientsController < ApplicationController
       if @client.save
         format.html { redirect_to @client, notice: 'Client was successfully created.' }
         format.json { render json: @client, status: :created, location: @client }
+        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => 'Client was successfully created.')
+        return
       else
         format.html { render action: "new" }
         format.json { render json: @client.errors, status: :unprocessable_entity }

@@ -1,25 +1,15 @@
-<h1>Listing taxes</h1>
+<div class="page-header"><h1>Listing taxes</h1></div>
 
-<table>
-  <tr>
+<table class="table table_listing">
+  <thead>
     <th>Name</th>
     <th>Percentage</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <th width=75>Actions</th>
+  </thead>
 
-<% @taxes.each do |taxis| %>
-  <tr>
-    <td><%= taxis.name %></td>
-    <td><%= taxis.percentage %></td>
-    <td><%= link_to 'Show', taxis %></td>
-    <td><%= link_to 'Edit', edit_taxis_path(taxis) %></td>
-    <td><%= link_to 'Destroy', taxis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<tbody id="tax_body">
+<%= render 'taxes' %>
+</tbody>
 </table>
 
-<br />
 
-<%= link_to 'New Tax', new_taxis_path %>

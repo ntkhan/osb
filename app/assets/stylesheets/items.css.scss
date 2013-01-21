@@ -1,0 +1,19 @@
+.items_wrapper {
+  width: auto;
+  margin: 20px 60px 20px 60px;
+  div.field,div.actions{float: left; width: 100%; margin-bottom: 20px;}
+  div.actions{margin: 20px 0; width: 500px; text-align: center;}
+  div.first_row{margin: 10px 0 20px 0;}
+  label {
+    width: 130px; float: left;
+  }
+  input[type=text],input[type=number],textarea {
+    width: 350px; height: 30px; float: left;
+  }
+  input.small{ width: 129px;}
+  label.small{width: 62px; margin-left: 10px;}
+  label.form_title{padding:7px 0 0;
+  div{width: 70px; float: left;}}
+  select.small {width: 72px;}
+  input.new_btn[type="submit"] {width: 290px;}
+}

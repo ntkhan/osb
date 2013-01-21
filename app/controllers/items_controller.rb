@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @item }
     end
+
   end
 
   # GET /items/1/edit
@@ -47,6 +48,8 @@ class ItemsController < ApplicationController
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
+        redirect_to({:action => "edit", :controller => "items", :id => @item.id},:notice => 'Item was successfully created.')
+        return
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }

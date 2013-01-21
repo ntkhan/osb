@@ -12,14 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, :class => "form_title" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :percentage %><br />
+    <%= f.label :percentage, :class => "form_title" %>
     <%= f.text_field :percentage %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(:class => "new_btn")   %>
   </div>
 <% end %>
