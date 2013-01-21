@@ -2,15 +2,13 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
-<table class="table table-listing">
+<table class="table table_listing">
   <thead>
-    <tr>
       <th>Organization</th>
       <th>Contact</th>
       <th>Email</th>
       <th>Phone</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
   </thead>
   <tbody>
     <% @clients.each do |client| %>
