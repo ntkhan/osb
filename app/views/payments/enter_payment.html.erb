@@ -1,11 +1,12 @@
-<h1 class="pt">Enter Payment</h1>
+<div class="page-header">
+<h1>Enter Payment</h1>
+</div>
 <% grand_total = 0 %>
 <%= form_tag "update_individual_payment", :method => :put do %>
-  <% for payment in @payments %>
+  <% @payments.each_with_index do |payment, index| %>
     <% grand_total = grand_total + payment.invoice.invoice_total %>
     <%= fields_for "payments[]", payment do |f| %>
-      <div class="payment_heading">Invoice #<%=h payment.invoice.invoice_number %> for <%=h payment.client_name %></div>
-      <%= render "fields", :f => f,:payment=>payment%>
+      <%= render "fields", :f => f,:payment=>payment,:index=>index%>
     <% end %>
       <% if Payment.invoice_paid_amount(payment.invoice.id) > 0 %>
       <br />

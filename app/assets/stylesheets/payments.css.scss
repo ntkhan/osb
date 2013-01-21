@@ -31,6 +31,20 @@ table.index th{
 }
 .left-section {
     float:left;
+    width:280px;
+  .invoice_number {
+  font-size:18px;
+  color:#464646;
+  }
+  .invoice_total {
+  color:#92C534;
+  font-size: 24px;
+  margin: 10px 0px;
+
+  }
+  .client_name {
+font-size:14px;
+  }
 }
 .right-section {
     float:left;
@@ -38,23 +52,26 @@ table.index th{
 .sub-section{
     margin-bottom: 18px;
     padding-top: 4px;
-    clear:both
+    clear:both;
+    float:left;
+    width:478px;
 }
 .sub-section .field {
     float:left;
-    min-width: 190px;
+    min-width: 145px;
 }
 .sub-section textarea {
-    width: 250px;
+    width: 307px;
+    min-height: 50px;
 }
 .sub-section label {
     display: block;
     float: left;
     margin-bottom: 5px;
-    text-align: right;
-    width: 130px;
+    text-align: left;
+    width: 100px;
     margin-top: 5px;
-    padding-right: 15px;
+    padding-right: 0px;
     font-weight:bold;
     font-size:13px;
 }
@@ -68,15 +85,6 @@ table.index th{
 .field.invoice_total{
     font-size:22px;
 margin-top: 5px;}
-.payment_heading{
-    text-align:left;
-    font-size:18px;
-    border-top: 4px solid #E5E5E5;
-    font-weight:bold;
-    padding: 18px 0 18px 180px;
-   clear: both;
-}
-
 h2.pt {
     margin-bottom: 0;
     padding: 9px 20px 18px 0;
@@ -121,12 +129,23 @@ body {
 .sub-section input, .sub-section textarea {
     float: left;
 }
+input[type="radio"], input[type="checkbox"] {
+    cursor: pointer;
+    line-height: normal;
+    margin: 8px 0 0;
+}
 .sub-section label.text-left{
-text-align:left;
-margin-top:0px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: left;
+    width:auto;
 }
 td {
     text-align: right;
 }
-
-/////////////////// payments listing ///////////
+.sub-section select {
+    width: 125px;
+}
+.sub-section input.small {
+    width: 107px;
+}
