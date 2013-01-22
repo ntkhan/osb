@@ -3,7 +3,7 @@
     <div class="inner_form">
       <table cellspacing="0" cellpadding="0" class="invoice">
         <tbody><tr>
-            <td class="payment_serial" rowspan="4"><span>1</span></td>
+            <td class="payment_serial" rowspan="4"><span><%= index+1 %></span></td>
             <td class="invoice_detail" rowspan="4">
               <ul>
                 <li><h1 class="secondary small">Invoice#<%=h payment.invoice.invoice_number %></h1></li>
@@ -14,33 +14,44 @@
             </td>
             <td class="form_title invoice">
               <%= f.hidden_field :invoice_id%>
-              <%= f.label "Payment(PKR)", :class => "" %>
+              <%#= f.label "Payment(PKR)", :class => "" %>
+              <label for="payments_<%= index%>_payment_amount">Payment(PKR)</label>
             </td>
             <td><%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small full_payment_amount",:value=>''%></td>
             <td class="form_field" colspan="2">
-              <%= f.check_box :paid_full, :id=>"payments_#{index}_paid_full" ,:class=>'paid_full checkbox invoice'%>
+              <%= f.check_box :paid_full, :id=>"payments_#{index}_paid_full" ,:class=>'paid_full'%>
               <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
               <%= f.label :paid_full,:class=>'text-left paid_full_label',:for=>"payments_#{index}_paid_full" %>
             </td>
           </tr>
-
           <tr>
-            <td class="form_title invoice"><%= f.label "Method", :class => "" %></td>
+            <td></td>
+            <td colspan="3">
+              <% client_credit = payment.client_credit payment.invoice.client_id
+              if client_credit > 0
+              %>
+                <%= check_box " ",index ,:class=>'apply_credit',:id=>"payments_#{index}"%>
+                <label for="payments_<%= index%>" class='apply_credit_label' id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_title invoice"><%= f.label "Method", :class => "",:for=>"payments_#{index}_payment_method" %></td>
             <td class="form_field">
               <%= f.select :payment_method, PAYMENT_METHODS, {}, {:id => "payments_#{index}_payment_method", :class => "medium invoice"} %>
             </td>
-            <td class="form_title invoice small"><%= f.label "Date", :class => "" %></td>
+            <td class="form_title invoice small"><%= f.label "Date", :class => "",:for=>"payments_#{index}_payment_date" %></td>
             <td>
               <div class="calendar">
-                <%= f.text_field :payment_date, :class => "small hasDatepicker" %>
+                <%= f.text_field :payment_date,:id=>"payments_#{index}_payment_date", :class => "small hasDatepicker" %>
               </div>
             </td>
           </tr>
 
           <tr>
-            <td class="form_title invoice"> <%= f.label :notes, :class => "" %></td>
+            <td class="form_title invoice"> <%= f.label :notes, :class => "", :for=>"payments_#{index}_notes"%></td>
             <td class="form_field" colspan="3">
-              <%= f.text_area :notes, :class => "text_area invoice" %>
+              <%= f.text_area :notes,:id=>"payments_#{index}_notes",:class => "text_area invoice" %>
             </td>
           </tr>
 
@@ -51,7 +62,52 @@
               <%= f.label :send_payment_notification, :class=>'text-left paid_full_label checkbox',:for=>"payments_#{index}_send_payment_notification" %>
             </td>
           </tr>
-
+          <% if Payment.invoice_paid_amount(payment.invoice.id) > 0 %>
+            <tr>
+              <td class="form_field" colspan="6">
+                <table cellspacing="0" cellpadding="0" style="width:100%; line-height: 24px;color: #464646;">
+                  <tbody><tr style="background-color: rgb(237, 237, 237);">
+                      <td width="100" style="text-indent: 5px;line-height:24px;padding:0px;text-align: left;"><strong>Date</strong></td>
+                      <td width="100"><strong>Type</strong></td>
+                      <td><strong>Notes</strong></td>
+                      <td  width="100" style="text-align:right;"><strong>Amount</strong></td>
+                      <td width="10">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td bgcolor="#DDDDDD" height="1" colspan="5"  style="line-height:24px;padding:0px;"></td>
+                    </tr>
+                    <%
+                    paid_amount = 0
+                    Payment.invoice_paid_detail(payment.invoice_id).each do |pd|
+                      unless pd.payment_amount.blank?
+                        paid_amount += pd.payment_amount
+                      %>
+                        <tr>
+                          <td style="text-align: left;" ><%= pd.payment_date %></td>
+                          <td align="left"><%= pd.payment_method %></td>
+                          <td align="left"><%= pd.notes %></td>
+                          <td style="text-align:right;"><%= pd.payment_amount%></td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#DDDDDD" height="1" colspan="5"  style="line-height:24px;padding:0px;"></td>
+                        </tr>
+                      <% end
+                    end %>
+                    <tr>
+                      <td style="text-align:right" colspan="3">Total Paid:</td>
+                      <td style="text-align:right">Rs.<%= paid_amount %></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right" colspan="3"><strong>Balance:</strong></td>
+                      <td style="text-align:right"><strong>Rs.<%= payment.invoice.invoice_total - paid_amount %></strong></td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </tbody></table>
+              </td>
+            </tr>
+          <% end %>
         </tbody></table>
     </div><!--inner_form-->
   </div><!--content_inner-->
