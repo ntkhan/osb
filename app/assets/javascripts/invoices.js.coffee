@@ -101,7 +101,7 @@ jQuery ->
     jQuery(".add_nested_fields").click()
     jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
-  jQuery(".add_nested_fields").live "click", ->
+   jQuery(".add_nested_fields").live "click", ->
     setTimeout (->
      jQuery(".chzn-select").chosen({allow_single_deselect: true})
     ), 0
