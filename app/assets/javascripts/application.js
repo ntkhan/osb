@@ -18,6 +18,7 @@
 //= require nav
 //= require chosen.jquery
 //= require jquery.css3caching.js
+//= require jqamp-ui-spinner.min.js
 
 jQuery(function(){
     //override default behavior of inserting new subforms into form    
