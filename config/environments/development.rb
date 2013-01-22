@@ -47,5 +47,5 @@ Osb::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = {:host => 'localhost:3000'}
-  config.address = "http://localhost:3000/"
+  config.address = "http://10.28.81.143:3000/"
 end

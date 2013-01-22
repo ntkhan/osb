@@ -89,7 +89,7 @@ h1.secondary.small{
     width: 100%;
 }
 #nav {
-    height:43px; 
+    height:43px;
     position:relative;
     z-index:500;
     width: 100%;
@@ -128,7 +128,6 @@ h1.secondary.small{
     height: 43px;
     text-decoration: none;
 }
-
 #nav .sub {
     display:none;
     margin:0;
@@ -137,7 +136,7 @@ h1.secondary.small{
     width: 100%;
     background: url(/assets/sub_bg.png) repeat-x bottom;
 }
-#nav .select li:hover .sub {
+#nav .select li:hover .sub, #nav .select li a.active + .sub {
     height:43px;
     display:block;
     position:absolute;
@@ -145,7 +144,7 @@ h1.secondary.small{
     left:0;
     text-align:center;
 }
-#nav .select li:hover .sub li a {
+#nav .select li:hover .sub li a, #nav .select li .sub li a {
     display:block;
     float:left;
     background:transparent url(transparent.gif);
@@ -158,7 +157,7 @@ h1.secondary.small{
     line-height: 34px;
     min-width: 39px;
 }
-#nav .select li:hover .sub li a:hover, #nav .select li.active .sub li a.active {
+#nav .select li:hover .sub li a:hover, #nav .select li .sub li a.active  {
     display: block;
     color:#00ace5;
     background: url(/assets/sub_hover.png) no-repeat bottom center;
@@ -564,3 +563,4 @@ input.small{
 .form_title label{font-weight:bold; font-size:13px; margin: -4px 0 0;}
 
 /* Payment CSS Ends*/
+
