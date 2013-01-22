@@ -31,13 +31,13 @@
         <li><%= active_link_to "Invoices", invoices_path %></li>
         <li><%= active_link_to "Clients", clients_path %>
           <ul class="sub">
-            <li><a href="#">Clients </a></li>
+            <li><%= active_link_to "Clients", clients_path %></li>
             <li><a href="#">Staff </a></li>
-            <li><a class="active" href="#">Assign Clients</a></li>
+            <li><a href="#">Assign Clients</a></li>
             <li><a href="#">Sent Emails</a></li>
           </ul>
         </li>
-        <li><a href="#">Items </a>
+        <li><%= active_link_to "Items", items_path %>
           <ul class="sub">
             <li><%= active_link_to "Items", items_path %></li>
             <li><%= active_link_to "Taxes", taxes_path %></li>

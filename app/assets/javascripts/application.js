@@ -25,4 +25,6 @@ jQuery(function(){
         var $tr = $(link).closest('tr');
         return $(content).insertBefore($tr);
     }
+    jQuery("#nav .select .sub li").find("a.active").parents("ul.sub").prev("a").addClass("active");
+//    jQuery("#nav .select .sub li")
 });

@@ -101,6 +101,11 @@ jQuery ->
     jQuery(".add_nested_fields").click()
     jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
+  jQuery(".add_nested_fields").live "click", ->
+    setTimeout (->
+     jQuery(".chzn-select").chosen({allow_single_deselect: true})
+    ), 0
+
  # Re calculate the total invoice balance if an item is removed
    jQuery(".remove_nested_fields").live "click", ->
     setTimeout (->
@@ -141,6 +146,7 @@ jQuery ->
     if jQuery("#invoice_client_id").val() is ""
       alert "Please select a client"
       false
+
 
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
