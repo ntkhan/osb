@@ -42,28 +42,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="21" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="invoice.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="0" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
+            <state line="2" column="2" selection-start="56" selection-end="72" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invoices_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="invoices_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="48" selection-start="233" selection-end="233" vertical-scroll-proportion="0.1585903">
+            <state line="86" column="20" selection-start="2453" selection-end="2460" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -72,7 +63,7 @@
       <file leaf-file-name="20121226164536_create_invoices.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/migrate/20121226164536_create_invoices.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="29" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
+            <state line="17" column="6" selection-start="495" selection-end="517" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -81,7 +72,35 @@
       <file leaf-file-name="20121226164548_create_invoice_line_items.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/migrate/20121226164548_create_invoice_line_items.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="33" selection-start="370" selection-end="393" vertical-scroll-proportion="0.0">
+            <state line="16" column="16" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="8.0">
+              <folding>
+                <marker date="1358511767000" expanded="true" signature="188:276" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="311:746" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="348:626" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="356:617" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="657:739" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="798:1164" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="808:1090" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="815:1079" placeholder="..." />
+                <marker date="1358511767000" expanded="true" signature="1118:1155" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_invoice.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="33" selection-start="254" selection-end="265" vertical-scroll-proportion="-3.3333333">
               <folding />
             </state>
           </provider>
@@ -96,19 +115,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="invoice_line_item.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="invoice_line_item.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/invoice_line_item.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="2" selection-start="337" selection-end="337" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="65" selection-start="3723" selection-end="3723" vertical-scroll-proportion="-20.0">
+            <state line="2" column="21" selection-start="184" selection-end="184" vertical-scroll-proportion="0.052863438">
               <folding />
             </state>
           </provider>
@@ -147,11 +157,11 @@
         <option value="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
         <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/app/models/invoice_line_item.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20121226164548_create_invoice_line_items.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20121226164536_create_invoices.rb" />
         <option value="$PROJECT_DIR$/app/models/invoice.rb" />
         <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20121226164536_create_invoices.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20121226164548_create_invoice_line_items.rb" />
+        <option value="$PROJECT_DIR$/app/models/invoice_line_item.rb" />
       </list>
     </option>
   </component>
@@ -220,26 +230,8 @@
               <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osb" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osb" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InvoicesController" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
+              <option name="myItemId" value="Models" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ModelsFolderNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -592,11 +584,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/taxes/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="18" selection-start="141" selection-end="141" vertical-scroll-proportion="0.12587413" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="27" selection-start="640" selection-end="640" vertical-scroll-proportion="-0.6666667">
@@ -627,13 +614,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/invoices/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="90" column="65" selection-start="3723" selection-end="3723" vertical-scroll-proportion="-20.0">
@@ -648,20 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="82" selection-start="5962" selection-end="5962" vertical-scroll-proportion="-10.32258">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="21" selection-start="648" selection-end="648" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -669,37 +635,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121226164548_create_invoice_line_items.rb">
+    <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="33" selection-start="370" selection-end="393" vertical-scroll-proportion="0.0">
+        <state line="29" column="33" selection-start="683" selection-end="683" vertical-scroll-proportion="0.7521614">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121226164536_create_invoices.rb">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="488" selection-end="488" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/invoice_line_item.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="2" selection-start="337" selection-end="337" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
+        <state line="149" column="82" selection-start="5962" selection-end="5962" vertical-scroll-proportion="-10.32258">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="48" selection-start="233" selection-end="233" vertical-scroll-proportion="0.1585903">
+        <state line="86" column="20" selection-start="2453" selection-end="2460" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20121226164536_create_invoices.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="6" selection-start="495" selection-end="517" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20121226164548_create_invoice_line_items.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="16" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="8.0">
+          <folding>
+            <marker date="1358511767000" expanded="true" signature="188:276" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="311:746" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="348:626" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="356:617" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="657:739" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="798:1164" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="808:1090" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="815:1079" placeholder="..." />
+            <marker date="1358511767000" expanded="true" signature="1118:1155" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="33" selection-start="254" selection-end="265" vertical-scroll-proportion="-3.3333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="2" selection-start="56" selection-end="72" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/invoice_line_item.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="21" selection-start="184" selection-end="184" vertical-scroll-proportion="0.052863438">
           <folding />
         </state>
       </provider>

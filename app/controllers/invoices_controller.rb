@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   # GET /invoices.json
   layout :choose_layout
   def index
-    @invoices = Invoice.page(params[:page]).unarchived
+    @invoices = Invoice.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -84,7 +84,7 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1.json
   def destroy
     @invoice = Invoice.find(params[:id])
-    @invoice.archive
+    @invoice.destroy
 
     respond_to do |format|
       format.html { redirect_to invoices_url }

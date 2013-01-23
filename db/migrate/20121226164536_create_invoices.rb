@@ -15,6 +15,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.decimal :invoice_total
       t.string :archive_number
       t.datetime :archived_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

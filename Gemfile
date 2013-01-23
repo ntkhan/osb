@@ -27,6 +27,7 @@ gem 'jquery-rails'
 gem "nested_form"
 gem "kaminari"
 gem "acts_as_archival"
+gem "acts_as_paranoid", "~>0.4.0"
 #gem 'will_paginate', '~> 3.0'
 
 

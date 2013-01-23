@@ -1,5 +1,6 @@
 class Invoice < ActiveRecord::Base
   acts_as_archival
+  acts_as_paranoid
   belongs_to :client
   belongs_to :invoice
   has_many :invoice_line_items, :dependent => :destroy
