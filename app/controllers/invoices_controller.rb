@@ -25,8 +25,8 @@ class InvoicesController < ApplicationController
   end
 
   def preview
-    id = decrypt(Base64.decode64params([:inv_id])).to_i
-    @invoice = Invoice.find(id)
+    id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue id = nil
+    @invoice = id.blank? ? nil : Invoice.find(id)
   end
 
   # GET /invoices/new

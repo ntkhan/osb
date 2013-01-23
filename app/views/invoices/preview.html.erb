@@ -1,4 +1,9 @@
 <%- model_class = Invoice -%>
+<% unless @invoice %>
+<div class="invoice-page-header">
+  Invoice URL seems invalid. Please check and try again.
+</div>
+<% else %>
 <div class="invoice-page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
 </div>
@@ -61,7 +66,7 @@
         item_line_total= (item.item_unit_cost ||0) * (item.item_quantity ||0)
         %>
         <tr>
-          <td style="width: 120px;"><div class="item"><%= item.item_name %></div></td>
+          <td style="width: 120px;"><div class="item"><%= item.item.item_name %></div></td>
           <td><div class="description"><%= item.item_description %> </div></td>
           <td style="width: 85px;"><div class="unitcost"><%= item.item_unit_cost %></div></td>
           <td style="width: 80px;"><div class="quantity"><%= item.item_quantity %></div></td>
@@ -119,6 +124,7 @@
     </div>
   </div>
 </div>
+<% end %>
 <%#*<div class="form-actions">%>
 <%#= link_to t('.back', :default => t("helpers.links.back")),
 invoices_path, :class => 'btn'  %>

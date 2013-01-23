@@ -1,37 +1,53 @@
 <%= form_tag "/payments/enter_payment" do %>
-  <a id="close_popup">X</a>
-  <div class="invoices_list">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th class="col-checkbox"><input type="checkbox" name="check" class="checkbox"></th>
-          <th width="90" class="first-column no-sort">Invoice</th>
-          <th width="130">Client Name</th>
-          <th width="170">Description</th>
-          <th width="85">Date</th>
-          <th width="110" class="ta_right currency no-sort">Total</th>
-          <th width="65" class="ta_center">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @invoices.each do |inv|%>
-          <tr data-id="11440">
-            <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id %>
-            <td class="invoice"><%= inv.invoice_number %></td>
-            <td><span class="tt"><%= inv.client.organization_name %></span></td>
-            <td><span class="tt">Description</span></td>
-            <td><%= "2013-01-01" %></td>
-            <td class="ta_right currency no-sort"><%= inv.invoice_total %></td>
-            <td class="ta_center">
-              <span class="invoice-status invoice-sent">
-                <%= inv.status %>
-              </span>
-            </td>
+  <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
+    <div class="model_grey_container">
+
+      <div class="modal-header">
+        <h1>Which Invoicess have you received payment for?</h1>
+        <p>Select one or more Invoicess from the list below to apply payment.</p>
+        <div class="cross_btn">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <img src="cross.png" width="7" height="7" alt=""/>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+
+        <table class="table table-striped">
+          <tr>
+            <th><input type="checkbox" name="check" class="checkbox"></th>
+            <th>Invoices</th>
+            <th>Client</th>
+            <th>Invoice Description</th>
+            <th>Total</th>
+            <th>Date</th>
+            <th>Status</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= submit_tag "Enter Payment" %>
+          <% @invoices.each do |inv|%>
+            <tr>
+              <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id %>
+              <td class="invoice"><%= inv.invoice_number %></td>
+              <td><span class="tt"><%= inv.client.organization_name %></span></td>
+              <td><span class="tt">Description</span></td>
+              <td><%= "2013-01-01" %></td>
+              <td class="ta_right currency no-sort"><%= inv.invoice_total %></td>
+              <td class="ta_center">
+                <span class="invoice-status invoice-sent">
+                  <%= inv.status %>
+                </span>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <div class="footer">
+        <%= submit_tag "Enter Payment" %>
+        <a href="#">cancel</a>
+      </div>
+
+    </div>
   </div>
 <% end %>
