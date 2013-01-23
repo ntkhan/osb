@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(:version => 20130108103358) do
     t.decimal  "item_quantity",    :precision => 10, :scale => 0
     t.integer  "tax_1"
     t.integer  "tax_2"
+    t.string   "archive_number"
+    t.datetime "archived_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
   end
@@ -106,6 +108,8 @@ ActiveRecord::Schema.define(:version => 20130108103358) do
     t.decimal  "discount_amount",     :precision => 10, :scale => 0
     t.decimal  "tax_amount",          :precision => 10, :scale => 0
     t.decimal  "invoice_total",       :precision => 10, :scale => 0
+    t.string   "archive_number"
+    t.datetime "archived_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
   end
