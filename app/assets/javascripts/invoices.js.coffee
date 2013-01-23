@@ -147,7 +147,7 @@ jQuery ->
   jQuery("form#new_invoice").submit ->
     flag = true
     if jQuery("#invoice_client_id").val() is ""
-      applyPopover(jQuery("#invoice_client_id_chzn"),"top")
+      applyPopover(jQuery("#invoice_client_id_chzn"),"top","Please select a client")
       flag = false
     else
       jQuery("tr.fields:visible").each ->
@@ -155,15 +155,15 @@ jQuery ->
         if row.find("select.items_list").val() isnt ""
           cost = row.find(".cost")
           qty =  row.find(".qty")
-          if cost.val() is "" then applyPopover(cost,"left") else hidePopover(cost)
-          if qty.val() is "" then applyPopover(qty,"right") else hidePopover(qty)
+          if cost.val() is "" then applyPopover(cost,"left","Please enter item cost") else hidePopover(cost)
+          if qty.val() is "" then applyPopover(qty,"right","Please enter item quantity") else hidePopover(qty)
           if cost.val() is "" or qty.val() is "" then flag = false
     flag
 
-  applyPopover = (elem,position) ->
+  applyPopover = (elem,position,message) ->
     elem.popover
       trigger: "manual"
-      content: "This field is required"
+      content: message
       placement: position
       template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content alert-error"><p></p></div></div></div>'
     elem.popover "show"

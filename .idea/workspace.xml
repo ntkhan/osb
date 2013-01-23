@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_form.html.erb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +46,7 @@
       <file leaf-file-name="invoices.js.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="12" selection-start="6741" selection-end="6741" vertical-scroll-proportion="0.58739257">
+            <state line="149" column="82" selection-start="5962" selection-end="5962" vertical-scroll-proportion="0.76790833">
               <folding />
             </state>
           </provider>
@@ -656,7 +654,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="12" selection-start="6741" selection-end="6741" vertical-scroll-proportion="0.58739257">
+        <state line="149" column="82" selection-start="5962" selection-end="5962" vertical-scroll-proportion="0.76790833">
           <folding />
         </state>
       </provider>
