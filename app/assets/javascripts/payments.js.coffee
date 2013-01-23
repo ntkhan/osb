@@ -15,9 +15,9 @@ jQuery ->
   jQuery(".apply_credit").live "click", ->
      apply_credit_id = jQuery(this).attr("id")
      if jQuery(this).is ":checked"
-        jQuery("#payments" + apply_credit_id + "_payment_method").val "Credit"
+        jQuery("#" + apply_credit_id + "_payment_method").val "Credit"
      else
-        jQuery("#payments" + apply_credit_id + "_payment_method").val ""
+        jQuery("#" + apply_credit_id + "_payment_method").val ""
   jQuery('#submit_payment_form').live "click", ->
      flag = true
      jQuery(".apply_credit:checked").each ->
