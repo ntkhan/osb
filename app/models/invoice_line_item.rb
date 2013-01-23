@@ -5,4 +5,5 @@ class InvoiceLineItem < ActiveRecord::Base
   belongs_to :tax1, :foreign_key => "tax_1", :class_name => "Tax"
   belongs_to :tax2, :foreign_key => "tax_2", :class_name => "Tax"
   acts_as_archival
+  acts_as_paranoid
 end
