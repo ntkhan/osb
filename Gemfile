@@ -26,6 +26,7 @@ gem 'active_link_to'
 gem 'jquery-rails'
 gem "nested_form"
 gem "kaminari"
+gem "acts_as_archival"
 #gem 'will_paginate', '~> 3.0'
 
 

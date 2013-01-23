@@ -13,6 +13,8 @@ class CreateInvoices < ActiveRecord::Migration
       t.decimal :discount_amount
       t.decimal :tax_amount
       t.decimal :invoice_total
+      t.string :archive_number
+      t.datetime :archived_at
 
       t.timestamps
     end
