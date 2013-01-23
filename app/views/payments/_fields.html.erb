@@ -1,40 +1,43 @@
+<% client_credit = payment.client_credit payment.invoice.client_id 
+rowspan = 4
+if client_credit > 0
+rowspan =5
+end
+%>
 <div class="content_box box_two">
   <div class="content_inner">
     <div class="inner_form">
       <table cellspacing="0" cellpadding="0" class="invoice">
         <tbody><tr>
-            <td class="payment_serial" rowspan="4"><span><%= index+1 %></span></td>
-            <td class="invoice_detail" rowspan="4">
+            <td class="payment_serial" rowspan="<%= rowspan %>"><span><%= index+1 %></span></td>
+            <td class="invoice_detail" rowspan="<%= rowspan %>">
               <ul>
                 <li><h1 class="secondary small">Invoice#<%=h payment.invoice.invoice_number %></h1></li>
-                <li><h1 class="green">$ <%=h payment.invoice.invoice_total %></h1></li>
+                <li><h1 class="green">Rs. <%=h payment.invoice.invoice_total %></h1></li>
                 <li class="invoice_rank"><%= payment.client_name %></li>
                 <li class="invoice_rank person"><%= payment.client_full_name %></li>
               </ul>
             </td>
             <td class="form_title invoice">
               <%= f.hidden_field :invoice_id%>
-              <%#= f.label "Payment(PKR)", :class => "" %>
-              <label for="payments_<%= index%>_payment_amount">Payment(PKR)</label>
+              <label for="payments_<%= index%>_payment_amount">Payment (PKR)</label>
             </td>
             <td><%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small full_payment_amount",:value=>''%></td>
             <td class="form_field" colspan="2">
-              <%= f.check_box :paid_full, :id=>"payments_#{index}_paid_full" ,:class=>'paid_full'%>
+              <input id="payments_<%= index%>_paid_full" class="paid_full" type="checkbox"  name="payments[][paid_full]">
               <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
               <%= f.label :paid_full,:class=>'text-left paid_full_label',:for=>"payments_#{index}_paid_full" %>
             </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td colspan="3">
-              <% client_credit = payment.client_credit payment.invoice.client_id
-              if client_credit > 0
-              %>
-                <%= check_box " ",index ,:class=>'apply_credit',:id=>"payments_#{index}"%>
+          </tr>        
+          <%  if client_credit > 0 %>
+            <tr>
+              <td></td>
+              <td colspan="3">
+                <%= check_box " ",index ,:class=>'apply_credit',:id=>"#{index}"%>
                 <label for="payments_<%= index%>" class='apply_credit_label' id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply from Credit Rs.<%= client_credit %> available</label>
-              <% end %>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          <% end %>
           <tr>
             <td class="form_title invoice"><%= f.label "Method", :class => "",:for=>"payments_#{index}_payment_method" %></td>
             <td class="form_field">
@@ -58,7 +61,7 @@
           <tr>
             <td class="form_title invoice">&nbsp;</td>
             <td class="form_field" colspan="3">
-              <%= f.check_box :send_payment_notification,:id=>"payments_#{index}_send_payment_notification", :class => "paid_full checkbox send_payment_notification" %>
+              <input type="checkbox" name="payments[][send_payment_notification]" id="payments_<%= index %>_send_payment_notification" class="paid_full checkbox send_payment_notification">
               <%= f.label :send_payment_notification, :class=>'text-left paid_full_label checkbox',:for=>"payments_#{index}_send_payment_notification" %>
             </td>
           </tr>
