@@ -60,6 +60,7 @@ jQuery ->
    jQuery("input.cost, input.qty").live "keyup", ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
+#     jQuery(this).popover "hide"
 
   # Update line and grand total when tax is selected from dropdown
    jQuery("select.tax1, select.tax2").live "change", ->
@@ -67,6 +68,7 @@ jQuery ->
 
   # Prevent form submission if enter key is press in cost,quantity or tax inputs.
    jQuery("input.cost, input.qty").live "keypress", (e) ->
+#     jQuery(this).popover "hide"
      if e.which is 13
        e.preventDefault()
        false
@@ -107,27 +109,27 @@ jQuery ->
     ), 0
 
  # Re calculate the total invoice balance if an item is removed
-   jQuery(".remove_nested_fields").live "click", ->
+  jQuery(".remove_nested_fields").live "click", ->
     setTimeout (->
      updateInvoiceTotal()
     ), 100
 
   # Subtract discount percentage from subtotal
-   jQuery("#invoice_discount_percentage").blur ->
+  jQuery("#invoice_discount_percentage").blur ->
      updateInvoiceTotal()
 
   # Don't allow nagetive value for discount
-   jQuery("#invoice_discount_percentage").keydown (e) ->
+  jQuery("#invoice_discount_percentage").keydown (e) ->
      if e.keyCode is 109 or e.keyCode is 13
        e.preventDefault()
        false
 
   # Don't allow paste and right click in discount field
-   jQuery("#invoice_discount_percentage").bind "paste contextmenu", (e) ->
+  jQuery("#invoice_discount_percentage").bind "paste contextmenu", (e) ->
      e.preventDefault()
 
   # Add date picker to invoice date field
-   jQuery("#invoice_invoice_date").datepicker
+  jQuery("#invoice_invoice_date").datepicker
      dateFormat: 'yy-mm-dd'
 
   # Makes the invoice line item list sortable
@@ -143,10 +145,35 @@ jQuery ->
 
   # Validate client, cost and quantity on invoice save
   jQuery("form#new_invoice").submit ->
+    flag = true
     if jQuery("#invoice_client_id").val() is ""
-      alert "Please select a client"
-      false
+      applyPopover(jQuery("#invoice_client_id_chzn"),"top","Please select a client")
+      flag = false
+    else
+      jQuery("tr.fields:visible").each ->
+        row = jQuery(this)
+        if row.find("select.items_list").val() isnt ""
+          cost = row.find(".cost")
+          qty =  row.find(".qty")
+          if cost.val() is "" then applyPopover(cost,"left","Please enter item cost") else hidePopover(cost)
+          if qty.val() is "" then applyPopover(qty,"right","Please enter item quantity") else hidePopover(qty)
+          if cost.val() is "" or qty.val() is "" then flag = false
+    flag
 
+  applyPopover = (elem,position,message) ->
+    elem.popover
+      trigger: "manual"
+      content: message
+      placement: position
+      template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content alert-error"><p></p></div></div></div>'
+    elem.popover "show"
+    elem.focus
+
+  hidePopover = (elem) ->
+    elem.next(".popover").hide()
+
+  jQuery("#invoice_client_id_chzn").click ->
+    jQuery(this).popover "hide"
 
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
