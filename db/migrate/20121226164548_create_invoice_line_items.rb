@@ -9,6 +9,9 @@ class CreateInvoiceLineItems < ActiveRecord::Migration
       t.decimal :item_quantity
       t.integer :tax_1
       t.integer :tax_2
+      t.string :archive_number
+      t.datetime :archived_at
+      t.datetime :deleted_at
 
       t.timestamps
     end
