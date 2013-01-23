@@ -91,8 +91,17 @@ h2.pt {
 font-size:24px;
 }
 .grand_total{
+clear:both;
+font-size:18px;
+margin-left:180px;
+font-weight:bold;
+ padding: 10px 0;
+}
+.grand_total2{
+clear:both;
 font-size:22px;
 margin-left:180px;
+ padding: 10px 0;
 }
 
 .form-horizontal .checkbox-label {
@@ -148,4 +157,22 @@ td {
 }
 .sub-section input.small {
     width: 107px;
+}
+.apply_credit_label{
+float:left;
+margin: 0px;
+color:#464646;
+padding: 0 0 20px 6px;
+}
+input[type="checkbox"].apply_credit{
+float:left;
+margin: 3px 0 0;
+}
+input.paid_full {
+    margin: 7px 0 0 20px;
+    float:left;
+}
+input.send_payment_notification {
+margin: 7px 0 0 19px;
+
 }

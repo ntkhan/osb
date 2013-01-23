@@ -4,10 +4,13 @@
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
-<h2>Dear, <%= @user.first_name %></h2> <br/>
+  <%
+  sender_business_name ||= "OSB LLC"
+  %>
+<p>Dear <%= @user.first_name %>,</p>
 
 <p>
-  To view your invoice from "{sender_business_name}" for <%=@invoice.invoice_total%>, or to download a PDF copy for
+  To view your invoice from <%= "#{sender_business_name}" %> for <%=@invoice.invoice_total%>, or to download a PDF copy for
   your records, click the link below:
 </p>
 
@@ -17,7 +20,7 @@
 
 <p>
   Best regards, <br />
-  {sender_business_name} (<%= @current_user.email %>)
+  <%= "#{sender_business_name}" %> (<%= @current_user.email %>)
 </p>
 
 </body>

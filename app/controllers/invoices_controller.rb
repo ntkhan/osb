@@ -25,7 +25,7 @@ class InvoicesController < ApplicationController
   end
 
   def preview
-    id = decrypt(params[:inv_id]).to_i
+    id = decrypt(Base64.decode64params([:inv_id])).to_i
     @invoice = Invoice.find(id)
   end
 
@@ -53,7 +53,7 @@ class InvoicesController < ApplicationController
     params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
     respond_to do |format|
       if @invoice.save
-        encrypted_id = encrypt(@invoice.id)
+        encrypted_id = Base64.encode64(encrypt(@invoice.id))
         InvoiceMailer.new_invoice_email(@invoice.client,@invoice,encrypted_id,current_user).deliver
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render json: @invoice, status: :created, location: @invoice }
