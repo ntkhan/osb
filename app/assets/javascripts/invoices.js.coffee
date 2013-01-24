@@ -191,3 +191,7 @@ jQuery ->
   jQuery(".alert button.close").click ->
     jQuery(this).parent(".alert").hide()
 
+ # Check all checkboxes using from main checkbox
+  jQuery('#main-invoice-checkbox').live "click", ->
+     jQuery(this).parents('table.table-striped').find(':checkbox').attr('checked', this.checked)
+

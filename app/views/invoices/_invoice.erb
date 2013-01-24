@@ -1,3 +1,12 @@
+<%
+ no_record_message = "You haven't created any invoice yet. Please click on New Invoice button to create new invoice."
+if params[:status] == "archived"
+  no_record_message = "You haven't any archived invoice yet."
+elsif params[:status] == "deleted"
+  no_record_message = "You haven't any deleted invoice yet."
+end
+%>
+end
 <% if  @invoices.length > 0 %>
   <% @invoices.each do |invoice| %>
     <tr>
@@ -32,7 +41,7 @@
 <% else %>
   <tr>
     <td colspan="8">
-      <div class="no_record_container">You haven't created any invoice yet. Please click on New Invoice button to create new invoice.</div>
+      <div class="no_record_container"><%= no_record_message %></div>
     </td>
   </tr>
 <% end %>

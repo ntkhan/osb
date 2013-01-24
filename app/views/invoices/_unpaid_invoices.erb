@@ -1,6 +1,6 @@
 <table class="table table-striped">
   <tr>
-    <th><input type="checkbox" name="check" class="checkbox"></th>
+    <th><input type="checkbox" name="check" id="main-invoice-checkbox"></th>
     <th>Invoice#</th>
     <th>Invoice Description</th>
     <th>Client</th>
@@ -10,7 +10,7 @@
   </tr>
   <% @invoices.each do |inv|%>
     <tr>
-      <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id %>
+      <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id%>
       <td class="invoice"><%= inv.invoice_number %></td>
       <td><%= inv.description %></td>
       <td><%= inv.client.organization_name %></td>
