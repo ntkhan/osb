@@ -30,21 +30,31 @@ class Invoice < ActiveRecord::Base
     new_invoice
   end
 
+  def self.multiple_invoices ids
+    where("id IN(?)", ids)
+  end
+
   def self.archive_multiple ids
-    where("id IN(?)", ids).each { |invoice| invoice.archive }
+    self.multiple_invoices(ids).each {|invoice| invoice.archive}
   end
 
   def self.delete_multiple ids
-    where("id IN(?)", ids).each { |invoice| invoice.destroy }
+    self.multiple_invoices(ids).each {|invoice| invoice.destroy}
+  end
+
+  def self.recover_archived ids
+    self.multiple_invoices(ids).each {|invoice| invoice.unarchive}
+  end
+
+  def self.recover_deleted ids
+    where("id IN(?)", ids).only_deleted.each {|invoice| invoice.recover}
   end
 
   def self.filter params
-    if params[:status] == "active"
-      self.unarchived.page(params[:page])
-    elsif params[:status] == "archived"
-      self.archived.page(params[:page])
-    else
-      self.only_deleted.page(params[:page])
+    case params[:status]
+      when "active"   then self.unarchived.page(params[:page])
+      when "archived" then self.archived.page(params[:page])
+      when "deleted"  then self.only_deleted.page(params[:page])
     end
   end
 
