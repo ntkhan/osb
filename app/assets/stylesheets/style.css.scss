@@ -452,7 +452,8 @@ td {
   .invoice_action_links{
     float: left; width: 70%;
     P{color: #00BDE5; line-height: 29px; }
-    a,span{color: #00BDE5; text-decoration: none; margin-right: 8px;
+    a,span,input{color: #00BDE5; text-decoration: none; margin-right: 8px; background: #FFFFFF;
+      padding: 0; border: 0 none;
       &:hover{text-decoration: none;background-color: #FFFFFF;}
     }
   }

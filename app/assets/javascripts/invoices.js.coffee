@@ -147,7 +147,7 @@ jQuery ->
   jQuery("form#new_invoice").submit ->
     flag = true
     if jQuery("#invoice_client_id").val() is ""
-      applyPopover(jQuery("#invoice_client_id_chzn"),"top","Please select a client")
+      applyPopover(jQuery("#invoice_client_id_chzn"),"top")
       flag = false
     else
       jQuery("tr.fields:visible").each ->
@@ -155,8 +155,8 @@ jQuery ->
         if row.find("select.items_list").val() isnt ""
           cost = row.find(".cost")
           qty =  row.find(".qty")
-          if cost.val() is "" then applyPopover(cost,"left","Please enter item cost") else hidePopover(cost)
-          if qty.val() is "" then applyPopover(qty,"right","Please enter item quantity") else hidePopover(qty)
+          if cost.val() is "" then applyPopover(cost,"left","Enter item cost") else hidePopover(cost)
+          if qty.val() is "" then applyPopover(qty,"right","Enter item quantity") else hidePopover(qty)
           if cost.val() is "" or qty.val() is "" then flag = false
     flag
 
@@ -183,3 +183,8 @@ jQuery ->
     container.find("input.qty").val('')
     updateLineTotal(elem)
     updateInvoiceTotal()
+
+  # Check all checkboxes using from main checkbox
+  jQuery('#select_all').click ->
+    jQuery(this).parents('table.table_listing').find(':checkbox').attr('checked', this.checked)
+

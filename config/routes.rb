@@ -10,6 +10,8 @@ Osb::Application.routes.draw do
 
   match "invoices/preview" => "invoices#preview"
 
+  match "invoices/bulk_actions" => "invoices#bulk_actions"
+
   match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
   match "items/load_item_data" => "items#load_item_data"
@@ -43,6 +45,7 @@ Osb::Application.routes.draw do
 
   resources :invoices do
     resources :invoice_line_items
+    #get 'archive_multiple'
   end
 
 

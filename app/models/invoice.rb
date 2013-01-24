@@ -30,5 +30,12 @@ class Invoice < ActiveRecord::Base
     new_invoice
   end
 
+  def self.archive_multiple ids
+    where("id IN(?)",ids).each{|invoice| invoice.archive}
+  end
+
+  def self.delete_multiple ids
+    where("id IN(?)",ids).each{|invoice| invoice.destroy}
+  end
 
 end

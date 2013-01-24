@@ -5,11 +5,12 @@
 <div class="page-header header_with_margins">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+<%= form_tag "invoices/bulk_actions", :remote => true do -%>
 <div class="action_links_wrapper">
   <div class="invoice_action_links">
     <p>
-      <a href="#">Archive</a>
-      <a href="#">Delete</a>
+      <%= submit_tag "Archive", :name => "archive"  %>
+      <%= submit_tag "Delete", :name => "destroy"  %>
       <span>|</span>
       <a href="#">Copy</a>
       <a href="#">Print</a>
@@ -40,5 +41,5 @@
   <%= render 'invoice' %>
   </tbody>
 </table>
-
+ <% end %>
 

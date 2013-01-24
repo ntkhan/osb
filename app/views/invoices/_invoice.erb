@@ -1,6 +1,6 @@
 <% @invoices.each do |invoice| %>
     <tr>
-      <td><%= check_box_tag "check_#{invoice.id}" %></td>
+      <td> <%= check_box_tag "invoice_ids[]", invoice.id, false, :id => "invoice_#{invoice.id}" %></td>
       <td><%= link_to invoice.invoice_number, invoice_path(invoice) %></td>
       <td><%= invoice.client.organization_name %></td>
       <td><%= invoice.description %></td>
