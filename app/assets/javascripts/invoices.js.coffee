@@ -188,3 +188,6 @@ jQuery ->
   jQuery('#select_all').click ->
     jQuery(this).parents('table.table_listing').find(':checkbox').attr('checked', this.checked)
 
+  jQuery(".alert button.close").click ->
+    jQuery(this).parent(".alert").hide()
+
