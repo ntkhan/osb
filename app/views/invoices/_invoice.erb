@@ -6,7 +6,6 @@ elsif params[:status] == "deleted"
   no_record_message = "You haven't any deleted invoice yet."
 end
 %>
-end
 <% if  @invoices.length > 0 %>
   <% @invoices.each do |invoice| %>
     <tr>
