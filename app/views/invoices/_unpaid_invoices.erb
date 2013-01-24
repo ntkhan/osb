@@ -1,37 +1,26 @@
-<%= form_tag "/payments/enter_payment" do %>
-  <a id="close_popup">X</a>
-  <div class="invoices_list">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th class="col-checkbox"><input type="checkbox" name="check" class="checkbox"></th>
-          <th width="90" class="first-column no-sort">Invoice</th>
-          <th width="130">Client Name</th>
-          <th width="170">Description</th>
-          <th width="85">Date</th>
-          <th width="110" class="ta_right currency no-sort">Total</th>
-          <th width="65" class="ta_center">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @invoices.each do |inv|%>
-          <tr data-id="11440">
-            <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id %>
-            <td class="invoice"><%= inv.invoice_number %></td>
-            <td><span class="tt"><%= inv.client.organization_name %></span></td>
-            <td><span class="tt">Description</span></td>
-            <td><%= "2013-01-01" %></td>
-            <td class="ta_right currency no-sort"><%= inv.invoice_total %></td>
-            <td class="ta_center">
-              <span class="invoice-status invoice-sent">
-                <%= inv.status %>
-              </span>
-            </td>
-
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= submit_tag "Enter Payment" %>
-  </div>
-<% end %>
+<table class="table table-striped">
+  <tr>
+    <th><input type="checkbox" name="check" class="checkbox"></th>
+    <th>Invoice#</th>
+    <th>Invoice Description</th>
+    <th>Client</th>
+    <th>Total</th>
+    <th>Date</th>
+    <th>Status</th>
+  </tr>
+  <% @invoices.each do |inv|%>
+    <tr>
+      <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id %>
+      <td class="invoice"><%= inv.invoice_number %></td>
+      <td><%= inv.description %></td>
+      <td><%= inv.client.organization_name %></td>
+      <td class="ta_right currency no-sort"><%= inv.invoice_total %><span class="tt"> PKR</span></td>
+      <td><%= "2013-01-01" %></td>
+      <td class="ta_center">
+        <span class="invoice-status invoice-sent">
+          <%= inv.status %>
+        </span>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -14,11 +14,34 @@
   <th>Date</th>
   <th>Amount</th>
   <th width=75>Actions</th>
-  </thead>
+</thead>
 
-  <tbody id="payment_body">
+<tbody id="payment_body">
   <%= render 'payment' %>
-  </tbody>
+</tbody>
 </table>
 
+<!-- START: Unpaid invoices popup -->
+<%= form_tag "/payments/enter_payment" do %>
+  <div id="myModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="model_grey_container">
+      <div class="modal-header">
+        <h1>Which Invoicess have you received payment for?</h1>
+        <p>Select one or more Invoicess from the list below to apply payment.</p>
+        <div class="cross_btn">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="footer">
+        <%= submit_tag "Enter Payment" %>
+        <a href="#" data-dismiss="modal">cancel</a>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!-- END: Unpaid invoices popup -->
 

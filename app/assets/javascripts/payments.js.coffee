@@ -15,14 +15,14 @@ jQuery ->
   jQuery(".apply_credit").live "click", ->
      apply_credit_id = jQuery(this).attr("id")
      if jQuery(this).is ":checked"
-        jQuery("#" + apply_credit_id + "_payment_method").val "Credit"
+        jQuery("#payments_" + apply_credit_id + "_payment_method").val "Credit"
      else
-        jQuery("#" + apply_credit_id + "_payment_method").val ""
+        jQuery("#payments_" + apply_credit_id + "_payment_method").val ""
   jQuery('#submit_payment_form').live "click", ->
      flag = true
      jQuery(".apply_credit:checked").each ->
-       pay_amount = jQuery("#payments" + this.id + "_payment_amount").val()
-       rem_credit = jQuery("#rem_credit" + this.id).attr("value")
+       pay_amount = parseInt(jQuery("#payments_" + this.id + "_payment_amount").val())
+       rem_credit = parseInt(jQuery("#rem_credit_" + this.id).attr("value"))
        if pay_amount > rem_credit
           alert "Payment from credit cannot exceed available credit."
           flag = false
