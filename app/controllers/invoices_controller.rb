@@ -108,12 +108,21 @@ class InvoicesController < ApplicationController
   def bulk_actions
     if params[:archive]
       Invoice.archive_multiple(params[:invoice_ids])
+      @invoices = Invoice.unarchived.page(params[:page])
       @action = "archived"
     elsif params[:destroy]
       Invoice.delete_multiple(params[:invoice_ids])
+      @invoices = Invoice.unarchived.page(params[:page])
       @action = "deleted"
+    elsif params[:recover_archived]
+      Invoice.recover_archived(params[:invoice_ids])
+      @invoices = Invoice.archived.page(params[:page])
+      @action = "recovered"
+    elsif params[:recover_deleted]
+      Invoice.recover_deleted(params[:invoice_ids])
+      @invoices = Invoice.only_deleted.page(params[:page])
+      @action = "recovered"
     end
-    @invoices = Invoice.unarchived.page(params[:page])
     respond_to { |format| format.js }
   end
 
