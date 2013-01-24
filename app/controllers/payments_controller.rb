@@ -44,7 +44,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+        format.html { redirect_to @payment, notice: 'The payment has been recorded successfully.' }
         format.json { render json: @payment, status: :created, location: @payment }
       else
         format.html { render action: "new" }
@@ -98,6 +98,7 @@ class PaymentsController < ApplicationController
       payment = Payment.new(pay)
       payment.save
     end
-    redirect_to payments_url
+    redirect_to(payments_url,:notice => 'The payment has been recorded successfully.')
+    #redirect_to payments_url
   end
 end

@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js" afterPath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/invoices.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/index.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/cross.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/images/cross_btn.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/clients_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clients_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/items_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/items_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/payments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js" afterPath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +34,11 @@
       <file leaf-file-name="invoices_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="14" selection-start="2865" selection-end="2865" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="107" column="14" selection-start="3199" selection-end="3199" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1359028942000" expanded="true" signature="1952:2024" placeholder="{ ... }" />
+                <marker date="1359028942000" expanded="true" signature="2588:2608" placeholder="{ ... }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,10 +100,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_invoice.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_invoice.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="21" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.58321273">
+            <state line="32" column="70" selection-start="1265" selection-end="1265" vertical-scroll-proportion="-11.592592">
               <folding />
             </state>
           </provider>
@@ -112,10 +118,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filter_invoices.js.erb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="filter_invoices.js.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/filter_invoices.js.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="6" selection-start="458" selection-end="458" vertical-scroll-proportion="0.0">
+            <state line="11" column="39" selection-start="458" selection-end="458" vertical-scroll-proportion="0.27576602">
               <folding />
             </state>
           </provider>
@@ -699,15 +705,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="14" selection-start="2865" selection-end="2865" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/invoices/filter_invoices.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="6" selection-start="458" selection-end="458" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="107" column="14" selection-start="3199" selection-end="3199" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1359028942000" expanded="true" signature="1952:2024" placeholder="{ ... }" />
+            <marker date="1359028942000" expanded="true" signature="2588:2608" placeholder="{ ... }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -720,7 +722,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="21" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.58321273">
+        <state line="32" column="70" selection-start="1265" selection-end="1265" vertical-scroll-proportion="-11.592592">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/filter_invoices.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="39" selection-start="458" selection-end="458" vertical-scroll-proportion="0.27576602">
           <folding />
         </state>
       </provider>
