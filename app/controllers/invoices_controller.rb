@@ -56,8 +56,10 @@ class InvoicesController < ApplicationController
       if @invoice.save
         encrypted_id = Base64.encode64(encrypt(@invoice.id))
         InvoiceMailer.new_invoice_email(@invoice.client, @invoice, encrypted_id, current_user).deliver
-        format.html { redirect_to @invoice, :notice => 'Invoice was successfully created.' }
+       # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
         format.json { render :json => @invoice, :status => :created, :location => @invoice }
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been created successfully.')
+        return
       else
         format.html { render :action => "new" }
         format.json { render :json => @invoice.errors, :status => :unprocessable_entity }
@@ -72,8 +74,10 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
-        format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
+        #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
         format.json { head :no_content }
+         redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
+         return
       else
         format.html { render :action => "edit" }
         format.json { render :json => @invoice.errors, :status => :unprocessable_entity }

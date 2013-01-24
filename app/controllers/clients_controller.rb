@@ -45,9 +45,9 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully created.' }
+        #format.html { redirect_to @client, notice: 'Your client has been created successfully.' }
         format.json { render json: @client, status: :created, location: @client }
-        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => 'Client was successfully created.')
+        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => 'Your client has been created successfully.')
         return
       else
         format.html { render action: "new" }
@@ -65,6 +65,8 @@ class ClientsController < ApplicationController
       if @client.update_attributes(params[:client])
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
         format.json { head :no_content }
+        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => 'Your client has been updated successfully.')
+        return
       else
         format.html { render action: "edit" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
