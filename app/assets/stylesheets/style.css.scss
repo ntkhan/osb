@@ -466,7 +466,7 @@ td {
 .paginator {
   float: left;
   width: 100%;
-  margin: 20px 0;
+  margin: 20px 0 0;
   .pagination {
     float: left;
     width: 50%;
@@ -477,6 +477,13 @@ td {
     text-align: right;
     float: right;
   }
+
+}
+.active_links{
+  text-align: right;
+  float: left;
+  width: 100%;
+  a,span{color: #00BDE5;}
 }
 input[type="submit"].new_btn{
   background-color: #00BDE5;

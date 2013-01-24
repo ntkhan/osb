@@ -29,6 +29,17 @@
   </td>
 </tr>
 <tr>
+  <td colspan="8" style="border-top: 0;">
+    <div class="active_links">
+      <%= link_to "Active", "invoices/filter_invoices?status=active", :remote => true %>
+      <span>|</span>
+      <%= link_to "Archived", "invoices/filter_invoices?status=archived", :remote => true %>
+      <span>|</span>
+      <%= link_to "Deleted", "invoices/filter_invoices?status=deleted", :remote => true %>
+    </div>
+  </td>
+</tr>
+<tr>
   <td align="center" colspan="8">
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_invoice_path,

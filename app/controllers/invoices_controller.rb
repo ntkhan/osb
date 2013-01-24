@@ -113,6 +113,10 @@ class InvoicesController < ApplicationController
     respond_to { |format| format.js }
   end
 
+  def filter_invoices
+    @invoices = Invoice.filter(params)
+  end
+
   private
   def choose_layout
     action_name == 'preview' ? "preview_mode" : "application"

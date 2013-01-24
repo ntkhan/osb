@@ -12,6 +12,8 @@ Osb::Application.routes.draw do
 
   match "invoices/bulk_actions" => "invoices#bulk_actions"
 
+  match "invoices/filter_invoices" => "invoices#filter_invoices"
+
   match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
   match "items/load_item_data" => "items#load_item_data"

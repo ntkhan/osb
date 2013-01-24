@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_line_items, :dependent => :destroy
   has_many :payments
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes
-  accepts_nested_attributes_for :invoice_line_items, :reject_if => proc {|line_item| line_item['item_id'].blank?}, :allow_destroy => true
+  accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
   paginates_per 4
 
   class << self
@@ -31,11 +31,21 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.archive_multiple ids
-    where("id IN(?)",ids).each{|invoice| invoice.archive}
+    where("id IN(?)", ids).each { |invoice| invoice.archive }
   end
 
   def self.delete_multiple ids
-    where("id IN(?)",ids).each{|invoice| invoice.destroy}
+    where("id IN(?)", ids).each { |invoice| invoice.destroy }
+  end
+
+  def self.filter params
+    if params[:status] == "active"
+      self.unarchived.page(params[:page])
+    elsif params[:status] == "archived"
+      self.archived.page(params[:page])
+    else
+      self.only_deleted.page(params[:page])
+    end
   end
 
 end
