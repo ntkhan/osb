@@ -1,4 +1,5 @@
-<% @invoices.each do |invoice| %>
+<% if  @invoices.length > 0 %>
+  <% @invoices.each do |invoice| %>
     <tr>
       <td> <%= check_box_tag "invoice_ids[]", invoice.id, false, :id => "invoice_#{invoice.id}" %></td>
       <td><%= link_to invoice.invoice_number, invoice_path(invoice) %></td>
@@ -9,7 +10,7 @@
       <td><%= invoice.status %></td>
       <td>
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_invoice_path(invoice), :class => 'edit_action' %>
+          edit_invoice_path(invoice), :class => 'edit_action' %>
         <%= link_to t('.destroy', :default => "Delete"),
                     invoice_path(invoice),
                     :method => :delete,
@@ -29,3 +30,11 @@
     </div>
   </td>
 </tr>
+
+<% else %>
+  <tr>
+    <td colspan="8">
+      <div class="no_record_container">You haven't created any invoice yet. Please click on New Invoice button to create new invoice.</div>
+    </td>
+  </tr>
+<% end %>

@@ -1,21 +1,29 @@
-<% @taxes.each do |taxis| %>
+<% if @taxes.length > 0 %>
+  <% @taxes.each do |taxis| %>
     <tr>
       <td><%= taxis.name %></td>
       <td><%= taxis.percentage %></td>
       <td><%= link_to 'Edit', edit_taxis_path(taxis), :class => "edit_action" %>
         <%= link_to 'Delete', taxis, :class => "del_action", :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
     </tr>
-<% end %>
-<tr>
-  <td colspan="3">
-    <div class="paginator">
-      <%= paginate @taxes, :remote => true %>
-      <div class="paging_info">
-        <%= page_entries_info @taxes %>
+  <% end %>
+  <tr>
+    <td colspan="3">
+      <div class="paginator">
+        <%= paginate @taxes, :remote => true %>
+        <div class="paging_info">
+          <%= page_entries_info @taxes %>
+        </div>
       </div>
-    </div>
-  </td>
-</tr>
+    </td>
+  </tr>
+<% else %>
+  <tr>
+    <td colspan="3">
+      <div class="no_record_container">You haven't created any tax yet. Please click on New Tax button to create new tax.</div>
+    </td>
+  </tr>
+<% end %>
 <tr>
   <td align="center" colspan="3">
     <%= link_to 'New Tax', new_taxis_path, :class => "new_btn" %>

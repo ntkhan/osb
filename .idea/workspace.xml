@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/style.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/style.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/invoice.rb" afterPath="$PROJECT_DIR$/app/models/invoice.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/clients/_clients.html.erb" afterPath="$PROJECT_DIR$/app/views/clients/_clients.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/_invoice.erb" afterPath="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js.erb" afterPath="$PROJECT_DIR$/app/views/invoices/filter_invoices.js.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/index.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/_items.html.erb" afterPath="$PROJECT_DIR$/app/views/items/_items.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/_payment.html.erb" afterPath="$PROJECT_DIR$/app/views/payments/_payment.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/taxes/_taxes.html.erb" afterPath="$PROJECT_DIR$/app/views/taxes/_taxes.html.erb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,7 +60,7 @@
       <file leaf-file-name="style.css.scss" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/style.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="485" column="20" selection-start="9304" selection-end="9304" vertical-scroll-proportion="-44.548386">
+            <state line="492" column="20" selection-start="9458" selection-end="9458" vertical-scroll-proportion="-44.548386">
               <folding />
             </state>
           </provider>
@@ -80,7 +78,7 @@
       <file leaf-file-name="_invoice.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="102" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.46153846">
+            <state line="40" column="0" selection-start="1585" selection-end="1585" vertical-scroll-proportion="1.0256411">
               <folding />
             </state>
           </provider>
@@ -621,7 +619,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/style.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="485" column="20" selection-start="9304" selection-end="9304" vertical-scroll-proportion="-44.548386">
+        <state line="492" column="20" selection-start="9458" selection-end="9458" vertical-scroll-proportion="-44.548386">
           <folding />
         </state>
       </provider>
@@ -677,7 +675,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="102" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.46153846">
+        <state line="40" column="0" selection-start="1585" selection-end="1585" vertical-scroll-proportion="1.0256411">
           <folding />
         </state>
       </provider>
