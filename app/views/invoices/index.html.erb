@@ -9,8 +9,10 @@
 <div class="action_links_wrapper">
   <div class="invoice_action_links">
     <p>
-      <%= submit_tag "Archive", :name => "archive"  %>
-      <%= submit_tag "Delete", :name => "destroy"  %>
+      <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
+      <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
+      <%= submit_tag "Archive", :name => "archive", :class => "top_links archive"  %>
+      <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy"  %>
       <span>|</span>
       <a href="#">Copy</a>
       <a href="#">Print</a>

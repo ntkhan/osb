@@ -191,3 +191,6 @@ jQuery ->
   jQuery(".alert button.close").click ->
     jQuery(this).parent(".alert").hide()
 
+  jQuery(".invoice_action_links input[type=submit]").click ->
+    jQuery(this).parents("FORM:eq(0)").find("table.table_listing").find(':checkbox').attr()
+
