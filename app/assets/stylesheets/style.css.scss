@@ -34,13 +34,15 @@ body{
 }
 h1{
     font-family: 'Dosis', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-size: 24px;
     color: #00bde5;
     line-height: 1.2;
-    letter-spacing: -0.21px;
+    letter-spacing: 0.6px;
     font-weight: normal;
+    margin: 0 0 0 -1px;
+
 }
 h1.green{
     font-weight: 500;
@@ -350,7 +352,7 @@ textarea{
 table.table_listing {
   margin: 22px 0;
   th, td {
-    padding: 5px 5px 5px 10px;
+    /*padding: 5px 5px 5px 10px;*/
     vertical-align: middle;
   }
   thead {
@@ -361,7 +363,7 @@ table.table_listing {
       vertical-align: middle;
       &:first-child {
         border-radius: 5px 0 0 5px;
-        padding: 2px 5px 6px 10px;
+        /*padding: 2px 5px 6px 10px;*/
       }
       &:last-child {
         border-radius: 0 5px 5px 0;
@@ -398,7 +400,7 @@ table.table_listing {
 
 table.invoice_listing {
   tbody {
-    tr td:first-child{padding: 5px 5px 4px 10px;}
+    tr td:first-child{/*padding: 5px 5px 4px 10px;*/}
   }
 }
 
@@ -407,11 +409,11 @@ table.payment_listing, table.client_listing {
   thead{
   th{
     &:first-child {
-      padding: 5px 5px 5px 10px;
+      /*padding: 5px 5px 5px 10px;*/
     }
   }   }
   tbody {
-    tr td:first-child{padding: 7px 5px 4px 10px;}
+    tr td:first-child{/*padding: 7px 5px 4px 10px;*/}
   }
 }
 table.item_listing{@extend table.payment_listing}
@@ -442,6 +444,7 @@ a.btn_small{@extend a.new_invoice_btn;
 }
 .page-header {
   border-bottom: 1px solid #00BDE5;
+  padding-bottom:5px;
 }
 td {
   text-align: left;
@@ -530,17 +533,20 @@ table.invoice{
 }
 .invoice_detail{
     width: 176px;
-    padding: 0 0 0 19px;
+    padding: 3px 0 0 18px;
 }
 .invoice_detail h1{
     padding: 0px 0 7px 0;
+}
+.invoice_detail h1.green{
+    padding: 0px 0 5px 0;
 }
 .invoice_rank{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: bold;
     color: #a2a2a2;
-    padding: 0 0 2px 0;
+    margin: 0 0 -2px 0;
 }
 .invoice_rank.person{
     font-weight: normal;

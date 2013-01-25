@@ -4,14 +4,16 @@
 </div>
 <table class="table table_listing client_listing">
   <thead>
+    <tr>
       <th>Organization</th>
       <th>Contact</th>
       <th>Email</th>
       <th>Phone</th>
       <th width=75><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
   </thead>
   <tbody id="client_body">
-  <%= render 'clients' %>
+    <%= render 'clients' %>
   </tbody>
 </table>
 

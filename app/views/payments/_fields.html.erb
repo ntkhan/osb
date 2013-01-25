@@ -22,7 +22,7 @@ end
               <%= f.hidden_field :invoice_id%>
               <label for="payments_<%= index%>_payment_amount">Payment (PKR)</label>
             </td>
-            <td><%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small full_payment_amount",:value=>''%></td>
+            <td><%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small invoice",:value=>''%></td>
             <td class="form_field" colspan="2">
               <input id="payments_<%= index%>_paid_full" class="paid_full" type="checkbox"  name="payments[][paid_full]">
               <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
@@ -46,7 +46,7 @@ end
             <td class="form_title invoice small"><%= f.label "Date", :class => "",:for=>"payments_#{index}_payment_date" %></td>
             <td>
               <div class="calendar">
-                <%= f.text_field :payment_date,:id=>"payments_#{index}_payment_date", :class => "small hasDatepicker" %>
+                <%= f.text_field :payment_date,:id=>"payments_#{index}_payment_date", :class => "small invoice" %>
               </div>
             </td>
           </tr>
