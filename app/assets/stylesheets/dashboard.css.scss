@@ -1,0 +1,223 @@
+.content_container{
+    margin: auto;
+	p{
+		margin-bottom: 0px;
+	}
+	ul{
+		margin: 0;
+	}
+	ul li{
+		list-style: none;
+		text-decoration: none;
+	}
+	h1{
+		font-family: 'Dosis', sans-serif;
+		font-weight: 300;
+		font-style: normal;
+		font-size: 24px;
+		color: #464646;
+		line-height: 0.5;
+		letter-spacing: 0;
+		font-weight: normal;
+		text-transform: uppercase;
+		margin: 0px;
+	}
+	h1 span{
+		font-size: 14px;
+	}
+	h1.small{
+		font-size: 20px;
+	}
+	/*General CSS Ends*/
+
+	/*Content Css Starts*/
+	.row-fluid .span4 {
+		width: 32.924%;
+	}
+	.row-fluid .span8 {
+		width: 64.2%;
+		margin-left: 2.6641%;
+	}
+	.overview_box{
+		width: 100%;
+		border: 1px solid #d7d7d7;
+		border-radius: 4px;
+		padding: 21px 0 3px 0;
+		overflow: hidden;
+		margin: 0 0 20px 0;
+                box-shadow: 0 1px 2px #F0F0F0 inset;
+	}
+	.overview_box_heading{
+		float: left;
+		width: 100%
+	}
+	.overview_box_heading h1{
+		padding: 0 18px 19px 18px;
+	}
+	/*Content Left Css Starts*/
+	.day_session{
+		float: left;
+		width: 100%;
+		padding: 0 0 3px 0;
+	}
+	.day_session_heading{
+		float: left;
+		width: 100%;
+		border-bottom: 1px solid #d7d7d7;
+	}
+	.day_session_heading p{
+		padding: 9px 20px 3px 20px;
+	}
+	.day_session_content{
+		float: left;
+		width: 84.6%;
+		padding: 0 19px 0 19px;
+	}
+	.day_session_content_detail{
+		float: left;
+		border-bottom: 1px solid #d7d7d7;
+		width: 100%;
+		padding: 5px 0 8px 0;
+	}
+	.day_session_content_detail ul{
+		margin: 0 0 -2px 0;
+		overflow: hidden;
+	}
+	.day_session_content_detail ul li{
+		float: left;
+	}
+	.day_session_title{
+		color: #00ace5;
+		padding: 0 5px 0 0;
+	}
+	.day_session_amount{
+		color: #464646;
+		padding: 0 6px 0 0;
+	}
+	.day_session_currency{
+		font-size: 10px;
+		color: #C6C6C6;
+		text-transform: uppercase;
+		padding: 1px 0 0 0;
+	}
+	.day_session_content_detail p{
+		float: left;
+		width: 100%;
+		color: #C6C6C6;
+	}
+	.no_border{
+		border: none;
+	}
+	.osb_content{
+		float: left;
+		width: 100%;
+		text-align: center;
+		padding: 0 0 26px 0;
+	}
+	.osb_content p{
+		color: #464646;
+		line-height: 1.7;
+		padding: 0 19px 17px 19px;
+		text-align: left;
+	}
+	.osb_content a{
+		display: inline-block;
+		background: #ACACAC;
+		border-radius: 3px;
+		height: 34px;
+		line-height: 33px;
+		padding: 0 20px;
+		font-family: 'Dosis', sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 19px;
+		color: #ffffff;
+		font-weight: normal;
+		text-transform: uppercase;
+		text-decoration: none;
+		letter-spacing: 0.1px;
+	}
+	.osb_content a:hover{
+		background: #00bde5;
+	}
+	.getting_start{
+		float: left;
+		width: 100%;
+	}
+	.getting_start ul{
+		padding: 0 19px 20px 35px;
+	}
+	.getting_start ul li{
+		list-style: square;
+		color: #464646;
+	}
+	.getting_start ul li a{
+		display: block;
+		color: #959595;
+		text-decoration: none;
+	}
+	.getting_start ul li a:hover, .getting_start ul li:hover{
+		color: #00bde5;
+	}
+	/*Content Left Css Ends*/
+
+	/*Content Right Css Starts*/
+	.graff_content{
+		float: left;
+		width: 100%;
+	}
+	.graff_highlight{
+		float: left;
+		width: 91.8%;
+		padding: 0 20px 30px 20px;
+		border-bottom: 1px solid #d7d7d7;
+		margin: 0 0 23px 0;
+	}
+	.graff_description{
+		float: left;
+		width: 91.8%;
+		padding: 0 20px 24px 20px;
+	}
+	.graff_value{
+		float: left;
+		width: 266px;
+		text-align: center;
+	}
+	.graff_digit{
+		display: inline-block;
+	}
+	.digit_content{
+		font-family: 'Dosis', sans-serif;
+		font-weight: 300;
+		font-style: normal;
+		font-size: 42px;
+		color: #00bde5;
+		font-weight: normal;
+		padding: 39px 0 8px 0;
+		letter-spacing: 0.2px;
+	}
+	.digit_description{
+		color: #464646;
+	}
+	.digit_description span{
+		font-size: 10px;
+	}
+	.graff_detail{
+		float: right;
+	}
+	.graff_detail table tr td{
+		color: #464646;
+	}
+	.graff_detail table tr td:first-child{
+		padding: 0 5px 0 0;
+	}
+	.graff_detail table tr td span{
+		color: #00bde5;
+	}
+	.graff_detail a{
+		display: block;
+		padding: 13px 0 0 0;
+		color: #00bde5;
+		text-decoration: none;
+	}
+}
