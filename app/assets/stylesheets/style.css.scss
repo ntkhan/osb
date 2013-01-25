@@ -113,7 +113,7 @@ h1.secondary.small{
 #nav .select a {
     display:block;
     font-family: 'Dosis', sans-serif;
-    font-weight: 600;
+    font-weight: normal;
     font-style: normal;
     font-size: 18px;
     color: #ffffff;
@@ -128,7 +128,6 @@ h1.secondary.small{
     background: url(/assets/nav_hover.png) no-repeat center;
     height: 43px;
     text-decoration: none;
-    color: yellow;
 }
 #nav .sub {
     display:none;
@@ -153,7 +152,6 @@ h1.secondary.small{
     font-family: 'Dosis', sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 15px;
     color: #7d7d7d;
     font-weight: normal;
     line-height: 34px;
