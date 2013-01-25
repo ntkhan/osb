@@ -1,15 +1,15 @@
 <% if @items.length > 0 %>
   <% @items.each do |item| %>
     <tr>
-      <td><%= item.item_name %></td>
-      <td><%= item.item_description %></td>
-      <td><%= item.unit_cost %></td>
-      <td><%= item.quantity %></td>
-      <td><%= item.tax_1 %></td>
-      <td><%= item.tax_2 %></td>
+      <td class="align_center"><%= item.item_name %></td>
+      <td class="align_left"><%= item.item_description %></td>
+      <td class="align_center"><%= item.unit_cost %></td>
+      <td class="align_center"><%= item.quantity %></td>
+      <td class="align_center"><%= item.tax_1 %></td>
+      <td class="align_center"><%= item.tax_2 %></td>
       <!--<td><%#= item.track_inventory %></td>-->
       <!--<td><%#= item.inventory %></td>-->
-      <td><%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
+      <td class="align_center"><%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
         <%= link_to 'Delete', item, :method => :delete,:class => "del_action", :data => {:confirm => 'Are you sure?' } %></td>
     </tr>
   <% end %>
