@@ -1,0 +1,8 @@
+<%= link_to "Active", "items/filter_items?status=active", :remote => true %>
+<span class="item_counts" id="actives">(<%= Item.unarchived.size%>)</span>
+<span>|</span>
+<%= link_to "Archived", "items/filter_items?status=archived", :remote => true %>
+<span class="item_counts" id="archives">(<%= Item.archived.size%>)</span>
+<span>|</span>
+<%= link_to "Deleted", "items/filter_items?status=deleted", :remote => true %>
+<span class="item_counts" id="deletes">(<%= Item.only_deleted.size%>)</span>

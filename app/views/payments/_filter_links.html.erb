@@ -1,0 +1,8 @@
+<%= link_to "Active", "payments/filter_payments?status=active", :remote => true %>
+<span class="item_counts" id="actives">(<%= Payment.unarchived.size%>)</span>
+<span>|</span>
+<%= link_to "Archived", "payments/filter_payments?status=archived", :remote => true %>
+<span class="item_counts" id="archives">(<%= Payment.archived.size%>)</span>
+<span>|</span>
+<%= link_to "Deleted", "payments/filter_payments?status=deleted", :remote => true %>
+<span class="item_counts" id="deletes">(<%= Payment.only_deleted.size%>)</span>

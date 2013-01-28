@@ -1,0 +1,8 @@
+<%= link_to "Active", "clients/filter_clients?status=active", :remote => true %>
+<span class="item_counts" id="actives">(<%= Client.unarchived.size%>)</span>
+<span>|</span>
+<%= link_to "Archived", "clients/filter_clients?status=archived", :remote => true %>
+<span class="item_counts" id="archives">(<%= Client.archived.size%>)</span>
+<span>|</span>
+<%= link_to "Deleted", "clients/filter_clients?status=deleted", :remote => true %>
+<span class="item_counts" id="deletes">(<%= Client.only_deleted.size%>)</span>

@@ -9,6 +9,9 @@ class CreateItems < ActiveRecord::Migration
       t.integer :tax_2
       t.boolean :track_inventory
       t.integer :inventory
+      t.string :archive_number
+      t.datetime :archived_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

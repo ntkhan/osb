@@ -19,6 +19,9 @@ class CreateClients < ActiveRecord::Migration
       t.string :business_phone
       t.string :fax
       t.text :internal_notes
+      t.string :archive_number
+      t.datetime :archived_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

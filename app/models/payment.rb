@@ -2,6 +2,9 @@ class Payment < ActiveRecord::Base
   attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification
   belongs_to :invoice
   paginates_per 4
+  acts_as_archival
+  acts_as_paranoid
+
   def client_name
     self.invoice.client.organization_name rescue "credit?"
   end
@@ -68,5 +71,33 @@ class Payment < ActiveRecord::Base
 
   def self.invoice_paid_detail inv_id
     Payment.where("invoice_id = ? and (payment_type is null || payment_type != 'credit')",inv_id).all
+  end
+
+  def self.multiple_payments ids
+    where("id IN(?)", ids)
+  end
+
+  def self.archive_multiple ids
+    self.multiple_payments(ids).each { |payment| payment.archive }
+  end
+
+  def self.delete_multiple ids
+    self.multiple_payments(ids).each { |payment| payment.destroy }
+  end
+
+  def self.recover_archived ids
+    self.multiple_payments(ids).each { |payment| payment.unarchive }
+  end
+
+  def self.recover_deleted ids
+    where("id IN(?)", ids).only_deleted.each { |payment| payment.recover }
+  end
+
+  def self.filter params
+    case params[:status]
+      when "active"   then self.unarchived.page(params[:page])
+      when "archived" then self.archived.page(params[:page])
+      when "deleted"  then self.only_deleted.page(params[:page])
+    end
   end
 end

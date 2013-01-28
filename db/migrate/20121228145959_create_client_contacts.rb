@@ -7,6 +7,9 @@ class CreateClientContacts < ActiveRecord::Migration
       t.string :email
       t.string :home_phone
       t.string :mobile_number
+      t.string :archive_number
+      t.datetime :archived_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

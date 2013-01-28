@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.page(params[:page])
+    @payments = Payment.unarchived.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -101,4 +101,29 @@ class PaymentsController < ApplicationController
     redirect_to(payments_url,:notice => 'The payment has been recorded successfully.')
     #redirect_to payments_url
   end
+  def bulk_actions
+    if params[:archive]
+      Payment.archive_multiple(params[:payment_ids])
+      @payments = Payment.unarchived.page(params[:page])
+      @action = "archived"
+    elsif params[:destroy]
+      Payment.delete_multiple(params[:payment_ids])
+      @payments = Payment.unarchived.page(params[:page])
+      @action = "deleted"
+    elsif params[:recover_archived]
+      Payment.recover_archived(params[:payment_ids])
+      @payments = Payment.archived.page(params[:page])
+      @action = "recovered"
+    elsif params[:recover_deleted]
+      Payment.recover_deleted(params[:payment_ids])
+      @payments = Payment.only_deleted.page(params[:page])
+      @action = "recovered"
+    end
+    respond_to { |format| format.js }
+  end
+
+  def filter_payments
+    @payments = Payment.filter(params)
+  end
+
 end
