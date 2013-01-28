@@ -4,11 +4,11 @@
 <h1>Sign in to Open<span>Source</span>Billing</h1>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-<div class="form_title login_title"><%= f.label :email %>
-  <%= f.email_field :email, :autofocus => true %></div>
+<div class="form_title login_title"><!--<%= f.label :email %>-->
+  <%= f.email_field :email, :autofocus => true, :value => "username" %></div>
 
-  <div class="form_title login_title"><%= f.label :password %>
-  <%= f.password_field :password %></div>
+  <div class="form_title login_title"><!--<%= f.label :password %>-->
+  <%= f.password_field :password, :value => "password" %></div>
 
   <% if devise_mapping.rememberable? -%>
 <div class="login_check"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
