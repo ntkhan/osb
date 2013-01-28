@@ -1,4 +1,5 @@
 jQuery ->
+  flag = true
   jQuery("#close_popup").live "click",->
     jQuery("#invoices_container").hide()
 #Autocomplete amount field on paid full checkbox
@@ -11,6 +12,7 @@ jQuery ->
      else
         jQuery('#payments_'+rem_value_id+'_payment_amount').removeAttr('readonly')
         jQuery('#payments_'+rem_value_id+'_payment_amount').val('')
+
 #Select credit from method dropdown if apply from credit checkbox is checked
   jQuery(".apply_credit").live "click", ->
      apply_credit_id = jQuery(this).attr("id")
@@ -29,4 +31,9 @@ jQuery ->
        else
           flag = true
      flag
-
+ # show intimation message on selection no invoice.
+  jQuery('#invoice_selection').submit ->
+       if jQuery("table.table-striped").find(":checked").length is 0
+          jQuery("#invoice_popup_error").show()
+          flag = false
+     flag
