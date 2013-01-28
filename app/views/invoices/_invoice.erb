@@ -13,7 +13,7 @@ end
       <td class="align_center"><%= link_to invoice.invoice_number, invoice_path(invoice) %></td>
       <td class="align_left"><%= invoice.client.organization_name %></td>
       <td class="align_left"><%= invoice.description %></td>
-      <td class="align_center"><%= invoice.invoice_total %></td>
+      <td class="align_right"><%= invoice.invoice_total %></td>
       <td class="align_center"><%= invoice.invoice_date.to_time.strftime("%m/%d/%Y")%></td>
       <td class="align_center"><%= invoice.status %></td>
       <td class="align_center">
