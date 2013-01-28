@@ -27,7 +27,7 @@
   <div class="naviagion">
     <div id="nav">
       <ul class="select">
-        <li><%= active_link_to "Home", "/" %></li>
+        <li><%= active_link_to "Dashboard", "/dashboard" %></li>
         <li><%= active_link_to "Invoices", invoices_path %></li>
         <li><%= active_link_to "Clients", clients_path %>
           <ul class="sub">
@@ -50,7 +50,7 @@
   </div>
   <!-- NAVIGATION END -->
   <!-- CONTENT AREA START-->
-  <div class="content">
+  <div class="content <%= controller.controller_name %>-main">
     <div class="alert alert-success" <% if notice.blank? %> style="display: none;"<% end %>>
       <button type="button" class="close">&times;</button>
       <span><%= notice %></span>

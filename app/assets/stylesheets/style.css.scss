@@ -34,13 +34,15 @@ body{
 }
 h1{
     font-family: 'Dosis', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-style: normal;
     font-size: 24px;
     color: #00bde5;
     line-height: 1.2;
-    letter-spacing: -0.21px;
+    letter-spacing: 0.6px;
     font-weight: normal;
+    margin: 0 0 0 -1px;
+
 }
 h1.green{
     font-weight: 500;
@@ -111,7 +113,7 @@ h1.secondary.small{
 #nav .select a {
     display:block;
     font-family: 'Dosis', sans-serif;
-    font-weight: 600;
+    font-weight: normal;
     font-style: normal;
     font-size: 18px;
     color: #ffffff;
@@ -126,7 +128,6 @@ h1.secondary.small{
     background: url(/assets/nav_hover.png) no-repeat center;
     height: 43px;
     text-decoration: none;
-    color: yellow;
 }
 #nav .sub {
     display:none;
@@ -151,7 +152,6 @@ h1.secondary.small{
     font-family: 'Dosis', sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 15px;
     color: #7d7d7d;
     font-weight: normal;
     line-height: 34px;
@@ -350,7 +350,7 @@ textarea{
 table.table_listing {
   margin: 22px 0;
   th, td {
-    padding: 5px 5px 5px 10px;
+    /*padding: 5px 5px 5px 10px;*/
     vertical-align: middle;
   }
   thead {
@@ -361,7 +361,7 @@ table.table_listing {
       vertical-align: middle;
       &:first-child {
         border-radius: 5px 0 0 5px;
-        padding: 2px 5px 6px 10px;
+        /*padding: 2px 5px 6px 10px;*/
       }
       &:last-child {
         border-radius: 0 5px 5px 0;
@@ -378,10 +378,10 @@ table.table_listing {
     }
   }
   .del_action{
-    color: #FF0003;
+    color: #DD0C1D;
     text-decoration: none;
     &:hover {
-      color: #FF0003;
+      color: #DD0C1D;
       text-decoration: none;
       background: #FFFFFF;
     }
@@ -398,7 +398,7 @@ table.table_listing {
 
 table.invoice_listing {
   tbody {
-    tr td:first-child{padding: 5px 5px 4px 10px;}
+    tr td:first-child{/*padding: 5px 5px 4px 10px;*/}
   }
 }
 
@@ -407,16 +407,33 @@ table.payment_listing, table.client_listing {
   thead{
   th{
     &:first-child {
-      padding: 5px 5px 5px 10px;
+      /*padding: 5px 5px 5px 10px;*/
     }
   }   }
   tbody {
-    tr td:first-child{padding: 7px 5px 4px 10px;}
+    tr td:first-child{/*padding: 7px 5px 4px 10px;*/}
   }
 }
 table.item_listing{@extend table.payment_listing}
-a.new_btn {
-  background-color: #00BDE5;
+a.new_btn,  input.new_btn[type="submit"], {
+
+    background: none repeat scroll 0 0 #00BDE5;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: "Dosis",sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 100px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+
+  /*background-color: #00BDE5;
   height: 47px;
   width: 235px;
   border-radius: 5px;
@@ -430,18 +447,21 @@ a.new_btn {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   &:hover{text-decoration: none;
     color: #FFFFFF;
-    background-color: #00BDE5;}
+    background-color: #00BDE5;}*/
 }
 a.btn_right{float: right;}
 .header_with_margins{margin: 10px 0;}
 a.btn_small{@extend a.new_invoice_btn;
-  width: 176px;
+  /*width: 176px;*/
   height: 37px;
   line-height: 37px;
   font-size: 17px;
+  padding: 0 45px 0 45px;
 }
+
 .page-header {
   border-bottom: 1px solid #00BDE5;
+  padding-bottom:5px;
 }
 td {
   text-align: left;
@@ -462,6 +482,18 @@ td {
     #search_invoice{width: 165px; height: 29px; float: right;}
   }
 }
+
+
+
+.align_left{
+    text-align: left !important ;
+}
+.align_center{
+    text-align: center !important;
+}
+
+
+
 
 .paginator {
   float: left;
@@ -530,17 +562,20 @@ table.invoice{
 }
 .invoice_detail{
     width: 176px;
-    padding: 0 0 0 19px;
+    padding: 3px 0 0 18px;
 }
 .invoice_detail h1{
     padding: 0px 0 7px 0;
+}
+.invoice_detail h1.green{
+    padding: 0px 0 5px 0;
 }
 .invoice_rank{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: bold;
     color: #a2a2a2;
-    padding: 0 0 2px 0;
+    margin: 0 0 -2px 0;
 }
 .invoice_rank.person{
     font-weight: normal;
@@ -578,4 +613,12 @@ font-size:14px;
 padding: 4px 0px;
 margin-bottom:38px;
 color:#898989;
+}
+
+
+.clients-main, .items-main{
+    padding-top:93px;
+}
+.dashboard-main{
+    padding-top:61px;
 }

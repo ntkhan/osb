@@ -5,7 +5,7 @@
       <td><%= client.contact_name %></td>
       <td><%= client.email %></td>
       <td><%= client.business_phone %></td>
-      <td>
+      <td class="align_center">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
           edit_client_path(client), :class => 'edit_action' %>
         <%= link_to t('.destroy', :default => "Delete"),

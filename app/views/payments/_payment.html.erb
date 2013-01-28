@@ -1,15 +1,15 @@
 <% if @payments.length > 0 %>
   <% @payments.each do |payment| %>
     <tr>
-      <td><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
-      <td><%= payment.client_name %></td>
-      <td><%= payment.payment_method %></td>
-      <td><%= payment.payment_type %></td>
-      <td><%= payment.notes %></td>
-      <td><%= payment.payment_date %></td>
-      <td><%= payment.payment_amount %></td>
+      <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
+      <td class="align_left"><%= payment.client_name %></td>
+      <td class="align_center"><%= payment.payment_method %></td>
+      <td class="align_center"><%= payment.payment_type %></td>
+      <td class="align_center"><%= payment.notes %></td>
+      <td class="align_center"><%= payment.payment_date %></td>
+      <td class="align_center"><%= payment.payment_amount %></td>
 
-      <td>
+      <td class="align_center">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
           edit_payment_path(payment), :class => 'edit_action' %>
         <%= link_to t('.destroy', :default => "Delete"),
@@ -33,7 +33,7 @@
 <% else %>
   <tr>
     <td colspan="8">
-      <div class="no_record_container">You haven't made any payment yet. Please click on New Payment button to make new payment.</div>
+      <div class="no_record_container">You haven't entered any payment yet. Please click on New Payment button to enter new payment.</div>
     </td>
   </tr>
 <% end %>

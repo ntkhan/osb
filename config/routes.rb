@@ -1,4 +1,5 @@
 Osb::Application.routes.draw do
+  match "dashboard" => "dashboard#index"
   resources :payments do
     collection do
       post 'enter_payment'

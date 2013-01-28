@@ -147,7 +147,7 @@ jQuery ->
   jQuery("form#new_invoice").submit ->
     flag = true
     if jQuery("#invoice_client_id").val() is ""
-      applyPopover(jQuery("#invoice_client_id_chzn"),"top")
+      applyPopover(jQuery("#invoice_client_id_chzn"),"top","Select a client")
       flag = false
     else
       jQuery("tr.fields:visible").each ->
@@ -155,9 +155,17 @@ jQuery ->
         if row.find("select.items_list").val() isnt ""
           cost = row.find(".cost")
           qty =  row.find(".qty")
-          if cost.val() is "" then applyPopover(cost,"left","Enter item cost") else hidePopover(cost)
-          if qty.val() is "" then applyPopover(qty,"right","Enter item quantity") else hidePopover(qty)
-          if cost.val() is "" or qty.val() is "" then flag = false
+          if cost.val() is ""
+            applyPopover(cost,"left","Enter item cost")
+          else if cost.val() <= 0
+            applyPopover(cost,"left","Item cost should be greater then 0")
+          else hidePopover(cost)
+          if qty.val() is ""
+            applyPopover(qty,"right","Enter item quantity")
+          else if qty.val() <= 0
+            applyPopover(qty,"right","Quantity should be greater then 0")
+          else hidePopover(qty)
+          if cost.val() is "" or cost.val() <= 0 or qty.val() is "" or qty.val() <= 0 then flag = false
     flag
 
   applyPopover = (elem,position,message) ->
@@ -166,7 +174,7 @@ jQuery ->
       content: message
       placement: position
       template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content alert-error"><p></p></div></div></div>'
-    elem.popover "show"
+    elem.attr('data-content',message).popover "show"
     elem.focus
 
   hidePopover = (elem) ->

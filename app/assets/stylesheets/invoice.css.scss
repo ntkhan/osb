@@ -570,7 +570,7 @@ table.index th {
 }
 
 .hint_text {
-  color: #CCCCCC;
+  color: #959595;
   font-size: 11px;
 }
 
@@ -582,18 +582,28 @@ table.index th {
     background-color: #00BDE5;
     background-image: none;
     color: #ffffff;
-    text-transform: uppercase;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    width: 210px;
-    height: 50px;
-    font-size: 18px;
     margin-left: 5px;
+    font-family: "Dosis",sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 40px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow:none;
+
   }
   .btn {
     @extend input[type="submit"];
     background-color: #ACACAC;
     line-height: 50px;
     padding: 0;
+    padding: 0 40px;
+
+
+
   }
   padding-left: 69px;
 }
