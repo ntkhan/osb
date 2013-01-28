@@ -470,7 +470,7 @@ td {
 .action_links_wrapper{
   width: 100%; margin: 29px 0 0; height: 20px;
   .invoice_action_links{
-    float: left; width: 70%;
+    float: left; width: 60%;
     P{color: #00BDE5; line-height: 29px; }
     a,span,input{color: #00BDE5; text-decoration: none; margin-right: 8px; background: #FFFFFF;
       padding: 0; border: 0 none;
@@ -478,7 +478,7 @@ td {
     }
   }
   .invoice_search{
-    float: right; width: 30%;
+    float: right; width: 40%;
     #search_invoice{width: 165px; height: 29px; float: right;}
   }
 }
@@ -519,6 +519,8 @@ td {
   width: 100%;
   line-height: 28px;
   a,span{color: #00BDE5;}
+  span.item_counts{color: #808080; font-size: 10px;}
+  a.active{color: #000000;}
 }
 input[type="submit"].new_btn{
   background-color: #00BDE5;
