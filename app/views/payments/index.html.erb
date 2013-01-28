@@ -46,10 +46,14 @@
 </table>
 <%end%>
 <!-- START: Unpaid invoices popup -->
-<%= form_tag "/payments/enter_payment" do %>
+<%= form_tag "/payments/enter_payment",:id=>"invoice_selection" do %>
   <div id="myModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="model_grey_container">
       <div class="modal-header">
+        <div id="invoice_popup_error" class="alert alert-error" style="width:635px;display:none;">
+          <button  class="close" type="button" style="margin:0px;">×</button>
+          <span>No Invoice has been selected.</span>
+        </div>
         <h1>Which Invoicess have you received payment for?</h1>
         <p>Select one or more Invoicess from the list below to apply payment.</p>
         <div class="cross_btn">

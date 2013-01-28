@@ -190,3 +190,14 @@ input.send_payment_notification {
 margin: 2px 0 0 0;
 
 }
+
+.modal .cross_btn {
+    background: url("cross_btn.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 45px;
+    position: absolute;
+    width: 45px;
+    z-index: 500;
+    top:81px;
+    right:5px;
+}
