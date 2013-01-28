@@ -634,11 +634,11 @@ color:#898989;
 
 /*Login Page*/
 .login_container{
-    width:360px;
+    width:340px;
     margin:auto;
     border: 1px solid #d7d7d7;
     border-radius: 4px;
-    padding:35px 25px 25px 25px;
+    padding:35px 35px 25px 35px;
     box-shadow: 0 0 5px #D0D0D0;
 }
 .login_container a{
@@ -665,11 +665,11 @@ color:#898989;
 }
 .login_title input{
     float:left;
-    width: 70%;
+    width: 72.1%;
 }
 .login_check{
     float: left;
-    padding: 0 0 0 78px;
+    padding: 0 0 0 74px;
     width: 74%;
 
 }
@@ -697,6 +697,7 @@ color:#898989;
 .login_btn{
     font-size: 24px !important;
     text-shadow: none !important;
+    margin-left: 16px !important;
 }
 .login_footer{
     width: 390px;
