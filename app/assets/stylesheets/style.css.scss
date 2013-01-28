@@ -470,7 +470,7 @@ td {
 .action_links_wrapper{
   width: 100%; margin: 29px 0 0; height: 20px;
   .invoice_action_links{
-    float: left; width: 70%;
+    float: left; width: 60%;
     P{color: #00BDE5; line-height: 29px; }
     a,span,input{color: #00BDE5; text-decoration: none; margin-right: 8px; background: #FFFFFF;
       padding: 0; border: 0 none;
@@ -478,7 +478,7 @@ td {
     }
   }
   .invoice_search{
-    float: right; width: 30%;
+    float: right; width: 40%;
     #search_invoice{width: 165px; height: 29px; float: right;}
   }
 }
@@ -491,7 +491,9 @@ td {
 .align_center{
     text-align: center !important;
 }
-
+.align_right{
+    text-align: right !important;
+}
 
 
 
@@ -517,6 +519,8 @@ td {
   width: 100%;
   line-height: 28px;
   a,span{color: #00BDE5;}
+  span.item_counts{color: #808080; font-size: 10px;}
+  a.active{color: #000000;}
 }
 input[type="submit"].new_btn{
   background-color: #00BDE5;
@@ -622,6 +626,66 @@ color:#898989;
 .dashboard-main{
     padding-top:61px;
 }
+
 .alert-danger, .alert-error {
     font-weight: normal;
+
+/*Login Page*/
+.login_container{
+    width:460px;
+    margin:auto;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    padding:25px;
+    box-shadow: 0 0 5px #D0D0D0;
+}
+.login_container a{
+    font-size: 11px;
+}
+.login_container h1{
+    padding: 0 0 30px 0;
+    text-transform: normal;
+}
+.login_title{
+    float:left;
+    padding: 0px;
+    width: 100%;
+    clear: both;
+    margin: 0 0 20px 0;
+}
+.login_title label{
+    float: left;
+    width: 25%;
+    line-height: 35px;
+}
+.login_title input{
+    float:left;
+    width: 70%;
+}
+.login_check{
+    float: left;
+    padding: 0 0 0 114px;
+    width: 74%;
+}
+.login_check input{
+    margin: 0px;
+    padding: 0px;
+    float: left;
+}
+.login_check label{
+    margin: 0px;
+    float: left;
+    line-height: 29px;
+    margin: 0;
+    padding: 0 0 0 11px;
+    width: 86%;
+}
+.login_btn_container{
+    clear: both;
+    text-align: center;
+    padding: 25px 0 0 0;
+}
+.login_btn{
+    font-size: 24px !important;
+    text-shadow: none !important;
 }

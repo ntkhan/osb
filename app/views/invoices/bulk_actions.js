@@ -4,3 +4,4 @@ jQuery(".alert").show().find('span').html("Invoice(s) are <%= @action %> success
 jQuery(".alert").show().find('span').html("No invoice is selected.");
 <% end %>
 jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
+jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');

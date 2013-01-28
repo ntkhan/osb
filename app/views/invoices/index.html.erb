@@ -24,12 +24,8 @@
       </div>
       <div class="invoice_search">
         <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
-        <div class="active_links">
-          <%= link_to "Active", "invoices/filter_invoices?status=active", :remote => true %>
-          <span>|</span>
-          <%= link_to "Archived", "invoices/filter_invoices?status=archived", :remote => true %>
-          <span>|</span>
-          <%= link_to "Deleted", "invoices/filter_invoices?status=deleted", :remote => true %>
+        <div class="active_links" id="active_links">
+            <%= render 'filter_links' %>
         </div>
       </div>
     </div>
@@ -40,7 +36,7 @@
         <th class="align_center">Invoice</th>
         <th class="align_left" width=120>Client</th>
         <th class="align_left">Description</th>
-        <th class="align_center">Total</th>
+        <th class="align_right">Total</th>
         <th class="align_center">Date</th>
         <th class="align_center">Status</th>
         <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>

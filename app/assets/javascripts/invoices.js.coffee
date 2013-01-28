@@ -145,10 +145,18 @@ jQuery ->
 
   # Validate client, cost and quantity on invoice save
   jQuery("form#new_invoice").submit ->
+    item_rows = jQuery("table#invoice_grid_fields tr.fields:visible")
     flag = true
+    # Check if client is selected
     if jQuery("#invoice_client_id").val() is ""
       applyPopover(jQuery("#invoice_client_id_chzn"),"top","Select a client")
       flag = false
+    # Check if item is selected
+    else if item_rows.find("select.items_list option:first:selected").length is item_rows.length
+      first_item = jQuery("table#invoice_grid_fields tr.fields:visible:first").find("select.items_list").next()
+      applyPopover(first_item,"left","Select an item")
+      flag = false
+    # Item cost and quantity should be greater then 0
     else
       jQuery("tr.fields:visible").each ->
         row = jQuery(this)
@@ -180,7 +188,7 @@ jQuery ->
   hidePopover = (elem) ->
     elem.next(".popover").hide()
 
-  jQuery("#invoice_client_id_chzn").click ->
+  jQuery("#invoice_client_id_chzn,.chzn-container").click ->
     jQuery(this).popover "hide"
 
   # Don't send an ajax request if an item is deselected.
@@ -203,6 +211,10 @@ jQuery ->
  # Check all invoice checkboxes using from main checkbox
   jQuery('#main-invoice-checkbox').live "click", ->
      jQuery(this).parents('table.table-striped').find(':checkbox').attr('checked', this.checked)
+
+  jQuery('#active_links a').live 'click', ->
+     jQuery('#active_links a').removeClass('active')
+     jQuery(this).addClass('active')
 
   jQuery(".invoice_action_links input[type=submit]").click ->
     jQuery(this).parents("FORM:eq(0)").find("table.table_listing").find(':checkbox').attr()
