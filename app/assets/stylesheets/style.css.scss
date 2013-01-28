@@ -630,11 +630,11 @@ color:#898989;
 
 /*Login Page*/
 .login_container{
-    width:460px;
+    width:360px;
     margin:auto;
     border: 1px solid #d7d7d7;
     border-radius: 4px;
-    padding:25px;
+    padding:35px 25px 25px 25px;
     box-shadow: 0 0 5px #D0D0D0;
 }
 .login_container a{
@@ -643,6 +643,9 @@ color:#898989;
 .login_container h1{
     padding: 0 0 30px 0;
     text-transform: normal;
+}
+.login_container h1 span{
+    color: #9b9b9b;
 }
 .login_title{
     float:left;
@@ -653,7 +656,7 @@ color:#898989;
 }
 .login_title label{
     float: left;
-    width: 25%;
+    width: 22%;
     line-height: 35px;
 }
 .login_title input{
@@ -662,13 +665,17 @@ color:#898989;
 }
 .login_check{
     float: left;
-    padding: 0 0 0 114px;
+    padding: 0 0 0 78px;
     width: 74%;
+
 }
 .login_check input{
     margin: 0px;
     padding: 0px;
     float: left;
+    width: 13px;
+    height: 13px;
+    margin: 8px 0 0 0;
 }
 .login_check label{
     margin: 0px;
