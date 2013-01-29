@@ -428,7 +428,7 @@ a.new_btn,  input.new_btn[type="submit"], {
     color: #FFFFFF;
     display: inline-block;
     font-family: "Dosis",sans-serif;
-    font-size: 24px;
+    font-size: 24px !important;
     font-style: normal;
     font-weight: normal;
     height: 50px;
@@ -436,6 +436,7 @@ a.new_btn,  input.new_btn[type="submit"], {
     padding: 0 100px;
     text-transform: uppercase;
     text-decoration: none;
+    text-shadow:none !important;
 
 
   /*background-color: #00BDE5;
