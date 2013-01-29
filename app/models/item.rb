@@ -26,10 +26,8 @@ class Item < ActiveRecord::Base
 
   def self.recover_deleted ids
     where("id IN(?)", ids).only_deleted.each do |item|
-      item.update_attributes({
-      :archive_number => nil,
-      :archived_at => nil,
-      :deleted_at => nil})
+      item.recover
+      item.unarchive
     end
   end
 
