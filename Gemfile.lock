@@ -40,7 +40,12 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    better_errors (0.3.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
     builder (3.0.4)
+    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -147,6 +152,8 @@ DEPENDENCIES
   activerecord-mysql-adapter
   acts_as_archival
   acts_as_paranoid (~> 0.4.0)
+  better_errors
+  binding_of_caller
   coffee-rails (~> 3.2.1)
   daemons
   delayed_job_active_record
