@@ -5,9 +5,9 @@ class Invoice < ActiveRecord::Base
   belongs_to :invoice
   has_many :invoice_line_items, :dependent => :destroy
   has_many :payments
-  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes
+  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
-  paginates_per 4
+  paginates_per 10
 
   class << self
     def get_next_invoice_number user_id
@@ -17,6 +17,10 @@ class Invoice < ActiveRecord::Base
 
   def description
     "Invoice Description"
+  end
+
+  def self.paid_invoices ids
+    where("id IN(?) AND status = 'paid'",ids)
   end
 
   def total
@@ -47,7 +51,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
-    where("id IN(?)", ids).only_deleted.each {|invoice| invoice.recover}
+    where("id IN(?)", ids).only_deleted.each do |invoice|
+      invoice.recover
+      invoice.unarchive
+    end
   end
 
   def self.filter params
@@ -55,6 +62,17 @@ class Invoice < ActiveRecord::Base
       when "active"   then self.unarchived.page(params[:page])
       when "archived" then self.archived.page(params[:page])
       when "deleted"  then self.only_deleted.page(params[:page])
+    end
+  end
+
+  def self.paid_full ids
+    self.multiple_invoices(ids).each do |invoice|
+      Payment.create({
+       :payment_amount => Payment.update_invoice_status(invoice.id, invoice.invoice_total.to_i),
+       :invoice_id => invoice.id,
+       :paid_full => 1,
+       :payment_date => Time.now.strftime("%Y-%d-%m")
+       })
     end
   end
 

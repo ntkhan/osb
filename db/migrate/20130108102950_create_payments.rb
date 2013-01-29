@@ -9,6 +9,9 @@ class CreatePayments < ActiveRecord::Migration
       t.text :notes
       t.boolean :send_payment_notification
       t.boolean :paid_full
+      t.string :archive_number
+      t.datetime :archived_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

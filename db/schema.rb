@@ -26,8 +26,11 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.string   "email"
     t.string   "home_phone"
     t.string   "mobile_number"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "clients", :force => true do |t|
@@ -49,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.string   "business_phone"
     t.string   "fax"
     t.text     "internal_notes"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -141,6 +147,9 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.integer  "tax_2"
     t.boolean  "track_inventory"
     t.integer  "inventory"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
   end
@@ -154,6 +163,9 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.text     "notes"
     t.boolean  "send_payment_notification"
     t.boolean  "paid_full"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
   end

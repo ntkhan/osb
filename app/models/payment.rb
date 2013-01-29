@@ -1,20 +1,25 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification
+  attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at
   belongs_to :invoice
-  paginates_per 4
+  paginates_per 10
+  acts_as_archival
+  acts_as_paranoid
+
   def client_name
     self.invoice.client.organization_name rescue "credit?"
   end
+
   def client_full_name
     "#{self.invoice.client.first_name}  #{self.invoice.client.last_name}"
   end
+
   def self.update_invoice_status inv_id, c_pay
     invoice = Invoice.find(inv_id)
-    diff =   (self.invoice_paid_amount(invoice.id) + c_pay) - invoice.invoice_total
+    diff = (self.invoice_paid_amount(invoice.id) + c_pay) - invoice.invoice_total
     if diff > 0
       status = 'paid'
       self.add_credit_payment invoice.id, diff
-      return_v =  c_pay - diff
+      return_v = c_pay - diff
     elsif diff < 0
       status = 'partial'
       return_v = c_pay
@@ -34,18 +39,19 @@ class Payment < ActiveRecord::Base
     credit_pay.payment_amount = amount
     credit_pay.save
   end
+
   def client_credit client_id
-    invoice_ids =  Invoice.where("client_id = ?",client_id).all
+    invoice_ids = Invoice.where("client_id = ?", client_id).all
     # total credit
     client_payments = Payment.where("payment_type = 'credit' AND invoice_id in (?)", invoice_ids).all
-    client_total_credit =  client_payments.sum{|f| f.payment_amount}
+    client_total_credit = client_payments.sum { |f| f.payment_amount }
     # avail credit
     client_payments = Payment.where("payment_method = 'credit' AND invoice_id in (?)", invoice_ids).all
-    client_avail_credit =  client_payments.sum{|f| f.payment_amount}
+    client_avail_credit = client_payments.sum { |f| f.payment_amount }
     balance = client_total_credit - client_avail_credit
     return balance
   end
-  
+
   def self.invoice_remaining_amount inv_id
     invoice = Invoice.find(inv_id)
     invoice_payments = self.invoice_paid_detail(inv_id)
@@ -54,7 +60,7 @@ class Payment < ActiveRecord::Base
     invoice_payments.each do |inv_p|
       invoice_paid_amount= invoice_paid_amount + inv_p.payment_amount unless inv_p.payment_amount.blank?
     end
-    return   invoice.invoice_total - invoice_paid_amount
+    return invoice.invoice_total - invoice_paid_amount
   end
 
   def self.invoice_paid_amount inv_id
@@ -63,10 +69,48 @@ class Payment < ActiveRecord::Base
     invoice_payments.each do |inv_p|
       invoice_paid_amount= invoice_paid_amount + inv_p.payment_amount unless inv_p.payment_amount.blank?
     end
-    return   invoice_paid_amount
+    return invoice_paid_amount
   end
 
   def self.invoice_paid_detail inv_id
-    Payment.where("invoice_id = ? and (payment_type is null || payment_type != 'credit')",inv_id).all
+    Payment.where("invoice_id = ? and (payment_type is null || payment_type != 'credit')", inv_id).all
+  end
+
+  def self.multiple_payments ids
+    where("id IN(?)", ids)
+  end
+
+  def self.archive_multiple ids
+    self.multiple_payments(ids).each { |payment| payment.archive }
+  end
+
+  def self.delete_multiple ids
+    self.multiple_payments(ids).each { |payment| payment.destroy }
+  end
+
+  def self.recover_archived ids
+    self.multiple_payments(ids).each { |payment| payment.unarchive }
+  end
+
+  def self.recover_deleted ids
+    where("id IN(?)", ids).only_deleted.each do |payment|
+      payment.recover
+      payment.unarchive
+    end
+  end
+
+  def self.filter params
+    case params[:status]
+      when "active" then
+        self.unarchived.page(params[:page])
+      when "archived" then
+        self.archived.page(params[:page])
+      when "deleted" then
+        self.only_deleted.page(params[:page])
+    end
+  end
+  
+  def notify_client
+    PaymentMailer.payment_notification_email(self.invoice.client, self.invoice.invoice_number, self.payment_amount).deliver if self.send_payment_notification
   end
 end

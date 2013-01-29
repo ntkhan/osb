@@ -58,7 +58,7 @@ table {
     }
     .invoice_header_items {
       border-right: 1px solid #AAA9A9;
-      padding: 6px 0;
+      padding: 0px 6px;
     }
   }
 }
@@ -411,7 +411,7 @@ p, ol, ul, td {
     width: 50px;
   }
   .linetotal label {
-    width: 48px;
+    width: 51px;
     text-align: right;
     height: 28px;
     line-height: 28px;

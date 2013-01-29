@@ -6,7 +6,7 @@
 */
 
 /*Custom fonts CSS Starts*/
-@import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
+    @import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
 /*Custom fonts CSS Starts*/
 
 /*General CSS Starts*/
@@ -123,7 +123,7 @@ h1.secondary.small{
     cursor: pointer;
     text-decoration: none;
 }
-#nav .select li:hover a, #nav .select li a.active {
+/*#nav .select li:hover a,*/ #nav .select li a.active {
     display:block;
     background: url(/assets/nav_hover.png) no-repeat center;
     height: 43px;
@@ -134,7 +134,7 @@ h1.secondary.small{
     margin:0;
     padding-left: 26%;
     list-style:none;
-    width: 100%;
+    width: 74%;
     background: url(/assets/sub_bg.png) repeat-x bottom;
 }
 #nav .select li:hover .sub, #nav .select li a.active + .sub {
@@ -157,10 +157,15 @@ h1.secondary.small{
     line-height: 34px;
     min-width: 39px;
 }
+
 #nav .select li:hover .sub li a:hover, #nav .select li .sub li a.active  {
     display: block;
     color:#00ace5;
+    /*background: url(/assets/sub_hover.png) no-repeat bottom center;*/
+}
+#nav .select li .sub li a.active{
     background: url(/assets/sub_hover.png) no-repeat bottom center;
+
 }
 /* Navigation CSS Ends */
 
@@ -423,7 +428,7 @@ a.new_btn,  input.new_btn[type="submit"], {
     color: #FFFFFF;
     display: inline-block;
     font-family: "Dosis",sans-serif;
-    font-size: 24px;
+    font-size: 24px !important;
     font-style: normal;
     font-weight: normal;
     height: 50px;
@@ -431,6 +436,7 @@ a.new_btn,  input.new_btn[type="submit"], {
     padding: 0 100px;
     text-transform: uppercase;
     text-decoration: none;
+    text-shadow:none !important;
 
 
   /*background-color: #00BDE5;
@@ -520,7 +526,7 @@ td {
   line-height: 28px;
   a,span{color: #00BDE5;}
   span.item_counts{color: #808080; font-size: 10px;}
-  a.active{color: #000000;}
+  a.active{color: #333333; font-weight: bold;}
 }
 input[type="submit"].new_btn{
   background-color: #00BDE5;
@@ -634,12 +640,14 @@ color:#898989;
 
 /*Login Page*/
 .login_container{
-    width:360px;
+    width:342px;
     margin:auto;
-    border: 1px solid #d7d7d7;
     border-radius: 4px;
-    padding:35px 25px 25px 25px;
-    box-shadow: 0 0 5px #D0D0D0;
+    border: 1px solid #ECECEC;
+    box-shadow: 0 0 10px #EEEEEE inset;
+    padding:35px 35px 25px 35px;
+    /*border: 1px solid #d7d7d7;
+     box-shadow: 0 0 5px #D0D0D0;*/
 }
 .login_container a{
     font-size: 11px;
@@ -647,6 +655,7 @@ color:#898989;
 .login_container h1{
     padding: 0 0 30px 0;
     text-transform: normal;
+    text-align: center;
 }
 .login_container h1 span{
     color: #9b9b9b;
@@ -665,13 +674,11 @@ color:#898989;
 }
 .login_title input{
     float:left;
-    width: 70%;
+    width: 93.25%;
 }
 .login_check{
     float: left;
-    padding: 0 0 0 78px;
-    width: 74%;
-
+    width: 100%;
 }
 .login_check input{
     margin: 0px;
@@ -679,24 +686,26 @@ color:#898989;
     float: left;
     width: 13px;
     height: 13px;
-    margin: 8px 0 0 0;
+    margin: 0 0 0 0;
 }
 .login_check label{
     margin: 0px;
     float: left;
-    line-height: 29px;
-    margin: 0;
+    line-height: none;
+    margin: -3px 0 0 0;
     padding: 0 0 0 11px;
     width: 86%;
+    font-size: 12px;
 }
 .login_btn_container{
     clear: both;
     text-align: center;
-    padding: 25px 0 0 0;
+    padding: 29px 0 0 0;
 }
 .login_btn{
     font-size: 24px !important;
     text-shadow: none !important;
+    margin-left: 16px !important;
 }
 .login_footer{
     width: 390px;
@@ -712,4 +721,12 @@ color:#898989;
     float: right;
     color: #afafaf;
 }
-
+#login_email:-webkit-input-placeholder, login_pswd:-webkit-input-placeholder {
+  color: #9B9B9B;
+}
+#login_email:-moz-placeholder, #login_pswd:-moz-placeholder {
+  color: #9B9B9B;
+}
+#login_email:-ms-input-placeholder, #login_pswd:-ms-input-placeholder {
+  color: #9B9B9B;
+}

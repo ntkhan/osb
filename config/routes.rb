@@ -4,22 +4,22 @@ Osb::Application.routes.draw do
     collection do
       post 'enter_payment'
       put 'update_individual_payment'
+      get 'filter_payments'
+      post 'bulk_actions'
     end
   end
   resources :taxes
 
-
   match "invoices/preview" => "invoices#preview"
-
-  match "invoices/bulk_actions" => "invoices#bulk_actions"
-
-  match "invoices/filter_invoices" => "invoices#filter_invoices"
 
   match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
-  match "items/load_item_data" => "items#load_item_data"
-
-  resources :clients
+  resources :clients do
+    collection do
+      get 'filter_clients'
+      post 'bulk_actions'
+    end
+  end
 
 
   resources :client_contacts
@@ -34,7 +34,13 @@ Osb::Application.routes.draw do
   resources :categories
 
 
-  resources :items
+  resources :items do
+    collection do
+      get 'filter_items'
+      post 'bulk_actions'
+      post 'load_item_data'
+    end
+  end
 
 
   resources :recurring_profile_line_items
@@ -49,6 +55,10 @@ Osb::Application.routes.draw do
   resources :invoices do
     resources :invoice_line_items
     #get 'archive_multiple'
+    collection do
+      get 'filter_invoices'
+      post 'bulk_actions'
+    end
   end
 
 
