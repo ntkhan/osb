@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+users = User.create([
+    {:email => "imran@nxb.com.pk", :crypted_password => "9027ed25057cef842561eb3f58739556e09d85f4"},
+    {:email => "muhammad.azeem@nxb.com.pk", :crypted_password => "9027ed25057cef842561eb3f58739556e09d85f4"},
+    {:email => "sohail.asghar@nxb.com.pk", :crypted_password => "9027ed25057cef842561eb3f58739556e09d85f4"}
+  ])
 taxes = Tax.create([{:name => 'VAT', :percentage => 2.5},{:name => 'GST', :percentage => 4}])
 tax1,tax2 = taxes.first.id,taxes.last.id
 
@@ -28,7 +33,7 @@ item1,item2 = items.first.id, items.last.id
 
 client = Client.create(
   :organization_name => "NXB",
-  :email => "client@nxb.com.pk",
+  :email => "imran@nxb.com.pk",
   :first_name => "Hyper",
   :last_name => "Conversion",
   :home_phone => "000000",
@@ -37,8 +42,8 @@ client = Client.create(
   :country => "Pakistan")
 
 invoice = Invoice.create(
-  :invoice_number => 00001,
-  :invoice_date => "2013-01-10 00:00:00",
+  :invoice_number => "00001",
+  :invoice_date => Date.today,
   :discount_percentage => 10,
   :client_id => client.id,
   :terms => "none",
