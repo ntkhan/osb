@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Open Source Billing</title>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
+      body {
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 13px;
+      }
+      .content {
+        clear: both;
+        margin: auto;
+        overflow: hidden;
+        padding: 50px 0 40px;
+        width: 758px;
+      }
+
+      .invoice-page-header {
+        margin-top: 20px;
+        padding-bottom: 9px;
+      }
+      h1 {
+        color: #00BDE5;
+        font-family: "Dosis",sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: normal;
+        letter-spacing: 0.6px;
+        line-height: 1.2;
+        margin: 0 0 0 -1px;
+      }
+      .page-contents {
+        border: 1px solid #CCCCCC;
+        border-radius: 5px 5px 5px 5px;
+        float: left;
+        font-size: 12px;
+        line-height: 18px;
+        padding: 54px 40px 72px;
+        width: 675px;
+      }
+
+      .invheader-upper {
+        min-height: 90px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .invheader-lower {
+        clear: both;
+        margin-top: 54px;
+        min-height: 126px;
+      }
+      .invheader, .invbody {
+        font-family: Arial,"Arial Unicode","Arial Unicode MS",Helvetica,sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: left;
+      }
+      .invheader-address-client {
+        float: left;
+        padding-bottom: 20px;
+        width: 300px;
+      }
+
+      .invheader-invoicedetails {
+        float: right;
+        padding-bottom: 20px;
+        width: 290px;
+      }
+      .invheader-invoicedetails table {
+        width: 100%;
+      }
+      table {
+        background-color: transparent;
+        border-collapse: collapse;
+        border-spacing: 0;
+        max-width: 100%;
+      }
+      .invheader-invoicedetails .invheader-invoicedetails-balance td
+      {
+        background-color: #E5E5E5;
+        border-bottom: 1px solid #C7C7C7;
+        border-right: 1px solid #C7C7C7;
+        border-top: 1px solid #C7C7C7;
+        font-weight: bold;
+        padding: 0;
+      }
+      .invheader-invoicedetails .invheader-invoicedetails-balance th{
+        background-color: #E5E5E5;
+        border-bottom: 1px solid #C7C7C7;
+        border-left: 1px solid #C7C7C7;
+        border-top: 1px solid #C7C7C7;
+        font-weight: bold;
+        padding: 0;
+      }
+      .invheader-invoicedetails table th {
+        font-weight: normal;
+        white-space: nowrap;
+        width: 50%;
+      }
+      .invheader-invoicedetails .invheader-invoicedetails-balance td div {
+        border-top: 1px solid #F1F1F1;
+        padding: 3px 5px;
+      }
+
+      .invheader-invoicedetails .invheader-invoicedetails-balance th div {
+        border-left: 1px solid #F1F1F1;
+        border-top: 1px solid #F1F1F1;
+        padding: 3px 5px;
+      }
+      .invheader-invoicedetails table td {
+        font-family: Arial,"Arial Unicode","Arial Unicode MS",Helvetica,sans-serif;
+        font-size: 12px;
+        text-align: right;
+      }
+      .invbody-items td, .invbody-expenses td, .invbody-timeentries td {
+        border-bottom: 1px solid #E5E5E5;
+        padding: 3px 0 3px 2px;
+        text-align: left;
+      }
+      .invbody-items, .invbody-expenses, .invbody-timeentries {
+        margin-bottom: 24px;
+        width: 100%;
+      }
+      .invbody-items th.first {
+        border-left: 1px solid #C7C7C7;
+      }
+      .invbody-items th, .invbody-expenses th, .invbody-timeentries th {
+        background-color: #E3E3E3;
+        border-bottom: 1px solid #C7C7C7;
+        border-top: 1px solid #C7C7C7;
+        line-height: 22px;
+        vertical-align: top;
+      }
+      .invbody-summary {
+        border-top: 3px solid #E3E3E3;
+        float: right;
+        margin-bottom: 18px;
+        width: 100%;
+      }
+      .invbody-summary .invbody-summary-clean {
+        background-color: transparent;
+        border: 0 none;
+      }
+      .invbody-summary-total th {
+        border-left: 1px solid #C7C7C7;
+      }
+      .invbody-summary-total td, .invbody-summary-total th {
+        background-color: #E5E5E5;
+        border-bottom: 1px solid #C7C7C7;
+        border-top: 1px solid #C7C7C7;
+        padding: 0;
+      }
+      .invbody-summary th {
+        font-weight: normal;
+        text-align: left;
+      }
+      .invbody-items thead .item {
+        border-left: 1px solid #F1F1F1;
+        border-top: 1px solid #F1F1F1;
+        padding-left: 5px;
+        text-align: left;
+      }
+      .invbody-summary td {
+        text-align: right;
+      }
+      .invbody-items tbody .linetotal {
+        padding-right: 5px;
+        text-align: right;
+      }
+      .invbody-items thead .linetotal {
+        border-top: 1px solid #F1F1F1;
+        padding-right: 5px;
+        text-align: right;
+      }
+
+      .invbody-items, .invbody-expenses, .invbody-timeentries {
+        margin-bottom: 24px;
+        width: 100%;
+      }
+
+      .invheader, .invbody {
+        font-family: Arial,"Arial Unicode","Arial Unicode MS",Helvetica,sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: left;
+      }
+
+      .invbody-items th.last {
+        border-right: 1px solid #C7C7C7;
+      }
+      .invbody-summary-total th {
+        border-left: 1px solid #C7C7C7;
+      }
+      .invbody-summary .invbody-summary-total th div {
+        border-left: 1px solid #F1F1F1;
+        border-top: 1px solid #F1F1F1;
+        padding: 3px 5px;
+      }
+      .invbody-summary .invbody-summary-total td div {
+        border-top: 1px solid #F1F1F1;
+        padding: 3px 5px;
+      }
+      .invbody-summary-total td {
+        border-right: 1px solid #C7C7C7;
+      }
+      .invbody-terms, .invbody-notes {
+        margin-bottom: 18px;
+        width: 80%;
+      }
+      .invbody-terms h2 {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      .invbody-items, .invbody-expenses, .invbody-timeentries {
+        margin-bottom: 24px;
+        width: 100%;
+      }
+      .invbody-notes h2 {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      .invbody-items, .invbody-expenses, .invbody-timeentries {
+        margin-bottom: 24px;
+        width: 100%;
+      }
+
+      .invheader, .invbody {
+        font-family: Arial,"Arial Unicode","Arial Unicode MS",Helvetica,sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MAIN CONTAINER START-->
+    <div class="mainContainer">
+      <!-- HEADER START -->
+      <div class="header">
+        <div class="logo">
+          <!--<%= image_tag "logo.png", :size => "185x30" %>-->
+        </div>
+      </div>
+      <!-- HEADER END -->
+      <!-- CONTENT AREA START-->
+      <div class="content">
+        <!-- <div class="notice"><%#= notice %></div> -->
+        <%= yield %>
+      </div>
+      <!-- CONTENT AREA END-->
+
+    </div>
+    <!-- MAIN CONTAINER END -->
+  </body>
+</html>

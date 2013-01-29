@@ -92,6 +92,7 @@ GEM
     mysql2 (0.3.11-x86-mingw32)
     nested_form (0.3.1)
     orm_adapter (0.4.0)
+    pdfkit (0.5.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -165,6 +166,7 @@ DEPENDENCIES
   kaminari
   mysql2
   nested_form
+  pdfkit
   rails (= 3.2.9)
   sass-rails (~> 3.2.3)
   twitter-bootstrap-rails
