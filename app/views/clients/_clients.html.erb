@@ -1,6 +1,7 @@
 <% if @clients.length > 0 %>
   <% @clients.each do |client| %>
     <tr>
+      <td class="align_center"> <%= check_box_tag "client_ids[]", client.id, false, :id => "client_#{client.id}" %></td>
       <td><%= link_to client.organization_name, client_path(client) %></td>
       <td><%= client.contact_name %></td>
       <td><%= client.email %></td>
@@ -17,7 +18,7 @@
     </tr>
   <% end %>
   <tr>
-    <td colspan="5">
+    <td colspan="6">
       <div class="paginator">
         <%= paginate @clients, :remote => true %>
         <div class="paging_info">
@@ -28,7 +29,7 @@
   </tr>
 <% else %>
   <tr>
-    <td colspan="5">
+    <td colspan="6">
       <div class="no_record_container">You haven't created any client yet. Please click on New Client button to create new client.</div>
     </td>
   </tr>

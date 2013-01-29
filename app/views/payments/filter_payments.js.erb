@@ -1,0 +1,11 @@
+//jQuery(".alert").show().find('span').html("Invoice(s) are <%= @action %> successfully");
+jQuery('tbody#payment_body').hide(200, function(){jQuery(this).html('<%= escape_javascript render("payment") %>').show(500);});
+<% status = params[:status]%>
+jQuery('.top_links').hide();
+ <%if status == "active" %>
+    jQuery('.archive,.destroy').show();
+<% elsif status == "archived"%>
+    jQuery('.recover_archived,.destroy').show();
+<% elsif status == "deleted"%>
+    jQuery('.recover_deleted').show();
+<%end%>

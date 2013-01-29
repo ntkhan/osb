@@ -1,6 +1,7 @@
 <% if @items.length > 0 %>
   <% @items.each do |item| %>
     <tr>
+      <td class="align_center"> <%= check_box_tag "item_ids[]", item.id, false, :id => "item_#{item.id}" %></td>
       <td class="align_center"><%= item.item_name %></td>
       <td class="align_left"><%= item.item_description %></td>
       <td class="align_center"><%= item.unit_cost %></td>

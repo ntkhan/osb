@@ -2,9 +2,34 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+<%= form_tag "clients/bulk_actions", :remote => true do -%>
+    <div class="action_links_wrapper">
+      <div class="invoice_action_links">
+        <p>
+          <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
+          <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
+          <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
+          <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
+          <span>|</span>
+          <a href="#">Copy</a>
+          <a href="#">Print</a>
+          <a href="#">Send</a>
+          <span>|</span>
+          <a href="#">Enter Payment</a>
+          <a href="#">Pay Online</a>
+        </p>
+      </div>
+      <div class="invoice_search">
+        <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
+        <div class="active_links" id="active_links">
+          <%= render 'clients/filter_links' %>
+        </div>
+      </div>
+    </div>
 <table class="table table_listing client_listing">
   <thead>
     <tr>
+      <th class="align_center"><%= check_box_tag 'select_all' %></th>
       <th>Organization</th>
       <th>Contact</th>
       <th>Email</th>
@@ -16,5 +41,5 @@
     <%= render 'clients' %>
   </tbody>
 </table>
-
+ <%end%>
 

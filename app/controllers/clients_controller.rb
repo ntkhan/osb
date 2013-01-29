@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.page(params[:page])
+    @clients = Client.unarchived.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -84,5 +84,30 @@ class ClientsController < ApplicationController
       format.html { redirect_to clients_url }
       format.json { head :no_content }
     end
+  end
+
+  def bulk_actions
+    if params[:archive]
+      Client.archive_multiple(params[:client_ids])
+      @clients = Client.unarchived.page(params[:page])
+      @action = "archived"
+    elsif params[:destroy]
+      Client.delete_multiple(params[:client_ids])
+      @clients = Client.unarchived.page(params[:page])
+      @action = "deleted"
+    elsif params[:recover_archived]
+      Client.recover_archived(params[:client_ids])
+      @clients = Client.archived.page(params[:page])
+      @action = "recovered"
+    elsif params[:recover_deleted]
+      Client.recover_deleted(params[:client_ids])
+      @clients = Client.only_deleted.page(params[:page])
+      @action = "recovered"
+    end
+    respond_to { |format| format.js }
+  end
+
+  def filter_clients
+    @clients = Client.filter(params)
   end
 end
