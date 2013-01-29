@@ -1,4 +1,5 @@
 <%- model_class = Invoice -%>
+<p id="pdf_link"><%= link_to "Download Invoice (PDF)", :controller=>'invoices',:action=>'invoice_pdf',:id=>@invoice.id,:format => "pdf" %></p>
 <div class="invoice-page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
 </div>
