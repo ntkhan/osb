@@ -16,7 +16,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def description
-    "Invoice Description"
+   "Invoice Description"
   end
 
   def total
