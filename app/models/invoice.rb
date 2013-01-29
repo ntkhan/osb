@@ -19,6 +19,10 @@ class Invoice < ActiveRecord::Base
     "Invoice Description"
   end
 
+  def self.paid_invoices ids
+    where("id IN(?) AND status = 'paid'",ids)
+  end
+
   def total
     self.invoice_line_items.sum { |li| (li.item_unit_cost || 0) *(li.item_quantity || 0) }
   end
@@ -60,6 +64,17 @@ class Invoice < ActiveRecord::Base
       when "active"   then self.unarchived.page(params[:page])
       when "archived" then self.archived.page(params[:page])
       when "deleted"  then self.only_deleted.page(params[:page])
+    end
+  end
+
+  def self.paid_full ids
+    self.multiple_invoices(ids).each do |invoice|
+      Payment.create({
+       :payment_amount => Payment.update_invoice_status(invoice.id, invoice.invoice_total.to_i),
+       :invoice_id => invoice.id,
+       :paid_full => 1,
+       :payment_date => Time.now.strftime("%Y-%d-%m")
+       })
     end
   end
 

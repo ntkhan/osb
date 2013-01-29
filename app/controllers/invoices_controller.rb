@@ -56,9 +56,9 @@ class InvoicesController < ApplicationController
       if @invoice.save
         encrypted_id = Base64.encode64(encrypt(@invoice.id))
         InvoiceMailer.delay({:run_at => 1.minutes.from_now}).new_invoice_email(@invoice.client, @invoice, encrypted_id, current_user)
-       # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
+        # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
         format.json { render :json => @invoice, :status => :created, :location => @invoice }
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been created successfully.')
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => 'Your Invoice has been created successfully.')
         return
       else
         format.html { render :action => "new" }
@@ -76,8 +76,8 @@ class InvoicesController < ApplicationController
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
         format.json { head :no_content }
-         redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
-         return
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => 'Your Invoice has been updated successfully.')
+        return
       else
         format.html { render :action => "edit" }
         format.json { render :json => @invoice.errors, :status => :unprocessable_entity }
@@ -106,22 +106,31 @@ class InvoicesController < ApplicationController
   end
 
   def bulk_actions
+    ids = params[:invoice_ids]
     if params[:archive]
-      Invoice.archive_multiple(params[:invoice_ids])
+      Invoice.archive_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
       @action = "archived"
     elsif params[:destroy]
-      Invoice.delete_multiple(params[:invoice_ids])
+      Invoice.delete_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
       @action = "deleted"
     elsif params[:recover_archived]
-      Invoice.recover_archived(params[:invoice_ids])
+      Invoice.recover_archived(ids)
       @invoices = Invoice.archived.page(params[:page])
       @action = "recovered"
     elsif params[:recover_deleted]
-      Invoice.recover_deleted(params[:invoice_ids])
+      Invoice.recover_deleted(ids)
       @invoices = Invoice.only_deleted.page(params[:page])
       @action = "recovered"
+    elsif params[:payment]
+      unless Invoice.paid_invoices(ids).present?
+        Invoice.paid_full(ids)
+        @action = "paid"
+      else
+        @action = "paid invoices"
+      end
+      @invoices = Invoice.unarchived.page(params[:page])
     end
     respond_to { |format| format.js }
   end
