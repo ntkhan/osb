@@ -18,16 +18,19 @@ class InvoicesController < ApplicationController
   # GET /invoices/1.json
   def show
     @invoice = Invoice.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @invoice }
     end
+  end
+  
+  def invoice_pdf
+    @invoice = Invoice.find(params[:id])
+    render :layout=> "pdf_mode"
   end
 
   def preview
-    id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue id = nil
-    @invoice = id.blank? ? nil : Invoice.find(id)
+    @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
+    @invoice = @id.blank? ? nil : Invoice.find(@id)
   end
 
   # GET /invoices/new
@@ -56,7 +59,7 @@ class InvoicesController < ApplicationController
       if @invoice.save
         encrypted_id = Base64.encode64(encrypt(@invoice.id))
         InvoiceMailer.delay({:run_at => 1.minutes.from_now}).new_invoice_email(@invoice.client, @invoice, encrypted_id, current_user)
-       # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
+        # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
         format.json { render :json => @invoice, :status => :created, :location => @invoice }
         redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been created successfully.')
         return
@@ -76,8 +79,8 @@ class InvoicesController < ApplicationController
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
         format.json { head :no_content }
-         redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
-         return
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
+        return
       else
         format.html { render :action => "edit" }
         format.json { render :json => @invoice.errors, :status => :unprocessable_entity }
@@ -129,7 +132,6 @@ class InvoicesController < ApplicationController
   def filter_invoices
     @invoices = Invoice.filter(params)
   end
-
   private
   def choose_layout
     action_name == 'preview' ? "preview_mode" : "application"
