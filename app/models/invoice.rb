@@ -52,10 +52,8 @@ class Invoice < ActiveRecord::Base
 
   def self.recover_deleted ids
     where("id IN(?)", ids).only_deleted.each do |invoice|
-      invoice.update_attributes({
-      :archive_number => nil,
-      :archived_at => nil,
-      :deleted_at => nil})
+      invoice.recover
+      invoice.unarchive
     end
   end
 

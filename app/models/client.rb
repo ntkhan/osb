@@ -28,10 +28,8 @@ class Client < ActiveRecord::Base
 
   def self.recover_deleted ids
     where("id IN(?)", ids).only_deleted.each do |client|
-      client.update_attributes({
-      :archive_number => nil,
-      :archived_at => nil,
-      :deleted_at => nil})
+      client.recover
+      client.unarchive
     end
   end
 
