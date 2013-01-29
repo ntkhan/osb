@@ -11,7 +11,7 @@
   <%= f.password_field :password, :placeholder  => "password", :id => "login_pswd" %></div>
 
   <% if devise_mapping.rememberable? -%>
-<div class="login_check"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+<div class="login_check"><%= f.check_box :remember_me %> <%= f.label (:remember_me) {"Keep me signed-in <span style='color:#ababab'> (in #{browser.name} on this machine)</span>".html_safe} %> </div>
   <% end -%>
 
 <div class="login_btn_container"><%= f.submit "Sign in", :class => "new_btn login_btn" %></div>

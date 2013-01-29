@@ -1,7 +1,7 @@
 class Payment < ActiveRecord::Base
   attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at
   belongs_to :invoice
-  paginates_per 4
+  paginates_per 10
   acts_as_archival
   acts_as_paranoid
 
