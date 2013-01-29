@@ -4,12 +4,10 @@
           <td class="align_center"> <%= check_box_tag "item_ids[]", item.id, false, :id => "item_#{item.id}" %></td>
           <td class="align_center"><%= item.item_name %></td>
           <td class="align_left"><%= item.item_description %></td>
-          <td class="align_right"><%= item.unit_cost %></td>
+          <td class="align_right">$<%= number_with_precision(item.unit_cost, :precision => 2) %></td>
           <td class="align_right"><%= item.quantity %></td>
-          <td class="align_center"><%= item.tax_1 %></td>
-          <td class="align_center"><%= item.tax_2 %></td>
-          <!--<td><%#= item.track_inventory %></td>-->
-          <!--<td><%#= item.inventory %></td>-->
+          <td class="align_center"><%= item.tax1.name %></td>
+          <td class="align_center"><%= item.tax2.name %></td>
           <td class="align_center"><%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
             <% unless params[:status] == "deleted" %>
                 <%= link_to 'Delete', item, :method => :delete, :class => "del_action", :data => {:confirm => 'Are you sure?'} %></td>

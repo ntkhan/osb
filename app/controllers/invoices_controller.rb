@@ -121,11 +121,11 @@ class InvoicesController < ApplicationController
     elsif params[:recover_archived]
       Invoice.recover_archived(ids)
       @invoices = Invoice.archived.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from archived"
     elsif params[:recover_deleted]
       Invoice.recover_deleted(ids)
       @invoices = Invoice.only_deleted.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from deleted"
     elsif params[:payment]
       unless Invoice.paid_invoices(ids).present?
         Invoice.paid_full(ids)
