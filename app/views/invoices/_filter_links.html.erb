@@ -1,4 +1,4 @@
-<%= link_to "Active", "invoices/filter_invoices?status=active", :remote => true %>
+<%= link_to "Active", "invoices/filter_invoices?status=active", :remote => true, :class => "active" %>
 <span class="item_counts" id="actives">(<%= Invoice.unarchived.size%>)</span>
 <span>|</span>
 <%= link_to "Archived", "invoices/filter_invoices?status=archived", :remote => true %>
