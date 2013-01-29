@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   acts_as_archival
   acts_as_paranoid
-  attr_accessible :inventory, :item_description, :item_name, :quantity, :tax_1, :tax_2, :track_inventory, :unit_cost
+  attr_accessible :inventory, :item_description, :item_name, :quantity, :tax_1, :tax_2, :track_inventory, :unit_cost , :archive_number, :archived_at, :deleted_at
   has_many :invoice_line_items, :dependent => :destroy
   belongs_to :tax1, :foreign_key => "tax_1", :class_name => "Tax"
   belongs_to :tax2, :foreign_key => "tax_2", :class_name => "Tax"
@@ -25,7 +25,12 @@ class Item < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
-    where("id IN(?)", ids).only_deleted.each { |item| item.recover }
+    where("id IN(?)", ids).only_deleted.each do |item|
+      item.update_attributes({
+      :archive_number => nil,
+      :archived_at => nil,
+      :deleted_at => nil})
+    end
   end
 
   def self.filter params

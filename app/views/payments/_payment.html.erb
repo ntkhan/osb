@@ -1,42 +1,46 @@
 <% if @payments.length > 0 %>
-  <% @payments.each do |payment| %>
-    <tr>
-      <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
-      <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
-      <td class="align_left"><%= payment.client_name %></td>
-      <td class="align_center"><%= payment.payment_method %></td>
-      <td class="align_center"><%= payment.payment_type %></td>
-      <td class="align_center"><%= payment.notes %></td>
-      <td class="align_center"><%= payment.payment_date %></td>
-      <td class="align_center"><%= payment.payment_amount %></td>
+    <% @payments.each do |payment| %>
+        <tr>
+          <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
+          <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
+          <td class="align_left"><%= payment.client_name %></td>
+          <td class="align_center"><%= payment.payment_method %></td>
+          <td class="align_center"><%= payment.payment_type %></td>
+          <td class="align_center"><%= payment.notes %></td>
+          <td class="align_center"><%= payment.payment_date %></td>
+          <td class="align_center"><%= payment.payment_amount %></td>
 
-      <td class="align_center">
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-          edit_payment_path(payment), :class => 'edit_action' %>
-        <%= link_to t('.destroy', :default => "Delete"),
-          payment_path(payment),
-          :method => :delete,
-          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-          :class => 'del_action' %>
+          <td class="align_center">
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_payment_path(payment), :class => 'edit_action' %>
+            <% unless params[:status] == "deleted" %>
+                <%= link_to t('.destroy', :default => "Delete"),
+                            payment_path(payment),
+                            :method => :delete,
+                            :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                            :class => 'del_action' %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+    <tr>
+      <td colspan="9">
+        <div class="paginator">
+          <%= paginate @payments, :remote => true %>
+          <div class="paging_info">
+            <%= page_entries_info @payments %>
+          </div>
+        </div>
       </td>
     </tr>
-  <% end %>
-  <tr>
-    <td colspan="9">
-      <div class="paginator">
-        <%= paginate @payments, :remote => true %>
-        <div class="paging_info">
-          <%= page_entries_info @payments %>
-        </div>
-      </div>
-    </td>
-  </tr>
 <% else %>
-  <tr>
-    <td colspan="9">
-      <div class="no_record_container">You haven't entered any payment yet. Please click on New Payment button to enter new payment.</div>
-    </td>
-  </tr>
+    <tr>
+      <td colspan="9">
+        <div class="no_record_container">You haven't entered any payment yet. Please click on New Payment button to
+          enter new payment.
+        </div>
+      </td>
+    </tr>
 <% end %>
 <tr>
   <td align="center" colspan="9">
