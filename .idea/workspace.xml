@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/payments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/invoice.rb" afterPath="$PROJECT_DIR$/app/models/invoice.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/payment.rb" afterPath="$PROJECT_DIR$/app/models/payment.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboard/index.erb" afterPath="$PROJECT_DIR$/app/views/dashboard/index.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/clients/bulk_actions.js" afterPath="$PROJECT_DIR$/app/views/clients/bulk_actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/bulk_actions.js" afterPath="$PROJECT_DIR$/app/views/invoices/bulk_actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/invoices/index.html.erb" afterPath="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/bulk_actions.js" afterPath="$PROJECT_DIR$/app/views/items/bulk_actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/bulk_actions.js" afterPath="$PROJECT_DIR$/app/views/payments/bulk_actions.js" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,25 +35,61 @@
       <file leaf-file-name="invoices_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="38" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0">
+            <state line="132" column="56" selection-start="4111" selection-end="4111" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
+      <file leaf-file-name="bulk_actions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoices/bulk_actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
+            <state line="9" column="0" selection-start="493" selection-end="537" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile.lock" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Gemfile.lock">
+      <file leaf-file-name="bulk_actions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/clients/bulk_actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="1.018868">
+            <state line="3" column="44" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bulk_actions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/items/bulk_actions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="44" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bulk_actions.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/payments/bulk_actions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="44" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="44" selection-start="1207" selection-end="1207" vertical-scroll-proportion="-16.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="invoice.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="0" selection-start="870" selection-end="870" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -60,7 +98,7 @@
       <file leaf-file-name="payment.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="30" selection-start="909" selection-end="909" vertical-scroll-proportion="0.0">
+            <state line="15" column="11" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -69,7 +107,7 @@
       <file leaf-file-name="payments_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="6" selection-start="2749" selection-end="2749" vertical-scroll-proportion="0.0">
+            <state line="92" column="46" selection-start="2291" selection-end="2291" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -88,30 +126,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/clients_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/items_controller.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/models/invoice.rb" />
-        <option value="$PROJECT_DIR$/app/views/invoices/_invoice.erb" />
-        <option value="$PROJECT_DIR$/app/views/items/_items.html.erb" />
         <option value="$PROJECT_DIR$/app/views/clients/_clients.html.erb" />
         <option value="$PROJECT_DIR$/app/views/payments/_payment.html.erb" />
         <option value="$PROJECT_DIR$/app/models/item.rb" />
         <option value="$PROJECT_DIR$/app/models/client.rb" />
         <option value="$PROJECT_DIR$/app/models/payment.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/style.css.scss" />
-        <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/Gemfile.lock" />
+        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/invoices/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/invoice.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/invoices/bulk_actions.js" />
+        <option value="$PROJECT_DIR$/app/views/clients/bulk_actions.js" />
+        <option value="$PROJECT_DIR$/app/views/items/bulk_actions.js" />
+        <option value="$PROJECT_DIR$/app/views/payments/bulk_actions.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-5" />
+    <option name="y" value="24" />
     <option name="width" value="1536" />
-    <option name="height" value="906" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -163,6 +201,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Controllers" />
               <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osb" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osb" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.folders.ControllersFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PaymentsController" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.ControllerClassNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -454,7 +510,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-5" width="1536" height="906" extended-state="6" />
+    <frame x="65" y="24" width="1536" height="877" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -530,35 +586,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/payments/filter_payments.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="106" selection-start="197" selection-end="197" vertical-scroll-proportion="-0.6666667" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/items_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="28" selection-start="158" selection-end="158" vertical-scroll-proportion="0.025069637" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/clients_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="131" selection-end="131" vertical-scroll-proportion="0.025069637" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/items/_items.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="57" selection-start="777" selection-end="818" vertical-scroll-proportion="-8.666667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/clients/_clients.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="12" selection-start="614" selection-end="655" vertical-scroll-proportion="-7.3333335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/payments/_payment.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="21" selection-start="1388" selection-end="1388" vertical-scroll-proportion="0.53846157">
@@ -569,13 +596,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/invoices/_invoice.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="53" selection-start="1218" selection-end="1259" vertical-scroll-proportion="0.5286713">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="210" selection-start="402" selection-end="446" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -594,13 +614,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="38" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/style.css.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="522" column="25" selection-start="10047" selection-end="10047" vertical-scroll-proportion="0.51054853">
@@ -608,30 +621,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
+    <entry file="file://$PROJECT_DIR$/Gemfile.lock">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="30" selection-start="909" selection-end="909" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="6" selection-start="2749" selection-end="2749" vertical-scroll-proportion="0.0">
+        <state line="42" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="1.018868">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
+        <state line="38" column="0" selection-start="866" selection-end="866" vertical-scroll-proportion="0.46630728">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile.lock">
+    <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="1.018868">
+        <state line="92" column="46" selection-start="2291" selection-end="2291" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="11" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="44" selection-start="1207" selection-end="1207" vertical-scroll-proportion="-16.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/invoice.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="870" selection-end="870" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="56" selection-start="4111" selection-end="4111" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/invoices/bulk_actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="493" selection-end="537" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/clients/bulk_actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="44" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/items/bulk_actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="44" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/payments/bulk_actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="44" selection-start="44" selection-end="44" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

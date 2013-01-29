@@ -96,7 +96,7 @@ class PaymentsController < ApplicationController
     redirect_to(payments_url,:notice => 'The payment has been recorded successfully.')
     #redirect_to payments_url
   end
-  
+
   def bulk_actions
     if params[:archive]
       Payment.archive_multiple(params[:payment_ids])
