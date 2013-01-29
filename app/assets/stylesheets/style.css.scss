@@ -6,7 +6,7 @@
 */
 
 /*Custom fonts CSS Starts*/
-@import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
+    @import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
 /*Custom fonts CSS Starts*/
 
 /*General CSS Starts*/
@@ -123,7 +123,7 @@ h1.secondary.small{
     cursor: pointer;
     text-decoration: none;
 }
-#nav .select li:hover a, #nav .select li a.active {
+/*#nav .select li:hover a,*/ #nav .select li a.active {
     display:block;
     background: url(/assets/nav_hover.png) no-repeat center;
     height: 43px;
@@ -134,7 +134,7 @@ h1.secondary.small{
     margin:0;
     padding-left: 26%;
     list-style:none;
-    width: 100%;
+    width: 74%;
     background: url(/assets/sub_bg.png) repeat-x bottom;
 }
 #nav .select li:hover .sub, #nav .select li a.active + .sub {
@@ -157,10 +157,15 @@ h1.secondary.small{
     line-height: 34px;
     min-width: 39px;
 }
+
 #nav .select li:hover .sub li a:hover, #nav .select li .sub li a.active  {
     display: block;
     color:#00ace5;
+    /*background: url(/assets/sub_hover.png) no-repeat bottom center;*/
+}
+#nav .select li .sub li a.active{
     background: url(/assets/sub_hover.png) no-repeat bottom center;
+
 }
 /* Navigation CSS Ends */
 
