@@ -14,8 +14,6 @@ Osb::Application.routes.draw do
 
   match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
-  match "items/load_item_data" => "items#load_item_data"
-
   resources :clients do
     collection do
       get 'filter_clients'
@@ -40,6 +38,7 @@ Osb::Application.routes.draw do
     collection do
       get 'filter_items'
       post 'bulk_actions'
+      post 'load_item_data'
     end
   end
 
