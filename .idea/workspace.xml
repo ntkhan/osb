@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56fd9654-c3ba-4d0a-98c5-3c08a99c4316" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/invoice.rb" afterPath="$PROJECT_DIR$/app/models/invoice.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/payment.rb" afterPath="$PROJECT_DIR$/app/models/payment.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboard/index.erb" afterPath="$PROJECT_DIR$/app/views/dashboard/index.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" afterPath="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/payments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
     </list>
     <ignored path="osb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,24 +34,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Gemfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gemfile.lock" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Gemfile.lock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="1.018868">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="payment.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -66,10 +43,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="payments_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="payments_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="6" selection-start="2749" selection-end="2749" vertical-scroll-proportion="0.0">
+            <state line="104" column="26" selection-start="2776" selection-end="2776" vertical-scroll-proportion="0.5555556">
               <folding />
             </state>
           </provider>
@@ -101,9 +78,9 @@
         <option value="$PROJECT_DIR$/app/models/payment.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/style.css.scss" />
         <option value="$PROJECT_DIR$/app/controllers/invoices_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/Gemfile.lock" />
+        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
       </list>
     </option>
   </component>
@@ -594,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="38" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/style.css.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="522" column="25" selection-start="10047" selection-end="10047" vertical-scroll-proportion="0.51054853">
@@ -615,23 +585,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
+    <entry file="file://$PROJECT_DIR$/Gemfile.lock">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="6" selection-start="2749" selection-end="2749" vertical-scroll-proportion="0.0">
+        <state line="42" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="1.018868">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="866" selection-end="866" vertical-scroll-proportion="0.0">
+        <state line="38" column="0" selection-start="866" selection-end="866" vertical-scroll-proportion="0.46630728">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile.lock">
+    <entry file="file://$PROJECT_DIR$/app/controllers/invoices_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1074" selection-end="1074" vertical-scroll-proportion="1.018868">
+        <state line="18" column="38" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="26" selection-start="2776" selection-end="2776" vertical-scroll-proportion="0.5555556">
           <folding />
         </state>
       </provider>
