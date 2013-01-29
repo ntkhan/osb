@@ -5,7 +5,7 @@ jQuery ->
     # Validate client
   jQuery("form#new_item, form.edit_item").submit ->
     flag = true
-    if jQuery("#item_item_name").val() is ""
+    if jQuery.trim(jQuery("#item_item_name").val()) is ""
       applyPopover(jQuery("#item_item_name"),"top","Item name is required")
       flag = false
     flag

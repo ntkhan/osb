@@ -32,6 +32,7 @@ gem "acts_as_paranoid", "~>0.4.0"
 gem "activerecord-mysql-adapter"
 gem 'delayed_job_active_record'
 gem "daemons"
+gem "pdfkit"
 group :development do
   gem 'better_errors'
   gem "binding_of_caller"

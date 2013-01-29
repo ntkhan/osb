@@ -1,4 +1,6 @@
 <%- model_class = Invoice -%>
+<p id="pdf_link"><%= link_to "Download Invoice (PDF)", :controller=>'invoices',:action=>'invoice_pdf',:id=>@invoice.id,:format => "pdf" %></p>
+
 <% unless @invoice %>
 <div class="invoice-page-header">
   Invoice URL seems invalid. Please check and try again.
