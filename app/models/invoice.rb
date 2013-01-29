@@ -7,7 +7,7 @@ class Invoice < ActiveRecord::Base
   has_many :payments
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
-  paginates_per 4
+  paginates_per 10
 
   class << self
     def get_next_invoice_number user_id
