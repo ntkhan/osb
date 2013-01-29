@@ -1,7 +1,8 @@
 # All Devise controllers are inherited from here.
 class DeviseController < Devise.parent_controller.constantize
   include Devise::Controllers::ScopedViews
-
+  layout "login"
+  
   helper DeviseHelper
 
   helpers = %w(resource scope_name resource_name signed_in_resource
