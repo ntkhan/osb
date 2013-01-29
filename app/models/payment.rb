@@ -111,4 +111,8 @@ class Payment < ActiveRecord::Base
         self.only_deleted.page(params[:page])
     end
   end
+  
+  def notify_client
+    PaymentMailer.payment_notification_email(self.invoice.client, self.invoice.invoice_number, self.payment_amount).deliver if self.send_payment_notification
+  end
 end

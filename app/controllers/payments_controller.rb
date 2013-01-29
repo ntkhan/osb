@@ -91,16 +91,12 @@ class PaymentsController < ApplicationController
   def update_individual_payment
     params[:payments].each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
-      if  pay[:send_payment_notification]
-        invoice = Invoice.find(pay[:invoice_id])
-        PaymentMailer.payment_notification_email(invoice.client,invoice.invoice_number, pay[:payment_amount]).deliver
-      end
-      payment = Payment.new(pay)
-      payment.save
+      Payment.create!(pay).notify_client
     end
     redirect_to(payments_url,:notice => 'The payment has been recorded successfully.')
     #redirect_to payments_url
   end
+  
   def bulk_actions
     if params[:archive]
       Payment.archive_multiple(params[:payment_ids])
