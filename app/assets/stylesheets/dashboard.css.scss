@@ -86,10 +86,13 @@
 	.day_session_content_detail ul li{
 		float: left;
 	}
-	.day_session_title{
+	.day_session_title a{
 		color: #00ace5;
 		padding: 0 5px 0 0;
 	}
+        .day_session_title a:hover{
+                text-decoration: underline;
+        }
 	.day_session_amount{
 		color: #464646;
 		padding: 0 6px 0 0;
@@ -149,15 +152,15 @@
 	}
 	.getting_start ul li{
 		list-style: square;
-		color: #464646;
+		color: #00bde5;
 	}
 	.getting_start ul li a{
 		display: block;
-		color: #959595;
+		color: #00bde5;
 		text-decoration: none;
 	}
 	.getting_start ul li a:hover, .getting_start ul li:hover{
-		color: #00bde5;
+		text-decoration: underline;
 	}
 	/*Content Left Css Ends*/
 
@@ -220,4 +223,7 @@
 		color: #00bde5;
 		text-decoration: none;
 	}
+        .graff_detail a:hover{
+                text-decoration: underline;
+        }
 }

@@ -18,10 +18,10 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   #gem 'therubyracer', :platforms => :ruby
-
+  gem 'twitter-bootstrap-rails'
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'twitter-bootstrap-rails'
+
 gem 'active_link_to'
 gem 'jquery-rails'
 gem "nested_form"
