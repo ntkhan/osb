@@ -10,7 +10,7 @@
     <% @invoices.each do |invoice| %>
         <tr>
           <td class="align_center"> <%= check_box_tag "invoice_ids[]", invoice.id, false, :id => "invoice_#{invoice.id}" %></td>
-          <td class="align_center"><%= link_to invoice.invoice_number, invoice_path(invoice) %></td>
+          <td class="align_center"><%= link_to invoice.invoice_number, invoice_path(invoice), :class => "invoices_link" %></td>
           <td class="align_left"><%= invoice.client.organization_name %></td>
           <td class="align_left"><%= invoice.description %></td>
           <td class="align_right">$<%= number_with_precision(invoice.invoice_total, :precision => 2) %></td>
