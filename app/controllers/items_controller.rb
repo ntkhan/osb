@@ -103,11 +103,11 @@ class ItemsController < ApplicationController
     elsif params[:recover_archived]
       Item.recover_archived(params[:item_ids])
       @items = Item.archived.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from archived"
     elsif params[:recover_deleted]
       Item.recover_deleted(params[:item_ids])
       @items = Item.only_deleted.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from deleted"
     end
     respond_to { |format| format.js }
   end

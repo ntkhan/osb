@@ -3,9 +3,10 @@ jQuery('tbody#invoice_body').hide(200, function(){jQuery(this).html('<%= escape_
 <% status = params[:status]%>
 jQuery('.top_links').hide();
  <%if status == "active" %>
-    jQuery('.archive,.destroy').show();
+    jQuery('.archive,.destroy,.payment').show();
 <% elsif status == "archived"%>
-    jQuery('.recover_archived,.destroy').show();
+    jQuery('.recover_archived,.destroy,.payment').show();
 <% elsif status == "deleted"%>
-    jQuery('.recover_deleted').show();
+    jQuery('.recover_deleted,.payment').show();
 <%end%>
+jQuery('#select_all').attr('checked',false);

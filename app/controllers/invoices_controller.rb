@@ -18,16 +18,19 @@ class InvoicesController < ApplicationController
   # GET /invoices/1.json
   def show
     @invoice = Invoice.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @invoice }
     end
+  end
+  
+  def invoice_pdf
+    @invoice = Invoice.find(params[:id])
+    render :layout=> "pdf_mode"
   end
 
   def preview
-    id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue id = nil
-    @invoice = id.blank? ? nil : Invoice.find(id)
+    @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
+    @invoice = @id.blank? ? nil : Invoice.find(@id)
   end
 
   # GET /invoices/new
@@ -76,7 +79,7 @@ class InvoicesController < ApplicationController
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
         format.json { head :no_content }
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => 'Your Invoice has been updated successfully.')
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
         return
       else
         format.html { render :action => "edit" }
@@ -118,11 +121,11 @@ class InvoicesController < ApplicationController
     elsif params[:recover_archived]
       Invoice.recover_archived(ids)
       @invoices = Invoice.archived.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from archived"
     elsif params[:recover_deleted]
       Invoice.recover_deleted(ids)
       @invoices = Invoice.only_deleted.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from deleted"
     elsif params[:payment]
       unless Invoice.paid_invoices(ids).present?
         Invoice.paid_full(ids)
@@ -137,6 +140,10 @@ class InvoicesController < ApplicationController
 
   def filter_invoices
     @invoices = Invoice.filter(params)
+  end
+
+  def duplicate_invoice
+    new_invoice = Invoice.find(params[:id]).duplicate_invoice
   end
 
   private

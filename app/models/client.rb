@@ -10,6 +10,10 @@ class Client < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def last_invoice
+    self.invoices.last.id unless self.invoices.blank?
+  end
+
   def self.multiple_clients ids
     where("id IN(?)", ids)
   end

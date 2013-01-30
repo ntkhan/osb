@@ -9,8 +9,8 @@ jQuery ->
     container = elem.parents("tr.fields")
     cost = jQuery(container).find("input.cost").val()
     qty = jQuery(container).find("input.qty").val()
-    cost = 0 if not cost? or cost is ""
-    qty = 0 if not qty? or qty is ""
+    cost = 0 if not cost? or cost is "" or not jQuery.isNumeric(cost)
+    qty = 0 if not qty? or qty is "" or not jQuery.isNumeric(qty)
     line_total = ((parseFloat(cost) * parseFloat(qty))).toFixed(2)
     jQuery(container).find(".line_total").text(line_total)
 
@@ -53,28 +53,27 @@ jQuery ->
     (subtotal * (parseFloat(discount_percentage)/100))
 
   # Update line and grand total if line item fields are changed
-   jQuery("input.cost, input.qty").live "blur", ->
+  jQuery("input.cost, input.qty").live "blur", ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
 
-   jQuery("input.cost, input.qty").live "keyup", ->
+  jQuery("input.cost, input.qty").live "keyup", ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
 #     jQuery(this).popover "hide"
 
   # Update line and grand total when tax is selected from dropdown
-   jQuery("select.tax1, select.tax2").live "change", ->
+  jQuery("select.tax1, select.tax2").live "change", ->
      updateInvoiceTotal()
 
   # Prevent form submission if enter key is press in cost,quantity or tax inputs.
-   jQuery("input.cost, input.qty").live "keypress", (e) ->
-#     jQuery(this).popover "hide"
+  jQuery("input.cost, input.qty").live "keypress", (e) ->
      if e.which is 13
        e.preventDefault()
        false
 
   # Load Items data when an item is selected from dropdown list
-   jQuery(".invoice_grid_fields select.items_list").live "change", ->
+  jQuery(".invoice_grid_fields select.items_list").live "change", ->
      # Add an empty line item row at the end if last item is changed.
      elem = jQuery(this)
      addLineItemRow(elem)
@@ -119,18 +118,18 @@ jQuery ->
      updateInvoiceTotal()
 
   # Don't allow nagetive value for discount
-  jQuery("#invoice_discount_percentage").keydown (e) ->
+  jQuery("#invoice_discount_percentage,.qty").keydown (e) ->
      if e.keyCode is 109 or e.keyCode is 13
        e.preventDefault()
        false
 
   # Don't allow paste and right click in discount field
-  jQuery("#invoice_discount_percentage").bind "paste contextmenu", (e) ->
+  jQuery("#invoice_discount_percentage,.qty").bind "paste contextmenu", (e) ->
      e.preventDefault()
 
   # Add date picker to invoice date field
   jQuery("#invoice_invoice_date").datepicker
-     dateFormat: 'yy-mm-dd'
+    dateFormat: 'yy-mm-dd'
 
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
@@ -167,13 +166,18 @@ jQuery ->
             applyPopover(cost,"left","Enter item cost")
           else if cost.val() <= 0
             applyPopover(cost,"left","Item cost should be greater then 0")
+          else if not jQuery.isNumeric(cost.val())
+            applyPopover(cost,"left","Enter valid Item cost")
           else hidePopover(cost)
+
           if qty.val() is ""
             applyPopover(qty,"right","Enter item quantity")
           else if qty.val() <= 0
             applyPopover(qty,"right","Quantity should be greater then 0")
+          else if not jQuery.isNumeric(qty.val())
+            applyPopover(qty,"left","Enter valid Item quantity")
           else hidePopover(qty)
-          if cost.val() is "" or cost.val() <= 0 or qty.val() is "" or qty.val() <= 0 then flag = false
+          if cost.val() is "" or cost.val() <= 0 or not jQuery.isNumeric(cost.val()) or qty.val() is "" or qty.val() <= 0 or not jQuery.isNumeric(qty.val()) then flag = false
     flag
 
   applyPopover = (elem,position,message) ->
@@ -219,4 +223,20 @@ jQuery ->
   jQuery(".invoice_action_links input[type=submit]").click ->
     jQuery(this).parents("FORM:eq(0)").find("table.table_listing").find(':checkbox').attr()
 
-
+  # Load last invoice for client if any
+  jQuery("#invoice_client_id").change ->
+    client_id = jQuery(this).val()
+    jQuery("#last_invoice").hide()
+    if not client_id? or client_id isnt ""
+      jQuery.ajax '/clients/get_last_invoice',
+      type: 'POST'
+      data: "id=" + client_id
+      dataType: 'html'
+      error: (jqXHR, textStatus, errorThrown) ->
+        alert "Error: #{textStatus}"
+      success: (id, textStatus, jqXHR) ->
+        id = jQuery.trim(id)
+        if id isnt ""
+          jQuery("#last_invoice").show().find("a").attr("href","/invoices/duplicate_invoice/#{id}")
+        else
+          jQuery("#last_invoice").hide()

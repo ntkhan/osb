@@ -1,12 +1,12 @@
 <%- model_class = Invoice -%>
 <div style="float: left; width: 100%;">
-<%= link_to '+ NEW INVOICE',
-            new_invoice_path,
-            :class => 'new_btn btn_right btn_small' %>
-<div class="page-header header_with_margins">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
-<%= form_tag "invoices/bulk_actions", :remote => true do -%>
+  <%= link_to '+ NEW INVOICE',
+    new_invoice_path,
+    :class => 'new_btn btn_right btn_small' %>
+  <div class="page-header header_with_margins">
+    <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  </div>
+  <%= form_tag "invoices/bulk_actions", :remote => true do -%>
     <div class="action_links_wrapper">
       <div class="invoice_action_links">
         <p>
@@ -19,39 +19,42 @@
           <a href="#">Print</a>
           <a href="#">Send</a>
           <span>|</span>
-          <%= submit_tag "Enter payment", :name => "payment", :class => "top_links" %>
-          <a href="#">Pay Online</a>
+          <%= submit_tag "Enter payment", :name => "payment", :class => "top_links payment" %>
+          <!--<a href="#">Pay Online</a>-->
         </p>
       </div>
       <div class="invoice_search">
-        <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
+  <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
         <div class="active_links" id="active_links">
-            <%= render 'filter_links' %>
+          <%= render 'filter_links' %>
         </div>
       </div>
     </div>
     <table class="table table_listing invoice_listing">
       <thead>
-      <tr>
-        <th class="align_center"><%= check_box_tag 'select_all' %></th>
-        <th class="align_center">Invoice</th>
-        <th class="align_left" width=120>Client</th>
-        <th class="align_left">Description</th>
-        <th class="align_right">Total</th>
-        <th class="align_center">Date</th>
-        <th class="align_center">Status</th>
-        <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
-      </tr>
+        <tr>
+          <th class="align_center"><%= check_box_tag 'select_all' %></th>
+          <th class="align_center">Invoice</th>
+          <th class="align_left" width=120>Client</th>
+          <th class="align_left">Description</th>
+          <th class="align_right">Total</th>
+          <th class="align_center">Date</th>
+          <th class="align_center">Status</th>
+          <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
       </thead>
       <tbody id="invoice_body">
-      <%= render 'invoice' %>
+        <%= render 'invoice' %>
       </tbody>
     </table>
     <div style="float: left;width: 100%; text-align: center;">
       <%= link_to t('.new', :default => t("helpers.links.new")),
-                  new_invoice_path,
-                  :class => 'new_btn' %>
+        new_invoice_path,
+        :class => 'new_btn' %>
     </div>
-<% end %>
+  <% end %>
 
-<div>
+  <div>
+    <%# b = "" %>
+    <%# a = open(File.join(Rails.root, 'app', 'assets', '/stylesheets/','application.css'), 'rb') {|f| b += f.read} %>
+    <%#= a %>

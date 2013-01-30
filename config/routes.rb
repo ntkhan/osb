@@ -18,6 +18,7 @@ Osb::Application.routes.draw do
     collection do
       get 'filter_clients'
       post 'bulk_actions'
+      post 'get_last_invoice'
     end
   end
 
@@ -54,10 +55,10 @@ Osb::Application.routes.draw do
 
   resources :invoices do
     resources :invoice_line_items
-    #get 'archive_multiple'
     collection do
       get 'filter_invoices'
       post 'bulk_actions'
+      post 'duplicate_invoice'
     end
   end
 
@@ -123,11 +124,11 @@ Osb::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => redirect("/payments")
+  root :to => redirect("/dashboard")
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  match ':controller(/:action(/:id))(.:format)'
 end
