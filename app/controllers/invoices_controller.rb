@@ -141,6 +141,11 @@ class InvoicesController < ApplicationController
   def filter_invoices
     @invoices = Invoice.filter(params)
   end
+
+  def duplicate_invoice
+    new_invoice = Invoice.find(params[:id]).duplicate_invoice
+  end
+
   private
   def choose_layout
     action_name == 'preview' ? "preview_mode" : "application"

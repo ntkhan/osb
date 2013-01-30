@@ -98,16 +98,21 @@ class ClientsController < ApplicationController
     elsif params[:recover_archived]
       Client.recover_archived(params[:client_ids])
       @clients = Client.archived.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from archived"
     elsif params[:recover_deleted]
       Client.recover_deleted(params[:client_ids])
       @clients = Client.only_deleted.page(params[:page])
-      @action = "recovered"
+      @action = "recovered from deleted"
     end
     respond_to { |format| format.js }
   end
 
   def filter_clients
     @clients = Client.filter(params)
+  end
+
+  def get_last_invoice
+    invoice_id = Client.find(params[:id]).last_invoice
+    render :text => invoice_id
   end
 end

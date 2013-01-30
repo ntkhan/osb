@@ -18,6 +18,7 @@ Osb::Application.routes.draw do
     collection do
       get 'filter_clients'
       post 'bulk_actions'
+      post 'get_last_invoice'
     end
   end
 
@@ -54,10 +55,10 @@ Osb::Application.routes.draw do
 
   resources :invoices do
     resources :invoice_line_items
-    #get 'archive_multiple'
     collection do
       get 'filter_invoices'
       post 'bulk_actions'
+      post 'duplicate_invoice'
     end
   end
 

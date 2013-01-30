@@ -20,8 +20,9 @@ group :assets do
   #gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails'
 end
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-datepicker-rails'
 gem 'active_link_to'
 gem 'jquery-rails'
 gem "nested_form"
