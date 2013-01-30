@@ -34,6 +34,14 @@ class Invoice < ActiveRecord::Base
     new_invoice
   end
 
+  def use_as_template
+    invoice = self.dup
+    invoice.invoice_number = Invoice.get_next_invoice_number(nil)
+    invoice.invoice_date = Date.today
+    invoice.invoice_line_items << self.invoice_line_items.map { |line_item| line_item.dup }
+    invoice
+  end
+
   def self.multiple_invoices ids
     where("id IN(?)", ids)
   end
