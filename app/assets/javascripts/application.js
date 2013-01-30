@@ -19,6 +19,7 @@
 //= require chosen.jquery
 //= require jquery.css3caching.js
 //= require jqamp-ui-spinner.min.js
+//= require invoices.js.coffee
 
 jQuery(function(){
     //override default behavior of inserting new subforms into form    
