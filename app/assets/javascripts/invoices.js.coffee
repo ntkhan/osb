@@ -128,8 +128,8 @@ jQuery ->
      e.preventDefault()
 
   # Add date picker to invoice date field
-  jQuery("#invoice_invoice_date").datepicker
-    dateFormat: 'yy-mm-dd'
+#  jQuery("#invoice_invoice_date").datepicker
+#    dateFormat: 'yy-mm-dd'
 
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
