@@ -21,7 +21,7 @@ class Payment < ActiveRecord::Base
       self.add_credit_payment invoice.id, diff
       return_v = c_pay - diff
     elsif diff < 0
-      status = invoice.status == 'draft' ? 'draft-partial' : 'partial'
+      status = (invoice.status == 'draft' || invoice.status == 'draft-partial') ? 'draft-partial' : 'partial'
       return_v = c_pay
     else
       status = 'paid'
