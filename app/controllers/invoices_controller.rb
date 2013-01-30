@@ -144,6 +144,7 @@ class InvoicesController < ApplicationController
 
   def duplicate_invoice
     new_invoice = Invoice.find(params[:id]).duplicate_invoice
+    redirect_to edit_invoice_path(new_invoice), :notice => "Last invoice is used as template"
   end
 
   private
