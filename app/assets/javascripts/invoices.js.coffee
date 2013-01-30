@@ -60,7 +60,7 @@ jQuery ->
   jQuery("input.cost, input.qty").live "keyup", ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
-#     jQuery(this).popover "hide"
+     #jQuery(this).popover "hide"
 
   # Update line and grand total when tax is selected from dropdown
   jQuery("select.tax1, select.tax2").live "change", ->
