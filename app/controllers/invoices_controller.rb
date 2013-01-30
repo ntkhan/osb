@@ -22,10 +22,10 @@ class InvoicesController < ApplicationController
       format.html # show.html.erb
     end
   end
-  
+
   def invoice_pdf
     @invoice = Invoice.find(params[:id])
-    render :layout=> "pdf_mode"
+    render :layout => "pdf_mode"
   end
 
   def preview
@@ -36,9 +36,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
-    @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
-    3.times { @invoice.invoice_line_items.build() }
-
+    unless params[:id]
+      @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
+      3.times { @invoice.invoice_line_items.build() }
+    else
+      @invoice = Invoice.find(params[:id]).use_as_template
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @invoice }
@@ -79,7 +82,7 @@ class InvoicesController < ApplicationController
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
         format.json { head :no_content }
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => 'Your Invoice has been updated successfully.')
         return
       else
         format.html { render :action => "edit" }
@@ -140,11 +143,6 @@ class InvoicesController < ApplicationController
 
   def filter_invoices
     @invoices = Invoice.filter(params)
-  end
-
-  def duplicate_invoice
-    new_invoice = Invoice.find(params[:id]).duplicate_invoice
-    redirect_to edit_invoice_path(new_invoice), :notice => "Last invoice is used as template"
   end
 
   private

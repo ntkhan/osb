@@ -2,7 +2,7 @@
 
 
 <h1>Sign in to Open<span>Source</span>Billing</h1>
-
+  <div class="notice" style=""><%= flash[:alert] %></div>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 <div class="form_title login_title"><!--<%= f.label :email %>-->
   <%=  f.email_field :email, :autofocus => true, :placeholder => "username", :id => "login_email", :title => "Enter your username" %></div>
@@ -25,10 +25,7 @@
 <div class="login_footer">
 
   <a class="site_link" href="#">www.opensourcebilling.org</a>
-<<<<<<< HEAD
-  <p class="team_link">powered by: <a href="#">vteams.com</a></p>
-=======
+
   <p class="team_link">powered by:<a href="http://vteams.com"> vteams.com</a></p>
->>>>>>> 3d384a5d110c1f64089ec676420ca2cc7e047db7
 
 </div>

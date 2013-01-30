@@ -237,6 +237,6 @@ jQuery ->
       success: (id, textStatus, jqXHR) ->
         id = jQuery.trim(id)
         if id isnt ""
-          jQuery("#last_invoice").show().find("a").attr("href","/invoices/duplicate_invoice/#{id}")
+          jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
         else
           jQuery("#last_invoice").hide()
