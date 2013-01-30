@@ -110,4 +110,9 @@ class ClientsController < ApplicationController
   def filter_clients
     @clients = Client.filter(params)
   end
+
+  def get_last_invoice
+    invoice_id = Client.find(params[:id]).last_invoice
+    render :text => invoice_id
+  end
 end

@@ -7,6 +7,7 @@
       <div class="controls">
         <%=collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""},{"data-placeholder" => "Select a client...", :class => "medium chzn-select"} %><br />
         <span class="hint_text">client you want to send invoice</span>
+        <span id="last_invoice" style="display: none;"><a href="#">Use as template</a></span>
       </div>
     </div>
     <div class="control-group">
