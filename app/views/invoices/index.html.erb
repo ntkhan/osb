@@ -1,8 +1,9 @@
 <%- model_class = Invoice -%>
 <div style="float: left; width: 100%;">
-  <%= link_to '+ NEW INVOICE',
+  
+  <%= link_to (content_tag(:span, "+") + 'NEW INVOICE'),
     new_invoice_path,
-    :class => 'new_btn btn_right btn_small' %>
+    :class => 'new_btn btn_right btn_plus' %>
   <div class="page-header header_with_margins">
     <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
   </div>
