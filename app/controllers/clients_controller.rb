@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
+  include ClientsHelper
   def index
     @clients = Client.unarchived.page(params[:page])
 
@@ -47,7 +48,8 @@ class ClientsController < ApplicationController
       if @client.save
         #format.html { redirect_to @client, notice: 'Your client has been created successfully.' }
         format.json { render json: @client, status: :created, location: @client }
-        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => 'Your client has been created successfully.')
+        new_client_message = new_client(@client.id)
+        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => new_client_message)
         return
       else
         format.html { render action: "new" }

@@ -763,3 +763,8 @@ color:#898989;
 #login_email:-ms-input-placeholder, #login_pswd:-ms-input-placeholder {
   color: #9B9B9B;
 }
+.alert{
+  ul li{
+    list-style: outside;
+  }
+}
