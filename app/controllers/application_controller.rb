@@ -1,7 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
+  before_filter :_reload_libs #reload libs on every request for dev environment only
 
+  #reload libs on every request for dev environment only
+  def _reload_libs
+    if defined? RELOAD_LIBS
+      RELOAD_LIBS.each do |lib|
+        require_dependency lib
+      end
+    end
+  end
 
   def after_sign_in_path_for(user)
     dashboard_path
