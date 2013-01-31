@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   #before_filter :authenticate_user!
   # GET /items
   # GET /items.json
+  include ItemsHelper
   def index
     @items = Item.unarchived.page(params[:page])
 
@@ -25,8 +26,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.json
   def new
-    @item = Item.new
-
+    @item = params[:id] ? Item.find_by_id(params[:id]).dup : Item.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @item }
@@ -48,13 +48,19 @@ class ItemsController < ApplicationController
       if @item.save
         #format.html { redirect_to @item, notice: 'Your item has been created successfully.' }
         format.json { render :json => @item, :status => :created, :location => @item }
-        redirect_to({:action => "edit", :controller => "items", :id => @item.id}, :notice => 'Your item has been created successfully.')
+        new_item_message = new_item(@item.id)
+        redirect_to({:action => "edit", :controller => "items", :id => @item.id}, :notice => new_item_message)
         return
       else
         format.html { render :action => "new" }
         format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  def duplicate_item
+    new_item = Item.find_by_id(params[:item_id]).dup
+    redirect_to new_item_path(new_item)
   end
 
   # PUT /items/1
