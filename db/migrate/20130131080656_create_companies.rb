@@ -1,6 +1,6 @@
-class CreateCompanyProfiles < ActiveRecord::Migration
+class CreateCompanies < ActiveRecord::Migration
   def change
-    create_table :company_profiles do |t|
+    create_table :companies do |t|
       t.string :org_name
       t.string :country
       t.string :street_address_1
@@ -16,7 +16,7 @@ class CreateCompanyProfiles < ActiveRecord::Migration
       t.string :time_zone
       t.boolean :auto_dst_adjustment
       t.string :currency_code
-      t.string :currecy_symbol
+      t.string :currency_symbol
       t.string :admin_first_name
       t.string :admin_last_name
       t.string :admin_email

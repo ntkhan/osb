@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128064651) do
+ActiveRecord::Schema.define(:version => 20130131081133) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "company_profiles", :force => true do |t|
+  create_table "companies", :force => true do |t|
     t.string   "org_name"
     t.string   "country"
     t.string   "street_address_1"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.string   "time_zone"
     t.boolean  "auto_dst_adjustment"
     t.string   "currency_code"
-    t.string   "currecy_symbol"
+    t.string   "currency_symbol"
     t.string   "admin_first_name"
     t.string   "admin_last_name"
     t.string   "admin_email"
@@ -84,6 +84,13 @@ ActiveRecord::Schema.define(:version => 20130128064651) do
     t.string   "admin_password"
     t.datetime "created_at",                                                 :null => false
     t.datetime "updated_at",                                                 :null => false
+  end
+
+  create_table "company_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|

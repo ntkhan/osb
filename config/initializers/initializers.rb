@@ -1,3 +1,4 @@
+# encoding: UTF-8
 COUNTRY_LIST = ["Afghanistan",
   "Albania",
   "Algeria",
@@ -245,3 +246,13 @@ COMPANY_SIZE = ["1-10 employees",
   "101-500 employees",
   "Over 500 employees"]
 PAYMENT_METHODS = ["Check","Bank Transfer","Credit","Cash","Debit"]
+
+CURRENCY_CODE = [
+  ["PKR Pakistan Rupee","PKR"],
+  ["USD United States Dollar","USD"],
+  ["CNY China Yuan Renminbi","CNY"],
+  ["GBP United Kingdom Pound","GBP"],
+  ["EUR Euro Member Countries","EUR"],
+  ["SAR Saudi Arabia Riyal","SAR"]
+  ]
+CURRENCY_SYMBOL = {"PKR"=>"Rs","USD"=>"$","CNY"=>"¥","GBP"=>"£","EUR"=>"€","SAR"=>"﷼"}

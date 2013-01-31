@@ -14,9 +14,9 @@
       <td class="invoice"><%= inv.invoice_number %></td>
       <td><%= inv.description %></td>
       <td><%= inv.client.organization_name %></td>
-      <td class="ta_right currency no-sort"><%= inv.invoice_total %><span class="tt"> PKR</span></td>
+      <td class="ta_right currency no-sort"><%= inv.invoice_total %><span class="tt"> <%= current_user.currency_code %></span></td>
       <td><%= "2013-01-01" %></td>
-      <td class="ta_center">
+      <td class="align_center <%= inv.status %>">
         <span class="invoice-status invoice-sent">
           <%= inv.status %>
         </span>

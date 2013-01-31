@@ -13,14 +13,14 @@ end
             <td class="invoice_detail" rowspan="<%= rowspan %>">
               <ul>
                 <li><h1 class="secondary small">Invoice#<%=h payment.invoice.invoice_number %></h1></li>
-                <li><h1 class="green">Rs. <%=h payment.invoice.invoice_total %></h1></li>
+                <li><h1 class="green"><%= current_user.currency_symbol %> <%=h payment.invoice.invoice_total %></h1></li>
                 <li class="invoice_rank"><%= payment.client_name %></li>
                 <li class="invoice_rank person"><%= payment.client_full_name %></li>
               </ul>
             </td>
             <td class="form_title invoice">
               <%= f.hidden_field :invoice_id%>
-              <label for="payments_<%= index%>_payment_amount">Payment (PKR)</label>
+              <label for="payments_<%= index%>_payment_amount">Payment (<%= current_user.currency_code %>)</label>
             </td>
             <td><%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :class => "small invoice",:value=>''%></td>
             <td class="form_field" colspan="2">
