@@ -60,7 +60,7 @@ jQuery ->
   jQuery("input.cost, input.qty").live "keyup", ->
      updateLineTotal(jQuery(this))
      updateInvoiceTotal()
-#     jQuery(this).popover "hide"
+     #jQuery(this).popover "hide"
 
   # Update line and grand total when tax is selected from dropdown
   jQuery("select.tax1, select.tax2").live "change", ->
@@ -237,6 +237,6 @@ jQuery ->
       success: (id, textStatus, jqXHR) ->
         id = jQuery.trim(id)
         if id isnt ""
-          jQuery("#last_invoice").show().find("a").attr("href","/invoices/duplicate_invoice/#{id}")
+          jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
         else
           jQuery("#last_invoice").hide()

@@ -123,7 +123,23 @@
 		padding: 0 19px 17px 19px;
 		text-align: left;
 	}
-	.osb_content a{
+        .osb_content a{
+                background: #00BDE5;
+                border-radius: 4px;
+                color: #FFFFFF;
+                display: inline-block;
+                font-family: "Dosis",sans-serif;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                height: 38px;
+                line-height: 36px;
+                min-width: 170px;
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: normal;
+        }
+	/*.osb_content a{
 		display: inline-block;
 		background: #00bde5;
 		border-radius: 3px;
@@ -139,9 +155,10 @@
 		text-transform: capitalize;
 		text-decoration: none;
 		letter-spacing: 0.1px;
-	}
+	}*/
 	.osb_content a:hover{
 		background: #00bde5;
+                text-decoration: none;
 	}
 	.getting_start{
 		float: left;

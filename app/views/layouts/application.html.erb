@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Open Source Billing</title>
+  <%= favicon_link_tag %>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -59,8 +60,22 @@
       <span><%= notice %></span>
     </div>
     <%= yield %>
+
+    <div class="primary_footer">
+        <div class="primary_footer_container">
+            <ul>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">License/GPLv2</a></li>
+              <li><a href="#">A vteams.com app</a></li>
+              <li><p>Copyright © 2013 Mark Mian</p></li>
+            </ul>
+        </div>
+    </div>
   </div>
   <!-- CONTENT AREA END-->
+
+
+   
 
 </div>
 <!-- MAIN CONTAINER END -->

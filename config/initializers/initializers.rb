@@ -256,3 +256,6 @@ CURRENCY_CODE = [
   ["SAR Saudi Arabia Riyal","SAR"]
   ]
 CURRENCY_SYMBOL = {"PKR"=>"Rs","USD"=>"$","CNY"=>"¥","GBP"=>"£","EUR"=>"€","SAR"=>"﷼"}
+# this is to preapre the list of files to autoload from lib folder in development environment
+# we'll use this list in application controller to reload on every request to avoid restarting the server and/or console
+RELOAD_LIBS = Dir[Rails.root + 'lib/**/*.rb'] if Rails.env.development?

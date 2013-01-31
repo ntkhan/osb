@@ -80,6 +80,7 @@ class PaymentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def enter_payment
     @payments = []
     params[:invoice_ids].each do |inv_id|
@@ -88,12 +89,13 @@ class PaymentsController < ApplicationController
       @payments << payment
     end
   end
+
   def update_individual_payment
     params[:payments].each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
       Payment.create!(pay).notify_client
     end
-    redirect_to(payments_url,:notice => 'The payment has been recorded successfully.')
+    redirect_to(payments_url,:notice => 'Payments against selected invoices have been recorded successfully.')
     #redirect_to payments_url
   end
 

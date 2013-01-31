@@ -1,11 +1,14 @@
 Osb::Application.routes.draw do
   resources :companies
 
+  match "reports/payment_collected" => "reports#payment_collected"
+  match "reports" => "reports#index"
+
 
   match "dashboard" => "dashboard#index"
   resources :payments do
     collection do
-      post 'enter_payment'
+      get 'enter_payment'
       put 'update_individual_payment'
       get 'filter_payments'
       post 'bulk_actions'
@@ -43,6 +46,7 @@ Osb::Application.routes.draw do
       get 'filter_items'
       post 'bulk_actions'
       post 'load_item_data'
+      get 'duplicate_item'
     end
   end
 
@@ -60,8 +64,9 @@ Osb::Application.routes.draw do
     resources :invoice_line_items
     collection do
       get 'filter_invoices'
-      post 'bulk_actions'
+      get 'bulk_actions'
       post 'duplicate_invoice'
+      get 'enter_single_payment'
     end
   end
 

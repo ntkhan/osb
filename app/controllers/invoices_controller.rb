@@ -3,6 +3,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   layout :choose_layout
+  include InvoicesHelper
 
   def index
     @invoices = Invoice.unarchived.page(params[:page])
@@ -22,10 +23,10 @@ class InvoicesController < ApplicationController
       format.html # show.html.erb
     end
   end
-  
+
   def invoice_pdf
     @invoice = Invoice.find(params[:id])
-    render :layout=> "pdf_mode"
+    render :layout => "pdf_mode"
   end
 
   def preview
@@ -36,9 +37,14 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
-    @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
-    3.times { @invoice.invoice_line_items.build() }
-
+    if params[:invoice_for_client]
+      @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today, :client_id => params[:invoice_for_client]})
+    elsif params[:id]
+      @invoice = Invoice.find(params[:id]).use_as_template
+    else
+      @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
+      3.times { @invoice.invoice_line_items.build() }
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @invoice }
@@ -61,13 +67,19 @@ class InvoicesController < ApplicationController
         InvoiceMailer.delay({:run_at => 1.minutes.from_now}).new_invoice_email(@invoice.client, @invoice, encrypted_id, current_user)
         # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
         format.json { render :json => @invoice, :status => :created, :location => @invoice }
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => 'Your Invoice has been created successfully.')
+        new_invoice_message = new_invoice(@invoice.id)
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => new_invoice_message)
         return
       else
         format.html { render :action => "new" }
         format.json { render :json => @invoice.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  def enter_single_payment
+    invoice_ids = [params[:ids]]
+    redirect_to({:action => "enter_payment", :controller => "payments", :invoice_ids => invoice_ids})
   end
 
   # PUT /invoices/1
@@ -79,7 +91,7 @@ class InvoicesController < ApplicationController
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
         format.json { head :no_content }
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id},:notice => 'Your Invoice has been updated successfully.')
+        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => 'Your Invoice has been updated successfully.')
         return
       else
         format.html { render :action => "edit" }
@@ -114,10 +126,12 @@ class InvoicesController < ApplicationController
       Invoice.archive_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
       @action = "archived"
+      @message = invoices_archived(ids) unless ids.blank?
     elsif params[:destroy]
       Invoice.delete_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
       @action = "deleted"
+      @message = invoices_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Invoice.recover_archived(ids)
       @invoices = Invoice.archived.page(params[:page])
@@ -140,11 +154,6 @@ class InvoicesController < ApplicationController
 
   def filter_invoices
     @invoices = Invoice.filter(params)
-  end
-
-  def duplicate_invoice
-    new_invoice = Invoice.find(params[:id]).duplicate_invoice
-    redirect_to edit_invoice_path(new_invoice), :notice => "Last invoice is used as template"
   end
 
   private

@@ -106,10 +106,10 @@
 
   </div>
 
-  <div class="form-actions">
-    <%= f.submit 'CREATE INVOICE', :class => 'btn btn-primary' %>
-    <%= f.submit 'SAVE AS DRAFT', :class => 'btn btn-primary', :name => "save_as_draft" %>
+  <div class="invoice_btn_session">
+    <%= f.submit 'CREATE INVOICE', :class => 'btn_large' %>
+    <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large', :name => "save_as_draft" %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-      invoices_path, :class => 'btn' %>
+      invoices_path, :class => 'btn_large dark_grey' %>
   </div>
 <% end %>
