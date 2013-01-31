@@ -1,4 +1,9 @@
 Osb::Application.routes.draw do
+
+  match "reports/payment_collected" => "reports#payment_collected"
+  match "reports" => "reports#index"
+
+
   match "dashboard" => "dashboard#index"
   resources :payments do
     collection do
