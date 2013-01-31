@@ -2,6 +2,7 @@
 jQuery('tbody#payment_body').hide(200, function(){jQuery(this).html('<%= escape_javascript render("payment") %>').show(500);});
 <% status = params[:status]%>
 jQuery('.top_links').hide();
+jQuery('.page-header h1 span').html("&nbsp;&nbsp;/&nbsp;&nbsp;<%= status.capitalize%>");
  <%if status == "active" %>
     jQuery('.archive,.destroy').show();
 <% elsif status == "archived"%>

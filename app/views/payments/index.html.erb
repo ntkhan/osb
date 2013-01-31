@@ -7,7 +7,9 @@
 
 
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
+    <span class="filter-tag">&nbsp;&nbsp;/&nbsp;&nbsp;Active</span>
+  </h1>
 </div>
 <%= form_tag "payments/bulk_actions", :remote => true do -%>
     <div class="action_links_wrapper">
@@ -60,8 +62,8 @@
           <button  class="close" type="button" style="margin:0px;">×</button>
           <span>No Invoice has been selected.</span>
         </div>
-        <h1>Which Invoicess have you received payment for?</h1>
-        <p>Select one or more Invoicess from the list below to apply payment.</p>
+        <h1>Which Invoices have you received payment for?</h1>
+        <p>Select one or more Invoices from the list below to apply payment.</p>
         <div class="cross_btn">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <%= image_tag "cross.png", :size => "7x7", :alt => "" %>

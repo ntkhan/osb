@@ -245,3 +245,7 @@ COMPANY_SIZE = ["1-10 employees",
   "101-500 employees",
   "Over 500 employees"]
 PAYMENT_METHODS = ["Check","Bank Transfer","Credit","Cash","Debit"]
+
+# this is to preapre the list of files to autoload from lib folder in development environment
+# we'll use this list in application controller to reload on every request to avoid restarting the server and/or console
+RELOAD_LIBS = Dir[Rails.root + 'lib/**/*.rb'] if Rails.env.development?

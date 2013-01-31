@@ -103,11 +103,11 @@ table.invoice_total {
   }
   tr.invoice_total_tr {
     font-weight: bold;
-    border-top: 1px solid #cccccc;
+    border-top: medium double #cccccc;
     border-bottom: medium double #cccccc;
   }
   tr.sub_total_tr {
-    border-top: 1px solid #cccccc;
+    border-top: none;
   }
 }
 

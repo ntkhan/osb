@@ -2,9 +2,13 @@ jQuery(".alert").hide()
 <% if @action == "paid invoices" %>
 jQuery(".alert.alert-error").show().find('span').html("You cannot pay paid invoices");
 <% elsif params[:invoice_ids].blank? %>
-jQuery(".alert.alert-error").show().find('span').html("No invoice is selected.");
-<% else %>
-jQuery(".alert.alert-success").show().find('span').html("Invoice(s) are <%= @action %> successfully");
+jQuery(".alert.alert-error").show().find('span').html("You haven't selected any invoice to delete/archive. Please select one or more invoices and try again.");
+<% elsif @action == "archived" or @action == "deleted" %>
+ jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
+ <%elsif @action == "paid" %>
+jQuery(".alert.alert-success").show().find('span').html("Payments against selected invoices have been recorded successfully.");
+<%else%>
+jQuery(".alert.alert-success").show().find('span').html("Invoices are <%= @action %> successfully.");
 <% end %>
 jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
 jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');
