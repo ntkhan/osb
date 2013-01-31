@@ -474,14 +474,21 @@ a.new_btn,  input.new_btn[type="submit"],{
 
 a.btn_right{float: right;}
 .header_with_margins{margin: 10px 0;}
-a.btn_small{@extend a.new_invoice_btn;
+a.btn_small, a.btn_plus{@extend a.new_invoice_btn;
   /*width: 176px;*/
   height: 37px;
   line-height: 37px;
   font-size: 17px;
   padding: 0 45px 0 45px;
 }
-
+a.btn_plus{
+    line-height:24px !important;
+    padding: 0 25px !important;
+}
+a.btn_plus span{
+    font-size:40px;
+    padding:0 7px 0 0;
+}
 .page-header {
   border-bottom: 1px solid #00BDE5;
   padding-bottom:5px;
