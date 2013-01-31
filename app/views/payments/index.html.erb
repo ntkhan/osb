@@ -1,5 +1,11 @@
 <%- model_class = Payment -%>
 <div id="invoices_container">default data</div>
+
+<div class="top_plus_btn">
+  <%= link_to (content_tag(:span, "+") + 'NEW Payments'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus", :remote => true %>
+</div>
+
+
 <div class="page-header">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
@@ -64,9 +70,9 @@
       </div>
       <div class="modal-body">
       </div>
-      <div class="footer">
-        <%= submit_tag "Enter Payment" %>
-        <a href="#" data-dismiss="modal">cancel</a>
+      <div class="footer ">
+        <%= submit_tag "Enter Payment", :class => "btn_large" %>
+        <a class="btn_large dark_grey" href="#" data-dismiss="modal">cancel</a>
       </div>
     </div>
   </div>

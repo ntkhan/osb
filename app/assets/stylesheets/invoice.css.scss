@@ -541,6 +541,8 @@ table.index th {
   font-size: 22px;
 }
 
+
+
 .payment_heading {
   text-align: center;
   font-size: 18px;
@@ -574,25 +576,27 @@ table.index th {
   font-size: 11px;
 }
 
+
+/*
 .form-horizontal .form-actions {
   border: none;
   background: none;
   input[type="submit"] {
-    border: none;
-    background-color: #00BDE5;
-    background-image: none;
-    color: #ffffff;
-    margin-left: 5px;
+    background: #00BDE5;
+    border-radius: 4px;
+    color: #FFFFFF;
+    display: inline-block;
     font-family: "Dosis",sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: normal;
-    height: 50px;
-    line-height: 50px;
-    padding: 0 40px;
+    font-weight: 500;
+    height: 38px;
+    line-height: 36px;
+    min-width: 170px;
+    text-align: center;
     text-transform: uppercase;
-    text-decoration: none;
-    text-shadow:none;
+    font-weight: normal;
+    border: none;
 
   }
   .btn {
@@ -601,17 +605,24 @@ table.index th {
     line-height: 50px;
     padding: 0;
     padding: 0 40px;
-
-
-
   }
-  padding-left: 69px;
+  padding-left: 79px;
 }
 
 #new_invoice .invoice_top_section {
   .control-group {
     margin-bottom: 12px;
   }
+}
+*/
+.invoice_btn_session{
+    margin: auto;
+    width: 518px;
+    padding: 40px 0 0 0;
+}
+.invoice_btn_session input{
+    padding:0px;
+    margin-top:-6px;
 }
 
 .invoices_link{

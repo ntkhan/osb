@@ -116,7 +116,7 @@
         margin: 0px;
         padding: 25px 0 24px 0;
     }
-    .footer {
+    /*.footer {
         a, input{
             display: inline-block;
             background: #acacac;
@@ -138,8 +138,10 @@
         a:hover, input:hover{
             background: #00bde5;
         }
-    }
+    }*/
 }
-.modal .footer input{
-    background: #00BDE5;
+.footer input{
+    vertical-align: none !important;
 }
+
+
