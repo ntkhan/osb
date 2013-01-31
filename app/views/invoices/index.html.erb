@@ -5,7 +5,9 @@
     new_invoice_path,
     :class => 'new_btn btn_right btn_plus' %>
   <div class="page-header header_with_margins">
-    <h1><%= t '.title', :default => model_class.model_name.human.pluralize %></h1>
+    <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
+    <span class="filter-tag">&nbsp;&nbsp;/&nbsp;&nbsp;Active</span>
+    </h1>
   </div>
   <%= form_tag "invoices/bulk_actions", :remote => true do -%>
     <div class="action_links_wrapper">
