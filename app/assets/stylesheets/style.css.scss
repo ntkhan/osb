@@ -37,6 +37,7 @@ body{
 }
 .mainContainer{
     width: 100%;
+
 }
 h1{
     font-family: 'Dosis', sans-serif;
@@ -180,9 +181,10 @@ h1 span.filter-tag{color:gray; font-size: 75%;}
 .content{
     clear: both;
     width: 758px;
+    min-height: 360px;
     margin: auto;
     overflow: hidden;
-    padding: 50px 0 26px 0;
+    padding: 50px 0 0 0;
 }
 .content input[type=text],
 .content input[type=number],
@@ -827,29 +829,34 @@ h1 span.filter-tag{color:gray; font-size: 75%;}
     clear:both;
     float:left;
     width:100%;
-    padding:16px 0 0 0;
+    padding:16px 0 10px 0;
 }
 .primary_footer_container{
-    border-top:1px solid #99e5f5;
-    padding:24px 0 0 0;
+    border-top:1px solid #d7d7d7;
+    padding:5px 0 0 0;
+    width: 758px;
+    margin:auto;
+}
+.primary_footer_container p{
+    float:left;
 }
 .primary_footer_container ul{
-    text-align:center;
+    float:right;
     line-height:none;
     margin: 0;
 }
-.primary_footer_container ul li,
-.primary_footer_container ul li p{
+.primary_footer_container ul li{
     display:inline;
+    padding: 0 0 0 22px;
 }
-.primary_footer_container ul li a,
-.primary_footer_container ul li p{
+.primary_footer_container a,
+.primary_footer_container p,
+{
     text-decoration:none;
     color: #7d7d7d ;
     font-size:11px;
-    padding:0 11px;
 }
-.primary_footer_container ul li a:hover, .primary_footer_container ul li a.active{
+.primary_footer_container a:hover, .primary_footer_container a.active{
     text-decoration:underline;
     color:#00ACE5;
 }
