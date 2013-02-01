@@ -41,6 +41,7 @@ class InvoicesController < ApplicationController
       @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today, :client_id => params[:invoice_for_client]})
     elsif params[:id]
       @invoice = Invoice.find(params[:id]).use_as_template
+      #@invoice.invoice_line_items.build()
     else
       @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
       3.times { @invoice.invoice_line_items.build() }
@@ -54,6 +55,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
+    @invoice.invoice_line_items.build()
   end
 
   # POST /invoices

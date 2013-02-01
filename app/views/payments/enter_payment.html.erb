@@ -11,7 +11,7 @@
    end %>
   <% if @payments.size > 1 %>
     <div class="grand_total">Totals</div>
-    <div class="grand_total2">Rs.<%=  grand_total %></div>
+    <div class="grand_total2"><%= current_user.currency_symbol %><%=  grand_total %></div>
   <%  end %>
   <p id="submit_button"><%= submit_tag "Save", :id=>'submit_payment_form' %></p>
 <% end %>
