@@ -4,8 +4,7 @@
           <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
           <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice), :class => "invoices_link" %><%#= link_to payment.invoice_id, payment%></td>
           <td class="align_left"><%= payment.client_name %></td>
-          <td class="align_center"><%= payment.payment_method %></td>
-          <td class="align_center"><%= payment.payment_type %></td>
+          <td class="align_center"><%= payment.payment_method || payment.payment_type%></td>
           <td class="align_center"><%= payment.notes %></td>
           <td class="align_center"><%= payment.payment_date %></td>
           <td class="align_right"><%= "#{current_user.currency_symbol}  #{number_with_precision(payment.payment_amount, :precision => 2)}" %></td>
@@ -44,6 +43,6 @@
 <% end %>
 <tr>
   <td align="center" colspan="9">
-    <%= link_to 'New Payment', '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large", :remote => true %>
+    <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus_bottom", :remote => true %>
   </td>
 </tr>

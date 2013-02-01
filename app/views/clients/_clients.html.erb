@@ -2,7 +2,7 @@
     <% @clients.each do |client| %>
         <tr>
           <td class="align_center"> <%= check_box_tag "client_ids[]", client.id, false, :id => "client_#{client.id}" %></td>
-          <td class="client_organize"><%= link_to client.organization_name, client_path(client) %></td>
+          <td class="client_organize"><%= link_to client.organization_name, edit_client_path(client) %></td>
           <td><%= client.contact_name %></td>
           <td><%= client.email %></td>
           <td><%= client.business_phone %></td>
@@ -40,6 +40,6 @@
 <% end %>
 <tr>
   <td align="center" colspan="6">
-    <%= link_to "New Client", new_client_path, :class => 'btn_large' %>
+    <%= link_to (content_tag(:span, "+") + 'NEW Client'), new_client_path, :class => 'btn_large btn_plus_bottom' %>
   </td>
 </tr>

@@ -801,7 +801,7 @@ color:#898989;
 .btn_plus{
     float: right;
 }
-.btn_plus span{
+.btn_plus span, .btn_plus_bottom span{
     padding:0 6px 0 0;
     font-size: 30px;
     line-height: 28px;
@@ -810,6 +810,7 @@ color:#898989;
     text-decoration:none;
     color: #ffffff;
 }
+
 .top_plus_btn{
     margin-bottom: 10px;
 }
