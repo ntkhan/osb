@@ -1,42 +1,50 @@
+<%
+no_record_message = "You haven't created any client yet. Please click on New Client button to create new client."
+if params[:status] == "archived"
+  no_record_message = "You haven't any archived client yet."
+elsif params[:status] == "deleted"
+  no_record_message = "You haven't any deleted client yet."
+end
+%>
 <% if @clients.length > 0 %>
-    <% @clients.each do |client| %>
-        <tr>
-          <td class="align_center"> <%= check_box_tag "client_ids[]", client.id, false, :id => "client_#{client.id}" %></td>
-          <td class="client_organize"><%= link_to client.organization_name, edit_client_path(client) %></td>
-          <td><%= client.contact_name %></td>
-          <td><%= client.email %></td>
-          <td><%= client.business_phone %></td>
-          <td class="align_center">
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_client_path(client), :class => 'edit_action' %>
-            <% unless params[:status] == "deleted" %>
-                <%#= link_to t('.destroy', :default => "Delete"),
-                            client_path(client),
-                            :method => :delete,
-                            :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                            :class => 'del_action' %>
-            <% end %>
-          </td>
-        </tr>
-    <% end %>
+  <% @clients.each do |client| %>
     <tr>
-      <td colspan="6">
-        <div class="paginator">
-          <%= paginate @clients, :remote => true %>
-          <div class="paging_info">
-            <%= page_entries_info @clients %>
-          </div>
-        </div>
+      <td class="align_center"> <%= check_box_tag "client_ids[]", client.id, false, :id => "client_#{client.id}" %></td>
+      <td class="client_organize"><%= link_to client.organization_name, edit_client_path(client) %></td>
+      <td><%= client.contact_name %></td>
+      <td><%= client.email %></td>
+      <td><%= client.business_phone %></td>
+      <td class="align_center">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_client_path(client), :class => 'edit_action' %>
+        <% unless params[:status] == "deleted" %>
+      <%#= link_to t('.destroy', :default => "Delete"),
+      client_path(client),
+      :method => :delete,
+      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+      :class => 'del_action' %>
+        <% end %>
       </td>
     </tr>
+  <% end %>
+  <tr>
+    <td colspan="6">
+      <div class="paginator">
+        <%= paginate @clients, :remote => true %>
+        <div class="paging_info">
+          <%= page_entries_info @clients %>
+        </div>
+      </div>
+    </td>
+  </tr>
 <% else %>
-    <tr>
-      <td colspan="6">
-        <div class="no_record_container">You haven't created any client yet. Please click on New Client button to create
-          new client.
-        </div>
-      </td>
-    </tr>
+  <tr>
+    <td colspan="6">
+      <div class="no_record_container">
+        <%= no_record_message %>
+      </div>
+    </td>
+  </tr>
 <% end %>
 <tr>
   <td align="center" colspan="6">
