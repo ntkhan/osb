@@ -98,20 +98,23 @@ class ItemsController < ApplicationController
   end
 
   def bulk_actions
+    ids = params[:item_ids]
     if params[:archive]
-      Item.archive_multiple(params[:item_ids])
+      Item.archive_multiple(ids)
       @items = Item.unarchived.page(params[:page])
       @action = "archived"
+      @message = items_archived(ids) unless ids.blank?
     elsif params[:destroy]
-      Item.delete_multiple(params[:item_ids])
+      Item.delete_multiple(ids)
       @items = Item.unarchived.page(params[:page])
       @action = "deleted"
+      @message = items_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
-      Item.recover_archived(params[:item_ids])
+      Item.recover_archived(ids)
       @items = Item.archived.page(params[:page])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
-      Item.recover_deleted(params[:item_ids])
+      Item.recover_deleted(ids)
       @items = Item.only_deleted.page(params[:page])
       @action = "recovered from deleted"
     end
@@ -120,5 +123,11 @@ class ItemsController < ApplicationController
 
   def filter_items
     @items = Item.filter(params)
+  end
+
+  def undo_actions
+    params[:archived] ? Item.recover_archived(params[:ids]) : Item.recover_deleted(params[:ids])
+    @items = Item.unarchived.page(params[:page])
+    respond_to { |format| format.js }
   end
 end

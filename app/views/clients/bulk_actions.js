@@ -1,6 +1,8 @@
 jQuery(".alert").hide()
 <%if params[:client_ids].blank? %>
 jQuery(".alert.alert-error").show().find('span').html("No client is selected.");
+<% elsif @action == "archived" or @action == "deleted" %>
+jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
 <% else %>
 jQuery(".alert.alert-success").show().find('span').html("Client(s) are <%= @action %> successfully");
 <% end %>

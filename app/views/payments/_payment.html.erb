@@ -2,7 +2,7 @@
     <% @payments.each do |payment| %>
         <tr>
           <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
-          <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice) %><%#= link_to payment.invoice_id, payment%></td>
+          <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice), :class => "invoices_link" %><%#= link_to payment.invoice_id, payment%></td>
           <td class="align_left"><%= payment.client_name %></td>
           <td class="align_center"><%= payment.payment_method %></td>
           <td class="align_center"><%= payment.payment_type %></td>
