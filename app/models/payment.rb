@@ -77,6 +77,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.multiple_payments ids
+    ids = ids.split(",") if ids and ids.class == String
     where("id IN(?)", ids)
   end
 
@@ -93,6 +94,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
+    ids = ids.split(",") if ids and ids.class == String
     where("id IN(?)", ids).only_deleted.each do |payment|
       payment.recover
       payment.unarchive

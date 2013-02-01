@@ -1,6 +1,8 @@
 jQuery(".alert").hide()
 <%if params[:payment_ids].blank? %>
-jQuery(".alert.alert-error").show().find('span').html("No payment is selected.");
+jQuery(".alert.alert-error").show().find('span').html("You haven't selected any payment to delete/archive. Please select one or more payments and try again.");
+<% elsif @action == "archived" or @action == "deleted" %>
+jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
 <% else %>
 jQuery(".alert.alert-success").show().find('span').html("Payment(s) are <%= @action %> successfully");
 <% end %>

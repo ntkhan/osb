@@ -58,6 +58,7 @@
     float: left;
     padding: 10px 10px 10px 29px;
     width: 94.8%;
+    height: 30px;
   }
   .report_date {
     float: left;
@@ -316,7 +317,9 @@
     text-align: right;
     font-size: 10px;
   }
- 
+  .client, .payment-method {
+    width: 150px;
+  }
   /* Report Css Ends */
 
 }

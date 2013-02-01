@@ -9,6 +9,7 @@ class Item < ActiveRecord::Base
 
 
   def self.multiple_items ids
+    ids = ids.split(",") if ids and ids.class == String
     where("id IN(?)", ids)
   end
 
@@ -25,6 +26,7 @@ class Item < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
+    ids = ids.split(",") if ids and ids.class == String
     where("id IN(?)", ids).only_deleted.each do |item|
       item.recover
       item.unarchive

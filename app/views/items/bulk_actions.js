@@ -1,6 +1,8 @@
 jQuery(".alert").hide()
 <%if params[:item_ids].blank? %>
-jQuery(".alert.alert-error").show().find('span').html("No item is selected.");
+jQuery(".alert.alert-error").show().find('span').html("You haven't selected any item to delete/archive. Please select one or more items and try again.");
+<% elsif @action == "archived" or @action == "deleted" %>
+jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
 <% else %>
 jQuery(".alert.alert-success").show().find('span').html("Item(s) are <%= @action %> successfully");
 <% end %>
