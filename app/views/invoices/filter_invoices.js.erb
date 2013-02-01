@@ -2,7 +2,7 @@ jQuery('tbody#invoice_body').hide(200, function(){jQuery(this).html('<%= escape_
 <% status = params[:status]%>
 jQuery('.top_links').hide();
 jQuery('#active_links a').removeClass('active');
-jQuery('.page-header h1 span').html("&nbsp;&nbsp;/&nbsp;&nbsp;<%= status.capitalize%>");
+jQuery('.page-header h1 span').html("&nbsp;/&nbsp;<%= status.capitalize%>");
  <%if status == "active" %>
     jQuery('.archive,.destroy,.payment').show();
     jQuery('#active_links a.get_actives').addClass('active');
