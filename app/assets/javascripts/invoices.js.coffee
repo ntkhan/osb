@@ -151,7 +151,7 @@ jQuery ->
       applyPopover(jQuery("#invoice_client_id_chzn"),"top","Select a client")
       flag = false
     # Check if item is selected
-    else if item_rows.find("select.items_list option:first:selected").length is item_rows.length
+    else if item_rows.find("select.items_list option:selected[value='']").length is item_rows.length
       first_item = jQuery("table#invoice_grid_fields tr.fields:visible:first").find("select.items_list").next()
       applyPopover(first_item,"left","Select an item")
       flag = false
