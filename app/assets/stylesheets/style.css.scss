@@ -879,4 +879,19 @@ h1 span.filter-tag{color:gray; font-size: 75%;}
     position: relative;
     top: -16px;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    body:nth-of-type(1) .logo_tag{
+        font-wight:normal;
+        letter-spacing:1px;
+        color: red;
+    }
+    
+}
 /*Primary Footer CSS Ends*/
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input
+    {
+        line-height:0px !important;
+    }
+}
