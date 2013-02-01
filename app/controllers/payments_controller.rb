@@ -94,7 +94,7 @@ class PaymentsController < ApplicationController
   def update_individual_payment
     params[:payments].each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
-      Payment.create!(pay).notify_client
+      Payment.create!(pay).notify_client current_user.email
     end
     redirect_to(payments_url,:notice => 'Payments against selected invoices have been recorded successfully.')
     #redirect_to payments_url

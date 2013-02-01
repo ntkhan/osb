@@ -112,7 +112,7 @@ class Payment < ActiveRecord::Base
     end
   end
   
-  def notify_client
-    PaymentMailer.payment_notification_email(self.invoice.client, self.invoice.invoice_number, self.payment_amount).deliver if self.send_payment_notification
+  def notify_client current_user_email
+    PaymentMailer.payment_notification_email(current_user_email,self.invoice.client, self.invoice.invoice_number, self.payment_amount).deliver if self.send_payment_notification
   end
 end
