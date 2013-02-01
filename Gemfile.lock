@@ -4,9 +4,6 @@ GEM
     actionmailer (3.2.9)
       actionpack (= 3.2.9)
       mail (~> 2.4.4)
-    actionmailer-callbacks (1.1.0)
-      actionmailer (~> 3.0)
-      activesupport
     actionpack (3.2.9)
       activemodel (= 3.2.9)
       activesupport (= 3.2.9)
@@ -153,7 +150,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  actionmailer-callbacks
   active_link_to
   activerecord-mysql-adapter
   acts_as_archival
