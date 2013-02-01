@@ -16,7 +16,7 @@ module InvoicesHelper
    notice = <<-HTML
      <p>#{ids.size} invoice(s) have been archived. You can find them under
      <a href="invoices/filter_invoices?status=archived" data-remote="true">Archived</a> section on this page.</p>
-     <p><a href='invoices/bulk_actions?invoice_ids[]=#{ids}&recover_archived=true'  data-remote="true">Undo this action</a> to move archived invoices back to active.</p>
+     <p><a href='invoices/undo_actions?ids=#{ids.join(",")}&archived=true'  data-remote="true">Undo this action</a> to move archived invoices back to active.</p>
     HTML
     notice = notice.html_safe
   end
@@ -25,7 +25,7 @@ module InvoicesHelper
     notice = <<-HTML
      <p>#{ids.size} invoice(s) have been deleted. You can find them under
      <a href="invoices/filter_invoices?status=deleted" data-remote="true">Deleted</a> section on this page.</p>
-     <p><a href='invoices/bulk_actions?invoice_ids[]=#{ids}&recover_deleted=true'  data-remote="true">Undo this action</a> to move deleted invoices back to active.</p>
+     <p><a href='invoices/undo_actions?ids=#{ids.join(",")}&deleted=true'  data-remote="true">Undo this action</a> to move deleted invoices back to active.</p>
     HTML
     notice = notice.html_safe
   end

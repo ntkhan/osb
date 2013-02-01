@@ -154,6 +154,12 @@ class InvoicesController < ApplicationController
     respond_to { |format| format.js }
   end
 
+  def undo_actions
+    params[:archived] ? Invoice.recover_archived(params[:ids]) : Invoice.recover_deleted(params[:ids])
+    @invoices = Invoice.unarchived.page(params[:page])
+    respond_to { |format| format.js }
+  end
+
   def filter_invoices
     @invoices = Invoice.filter(params)
   end
