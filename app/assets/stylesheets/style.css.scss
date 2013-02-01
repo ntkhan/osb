@@ -829,7 +829,7 @@ h1 span.filter-tag{color:gray; font-size: 75%;}
     clear:both;
     float:left;
     width:100%;
-    padding:16px 0 10px 0;
+    padding:25px 0 10px 0;
 }
 .primary_footer_container{
     border-top:1px solid #d7d7d7;
@@ -844,10 +844,18 @@ h1 span.filter-tag{color:gray; font-size: 75%;}
     float:right;
     line-height:none;
     margin: 0;
+    padding:5px 0 0 0;
 }
 .primary_footer_container ul li{
-    display:inline;
-    padding: 0 0 0 22px;
+    float:left;
+    display:block;
+    padding: 0 0 0 5px;
+    height: 10px;
+    line-height: 6px;
+}
+.primary_footer_container ul li.border{
+    border-right: 1px solid #d7d7d7;
+    padding: 0 6px 0 0;
 }
 .primary_footer_container a,
 .primary_footer_container p,
@@ -859,5 +867,16 @@ h1 span.filter-tag{color:gray; font-size: 75%;}
 .primary_footer_container a:hover, .primary_footer_container a.active{
     text-decoration:underline;
     color:#00ACE5;
+}
+.logo_tag{
+    background-color: #D7D7D7;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: tahoma;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 0 5px 1px 5px;
+    position: relative;
+    top: -16px;
 }
 /*Primary Footer CSS Ends*/
