@@ -130,12 +130,6 @@ jQuery ->
   # Add date picker to invoice date field
   jQuery("#invoice_invoice_date").datepicker
     dateFormat: 'yy-mm-dd'
-    beforeShow: (input, inst) ->
-      widget = jQuery(inst).datepicker("widget")
-      widget.css "margin-left", jQuery(input).outerWidth() - widget.outerWidth()
-    buttonImage: '/assets/calender_icon.png'
-    buttonImageOnly: true
-    showOn: 'button'
 
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
