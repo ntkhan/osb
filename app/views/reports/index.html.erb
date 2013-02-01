@@ -1,9 +1,9 @@
 <div class="page-header">
   <h1>Reports</h1>
 </div>
-<ol style="margin-top:25px;">
-  <li><%= link_to "Payments Collected", "/reports/payments_collected" %> <span class="report-status">(in progress)</span></li>
-  <li><%= link_to "Payments Due", "/reports/payments_collected" %> <span class="report-status">(not started yet)</span></li>
-  <li><%= link_to "Revenue by Client", "/reports/payments_collected" %> <span class="report-status">(not started yet)</span></li>
-  <li><%= link_to "Item Sales", "/reports/payments_collected" %> <span class="report-status">(not started yet)</span></li>
+<ol style="margin-top:25px;" class="reports_list">
+  <li><%= link_to "Payments Collected", "/reports/payments_collected", :class => "invoices_link" %> <span class="report_status">(in progress)</span></li>
+  <li><%= link_to "Payments Due", "/reports/payments_collected", :class => "invoices_link"  %> <span class="report_status">(not started yet)</span></li>
+  <li><%= link_to "Revenue by Client", "/reports/payments_collected", :class => "invoices_link"  %> <span class="report_status">(not started yet)</span></li>
+  <li><%= link_to "Item Sales", "/reports/payments_collected", :class => "invoices_link"  %> <span class="report_status">(not started yet)</span></li>
 </ol>
