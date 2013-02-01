@@ -15,6 +15,11 @@
 //= require jquery-ui.js
 //= require twitter/bootstrap
 //= require_tree .
+//= require jquery_nested_form
+//= require nav
+//= require chosen.jquery
+//= require jquery.css3caching.js
+//= require invoices.js.coffee
 
 jQuery(function(){
     //override default behavior of inserting new subforms into form    
