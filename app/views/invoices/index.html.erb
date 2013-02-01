@@ -5,7 +5,7 @@
     :class => 'btn_large btn_plus' %>
   <div class="page-header header_with_margins">
     <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <span class="filter-tag">&nbsp;&nbsp;/&nbsp;&nbsp;Active</span>
+    <span class="filter-tag">&nbsp;/&nbsp;Active</span>
     </h1>
   </div>
   <%= form_tag "invoices/bulk_actions", :remote => true do -%>
@@ -55,8 +55,7 @@
         :class => 'btn_large' %>
     </div>
   <% end %>
-
-  <div>
+  </div>
     <%# b = "" %>
     <%# a = open(File.join(Rails.root, 'app', 'assets', '/stylesheets/','application.css'), 'rb') {|f| b += f.read} %>
     <%#= a %>

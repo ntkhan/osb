@@ -2,13 +2,13 @@
 <div id="invoices_container">default data</div>
 
 <div class="top_plus_btn">
-  <%= link_to (content_tag(:span, "+") + 'NEW Payments'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus", :remote => true %>
+  <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus", :remote => true %>
 </div>
 
 
 <div class="page-header">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <span class="filter-tag">&nbsp;&nbsp;/&nbsp;&nbsp;Active</span>
+    <span class="filter-tag">&nbsp;/&nbsp;Active</span>
   </h1>
 </div>
 <%= form_tag "payments/bulk_actions", :remote => true do -%>
@@ -40,7 +40,6 @@
   <th class="align_center"><%= check_box_tag 'select_all' %></th>
   <th class="align_center">Invoice</th>
   <th class="align_left">Client</th>
-  <th class="align_center">Payment method</th>
   <th class="align_center">Type</th>
   <th class="align_center">Notes</th>
   <th class="align_center">Date</th>

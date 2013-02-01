@@ -6,7 +6,7 @@
     <th>Client</th>
     <th>Total</th>
     <th>Date</th>
-    <th>Status</th>
+    <th class="align-center">Status</th>
   </tr>
   <% @invoices.each do |inv|%>
     <tr>
@@ -18,7 +18,7 @@
       <td><%= "2013-01-01" %></td>
       <td class="align_center <%= inv.status %>">
         <span class="invoice-status invoice-sent">
-          <%= inv.status %>
+          <%= inv.status.downcase %>
         </span>
       </td>
     </tr>

@@ -89,20 +89,23 @@ class ClientsController < ApplicationController
   end
 
   def bulk_actions
+    ids =  params[:client_ids]
     if params[:archive]
-      Client.archive_multiple(params[:client_ids])
+      Client.archive_multiple(ids)
       @clients = Client.unarchived.page(params[:page])
       @action = "archived"
+      @message = clients_archived(ids) unless ids.blank?
     elsif params[:destroy]
-      Client.delete_multiple(params[:client_ids])
+      Client.delete_multiple(ids)
       @clients = Client.unarchived.page(params[:page])
       @action = "deleted"
+      @message = clients_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
-      Client.recover_archived(params[:client_ids])
+      Client.recover_archived(ids)
       @clients = Client.archived.page(params[:page])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
-      Client.recover_deleted(params[:client_ids])
+      Client.recover_deleted(ids)
       @clients = Client.only_deleted.page(params[:page])
       @action = "recovered from deleted"
     end
@@ -111,6 +114,12 @@ class ClientsController < ApplicationController
 
   def filter_clients
     @clients = Client.filter(params)
+  end
+
+  def undo_actions
+    params[:archived] ? Client.recover_archived(params[:ids]) : Client.recover_deleted(params[:ids])
+    @clients = Client.unarchived.page(params[:page])
+    respond_to { |format| format.js }
   end
 
   def get_last_invoice
