@@ -1,0 +1,27 @@
+<% if @sent_emails.length > 0 %>
+  <% @sent_emails.each do |sent_email| %>
+    <tr>
+      <td class="align_center"><%= sent_email.date %></td>
+      <td class="align_center"><%= sent_email.sender %></td>
+      <td class="align_center"><%= sent_email.recipient %></td>
+      <td class="align_center"><%= sent_email.type %></td>
+       <td class="align_center"><%= link_to sent_email.subject, {:controller=>'sent_emails',:action=>'show',:id=>sent_email.id}, :class=>"sent_email_link"%></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="5">
+      <div class="paginator" style="text-align:left;">
+        <%= paginate @sent_emails, :remote => true %>
+        <div class="paging_info">
+          <%= page_entries_info @sent_emails %>
+        </div>
+      </div>
+    </td>
+  </tr>
+<% else %>
+  <tr>
+    <td colspan="5">
+      <div class="no_record_container">No emails.</div>
+    </td>
+  </tr>
+<% end %>
