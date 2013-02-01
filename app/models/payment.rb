@@ -18,7 +18,7 @@ class Payment < ActiveRecord::Base
     diff = (self.invoice_paid_amount(invoice.id) + c_pay) - invoice.invoice_total
     if diff > 0
       status = 'paid'
-      self.add_credit_payment invoice.id, diff
+      self.add_credit_payment invoice, diff
       return_v = c_pay - diff
     elsif diff < 0
       status = (invoice.status == 'draft' || invoice.status == 'draft-partial') ? 'draft-partial' : 'partial'
@@ -32,10 +32,11 @@ class Payment < ActiveRecord::Base
     return return_v
   end
 
-  def self.add_credit_payment inv_id, amount
+  def self.add_credit_payment invoice, amount
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
-    credit_pay.invoice_id = inv_id
+    credit_pay.invoice_id = invoice.id
+    credit_pay.notes = "Overpayment against invoice# #{invoice.invoice_number}"
     credit_pay.payment_amount = amount
     credit_pay.save
   end
