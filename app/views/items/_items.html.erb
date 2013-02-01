@@ -1,37 +1,45 @@
+<%
+no_record_message = "You haven't created any item yet. Please click on New Item button to create new item."
+if params[:status] == "archived"
+  no_record_message = "You haven't any archived item yet."
+elsif params[:status] == "deleted"
+  no_record_message = "You haven't any deleted item yet."
+end
+%>
 <% if @items.length > 0 %>
-    <% @items.each do |item| %>
-        <tr>
-          <td class="align_center"> <%= check_box_tag "item_ids[]", item.id, false, :id => "item_#{item.id}" %></td>
-          <td class="align_left"><%= item.item_name %></td>
-          <td class="align_left"><%= item.item_description %></td>
-          <td class="align_right"><%= current_user.currency_symbol%><%= number_with_precision(item.unit_cost, :precision => 2) %></td>
-          <td class="align_right"><%= item.quantity %></td>
-          <td class="align_center"><%= item.tax1.name rescue "" %></td>
-          <td class="align_center"><%= item.tax2.name rescue "" %></td>
-          <td class="align_center"><%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
-            <% unless params[:status] == "deleted" %>
-                <%#= link_to 'Delete', item, :method => :delete, :class => "del_action", :data => {:confirm => 'Are you sure?'} %></td>
-            <% end %>
-            </tr>
-    <% end %>
+  <% @items.each do |item| %>
     <tr>
-      <td colspan="9">
-        <div class="paginator">
-          <%= paginate @items, :remote => true %>
-          <div class="paging_info">
-            <%= page_entries_info @items %>
-          </div>
-        </div>
-      </td>
+      <td class="align_center"> <%= check_box_tag "item_ids[]", item.id, false, :id => "item_#{item.id}" %></td>
+      <td class="align_left"><%= item.item_name %></td>
+      <td class="align_left"><%= item.item_description %></td>
+      <td class="align_right"><%= current_user.currency_symbol%><%= number_with_precision(item.unit_cost, :precision => 2) %></td>
+      <td class="align_right"><%= item.quantity %></td>
+      <td class="align_center"><%= item.tax1.name rescue "" %></td>
+      <td class="align_center"><%= item.tax2.name rescue "" %></td>
+      <td class="align_center"><%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
+        <% unless params[:status] == "deleted" %>
+      <%#= link_to 'Delete', item, :method => :delete, :class => "del_action", :data => {:confirm => 'Are you sure?'} %></td>
+      <% end %>
     </tr>
+  <% end %>
+  <tr>
+    <td colspan="9">
+      <div class="paginator">
+        <%= paginate @items, :remote => true %>
+        <div class="paging_info">
+          <%= page_entries_info @items %>
+        </div>
+      </div>
+    </td>
+  </tr>
 <% else %>
-    <tr>
-      <td colspan="9">
-        <div class="no_record_container">You haven't created any item yet. Please click on New Item button to create new
-          item.
-        </div>
-      </td>
-    </tr>
+  <tr>
+    <td colspan="9">
+      <div class="no_record_container">
+        <%= no_record_message %>
+      </div>
+    </td>
+  </tr>
 <% end %>
 <tr>
   <td align="center" colspan="9">
