@@ -26,7 +26,7 @@ end
             <td class="form_field" colspan="2">
               <input id="payments_<%= index%>_paid_full" class="paid_full" type="checkbox"  name="payments[][paid_full]">
               <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
-              <%= f.label :paid_full,:class=>'text-left paid_full_label',:for=>"payments_#{index}_paid_full" %>
+              <%= f.label(:paid_full,:class=>'text-left paid_full_label',:for=>"payments_#{index}_paid_full") {"Pay Full"}%>
             </td>
           </tr>        
           <%  if client_credit > 0 %>
