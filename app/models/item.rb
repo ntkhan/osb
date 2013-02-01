@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
   has_many :invoice_line_items, :dependent => :destroy
   belongs_to :tax1, :foreign_key => "tax_1", :class_name => "Tax"
   belongs_to :tax2, :foreign_key => "tax_2", :class_name => "Tax"
-  paginates_per 4
+  paginates_per 10
 
 
   def self.multiple_items ids
