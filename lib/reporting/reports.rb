@@ -12,6 +12,7 @@ module Reporting
       # Report columns: Invoice# 	Client Name 	Type 	Note 	Date 	Amount
       payments = Payment.select(
           "payments.id as payment_id,
+        invoices.invoice_number,
         invoices.id as invoice_id,
         clients.organization_name as client_name,
         payments.payment_type,
