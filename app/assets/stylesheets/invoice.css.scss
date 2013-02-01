@@ -12,7 +12,10 @@ table.invoice_grid_fields {
   tr.fields:first-child td {
     padding-top: 5px;
   }
-  tr.fields td:first-child{vertical-align: middle; padding-top: 0;}
+  tr.fields td:first-child {
+    vertical-align: middle;
+    padding-top: 0;
+  }
 }
 
 .invoice_balance td {
@@ -317,7 +320,7 @@ p, ol, ul, td {
 .invbody-items td, .invbody-expenses td, .invbody-timeentries td {
   border-bottom: 1px solid #E5E5E5;
   padding: 3px 0 3px 2px;
-  text-align:left;
+  text-align: left;
 }
 
 .invbody-summary {
@@ -513,7 +516,7 @@ table.index th {
   }
   input, textarea {
     width: 20px;
-    height:20px;
+    height: 20px;
   }
   select {
     width: 168px;
@@ -540,8 +543,6 @@ table.index th {
 .field.invoice_total {
   font-size: 22px;
 }
-
-
 
 .payment_heading {
   text-align: center;
@@ -575,7 +576,6 @@ table.index th {
   color: #959595;
   font-size: 11px;
 }
-
 
 /*
 .form-horizontal .form-actions {
@@ -615,24 +615,47 @@ table.index th {
   }
 }
 */
-.invoice_btn_session{
-    margin: auto;
-    width: 518px;
-    padding: 40px 0 0 0;
-}
-.invoice_btn_session input{
-    padding:0px;
-    margin-top:-6px;
+.invoice_btn_session {
+  margin: auto;
+  width: 518px;
+  padding: 40px 0 0 0;
 }
 
-.invoices_link{
-    color:#00BDE5;
+.invoice_btn_session input {
+  padding: 0px;
+  margin-top: -6px;
 }
-.invoices_link:hover{
-    text-decoration: underline;
-    color:#00BDE5;
+
+.invoices_link {
+  color: #00BDE5;
 }
-.draft, .sent, .viewed{color:#00000}
-.disputed{color:#FF0000}
-.paid{color:#009900 !important}
-.partial, .draft-partial{color:#E27100 !important}
+
+.invoices_link:hover {
+  text-decoration: underline;
+  color: #00BDE5;
+}
+
+.draft, .sent, .viewed {
+  color: #000000;
+}
+
+.disputed {
+  color: #FF0000;
+}
+
+.paid {
+  color: #009900 !important;
+}
+
+.partial, .draft-partial {
+  color: #E27100 !important;
+}
+
+.modal .table {
+  tr td span.invoice-status {
+    text-transform: lowercase;
+    font-size: 13px;
+  }
+  th.align-center{text-align: center;}
+
+}
