@@ -189,12 +189,12 @@ jQuery ->
     elem.attr('data-content',message).popover "show"
     elem.focus
 
-  useAsTemplatePopover = (elem,id) ->
-    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to 'this client'.</a>"
+  useAsTemplatePopover = (elem,id,client_name) ->
+    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
     elem.popover
       trigger: "manual"
       content: message
-      placement: "bottom"
+      placement: "right"
       template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
       html: true
     elem.attr('data-content',message).popover "show"
@@ -245,11 +245,15 @@ jQuery ->
       dataType: 'html'
       error: (jqXHR, textStatus, errorThrown) ->
         alert "Error: #{textStatus}"
-      success: (id, textStatus, jqXHR) ->
-        id = jQuery.trim(id)
-        if id isnt ""
+      success: (data, textStatus, jqXHR) ->
+        data = JSON.parse(data)
+        id = jQuery.trim(data[0])
+        client_name = data[1]
+        unless id is "no invoice"
           #jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
-          useAsTemplatePopover(jQuery(".hint_text:eq(0)"),id)
+          useAsTemplatePopover(jQuery(".hint_text:eq(0)"),id,client_name)
         else
          # jQuery("#last_invoice").hide()
           hidePopover(jQuery(".hint_text:eq(0)"))
+  # tool tip
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip();

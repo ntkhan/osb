@@ -149,9 +149,10 @@ class InvoicesController < ApplicationController
       else
         @action = "paid invoices"
       end
+      #redirect_to :action => "enter_payment", :controller => "payments"
       @invoices = Invoice.unarchived.page(params[:page])
     end
-    respond_to { |format| format.js}
+    respond_to { |format| format.js }  #unless params[:payment]
   end
 
   def undo_actions

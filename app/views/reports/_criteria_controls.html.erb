@@ -4,22 +4,22 @@
       <div class="control_name">
         <p>Date Range</p>
       </div>
-      <input name="fromDate" type="text" id="fromDate" value=""/>
+      <input name="criteria[from_date]" type="date" id="from_date" value="<%= Date.today.beginning_of_month %>" title="Enter from date"/>
       <p>to</p>
-      <input name="toDate" type="text" id="toDate"  value="" />
+      <input name="criteria[to_date]" type="date" id="to_date"  value="<%= Date.today %>" />
     </div>
     <div class="report_clients">
       <div class="control_name">
         <p>Clients</p>
       </div>
-      <%= collection_select "criteria", "client_id", Client.all, :id, :organization_name, {:prompt => ""},{"data-placeholder" => "Select a client...", :class => "client chzn-select"} %>
+      <%= collection_select "criteria", "client_id", Client.all, :id, :organization_name, {:prompt => "All"}, {:class => "client chzn-select"} %>
       <div class="control_name">
         <p>Type</p>
       </div>
-      <%= select_tag "criteria[payment_method]", PAYMENT_METHODS, {:class => "payment-method chzn-select"} %>
+      <%= select_tag "criteria[payment_method]", options_for_select(PAYMENT_METHODS.map{|p|[p, p]}), {:prompt => "All", :class => "payment-method chzn-select"} %>
     </div>
     <div class="report_update">
-      <a href="#">Update</a>
+      <a href="#">Go</a>
     </div>
   </div>
 </div>
