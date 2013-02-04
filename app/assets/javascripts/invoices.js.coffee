@@ -185,9 +185,19 @@ jQuery ->
       trigger: "manual"
       content: message
       placement: position
-      template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content alert-error"><p></p></div></div></div>'
+      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-error'><p></p></div></div></div>"
     elem.attr('data-content',message).popover "show"
     elem.focus
+
+  useAsTemplatePopover = (elem,id,client_name) ->
+    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
+    elem.popover
+      trigger: "manual"
+      content: message
+      placement: "right"
+      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
+      html: true
+    elem.attr('data-content',message).popover "show"
 
   hidePopover = (elem) ->
     elem.next(".popover").hide()
@@ -226,6 +236,7 @@ jQuery ->
   # Load last invoice for client if any
   jQuery("#invoice_client_id").change ->
     client_id = jQuery(this).val()
+    hidePopover(jQuery(".hint_text:eq(0)")) if client_id is ""
     jQuery("#last_invoice").hide()
     if not client_id? or client_id isnt ""
       jQuery.ajax '/clients/get_last_invoice',
@@ -234,9 +245,13 @@ jQuery ->
       dataType: 'html'
       error: (jqXHR, textStatus, errorThrown) ->
         alert "Error: #{textStatus}"
-      success: (id, textStatus, jqXHR) ->
-        id = jQuery.trim(id)
-        if id isnt ""
-          jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
+      success: (data, textStatus, jqXHR) ->
+        data = JSON.parse(data)
+        id = jQuery.trim(data[0])
+        client_name = data[1]
+        unless id is "no invoice"
+          #jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
+          useAsTemplatePopover(jQuery(".hint_text:eq(0)"),id,client_name)
         else
-          jQuery("#last_invoice").hide()
+         # jQuery("#last_invoice").hide()
+          hidePopover(jQuery(".hint_text:eq(0)"))
