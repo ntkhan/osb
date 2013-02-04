@@ -151,7 +151,7 @@ class InvoicesController < ApplicationController
       end
       @invoices = Invoice.unarchived.page(params[:page])
     end
-    respond_to { |format| format.js }
+    respond_to { |format| format.js}
   end
 
   def undo_actions
