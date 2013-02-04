@@ -255,3 +255,5 @@ jQuery ->
         else
          # jQuery("#last_invoice").hide()
           hidePopover(jQuery(".hint_text:eq(0)"))
+  # tool tip
+  jQuery(".invoice-tooltip, .invoice-status").tooltip()

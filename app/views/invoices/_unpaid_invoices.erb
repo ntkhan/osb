@@ -13,11 +13,11 @@
       <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id%>
       <td class="invoice"><%= inv.invoice_number %></td>
       <td><%= inv.description %></td>
-      <td><%= inv.client.organization_name %></td>
+      <td><%#= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
       <td class="ta_right currency no-sort"><%= inv.invoice_total %><span class="tt"> <%= current_user.currency_code %></span></td>
       <td><%= "2013-01-01" %></td>
       <td class="align_center <%= inv.status %>">
-        <span class="invoice-status invoice-sent">
+        <span class="invoice-status invoice-sent" title="<%= invoice.description %>">
           <%= inv.status.downcase %>
         </span>
       </td>
