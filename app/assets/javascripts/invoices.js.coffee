@@ -130,12 +130,6 @@ jQuery ->
   # Add date picker to invoice date field
   jQuery("#invoice_invoice_date").datepicker
     dateFormat: 'yy-mm-dd'
-    beforeShow: (input, inst) ->
-      widget = jQuery(inst).datepicker("widget")
-      widget.css "margin-left", jQuery(input).outerWidth() - widget.outerWidth()
-    buttonImage: '/assets/calender_icon.png'
-    buttonImageOnly: true
-    showOn: 'button'
 
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
@@ -191,9 +185,19 @@ jQuery ->
       trigger: "manual"
       content: message
       placement: position
-      template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content alert-error"><p></p></div></div></div>'
+      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-error'><p></p></div></div></div>"
     elem.attr('data-content',message).popover "show"
     elem.focus
+
+  useAsTemplatePopover = (elem,id) ->
+    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to 'this client'.</a>"
+    elem.popover
+      trigger: "manual"
+      content: message
+      placement: "bottom"
+      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
+      html: true
+    elem.attr('data-content',message).popover "show"
 
   hidePopover = (elem) ->
     elem.next(".popover").hide()
@@ -232,6 +236,7 @@ jQuery ->
   # Load last invoice for client if any
   jQuery("#invoice_client_id").change ->
     client_id = jQuery(this).val()
+    hidePopover(jQuery(".hint_text:eq(0)")) if client_id is ""
     jQuery("#last_invoice").hide()
     if not client_id? or client_id isnt ""
       jQuery.ajax '/clients/get_last_invoice',
@@ -243,6 +248,8 @@ jQuery ->
       success: (id, textStatus, jqXHR) ->
         id = jQuery.trim(id)
         if id isnt ""
-          jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
+          #jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
+          useAsTemplatePopover(jQuery(".hint_text:eq(0)"),id)
         else
-          jQuery("#last_invoice").hide()
+         # jQuery("#last_invoice").hide()
+          hidePopover(jQuery(".hint_text:eq(0)"))

@@ -6,7 +6,7 @@
 <body>
 <h2>Dear, <%= @user.first_name %></h2> <br/>
 <p>
-  We have received your payment in the amount of Rs.<%= @amount %> for invoice <%= @invoice%>.
+  We have received your payment in the amount of <%= @user.invoices.first.currency_symbol %><%= @amount %> for invoice <%= @invoice%>.
 </p>
 
 </body>

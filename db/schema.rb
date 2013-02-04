@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130131081133) do
+ActiveRecord::Schema.define(:version => 20130201072840) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -208,6 +208,17 @@ ActiveRecord::Schema.define(:version => 20130131081133) do
     t.decimal  "tax_amount",          :precision => 10, :scale => 0
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
+  end
+
+  create_table "sent_emails", :force => true do |t|
+    t.date     "date"
+    t.string   "sender"
+    t.string   "recipient"
+    t.string   "type"
+    t.string   "subject"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taxes", :force => true do |t|

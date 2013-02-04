@@ -1,6 +1,7 @@
 Osb::Application.routes.draw do
   resources :companies
 
+  match "help" => "help#index"
   match "reports/payment_collected" => "reports#payment_collected"
   match "reports" => "reports#index"
 

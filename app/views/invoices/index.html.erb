@@ -1,39 +1,39 @@
 <%- model_class = Invoice -%>
 <div style="float: left; width: 100%;">
   <%= link_to (content_tag(:span, "+") + 'NEW INVOICE'),
-    new_invoice_path,
-    :class => 'btn_large btn_plus' %>
+              new_invoice_path,
+              :class => 'btn_large btn_plus' %>
   <div class="page-header header_with_margins">
     <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <span class="filter-tag">&nbsp;/&nbsp;Active</span>
+      <span class="filter-tag">&nbsp;/&nbsp;Active</span>
     </h1>
   </div>
   <%= form_tag "invoices/bulk_actions", :remote => true do -%>
-    <div class="action_links_wrapper">
-      <div class="invoice_action_links">
-        <p>
-          <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
-          <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
-          <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
-          <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
-          <span>|</span>
-          <a href="#">Copy</a>
-          <a href="#">Print</a>
-          <a href="#">Send</a>
-          <span>|</span>
-          <%= submit_tag "Enter payment", :name => "payment", :class => "top_links payment" %>
-          <!--<a href="#">Pay Online</a>-->
-        </p>
-      </div>
-      <div class="invoice_search">
-  <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
-        <div class="active_links" id="active_links">
-          <%= render 'filter_links' %>
+      <div class="action_links_wrapper">
+        <div class="invoice_action_links">
+          <p>
+            <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
+            <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
+            <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
+            <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
+            <span>|</span>
+            <a href="#">Copy</a>
+            <a href="#">Print</a>
+            <a href="#">Send</a>
+            <span>|</span>
+            <%= submit_tag "Enter payment", :name => "payment", :class => "top_links payment" %>
+            <!--<a href="#">Pay Online</a>-->
+          </p>
+        </div>
+        <div class="invoice_search">
+          <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
+          <div class="active_links" id="active_links">
+            <%= render 'filter_links' %>
+          </div>
         </div>
       </div>
-    </div>
-    <table class="table table_listing invoice_listing">
-      <thead>
+      <table class="table table_listing invoice_listing">
+        <thead>
         <tr>
           <th class="align_center"><%= check_box_tag 'select_all' %></th>
           <th class="align_center">Invoice</th>
@@ -44,18 +44,18 @@
           <th class="align_center">Status</th>
           <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
         </tr>
-      </thead>
-      <tbody id="invoice_body">
+        </thead>
+        <tbody id="invoice_body">
         <%= render 'invoice' %>
-      </tbody>
-    </table>
-    <div style="float: left;width: 100%; text-align: center;">
-      <%= link_to t('.new', :default => t("helpers.links.new invoice")),
-        new_invoice_path,
-        :class => 'btn_large' %>
-    </div>
+        </tbody>
+      </table>
+      <div style="float: left;width: 100%; text-align: center;">
+        <%= link_to t('.new', :default => t("helpers.links.new invoice")),
+                    new_invoice_path,
+                    :class => 'btn_large' %>
+      </div>
   <% end %>
-  </div>
-    <%# b = "" %>
-    <%# a = open(File.join(Rails.root, 'app', 'assets', '/stylesheets/','application.css'), 'rb') {|f| b += f.read} %>
-    <%#= a %>
+</div>
+<%# b = "" %>
+<%# a = open(File.join(Rails.root, 'app', 'assets', '/stylesheets/','application.css'), 'rb') {|f| b += f.read} %>
+<%#= a %>

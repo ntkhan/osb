@@ -63,7 +63,7 @@ class TaxesController < ApplicationController
 
     respond_to do |format|
       if @taxis.update_attributes(params[:tax])
-        format.html { redirect_to @taxis, notice: 'Tax was successfully updated.' }
+        format.html { redirect_to taxes_url, notice: 'Tax was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,11 +1,18 @@
+<%
+no_record_message = "You haven't entered any payment yet. Please click on New Payment button to enter new payment."
+if params[:status] == "archived"
+  no_record_message = "You haven't any archived payment yet."
+elsif params[:status] == "deleted"
+  no_record_message = "You haven't any deleted payment yet."
+end
+%>
 <% if @payments.length > 0 %>
     <% @payments.each do |payment| %>
         <tr>
           <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
-          <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice), :class => "invoices_link" %><%#= link_to payment.invoice_id, payment%></td>
+          <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice), :class => "invoices_link" rescue "" %><%#= link_to payment.invoice_id, payment%></td>
           <td class="align_left"><%= payment.client_name %></td>
-          <td class="align_center"><%= payment.payment_method %></td>
-          <td class="align_center"><%= payment.payment_type %></td>
+          <td class="align_center"><%= payment.payment_method || payment.payment_type%></td>
           <td class="align_center"><%= payment.notes %></td>
           <td class="align_center"><%= payment.payment_date %></td>
           <td class="align_right"><%= "#{current_user.currency_symbol}  #{number_with_precision(payment.payment_amount, :precision => 2)}" %></td>
@@ -36,14 +43,14 @@
 <% else %>
     <tr>
       <td colspan="9">
-        <div class="no_record_container">You haven't entered any payment yet. Please click on New Payment button to
-          enter new payment.
+        <div class="no_record_container">
+          <%=  no_record_message %>
         </div>
       </td>
     </tr>
 <% end %>
 <tr>
   <td align="center" colspan="9">
-    <%= link_to 'New Payment', '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large", :remote => true %>
+    <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus_bottom", :remote => true %>
   </td>
 </tr>
