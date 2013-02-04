@@ -181,29 +181,42 @@ jQuery ->
     flag
 
   applyPopover = (elem,position,message) ->
-    elem.popover
-      trigger: "manual"
-      content: message
-      placement: position
-      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-error'><p></p></div></div></div>"
-    elem.attr('data-content',message).popover "show"
-    elem.focus
+#    elem.popover
+#      trigger: "manual"
+#      content: message
+#      placement: position
+#      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-error'><p></p></div></div></div>"
+#    elem.attr('data-content',message).popover "show"
+#    elem.focus
+    elem.qtip
+      content:
+        text: message
+      show:
+        event: false
+      hide:
+        event: false
+      position:
+        target: 'bottomMiddle'
+        tooltip: 'bottomMiddle'
+    elem.qtip().show()
 
   useAsTemplatePopover = (elem,id,client_name) ->
-    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
-    elem.popover
-      trigger: "manual"
-      content: message
-      placement: "right"
-      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
-      html: true
-    elem.attr('data-content',message).popover "show"
+#    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
+#    elem.popover
+#      trigger: "manual"
+#      content: message
+#      placement: "right"
+#      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
+#      html: true
+#    elem.attr('data-content',message).popover "show"
 
   hidePopover = (elem) ->
     elem.next(".popover").hide()
+#    elem.qtip().toggle()
 
   jQuery("#invoice_client_id_chzn,.chzn-container").click ->
     jQuery(this).popover "hide"
+#    jQuery(this).qtip().hide()
 
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
@@ -250,10 +263,10 @@ jQuery ->
         id = jQuery.trim(data[0])
         client_name = data[1]
         unless id is "no invoice"
-          #jQuery("#last_invoice").show().find("a").attr("href","/invoices/new/#{id}")
           useAsTemplatePopover(jQuery(".hint_text:eq(0)"),id,client_name)
         else
-         # jQuery("#last_invoice").hide()
           hidePopover(jQuery(".hint_text:eq(0)"))
+
   # tool tip
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip();
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip()
+

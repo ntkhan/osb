@@ -123,7 +123,7 @@ class InvoicesController < ApplicationController
   end
 
   def bulk_actions
-    ids = params[:invoice_ids]
+    @ids,ids = params[:invoice_ids]
     if params[:archive]
       Invoice.archive_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
@@ -143,16 +143,16 @@ class InvoicesController < ApplicationController
       @invoices = Invoice.only_deleted.page(params[:page])
       @action = "recovered from deleted"
     elsif params[:payment]
-      unless Invoice.paid_invoices(ids).present?
-        Invoice.paid_full(ids)
-        @action = "paid"
-      else
-        @action = "paid invoices"
-      end
-      #redirect_to :action => "enter_payment", :controller => "payments"
+      @action = unless Invoice.paid_invoices(ids).present?
+                  #Invoice.paid_full(ids)
+                  "paid"
+                else
+                  "paid invoices"
+                end
       @invoices = Invoice.unarchived.page(params[:page])
     end
-    respond_to { |format| format.js }  #unless params[:payment]
+
+    respond_to { |format| format.js }
   end
 
   def undo_actions
@@ -169,4 +169,5 @@ class InvoicesController < ApplicationController
   def choose_layout
     action_name == 'preview' ? "preview_mode" : "application"
   end
+
 end
