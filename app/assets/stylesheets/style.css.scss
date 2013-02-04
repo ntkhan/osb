@@ -870,6 +870,7 @@ box-shadow: 0 0 5px #D0D0D0;*/
   clear: both;
   text-align: center;
   padding: 29px 0 0 0;
+  *padding-top: 7px;
 }
 
 .login_btn {
@@ -1066,8 +1067,39 @@ h1 span.filter-tag {
 
 /*Primary Footer CSS Ends*/
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  input {
-    line-height: 0px !important;
-  }
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input
+    {
+        line-height:0px !important;
+    }
 }
+
+/*Tipsy CSS Starts*/
+.popover {
+    background-clip: padding-box;
+    background-color: #464646;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    display: none;
+    left: 0;
+    padding: 1px;
+    position: absolute;
+    top: 0;
+    width: 236px;
+    z-index: 1010;
+}
+.alert-danger, .alert-error {
+    background-color: #464646;
+    border-color: none;
+    color: #FFFFFF;
+}
+.popover.top .arrow{
+     border-top-color: #464646;
+}
+.popover.top .arrow:after {
+    border-top-color: #464646;
+}
+/*Tipsy CSS Ends*/
+
+
