@@ -1,6 +1,7 @@
 <% if @taxes.length > 0 %>
   <% @taxes.each do |taxis| %>
     <tr>
+      <td class="align_center" width=10> <%= check_box_tag "tax_ids[]", taxis.id, false, :id => "tax_#{taxis.id}" %></td>
       <td class="align_center"><%= taxis.name %></td>
       <td class="align_center"><%= taxis.percentage %></td>
       <td class="align_center"><%= link_to 'Edit', edit_taxis_path(taxis), :class => "edit_action" %>
@@ -19,13 +20,13 @@
   </tr>
 <% else %>
   <tr>
-    <td colspan="3">
+    <td colspan="4">
       <div class="no_record_container">You haven't created any tax yet. Please click on New Tax button to create new tax.</div>
     </td>
   </tr>
 <% end %>
 <tr>
-  <td align="center" colspan="3">
+  <td align="center" colspan="4">
     <%= link_to 'New Tax', new_taxis_path, :class => "btn_large" %>
   </td>
 </tr>

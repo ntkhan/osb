@@ -35,11 +35,11 @@ module Reporting
         payments.payment_method,
         payments.notes,
         payments.payment_amount,
-        payments.created_at").includes(:invoice => :client).joins(:invoice => :client).where(:created_at => @report_criteria.from_date..@report_criteria.to_date)
+        payments.created_at").includes(:invoice => :client).joins(:invoice => :client).where("payments.created_at" => @report_criteria.from_date..@report_criteria.to_date)
 
       payments.where(["clients.id = ?", @report_criteria.client_id]) unless @report_criteria.client_id == 0
       payments.where(["payments.payment_method = ?", @report_criteria[:payment_method]]) unless @report_criteria.payment_method == 0
-
+      payments.except(:order)
       payments
     end
   end
