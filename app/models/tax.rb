@@ -5,5 +5,41 @@ class Tax < ActiveRecord::Base
   validates :name, :presence => true
   validates :percentage, :presence => true
   paginates_per 4
+  acts_as_archival
+  acts_as_paranoid
   default_scope order('created_at DESC')
+
+  def self.multiple_taxes ids
+    ids = ids.split(",") if ids and ids.class == String
+    where("id IN(?)", ids)
+  end
+
+  def self.archive_multiple ids
+    self.multiple_taxes(ids).each {|tax| tax.archive}
+  end
+
+  def self.delete_multiple ids
+    self.multiple_taxes(ids).each {|tax| tax.destroy}
+  end
+
+  def self.recover_archived ids
+    self.multiple_taxes(ids).each {|tax| tax.unarchive}
+  end
+
+  def self.recover_deleted ids
+    ids = ids.split(",") if ids and ids.class == String
+    where("id IN(?)", ids).only_deleted.each do |tax|
+      tax.recover
+      tax.unarchive
+    end
+  end
+
+  def self.filter params
+    case params[:status]
+      when "active"   then self.unarchived.page(params[:page])
+      when "archived" then self.archived.page(params[:page])
+      when "deleted"  then self.only_deleted.page(params[:page])
+    end
+  end
+
 end

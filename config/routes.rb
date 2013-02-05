@@ -16,7 +16,13 @@ Osb::Application.routes.draw do
       get 'undo_actions'
     end
   end
-  resources :taxes
+  resources :taxes do
+    collection do
+      get 'filter_payments'
+      get 'bulk_actions'
+      get 'undo_actions'
+    end
+  end
 
   match "invoices/preview" => "invoices#preview"
 

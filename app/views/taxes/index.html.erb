@@ -1,15 +1,37 @@
-<div class="page-header"><h1>Listing taxes</h1></div>
+<div class="page-header"><h1>Taxes
+  <span class="filter-tag">&nbsp;/&nbsp;Active</span></h1></div>
+<%= form_tag "taxes/bulk_actions", :remote => true do -%>
+    <div class="action_links_wrapper">
+      <div class="invoice_action_links">
+        <p>
+          <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
+          <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
+          <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
+          <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
+          <span>|</span>
+          <a href="#">Copy</a>
+          <a href="#">Print</a>
+        </p>
+      </div>
+      <div class="invoice_search">
+        <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
+        <div class="active_links" id="active_links">
+          <%= render 'filter_links' %>
+        </div>
+      </div>
+    </div>
+    <table class="table table_listing">
+      <thead>
+      <th class="align_center"><%= check_box_tag 'select_all' %></th>
+      <th class="align_center">Name</th>
+      <th class="align_center">Percentage</th>
+      <th class="align_center" width=75>Actions</th>
+      </thead>
 
-<table class="table table_listing">
-  <thead>
-    <th class="align_center">Name</th>
-    <th class="align_center">Percentage</th>
-    <th class="align_center" width=75>Actions</th>
-  </thead>
-
-<tbody id="tax_body">
-<%= render 'taxes' %>
-</tbody>
-</table>
+      <tbody id="tax_body">
+      <%= render 'taxes' %>
+      </tbody>
+    </table>
+<% end %>
 
 
