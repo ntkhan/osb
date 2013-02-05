@@ -26,7 +26,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def description
-    "Invoice Description"
+    self.invoice_line_items.first.item_description
   end
 
   def self.paid_invoices ids
