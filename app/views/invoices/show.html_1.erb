@@ -1,10 +1,5 @@
 <%- model_class = Invoice -%>
 <p id="pdf_link"><%= link_to "Download Invoice (PDF)", {:controller=>'invoices',:action=>'invoice_pdf',:id=>@invoice.id,:format => "pdf"},:target=>'_blank' %></p>
-<% unless @invoice %>
-<div class="invoice-page-header">
-  Invoice URL seems invalid. Please check and try again.
-</div>
-<% else %>
 <div class="invoice-page-header">
   <h1><%=t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
 </div>
@@ -43,7 +38,7 @@
               <th>
                 <div>Amount Due </div></th>
               <td>
-                <div><%= @invoice.currency_symbol %><%= @invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id) %>  <%= @invoice.currency_code%></div>
+                <div><%= current_user.currency_symbol %><%= number_with_precision(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id), :precision => 2) %> <%= current_user.currency_code %></div>
               </td>
             </tr>
           </tbody>
@@ -57,7 +52,7 @@
         <tr>
           <th class="first"><div class="item">Item </div></th>
           <th><div class="description">Description</div></th>
-          <th><div class="unitcost">Unit Cost</div></th>
+          <th><div class="unitcost" style="padding: 5px 0 5px 10px;">Unit Cost</div></th>
           <th><div class="quantity">Quantity</div></th>
           <th class="last"><div class="linetotal">Line Total</div></th>
         </tr>
@@ -69,9 +64,9 @@
         <tr>
           <td style="width: 120px;"><div class="item"><%= item.item.item_name %></div></td>
           <td><div class="description"><%= item.item_description %> </div></td>
-          <td style="width: 85px;"><div class="unitcost"><%= item.item_unit_cost %></div></td>
-          <td style="width: 80px;"><div class="quantity"><%= item.item_quantity %></div></td>
-          <td style="width: 90px;"><div class="linetotal"><%= item_line_total %></div></td>
+          <td style="width: 85px; text-align: center;"><div class="unitcost"><%= number_with_precision(item.item_unit_cost, :precision => 2)  %></div></td>
+          <td style="width: 80px; text-align: center;"><div class="quantity"><%= item.item_quantity %></div></td>
+          <td style="width: 90px;"><div class="linetotal"><%= number_with_precision(item_line_total, :precision => 2) %></div></td>
         </tr>
         <% end %>
       </tbody>
@@ -82,32 +77,32 @@
         <tr class="invbody-summary-subtotal">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;"><strong>Subtotal</strong></th>
-          <td style="width: 120px;"><strong><%= @invoice.sub_total %></strong></td>
+          <td style="width: 120px;"><strong><%= number_with_precision(@invoice.sub_total, :precision => 2) %></strong></td>
         </tr>
         <tr>
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;">Discount - <%= @invoice.discount_percentage.to_s + "%" %></th>
-          <td style="width: 120px;"><%= @invoice.discount_amount %></td>
+          <td style="width: 120px;"><%= number_with_precision(@invoice.discount_amount, :precision => 2) %></td>
         </tr>
         <tr>
           <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;">VAT (RT710)2%</th>
-          <td style="width: 120px;"><%= @invoice.tax_amount %></td>
+          <th style="width: 150px;">VAT - %</th>
+          <td style="width: 120px;"><%= number_with_precision(@invoice.tax_amount, :precision => 2) %></td>
         </tr>
         <tr>
           <td class="invbody-summary-clean">&nbsp;</td>
           <th class="border" style="width: 150px;"><strong>Total</strong></th>
-          <td class="border" style="width: 120px;"><strong><%= @invoice.invoice_total %></strong></td>
+          <td class="border" style="width: 120px;"><strong><%= number_with_precision(@invoice.invoice_total, :precision => 2) %></strong></td>
         </tr>
         <tr class="invbody-summary-paid">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;">Amount Paid</th>
-          <td style="width: 120px;">-<%= Payment.invoice_paid_amount(@invoice.id) %></td>
+          <td style="width: 120px;">-<%= number_with_precision(Payment.invoice_paid_amount(@invoice.id), :precision => 2) %></td>
         </tr>
         <tr class="invbody-summary-total">
           <td class="invbody-summary-clean">&nbsp;</td>
           <th style="width: 150px;"><div><strong>Amount Due</strong></div></th>
-          <td style="width: 120px;"><div><strong><%= @invoice.currency_symbol %><%= @invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id) %>  <%= @invoice.currency_code%></strong></div></td>
+          <td style="width: 120px;"><div><strong><%= current_user.currency_symbol %><%= number_with_precision(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id), :precision => 2) %>  <%= current_user.currency_code %></strong></div></td>
         </tr>
       </tbody>
     </table>
@@ -125,7 +120,6 @@
     </div>
   </div>
 </div>
-<% end %>
 <%#*<div class="form-actions">%>
 <%#= link_to t('.back', :default => t("helpers.links.back")),
 invoices_path, :class => 'btn'  %>

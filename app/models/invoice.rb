@@ -8,6 +8,8 @@ class Invoice < ActiveRecord::Base
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
   paginates_per 10
+  default_scope order('created_at DESC')
+
   def currency_symbol
     # self.company.currency_symbol
     "$"
@@ -89,7 +91,7 @@ class Invoice < ActiveRecord::Base
           :payment_amount => Payment.update_invoice_status(invoice.id, invoice.invoice_total.to_i),
           :invoice_id => invoice.id,
           :paid_full => 1,
-          :payment_date => Time.now.strftime("%Y-%d-%m")
+          :payment_date => Date.today
         })
     end
   end

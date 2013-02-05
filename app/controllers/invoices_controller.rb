@@ -123,7 +123,7 @@ class InvoicesController < ApplicationController
   end
 
   def bulk_actions
-    @ids,ids = params[:invoice_ids]
+    ids = params[:invoice_ids]
     if params[:archive]
       Invoice.archive_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
