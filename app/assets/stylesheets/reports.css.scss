@@ -105,11 +105,12 @@
     float: right;
     padding: 0 0 0 9px;
   }
-  .report_update a {
+  .report_update input[type=submit] {
     display: block;
     padding: 0 19px 0 19px;
     background: #00bde5;
     border-radius: 3px;
+    border-color: transparent;
     color: #ffffff;
     text-decoration: none;
     text-transform: uppercase;

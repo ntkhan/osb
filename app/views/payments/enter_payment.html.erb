@@ -1,17 +1,20 @@
 <div class="page-header">
 <h1>Enter Payment</h1>
 </div>
-<% grand_total = 0 %>
+<% grand_total,due_amount,payments_entered = 0,0,0%>
 <%= form_tag "update_individual_payment", :method => :put do %>
   <% @payments.each_with_index do |payment, index| %>
-    <% grand_total = grand_total + payment.invoice.invoice_total %>
+    <% #grand_total = grand_total + payment.invoice.invoice_total %>
+    <%due_amount += Payment.invoice_remaining_amount(payment.invoice.id)
+      payments_entered += Payment.invoice_paid_amount(payment.invoice.id)
+    %>
     <%=  fields_for "payments[]", payment do |f| %>
       <%= render "fields", :f => f,:payment=>payment,:index=>index%>
     <% end 
    end %>
   <% if @payments.size > 1 %>
-    <div class="grand_total">Totals</div>
-    <div class="grand_total2"><%= current_user.currency_symbol %><%=  grand_total %></div>
+    <div class="grand_total">Total amount due against selected invoices : <%=current_user.currency_symbol%><%= number_with_precision(due_amount, :precision => 2) %> </div>
+    <div class="grand_total">Payments entered against selected invoices: <%=current_user.currency_symbol%><%= number_with_precision(payments_entered, :precision => 2) %> <%#= current_user.currency_symbol %><%#=  grand_total %></div>
   <%  end %>
   <p id="submit_button"><%= submit_tag "Save", :id=>'submit_payment_form' %></p>
 <% end %>

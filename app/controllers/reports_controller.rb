@@ -5,10 +5,19 @@ class ReportsController < ApplicationController
 
   end
 
-  def payments_collected
-    criteria = params
-    @payments_collected = Reports.payments_collected(criteria)
-    @payments_total = @payments_collected .reject{|payment| payment[:payment_method] == "check"}
-                                          .inject(0){|total, payment| total + payment[:payment_amount]}
+  def reports
+
+    @report_name = params[:report_name]
+
+    #prepare the criteria and report object
+    @criteria = Reporting::Criteria.new(params)
+    @report = Reporting::Report.new({:report_name => @report_name, :report_criteria => @criteria})
+    #payments_collected
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :text => "json response" }
+      #format.json { render :json => @report }
+    end
   end
 end

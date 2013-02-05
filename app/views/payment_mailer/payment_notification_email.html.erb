@@ -4,11 +4,14 @@
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
-<h2>Dear, <%= @user.first_name %></h2> <br/>
+<p>Dear <%= @user.first_name %>,</p>
 <p>
   We have received your payment in the amount of <%= @user.invoices.first.currency_symbol %><%= @amount %> for invoice <%= @invoice%>.
 </p>
 
+<p>Thanks,<br>
+vteams
+</p>
 </body>
 </html>
 
