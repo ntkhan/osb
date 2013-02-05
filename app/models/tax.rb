@@ -7,7 +7,7 @@ class Tax < ActiveRecord::Base
   paginates_per 4
   acts_as_archival
   acts_as_paranoid
-  default_scope order('created_at DESC')
+  default_scope order("#{self.table_name}.created_at DESC")
 
   def self.multiple_taxes ids
     ids = ids.split(",") if ids and ids.class == String

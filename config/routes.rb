@@ -3,6 +3,7 @@ Osb::Application.routes.draw do
 
   match "help" => "help#index"
   match "reports/:report_name" => "reports#reports"
+  match "reports/data/:report_name" => "reports#reports_data"
   #match "reports/payment_collected" => "reports#payment_collected"
   match "reports" => "reports#index"
 
