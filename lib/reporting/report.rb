@@ -1,23 +1,30 @@
 module Reporting
   class Report
+    #include ClassLevelInheritableAttributes
     attr_accessor :report_name, :report_criteria, :report_data
     # @param [options]
     def initialize(options={})
+
+      @report_name = options[:report_name] || "no report"
+      @report_criteria = options[:report_criteria]
+      @report_data =  "Reporting::#{@report_name.camelize}".constantize.new(options).report_data
+    end
+
+    def get_report_data
+      return @report_data
+    end
+  end
+
+  class PaymentsCollected
+    attr_accessor :report_name, :report_criteria, :report_data
+    def initialize(options={})
+      #raise "debugging..."
       @report_name = options[:report_name] || "no report"
       @report_criteria = options[:report_criteria]
       @report_data = get_report_data
     end
 
     def get_report_data
-      case @report_name
-        when "payments_collected"
-          payments_collected
-        else # for time being return same data for all reports
-          payments_collected
-      end
-    end
-
-    def payments_collected
       # Report columns: Invoice# 	Client Name 	Type 	Note 	Date 	Amount
       payments = Payment.select(
           "payments.id as payment_id,
