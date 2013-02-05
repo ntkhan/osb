@@ -11,6 +11,22 @@ class Invoice < ActiveRecord::Base
   paginates_per 10
   default_scope order("#{self.table_name}.created_at DESC")
 
+  def tooltip
+    case self.status
+    when "draft"
+      "Invoice created, but you have not notified your client. Your client will not see this invoice if they log in."
+    when "sent"
+      "Your client has been notified. When they log in the invoice will be visible for printing and payment."
+    when "paid"
+      "Your client has paid this invoice - either online or you have received their funds and updated your records."
+    when "partial"
+      "Your client has partially paid this invoice. Hover over the total to see the amount outstanding."
+    when "draft-partial"
+      "Invoice created and partial payment applied. Your client has no access to this invoice."
+    else
+      ""
+    end
+  end
   def currency_symbol
     # self.company.currency_symbol
     "$"
