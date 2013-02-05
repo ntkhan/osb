@@ -2,7 +2,7 @@ class TaxesController < ApplicationController
   # GET /taxes
   # GET /taxes.json
   def index
-    @taxes = Tax.page(params[:page])
+    @taxes = Tax.unarchived.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -108,7 +108,7 @@ class TaxesController < ApplicationController
     respond_to { |format| format.js }
   end
 
-  def filter_items
+  def filter_taxes
     @taxes = Tax.filter(params)
   end
 
