@@ -3,9 +3,9 @@ class PaymentMailer < ActionMailer::Base
 
   def payment_notification_email(current_user_email,user,invoice,amount)
     @user,@invoice, @amount = user,invoice, amount
-    email_body =  mail(:to => user.email, :subject => "Payment notification").body
+    email_body =  mail(:to => user.email, :subject => "Payment notification").body.to_s
     sentemail = SentEmail.new
-    sentemail.content = #email_body
+    sentemail.content = email_body
     sentemail.sender = current_user_email    #User email
     sentemail.recipient = @user.email #client email
     sentemail.subject = "Payment notification"

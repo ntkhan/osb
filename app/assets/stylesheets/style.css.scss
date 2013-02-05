@@ -1074,17 +1074,14 @@ h1 span.filter-tag {
 }
 
 .logo_tag {
-  background-color: orange;
-  border-radius: 40px 40px 40px 40px;
+  background-color: #B3B3B3;
+  border-radius: 2px 2px 2px 2px;
   color: #FFFFFF;
-  font-family: tahoma;
   font-size: 9px;
-  font-weight: bold;
-  left: -3px;
-  opacity: 0.5;
-  padding: 3px;
+  left: -2px;
+  padding: 1px 3px;
   position: relative;
-  top: -7px;
+  top: -1px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -1105,7 +1102,7 @@ h1 span.filter-tag {
     }
 }
 
-/*Tipsy CSS Starts */
+/*Tipsy CSS Starts*/
 /*
 .popover {
     background-clip: padding-box;
