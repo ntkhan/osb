@@ -13,7 +13,7 @@ end
             <td class="invoice_detail" rowspan="<%= rowspan %>">
               <ul>
                 <li><h1 class="secondary small">Invoice#<%=h payment.invoice.invoice_number %></h1></li>
-                <li><h1 class="green"><%= current_user.currency_symbol %> <%=h payment.invoice.invoice_total %></h1></li>
+                <li><h1 class="green"><%= current_user.currency_symbol %> <%=h number_with_precision(payment.invoice.invoice_total, :precision => 2)  %></h1></li>
                 <li class="invoice_rank"><%= payment.client_name %></li>
                 <li class="invoice_rank person"><%= payment.client_full_name %></li>
               </ul>
