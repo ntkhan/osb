@@ -18,7 +18,7 @@
 		color: #464646;
 		line-height: 0.5;
 		letter-spacing: 0;
-		font-weight: normal;
+		/*font-weight: normal;*/
 		text-transform: capitalize;
 		margin: 0px;
 	}
@@ -146,8 +146,8 @@
 		height: 34px;
 		line-height: 33px;
 		padding: 0 20px;
-		font-family: 'Myriad Pro', 'Dosis', sans-serif;
-		font-weight: 400;
+		font-family: 'Dosis', sans-serif;
+		font-weight: 500;
 		font-style: normal;
 		font-size: 24px;
 		color: #ffffff;
@@ -211,8 +211,8 @@
 		display: inline-block;
 	}
 	.digit_content{
-		font-family: 'Myriad Pro', 'Dosis', sans-serif;
-		font-weight: 300;
+		font-family: 'Dosis', sans-serif;
+		font-weight: 500;
 		font-style: normal;
 		font-size: 42px;
 		color: #00bde5;
