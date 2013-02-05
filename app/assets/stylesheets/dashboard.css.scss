@@ -52,7 +52,7 @@
 		width: 100%
 	}
 	.overview_box_heading h1{
-		padding: 0 18px 19px 18px;
+		padding: 0 18px 21px 18px;
 	}
 	/*Content Left Css Starts*/
 	.day_session{
@@ -165,16 +165,17 @@
 		width: 100%;
 	}
 	.getting_start ul{
-		padding: 0 19px 20px 35px;
+		padding: 0 19px 10px 19px;
 	}
 	.getting_start ul li{
-		list-style: square;
-		color: #00bde5;
+		 background: url("/assets/bullet.png") no-repeat left;
+                 margin: 0 0 4px;
 	}
 	.getting_start ul li a{
 		display: block;
 		color: #00bde5;
 		text-decoration: none;
+                padding: 0 0 0 11px;
 	}
 	.getting_start ul li a:hover, .getting_start ul li:hover{
 		text-decoration: underline;
@@ -193,6 +194,9 @@
 		border-bottom: 1px solid #d7d7d7;
 		margin: 0 0 23px 0;
 	}
+        .graff_highlight img{
+                height: 191px;
+        }
 	.graff_description{
 		float: left;
 		width: 91.8%;
