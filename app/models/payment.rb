@@ -4,6 +4,7 @@ class Payment < ActiveRecord::Base
   paginates_per 10
   acts_as_archival
   acts_as_paranoid
+  default_scope order('created_at DESC')
 
   def client_name
     self.invoice.client.organization_name rescue "credit?"
