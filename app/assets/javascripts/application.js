@@ -29,11 +29,16 @@ jQuery(function(){
     }
     jQuery("#nav .select .sub li").find("a.active").parents("ul.sub").prev("a").addClass("active");
     jQuery("#nav ul.select > li").mouseover(function(){
-       jQuery(".sub").hide();
-       jQuery(".sub",jQuery(this)).show();
+        jQuery(".sub").hide();
+        jQuery(".sub",jQuery(this)).show();
     });
     jQuery("#nav").mouseout(function(){
-       jQuery(".sub").hide();
-       jQuery("li a.active",jQuery(this)).next(".sub").show();
+        jQuery(".sub").hide();
+        jQuery("li a.active",jQuery(this)).next(".sub").show();
     });
+
+    // Placeholder init
+  
 });
+
+

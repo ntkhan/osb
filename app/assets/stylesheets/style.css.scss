@@ -832,14 +832,41 @@ box-shadow: 0 0 5px #D0D0D0;*/
 }
 
 .login_title label {
-  float: left;
+  /*
   width: 22%;
-  line-height: 35px;
+  line-height: 35px;*/
+    float: left;
+    border:1px solid #D7D7D7;
+    border-radius: 3px 0 0 3px;
+    box-shadow: 3px 3px 3px #F3F3F3 inset;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    min-width: 73px;
+    padding-right: 1px;
+    text-align: center;
+    color: #9B9B9B;
+    font-size: 13px;
+    font-weight: normal;
+    border-right: none;
+    margin-top:0px;
 }
 
 .login_title input {
-  float: left;
-  width: 93.25%;
+  /*
+  width: 93.25%;*/
+    float: left;
+    border: 1px solid #D7D7D7;
+    border-radius: 0 3px 3px 0;
+    box-shadow: none;
+    color: #464646;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    height: 28px;
+    line-height: 28px;
+    margin-bottom: 0;
+    padding: 0 9px;
+    width: 72%;
 }
 
 .login_check {
@@ -864,6 +891,7 @@ box-shadow: 0 0 5px #D0D0D0;*/
   padding: 0 0 0 11px;
   width: 86%;
   font-size: 12px;
+  *width: 92%;
 }
 
 .login_btn_container {
@@ -871,6 +899,9 @@ box-shadow: 0 0 5px #D0D0D0;*/
   text-align: center;
   padding: 29px 0 0 0;
   *padding-top: 7px;
+}
+.login_btn_container.sing_in_top {
+  *padding-top: 29px;
 }
 
 .login_btn {
@@ -1043,17 +1074,14 @@ h1 span.filter-tag {
 }
 
 .logo_tag {
-  background-color: orange;
-  border-radius: 40px 40px 40px 40px;
+  background-color: #B3B3B3;
+  border-radius: 2px 2px 2px 2px;
   color: #FFFFFF;
-  font-family: tahoma;
   font-size: 9px;
-  font-weight: bold;
-  left: -3px;
-  opacity: 0.5;
-  padding: 3px;
+  left: -2px;
+  padding: 1px 3px;
   position: relative;
-  top: -7px;
+  top: -1px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -1075,31 +1103,33 @@ h1 span.filter-tag {
 }
 
 /*Tipsy CSS Starts*/
-//.popover {
-//    background-clip: padding-box;
-//    background-color: #464646;
-//    border: none;
-//    border-radius: 5px;
-//    box-shadow: none;
-//    display: none;
-//    left: 0;
-//    padding: 1px;
-//    position: absolute;
-//    top: 0;
-//    width: 236px;
-//    z-index: 1010;
-//}
-//.alert-danger, .alert-error {
-//    background-color: #464646;
-//    border-color: none;
-//    color: #FFFFFF;
-//}
-//.popover.top .arrow{
-//     border-top-color: #464646;
-//}
-//.popover.top .arrow:after {
-//    border-top-color: #464646;
-//}
+/*
+.popover {
+    background-clip: padding-box;
+    background-color: #464646;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    display: none;
+    left: 0;
+    padding: 1px;
+    position: absolute;
+    top: 0;
+    width: 236px;
+    z-index: 1010;
+}
+.alert-danger, .alert-error {
+    background-color: #464646;
+    border-color: none;
+    color: #FFFFFF;
+}
+.popover.top .arrow{
+     border-top-color: #464646;
+}
+.popover.top .arrow:after {
+    border-top-color: #464646;
+}
+ */
 /*Tipsy CSS Ends*/
 
 
