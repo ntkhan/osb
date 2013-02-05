@@ -143,7 +143,7 @@ jQuery ->
   updateInvoiceTotal()
 
   # Validate client, cost and quantity on invoice save
-  jQuery("form#new_invoice").submit ->
+  jQuery("form.form-horizontal").submit ->
     item_rows = jQuery("table#invoice_grid_fields tr.fields:visible")
     flag = true
     # Check if client is selected
