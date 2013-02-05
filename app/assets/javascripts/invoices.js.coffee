@@ -148,12 +148,12 @@ jQuery ->
     flag = true
     # Check if client is selected
     if jQuery("#invoice_client_id").val() is ""
-      applyPopover(jQuery("#invoice_client_id_chzn"),"top","Select a client")
+      applyPopover(jQuery("#invoice_client_id_chzn"),"bottomMiddle","topLeft","Select a client")
       flag = false
     # Check if item is selected
     else if item_rows.find("select.items_list option:selected[value='']").length is item_rows.length
       first_item = jQuery("table#invoice_grid_fields tr.fields:visible:first").find("select.items_list").next()
-      applyPopover(first_item,"left","Select an item")
+      applyPopover(first_item,"bottomMiddle","topLeft","Select an item")
       flag = false
     # Item cost and quantity should be greater then 0
     else
@@ -163,24 +163,24 @@ jQuery ->
           cost = row.find(".cost")
           qty =  row.find(".qty")
           if cost.val() is ""
-            applyPopover(cost,"left","Enter item cost")
+            applyPopover(cost,"bottomMiddle","topLeft","Enter item cost")
           else if cost.val() <= 0
-            applyPopover(cost,"left","Item cost should be greater then 0")
+            applyPopover(cost,"bottomLeft","topLeft","Item cost should be greater then 0")
           else if not jQuery.isNumeric(cost.val())
-            applyPopover(cost,"left","Enter valid Item cost")
+            applyPopover(cost,"bottomLeft","topLeft","Enter valid Item cost")
           else hidePopover(cost)
 
           if qty.val() is ""
-            applyPopover(qty,"right","Enter item quantity")
+            applyPopover(qty,"bottomMiddle","topLeft","Enter item quantity")
           else if qty.val() <= 0
-            applyPopover(qty,"right","Quantity should be greater then 0")
+            applyPopover(qty,"bottomLeft","topLeft","Quantity should be greater then 0")
           else if not jQuery.isNumeric(qty.val())
-            applyPopover(qty,"left","Enter valid Item quantity")
+            applyPopover(qty,"bottomLeft","topLeft","Enter valid Item quantity")
           else hidePopover(qty)
           if cost.val() is "" or cost.val() <= 0 or not jQuery.isNumeric(cost.val()) or qty.val() is "" or qty.val() <= 0 or not jQuery.isNumeric(qty.val()) then flag = false
     flag
 
-  applyPopover = (elem,position,message) ->
+  applyPopover = (elem,position,corner,message) ->
 #    elem.popover
 #      trigger: "manual"
 #      content: message
@@ -196,8 +196,10 @@ jQuery ->
       hide:
         event: false
       position:
-        target: 'bottomMiddle'
-        tooltip: 'bottomMiddle'
+        at: position
+      style:
+        tip:
+          corner: corner
     elem.qtip().show()
 
   useAsTemplatePopover = (elem,id,client_name) ->
@@ -209,14 +211,27 @@ jQuery ->
 #      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
 #      html: true
 #    elem.attr('data-content',message).popover "show"
+    elem.qtip
+      content:
+        text: "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
+      show:
+        event: false
+      hide:
+        event: false
+      position:
+        at: "topRight"
+      style:
+        tip:
+          corner: "leftMiddle"
+    elem.qtip().show()
 
   hidePopover = (elem) ->
-    elem.next(".popover").hide()
-#    elem.qtip().toggle()
+    #elem.next(".popover").hide()
+    elem.qtip("hide")
 
   jQuery("#invoice_client_id_chzn,.chzn-container").click ->
-    jQuery(this).popover "hide"
-#    jQuery(this).qtip().hide()
+#    jQuery(this).popover "hide"
+    jQuery(this).qtip("hide")
 
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
@@ -249,7 +264,7 @@ jQuery ->
   # Load last invoice for client if any
   jQuery("#invoice_client_id").change ->
     client_id = jQuery(this).val()
-    hidePopover(jQuery(".hint_text:eq(0)")) if client_id is ""
+    hidePopover(jQuery("#invoice_client_id_chzn")) if client_id is ""
     jQuery("#last_invoice").hide()
     if not client_id? or client_id isnt ""
       jQuery.ajax '/clients/get_last_invoice',
@@ -263,7 +278,7 @@ jQuery ->
         id = jQuery.trim(data[0])
         client_name = data[1]
         unless id is "no invoice"
-          useAsTemplatePopover(jQuery(".hint_text:eq(0)"),id,client_name)
+          useAsTemplatePopover(jQuery("#invoice_client_id_chzn"),id,client_name)
         else
           hidePopover(jQuery(".hint_text:eq(0)"))
 
