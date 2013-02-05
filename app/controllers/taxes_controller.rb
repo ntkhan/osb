@@ -1,6 +1,7 @@
 class TaxesController < ApplicationController
   # GET /taxes
   # GET /taxes.json
+  include TaxesHelper
   def index
     @taxes = Tax.unarchived.page(params[:page])
 
