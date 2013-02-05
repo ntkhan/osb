@@ -3,6 +3,7 @@ Osb::Application.routes.draw do
 
   match "help" => "help#index"
   match "reports/:report_name" => "reports#reports"
+  match "reports/data/:report_name" => "reports#reports_data"
   #match "reports/payment_collected" => "reports#payment_collected"
   match "reports" => "reports#index"
 
@@ -17,7 +18,13 @@ Osb::Application.routes.draw do
       get 'undo_actions'
     end
   end
-  resources :taxes
+  resources :taxes do
+    collection do
+      get 'filter_taxes'
+      get 'bulk_actions'
+      get 'undo_actions'
+    end
+  end
 
   match "invoices/preview" => "invoices#preview"
 

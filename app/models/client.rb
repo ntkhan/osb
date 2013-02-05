@@ -6,7 +6,8 @@ class Client < ActiveRecord::Base
   has_many :client_contacts, :dependent => :destroy
   accepts_nested_attributes_for :client_contacts, :allow_destroy => true
   paginates_per 10
-  default_scope order('created_at DESC')
+  default_scope order("#{self.table_name}.created_at DESC")
+
   def contact_name
     "#{self.first_name} #{self.last_name}"
   end

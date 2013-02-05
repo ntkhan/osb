@@ -8,8 +8,24 @@ class Invoice < ActiveRecord::Base
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
   paginates_per 10
-  default_scope order('created_at DESC')
+  default_scope order("#{self.table_name}.created_at DESC")
 
+  def tooltip
+    case self.status
+    when "draft"
+      "Invoice created, but you have not notified your client. Your client will not see this invoice if they log in."
+    when "sent"
+      "Your client has been notified. When they log in the invoice will be visible for printing and payment."
+    when "paid"
+      "Your client has paid this invoice - either online or you have received their funds and updated your records."
+    when "partial"
+      "Your client has partially paid this invoice. Hover over the total to see the amount outstanding."
+    when "draft-partial"
+      "Invoice created and partial payment applied. Your client has no access to this invoice."
+    else
+      ""
+    end
+  end
   def currency_symbol
     # self.company.currency_symbol
     "$"
@@ -26,7 +42,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def description
-    "Invoice Description"
+    self.invoice_line_items.first.item_description
   end
 
   def self.paid_invoices ids
