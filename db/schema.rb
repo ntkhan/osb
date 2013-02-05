@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201072840) do
+ActiveRecord::Schema.define(:version => 20130205115130) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -86,33 +86,6 @@ ActiveRecord::Schema.define(:version => 20130201072840) do
     t.datetime "updated_at",                                                 :null => false
   end
 
-  create_table "company_profiles", :force => true do |t|
-    t.string   "org_name"
-    t.string   "country"
-    t.string   "street_address_1"
-    t.string   "street_address_2"
-    t.string   "city"
-    t.string   "province_or_state"
-    t.string   "postal_or_zip_code"
-    t.string   "profession"
-    t.string   "phone_business"
-    t.string   "phone_mobile"
-    t.string   "fax"
-    t.string   "email"
-    t.string   "time_zone"
-    t.boolean  "auto_dst_adjustment"
-    t.string   "currency_code"
-    t.string   "currecy_symbol"
-    t.string   "admin_first_name"
-    t.string   "admin_last_name"
-    t.string   "admin_email"
-    t.decimal  "admin_billing_rate_per_hour", :precision => 10, :scale => 0
-    t.string   "admin_user_name"
-    t.string   "admin_password"
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
-  end
-
   create_table "company_users", :force => true do |t|
     t.integer  "user_id"
     t.integer  "company_id"
@@ -170,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20130201072840) do
     t.datetime "deleted_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
+    t.integer  "payment_terms_id"
   end
 
   create_table "items", :force => true do |t|
@@ -186,6 +160,13 @@ ActiveRecord::Schema.define(:version => 20130201072840) do
     t.datetime "deleted_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
+  end
+
+  create_table "payment_terms", :force => true do |t|
+    t.integer  "number_of_days"
+    t.string   "description"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "payments", :force => true do |t|
@@ -250,9 +231,12 @@ ActiveRecord::Schema.define(:version => 20130201072840) do
 
   create_table "taxes", :force => true do |t|
     t.string   "name"
-    t.decimal  "percentage", :precision => 10, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.decimal  "percentage",     :precision => 10, :scale => 0
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
   end
 
   create_table "users", :force => true do |t|

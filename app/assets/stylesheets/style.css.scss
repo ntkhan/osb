@@ -788,12 +788,12 @@ input.small {
 
 /*Login Page*/
 .login_container {
-  width: 342px;
+  width: 360px;
   margin: auto;
   border-radius: 4px;
   border: 1px solid #ECECEC;
   box-shadow: 0 0 10px #EEEEEE inset;
-  padding: 35px 35px 25px 35px;
+  padding: 35px 34px 25px 34px;
   /*border: 1px solid #d7d7d7;
 box-shadow: 0 0 5px #D0D0D0;*/
 }
@@ -842,9 +842,9 @@ box-shadow: 0 0 5px #D0D0D0;*/
     float: left;
     height: 28px;
     line-height: 28px;
-    min-width: 73px;
-    padding-right: 1px;
-    text-align: center;
+    min-width: 100px;
+    padding:0 10px 0 8px;
+    text-align: left;
     color: #9B9B9B;
     font-size: 13px;
     font-weight: normal;
@@ -866,7 +866,7 @@ box-shadow: 0 0 5px #D0D0D0;*/
     line-height: 28px;
     margin-bottom: 0;
     padding: 0 9px;
-    width: 72%;
+    width: 61.3%;
 }
 
 .login_check {
@@ -1022,56 +1022,54 @@ h1 span.filter-tag {
 }
 
 /*Primary Footer CSS Starts*/
+
 .primary_footer {
   clear: both;
   float: left;
   width: 100%;
   padding: 25px 0 10px 0;
 }
-
 .primary_footer_container {
   border-top: 1px solid #d7d7d7;
   padding: 5px 0 0 0;
   width: 758px;
   margin: auto;
+  text-align: center;
 }
-
-.primary_footer_container p {
-  float: left;
-}
-
 .primary_footer_container ul {
-  float: right;
+  display: inline-block;
   line-height: none;
   margin: 0;
   padding: 5px 0 0 0;
 }
-
 .primary_footer_container ul li {
   float: left;
   display: block;
-  padding: 0 0 0 5px;
   height: 10px;
-  line-height: 6px;
-}
-
-.primary_footer_container ul li.border {
-  border-right: 1px solid #d7d7d7;
-  padding: 0 6px 0 0;
-}
-
-.primary_footer_container a,
-.primary_footer_container p,
-  {
-  text-decoration: none;
-  color: #7d7d7d;
   font-size: 11px;
+  line-height: 8px;
+  color: #7d7d7d;
+}
+.primary_footer_container ul li.links{
+    padding: 0 7px 0 6px;
+    border-left: 1px solid #7d7d7d;
+}
+.primary_footer_container ul li.links:last-child{
+    padding-right: 0px;
+}
+.copy_rights{
+    padding: 0 9px 0 0;
+}
+.primary_footer_container ul li a{
+    color: #7d7d7d;
+}
+.primary_footer_container ul li a:hover, .primary_footer_container ul li a.active{
+    color: #00ace5;
+    text-decoration: underline;
 }
 
-.primary_footer_container a:hover, .primary_footer_container a.active {
-  text-decoration: underline;
-  color: #00ACE5;
-}
+
+
 
 .logo_tag {
   background-color: #B3B3B3;
