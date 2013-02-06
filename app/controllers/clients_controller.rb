@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   include ClientsHelper
+
   def index
     @clients = Client.unarchived.page(params[:page])
 
@@ -19,7 +20,7 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @client }
+      format.json { render :json => @client }
     end
   end
 
@@ -27,10 +28,10 @@ class ClientsController < ApplicationController
   # GET /clients/new.json
   def new
     @client = Client.new
-      @client.client_contacts.build()
+    @client.client_contacts.build()
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @client }
+      format.json { render :json => @client }
     end
   end
 
@@ -42,19 +43,28 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-    @client = Client.new(params[:client])
-
-    respond_to do |format|
-      if @client.save
-        #format.html { redirect_to @client, notice: 'Your client has been created successfully.' }
-        format.json { render json: @client, status: :created, location: @client }
-        new_client_message = new_client(@client.id)
-        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => new_client_message)
-        return
-      else
-        format.html { render action: "new" }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+    unless params[:quick_create]
+      @client = Client.new(params[:client])
+      respond_to do |format|
+        if @client.save
+          #format.html { redirect_to @client, notice: 'Your client has been created successfully.' }
+          format.json { render :json => @client, :status => :created, :location => @client }
+          new_client_message = new_client(@client.id)
+          redirect_to({:action => "edit", :controller => "clients", :id => @client.id}, :notice => new_client_message)
+          return
+        else
+          format.html { render :action => "new" }
+          format.json { render :json => @client.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      @client = Client.create({
+      :organization_name => params[:organization_name],
+      :email => params[:email],
+      :first_name => params[:first_name],
+      :last_name => params[:last_name],
+      :business_phone => params[:business_phone]})
+      respond_to { |format| format.js }
     end
   end
 
@@ -65,13 +75,13 @@ class ClientsController < ApplicationController
 
     respond_to do |format|
       if @client.update_attributes(params[:client])
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
+        format.html { redirect_to @client, :notice => 'Client was successfully updated.' }
         format.json { head :no_content }
-        redirect_to({:action => "edit", :controller => "clients", :id => @client.id},:notice => 'Your client has been updated successfully.')
+        redirect_to({:action => "edit", :controller => "clients", :id => @client.id}, :notice => 'Your client has been updated successfully.')
         return
       else
-        format.html { render action: "edit" }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @client.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -89,7 +99,7 @@ class ClientsController < ApplicationController
   end
 
   def bulk_actions
-    ids =  params[:client_ids]
+    ids = params[:client_ids]
     if params[:archive]
       Client.archive_multiple(ids)
       @clients = Client.unarchived.page(params[:page])
@@ -124,6 +134,6 @@ class ClientsController < ApplicationController
 
   def get_last_invoice
     client = Client.find(params[:id])
-    render :text => [client.last_invoice || "no invoice",client.contact_name || ""]
+    render :text => [client.last_invoice || "no invoice", client.contact_name || ""]
   end
 end

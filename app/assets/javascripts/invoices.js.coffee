@@ -221,10 +221,10 @@ jQuery ->
       hide:
         event: false
       position:
-        at: "topRight"
+        at: "bottomMiddle"
       style:
         tip:
-          corner: "leftMiddle"
+          corner: "topLeft"
     elem.qtip().show()
     elem.focus()
 

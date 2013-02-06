@@ -67,3 +67,11 @@ margin-top:0px;
     text-decoration: underline;
     color:#00BDE5;
 }
+
+#create_client{
+.modal {
+  tr:first-child{background: none;}
+.modal-body{min-height: 0;}
+}
+
+}
