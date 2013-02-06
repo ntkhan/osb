@@ -38,6 +38,8 @@
   .grey_container {
     background: #ebebeb;
     border-radius: 0px 5px 0px 0px;
+    -moz-border-radius: 0px 5px 0px 0px;
+    -webkit-border-radius: 0px 5px 0px 0px;
   }
   .grey_container_left {
     background: url(/assets/grey_left.png) repeat-y left;
@@ -81,6 +83,8 @@
     float: left;
     border: 1px solid #D7D7D7;
     border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
     color: #464646;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
@@ -110,6 +114,8 @@
     padding: 0 19px 0 19px;
     background: #00bde5;
     border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
     border-color: transparent;
     color: #ffffff;
     text-decoration: none;
@@ -128,6 +134,8 @@
     background: #ffffff;
     border: 1px solid #d7d7d7;
     border-radius: 4px 4px 0px 4px;
+    -moz-border-radius: 4px 4px 0px 4px;
+    -webkit-border-radius: 4px 4px 0px 4px;
     overflow: hidden;
     padding: 20px 29px 0 29px;
   }
@@ -268,9 +276,13 @@
   }
   table th:first-child {
     border-radius: 5px 0 0 5px;
+    -moz-border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
   }
   table th:last-child {
     border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
   }
   .align_left {
     text-align: left;
@@ -339,6 +351,8 @@
     background-image: linear-gradient(#FFFFFF 20%, #F6F6F6 50%, #EEEEEE 52%, #F4F4F4 100%);
     border: 1px solid #d7d7d7;
     border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
     box-shadow: none !important; /*0 0 3px #FFFFFF inset, 0 1px 1px rgba(0, 0, 0, 0.1);*/
     color: #464646;
     display: block;

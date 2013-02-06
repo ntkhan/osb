@@ -42,6 +42,8 @@
 		width: 100%;
 		border: 1px solid #d7d7d7;
 		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
 		padding: 21px 0 3px 0;
 		overflow: hidden;
 		margin: 0 0 20px 0;
@@ -126,6 +128,8 @@
         .osb_content a{
                 background: #00BDE5;
                 border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
                 color: #FFFFFF;
                 display: inline-block;
                 font-family: "Dosis",sans-serif;
@@ -143,6 +147,8 @@
 		display: inline-block;
 		background: #00bde5;
 		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 		height: 34px;
 		line-height: 33px;
 		padding: 0 20px;
