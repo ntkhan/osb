@@ -22,6 +22,5 @@ jQuery ->
         tip:
           corner: "leftMiddle"
     elem.qtip().show()
+    elem.focus()
 
-  hidePopover = (elem) ->
-    elem.qtip("hide")

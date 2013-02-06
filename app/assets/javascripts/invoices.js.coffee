@@ -166,7 +166,7 @@ jQuery ->
           if cost.val() is ""
             applyPopover(cost,"bottomMiddle","topLeft","Enter item cost")
           else if cost.val() <= 0
-            applyPopover(cost,"bottomLeft","topLeft","Item cost should be greater then 0")
+            applyPopover(cost,"bottomLeft","topLeft","Unit cost should be greater then 0")
           else if not jQuery.isNumeric(cost.val())
             applyPopover(cost,"bottomLeft","topLeft","Enter valid Item cost")
           else hidePopover(cost)
@@ -202,6 +202,7 @@ jQuery ->
         tip:
           corner: corner
     elem.qtip().show()
+    elem.focus()
 
   useAsTemplatePopover = (elem,id,client_name) ->
 #    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
@@ -225,6 +226,7 @@ jQuery ->
         tip:
           corner: "leftMiddle"
     elem.qtip().show()
+    elem.focus()
 
   hidePopover = (elem) ->
     #elem.next(".popover").hide()
