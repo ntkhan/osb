@@ -47,6 +47,7 @@ table {
     .action_links {
       float: left;
       width: 22px;
+      opacity: .5;
     }
   }
   &.invoice_grid_header {
@@ -617,13 +618,14 @@ table.index th {
 */
 .invoice_btn_session {
   margin: auto;
-  width: 518px;
+  width: 530px;
   padding: 40px 0 0 0;
 }
 
 .invoice_btn_session input {
+  float: left;
   padding: 0px;
-  margin-top: -6px;
+  margin: 0px 10px 0 0;
 }
 
 .invoices_link {

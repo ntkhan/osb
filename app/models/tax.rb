@@ -23,7 +23,11 @@ class Tax < ActiveRecord::Base
   end
 
   def self.recover_archived ids
-    self.multiple_taxes(ids).each {|tax| tax.unarchive}
+    self.multiple_taxes(ids).each do |tax|
+      tax.archive_number = nil
+      tax.archived_at = nil
+      tax.save
+    end
   end
 
   def self.recover_deleted ids
