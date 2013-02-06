@@ -4,9 +4,16 @@
 jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
   jQuery("#contact").click ->
-    jQuery("#adCntcts").toggle 500;
+    jQuery("#adCntcts").toggle 500, ->
+      action = $(this).find("#action")
+      action_text = jQuery(action).html()
+      action_text = (if action_text == "expand" then "collaps" else "expand")
+      $(this).find("#id").html action_text;
   jQuery("#detail").click ->
-    jQuery("#add_Detail").toggle 500;
+    jQuery("#add_Detail").toggle 500, ->
+      action = $(this).find("#action")
+      action_text = (if jQuery(action).html() == "expand" then "collaps" else "expand")
+      $(this).find("#id").html action_text;
   jQuery("#submit_form").click ->
     jQuery("#newClient").submit();
 
