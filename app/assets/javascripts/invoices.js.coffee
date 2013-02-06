@@ -283,5 +283,7 @@ jQuery ->
           hidePopover(jQuery(".hint_text:eq(0)"))
 
   # tool tip
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip()
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip
+    position:
+      at: "bottomCenter"
 

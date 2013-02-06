@@ -462,7 +462,7 @@ p, ol, ul, td {
 }
 
 .txt_controls {
-/*margin-left: 88px;*/
+  /*margin-left: 88px;*/
 }
 
 #invoices_container {
@@ -656,9 +656,12 @@ table.index th {
     text-transform: lowercase;
     font-size: 13px;
   }
-  th.align-center{text-align: center;}
+  th.align-center {
+    text-align: center;
+  }
 }
-.client_hint + .popover{
+
+.client_hint + .popover {
   left: 762.5px !important;
   top: 234.8px !important;
 }
