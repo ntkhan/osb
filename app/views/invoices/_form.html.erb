@@ -6,7 +6,8 @@
           <%= f.label :client_id, "Client", :class => 'control-label' %>
           <div class="controls">
             <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select"} %>
-            <%= link_to "New Client",'#', "data-toggle" => "modal", "data-target" => "#myModal" %>
+            <%= link_to "New Client",'#', "data-toggle" => "modal", "data-target" => "#clientModal" %>
+            <%= link_to "New Item",'#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
             <br/>
             <span class="hint_text client_hint">client you want to send invoice</span>
             <span id="last_invoice" style="display: none;"></span>
