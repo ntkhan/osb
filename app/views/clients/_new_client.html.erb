@@ -1,0 +1,50 @@
+<%= form_tag "/clients/create", :id => "create_client", :remote => true do %>
+    <div id="myModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="model_grey_container">
+        <div class="modal-header">
+          <h1>Add New Client</h1> <br/><br/>
+          <table cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+              <td colspan="4" class="form_field">
+                <%= text_field_tag :organization_name, '', :class => 'text_field', :placeholder => "Organization name" %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="form_field">
+                <%= text_field_tag :email, '', :class => 'text_field', :placeholder => "Email" %>
+              </td>
+              </tr>
+            <tr>
+              <td class="form_field">
+                <%= text_field_tag :first_name,'', :class => 'text_field', :placeholder => "First Name" %>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" class="form_field align_right">
+                <%= text_field_tag :last_name,'', :class => 'text_field', :placeholder => "Last Name" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="form_field">
+                <%= text_field_tag :business_phone,'', :class => 'text_field', :placeholder => "Business Phone" %>
+                <%= hidden_field_tag :quick_create %>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="cross_btn">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="footer ">
+          <%= submit_tag "Add Client", :class => "btn_large" %>
+          <a class="btn_large dark_grey" href="#" data-dismiss="modal">cancel</a>
+        </div>
+      </div>
+    </div>
+<% end %>
