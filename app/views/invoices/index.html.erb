@@ -50,7 +50,11 @@
         </tbody>
       </table>
       <div style="float: left;width: 100%; text-align: center;">
-        <%= link_to t('.new', :default => t("helpers.links.new invoice")),
+        <%= link_to (content_tag(:span, "+") + 'NEW INVOICE'),
+              new_invoice_path,
+              :class => 'btn_large btn_plus_bottom' %>
+        
+        <%#= link_to t('.new', :default => t("helpers.links. (content_tag(:span, "+") +  new invoice")),
                     new_invoice_path,
                     :class => 'btn_large' %>
       </div>
