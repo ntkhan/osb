@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   include PaymentsHelper
+
   def index
     @payments = Payment.unarchived.page(params[:page])
 
@@ -18,7 +19,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @payment }
+      format.json { render :json => @payment }
     end
   end
 
@@ -29,7 +30,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @payment }
+      format.json { render :json => @payment }
     end
   end
 
@@ -45,11 +46,11 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to @payment, notice: 'The payment has been recorded successfully.' }
-        format.json { render json: @payment, status: :created, location: @payment }
+        format.html { redirect_to @payment, :notice => 'The payment has been recorded successfully.' }
+        format.json { render :json => @payment, :status => :created, :location => @payment }
       else
-        format.html { render action: "new" }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @payment.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -61,11 +62,11 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
+        format.html { redirect_to @payment, :notice => 'Payment was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @payment.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -84,10 +85,15 @@ class PaymentsController < ApplicationController
 
   def enter_payment
     @payments = []
-    params[:invoice_ids].each do |inv_id|
-      payment = Payment.new
-      payment.invoice_id = inv_id
-      @payments << payment
+    unless params[:pay_invoice]
+      params[:invoice_ids].each do |inv_id|
+        payment = Payment.new
+        payment.invoice_id = inv_id
+        @payments << payment
+      end
+    else
+      @payments << Payment.new({:invoice_id => params[:invoice_id]})
+      respond_to { |format| format.js }
     end
   end
 
@@ -97,8 +103,12 @@ class PaymentsController < ApplicationController
       pay[:payment_date] ||= Date.today
       Payment.create!(pay).notify_client current_user.email
     end
-    redirect_to(payments_url,:notice => 'Payments against selected invoices have been recorded successfully.')
-    #redirect_to payments_url
+    unless params[:pay_invoice]
+      redirect_to(payments_url, :notice => 'Payments against selected invoices have been recorded successfully.')
+    else
+      @invoices = Invoice.unarchived.page(params[:page])
+      respond_to { |format| format.js }
+    end
   end
 
   def bulk_actions
