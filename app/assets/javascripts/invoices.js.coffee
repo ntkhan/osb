@@ -35,6 +35,7 @@ jQuery ->
     total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
     jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").text(total_balance.toFixed(2))
+    jQuery("#invoice_total_lbl").formatCurrency()
 
   # Apply Tax on totals
   applyTax = (line_total,elem) ->
