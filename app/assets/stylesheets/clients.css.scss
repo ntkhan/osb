@@ -18,6 +18,8 @@ input[type="color"], .uneditable-input {
     font-size: 13px;
     line-height: 28px;
     border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
     margin-bottom:0px;
     box-shadow: none;
 }

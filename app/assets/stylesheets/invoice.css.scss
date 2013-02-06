@@ -53,6 +53,8 @@ table {
   &.invoice_grid_header {
     background: none repeat scroll 0 0 #898989;
     border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
     color: #FFFFFF;
     margin: 0px 0 0 30px;
     width: 96%;
@@ -82,6 +84,8 @@ h1, h2 {
 .invoice_grid_wrapper, .invoice_balance {
   clear: both;
   border-radius: 5px 5px 0 5px;
+  -moz-border-radius: 5px 5px 0 5px;
+  -webkit-border-radius: 5px 5px 0 5px;
   float: right;
 }
 
@@ -423,6 +427,8 @@ p, ol, ul, td {
     color: #464646;
     border: 1px solid #d7d7d7;
     border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
     padding: 0 9px;
     margin: 1px 0 0;
     cursor: default;
@@ -585,6 +591,8 @@ table.index th {
   input[type="submit"] {
     background: #00BDE5;
     border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
     color: #FFFFFF;
     display: inline-block;
     font-family: "Dosis",sans-serif;
