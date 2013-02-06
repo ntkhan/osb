@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   include ItemsHelper
+
   def index
     @items = Item.unarchived.page(params[:page])
 
@@ -42,19 +43,28 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(params[:item])
+    unless params[:quick_create]
+      @item = Item.new(params[:item])
 
-    respond_to do |format|
-      if @item.save
-        #format.html { redirect_to @item, notice: 'Your item has been created successfully.' }
-        format.json { render :json => @item, :status => :created, :location => @item }
-        new_item_message = new_item(@item.id)
-        redirect_to({:action => "edit", :controller => "items", :id => @item.id}, :notice => new_item_message)
-        return
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @item.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @item.save
+          #format.html { redirect_to @item, notice: 'Your item has been created successfully.' }
+          format.json { render :json => @item, :status => :created, :location => @item }
+          new_item_message = new_item(@item.id)
+          redirect_to({:action => "edit", :controller => "items", :id => @item.id}, :notice => new_item_message)
+          return
+        else
+          format.html { render :action => "new" }
+          format.json { render :json => @item.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      @item = Item.create({
+      :item_name => params[:item_name],
+      :item_description => params[:item_description],
+      :unit_cost => params[:unit_cost],
+      :quantity => params[:quantity]})
+      respond_to { |format| format.js }
     end
   end
 

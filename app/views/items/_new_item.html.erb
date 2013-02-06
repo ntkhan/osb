@@ -1,33 +1,28 @@
-<%= form_tag "/clients/create", :id => "create_client", :remote => true do %>
-    <div id="clientModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<%= form_tag "/items/create", :id => "create_item", :remote => true do %>
+    <div id="itemModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="model_grey_container">
         <div class="modal-header">
-          <h1>Add New Client</h1> <br/><br/>
+          <h1>Add New Item</h1> <br/><br/>
           <table cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
               <td colspan="4" class="form_field">
-                <%= text_field_tag :organization_name, '', :class => 'text_field', :placeholder => "Organization name" %>
+                <%= text_field_tag :item_name, '', :class => 'text_field', :placeholder => "Name" %>
               </td>
             </tr>
             <tr>
               <td colspan="2" class="form_field">
-                <%= text_field_tag :email, '', :class => 'text_field', :placeholder => "Email" %>
+                <%= text_field_tag :item_description, '', :class => 'text_field', :placeholder => "Description" %>
               </td>
               </tr>
             <tr>
               <td class="form_field">
-                <%= text_field_tag :first_name,'', :class => 'text_field', :placeholder => "First Name" %>
+                <%= text_field_tag :unit_cost,'', :class => 'text_field', :placeholder => "Unit cost" %>
               </td>
             </tr>
             <tr>
               <td align="right" class="form_field align_right">
-                <%= text_field_tag :last_name,'', :class => 'text_field', :placeholder => "Last Name" %>
-              </td>
-            </tr>
-            <tr>
-              <td class="form_field">
-                <%= text_field_tag :business_phone,'', :class => 'text_field', :placeholder => "Business Phone" %>
+                <%= number_field_tag :quantity,'', :class => 'text_field', :placeholder => "Quantity" %>
                 <%= hidden_field_tag :quick_create %>
               </td>
             </tr>
@@ -42,7 +37,7 @@
         <div class="modal-body">
         </div>
         <div class="footer ">
-          <%= submit_tag "Add Client", :class => "btn_large" %>
+          <%= submit_tag "Add Item", :class => "btn_large" %>
           <a class="btn_large dark_grey" href="#" data-dismiss="modal">cancel</a>
         </div>
       </div>
