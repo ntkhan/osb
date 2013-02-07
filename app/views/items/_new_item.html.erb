@@ -7,22 +7,22 @@
             <tbody>
             <tr>
               <td colspan="4" class="form_field">
-                <%= text_field_tag :item_name, '', :class => 'text_field', :placeholder => "Name" %>
+                <%= text_field_tag "item[item_name]", '', :class => 'text_field', :placeholder => "Name" %>
               </td>
             </tr>
             <tr>
               <td colspan="2" class="form_field">
-                <%= text_field_tag :item_description, '', :class => 'text_field', :placeholder => "Description" %>
+                <%= text_field_tag "item[item_description]", '', :class => 'text_field', :placeholder => "Description" %>
               </td>
               </tr>
             <tr>
               <td class="form_field">
-                <%= text_field_tag :unit_cost,'', :class => 'text_field', :placeholder => "Unit cost" %>
+                <%= text_field_tag "item[unit_cost]",'', :class => 'text_field', :placeholder => "Unit cost" %>
               </td>
             </tr>
             <tr>
               <td align="right" class="form_field align_right">
-                <%= number_field_tag :quantity,'', :class => 'text_field', :placeholder => "Quantity" %>
+                <%= number_field_tag "item[quantity]",'', :class => 'text_field', :placeholder => "Quantity" %>
                 <%= hidden_field_tag :quick_create %>
               </td>
             </tr>

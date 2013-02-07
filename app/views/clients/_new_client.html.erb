@@ -7,27 +7,27 @@
             <tbody>
             <tr>
               <td colspan="4" class="form_field">
-                <%= text_field_tag :organization_name, '', :class => 'text_field', :placeholder => "Organization name" %>
+                <%= text_field_tag "client[organization_name]", '', :class => 'text_field', :placeholder => "Organization name" %>
               </td>
             </tr>
             <tr>
               <td colspan="2" class="form_field">
-                <%= text_field_tag :email, '', :class => 'text_field', :placeholder => "Email" %>
+                <%= text_field_tag "client[email]", '', :class => 'text_field', :placeholder => "Email" %>
               </td>
               </tr>
             <tr>
               <td class="form_field">
-                <%= text_field_tag :first_name,'', :class => 'text_field', :placeholder => "First Name" %>
+                <%= text_field_tag "client[first_name]",'', :class => 'text_field', :placeholder => "First Name" %>
               </td>
             </tr>
             <tr>
               <td align="right" class="form_field align_right">
-                <%= text_field_tag :last_name,'', :class => 'text_field', :placeholder => "Last Name" %>
+                <%= text_field_tag "client[last_name]",'', :class => 'text_field', :placeholder => "Last Name" %>
               </td>
             </tr>
             <tr>
               <td class="form_field">
-                <%= text_field_tag :business_phone,'', :class => 'text_field', :placeholder => "Business Phone" %>
+                <%= text_field_tag "client[business_phone]",'', :class => 'text_field', :placeholder => "Business Phone" %>
                 <%= hidden_field_tag :quick_create %>
               </td>
             </tr>
