@@ -35,14 +35,14 @@
       <table class="table table_listing invoice_listing">
         <thead>
         <tr>
-          <th class="align_center"><%= check_box_tag 'select_all' %></th>
+          <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
           <th class="align_center">Invoice</th>
-          <th class="align_left" width=120>Client</th>
-          <th class="align_left">Description</th>
+          <th class="align_left">Client</th>
+          <th class="align_left" width=150>Description</th>
           <th class="align_right">Total</th>
           <th class="align_center">Date</th>
           <th class="align_center">Status</th>
-          <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+          <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
         </tr>
         </thead>
         <tbody id="invoice_body">
