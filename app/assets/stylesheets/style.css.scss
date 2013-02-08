@@ -480,8 +480,8 @@ table.table_listing {
       border-top: none;
     }
     tr:last-child td {
-      border-top: none;
-      text-align: center;
+      //border-top: none;
+      //text-align: center;
     }
   }
   input[type="checkbox"] {
@@ -630,6 +630,7 @@ td {
     float: left;
     width: 50%;
     margin: 0;
+    text-align: left;
   }
   .paging_info {
     @extend .pagination;
@@ -1148,6 +1149,10 @@ table.table_listing {
       background-color: #F0F0F6;
     }
   }
+}
+
+.btn_wrapper{
+  float: left;width: 100%; text-align: center;
 }
 
 /*********** Table sorting end ***************/

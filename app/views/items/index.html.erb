@@ -43,6 +43,10 @@
   <%= render 'items' %>
   </tbody>
 </table>
+    <div class="btn_wrapper">
+      <%= link_to (content_tag(:span, "+") + 'NEW Item'),
+                  new_item_path, :class => 'btn_large btn_plus_bottom' %>
+    </div>
 <% end %>
 
 

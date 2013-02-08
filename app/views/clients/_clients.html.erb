@@ -27,7 +27,7 @@ end
       </td>
     </tr>
   <% end %>
-  <tr>
+  <tr class="static">
     <td colspan="6">
       <div class="paginator">
         <%= paginate @clients, :remote => true %>
@@ -46,8 +46,3 @@ end
     </td>
   </tr>
 <% end %>
-<tr>
-  <td align="center" colspan="6">
-    <%= link_to (content_tag(:span, "+") + 'NEW Client'), new_client_path, :class => 'btn_large btn_plus_bottom' %>
-  </td>
-</tr>
