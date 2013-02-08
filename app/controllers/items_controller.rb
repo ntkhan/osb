@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
     @items = Item.unarchived.page(params[:page])
 
     respond_to do |format|
+      format.js
       format.html # index.html.erb
       format.json { render :json => @items }
     end

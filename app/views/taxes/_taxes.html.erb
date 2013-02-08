@@ -8,7 +8,7 @@
         <%#= link_to 'Delete', taxis, :class => "del_action", :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
     </tr>
   <% end %>
-  <tr>
+  <tr class="static">
     <td colspan="4">
       <div class="paginator">
         <%= paginate @taxes, :remote => true %>
@@ -25,8 +25,4 @@
     </td>
   </tr>
 <% end %>
-<tr>
-  <td align="center" colspan="4">
-    <%= link_to 'New Tax', new_taxis_path, :class => "btn_large" %>
-  </td>
-</tr>
+

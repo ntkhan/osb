@@ -30,7 +30,7 @@ end
           </td>
         </tr>
     <% end %>
-    <tr>
+    <tr class="static">
       <td colspan="9">
         <div class="paginator">
           <%= paginate @payments, :remote => true %>
@@ -49,8 +49,3 @@ end
       </td>
     </tr>
 <% end %>
-<tr>
-  <td align="center" colspan="9">
-    <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus_bottom", :remote => true %>
-  </td>
-</tr>

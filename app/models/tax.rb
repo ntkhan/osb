@@ -4,7 +4,7 @@ class Tax < ActiveRecord::Base
   has_many :items
   validates :name, :presence => true
   validates :percentage, :presence => true
-  paginates_per 4
+  paginates_per 10
   acts_as_archival
   acts_as_paranoid  :recover_dependent_associations => false
   default_scope order("#{self.table_name}.created_at DESC")

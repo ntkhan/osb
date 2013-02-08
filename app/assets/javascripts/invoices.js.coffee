@@ -6,9 +6,9 @@ jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
 #  # Apply sorting on invoice table
-  jQuery("table.invoice_listing").tablesorter
+  jQuery("table.table_listing").tablesorter
     widgets: ['staticRow']
-
+    sortList: [[1,1]]
 
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
