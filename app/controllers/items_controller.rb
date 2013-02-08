@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   include ItemsHelper
+
   def index
     @items = Item.unarchived.page(params[:page])
 
@@ -43,13 +44,12 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(params[:item])
-
     respond_to do |format|
       if @item.save
-        #format.html { redirect_to @item, notice: 'Your item has been created successfully.' }
+        format.js
         format.json { render :json => @item, :status => :created, :location => @item }
         new_item_message = new_item(@item.id)
-        redirect_to({:action => "edit", :controller => "items", :id => @item.id}, :notice => new_item_message)
+        redirect_to({:action => "edit", :controller => "items", :id => @item.id}, :notice => new_item_message) unless params[:quick_create]
         return
       else
         format.html { render :action => "new" }

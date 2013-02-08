@@ -6,6 +6,7 @@ class InvoicesController < ApplicationController
   include InvoicesHelper
 
   def index
+    #per_page = params[:per]
     @invoices = Invoice.unarchived.page(params[:page])
 
     respond_to do |format|

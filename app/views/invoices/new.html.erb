@@ -1,6 +1,11 @@
 <%- model_class = Invoice -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-                                 :default => "New #{model_class.model_name.human}") %></h1>
+  <h1><%= t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                    :default => "New #{model_class.model_name.human}") %></h1>
 </div>
 <%= render :partial => 'form' %>
+<%= render 'clients/new_client' %>
+<%= render 'items/new_item' %>
+<%= render 'payment_terms/new_term' %>
+<%= render 'taxes/new_tax' %>
+

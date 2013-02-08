@@ -1,0 +1,45 @@
+<%= form_tag "/items/create", :id => "create_item", :remote => true do %>
+    <div id="itemModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="model_grey_container">
+        <div class="modal-header">
+          <h1>Add New Item</h1> <br/><br/>
+          <table cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+              <td colspan="4" class="form_field">
+                <%= text_field_tag "item[item_name]", '', :class => 'text_field', :placeholder => "Name" %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="form_field">
+                <%= text_field_tag "item[item_description]", '', :class => 'text_field', :placeholder => "Description" %>
+              </td>
+              </tr>
+            <tr>
+              <td class="form_field">
+                <%= text_field_tag "item[unit_cost]",'', :class => 'text_field', :placeholder => "Unit cost" %>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" class="form_field align_right">
+                <%= number_field_tag "item[quantity]",'', :class => 'text_field', :placeholder => "Quantity" %>
+                <%= hidden_field_tag :quick_create %>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="cross_btn">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="footer ">
+          <%= submit_tag "Add Item", :class => "btn_large" %>
+          <a class="btn_large dark_grey" href="#" data-dismiss="modal">cancel</a>
+        </div>
+      </div>
+    </div>
+<% end %>

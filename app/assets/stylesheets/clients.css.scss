@@ -2,68 +2,92 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 select, textarea, input[type="text"], input[type="password"],
 input[type="datetime"], input[type="datetime-local"],
 input[type="date"], input[type="month"], input[type="time"],
 input[type="week"], input[type="number"], input[type="email"],
 input[type="url"], input[type="search"], input[type="tel"],
 input[type="color"], .uneditable-input {
-    width: 490px;
-    height: 28px;
-    border: 1px solid #d7d7d7;
-    padding: 0 9px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #464646;
-    font-size: 13px;
-    line-height: 28px;
-    border-radius: 3px;
-    margin-bottom:0px;
-    box-shadow: none;
+  width: 490px;
+  height: 28px;
+  border: 1px solid #d7d7d7;
+  padding: 0 9px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #464646;
+  font-size: 13px;
+  line-height: 28px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-bottom: 0px;
+  box-shadow: none;
 }
+
 h1, h2, h3, h4, h5, h6 {
-    margin: 0px;
+  margin: 0px;
 }
+
 .form_title {
- line-height:normal;
+  line-height: normal;
 }
+
 label.form_title {
-    padding: 0 0 10px;
-    margin-bottom:0px;
-    width:auto;
-    float:left;
-    font-size:13px;
-    font-weight:bold;
+  padding: 0 0 10px;
+  margin-bottom: 0px;
+  width: auto;
+  float: left;
+  font-size: 13px;
+  font-weight: bold;
 }
+
 .form_title span {
-    margin-top:-6px;
-    margin-left:3px;
-    float:left;
+  margin-top: -6px;
+  margin-left: 3px;
+  float: left;
 }
 
 .page-header {
-    margin: 0px;
+  margin: 0px;
 }
+
 .client_contacts_table .form_title {
-   float:left;
+  float: left;
 }
-.client_contacts_table #add_new_contact{
-  float:left;
+
+.client_contacts_table #add_new_contact {
+  float: left;
 }
-.client_contacts_table #add_new_contact a{
-margin-top:0px;
+
+.client_contacts_table #add_new_contact a {
+  margin-top: 0px;
 }
+
 .add:hover {
-    color: #197B30;
+  color: #197B30;
 }
+
 .remove:hover {
-    color: #DD0C1D;
+  color: #DD0C1D;
 }
-.client_organize a{
-    color: #00BDE5;
+
+.client_organize a {
+  color: #00BDE5;
 
 }
-.sent_email_link:hover{
-    text-decoration: underline;
-    color:#00BDE5;
+
+.sent_email_link:hover {
+  text-decoration: underline;
+  color: #00BDE5;
+}
+
+#create_client {
+  .modal {
+    tr:first-child {
+      background: none;
+    }
+    .modal-body {
+      min-height: 0;
+    }
+  }
+
 }

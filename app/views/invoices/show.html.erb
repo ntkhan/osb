@@ -57,7 +57,7 @@
                                 </tr>
                                 <tr>
                                     <td>Amount</td>
-                                    <td><%= current_user.currency_symbol %><%= number_with_precision(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id), :precision => 2) %> <%= current_user.currency_code %></td>
+                                    <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></td>
                                 </tr>
                             </table>
                         </div>
@@ -87,9 +87,9 @@
                                 <tr>
                                     <td class="align_left"><%= item.item.item_name %></td>
                                     <td class="align_left"><%= item.item_description %></td>
-                                    <td class="align_right"><%= number_with_precision(item.item_unit_cost, :precision => 2)  %></td>
+                                    <td class="align_right"><%= number_to_currency(item.item_unit_cost)  %></td>
                                     <td class="align_right"><%= item.item_quantity %></td>
-                                    <td class="align_right"><%= number_with_precision(item_line_total, :precision => 2) %></td>
+                                    <td class="align_right"><%= number_to_currency(item_line_total) %></td>
                                 </tr>
                                 <% end %>
                             </table>
@@ -105,27 +105,27 @@
                                 </colgroup>
                                 <tr>
                                     <th>Subtotal</th>
-                                    <th><%= number_with_precision(@invoice.sub_total, :precision => 2) %></th>
+                                    <th><%= number_to_currency(@invoice.sub_total) %></th>
                                 </tr>
                                 <tr>
                                     <td>Discount - <%= @invoice.discount_percentage.to_s + "%" %></td>
-                                    <td><%= number_with_precision(@invoice.discount_amount, :precision => 2) %></td>
+                                    <td><%= number_to_currency(@invoice.discount_amount) %></td>
                                 </tr>
                                 <tr>
                                     <td class="bottom_padding">VAT - %</td>
-                                    <td><%= number_with_precision(@invoice.tax_amount, :precision => 2) %></td>
+                                    <td><%= number_to_currency(@invoice.tax_amount) %></td>
                                 </tr>
                                 <tr class="single_border">
                                     <th class="top_padding">Total</th>
-                                    <th><%= number_with_precision(@invoice.invoice_total, :precision => 2) %></th>
+                                    <th><%= number_to_currency(@invoice.invoice_total) %></th>
                                 </tr>
                                 <tr>
                                     <td class="bottom_padding">Amount Paid</td>
-                                    <td>-<%= number_with_precision(Payment.invoice_paid_amount(@invoice.id), :precision => 2) %></td>
+                                    <td>-<%= number_to_currency(Payment.invoice_paid_amount(@invoice.id)) %></td>
                                 </tr>
                                 <tr class="double_border">
                                     <th class="top_padding">Amount Due</th>
-                                    <th><%= current_user.currency_symbol %><%= number_with_precision(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id), :precision => 2) %>  <%= current_user.currency_code %></th>
+                                    <th><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></th>
                                 </tr>
                             </table>
                         </div>

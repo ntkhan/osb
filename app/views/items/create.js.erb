@@ -1,0 +1,2 @@
+jQuery("button[class=close]").click();
+jQuery("select.items_list").append("<option value='<%= @item.id%>'><%= @item.item_name %></option>").trigger("liszt:updated");

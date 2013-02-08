@@ -4,6 +4,12 @@
 
 jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
+
+#  # Apply sorting on invoice table
+  jQuery("table.invoice_listing").tablesorter
+    widgets: ['staticRow']
+
+
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
@@ -35,6 +41,7 @@ jQuery ->
     total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
     jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").text(total_balance.toFixed(2))
+    jQuery("#invoice_total_lbl").formatCurrency()
 
   # Apply Tax on totals
   applyTax = (line_total,elem) ->
@@ -143,7 +150,7 @@ jQuery ->
   updateInvoiceTotal()
 
   # Validate client, cost and quantity on invoice save
-  jQuery("form#new_invoice").submit ->
+  jQuery("form.form-horizontal").submit ->
     item_rows = jQuery("table#invoice_grid_fields tr.fields:visible")
     flag = true
     # Check if client is selected
@@ -165,7 +172,7 @@ jQuery ->
           if cost.val() is ""
             applyPopover(cost,"bottomMiddle","topLeft","Enter item cost")
           else if cost.val() <= 0
-            applyPopover(cost,"bottomLeft","topLeft","Item cost should be greater then 0")
+            applyPopover(cost,"bottomLeft","topLeft","Unit cost should be greater then 0")
           else if not jQuery.isNumeric(cost.val())
             applyPopover(cost,"bottomLeft","topLeft","Enter valid Item cost")
           else hidePopover(cost)
@@ -201,6 +208,7 @@ jQuery ->
         tip:
           corner: corner
     elem.qtip().show()
+    elem.focus()
 
   useAsTemplatePopover = (elem,id,client_name) ->
 #    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
@@ -219,11 +227,12 @@ jQuery ->
       hide:
         event: false
       position:
-        at: "topRight"
+        at: "bottomMiddle"
       style:
         tip:
-          corner: "leftMiddle"
+          corner: "topLeft"
     elem.qtip().show()
+    elem.focus()
 
   hidePopover = (elem) ->
     #elem.next(".popover").hide()
@@ -283,5 +292,7 @@ jQuery ->
           hidePopover(jQuery(".hint_text:eq(0)"))
 
   # tool tip
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip()
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip
+    position:
+      at: "bottomCenter"
 

@@ -35,12 +35,12 @@
 <table class="table table_listing client_listing">
   <thead>
     <tr>
-      <th class="align_center"><%= check_box_tag 'select_all' %></th>
+      <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
       <th>Organization</th>
       <th>Contact</th>
       <th>Email</th>
       <th>Phone</th>
-      <th class="align_center" width=75><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th class="align_center not-sortable" width=75><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody id="client_body">

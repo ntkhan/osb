@@ -20,6 +20,9 @@
 //= require chosen.jquery
 //= require jquery.css3caching.js
 //= require invoices.js.coffee
+//= require formatCurrency.js
+//= require tableSorter.js
+//= require tablesorter.staticrow.js
 
 jQuery(function(){
     //override default behavior of inserting new subforms into form    

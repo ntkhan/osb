@@ -11,14 +11,14 @@
 		text-decoration: none;
 	}
 	h1{
-		font-family: 'Myriad Pro', 'Dosis', sans-serif;
-		font-weight: 300;
+		font-family: 'Dosis', sans-serif;
+		font-weight: 500;
 		font-style: normal;
 		font-size: 22px;
 		color: #464646;
 		line-height: 0.5;
 		letter-spacing: 0;
-		font-weight: normal;
+		/*font-weight: normal;*/
 		text-transform: capitalize;
 		margin: 0px;
 	}
@@ -42,6 +42,8 @@
 		width: 100%;
 		border: 1px solid #d7d7d7;
 		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
 		padding: 21px 0 3px 0;
 		overflow: hidden;
 		margin: 0 0 20px 0;
@@ -52,7 +54,7 @@
 		width: 100%
 	}
 	.overview_box_heading h1{
-		padding: 0 18px 19px 18px;
+		padding: 0 18px 21px 18px;
 	}
 	/*Content Left Css Starts*/
 	.day_session{
@@ -126,6 +128,8 @@
         .osb_content a{
                 background: #00BDE5;
                 border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
                 color: #FFFFFF;
                 display: inline-block;
                 font-family: "Dosis",sans-serif;
@@ -143,11 +147,13 @@
 		display: inline-block;
 		background: #00bde5;
 		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 		height: 34px;
 		line-height: 33px;
 		padding: 0 20px;
-		font-family: 'Myriad Pro', 'Dosis', sans-serif;
-		font-weight: 400;
+		font-family: 'Dosis', sans-serif;
+		font-weight: 500;
 		font-style: normal;
 		font-size: 24px;
 		color: #ffffff;
@@ -165,16 +171,17 @@
 		width: 100%;
 	}
 	.getting_start ul{
-		padding: 0 19px 20px 35px;
+		padding: 0 19px 10px 19px;
 	}
 	.getting_start ul li{
-		list-style: square;
-		color: #00bde5;
+		 background: url("/assets/bullet.png") no-repeat left;
+                 margin: 0 0 4px;
 	}
 	.getting_start ul li a{
 		display: block;
 		color: #00bde5;
 		text-decoration: none;
+                padding: 0 0 0 11px;
 	}
 	.getting_start ul li a:hover, .getting_start ul li:hover{
 		text-decoration: underline;
@@ -193,6 +200,9 @@
 		border-bottom: 1px solid #d7d7d7;
 		margin: 0 0 23px 0;
 	}
+        .graff_highlight img{
+                height: 191px;
+        }
 	.graff_description{
 		float: left;
 		width: 91.8%;
@@ -207,14 +217,16 @@
 		display: inline-block;
 	}
 	.digit_content{
-		font-family: 'Myriad Pro', 'Dosis', sans-serif;
-		font-weight: 300;
+		font-family: 'Dosis', sans-serif;
+		font-weight: 500;
 		font-style: normal;
 		font-size: 42px;
 		color: #00bde5;
 		font-weight: normal;
 		padding: 39px 0 8px 0;
+                margin: 0 0 8px 0;
 		letter-spacing: 0.2px;
+                display: block;
 	}
 	.digit_description{
 		color: #464646;

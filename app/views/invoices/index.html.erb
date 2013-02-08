@@ -35,14 +35,14 @@
       <table class="table table_listing invoice_listing">
         <thead>
         <tr>
-          <th class="align_center"><%= check_box_tag 'select_all' %></th>
+          <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
           <th class="align_center">Invoice</th>
-          <th class="align_left" width=120>Client</th>
-          <th class="align_left">Description</th>
+          <th class="align_left">Client</th>
+          <th class="align_left" width=150>Description</th>
           <th class="align_right">Total</th>
           <th class="align_center">Date</th>
           <th class="align_center">Status</th>
-          <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+          <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
         </tr>
         </thead>
         <tbody id="invoice_body">
@@ -50,12 +50,17 @@
         </tbody>
       </table>
       <div style="float: left;width: 100%; text-align: center;">
-        <%= link_to t('.new', :default => t("helpers.links.new invoice")),
+        <%= link_to (content_tag(:span, "+") + 'NEW INVOICE'),
+              new_invoice_path,
+              :class => 'btn_large btn_plus_bottom' %>
+        
+        <%#= link_to t('.new', :default => t("helpers.links. (content_tag(:span, "+") +  new invoice")),
                     new_invoice_path,
                     :class => 'btn_large' %>
       </div>
   <% end %>
 </div>
+<%= render 'pay_invoice' %>
 <%# b = "" %>
 <%# a = open(File.join(Rails.root, 'app', 'assets', '/stylesheets/','application.css'), 'rb') {|f| b += f.read} %>
 <%#= a %>
