@@ -18,8 +18,8 @@
         </div>
         <div class="header_menu">
           <ul>
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="#" class="no_links">My Account</a></li>
+            <li><a href="#" class="no_links">Settings</a></li>
             <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
           </ul>
         </div>
@@ -44,8 +44,8 @@
               </ul>
             </li>
             <li><%= active_link_to "Payments", payments_path %></li>
-            <li><%= active_link_to "Reports", "/reports" %></li>
-            <li><%= active_link_to "Help", "/help" %></li>
+            <li><%= active_link_to "Reports", "/reports" ,:class=>"no_links"%></li>
+            <li><%= active_link_to "Help", "/help",:class=>"no_links" %></li>
           </ul>
         </div>
       </div>

@@ -291,8 +291,11 @@ jQuery ->
         else
           hidePopover(jQuery(".hint_text:eq(0)"))
 
-  # tool tip
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip
+  # tool tip on links not implemented yet
+  jQuery(".no_links").attr "title", "This functionality is not implemented yet."
+  # tool tip on invoice statuses
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .no_links").qtip
     position:
       at: "bottomCenter"
+
 
