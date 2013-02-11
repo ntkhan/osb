@@ -31,4 +31,5 @@ jQuery('#active_links a').removeClass('active');
   jQuery('.get_actives').addClass('active');
 <%end%>
 jQuery('#select_all').attr('checked',false);
+jQuery('tfoot#paging_links').html('<%= escape_javascript render("paging") %>');
 jQuery("table.table_listing").trigger('update');

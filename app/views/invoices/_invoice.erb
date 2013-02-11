@@ -30,17 +30,6 @@
           </td>
         </tr>
     <% end %>
-    <tr class="static">
-      <td colspan="8" style="border-top: 1px solid #DDDDDD; text-align: left; ">
-        <div class="paginator">
-          <%= paginate @invoices, :remote => true %>
-          <div class="paging_info">
-            <%= page_entries_info @invoices %>
-            <%#= custom_per_page %>
-          </div>
-        </div>
-      </td>
-    </tr>
 
 <% else %>
     <tr>
