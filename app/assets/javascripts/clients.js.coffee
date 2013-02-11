@@ -18,7 +18,7 @@ jQuery ->
     jQuery("#newClient").submit();
 
   # Validate client
-  jQuery("form#newClient").submit ->
+  jQuery("form#newClient,form#create_client").submit ->
     flag = true
     pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i
     client_email = jQuery("#client_email").val()

@@ -20,7 +20,7 @@
   <!-- content_header_data -->
 
   <div class="table_session">
-    <table cellspacing="0" cellpadding="0">
+    <table cellspacing="0" cellpadding="0" class="table_listing">
       <colgroup>
         <col class="first">
         <col class="second">
@@ -29,7 +29,7 @@
         <col class="fifth">
         <col class="sixth">
       </colgroup>
-
+      <thead>
       <tr>
         <th class="align_left">Client</th>
         <% 12.times do |month| %>
@@ -47,6 +47,7 @@
             <td class="align_right"><%= number_to_currency(revenue.client_total) %></td>
           </tr>
       <% end %>
+      </tbody>
     </table>
   </div>
   <!-- table_session -->

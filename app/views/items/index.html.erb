@@ -1,6 +1,6 @@
 <div class="top_plus_btn">
-    <%= link_to (content_tag(:span, "+") + 'NEW Item'),
-    new_item_path, :class => 'btn_large btn_plus' %>
+  <%= link_to (content_tag(:span, "+") + 'NEW Item'),
+              new_item_path, :class => 'btn_large btn_plus' %>
 </div>
 <div class="page-header">
   <h1>Items
@@ -16,8 +16,8 @@
           <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
           <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
           <span>|</span>
-          <a href="#">Copy</a>
-          <a href="#">Print</a>
+          <a href="#" class="no_links">Copy</a>
+          <a href="#" class="no_links">Print</a>
         </p>
       </div>
       <div class="invoice_search">
@@ -27,22 +27,25 @@
         </div>
       </div>
     </div>
-<table class="table table_listing item_listing">
-  <thead>
-    <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
-    <th class="align_left">Item name</th>
-    <th class="align_left">Item description</th>
-    <th class="align_right">Unit cost ($)</th>
-    <th class="align_right">Quantity</th>
-    <th class="align_center">Tax 1</th>
-    <th class="align_center">Tax 2</th>
-    <th class="align_center not-sortable">Actions</th>
-  </thead>
+    <table class="table table_listing item_listing">
+      <thead>
+      <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
+      <th class="align_left">Item name</th>
+      <th class="align_left">Item description</th>
+      <th class="align_right" style="padding-right: 20px;">Unit cost ($)</th>
+      <th class="align_right" style="padding-right: 20px;">Quantity</th>
+      <th class="align_center">Tax 1</th>
+      <th class="align_center">Tax 2</th>
+      <th class="align_center not-sortable">Actions</th>
+      </thead>
 
-  <tbody id="item_body">
-  <%= render 'items' %>
-  </tbody>
-</table>
+      <tbody id="item_body">
+      <%= render 'items' %>
+      <tfoot id="paging_links">
+      <%= render "paging" %>
+      </tfoot>
+      </tbody>
+    </table>
     <div class="btn_wrapper">
       <%= link_to (content_tag(:span, "+") + 'NEW Item'),
                   new_item_path, :class => 'btn_large btn_plus_bottom' %>

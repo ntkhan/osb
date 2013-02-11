@@ -27,16 +27,6 @@ end
       </td>
     </tr>
   <% end %>
-  <tr class="static">
-    <td colspan="6">
-      <div class="paginator">
-        <%= paginate @clients, :remote => true %>
-        <div class="paging_info">
-          <%= page_entries_info @clients %>
-        </div>
-      </div>
-    </td>
-  </tr>
 <% else %>
   <tr>
     <td colspan="6">

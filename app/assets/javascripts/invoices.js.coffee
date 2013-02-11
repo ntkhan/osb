@@ -301,4 +301,13 @@ jQuery ->
     position:
       at: "bottomCenter"
 
+  # Hide placeholder text on focus
+  $("form#create_client input[type=text]").focus(->
+    @dataPlaceholder = @placeholder
+    @removeAttribute "placeholder"
+  ).blur ->
+    @placeholder = @dataPlaceholder
+    @removeAttribute "dataPlaceholder"
+
+
 
