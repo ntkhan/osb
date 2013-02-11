@@ -24,24 +24,27 @@
 //= require tableSorter.js
 //= require tablesorter.staticrow.js
 
-jQuery(function(){
+jQuery(function () {
     //override default behavior of inserting new subforms into form    
-    window.NestedFormEvents.prototype.insertFields = function(content, assoc, link) {
+    window.NestedFormEvents.prototype.insertFields = function (content, assoc, link) {
         var $tr = $(link).closest('tr');
         return $(content).insertBefore($tr);
     }
     jQuery("#nav .select .sub li").find("a.active").parents("ul.sub").prev("a").addClass("active");
-    jQuery("#nav ul.select > li").mouseover(function(){
+    jQuery("#nav ul.select > li").mouseover(function () {
         jQuery(".sub").hide();
-        jQuery(".sub",jQuery(this)).show();
+        jQuery(".sub", jQuery(this)).show();
     });
-    jQuery("#nav").mouseout(function(){
+    jQuery("#nav").mouseout(function () {
         jQuery(".sub").hide();
-        jQuery("li a.active",jQuery(this)).next(".sub").show();
+        jQuery("li a.active", jQuery(this)).next(".sub").show();
     });
 
-    // Placeholder init
-  
+    // toggle page effect by clicking on alpha tag
+    jQuery(".logo_tag").click(function () {
+        jQuery("#main-container").toggleClass("page-effect");
+    }).qtip();
+
 });
 
 

@@ -49,6 +49,10 @@ body {
   width: 900px;
 }
 
+.page-effect{
+  background: url(/assets/page-effect.png) no-repeat;
+}
+
 h1 {
   font-family: 'Dosis', sans-serif;
   font-weight: 400;
@@ -592,12 +596,12 @@ td {
       color: #00BDE5;
       text-decoration: none;
       margin-right: 8px;
-      background: #FFFFFF;
+      background: transparent;
       padding: 0 0 3px 0;
       border: 0 none;
       &:hover {
         text-decoration: underline;
-        background-color: #FFFFFF;
+        background-color: transparent;
       }
     }
   }
@@ -1114,6 +1118,7 @@ h1 span.filter-tag {
   padding: 1px 3px;
   position: relative;
   top: -1px;
+  cursor: pointer;
 }
 
 /*********************** Table Sorting css ****************/
