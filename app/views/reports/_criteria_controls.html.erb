@@ -5,7 +5,7 @@
           <div class="control_name">
             <p>Date Range</p>
           </div>
-          <input name="criteria[from_date]" type="date" id="from_date" value="<%= Date.today.beginning_of_month %>" title="Enter from date"/>
+          <input name="criteria[from_date]" type="date" id="from_date" value="<%= -1.month.from_now.to_date %>" title="Enter from date"/>
 
           <p>to</p>
           <input name="criteria[to_date]" type="date" id="to_date" value="<%= Date.today %>"/>
@@ -14,7 +14,7 @@
           <div class="control_name">
             <p>Clients</p>
           </div>
-          <%= collection_select "criteria", "client_id", Client.all, :id, :organization_name, {:prompt => true}, {:class => "client chzn-select"} %>
+          <%= collection_select "criteria", "client_id", [Client.new({:id => 0, :organization_name => "All"})] + Client.all, :id, :organization_name, {:prompt => "All"}, {:class => "client chzn-select"} %>
           <div class="control_name">
             <p>Type</p>
           </div>

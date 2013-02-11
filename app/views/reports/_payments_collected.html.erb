@@ -13,21 +13,8 @@
         <ul>
           <li class="header_name"><%= @report.client_name %></li>
           <li class="header_duration"><%= @report.period %></li>
-          <li class="header_description">This report shows a history of all payments made for every invoice
-            selectable by client and by date.
-          </li>
         </ul>
       </div>
-    </div>
-    <div class="header_data_right">
-      <ul class="download_report">
-        <li class="download_report_title">Export to:</li>
-        <li class="download_sep">CSV</li>
-        <li>Excel</li>
-      </ul>
-      <ul class="print_report">
-        <li><a href="#">Print Report</a></li>
-      </ul>
     </div>
   </div>
   <!-- content_header_data -->
@@ -79,7 +66,7 @@
     <div class="total_payment">
       <ul>
         <li class="total_payment_title">Total Payments Received:</li>
-        <li>$ <%= @payments_total || "Total object missing" %> <span>usd</span></li>
+        <li>$ <%= @report.report_total || "Total object missing" %> <span>usd</span></li>
       </ul>
     </div>
     <div class="footer_note">
