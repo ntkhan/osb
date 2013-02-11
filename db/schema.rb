@@ -26,11 +26,8 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.string   "email"
     t.string   "home_phone"
     t.string   "mobile_number"
-    t.string   "archive_number"
-    t.datetime "archived_at"
-    t.datetime "deleted_at"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "clients", :force => true do |t|
@@ -52,9 +49,6 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.string   "business_phone"
     t.string   "fax"
     t.text     "internal_notes"
-    t.string   "archive_number"
-    t.datetime "archived_at"
-    t.datetime "deleted_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -145,9 +139,6 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.decimal  "item_quantity",    :precision => 10, :scale => 0
     t.integer  "tax_1"
     t.integer  "tax_2"
-    t.string   "archive_number"
-    t.datetime "archived_at"
-    t.datetime "deleted_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
   end
@@ -158,16 +149,12 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.string   "po_number"
     t.decimal  "discount_percentage", :precision => 10, :scale => 0
     t.integer  "client_id"
-    t.text     "terms"
+    t.text     "tems"
     t.text     "notes"
     t.string   "status"
     t.decimal  "sub_total",           :precision => 10, :scale => 0
     t.decimal  "discount_amount",     :precision => 10, :scale => 0
     t.decimal  "tax_amount",          :precision => 10, :scale => 0
-    t.decimal  "invoice_total",       :precision => 10, :scale => 0
-    t.string   "archive_number"
-    t.datetime "archived_at"
-    t.datetime "deleted_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.integer  "payment_terms_id"
@@ -180,11 +167,8 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.integer  "quantity"
     t.integer  "tax_1"
     t.integer  "tax_2"
-    t.boolean  "track_inventory"
+    t.boolean  "track_invetory"
     t.integer  "inventory"
-    t.string   "archive_number"
-    t.datetime "archived_at"
-    t.datetime "deleted_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
   end
@@ -199,15 +183,11 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "payment_amount",            :precision => 8, :scale => 2
-    t.string   "payment_type"
     t.string   "payment_method"
     t.date     "payment_date"
     t.text     "notes"
     t.boolean  "send_payment_notification"
     t.boolean  "paid_full"
-    t.string   "archive_number"
-    t.datetime "archived_at"
-    t.datetime "deleted_at"
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
   end

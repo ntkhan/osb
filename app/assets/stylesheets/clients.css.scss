@@ -80,6 +80,13 @@ label.form_title {
   color: #00BDE5;
 }
 
+h1 .toggle-section {
+  font-family: Tahoma;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
 #create_client {
   .modal {
     tr:first-child {
@@ -91,3 +98,4 @@ label.form_title {
   }
 
 }
+

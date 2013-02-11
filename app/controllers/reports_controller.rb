@@ -5,33 +5,33 @@ class ReportsController < ApplicationController
 
   end
 
+
+  # first time report load
+  # reports/:report_name
   def reports
-
-    @report_name = params[:report_name]
-
-    #prepare the criteria and report object
-    @criteria = Reporting::Criteria.new(params)
-    @report = Reporting::Report.new({:report_name => @report_name, :report_criteria => @criteria})
-    #payments_collected
+    Rails.logger.debug "--> in reports_controller#report... #{params.inspect} "
+    @report = get_report(params)
 
     respond_to do |format|
       format.html # index.html.erb
-      #format.json { render :text => "json response" }
-      format.js
-      #format.json { render :json => @report }
     end
   end
 
+  # AJAX request to fetch report data after
+  # reports/data/:report_name
   def reports_data
-    @report_name = params[:report_name]
 
-    #prepare the criteria and report object
-    @criteria = Reporting::Criteria.new(params)
-    @report = Reporting::Report.new({:report_name => @report_name, :report_criteria => @criteria})
-    #payments_collected
+    @report = get_report(params)
 
     respond_to do |format|
       format.js
     end
+  end
+
+  private
+
+  def get_report(options={})
+    @criteria = Reporting::Criteria.new(options[:criteria]) # report criteria
+    Reporting::Reporter.get_report({:report_name => options[:report_name], :report_criteria => @criteria})
   end
 end

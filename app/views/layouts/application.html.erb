@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Open Source Billing</title>
-    <%= favicon_link_tag %>
-    <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <!-- MAIN CONTAINER START-->
-    <div class="mainContainer">
-      <!-- HEADER START -->
-      <div class="header">
-        <div class="logo">
-          <%= link_to image_tag("logo.png", :size => "185x30"),"/dashboard" %>
-          <span class="logo_tag">alpha</span>
-        </div>
-        <div class="header_menu">
-          <ul>
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-          </ul>
-        </div>
-      </div>
-      <!-- HEADER END -->
-      <!-- NAVIGATION START -->
-      <div class="naviagion">
-        <div id="nav">
-          <ul class="select">
-            <li><%= active_link_to "Dashboard", "/dashboard" %></li>
-            <li><%= active_link_to "Invoices", invoices_path %></li>
-            <li><%= active_link_to "Clients", clients_path %>
-              <ul class="sub">
-                <li><%= active_link_to "Clients", clients_path %></li>
-                <li><%= active_link_to "Sent Emails", "sent_emails" %></li>
-              </ul>
-            </li>
-            <li><%= active_link_to "Items", items_path %>
-              <ul class="sub">
-                <li><%= active_link_to "Items", items_path %></li>
-                <li><%= active_link_to "Taxes", taxes_path %></li>
-              </ul>
-            </li>
-            <li><%= active_link_to "Payments", payments_path %></li>
-            <li><%= active_link_to "Reports", "/reports" %></li>
-            <li><%= active_link_to "Help", "/help" %></li>
-          </ul>
-        </div>
-      </div>
-      <!-- NAVIGATION END -->
-      <!-- CONTENT AREA START-->
-      <div class="content <%= controller.controller_name %>-main">
-        <div class="alert alert-success" <% if notice.blank? %> style="display: none;"<% end %>>
-          <button type="button" class="close">&times;</button>
-          <span><%= notice %></span>
-        </div>
-        <div class="alert alert-error" style="display: none;">
-          <button type="button" class="close">&times;</button>
-          <span><%= notice %></span>
-        </div>
-        <%= yield %>
-      </div>
-      <!-- CONTENT AREA END-->
-      <div class="primary_footer">
-        <div class="primary_footer_container">
-          <ul>
-            <li class="copy_rights">
-                Copyright © 2013 by <a href="http://www.vteams.com">VTEAMS</a>. All rights reserved.
-            </li>
-            <li class="links"><a href="#">Privacy Policy</a></li>
-            <li class="links"><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
+<head>
+  <title>Open Source Billing</title>
+  <%= favicon_link_tag %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<!-- MAIN CONTAINER START-->
+<div class="mainContainer">
+  <!-- HEADER START -->
+  <div class="header">
+    <div class="logo">
+      <%= link_to image_tag("logo.png", :size => "185x30"), "/dashboard" %>
+      <span class="logo_tag">alpha</span>
     </div>
-    <!-- MAIN CONTAINER END -->
-  </body>
+    <div class="header_menu">
+      <ul>
+        <li><a href="#" class="no_links">My Account</a></li>
+        <li><a href="#" class="no_links">Settings</a></li>
+        <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+      </ul>
+    </div>
+  </div>
+  <!-- HEADER END -->
+  <!-- NAVIGATION START -->
+  <div class="naviagion">
+    <div id="nav">
+      <ul class="select">
+        <li><%= active_link_to "Dashboard", "/dashboard" %></li>
+        <li><%= active_link_to "Invoices", invoices_path %></li>
+        <li><%= active_link_to "Clients", clients_path %>
+          <ul class="sub">
+            <li><%= active_link_to "Clients", clients_path %></li>
+            <li><%= active_link_to "Sent Emails", "sent_emails" %></li>
+          </ul>
+        </li>
+        <li><%= active_link_to "Items", items_path %>
+          <ul class="sub">
+            <li><%= active_link_to "Items", items_path %></li>
+            <li><%= active_link_to "Taxes", taxes_path %></li>
+          </ul>
+        </li>
+        <li><%= active_link_to "Payments", payments_path %></li>
+        <li><%= active_link_to "Reports", "/reports" %></li>
+        <li><%= active_link_to "Help", "/help" %></li>
+      </ul>
+    </div>
+  </div>
+  <!-- NAVIGATION END -->
+  <!-- CONTENT AREA START-->
+  <div class="content <%= controller.controller_name %>-main">
+    <div class="alert alert-success"
+         <% if notice.blank? %> style="display: none;"
+    <% end %>>
+      <button type="button" class="close">&times;</button>
+      <span><%= notice %></span>
+    </div>
+    <div class="alert alert-error" style="display: none;">
+      <button type="button" class="close">&times;</button>
+      <span><%= notice %></span>
+    </div>
+    <%= yield %>
+  </div>
+  <!-- CONTENT AREA END-->
+  <div class="primary_footer">
+    <div class="primary_footer_container">
+      <ul>
+        <li class="copy_rights">
+          Copyright © 2013 by <a href="http://www.vteams.com">VTEAMS</a>. All rights reserved.
+        </li>
+        <li class="links"><a href="#">Privacy Policy</a></li>
+        <li class="links"><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- MAIN CONTAINER END -->
+</body>
 </html>
