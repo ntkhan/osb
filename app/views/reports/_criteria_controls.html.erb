@@ -14,7 +14,7 @@
           <div class="control_name">
             <p>Clients</p>
           </div>
-          <%= collection_select "criteria", "client_id", Client.all, :id, :organization_name, {:prompt => "All"}, {:class => "client chzn-select"} %>
+          <%= collection_select "criteria", "client_id", Client.all, :id, :organization_name, {:prompt => true}, {:class => "client chzn-select"} %>
           <div class="control_name">
             <p>Type</p>
           </div>

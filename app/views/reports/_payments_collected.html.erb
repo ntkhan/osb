@@ -11,8 +11,8 @@
     <div class="header_data_left">
       <div class="header_data_detail">
         <ul>
-          <li class="header_name">Azeem (pvt.) ltd</li>
-          <li class="header_duration">Between January 01, 2013 and January 31, 2013</li>
+          <li class="header_name"><%= @report.client_name %></li>
+          <li class="header_duration"><%= @report.period %></li>
           <li class="header_description">This report shows a history of all payments made for every invoice
             selectable by client and by date.
           </li>
@@ -32,13 +32,13 @@
   </div>
   <!-- content_header_data -->
 
-  <div class="report_duration">
-    <ul>
-      <li>01/01/2013</li>
-      <li><span>to</span></li>
-      <li>01/01/2013</li>
-    </ul>
-  </div>
+  <!--<div class="report_duration">-->
+    <!--<ul>-->
+      <!--<li>01/01/2013</li>-->
+      <!--<li><span>to</span></li>-->
+      <!--<li>01/01/2013</li>-->
+    <!--</ul>-->
+  <!--</div>-->
   <!-- report_duration -->
 
   <div class="table_session">
