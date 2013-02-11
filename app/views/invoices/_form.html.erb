@@ -27,6 +27,8 @@
           <%= f.label :payment_terms_id, "Terms", :class => 'control-label' %>
           <div class="controls">
             <%= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
+            <%= link_to "New Term",'#', "data-toggle" => "modal", "data-target" => "#termsModal" %>
+            <%= link_to "New Tax",'#', "data-toggle" => "modal", "data-target" => "#taxModal" %>
           </div>
         </div>
 
@@ -127,9 +129,9 @@
     <div class="control-group" style="clear:both;">
 
     </div>
-
+    <% button_text =  action_name == "new" ? "SEND" : "UPDATE" %>
     <div class="invoice_btn_session">
-      <%= f.submit 'CREATE INVOICE', :class => 'btn_large' %>
+      <%= f.submit "#{button_text} INVOICE", :class => 'btn_large' %>
       <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large', :name => "save_as_draft" %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   invoices_path, :class => 'btn_large dark_grey' %>

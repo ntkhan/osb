@@ -22,7 +22,7 @@ end
       <% end %>
     </tr>
   <% end %>
-  <tr>
+  <tr class="static">
     <td colspan="9">
       <div class="paginator">
         <%= paginate @items, :remote => true %>
@@ -41,10 +41,3 @@ end
     </td>
   </tr>
 <% end %>
-<tr>
-  <td align="center" colspan="9">
-    <%= link_to (content_tag(:span, "+") + 'NEW Item'),
-    new_item_path, :class => 'btn_large btn_plus_bottom' %>
-    <%#= link_to 'New Item', new_item_path, :class => "btn_large" %>
-  </td>
-</tr>

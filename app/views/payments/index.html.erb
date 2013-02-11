@@ -37,20 +37,23 @@
     </div>
 <table class="table table_listing payment_listing">
   <thead>
-  <th class="align_center"><%= check_box_tag 'select_all' %></th>
+  <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
   <th class="align_center">Invoice</th>
   <th class="align_left">Client</th>
   <th class="align_center">Type</th>
   <th class="align_center">Notes</th>
   <th class="align_center">Date</th>
   <th class="align_right">Amount</th>
-  <th class="align_center" width=75>Actions</th>
+  <th class="align_center not-sortable" width=75>Actions</th>
 </thead>
 
 <tbody id="payment_body">
   <%= render 'payment' %>
 </tbody>
 </table>
+    <div class="btn_wrapper">
+      <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus_bottom", :remote => true %>
+    </div>
 <%end%>
 <!-- START: Unpaid invoices popup -->
 <%= form_tag "/payments/enter_payment",:id=>"invoice_selection" do %>

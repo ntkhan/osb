@@ -4,6 +4,12 @@
 
 jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
+
+#  # Apply sorting on invoice table
+  jQuery("table.table_listing").tablesorter
+    widgets: ['staticRow']
+    sortList: [[1,1]]
+
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
@@ -285,8 +291,11 @@ jQuery ->
         else
           hidePopover(jQuery(".hint_text:eq(0)"))
 
-  # tool tip
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip
+  # tool tip on links not implemented yet
+  jQuery(".no_links").attr "title", "This functionality is not implemented yet."
+  # tool tip on invoice statuses
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .no_links").qtip
     position:
       at: "bottomCenter"
+
 
