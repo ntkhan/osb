@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- MAIN CONTAINER START-->
-<div class="mainContainer">
+<div id="main-container">
   <!-- HEADER START -->
   <div class="header">
     <div class="logo">
@@ -54,7 +54,7 @@
   <div class="content <%= controller.controller_name %>-main">
     <div class="alert alert-success"
          <% if notice.blank? %> style="display: none;"
-    <% end %>>
+         <% end %>>
       <button type="button" class="close">&times;</button>
       <span><%= notice %></span>
     </div>
