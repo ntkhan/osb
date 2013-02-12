@@ -9,6 +9,19 @@ jQuery ->
   jQuery("table.table_listing").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
+    headers:
+      5: #zero-based column index
+        sorter: "monetaryValue"
+
+  $.tablesorter.addParser
+    id: "monetaryValue"
+    is: (s) ->
+      sp = s.replace(/,/, ".")
+      test = (/([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp)) #check currency with symbol
+      test
+    format: (s) ->
+      $.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
+  type: "numeric"
 
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
@@ -309,5 +322,19 @@ jQuery ->
     @placeholder = @dataPlaceholder
     @removeAttribute "dataPlaceholder"
 
+  $(".new_client_btn").click ->
+    pos = $(this).position()
+
+    height = $(this).outerHeight()
+
+    #show the menu directly over the placeholder
+    $("#new_client_wrapper").css(
+      position: "absolute"
+      top: (pos.top + height ) + "px"
+      left: pos.left + "px"
+    ).show()
+
+  $(".close_btn").click ->
+    $(this).parents('.quick_create_wrapper').hide()
 
 
