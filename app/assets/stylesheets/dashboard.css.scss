@@ -21,6 +21,7 @@
 		/*font-weight: normal;*/
 		text-transform: capitalize;
 		margin: 0px;
+                *line-height: normal;
 	}
 	h1 span{
 		font-size: 14px;
@@ -48,6 +49,7 @@
 		overflow: hidden;
 		margin: 0 0 20px 0;
                 box-shadow: 0 1px 2px #F0F0F0 inset;
+                *width: 99.8%;
 	}
 	.overview_box_heading{
 		float: left;
@@ -55,6 +57,8 @@
 	}
 	.overview_box_heading h1{
 		padding: 0 18px 21px 18px;
+                *padding-top: 12px;
+
 	}
 	/*Content Left Css Starts*/
 	.day_session{

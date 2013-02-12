@@ -987,7 +987,7 @@ box-shadow: 0 0 5px #D0D0D0;*/
   font-weight: normal;
 }
 
-.btn_large.dark_grey {
+.btn_large.dark_grey,.btn_small.dark_grey {
   background: #acacac;
 }
 
@@ -1013,6 +1013,7 @@ box-shadow: 0 0 5px #D0D0D0;*/
 
 .btn_plus {
   float: right;
+  *line-height: 28px;
 }
 
 .btn_plus span, .btn_plus_bottom span {
@@ -1025,7 +1026,6 @@ box-shadow: 0 0 5px #D0D0D0;*/
   text-decoration: none;
   color: #ffffff;
 }
-
 .top_plus_btn {
   margin-bottom: 10px;
 }
