@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
     # Validate client
-  jQuery("form#new_item, form.edit_item").submit ->
+  jQuery("form#new_item, form.edit_item,form#create_item").submit ->
     flag = true
     if jQuery.trim(jQuery("#item_item_name").val()) is ""
       applyPopover(jQuery("#item_item_name"),"Item name is required")

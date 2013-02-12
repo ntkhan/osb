@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-  jQuery("form#new_tax, form.edit_tax").submit ->
+  jQuery("form#new_tax, form.edit_tax,form#create_tax").submit ->
     flag = true
     flag = if jQuery.trim(jQuery("#tax_name").val()) is ""
       applyPopover(jQuery("#tax_name"),"Enter tax name")
