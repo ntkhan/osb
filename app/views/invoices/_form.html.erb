@@ -30,10 +30,8 @@
         <div class="control-group">
           <%= f.label :payment_terms_id, "Terms", :class => 'control-label' %>
           <div class="controls">
-            <%= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-            <%#= link_to "New Term", '#', "data-toggle" => "modal", "data-target" => "#termsModal" %>
-            <%#= link_to "New Tax", '#', "data-toggle" => "modal", "data-target" => "#taxModal" %>
-
+            <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
+           <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] }),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"}  %>
             <%= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
             <%= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
           </div>
@@ -56,6 +54,12 @@
           <%= f.label :invoice_date, "Invoice Date", :class => 'control-label' %>
           <div class="controls">
             <%= f.text_field :invoice_date, :class => 'text_field small' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :due_date, "Invoice Due", :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :due_date, :class => 'text_field small' %>
           </div>
         </div>
       </div>
