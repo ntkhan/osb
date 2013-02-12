@@ -30,12 +30,18 @@ jQuery ->
       flag = false
     else if jQuery("#client_organization_name").val() is ""
       jQuery("#client_organization_name").val(client_email)
+    else
+      hidePopover(jQuery("#client_email"))
     flag
 
   applyPopover = (elem,message) ->
     elem.qtip
       content:
         text: message
+      show:
+        event: false
+      hide:
+        event: false
       position:
         at: "topRight"
       style:

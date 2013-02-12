@@ -335,14 +335,17 @@ jQuery ->
   jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
     @dataPlaceholder = @placeholder
     @removeAttribute "placeholder"
-  ).live "blur", ->
+  ).live("blur", ->
     @placeholder = @dataPlaceholder
     @removeAttribute "dataPlaceholder"
+  ).live "keypress", ->
+    hidePopover(jQuery(this))
 
+  # Show quick create popups under create buttons
   jQuery(".quick_create").click ->
     pos = $(this).position()
     height = $(this).outerHeight()
-    #show the menu directly over the placeholder
+    jQuery('.quick_create_wrapper').hide()
     jQuery("##{jQuery(this).attr('name')}").css(
       position: "absolute"
       top: (pos.top + height) + "px"
@@ -350,5 +353,7 @@ jQuery ->
     ).show()
 
   jQuery(".close_btn").live "click", ->
-    jQuery(this).parents('.quick_create_wrapper').hide()
+    jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
+
+
 

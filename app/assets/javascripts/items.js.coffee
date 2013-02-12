@@ -14,6 +14,10 @@ jQuery ->
     elem.qtip
       content:
         text: message
+      show:
+        event: false
+      hide:
+        event: false
       position:
         at: "topRight"
       style:
