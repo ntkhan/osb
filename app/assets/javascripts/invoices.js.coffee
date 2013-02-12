@@ -6,7 +6,7 @@ jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
 #  # Apply sorting on invoice table
-  jQuery("table.table_listing").tablesorter
+  jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
     headers:
