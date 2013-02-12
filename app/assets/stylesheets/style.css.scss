@@ -1151,8 +1151,38 @@ table.table_listing {
   }
 }
 
-.btn_wrapper{
-  float: left;width: 100%; text-align: center;
+.btn_wrapper {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.quick_create_wrapper {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px 5px 5px 5px;
+  padding: 15px;
+  position: absolute;
+  width: 184px;
+  z-index: 1000;
+  input[type=text]{
+    width: 165px;
+  }
+  .form_field{
+    padding: 0 0 10px;
+  }
+  input[type=submit]{
+    font-size: 16px;
+    width: 133px;
+    min-width: 40px;
+    margin: 0;
+  }
+  .close_btn{
+    position: absolute;
+    right: 0;
+    top: 5px;
+    right: 10px;
+  }
 }
 
 /*********** Table sorting end ***************/
