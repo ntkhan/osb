@@ -1,3 +1,7 @@
+<div class="top_plus_btn">
+  <%= link_to (content_tag(:span, "+") + 'NEW Tax'),
+              new_taxis_path, :class => 'btn_large btn_plus' %>
+</div>
 <div class="page-header"><h1>Taxes
   <span class="filter-tag">&nbsp;/&nbsp;Active</span></h1></div>
 <%= form_tag "taxes/bulk_actions", :remote => true do -%>
@@ -33,7 +37,8 @@
       </tbody>
     </table>
     <div class="btn_wrapper">
-      <%= link_to 'New Tax', new_taxis_path, :class => "btn_large" %>
+      <%= link_to (content_tag(:span, "+") + 'NEW Tax'),
+                  new_taxis_path, :class => 'btn_large' %>
     </div>
 <% end %>
 
