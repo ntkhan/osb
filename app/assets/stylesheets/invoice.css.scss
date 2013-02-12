@@ -129,7 +129,8 @@ table.invoice_total {
 
 .terms_notes {
   width: 720px;
-  float: right;
+  float: left;
+  padding-left: 40px;
   textarea {
     width: 699px;
   }
