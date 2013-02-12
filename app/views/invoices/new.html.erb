@@ -4,8 +4,16 @@
                                     :default => "New #{model_class.model_name.human}") %></h1>
 </div>
 <%= render :partial => 'form' %>
-<%= render 'clients/new_client' %>
-<%= render 'items/new_item' %>
-<%= render 'payment_terms/new_term' %>
-<%= render 'taxes/new_tax' %>
+<div id="clients_holder" style="display: none;" class="quick_create_wrapper">
+  <%= render 'clients/new_client' %>
+</div>
+<div id="items_holder" style="display: none;" class="quick_create_wrapper">
+  <%= render 'items/new_item' %>
+</div>
+<div id="terms_holder" style="display: none;" class="quick_create_wrapper">
+  <%= render 'payment_terms/new_term' %>
+</div>
+<div id="taxes_holder" style="display: none;" class="quick_create_wrapper">
+  <%= render 'taxes/new_tax' %>
+</div>
 

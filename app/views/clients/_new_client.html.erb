@@ -1,50 +1,45 @@
-<%= form_tag "/clients/create", :id => "create_client", :remote => true do %>
-    <div id="clientModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="model_grey_container">
-        <div class="modal-header">
-          <h1>Add New Client</h1> <br/><br/>
-          <table cellspacing="0" cellpadding="0">
-            <tbody>
-            <tr>
-              <td colspan="4" class="form_field">
-                <%= text_field_tag "client[organization_name]", '', :class => 'text_field', :placeholder => "Organization name" %>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" class="form_field">
-                <%= text_field_tag "client[email]", '', :class => 'text_field', :placeholder => "Email" %>
-              </td>
-              </tr>
-            <tr>
-              <td class="form_field">
-                <%= text_field_tag "client[first_name]",'', :class => 'text_field', :placeholder => "First Name" %>
-              </td>
-            </tr>
-            <tr>
-              <td align="right" class="form_field align_right">
-                <%= text_field_tag "client[last_name]",'', :class => 'text_field', :placeholder => "Last Name" %>
-              </td>
-            </tr>
-            <tr>
-              <td class="form_field">
-                <%= text_field_tag "client[business_phone]",'', :class => 'text_field', :placeholder => "Business Phone" %>
-                <%= hidden_field_tag :quick_create %>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-          <div class="cross_btn">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-              <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
-            </button>
-          </div>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="footer ">
-          <%= submit_tag "Add Client", :class => "btn_large" %>
-          <a class="btn_large dark_grey" href="#" data-dismiss="modal">cancel</a>
+  <%= form_tag "/clients/create", :id => "create_client", :remote => true do %>
+      <%= link_to 'x', 'javascript:', :class => "close_btn" %>
+      <div id="clientModal" class="client-modal">
+        <h4>Add New Client</h4> <br/>
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+          <tr>
+            <td colspan="4" class="form_field">
+              <%= text_field_tag "client[organization_name]", '', :class => 'text_field', :placeholder => "Organization name" %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="form_field">
+              <%= text_field_tag "client[email]", '', :class => 'text_field', :placeholder => "Email" %>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_field">
+              <%= text_field_tag "client[first_name]", '', :class => 'text_field', :placeholder => "First Name" %>
+            </td>
+          </tr>
+          <tr>
+            <td align="right" class="form_field align_right">
+              <%= text_field_tag "client[last_name]", '', :class => 'text_field', :placeholder => "Last Name" %>
+            </td>
+          </tr>
+          <tr>
+            <td class="form_field">
+              <%= text_field_tag "client[business_phone]", '', :class => 'text_field', :placeholder => "Business Phone" %>
+              <%= hidden_field_tag :quick_create %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="cross_btn">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+          </button>
         </div>
       </div>
-    </div>
-<% end %>
+      <div class="footer ">
+        <%= submit_tag "save",:name => "save", :class => "btn_large", :style => "width:40px;" %>
+        <%= submit_tag "save & ADD MORE",:name => "add_more", :class => "btn_large" %>
+      </div>
+  <% end %>

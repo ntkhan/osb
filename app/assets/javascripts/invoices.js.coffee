@@ -9,6 +9,19 @@ jQuery ->
   jQuery("table.table_listing").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
+    headers:
+      5: #zero-based column index
+        sorter: "monetaryValue"
+
+  $.tablesorter.addParser
+    id: "monetaryValue"
+    is: (s) ->
+      sp = s.replace(/,/, ".")
+      test = (/([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp)) #check currency with symbol
+      test
+    format: (s) ->
+      $.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
+  type: "numeric"
 
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
@@ -97,7 +110,7 @@ jQuery ->
          success: (data, textStatus, jqXHR) ->
           item = JSON.parse(data)
           container = elem.parents("tr.fields")
-          container.find("textarea.description").val(item[0])
+          container.find("input.description").val(item[0])
           container.find("input.cost").val(item[1].toFixed(2))
           container.find("input.qty").val(item[2])
           updateLineTotal(elem)
@@ -317,3 +330,25 @@ jQuery ->
    new_date += separator + ("0" + (elem.getMonth() + 1)).slice(-2)
    new_date += separator + ("0" + elem.getDate()).slice(-2)
    new_date
+
+  # Hide placeholder text on focus
+  jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
+    @dataPlaceholder = @placeholder
+    @removeAttribute "placeholder"
+  ).live "blur", ->
+    @placeholder = @dataPlaceholder
+    @removeAttribute "dataPlaceholder"
+
+  jQuery(".quick_create").click ->
+    pos = $(this).position()
+    height = $(this).outerHeight()
+    #show the menu directly over the placeholder
+    jQuery("##{jQuery(this).attr('name')}").css(
+      position: "absolute"
+      top: (pos.top + height) + "px"
+      left: pos.left + "px"
+    ).show()
+
+  jQuery(".close_btn").live "click", ->
+    jQuery(this).parents('.quick_create_wrapper').hide()
+

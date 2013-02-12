@@ -6,8 +6,12 @@
           <%= f.label :client_id, "Client", :class => 'control-label' %>
           <div class="controls">
             <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select"} %>
-            <%= link_to "New Client",'#', "data-toggle" => "modal", "data-target" => "#clientModal" %>
-            <%= link_to "New Item",'#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+            <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
+            <div style="float:right;">
+              <%= link_to "New Client", 'javascript:', :class => "btn btn-mini quick_create", :name => "clients_holder" %>
+              <%= link_to "New Item", 'javascript:', :class => "btn btn-mini quick_create", :name => "items_holder" %>
+              <%#= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+            </div>
             <br/>
             <span class="hint_text client_hint">client you want to send invoice</span>
             <span id="last_invoice" style="display: none;"></span>
@@ -28,8 +32,8 @@
           <div class="controls">
             <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
            <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] }),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"}  %>
-            <%= link_to "New Term",'#', "data-toggle" => "modal", "data-target" => "#termsModal" %>
-            <%= link_to "New Tax",'#', "data-toggle" => "modal", "data-target" => "#taxModal" %>
+            <%= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
+            <%= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
           </div>
         </div>
 
@@ -67,11 +71,11 @@
         <thead>
         <tr class="grid_head">
           <th class="invoice_header_items align_left" width="165">Item</th>
-          <th class="invoice_header_items align_left" width="143">Description</th>
-          <th class="invoice_header_items align_right" width="63">Unit Cost</th>
-          <th class="invoice_header_items align_right" width="62">Qty</th>
-          <th class="invoice_header_items" width="68">Tax1</th>
-          <th class="invoice_header_items" width="70">Tax2</th>
+          <th class="invoice_header_items align_left" width="163">Description</th>
+          <th class="invoice_header_items align_right" width="70">Unit Cost</th>
+          <th class="invoice_header_items align_right" width="70">Qty</th>
+          <th class="invoice_header_items" width="71">Tax1</th>
+          <th class="invoice_header_items" width="72">Tax2</th>
           <th class="invoice_header_items" style="border-right:none;">Line Total</th>
         </tr>
         </thead>
@@ -116,10 +120,10 @@
 
     <div class="terms_notes">
       <!--<div class="terms_div">-->
-        <!--<%= f.label :terms, :class => 'txt_label' %>-->
-        <!--<div class="txt_controls">-->
-          <!--<%= f.text_area :terms, :class => 'text_area', :rows => 5 %>-->
-        <!--</div>-->
+      <!--<%= f.label :terms, :class => 'txt_label' %>-->
+      <!--<div class="txt_controls">-->
+      <!--<%= f.text_area :terms, :class => 'text_area', :rows => 5 %>-->
+      <!--</div>-->
       <!--</div>-->
       <!-- terms -->
 
@@ -136,7 +140,7 @@
     <div class="control-group" style="clear:both;">
 
     </div>
-    <% button_text =  action_name == "new" ? "SEND" : "UPDATE" %>
+    <% button_text = action_name == "new" ? "SEND" : "UPDATE" %>
     <div class="invoice_btn_session">
       <%= f.submit "#{button_text} INVOICE", :class => 'btn_large' %>
       <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large', :name => "save_as_draft" %>

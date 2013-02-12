@@ -13,8 +13,8 @@
   </td>
   <td>
     <div class="field description">
-      <%#= f.text_field :item_description, :class => "description" %>
-      <%= f.text_area :item_description, :class => "description", :rows => 3, :cols => 2 %>
+      <%= f.text_field :item_description, :class => "description" %>
+      <%#= f.text_area :item_description, :class => "description", :rows => 3, :cols => 2 %>
     </div>
   </td>
   <td>
@@ -29,14 +29,14 @@
   </td>
   <td>
     <div class="field tax1">
-      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select", :style => "width:77px"}) %>
+      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select"}) %>
     </div>
   </td>
   <td>
 
     <div class="field tax2">
       <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
-      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "",:class => "tax2 chzn-select", :style => "width:77px"}) %>
+      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "",:class => "tax2 chzn-select"}) %>
     </div>
   </td>
   <td>

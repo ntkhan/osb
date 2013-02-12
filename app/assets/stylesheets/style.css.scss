@@ -39,12 +39,18 @@ input[type="checkbox"] {
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
-/*color: #7d7d7d;*/
+  background: url(/assets/osb-bg.png) repeat transparent;
+  /*color: #7d7d7d;*/
 }
 
-.mainContainer {
-  width: 100%;
+#main-container {
+  background-color: white;
+  margin: 40px auto;
+  width: 900px;
+}
 
+.page-effect{
+  background: url(/assets/page-effect.png) no-repeat;
 }
 
 h1 {
@@ -85,7 +91,7 @@ h1 span.filter-tag {
 /*Header CSS Starts*/
 .header {
   clear: both;
-  width: 758px;
+  width: 840px;
   margin: auto;
   overflow: hidden;
 }
@@ -130,7 +136,7 @@ h1 span.filter-tag {
 
 #nav .select {
   white-space: nowrap;
-  width: 758px;
+  width: 840px;
   margin: auto;
 }
 
@@ -169,9 +175,9 @@ h1 span.filter-tag {
 #nav .sub {
   display: none;
   margin: 0;
-  padding-left: 26%;
+  padding-left: 30px;
   list-style: none;
-  width: 74%;
+  width: 870px;
   background: url(/assets/sub_bg.png) repeat-x bottom;
 }
 
@@ -213,7 +219,7 @@ h1 span.filter-tag {
 /* Content CSS Starts */
 .content {
   clear: both;
-  width: 758px;
+  width: 840px;
   min-height: 360px;
   margin: auto;
   overflow: hidden;
@@ -590,12 +596,12 @@ td {
       color: #00BDE5;
       text-decoration: none;
       margin-right: 8px;
-      background: #FFFFFF;
+      background: transparent;
       padding: 0 0 3px 0;
       border: 0 none;
       &:hover {
         text-decoration: underline;
-        background-color: #FFFFFF;
+        background-color: transparent;
       }
     }
   }
@@ -1051,16 +1057,14 @@ h1 span.filter-tag {
 /*Primary Footer CSS Starts*/
 
 .primary_footer {
-  clear: both;
-  float: left;
   width: 100%;
-  padding: 25px 0 26px 0;
+  padding: 40px 0 26px 0;
 }
 
 .primary_footer_container {
   border-top: 1px solid #d7d7d7;
   padding: 5px 0 0 0;
-  width: 758px;
+  width: 840px;
   margin: auto;
   text-align: center;
 }
@@ -1114,6 +1118,7 @@ h1 span.filter-tag {
   padding: 1px 3px;
   position: relative;
   top: -1px;
+  cursor: pointer;
 }
 
 /*********************** Table Sorting css ****************/
@@ -1151,8 +1156,38 @@ table.table_listing {
   }
 }
 
-.btn_wrapper{
-  float: left;width: 100%; text-align: center;
+.btn_wrapper {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.quick_create_wrapper {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px 5px 5px 5px;
+  padding: 15px;
+  position: absolute;
+  width: 184px;
+  z-index: 1000;
+  input[type=text],input[type=number]{
+    width: 165px;
+  }
+  .form_field{
+    padding: 0 0 10px;
+  }
+  input[type=submit]{
+    font-size: 16px;
+    width: 133px;
+    min-width: 40px;
+    margin: 0;
+  }
+  .close_btn{
+    position: absolute;
+    right: 0;
+    top: 5px;
+    right: 10px;
+  }
 }
 
 /*********** Table sorting end ***************/

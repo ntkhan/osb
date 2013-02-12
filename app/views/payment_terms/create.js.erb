@@ -1,2 +1,6 @@
-jQuery("button[class=close]").click();
 jQuery("#invoice_payment_terms_id").append("<option value='<%= @payment_term.id%>' selected><%= @payment_term.description %></option>").trigger("liszt:updated");
+<% if params[:add_more] %>
+    $("#terms_holder").html("<%= escape_javascript render 'new_term'%>");
+<%else%>
+    $(".close_btn").click();
+<%end%>
