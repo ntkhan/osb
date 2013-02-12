@@ -23,6 +23,7 @@
 //= require formatCurrency.js
 //= require tableSorter.js
 //= require tablesorter.staticrow.js
+//= require jquery.metadata.js
 
 jQuery(function () {
     //override default behavior of inserting new subforms into form    

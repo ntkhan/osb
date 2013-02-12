@@ -1,139 +1,136 @@
 <%- model_class = Invoice -%>
 <p id="pdf_link"><%= link_to "Download Invoice (PDF)", {:controller=>'invoices',:action=>'invoice_pdf',:id=>@invoice.id,:format => "pdf"},:target=>'_blank' %></p>
-<% unless @invoice %>
-<div class="invoice-page-header">
-  Invoice URL seems invalid. Please check and try again.
-</div>
-<% else %>
-<div class="invoice-page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
-</div>
-<div class="page-contents">
-  <div class="invheader">
-    <div class="invheader-upper">
-      <div class="invheader-address-account">
-       <%= @invoice.client.organization_name %> <br><%= @invoice.client.address_street1 %><br><%= @invoice.client.city %>
-      </div>
-      <div class="invheader-logo-container">
-        <div class="invheader-logo">
+<div class="invoice_preview">
+  <div class="content_container">
+    <div class="content_header">
+      <h1><%= t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
+    </div>
+    <div class="payment_content" style="padding: 30px 0;">
+      <div class="payment_container">
+        <div class="payment_corner sent_green"></div>
+        <div class="payment_invoice_data">
+          <div class="primary_address">
+            <address>
+              <p><%= @invoice.client.organization_name %></p>
+              <p><%= @invoice.client.address_street1 %></p>
+              <p><%= @invoice.client.city %></p>
+            </address>
+          </div>
+          <div class="payment_summary">
+            <div class="secondary_address">
+              <address>
+                <p class="bold"><%= @invoice.client.organization_name %></p>
+                <p><%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %></p>
+                <p><%= @invoice.client.city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %></p>
+                <p><%= @invoice.client.address_street1.to_s+ " " +@invoice.client.address_street2.to_s %></p>
+              </address>
+            </div>
+            <div class="payment_summary_table">
+              <table cellpadding="0" cellspacing="0">
+                <colgroup>
+                  <col class="first" />
+                  <col class="second" />
+                </colgroup>
+                <tr>
+                  <td>Invoice #</td>
+                  <td><%= @invoice.invoice_number %></td>
+                </tr>
+                <tr>
+                  <td>Invoice Date</td>
+                  <td><%= @invoice.invoice_date.strftime('%B %d , %Y') %></td>
+                </tr>
+                <tr>
+                  <td>Amount</td>
+                  <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="payment_invoice_table">
+            <div class="time_entry">
+              <table cellpadding="0" cellspacing="0">
+                <colgroup>
+                  <col class="first">
+                  <col class="second">
+                  <col class="third">
+                  <col class="forth">
+                  <col class="fifth">
+                </colgroup>
+                <tr>
+                  <th class="align_left">Item</th>
+                  <th class="align_left">Description</th>
+                  <th class="align_right">Unit Cost</th>
+                  <th class="align_right">Quantity</th>
+                  <th class="align_right">Line Total</th>
+                </tr>
+                <% @invoice.invoice_line_items.each do |item|
+                  item_line_total= (item.item_unit_cost ||0) * (item.item_quantity ||0)
+                %>
+                    <tr>
+                      <td class="align_left"><%= item.item.item_name %></td>
+                      <td class="align_left"><%= item.item_description %></td>
+                      <td class="align_right"><%= number_to_currency(item.item_unit_cost) %></td>
+                      <td class="align_right"><%= item.item_quantity %></td>
+                      <td class="align_right"><%= number_to_currency(item_line_total) %></td>
+                    </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
+          <div class="payment_total">
+            <div class="payment_summary_table">
+              <table cellpadding="0" cellspacing="0">
+                <colgroup>
+                  <col class="first">
+                  <col class="second">
+                </colgroup>
+                <tr>
+                  <th>Subtotal</th>
+                  <th><%= number_to_currency(@invoice.sub_total) %></th>
+                </tr>
+                <tr>
+                  <td>Discount - <%= @invoice.discount_percentage.to_s + "%" %></td>
+                  <td><%= number_to_currency(@invoice.discount_amount) %></td>
+                </tr>
+                <tr>
+                  <td class="bottom_padding">VAT - %</td>
+                  <td><%= number_to_currency(@invoice.tax_amount) %></td>
+                </tr>
+                <tr class="single_border">
+                  <th class="top_padding">Total</th>
+                  <th><%= number_to_currency(@invoice.invoice_total) %></th>
+                </tr>
+                <tr>
+                  <td class="bottom_padding">Amount Paid</td>
+                  <td>-<%= number_to_currency(Payment.invoice_paid_amount(@invoice.id)) %></td>
+                </tr>
+                <tr class="double_border">
+                  <th class="top_padding">Amount Due</th>
+                  <th><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="terms_notes">
+            <div class="terms">
+              <h3>Terms</h3>
+
+              <p><%= @invoice.terms %></p>
+            </div>
+            <div class="notes">
+              <h3>Notes</h3>
+              <%= @invoice.notes %>
+            </div>
+          </div>
+          <div class="payment_footer">
+            <p>This invoice was sent using<%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></p>
+          </div>
         </div>
+        <!-- payment_invoice_data -->
       </div>
+      <!-- payment_container -->
     </div>
-
-    <div class="invheader-lower">
-      <div class="invheader-address-client">
-         <%= @invoice.client.organization_name %><br> <%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %><br>
-         <%= @invoice.client.address_street1.to_s+ " " +@invoice.client.address_street2.to_s %><br>
-         <%= @invoice.client.city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %>
-      </div>
-      <div class="invheader-invoicedetails">
-        <table cellspacing="0">
-          <tbody>
-            <tr>
-              <th>																			Invoice #
-              </th>
-              <td><%= @invoice.invoice_number %></td>
-            </tr>
-            <tr>
-              <th>																				Invoice Date
-              </th>
-              <td><%= @invoice.invoice_date.strftime('%B %d , %Y') %></td>
-            </tr>
-            <tr class="invheader-invoicedetails-balance">
-              <th>
-                <div>Amount Due </div></th>
-              <td>
-                <div><%= @invoice.currency_symbol %><%= @invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id) %>  <%= @invoice.currency_code%></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <!-- payment_content -->
   </div>
-  <div class="invbody">
-    <table cellspacing="0" class="invbody-items">
-      <thead>
-        <tr>
-          <th class="first"><div class="item">Item </div></th>
-          <th><div class="description">Description</div></th>
-          <th><div class="unitcost">Unit Cost</div></th>
-          <th><div class="quantity">Quantity</div></th>
-          <th class="last"><div class="linetotal">Line Total</div></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @invoice.invoice_line_items.each do |item|
-        item_line_total= (item.item_unit_cost ||0) * (item.item_quantity ||0)
-        %>
-        <tr>
-          <td style="width: 120px;"><div class="item"><%= item.item.item_name %></div></td>
-          <td><div class="description"><%= item.item_description %> </div></td>
-          <td style="width: 85px;"><div class="unitcost"><%= item.item_unit_cost %></div></td>
-          <td style="width: 80px;"><div class="quantity"><%= item.item_quantity %></div></td>
-          <td style="width: 90px;"><div class="linetotal"><%= item_line_total %></div></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <table cellspacing="0" class="invbody-summary">
-      <tbody>
-        <tr class="invbody-summary-subtotal">
-          <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;"><strong>Subtotal</strong></th>
-          <td style="width: 120px;"><strong><%= @invoice.sub_total %></strong></td>
-        </tr>
-        <tr>
-          <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;">Discount - <%= @invoice.discount_percentage.to_s + "%" %></th>
-          <td style="width: 120px;"><%= @invoice.discount_amount %></td>
-        </tr>
-        <tr>
-          <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;">VAT (RT710)2%</th>
-          <td style="width: 120px;"><%= @invoice.tax_amount %></td>
-        </tr>
-        <tr>
-          <td class="invbody-summary-clean">&nbsp;</td>
-          <th class="border" style="width: 150px;"><strong>Total</strong></th>
-          <td class="border" style="width: 120px;"><strong><%= @invoice.invoice_total %></strong></td>
-        </tr>
-        <tr class="invbody-summary-paid">
-          <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;">Amount Paid</th>
-          <td style="width: 120px;">-<%= Payment.invoice_paid_amount(@invoice.id) %></td>
-        </tr>
-        <tr class="invbody-summary-total">
-          <td class="invbody-summary-clean">&nbsp;</td>
-          <th style="width: 150px;"><div><strong>Amount Due</strong></div></th>
-          <td style="width: 120px;"><div><strong><%= @invoice.currency_symbol %><%= @invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id) %>  <%= @invoice.currency_code%></strong></div></td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="height: 1px; overflow: hidden;" class="clearb"></div>
-
-    <div class="invbody-terms">
-      <h2>Terms</h2>
-      <%= @invoice.terms %>
-    </div>
-    <div class="invbody-notes">
-      <div>
-        <h2>Notes</h2>
-	<%= @invoice.notes %>
-      </div>
-    </div>
-  </div>
+  <!--content_container-->
 </div>
-<% end %>
-<%#*<div class="form-actions">%>
-<%#= link_to t('.back', :default => t("helpers.links.back")),
-invoices_path, :class => 'btn'  %>
-<%#= link_to t('.edit', :default => t("helpers.links.edit")),
-edit_invoice_path(@invoice), :class => 'btn' %>
-<%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
-invoice_path(@invoice),
-:method => 'delete',
-:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-:class => 'btn btn-danger' %>
-<%#*</div>%>
