@@ -110,7 +110,7 @@ jQuery ->
          success: (data, textStatus, jqXHR) ->
           item = JSON.parse(data)
           container = elem.parents("tr.fields")
-          container.find("textarea.description").val(item[0])
+          container.find("input.description").val(item[0])
           container.find("input.cost").val(item[1].toFixed(2))
           container.find("input.qty").val(item[2])
           updateLineTotal(elem)
