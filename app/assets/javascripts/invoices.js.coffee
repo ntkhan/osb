@@ -314,6 +314,23 @@ jQuery ->
     position:
       at: "bottomCenter"
 
+ # Autofill due date
+  jQuery("#invoice_payment_terms_id").change ->
+    number_of_days = parseInt(jQuery("option:selected",this).attr('number_of_days'))
+    invoice_invoice_date = new Date(jQuery("#invoice_invoice_date").val());
+    invoice_due_date = new Date(invoice_invoice_date);
+    invoice_due_date.setDate(invoice_due_date.getDate() + number_of_days);
+    jQuery("#invoice_due_date").val(formated_date(invoice_due_date))
+
+
+ # Date formating function
+  formated_date = (elem) ->
+   separator = "-"
+   new_date  = elem.getFullYear() 
+   new_date += separator + ("0" + (elem.getMonth() + 1)).slice(-2)
+   new_date += separator + ("0" + elem.getDate()).slice(-2)
+   new_date
+
   # Hide placeholder text on focus
   jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
     @dataPlaceholder = @placeholder
@@ -334,5 +351,4 @@ jQuery ->
 
   jQuery(".close_btn").live "click", ->
     jQuery(this).parents('.quick_create_wrapper').hide()
-
 
