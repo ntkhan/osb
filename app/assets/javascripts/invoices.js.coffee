@@ -305,7 +305,7 @@ jQuery ->
           hidePopover(jQuery(".hint_text:eq(0)"))
 
   # tool tip on links not implemented yet
-  jQuery(".no_links").attr("title", "This functionality is not implemented yet.").qtip
+  jQuery(".no_links").attr("title", "This feature is not implemented yet.").qtip
     position:
       at: "bottomCenter"
 
