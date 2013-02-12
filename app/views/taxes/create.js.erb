@@ -1,3 +1,7 @@
-jQuery("button[class=close]").click();
 jQuery("#invoice_grid_fields select.tax1").append("<option value='<%= @taxis.id%>' data-tax_1='<%= @taxis.percentage %>'><%= @taxis.name %></option>").trigger("liszt:updated");
 jQuery("#invoice_grid_fields select.tax2").append("<option value='<%= @taxis.id%>' data-tax_2='<%= @taxis.percentage %>'><%= @taxis.name %></option>").trigger("liszt:updated");
+<% if params[:add_more] %>
+    $("#taxes_holder").html("<%= escape_javascript render 'new_tax'%>");
+<%else%>
+    $(".close_btn").click();
+<%end%>

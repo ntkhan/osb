@@ -315,26 +315,24 @@ jQuery ->
       at: "bottomCenter"
 
   # Hide placeholder text on focus
-  $("form#create_client input[type=text]").focus(->
+  jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
     @dataPlaceholder = @placeholder
     @removeAttribute "placeholder"
-  ).blur ->
+  ).live "blur", ->
     @placeholder = @dataPlaceholder
     @removeAttribute "dataPlaceholder"
 
-  $(".new_client_btn").click ->
+  jQuery(".quick_create").click ->
     pos = $(this).position()
-
     height = $(this).outerHeight()
-
     #show the menu directly over the placeholder
-    $("#new_client_wrapper").css(
+    jQuery("##{jQuery(this).attr('name')}").css(
       position: "absolute"
-      top: (pos.top + height ) + "px"
+      top: (pos.top + height) + "px"
       left: pos.left + "px"
     ).show()
 
-  $(".close_btn").click ->
-    $(this).parents('.quick_create_wrapper').hide()
+  jQuery(".close_btn").live "click", ->
+    jQuery(this).parents('.quick_create_wrapper').hide()
 
 

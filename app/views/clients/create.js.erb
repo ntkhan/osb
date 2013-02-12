@@ -1,2 +1,6 @@
-jQuery(".close_btn").click();
-jQuery("#invoice_client_id").append("<option value='<%= @client.id%>' selected><%= @client.organization_name %></option>").trigger("liszt:updated");
+$("#invoice_client_id").append("<option value='<%= @client.id%>' selected><%= @client.organization_name %></option>").trigger("liszt:updated");
+<% if params[:add_more] %>
+    $("#clients_holder").html("<%= escape_javascript render 'new_client'%>");
+<%else%>
+    $(".close_btn").click();
+<%end%>
