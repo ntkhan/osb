@@ -6,6 +6,7 @@ class InvoicesController < ApplicationController
   include InvoicesHelper
 
   def index
+    #per_page = params[:per]
     @invoices = Invoice.unarchived.page(params[:page])
 
     respond_to do |format|
@@ -25,6 +26,9 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_pdf
+    # to be used in invoice_pdf view because it requires absolute path of image
+    @images_path = "#{request.protocol}#{request.host_with_port}/assets"
+
     @invoice = Invoice.find(params[:id])
     render :layout => "pdf_mode"
   end

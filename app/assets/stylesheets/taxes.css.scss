@@ -8,3 +8,14 @@
   font-weight: bold;
   margin-top: 0;
 }
+#create_tax {
+  .modal {
+    tr:first-child {
+      background: none;
+    }
+    .modal-body {
+      min-height: 0;
+    }
+  }
+
+}

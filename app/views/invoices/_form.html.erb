@@ -6,8 +6,14 @@
           <%= f.label :client_id, "Client", :class => 'control-label' %>
           <div class="controls">
             <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select"} %>
-            <%= link_to "New Client",'#', "data-toggle" => "modal", "data-target" => "#clientModal" %>
-            <%= link_to "New Item",'#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+            <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
+            <!--<div style="float:right;">-->
+              <%= link_to "New Client", 'javascript:', :class => "btn btn-mini new_client_btn quick_create" %>
+              <!--<div id="new_client_wrapper" style="display: none;" class="quick_create_wrapper">-->
+                <%#= render 'clients/new_client' %>
+              <!--</div>-->
+              <%= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+            <!--</div>-->
             <br/>
             <span class="hint_text client_hint">client you want to send invoice</span>
             <span id="last_invoice" style="display: none;"></span>
@@ -27,6 +33,8 @@
           <%= f.label :payment_terms_id, "Terms", :class => 'control-label' %>
           <div class="controls">
             <%= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
+            <%= link_to "New Term", '#', "data-toggle" => "modal", "data-target" => "#termsModal" %>
+            <%= link_to "New Tax", '#', "data-toggle" => "modal", "data-target" => "#taxModal" %>
           </div>
         </div>
 
@@ -58,11 +66,11 @@
         <thead>
         <tr class="grid_head">
           <th class="invoice_header_items align_left" width="165">Item</th>
-          <th class="invoice_header_items align_left" width="143">Description</th>
-          <th class="invoice_header_items align_right" width="63">Unit Cost</th>
-          <th class="invoice_header_items align_right" width="62">Qty</th>
-          <th class="invoice_header_items" width="68">Tax1</th>
-          <th class="invoice_header_items" width="70">Tax2</th>
+          <th class="invoice_header_items align_left" width="163">Description</th>
+          <th class="invoice_header_items align_right" width="70">Unit Cost</th>
+          <th class="invoice_header_items align_right" width="70">Qty</th>
+          <th class="invoice_header_items" width="71">Tax1</th>
+          <th class="invoice_header_items" width="72">Tax2</th>
           <th class="invoice_header_items" style="border-right:none;">Line Total</th>
         </tr>
         </thead>
@@ -107,10 +115,10 @@
 
     <div class="terms_notes">
       <!--<div class="terms_div">-->
-        <!--<%= f.label :terms, :class => 'txt_label' %>-->
-        <!--<div class="txt_controls">-->
-          <!--<%= f.text_area :terms, :class => 'text_area', :rows => 5 %>-->
-        <!--</div>-->
+      <!--<%= f.label :terms, :class => 'txt_label' %>-->
+      <!--<div class="txt_controls">-->
+      <!--<%= f.text_area :terms, :class => 'text_area', :rows => 5 %>-->
+      <!--</div>-->
       <!--</div>-->
       <!-- terms -->
 
@@ -127,9 +135,9 @@
     <div class="control-group" style="clear:both;">
 
     </div>
-
+    <% button_text = action_name == "new" ? "SEND" : "UPDATE" %>
     <div class="invoice_btn_session">
-      <%= f.submit 'CREATE INVOICE', :class => 'btn_large' %>
+      <%= f.submit "#{button_text} INVOICE", :class => 'btn_large' %>
       <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large', :name => "save_as_draft" %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   invoices_path, :class => 'btn_large dark_grey' %>

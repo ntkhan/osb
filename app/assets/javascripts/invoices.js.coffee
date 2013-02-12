@@ -4,6 +4,25 @@
 
 jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
+
+#  # Apply sorting on invoice table
+  jQuery("table.table_listing").tablesorter
+    widgets: ['staticRow']
+    sortList: [[1,1]]
+    headers:
+      5: #zero-based column index
+        sorter: "monetaryValue"
+
+  $.tablesorter.addParser
+    id: "monetaryValue"
+    is: (s) ->
+      sp = s.replace(/,/, ".")
+      test = (/([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp)) #check currency with symbol
+      test
+    format: (s) ->
+      $.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
+  type: "numeric"
+
   # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
@@ -285,8 +304,37 @@ jQuery ->
         else
           hidePopover(jQuery(".hint_text:eq(0)"))
 
-  # tool tip
+  # tool tip on links not implemented yet
+  jQuery(".no_links").attr("title", "This functionality is not implemented yet.").qtip
+    position:
+      at: "bottomCenter"
+
+  # tool tip on invoice statuses
   jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed").qtip
     position:
       at: "bottomCenter"
+
+  # Hide placeholder text on focus
+  $("form#create_client input[type=text]").focus(->
+    @dataPlaceholder = @placeholder
+    @removeAttribute "placeholder"
+  ).blur ->
+    @placeholder = @dataPlaceholder
+    @removeAttribute "dataPlaceholder"
+
+  $(".new_client_btn").click ->
+    pos = $(this).position()
+
+    height = $(this).outerHeight()
+
+    #show the menu directly over the placeholder
+    $("#new_client_wrapper").css(
+      position: "absolute"
+      top: (pos.top + height ) + "px"
+      left: pos.left + "px"
+    ).show()
+
+  $(".close_btn").click ->
+    $(this).parents('.quick_create_wrapper').hide()
+
 

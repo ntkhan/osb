@@ -4,9 +4,9 @@ class Tax < ActiveRecord::Base
   has_many :items
   validates :name, :presence => true
   validates :percentage, :presence => true
-  paginates_per 4
+  paginates_per 10
   acts_as_archival
-  acts_as_paranoid  :recover_dependent_associations => false
+  acts_as_paranoid
   default_scope order("#{self.table_name}.created_at DESC")
 
   def self.multiple_taxes ids
@@ -26,6 +26,7 @@ class Tax < ActiveRecord::Base
     self.multiple_taxes(ids).each do |tax|
       tax.archive_number = nil
       tax.archived_at = nil
+      tax.deleted_at = nil
       tax.save
     end
   end
@@ -33,8 +34,10 @@ class Tax < ActiveRecord::Base
   def self.recover_deleted ids
     ids = ids.split(",") if ids and ids.class == String
     where("id IN(?)", ids).only_deleted.each do |tax|
-      tax.recover
-      tax.unarchive
+      tax.archive_number = nil
+      tax.archived_at = nil
+      tax.deleted_at = nil
+      tax.save
     end
   end
 

@@ -46,9 +46,10 @@ class TaxesController < ApplicationController
 
     respond_to do |format|
       if @taxis.save
+        format.js
         format.html { redirect_to @taxis, notice: 'Tax was successfully created.' }
         format.json { render json: @taxis, status: :created, location: @taxis }
-        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id},:notice => 'Tax was successfully created.')
+        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id},:notice => 'Tax was successfully created.') unless params[:quick_create]
         return
       else
         format.html { render action: "new" }

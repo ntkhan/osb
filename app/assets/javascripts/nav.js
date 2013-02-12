@@ -25,7 +25,3 @@ stuHover = function() {
 	}
 }
 if (window.attachEvent) window.attachEvent("onload", stuHover);
-
-
-
-
