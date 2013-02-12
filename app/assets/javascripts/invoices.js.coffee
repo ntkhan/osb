@@ -6,7 +6,7 @@ jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
 #  # Apply sorting on invoice table
-  jQuery("table.table_listing").tablesorter
+  jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
     headers:
@@ -182,6 +182,11 @@ jQuery ->
         if row.find("select.items_list").val() isnt ""
           cost = row.find(".cost")
           qty =  row.find(".qty")
+          tax1 = row.find("select.tax1")
+          tax2 = row.find("select.tax2")
+          tax1_value = jQuery("option:selected",tax1).val()
+          tax2_value = jQuery("option:selected",tax2).val()
+
           if cost.val() is ""
             applyPopover(cost,"bottomMiddle","topLeft","Enter item cost")
           else if cost.val() <= 0
@@ -196,6 +201,9 @@ jQuery ->
             applyPopover(qty,"bottomLeft","topLeft","Quantity should be greater then 0")
           else if not jQuery.isNumeric(qty.val())
             applyPopover(qty,"bottomLeft","topLeft","Enter valid Item quantity")
+          else if (tax1_value is tax2_value) and (tax1_value isnt "" and tax2_value isnt "")
+            applyPopover(tax2.next(),"bottomLeft","topLeft","Tax1 and Tax2 should be different")
+            flag = false
           else hidePopover(qty)
           if cost.val() is "" or cost.val() <= 0 or not jQuery.isNumeric(cost.val()) or qty.val() is "" or qty.val() <= 0 or not jQuery.isNumeric(qty.val()) then flag = false
     flag
@@ -335,14 +343,17 @@ jQuery ->
   jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
     @dataPlaceholder = @placeholder
     @removeAttribute "placeholder"
-  ).live "blur", ->
+  ).live("blur", ->
     @placeholder = @dataPlaceholder
     @removeAttribute "dataPlaceholder"
+  ).live "keypress", ->
+    hidePopover(jQuery(this))
 
+  # Show quick create popups under create buttons
   jQuery(".quick_create").click ->
     pos = $(this).position()
     height = $(this).outerHeight()
-    #show the menu directly over the placeholder
+    jQuery('.quick_create_wrapper').hide()
     jQuery("##{jQuery(this).attr('name')}").css(
       position: "absolute"
       top: (pos.top + height) + "px"
@@ -350,5 +361,7 @@ jQuery ->
     ).show()
 
   jQuery(".close_btn").live "click", ->
-    jQuery(this).parents('.quick_create_wrapper').hide()
+    jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
+
+
 
