@@ -5,25 +5,25 @@
 jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
-#  # Apply sorting on invoice table
-  jQuery("table.table_listing,table.report-data-table").tablesorter
-    widgets: ['staticRow']
-    sortList: [[1,1]]
-    headers:
-      5: #zero-based column index
-        sorter: "monetaryValue"
-
-  $.tablesorter.addParser
-    id: "monetaryValue"
+  jQuery.tablesorter.addParser
+    id: "thousands"
     is: (s) ->
       sp = s.replace(/,/, ".")
       test = (/([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp)) #check currency with symbol
       test
     format: (s) ->
-      $.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
-  type: "numeric"
+      jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
+    type: "numeric"
 
-  # Calculate the line total for invoice
+  # Apply sorting on invoice table
+  jQuery("table.table_listing,table.report-data-table").tablesorter
+    widgets: ['staticRow']
+    sortList: [[1,1]]
+#    headers:
+#      4: #zero-based column index
+#        sorter: "thousands"
+
+# Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
     cost = jQuery(container).find("input.cost").val()
