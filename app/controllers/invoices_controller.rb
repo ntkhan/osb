@@ -59,6 +59,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
+    @invoice.invoice_date = @invoice.invoice_date.to_date
     @invoice.invoice_line_items.build()
   end
 
