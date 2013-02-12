@@ -1,2 +1,6 @@
-jQuery("button[class=close]").click();
 jQuery("select.items_list").append("<option value='<%= @item.id%>'><%= @item.item_name %></option>").trigger("liszt:updated");
+<% if params[:add_more] %>
+    $("#items_holder").html("<%= escape_javascript render 'new_item'%>");
+<%else%>
+    $(".close_btn").click();
+<%end%>

@@ -1,4 +1,3 @@
-<div id="new_client_wrapper" style="display: none;" class="quick_create_wrapper">
   <%= form_tag "/clients/create", :id => "create_client", :remote => true do %>
       <%= link_to 'x', 'javascript:', :class => "close_btn" %>
       <div id="clientModal" class="client-modal">
@@ -40,8 +39,7 @@
         </div>
       </div>
       <div class="footer ">
-        <%= submit_tag "save", :class => "btn_large", :style => "width:40px;" %>
-        <%= submit_tag "save & ADD MORE", :class => "btn_large" %>
+        <%= submit_tag "save",:name => "save", :class => "btn_large", :style => "width:40px;" %>
+        <%= submit_tag "save & ADD MORE",:name => "add_more", :class => "btn_large" %>
       </div>
   <% end %>
-</div>

@@ -412,7 +412,7 @@ p, ol, ul, td {
   .name input {
     width: 150px;
   }
-  .description textarea {
+  .description input {
     width: 149px;
     min-height: 25px;
   }
@@ -587,7 +587,13 @@ table.index th {
 .hint_text {
   color: #959595;
   font-size: 11px;
+  height:18px;
+  float:left;
 }
+.hint_text.client_hint {
+  margin-top:-4px;
+}
+
 
 /*
 .form-horizontal .form-actions {

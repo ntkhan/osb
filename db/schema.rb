@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205115130) do
+ActiveRecord::Schema.define(:version => 20130211122020) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -26,8 +26,11 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.string   "email"
     t.string   "home_phone"
     t.string   "mobile_number"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "clients", :force => true do |t|
@@ -49,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.string   "business_phone"
     t.string   "fax"
     t.text     "internal_notes"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
@@ -70,33 +76,6 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.boolean  "auto_dst_adjustment"
     t.string   "currency_code"
     t.string   "currency_symbol"
-    t.string   "admin_first_name"
-    t.string   "admin_last_name"
-    t.string   "admin_email"
-    t.decimal  "admin_billing_rate_per_hour", :precision => 10, :scale => 0
-    t.string   "admin_user_name"
-    t.string   "admin_password"
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
-  end
-
-  create_table "company_profiles", :force => true do |t|
-    t.string   "org_name"
-    t.string   "country"
-    t.string   "street_address_1"
-    t.string   "street_address_2"
-    t.string   "city"
-    t.string   "province_or_state"
-    t.string   "postal_or_zip_code"
-    t.string   "profession"
-    t.string   "phone_business"
-    t.string   "phone_mobile"
-    t.string   "fax"
-    t.string   "email"
-    t.string   "time_zone"
-    t.boolean  "auto_dst_adjustment"
-    t.string   "currency_code"
-    t.string   "currecy_symbol"
     t.string   "admin_first_name"
     t.string   "admin_last_name"
     t.string   "admin_email"
@@ -139,6 +118,9 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.decimal  "item_quantity",    :precision => 10, :scale => 0
     t.integer  "tax_1"
     t.integer  "tax_2"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
   end
@@ -149,15 +131,20 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.string   "po_number"
     t.decimal  "discount_percentage", :precision => 10, :scale => 0
     t.integer  "client_id"
-    t.text     "tems"
+    t.text     "terms"
     t.text     "notes"
     t.string   "status"
     t.decimal  "sub_total",           :precision => 10, :scale => 0
     t.decimal  "discount_amount",     :precision => 10, :scale => 0
     t.decimal  "tax_amount",          :precision => 10, :scale => 0
+    t.decimal  "invoice_total",       :precision => 10, :scale => 0
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.integer  "payment_terms_id"
+    t.date     "due_date"
   end
 
   create_table "items", :force => true do |t|
@@ -167,8 +154,11 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
     t.integer  "quantity"
     t.integer  "tax_1"
     t.integer  "tax_2"
-    t.boolean  "track_invetory"
+    t.boolean  "track_inventory"
     t.integer  "inventory"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
   end
@@ -183,11 +173,15 @@ ActiveRecord::Schema.define(:version => 20130205115130) do
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.decimal  "payment_amount",            :precision => 8, :scale => 2
+    t.string   "payment_type"
     t.string   "payment_method"
     t.date     "payment_date"
     t.text     "notes"
     t.boolean  "send_payment_notification"
     t.boolean  "paid_full"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
   end

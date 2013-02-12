@@ -7,13 +7,11 @@
           <div class="controls">
             <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select"} %>
             <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
-            <!--<div style="float:right;">-->
-              <%= link_to "New Client", 'javascript:', :class => "btn btn-mini new_client_btn quick_create" %>
-              <!--<div id="new_client_wrapper" style="display: none;" class="quick_create_wrapper">-->
-                <%#= render 'clients/new_client' %>
-              <!--</div>-->
-              <%= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
-            <!--</div>-->
+            <div style="float:right;">
+              <%= link_to "New Client", 'javascript:', :class => "btn btn-mini quick_create", :name => "clients_holder" %>
+              <%= link_to "New Item", 'javascript:', :class => "btn btn-mini quick_create", :name => "items_holder" %>
+              <%#= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+            </div>
             <br/>
             <span class="hint_text client_hint">client you want to send invoice</span>
             <span id="last_invoice" style="display: none;"></span>
@@ -32,9 +30,10 @@
         <div class="control-group">
           <%= f.label :payment_terms_id, "Terms", :class => 'control-label' %>
           <div class="controls">
-            <%= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-            <%= link_to "New Term", '#', "data-toggle" => "modal", "data-target" => "#termsModal" %>
-            <%= link_to "New Tax", '#', "data-toggle" => "modal", "data-target" => "#taxModal" %>
+            <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
+           <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] }),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"}  %>
+            <%= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
+            <%= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
           </div>
         </div>
 
@@ -55,6 +54,14 @@
           <%= f.label :invoice_date, "Invoice Date", :class => 'control-label' %>
           <div class="controls">
             <%= f.text_field :invoice_date, :class => 'text_field small' %>
+              <br/>
+              <span class="hint_text"></span>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :due_date, "Invoice Due", :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :due_date, :class => 'text_field small' %>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ jQuery ->
   jQuery(".chzn-select").chosen({allow_single_deselect: true})
 
 #  # Apply sorting on invoice table
-  jQuery("table.table_listing").tablesorter
+  jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
     headers:
@@ -110,7 +110,7 @@ jQuery ->
          success: (data, textStatus, jqXHR) ->
           item = JSON.parse(data)
           container = elem.parents("tr.fields")
-          container.find("textarea.description").val(item[0])
+          container.find("input.description").val(item[0])
           container.find("input.cost").val(item[1].toFixed(2))
           container.find("input.qty").val(item[2])
           updateLineTotal(elem)
@@ -314,27 +314,41 @@ jQuery ->
     position:
       at: "bottomCenter"
 
+ # Autofill due date
+  jQuery("#invoice_payment_terms_id").change ->
+    number_of_days = parseInt(jQuery("option:selected",this).attr('number_of_days'))
+    invoice_invoice_date = new Date(jQuery("#invoice_invoice_date").val());
+    invoice_due_date = new Date(invoice_invoice_date);
+    invoice_due_date.setDate(invoice_due_date.getDate() + number_of_days);
+    jQuery("#invoice_due_date").val(formated_date(invoice_due_date))
+
+
+ # Date formating function
+  formated_date = (elem) ->
+   separator = "-"
+   new_date  = elem.getFullYear() 
+   new_date += separator + ("0" + (elem.getMonth() + 1)).slice(-2)
+   new_date += separator + ("0" + elem.getDate()).slice(-2)
+   new_date
+
   # Hide placeholder text on focus
-  $("form#create_client input[type=text]").focus(->
+  jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
     @dataPlaceholder = @placeholder
     @removeAttribute "placeholder"
-  ).blur ->
+  ).live "blur", ->
     @placeholder = @dataPlaceholder
     @removeAttribute "dataPlaceholder"
 
-  $(".new_client_btn").click ->
+  jQuery(".quick_create").click ->
     pos = $(this).position()
-
     height = $(this).outerHeight()
-
     #show the menu directly over the placeholder
-    $("#new_client_wrapper").css(
+    jQuery("##{jQuery(this).attr('name')}").css(
       position: "absolute"
-      top: (pos.top + height ) + "px"
+      top: (pos.top + height) + "px"
       left: pos.left + "px"
     ).show()
 
-  $(".close_btn").click ->
-    $(this).parents('.quick_create_wrapper').hide()
-
+  jQuery(".close_btn").live "click", ->
+    jQuery(this).parents('.quick_create_wrapper').hide()
 
