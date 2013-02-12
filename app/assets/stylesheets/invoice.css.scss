@@ -412,14 +412,17 @@ p, ol, ul, td {
     width: 150px;
   }
   .description textarea {
-    width: 130px;
+    width: 149px;
     min-height: 25px;
   }
-  .unit_cost input, .quantity input, .tax1 input, .tax2 input {
-    width: 50px;
+  .unit_cost input, .quantity input {
+    width: 58px;
+  }
+  .tax1 input, .tax2 input {
+    width: 82px;
   }
   .linetotal label {
-    width: 51px;
+    width: 89px;
     text-align: right;
     height: 28px;
     line-height: 28px;
@@ -562,9 +565,10 @@ table.index th {
 }
 
 .invoice_top_section {
-  float: right;
+  float: left;
   width: 720px;
   margin-top: 30px;
+  margin-left: 40px;
 }
 
 .form-horizontal .invoice_top_section {
@@ -675,7 +679,10 @@ table.index th {
   left: 762.5px !important;
   top: 234.8px !important;
 }
-#paymentModal.modal{
 
-    tr:first-child{background: none;}
+#paymentModal.modal {
+
+  tr:first-child {
+    background: none;
+  }
 }
