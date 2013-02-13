@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @companies = current_user.companies
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +24,8 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   # GET /companies/new.json
   def new
-    @company = Company.new
+    #@company = Company.new
+    @company = current_user.companies.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,11 +41,13 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(params[:company])
-    
+    #@company = Company.new(params[:company])
+    @company = current_user.companies.build(params[:company])
+
     respond_to do |format|
-      if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+      #if @company.save
+      if current_user.save
+        format.html { redirect_to edit_company_url(@company), notice: 'Company was successfully created.' }
         format.json { render json: @company, status: :created, location: @company }
       else
         format.html { render action: "new" }
@@ -73,7 +76,8 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.json
   def destroy
     @company = Company.find(params[:id])
-    @company.destroy
+    current_user.companies.destroy(@company)
+    #@company.destroy
 
     respond_to do |format|
       format.html { redirect_to companies_url }

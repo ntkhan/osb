@@ -18,7 +18,8 @@
     </div>
     <div class="header_menu">
       <ul>
-        <li><a href="#" class="no_links">My Account</a></li>
+        <!--<li><a href="#" class="no_links">My Account</a></li>-->
+        <li><%= link_to "My Account", new_company_path %></li>
         <li><a href="#" class="no_links">Settings</a></li>
         <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
       </ul>

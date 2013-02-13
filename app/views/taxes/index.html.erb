@@ -1,3 +1,4 @@
+<div style="float: left; width: 100%;">
 <div class="top_plus_btn">
   <%= link_to (content_tag(:span, "+") + 'NEW Tax'),
               new_taxis_path, :class => 'btn_large btn_plus' %>
@@ -38,8 +39,9 @@
     </table>
     <div class="btn_wrapper">
       <%= link_to (content_tag(:span, "+") + 'NEW Tax'),
-                  new_taxis_path, :class => 'btn_large' %>
+                  new_taxis_path, :class => 'btn_large btn_plus_bottom' %>
     </div>
+      </div>
 <% end %>
 
 

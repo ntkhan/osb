@@ -1,6 +1,6 @@
 <%- model_class = Payment -%>
 <div id="invoices_container">default data</div>
-
+<div style="float: left; width: 100%;">
 <div class="top_plus_btn">
   <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus", :remote => true %>
 </div>
@@ -57,6 +57,7 @@
     <div class="btn_wrapper">
       <%= link_to (content_tag(:span, "+") + 'NEW Payment'), '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal", :class => "btn_large btn_plus_bottom", :remote => true %>
     </div>
+      </div>
 <%end%>
 <!-- START: Unpaid invoices popup -->
 <%= form_tag "/payments/enter_payment",:id=>"invoice_selection" do %>
