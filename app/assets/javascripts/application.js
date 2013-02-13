@@ -14,6 +14,10 @@
 //= require jquery_ujs
 //= require jquery-ui.js
 //= require twitter/bootstrap
+//= require jquery.jqplot.js
+//= require jqplot.barRenderer.min.js
+//= require jqplot.categoryAxisRenderer.min.js
+//= require jqplot.pointLabels.min.js
 //= require_tree .
 //= require jquery_nested_form
 //= require nav
@@ -24,6 +28,8 @@
 //= require tableSorter.js
 //= require tablesorter.staticrow.js
 //= require jquery.metadata.js
+
+
 
 jQuery(function () {
     //override default behavior of inserting new subforms into form    
