@@ -11,7 +11,8 @@
       </ul>
     </div>
     <div class="enter_payment_btn">
-      <a href="#">enter payment on invoice</a>
+      <!--<a href="#">enter payment on invoice</a>-->
+      <%= link_to "enter payment on invoice", "enter_single_payment?ids=#{@invoice.id}" %>
     </div>
     <div class="payment_content">
       <div class="payment_container">

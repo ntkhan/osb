@@ -24,12 +24,13 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   # GET /companies/new.json
   def new
-    #@company = Company.new
-    @company = current_user.companies.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @company }
+    user_company = current_user.companies
+    if user_company.present?
+      @company =  user_company.first
+      redirect_to edit_company_url(@company)
+    else
+      @company = user_company.build
+      respond_to {|format| format.html}
     end
   end
 
