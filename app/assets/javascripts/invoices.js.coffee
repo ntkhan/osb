@@ -324,11 +324,15 @@ jQuery ->
 
  # Autofill due date
   jQuery("#invoice_payment_terms_id").change ->
-    number_of_days = parseInt(jQuery("option:selected",this).attr('number_of_days'))
-    invoice_invoice_date = new Date(jQuery("#invoice_invoice_date").val());
-    invoice_due_date = new Date(invoice_invoice_date);
-    invoice_due_date.setDate(invoice_due_date.getDate() + number_of_days);
-    jQuery("#invoice_due_date").val(formated_date(invoice_due_date))
+    number_of_days = jQuery("option:selected",this).attr('number_of_days')
+    if number_of_days?
+     number_of_days = parseInt(number_of_days)
+     invoice_invoice_date = new Date(jQuery("#invoice_invoice_date").val());
+     invoice_due_date = new Date(invoice_invoice_date);
+     invoice_due_date.setDate(invoice_due_date.getDate() + number_of_days);
+     jQuery("#invoice_due_date").val(formated_date(invoice_due_date))
+    else
+     jQuery("#invoice_due_date").val("")
 
 
  # Date formating function
