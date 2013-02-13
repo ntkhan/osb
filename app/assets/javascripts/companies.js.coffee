@@ -14,6 +14,9 @@ jQuery ->
       applyQtip(jQuery("#company_admin_last_name"),"Enter last name")
       false
 
+  jQuery("input[type=text]",".companies_wrapper").keypress ->
+    hideQtip(jQuery(this))
+
   applyQtip = (elem,message) ->
     elem.qtip
       content:
@@ -29,3 +32,6 @@ jQuery ->
           corner: "leftMiddle"
     elem.qtip().show()
     elem.focus()
+
+  hideQtip = (elem) =>
+    elem.qtip("hide")
