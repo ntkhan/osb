@@ -113,4 +113,9 @@ class Invoice < ActiveRecord::Base
     end
   end
 
+  def notify current_user,id
+    encrypted_id = Base64.encode64(id)
+    InvoiceMailer.delay({:run_at => 1.minutes.from_now}).new_invoice_email(self.client, self, encrypted_id, current_user)
+  end
+
 end

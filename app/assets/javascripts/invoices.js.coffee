@@ -19,9 +19,6 @@ jQuery ->
   jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
-#    headers:
-#      4: #zero-based column index
-#        sorter: "thousands"
 
 # Calculate the line total for invoice
   updateLineTotal = (elem) ->

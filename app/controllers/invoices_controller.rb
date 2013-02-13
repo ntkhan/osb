@@ -70,12 +70,9 @@ class InvoicesController < ApplicationController
     params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
     respond_to do |format|
       if @invoice.save
-        encrypted_id = Base64.encode64(encrypt(@invoice.id))
-        InvoiceMailer.delay({:run_at => 1.minutes.from_now}).new_invoice_email(@invoice.client, @invoice, encrypted_id, current_user)
-        # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
-        format.json { render :json => @invoice, :status => :created, :location => @invoice }
+        @invoice.notify(current_user, encrypt(@invoice.id))
         new_invoice_message = new_invoice(@invoice.id)
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => new_invoice_message)
+        redirect_to(edit_invoice_url(@invoice), :notice => new_invoice_message)
         return
       else
         format.html { render :action => "new" }
