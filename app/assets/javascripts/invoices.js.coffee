@@ -371,7 +371,7 @@ jQuery ->
     title = jQuery(this).parent("p").attr "title"
     action = jQuery(this).val().toLowerCase()
     flag = true
-    if jQuery("table.table_listing").find(":checked").length is 0
+    if jQuery("table.table_listing tbody").find(":checked").length is 0
        jQuery('.alert').hide();
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
        flag = false
