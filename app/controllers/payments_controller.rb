@@ -87,8 +87,7 @@ class PaymentsController < ApplicationController
     @payments = []
     unless params[:pay_invoice]
       params[:invoice_ids].each do |inv_id|
-        payment = Payment.new
-        payment.invoice_id = inv_id
+        payment = Payment.new({:invoice_id => inv_id,:payment_date=> Date.today})
         @payments << payment
       end
     else
