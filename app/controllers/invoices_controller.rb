@@ -118,10 +118,7 @@ class InvoicesController < ApplicationController
 
   def unpaid_invoices
     @invoices = Invoice.where("status != 'paid' or status is null").all
-    respond_to do |format|
-      format.js
-      format.html
-    end
+    respond_to { |format| format.js }
   end
 
   def bulk_actions
@@ -165,6 +162,11 @@ class InvoicesController < ApplicationController
 
   def filter_invoices
     @invoices = Invoice.filter(params)
+  end
+
+  def send_invoice
+    @invoice = Invoice.find_by_id(params[:id]).notify(current_user, encrypt(params[:id]))
+    respond_to { |format| format.js }
   end
 
   private

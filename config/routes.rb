@@ -83,6 +83,7 @@ Osb::Application.routes.draw do
       get 'undo_actions'
       post 'duplicate_invoice'
       get 'enter_single_payment'
+      get 'send_invoice'
     end
   end
 
