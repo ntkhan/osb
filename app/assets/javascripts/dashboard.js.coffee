@@ -30,5 +30,10 @@ jQuery ->
     legend: chart_legend
     axes: chart_axis
 
-  jQuery.jqplot "dashboard-chart", chart_data, chart_options
+  try
+    jQuery.jqplot "dashboard-chart", chart_data, chart_options
+  catch e
+
+
+
 
