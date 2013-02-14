@@ -147,7 +147,9 @@ jQuery ->
   # Add date picker to invoice date field
   jQuery("#invoice_invoice_date").datepicker
     dateFormat: 'yy-mm-dd'
-
+  # Add date picker to payment date field
+  jQuery(".date_picker_class").datepicker
+    dateFormat: 'yy-mm-dd'
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
@@ -363,6 +365,5 @@ jQuery ->
 
   jQuery(".close_btn").live "click", ->
     jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
-
 
 
