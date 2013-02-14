@@ -8,16 +8,6 @@
 
     </tr>
   <% end %>
-  <tr>
-    <td colspan="5">
-      <div class="paginator" style="text-align:left;">
-        <%= paginate @sent_emails, :remote => true %>
-        <div class="paging_info">
-          <%= page_entries_info @sent_emails %>
-        </div>
-      </div>
-    </td>
-  </tr>
 <% else %>
   <tr>
     <td colspan="5">
