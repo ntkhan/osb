@@ -3,7 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  jQuery(".chzn-select").chosen({allow_single_deselect: true})
+  jQuery(".chzn-select").chosen({allow_single_deselect: true}).on "liszt:showing_dropdown", ->
+    chzn_drop = jQuery(this).next().find(".chzn-drop")
+    unless chzn_drop.find("div.add-new").length > 0
+      chzn_drop.append("<div class='add-new no_links'><a href=\'http://www.google.com\' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
 
   jQuery.tablesorter.addParser
     id: "thousands"

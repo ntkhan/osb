@@ -1,5 +1,5 @@
 class PaymentMailer < ActionMailer::Base
-  default :from => "info@osb.com"
+default :from => "info@osb.com"
 
   def payment_notification_email(current_user_email,user,invoice,amount)
     @user,@invoice, @amount = user,invoice, amount
