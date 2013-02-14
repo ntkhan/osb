@@ -366,4 +366,13 @@ jQuery ->
   jQuery(".close_btn").live "click", ->
     jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
 
-
+  # Alert on no record selection
+  jQuery(".top_links").live "click", ->
+    title = jQuery(this).parent("p").attr "title"
+    action = jQuery(this).val().toLowerCase()
+    flag = true
+    if jQuery("table.table_listing tbody").find(":checked").length is 0
+       jQuery('.alert').hide();
+       jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
+       flag = false
+    flag

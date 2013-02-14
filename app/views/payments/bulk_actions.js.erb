@@ -1,14 +1,5 @@
 jQuery(".alert").hide()
-<%if params[:payment_ids].blank? %>
-<%
-  if @action == "recovered from archived" or @action == "recovered from deleted"
-    no_msg = "Recover"
-  else
-    no_msg = "delete/archive"
-  end
-%>
-jQuery(".alert.alert-error").show().find('span').html("You haven't selected any payment to <%= no_msg%>. Please select one or more payments and try again.");
-<% elsif @action == "archived" or @action == "deleted" %>
+<%if @action == "archived" or @action == "deleted" %>
 jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
 <% else %>
 jQuery(".alert.alert-success").show().find('span').html("Payment(s) are <%= @action %> successfully");

@@ -1,22 +1,5 @@
 jQuery('.alert').hide();
-
-// Check if invoices are selected. If not show error intimation message. //
-
-<% if params[:invoice_ids].blank? %>
-  <%
-  if @action == "recovered from archived" or @action == "recovered from deleted"
-    no_msg = "Recover"
-  elsif @action == "enter payment"
-    no_msg = "enter payment"
-  else
-    no_msg = "delete/archive"
-  end
-%>
-    jQuery(".alert.alert-error").show().find('span').html("You haven't selected any invoice to <%= no_msg %>. Please select one or more invoices and try again.");
-
-// If unpaid invoices are selected and action is enter payment then redirect to enter payment screen. //
-
-<% elsif @action == "enter payment" %>
+<% if @action == "enter payment" %>
     window.location.href = "/payments/enter_payment?invoice_ids=<%= params[:invoice_ids].join(",") %>"
 <%else%>
     <% if @action == "archived" or @action == "deleted" %>
