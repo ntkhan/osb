@@ -1121,17 +1121,17 @@ table.table_listing,table.report-data-table {
   thead {
     tr {
       .header {
-        background-image: url(/assets/bg.gif);
+        background-image: url(/assets/bg.png);
         background-repeat: no-repeat;
         background-position: center right;
         cursor: pointer;
       }
       .headerSortUp {
-        background-image: url(/assets/asc.gif);
+        background-image: url(/assets/asc.png);
         //background-color: #00BDE5;
       }
       .headerSortDown {
-        background-image: url(/assets/desc.gif);
+        background-image: url(/assets/desc.png);
         //background-color: #00BDE5;
       }
     }

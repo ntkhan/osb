@@ -84,9 +84,11 @@ class PaymentsController < ApplicationController
   end
 
   def enter_payment
+    ids = params[:invoice_ids]
     @payments = []
+    ids = ids.split(",") if ids and ids.is_a?(String)
     unless params[:pay_invoice]
-      params[:invoice_ids].each do |inv_id|
+      ids.each do |inv_id|
         payment = Payment.new
         payment.invoice_id = inv_id
         @payments << payment

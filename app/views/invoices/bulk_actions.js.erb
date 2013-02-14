@@ -1,6 +1,8 @@
-<% if @action == "paid invoices" %>
-  jQuery(".alert.alert-error").show().find('span').html("You cannot pay paid invoices");
-<% elsif params[:invoice_ids].blank? %>
+jQuery('.alert').hide();
+
+// Check if invoices are selected. If not show error intimation message. //
+
+<% if params[:invoice_ids].blank? %>
   <%
   if @action == "recovered from archived" or @action == "recovered from deleted"
     no_msg = "Recover"
@@ -8,27 +10,40 @@
     no_msg = "delete/archive"
   end
 %>
-  jQuery(".alert.alert-error").show().find('span').html("You haven't selected any invoice to <%= no_msg %>. Please select one or more invoices and try again.");
-<% elsif @action == "archived" or @action == "deleted" %>
-  jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
-<%elsif @action == "paid" %>
-  jQuery(".alert.alert-success").show().find('span').html("Payments against selected invoices have been recorded successfully.");
-  window.location.href = "/payments/enter_payment?invoice_ids=<%= params[:invoice_ids].join(",") %>"
+    jQuery(".alert.alert-error").show().find('span').html("You haven't selected any invoice to <%= no_msg %>. Please select one or more invoices and try again.");
+
+// If unpaid invoices are selected and action is enter payment then redirect to enter payment screen. //
+
+<% elsif @action == "enter payment" %>
+    window.location.href = "/payments/enter_payment?invoice_ids=<%= params[:invoice_ids].join(",") %>"
 <%else%>
-  jQuery(".alert.alert-success").show().find('span').html("Invoices are <%= @action %> successfully.");
-<% end %>
-<%unless params[:invoice_ids].blank?%>
-  jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
+    <% if @action == "archived" or @action == "deleted" %>
+        jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
+    <%elsif @action == "paid invoices" %>
+         jQuery(".alert.alert-error").show().find('span').html("You cannot pay paid invoices.");
+    <%else%>
+         jQuery(".alert.alert-success").show().find('span').html("Invoices are <%= @action %> successfully.");
+    <% end %>
+
+    <%if !params[:invoice_ids].blank? && @action != "paid invoices"%>
+        jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
+    <%end%>
+
+// Enable/Disable action links(Archive,Delete,Recover). //
+
+    jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');
+    jQuery('#active_links a').removeClass('active');
+    <% if @action == "recovered from archived"%>
+        jQuery('.get_archived').addClass('active');
+    <% elsif @action == "recovered from deleted" %>
+        jQuery('.get_deleted').addClass('active');
+    <%else%>
+        jQuery('.get_actives').addClass('active');
+    <%end%>
+    jQuery('#select_all').attr('checked',false);
+    <%if @action != "paid invoices"%>
+        jQuery('tfoot#paging_links').html('<%= escape_javascript render("paging") %>');
+        jQuery("table.table_listing").trigger('update');
+    <%end%>
+
 <%end%>
-jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');
-jQuery('#active_links a').removeClass('active');
-<% if @action == "recovered from archived"%>
-  jQuery('.get_archived').addClass('active');
-<% elsif @action == "recovered from deleted" %>
-  jQuery('.get_deleted').addClass('active');
-<%else%>
-  jQuery('.get_actives').addClass('active');
-<%end%>
-jQuery('#select_all').attr('checked',false);
-jQuery('tfoot#paging_links').html('<%= escape_javascript render("paging") %>');
-jQuery("table.table_listing").trigger('update');
