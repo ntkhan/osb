@@ -93,11 +93,11 @@ jQuery ->
   jQuery(".invoice_grid_fields select.items_list").live "change", ->
      # Add an empty line item row at the end if last item is changed.
      elem = jQuery(this)
-     addLineItemRow(elem)
      if elem.val() is ""
        clearLineTotal(elem)
        false
      else
+       addLineItemRow(elem)
        jQuery.ajax '/items/load_item_data',
          type: 'POST'
          data: "id=" + jQuery(this).val()
@@ -265,7 +265,7 @@ jQuery ->
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
     container = elem.parents("tr.fields")
-    container.find("textarea.description").val('')
+    container.find("input.description").val('')
     container.find("input.cost").val('')
     container.find("input.qty").val('')
     updateLineTotal(elem)
