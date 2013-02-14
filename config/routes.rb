@@ -100,6 +100,9 @@ Osb::Application.routes.draw do
   resources :clients
 
 
+  resources :sent_emails
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
