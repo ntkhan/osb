@@ -6,6 +6,8 @@ jQuery('.alert').hide();
   <%
   if @action == "recovered from archived" or @action == "recovered from deleted"
     no_msg = "Recover"
+  elsif @action == "enter payment"
+    no_msg = "enter payment"
   else
     no_msg = "delete/archive"
   end
