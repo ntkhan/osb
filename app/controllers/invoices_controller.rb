@@ -70,12 +70,9 @@ class InvoicesController < ApplicationController
     params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
     respond_to do |format|
       if @invoice.save
-        encrypted_id = Base64.encode64(encrypt(@invoice.id))
-        InvoiceMailer.delay({:run_at => 1.minutes.from_now}).new_invoice_email(@invoice.client, @invoice, encrypted_id, current_user)
-        # format.html { redirect_to @invoice, :notice => 'Your Invoice has been created successfully.' }
-        format.json { render :json => @invoice, :status => :created, :location => @invoice }
+        @invoice.notify(current_user, encrypt(@invoice.id))
         new_invoice_message = new_invoice(@invoice.id)
-        redirect_to({:action => "edit", :controller => "invoices", :id => @invoice.id}, :notice => new_invoice_message)
+        redirect_to(edit_invoice_url(@invoice), :notice => new_invoice_message)
         return
       else
         format.html { render :action => "new" }
@@ -121,10 +118,7 @@ class InvoicesController < ApplicationController
 
   def unpaid_invoices
     @invoices = Invoice.where("status != 'paid' or status is null").all
-    respond_to do |format|
-      format.js
-      format.html
-    end
+    respond_to { |format| format.js }
   end
 
   def bulk_actions
@@ -148,13 +142,13 @@ class InvoicesController < ApplicationController
       @invoices = Invoice.only_deleted.page(params[:page])
       @action = "recovered from deleted"
     elsif params[:payment]
-      @action = unless Invoice.paid_invoices(ids).present?
-                  #Invoice.paid_full(ids)
-                  "paid"
-                else
-                  "paid invoices"
-                end
-      @invoices = Invoice.unarchived.page(params[:page])
+      #@action = unless Invoice.paid_invoices(ids).present?
+      #            #Invoice.paid_full(ids)
+      #            "paid"
+      #          else
+      #            "paid invoices"
+      #          end
+      #@invoices = Invoice.unarchived.page(params[:page])
     end
 
     respond_to { |format| format.js }
@@ -168,6 +162,11 @@ class InvoicesController < ApplicationController
 
   def filter_invoices
     @invoices = Invoice.filter(params)
+  end
+
+  def send_invoice
+    @invoice = Invoice.find_by_id(params[:id]).notify(current_user, encrypt(params[:id]))
+    respond_to { |format| format.js }
   end
 
   private
