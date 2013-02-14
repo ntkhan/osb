@@ -96,11 +96,11 @@ jQuery ->
   jQuery(".invoice_grid_fields select.items_list").live "change", ->
      # Add an empty line item row at the end if last item is changed.
      elem = jQuery(this)
-     addLineItemRow(elem)
      if elem.val() is ""
        clearLineTotal(elem)
        false
      else
+       addLineItemRow(elem)
        jQuery.ajax '/items/load_item_data',
          type: 'POST'
          data: "id=" + jQuery(this).val()
@@ -150,7 +150,9 @@ jQuery ->
   # Add date picker to invoice date field
   jQuery("#invoice_invoice_date").datepicker
     dateFormat: 'yy-mm-dd'
-
+  # Add date picker to payment date field
+  jQuery(".date_picker_class").datepicker
+    dateFormat: 'yy-mm-dd'
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
@@ -266,7 +268,7 @@ jQuery ->
   # Don't send an ajax request if an item is deselected.
   clearLineTotal = (elem) ->
     container = elem.parents("tr.fields")
-    container.find("textarea.description").val('')
+    container.find("input.description").val('')
     container.find("input.cost").val('')
     container.find("input.qty").val('')
     updateLineTotal(elem)
@@ -367,5 +369,13 @@ jQuery ->
   jQuery(".close_btn").live "click", ->
     jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
 
-
-
+  # Alert on no record selection
+  jQuery(".top_links").live "click", ->
+    title = jQuery(this).parent("p").attr "title"
+    action = jQuery(this).val().toLowerCase()
+    flag = true
+    if jQuery("table.table_listing tbody").find(":checked").length is 0
+       jQuery('.alert').hide();
+       jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
+       flag = false
+    flag

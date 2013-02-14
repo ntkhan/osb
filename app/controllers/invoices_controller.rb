@@ -142,12 +142,12 @@ class InvoicesController < ApplicationController
       @invoices = Invoice.only_deleted.page(params[:page])
       @action = "recovered from deleted"
     elsif params[:payment]
-      #@action = unless Invoice.paid_invoices(ids).present?
-      #            #Invoice.paid_full(ids)
-      #            "paid"
-      #          else
-      #            "paid invoices"
-      #          end
+      @action = unless Invoice.paid_invoices(ids).present?
+                  #Invoice.paid_full(ids)
+                  "enter payment"
+                else
+                  "paid invoices"
+                end
       #@invoices = Invoice.unarchived.page(params[:page])
     end
 
@@ -165,8 +165,9 @@ class InvoicesController < ApplicationController
   end
 
   def send_invoice
-    @invoice = Invoice.find_by_id(params[:id]).notify(current_user, encrypt(params[:id]))
-    respond_to { |format| format.js }
+    @invoice = Invoice.find_by_id(params[:id])
+    @invoice.send_invoice(current_user, encrypt(params[:id]))
+    redirect_to(invoice_path(@invoice),:notice => "Invoice has been sent successfully")
   end
 
   private

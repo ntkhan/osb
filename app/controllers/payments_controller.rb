@@ -84,15 +84,16 @@ class PaymentsController < ApplicationController
   end
 
   def enter_payment
+    ids = params[:invoice_ids]
     @payments = []
+    ids = ids.split(",") if ids and ids.is_a?(String)
     unless params[:pay_invoice]
-      params[:invoice_ids].each do |inv_id|
-        payment = Payment.new
-        payment.invoice_id = inv_id
+      ids.each do |inv_id|
+        payment = Payment.new({:invoice_id => inv_id, :payment_date => Date.today})
         @payments << payment
       end
     else
-      @payments << Payment.new({:invoice_id => params[:invoice_id]})
+      @payments << Payment.new({:invoice_id => params[:invoice_id], :payment_date => Date.today})
       respond_to { |format| format.js }
     end
   end

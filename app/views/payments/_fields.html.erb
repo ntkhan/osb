@@ -46,7 +46,7 @@ end
             <td class="form_title invoice small"><%= f.label "Date", :class => "",:for=>"payments_#{index}_payment_date" %></td>
             <td>
               <div class="calendar">
-                <%= f.text_field :payment_date,:id=>"payments_#{index}_payment_date", :class => "small invoice" %>
+                <%= f.text_field :payment_date,:id=>"payments_#{index}_payment_date", :class => "small invoice date_picker_class" %>
               </div>
             </td>
           </tr>

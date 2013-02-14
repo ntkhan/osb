@@ -38,7 +38,11 @@
   input[type=text]{
     width: 176px;
   }
+
 }
 .content.companies-main{
   overflow: visible;
+  #company_time_zone_chzn.chzn-container .chzn-results{
+    max-height: 120px;
+  }
 }
