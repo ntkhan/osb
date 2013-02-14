@@ -142,13 +142,13 @@ class InvoicesController < ApplicationController
       @invoices = Invoice.only_deleted.page(params[:page])
       @action = "recovered from deleted"
     elsif params[:payment]
-      @action = unless Invoice.paid_invoices(ids).present?
-                  #Invoice.paid_full(ids)
-                  "paid"
-                else
-                  "paid invoices"
-                end
-      @invoices = Invoice.unarchived.page(params[:page])
+      #@action = unless Invoice.paid_invoices(ids).present?
+      #            #Invoice.paid_full(ids)
+      #            "paid"
+      #          else
+      #            "paid invoices"
+      #          end
+      #@invoices = Invoice.unarchived.page(params[:page])
     end
 
     respond_to { |format| format.js }
