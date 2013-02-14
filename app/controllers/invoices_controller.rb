@@ -165,7 +165,8 @@ class InvoicesController < ApplicationController
   end
 
   def send_invoice
-    @invoice = Invoice.find_by_id(params[:id]).send_invoice(current_user, encrypt(params[:id]))
+    @invoice = Invoice.find_by_id(params[:id])
+    @invoice.send_invoice(current_user, encrypt(params[:id]))
     redirect_to(invoice_path(@invoice),:notice => "Invoice has been sent successfully")
   end
 
