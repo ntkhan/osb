@@ -3,7 +3,20 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  jQuery(".chzn-select").chosen({allow_single_deselect: true})
+  jQuery(".chzn-select").on "liszt:ready", ->
+    chzn_drop = jQuery(this).next().find(".chzn-drop")
+    unless chzn_drop.find("div.add-new").length > 0
+      select_id = this.id
+      chzn_drop.append("<div class='add-new no_links'><a href=\'http://www.google.com\' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
+
+  jQuery(".chzn-select").chosen({allow_single_deselect: true}).trigger("liszt:ready", this)
+
+
+  jQuery(".add-new").live "click", ->
+    chzn_list = jQuery(this).prev()
+    console.log chzn_list.after(jQuery("#clients_holder form#create_client").clone().show().wrap('<p>').parent().html())
+    chzn_list.hide()
+
 
   jQuery.tablesorter.addParser
     id: "thousands"

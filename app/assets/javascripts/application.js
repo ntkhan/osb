@@ -52,6 +52,11 @@ jQuery(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
 
+    jwerty.key('a,i', function(){document.location.href = "http://" + document.location.host + "/invoices/new" });
+    jwerty.key('a,c', function(){document.location.href = "http://" + document.location.host + "/clients/new" });
+    jwerty.key('a,t', function(){document.location.href = "http://" + document.location.host + "/items/new" });
+    jwerty.key('a,p', function(){document.location.href = "http://" + document.location.host + "/payments" });
+    jwerty.key('esc', function(){jQuery(document.activeElement).blur();});
 });
 
 

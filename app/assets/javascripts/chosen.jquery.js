@@ -388,9 +388,10 @@ Copyright (c) 2011 by Harvest
       }
       this.results_build();
       this.set_tab_index();
-      return this.form_field_jq.trigger("liszt:ready", {
+      this.form_field_jq.trigger ("liszt:ready", {
         chosen: this
       });
+      return this;
     };
 
     Chosen.prototype.register_observers = function() {

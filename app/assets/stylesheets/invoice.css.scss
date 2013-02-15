@@ -587,13 +587,13 @@ table.index th {
 .hint_text {
   color: #959595;
   font-size: 11px;
-  height:18px;
-  float:left;
-}
-.hint_text.client_hint {
-  margin-top:-4px;
+  height: 18px;
+  float: left;
 }
 
+.hint_text.client_hint {
+  margin-top: -4px;
+}
 
 /*
 .form-horizontal .form-actions {
@@ -691,5 +691,23 @@ table.index th {
 
   tr:first-child {
     background: none;
+  }
+}
+
+.chzn-container {
+
+  .add-new {
+    background-color: #00BDE5;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    height: 26px;
+    margin: 10px;
+    padding: 6px 0 0;
+    text-align: center;
+    vertical-align: middle;
+    a {
+      vertical-align: middle;
+      color: white;
+    }
   }
 }
