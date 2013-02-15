@@ -39,6 +39,7 @@ group :development do
   gem "binding_of_caller"
 end
 gem "browser"
+gem "gon"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

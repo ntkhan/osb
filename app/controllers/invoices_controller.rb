@@ -170,9 +170,5 @@ class InvoicesController < ApplicationController
     redirect_to(invoice_path(@invoice),:notice => "Invoice has been sent successfully")
   end
 
-  private
-  def choose_layout
-    action_name == 'preview' ? "preview_mode" : "application"
-  end
 
 end

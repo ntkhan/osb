@@ -11,7 +11,7 @@
 <%= form_tag "items/bulk_actions", :remote => true do -%>
     <div class="action_links_wrapper">
       <div class="invoice_action_links">
-        <p title="item">
+        <p value="item">
           <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
           <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
           <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>

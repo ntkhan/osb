@@ -4,22 +4,32 @@
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
-  <%
-  sender_business_name ||= "OSB LLC"
-  %>
+<%
+   sender_business_name ||= "OSB LLC"
+%>
 <p>Dear <%= @user.first_name %>,</p>
 
 <p>
-  To view your invoice from <%= "#{sender_business_name}" %> for <%= @user.invoices.first.currency_symbol %><%=@invoice.invoice_total%>, or to download a PDF copy for
+  To view your invoice from <%= "#{sender_business_name}" %>
+  for <%= @user.invoices.first.currency_symbol %><%= @invoice.invoice_total %>, or to download a PDF copy for
   your records, click the link below:
 </p>
 
 <p>
-  <a href="<%= Osb::Application.config.address %>invoices/preview?inv_id=<%= @e_id %>"><%= Osb::Application.config.address %>view?inv_id=<%= @e_id %></a>
+  <a href="<%= Osb::Application.config.address %>invoices/preview?inv_id=<%= @e_id %>"><%= Osb::Application.config.address %>
+    view?inv_id=<%= @e_id %></a>
+</p>
+
+<p>To view payments history of <%= "#{@user.first_name}" %>, click the link below:</p>
+
+<p>
+  <a href="<%= Osb::Application.config.address %>payments/payments_history?inv_id=<%= @e_id %>">
+    <%= Osb::Application.config.address %>history?inv_id=<%= @e_id %>
+  </a>
 </p>
 
 <p>
-  Best regards, <br />
+  Best regards, <br/>
   <%= "#{sender_business_name}" %> (<%= @current_user.email %>)
 </p>
 

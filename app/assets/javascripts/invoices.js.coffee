@@ -381,11 +381,14 @@ jQuery ->
 
   # Alert on no record selection
   jQuery(".top_links").live "click", ->
-    title = jQuery(this).parent("p").attr "title"
+    title = jQuery(this).parent("p").attr "value"
     action = jQuery(this).val().toLowerCase()
     flag = true
     if jQuery("table.table_listing tbody").find(":checked").length is 0
        jQuery('.alert').hide();
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
+#       setTimeout (->
+#         jQuery('.alert').slideUp(300)
+#       ), 5000
        flag = false
     flag

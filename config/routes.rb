@@ -19,6 +19,7 @@ Osb::Application.routes.draw do
       get 'filter_payments'
       get 'bulk_actions'
       get 'undo_actions'
+      get 'payments_history'
     end
   end
   resources :taxes do
