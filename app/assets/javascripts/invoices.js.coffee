@@ -368,7 +368,7 @@ jQuery ->
 
   # Alert on no record selection
   jQuery(".top_links").live "click", ->
-    title = jQuery(this).parent("p").attr "title"
+    title = jQuery(this).parent("p").attr "value"
     action = jQuery(this).val().toLowerCase()
     flag = true
     if jQuery("table.table_listing tbody").find(":checked").length is 0
