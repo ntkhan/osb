@@ -128,4 +128,8 @@ class Invoice < ActiveRecord::Base
              end
     self.notify(current_user,id) if self.update_attributes(:status => status)
   end
+
+  def self.total_invoices_amount
+    sum('invoice_total')
+  end
 end

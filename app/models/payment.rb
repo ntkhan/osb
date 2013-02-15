@@ -122,4 +122,8 @@ class Payment < ActiveRecord::Base
     ids = client.invoices.collect{|invoice| invoice.id}
     where("invoice_id IN(?)",ids)
   end
+
+  def self.total_payments_amount
+    where('payment_type is null or payment_type != "credit"').sum('payment_amount')
+  end
 end

@@ -40,5 +40,10 @@ module Reporting
       chart_data
 
     end
+
+    # get outstanding invoices
+    def self.get_outstanding_invoices
+      Payment.total_payments_amount - Invoice.total_invoices_amount
+    end
   end
 end
