@@ -3,16 +3,19 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  jQuery(".chzn-select").chosen({allow_single_deselect: true}).on "liszt:showing_dropdown", ->
+  jQuery(".chzn-select").on "liszt:ready", ->
     chzn_drop = jQuery(this).next().find(".chzn-drop")
     unless chzn_drop.find("div.add-new").length > 0
-      console.log "the id of current list is: " + this.id
+      select_id = this.id
       chzn_drop.append("<div class='add-new no_links'><a href=\'http://www.google.com\' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
 
+  jQuery(".chzn-select").chosen({allow_single_deselect: true}).trigger("liszt:ready", this)
+
+
   jQuery(".add-new").live "click", ->
-    chzn_drop = jQuery(this).parent().prev()
-    chzn_drop.hide();
-    chzn_drop.append("<div style='height:100px; background-color: #feffde;'>Add new client</div>")
+    chzn_list = jQuery(this).prev()
+    console.log chzn_list.after(jQuery("#clients_holder form#create_client").clone().show().wrap('<p>').parent().html())
+    chzn_list.hide()
 
 
   jQuery.tablesorter.addParser
