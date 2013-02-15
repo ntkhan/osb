@@ -1,6 +1,8 @@
 class PaymentsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:payments_history]
   # GET /payments
   # GET /payments.json
+  layout :choose_layout
   include PaymentsHelper
 
   def index
@@ -144,6 +146,12 @@ class PaymentsController < ApplicationController
     params[:archived] ? Payment.recover_archived(params[:ids]) : Payment.recover_deleted(params[:ids])
     @payments = Payment.unarchived.page(params[:page])
     respond_to { |format| format.js }
+  end
+
+  def payments_history
+    id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue id = nil
+    client = Invoice.find_by_id(id).client
+    @payments = Payment.payments_history(client).page(params[:page])
   end
 
 end

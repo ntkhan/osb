@@ -1,0 +1,27 @@
+<%- model_class = Payment -%>
+<div id="invoices_container">default data</div>
+<div style="float: left; width: 100%;">
+  <div class="page-header">
+    <h1>Payments History</h1>
+  </div>
+  <table class="table table_listing payment_listing">
+    <thead>
+    <th class="align_center">Invoice</th>
+    <th class="align_left">Client</th>
+    <th class="align_center">Type</th>
+    <th class="align_center">Notes</th>
+    <th class="align_center">Date</th>
+    <th class="align_right {sorter:'thousands'}" style="padding-right: 20px;">Amount</th>
+    </thead>
+
+    <tbody id="payment_body">
+    <%= render 'payments_history' %>
+    <tfoot id="paging_links">
+    <%= render "paging" %>
+    </tfoot>
+    </tbody>
+  </table>
+</div>
+
+
+
