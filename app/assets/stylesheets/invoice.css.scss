@@ -697,15 +697,17 @@ table.index th {
 .chzn-container {
 
   .add-new {
-    background-color: #FFFF99;
-    border-radius: 0 0 3px 3px;
+    background-color: #00BDE5;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
     height: 26px;
+    margin: 10px;
     padding: 6px 0 0;
     text-align: center;
     vertical-align: middle;
-    width: 100%;
     a {
       vertical-align: middle;
+      color: white;
     }
   }
 }
