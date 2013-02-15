@@ -374,5 +374,8 @@ jQuery ->
     if jQuery("table.table_listing tbody").find(":checked").length is 0
        jQuery('.alert').hide();
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
-       flag = false
+#       setTimeout (->
+#         jQuery('.alert').slideUp(300)
+#       ), 5000
+#       flag = false
     flag
