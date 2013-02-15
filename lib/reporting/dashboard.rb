@@ -35,7 +35,7 @@ module Reporting
       chart_data = {}
       chart_data[:invoices] = chart_months.merge(invoices).map { |month, amount| amount }
       chart_data[:payments] = chart_months.merge(payments).map { |month, amount| amount }
-      chart_data[:ticks] = chart_months.map { |month, amount| Date::MONTHNAMES[month] }
+      chart_data[:ticks] = chart_months.map { |month, amount| Date::ABBR_MONTHNAMES[month] }
       Rails.logger.debug chart_data
       chart_data
 
