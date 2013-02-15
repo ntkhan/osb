@@ -377,5 +377,5 @@ jQuery ->
 #       setTimeout (->
 #         jQuery('.alert').slideUp(300)
 #       ), 5000
-#       flag = false
+       flag = false
     flag
