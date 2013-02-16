@@ -1,28 +1,25 @@
-.payment{
+.unpaid_invoice{
 
     .grid_table table col.one{
         width : 33px;
     }
     .grid_table table col.two{
-        min-width : 125px;
+        min-width : 91px;
     }
     .grid_table table col.three{
-        width: 119px;
+        width: 186px;
     }
     .grid_table table col.four{
-        width : 110px;
+        width : 70px;
     }
     .grid_table table col.five{
-        min-width : 115px;
+        min-width : 97px;
     }
     .grid_table table col.six{
-        min-width : 132px;
+        min-width : 106px;
     }
     .grid_table table col.seven{
-        min-width : 139px;
-    }
-    .grid_table table col.eight{
-        min-width : 70px;
+        min-width : 105px;
     }
 
 }

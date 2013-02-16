@@ -1,59 +1,78 @@
 <%- model_class = Client -%>
-<div style="float: left; width: 100%;">
-<div class="top_plus_btn">
-  <%= link_to (content_tag(:span, "+") + 'NEW Client'),
-              new_client_path, :class => 'btn_large btn_plus' %>
-</div>
-<div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <span class="filter-tag">&nbsp;/&nbsp;Active</span>
-  </h1>
-</div>
+<div class="clients">
+<div class="content_top">
+  <div class="primary_heading">
+    <h1>
+      <%= t '.title', :default => model_class.model_name.human.pluralize %>
+      <span class="forward_slash">/</span><span>Active</span>
+    </h1>
+  </div>
+  <div class="primary_btn">
+    <%= link_to (content_tag(:span, "NEW Client")),
+      new_client_path,
+      :class => 'btn_large' %>
+  </div>
+</div><!--content_top-->
 <%= form_tag "clients/bulk_actions", :remote => true do -%>
-    <div class="action_links_wrapper">
-      <div class="invoice_action_links">
-        <p>
-          <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
-          <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
-          <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
-          <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
-          <span>|</span>
-          <a href="#" class="no_links">Copy</a>
-          <a href="#" class="no_links">Print</a>
-          <!--<a href="#">Send</a>-->
-          <!--<span>|</span>-->
-          <!--<a href="#">Enter Payment</a>-->
-          <!--<a href="#">Pay Online</a>-->
-        </p>
+
+  <div class="content_middle">
+    <div class="grid_control">
+      <div class="grid_control_left">
+        <ul>
+          <li><%= submit_tag "Archive", :name => "archive"%></li>
+          <li class="grid_control_sep"><%= submit_tag "Delete", :name => "destroy"%></li>
+          <li><a href="#">Copy</a></li>
+          <li><a href="#">Print</a></li>
+        </ul>
       </div>
-      <div class="invoice_search">
-        <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
-        <div class="active_links" id="active_links">
-          <%= render 'clients/filter_links' %>
-        </div>
+      <div class="grid_control_right">
+        <ul>
+          <li class="grid_control_sep sep_right"><a href="#" class="active">Active</a><span>(11)</span></li>
+          <li class="grid_control_sep sep_right"><a href="#">Archived</a><span>(11)</span></li>
+          <li><a href="#">Deleted</a><span>(0)</span></li>
+        </ul>
       </div>
-    </div>
-    <table class="table table_listing client_listing">
-      <thead>
-      <tr>
-        <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
-        <th>Organization</th>
-        <th>Contact</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th class="align_center not-sortable" width=75><%= t '.actions', :default => t("helpers.actions") %></th>
-      </tr>
-      </thead>
-      <tbody id="client_body">
-      <%= render 'clients' %>
-      <tfoot id="paging_links">
-      <%= render "paging" %>
-      </tfoot>
-      </tbody>
-    </table>
-    <div class="btn_wrapper">
-      <%= link_to (content_tag(:span, "+") + 'NEW Client'), new_client_path, :class => 'btn_large btn_plus_bottom' %>
-    </div>
-      </div>
+    </div><!--grid_control-->
+
+
+    <div class="grid_table">
+      <table cellpadding="0" cellspacing="0">
+        <colgroup>
+          <col class="one"/>
+          <col class="two"/>
+          <col class="three"/>
+          <col class="four"/>
+          <col class="five"/>
+          <col class="six"/>
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="align_center"><%= check_box_tag 'select_all' %></th>
+            <th class="align_left">Organization</th>
+            <th class="align_left">Contact</th>
+            <th class="align_left">Email</th>
+            <th class="align_left">Phone</th>
+            <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+          </tr>
+        </thead>
+        <tbody id="client_body">
+          <%= render 'clients' %>
+        <tfoot id="paging_links">
+          <%= render "paging" %>
+        </tfoot>
+        </tbody>
+      </table>
+    </div><!--grid_table-->
+  </div><!--content_middle-->
+
+
+  <div class="content_bottom">
+    <%= link_to (content_tag(:span, "NEW Client")),
+      new_client_path,
+      :class => 'btn_large' %>
+  </div><!--content_bottom-->
+</div><!--clients-->
+
+
 <% end %>
 

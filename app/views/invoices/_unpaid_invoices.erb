@@ -1,31 +1,45 @@
 <script type="text/javascript">
   jQuery(function(){
-  jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed").qtip();
+    jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed").qtip();
   });
 </script>
-<table class="table table-striped">
-  <tr>
-    <th><input type="checkbox" name="check" id="main-invoice-checkbox"></th>
-    <th>Invoice#</th>
-    <th>Invoice Description</th>
-    <th>Client</th>
-    <th>Total</th>
-    <th>Date</th>
-    <th class="align-center">Status</th>
-  </tr>
-  <% @invoices.each do |inv|%>
-    <tr>
-      <td class="col-checkbox"><%= check_box_tag "invoice_ids[]", inv.id%>
-      <td class="invoice"><%= inv.invoice_number %></td>
-      <td><%= inv.description %></td>
-      <td><%#= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
-      <td class="ta_right currency no-sort"><%= inv.invoice_total %><span class="tt"> <%= current_user.currency_code %></span></td>
-      <td><%= "2013-01-01" %></td>
-      <td class="align_center <%= inv.status %>" title="<%= inv.tooltip %>">
-        <span class="invoice-status invoice-sent" >
-          <%= inv.status.downcase %>
-        </span>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class="unpaid_invoice">
+  <div class="grid_table">
+    <table cellpadding="0" cellspacing="0">
+      <colgroup>
+        <col class="one"/>
+        <col class="two"/>
+        <col class="three"/>
+        <col class="four"/>
+        <col class="five"/>
+        <col class="six"/>
+        <col class="seven"/>
+      </colgroup>
+      <tr>
+        <th class="align_center"><%= check_box_tag 'select_all' %></th>
+        <th class="align_center">Invoice#</th>
+        <th class="align_left">Invoice Description</th>
+        <th class="align_center">Client</th>
+        <th class="align_center">Total</th>
+        <th class="align_center">Date</th>
+        <th class="align_center">Status</th>
+      </tr>
+      <% @invoices.each do |inv|%>
+        <tr>
+          <td class="align_center"><%= check_box_tag "invoice_ids[]", inv.id%>
+          <td class="align_center"><%= inv.invoice_number %></td>
+          <td class="align_left"><%= inv.description %></td>
+          <td class="align_center"><%#= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
+          <td class="align_left currency"><%= inv.invoice_total %><span class="tt"> <%= current_user.currency_code %></span></td>
+          <td class="align_center"><%= "2013-01-01" %></td>
+          <td class="align_center <%= inv.status %>" title="<%= inv.tooltip %>">
+            <span class="invoice-status invoice-sent" >
+              <%= inv.status.downcase %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div><!--grid_table-->
+</div><!--unpaid_invoices-->

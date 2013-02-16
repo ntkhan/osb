@@ -1,56 +1,29 @@
-.items_wrapper {
-  width: auto;
-  margin: 20px 60px 20px 60px;
-  div.field, div.actions {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  div.actions {
-    margin: 20px 0;
-    width: 500px;
-    text-align: center;
-  }
-  div.first_row {
-    margin: 10px 0 20px 0;
-  }
-  label {
-    width: 130px;
-    float: left;
-  }
-  input[type=text], input[type=number], textarea {
-    width: 350px;
-    height: 30px;
-    float: left;
-  }
-  input.small {
-    width: 129px;
-  }
-  label.small {
-    width: 62px;
-    margin-left: 10px;
-  }
-  label.form_title {
-    padding: 7px 0 0;
-    div {
-      width: 70px;
-      float: left;
-    }
-  }
-  select.small {
-    width: 72px;
-  }
-/*input.new_btn[type="submit"] {width: 290px;}*/
-}
+.items{
 
-#create_item {
-  .modal {
-    tr:first-child {
-      background: none;
+    .grid_table table col.one{
+        width : 33px;
     }
-    .modal-body {
-      min-height: 0;
+    .grid_table table col.two{
+        min-width : 123px;
     }
-  }
+    .grid_table table col.three{
+        width: 146px;
+    }
+    .grid_table table col.four{
+        width : 126px;
+    }
+    .grid_table table col.five{
+        min-width : 141px;
+    }
+    .grid_table table col.six{
+        min-width : 103px;
+    }
+    .grid_table table col.seven{
+        min-width : 104px;
+    }
+    .grid_table table col.eight{
+        min-width : 70px;
+    }
+    
 
 }
