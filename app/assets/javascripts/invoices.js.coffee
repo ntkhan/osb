@@ -3,21 +3,28 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+
+  # listen to Chosen liszt:ready even
+  # add a Add New button at the bottom of every chosen list
   jQuery(".chzn-select").on "liszt:ready", ->
     chzn_drop = jQuery(this).next().find(".chzn-drop")
     unless chzn_drop.find("div.add-new").length > 0
       select_id = this.id
       chzn_drop.append("<div class='add-new no_links'><a href=\'http://www.google.com\' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
 
+  # apply chosen on dropdown lists
+  # trigger the "liszt:ready" manually so that we can add Add New button to list. See above
   jQuery(".chzn-select").chosen({allow_single_deselect: true}).trigger("liszt:ready", this)
 
-
+  # Add New click handler to show form inside the list
   jQuery(".add-new").live "click", ->
     chzn_list = jQuery(this).prev()
-    console.log chzn_list.after(jQuery("#clients_holder form#create_client").clone().show().wrap('<p>').parent().html())
+    chzn_list.after(jQuery("#clients_holder form#create_client").parent().clone().wrap('<p>').parent().html())
+    chzn_list.next().show(100).addClass("animated flipInX")
     chzn_list.hide()
 
 
+  # setup talbesorter parser for amount columns with currency and ',' signs
   jQuery.tablesorter.addParser
     id: "thousands"
     is: (s) ->

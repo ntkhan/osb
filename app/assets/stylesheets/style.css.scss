@@ -1157,13 +1157,14 @@ table.table_listing,table.report-data-table {
 }
 
 .quick_create_wrapper {
-  background: none repeat scroll 0 0 #FFFFFF;
-  border: 1px solid #CCCCCC;
+  background: none repeat scroll 0 0 white;
   border-radius: 5px 5px 5px 5px;
+  margin: 0 5px;
   padding: 15px;
-  position: absolute;
-  width: 184px;
+  position: relative;
   z-index: 1000;
+  -moz-animation-duration: 1s;
+  -moz-animation-delay: 0.2s;
   input[type=text],input[type=number]{
     width: 165px;
   }
