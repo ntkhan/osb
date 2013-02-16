@@ -1,29 +1,31 @@
+<div class="reports">
 <div class="report_header">
   <div class="report_header_content">
     <%= form_tag "/reports/data/#{@report.report_name}", :method => :get, :remote => true do %>
-        <div class="report_date">
-          <div class="control_name">
-            <p>Date Range</p>
-          </div>
-          <input name="criteria[from_date]" type="date" id="from_date" value="<%= -1.month.from_now.to_date %>" title="Enter from date"/>
-
-          <p>to</p>
-          <input name="criteria[to_date]" type="date" id="to_date" value="<%= Date.today %>"/>
-        </div>
-        <div class="report_clients">
-          <div class="control_name">
-            <p>Clients</p>
-          </div>
-          <%= collection_select "criteria", "client_id", [Client.new({:id => 0, :organization_name => "All"})] + Client.all, :id, :organization_name, {:prompt => "All"}, {:class => "client chzn-select"} %>
-          <div class="control_name">
-            <p>Type</p>
-          </div>
-          <%= select_tag "criteria[payment_method]", options_for_select(PAYMENT_METHODS.map { |p| [p, p] }), {:prompt => "All", :class => "payment-method chzn-select"} %>
-        </div>
-        <div class="report_update">
-          <%= submit_tag "Go" %>
-        </div>
+    <div class="report_date">
+      <div class="control_name">
+        <p>Date Range</p>
+      </div>
+      <input name="fromDate" type="text" id="fromDate" value=""/>
+      <p>to</p>
+      <input name="toDate" type="text" id="toDate"  value="" />
+    </div>
+    <div class="report_clients">
+      <div class="control_name">
+        <p>Clients</p>
+      </div>
+      <div class="client_select">
+        <%= collection_select "criteria", "client_id", [Client.new({:id => 0, :organization_name => "All"})] + Client.all, :id, :organization_name, {:prompt => "All"}, {:class => "client chzn-select"} %>
+      </div>
+      <div class="control_name">
+        <p>Type</p>
+      </div>
+      <div class="client_select"><%= select_tag "criteria[payment_method]", options_for_select(PAYMENT_METHODS.map { |p| [p, p] }), {:prompt => "All", :class => "payment-method chzn-select"} %></div>
+    </div>
+    <div class="report_update">
+      <%= submit_tag "Go", :class => "report_update" %>
+    </div>
     <% end %>
   </div>
-</div>
-<!-- report_header -->
+</div><!-- report_header -->
+</div><!--reports-->

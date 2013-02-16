@@ -1,73 +1,88 @@
-<div class="report_content_container">
+<div class="reports">
+  <div class="content_middle">
 
-  <div class="report_content_header">
-    <div class="report_content_heading">
-      <h1>Payments Collected</h1>
-    </div>
-  </div>
-  <!-- report_content_header -->
+    <div class="report_content_header">
+      <div class="report_content_heading">
+        <h1>Payments Collected</h1>
+      </div>
 
-  <div class="content_header_data">
-    <div class="header_data_left">
-      <div class="header_data_detail">
+      <div class="content_header_data">
+        <div class="header_data_left">
+          <div class="header_data_detail">
+            <ul>
+              <li class="header_name"><%= @report.client_name %></li>
+              <li class="header_duration"><%= @report.period %></li>
+              <li class="header_description">This report shows a history of all payments made for every invoice selectable by client and by date.</li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- content_header_data -->
+    </div><!-- report_content_header -->
+
+    <div class="header_data_right">
+      <ul class="download_report">
+        <li class="download_report_title">Export to:</li>
+        <li class="download_sep">CSV</li>
+        <li>Excel</li>
+      </ul>
+      <ul class="print_report">
+        <li><a href="#">Print Report</a></li>
+      </ul>
+      <div class="report_duration">
         <ul>
-          <li class="header_name"><%= @report.client_name %></li>
-          <li class="header_duration"><%= @report.period %></li>
+          <li>01/01/2013</li>
+          <li><span>to</span></li>
+          <li>01/01/2013</li>
+        </ul>
+      </div><!-- report_duration -->
+    </div>
+
+    <div class="grid_table">
+      <table cellpadding="0" cellspacing="0">
+        <colgroup>
+          <col class="one">
+          <col class="two">
+          <col class="three">
+          <col class="four">
+          <col class="five">
+          <col class="six">
+        </colgroup>
+        <tr>
+          <th class="align_left">Invoices</th>
+          <th class="align_left">Client Name</th>
+          <th class="align_left">Type</th>
+          <th class="align_center">Note</th>
+          <th class="align_center">Date</th>
+          <th class="align_center">Amount</th>
+        </tr>
+        <% @report.report_data.each do |payment| %>
+            <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
+        <tr>
+          <td class="align_left"><%= payment.invoice.invoice_number %></td>
+          <td class="align_left"><%= payment.client_name %></td>
+          <td class="align_left"><%= payment.payment_type || payment.payment_method %></td>
+          <td class="align_center"><%= payment.notes %></td>
+          <td class="align_center"><%= payment.created_at.to_date %></td>
+          <td class="align_right currency">$ <%= payment.payment_amount %> <span>usd</span></td>
+        </tr>
+         <% end %>
+
+      </table>
+    </div><!--grid_table-->
+
+  </div><!--content_middle-->
+
+  <div class="content_bottom">
+    <div class="report_footer">
+      <div class="total_payment">
+        <ul>
+          <li class="total_payment_title">Total Payments Received:</li>
+          <li>$ <%= @report.report_total || "Total object missing" %> <span>usd</span></li>
         </ul>
       </div>
-    </div>
-  </div>
-  <!-- content_header_data -->
-
-  <div class="table_session">
-    <table cellspacing="0" cellpadding="0" class="report-data-table">
-      <colgroup>
-        <col class="first">
-        <col class="second">
-        <col class="third">
-        <col class="forth">
-        <col class="fifth">
-        <col class="sixth">
-      </colgroup>
-      <thead>
-      <tr>
-        <th class="align_center">Invoice</th>
-        <th class="align_left">Client Name</th>
-        <th class="align_left">Type</th>
-        <th class="align_left">Note</th>
-        <th class="align_center">Date</th>
-        <th class="align_right no_border" style="padding-right: 20px;">Amount</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @report.report_data.each do |payment| %>
-          <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
-          <tr>
-            <td class="align_center"><%= payment.invoice.invoice_number %></td>
-            <td class="align_left"><%= payment.client_name %></td>
-            <td class="align_left"><%= payment.payment_type || payment.payment_method %></td>
-            <td class="align_left"><%= payment.notes %></td>
-            <td class="align_center"><%= payment.created_at.to_date %></td>
-            <td class="align_right">$ <%= payment.payment_amount %> <span>usd</span></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-  <!-- table_session -->
-
-  <div class="report_footer">
-    <div class="total_payment">
-      <ul>
-        <li class="total_payment_title">Total Payments Received:</li>
-        <li>$ <%= @report.report_total || "Total object missing" %> <span>usd</span></li>
-      </ul>
-    </div>
-    <div class="footer_note">
-      <p>* Payments applied from credit do not count towards the total</p>
-    </div>
-  </div>
-  <!-- report_footer -->
-
-</div>
-<!-- report_content_container -->
+      <div class="footer_note">
+        <p>* Payments applied from credit do not count towards the total</p>
+      </div>
+    </div><!-- report_footer -->
+  </div><!--content_bottom-->
+</div><!--reports-->

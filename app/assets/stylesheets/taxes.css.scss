@@ -1,21 +1,16 @@
-// Place all the styles related to the Taxes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.taxes{
 
-.form_title span.required_small {
-  color: #464646;
-  font-size: 13px;
-  font-weight: bold;
-  margin-top: 0;
-}
-#create_tax {
-  .modal {
-    tr:first-child {
-      background: none;
+    .grid_table table col.one{
+        width : 33px;
     }
-    .modal-body {
-      min-height: 0;
+    .grid_table table col.two{
+        min-width : 354px;
     }
-  }
-
+    .grid_table table col.three{
+        width: 378px;
+    }
+    .grid_table table col.four{
+        min-width : 70px;
+    }
+   
 }

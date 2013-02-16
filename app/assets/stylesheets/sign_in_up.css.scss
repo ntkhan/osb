@@ -1,0 +1,125 @@
+.login_container {
+  width: 360px;
+  margin: auto;
+  padding: 35px 34px 25px 34px;
+  background-color: white;
+}
+.login_container a {
+  font-size: 11px;
+}
+.login_container {
+  h1 {
+    padding: 0 0 15px 0;
+    text-transform: normal;
+    text-align: center;
+    span {
+      color: #9b9b9b;
+      font-size: 24px;
+    }
+  }
+  form {
+    margin: 15px 0 20px;
+  }
+  .notice {
+    color: #FF0000;
+    text-align: center;
+  }
+}
+.login_title {
+  float: left;
+  padding: 0px;
+  width: 100%;
+  clear: both;
+  margin: 0 0 20px 0;
+}
+.login_title label {
+  float: left;
+  border: 1px solid #D7D7D7;
+  border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  -webkit-border-radius: 3px 0 0 3px;
+  box-shadow: 3px 3px 3px #F3F3F3 inset;
+  float: left;
+  height: 28px;
+  line-height: 28px;
+  min-width: 100px;
+  padding: 0 10px 0 8px;
+  text-align: left;
+  color: #9B9B9B;
+  font-size: 13px;
+  font-weight: normal;
+  border-right: none;
+  margin-top: 0px;
+}
+.login_title input {
+  float: left;
+  border: 1px solid #D7D7D7;
+  border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+  box-shadow: none;
+  color: #464646;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  height: 28px;
+  line-height: 28px;
+  margin-bottom: 0;
+  padding: 0 9px;
+  width: 61.3%;
+}
+.login_check {
+  float: left;
+  width: 100%;
+}
+.login_check input {
+  margin: 0px;
+  padding: 0px;
+  float: left;
+  width: 13px;
+  height: 13px;
+  margin: 0 0 0 0;
+}
+.login_check label {
+  margin: 0px;
+  float: left;
+  line-height: none;
+  margin: -3px 0 0 0;
+  padding: 0 0 0 11px;
+  width: 86%;
+  font-size: 12px;
+  *width: 92%;
+}
+.login_btn_container {
+  clear: both;
+  text-align: center;
+  padding: 29px 0 0 0;
+  *padding-top: 7px;
+}
+.login_btn_container.sing_in_top {
+  *padding-top: 29px;
+}
+.login_btn {
+  font-size: 24px !important;
+  text-shadow: none !important;
+  margin-left: 16px !important;
+}
+.login_footer {
+  width: 390px;
+  margin: auto;
+  clear: both;
+  font-size: 11px;
+  padding: 5px 0 0 0;
+}
+.site_link {
+  float: left;
+}
+.site_link, .team_link a {
+  color: #00BDE5;
+}
+.site_link:hover, .team_link a:hover {
+  text-decoration: underline;
+  color: #00BDE5;
+}
+.team_link {
+  float: right;
+}

@@ -4,24 +4,46 @@
       <h2><%= pluralize(@taxis.errors.count, "error") %> prohibited this taxis from being saved:</h2>
 
       <ul>
-      <% @taxis.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @taxis.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%#= f.label :name, :class => "form_title" %>
-    <label for="tax_name" class="form_title"><span class="required_small">Name</span><span>*</span></label>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%#= f.label :percentage, :class => "form_title" %>
-    <label for="tax_percentage" class="form_title"><span class="required_small">Percentage</span><span>*</span></label>
-    <%= f.text_field :percentage %>
-  </div>
-  <div class="actions">
-    <%= f.submit(:class => "btn_large")   %>
-  </div>
+  <div class="new_item_form">
+    <div class="content_middle">
+
+      <div class="fields_content">
+        <div class="fields_content_container">
+
+
+          <div class="fields_content_data">
+
+            <div class="field_row">
+              <div class="label_field left single"><span>Item Name</span></div>
+              <div class="large_field">
+                <%= f.text_field :name %>
+              </div>
+            </div><!--field_row-->
+
+            <div class="field_row">
+              <div class="label_field left single"><span>Percentage</span></div>
+              <div class="large_field">
+                <%= f.text_field :percentage %>
+              </div>
+            </div><!--field_row-->
+
+
+          </div><!--fields_content_data-->
+        </div><!--fields_content_container-->
+      </div><!--fields_content-->
+
+
+    </div><!--content_middle-->
+
+    <div class="content_bottom">
+      <%= f.submit(:class => "btn_large submit") %>
+    </div><!--content_bottom-->
+  </div><!--new_item_form-->
 <% end %>
