@@ -10,15 +10,18 @@
  *
  *= require_self
  *= require_tree .
+ 
+ 
+ *= general.css.scss
  *= invoice.css.scss
- *= payments.css.scss
- *= style.css.scss
- *= client.css.scss
+ *= clients.css.scss
+ *= sent_email.css.scss
+ *= items.css.scss
  *= taxes.css.scss
- *= chosen.css
- *= bootstrap_and_overrides.css
- *= bootstrap_model_override.css.scss
- *= dashboard.css.scss
+ *= payment.css.scss
+ *= unpaid_invoice.css.scss
+ *= new_item_form.css.scss
+ *= payments_editing.css.scss
  *= reports.css.scss
- *= show.css.scss
+ *= sign_in_up.css.scss
 */

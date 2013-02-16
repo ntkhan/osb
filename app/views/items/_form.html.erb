@@ -10,40 +10,51 @@
       </ul>
     </div>
   <% end %>
+<div class="new_item_form">
+  <div class="content_middle">
 
-  <div class="field first_row form_title">
-    <label class="form_title" for="item_item_name"><div>Item Name</div><span>*</span></label>
-    <%= f.text_field :item_name %>
-  </div>
-  <div class="field">
-    <label class="form_title" for="item_item_description">Description</label>
-    <%#= f.label :item_description, :class => "form_title" %>
-    <%= f.text_area :item_description %>
-  </div>
-  <div class="field">
-    <%= f.label :unit_cost, :class => "form_title" %>
-    <%= f.text_field :unit_cost, :class => "form_title small" %>
+    <div class="fields_content">
+      <div class="fields_content_container">
 
 
-    <%= f.label :quantity, :class => "form_title small" %>
-    <%= f.number_field :quantity, :class => "small" %>
-  </div>
-  <div class="field">
-    <label class="form_title">Taxes</label>
-    <%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "tax1 small chzn-select"}) %>
+        <div class="fields_content_data">
 
-    <!--<%#= f.label :tax_2, :class => "form_title" %>-->
-    <%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "tax2 small chzn-select"}) %>
-  </div>
-  <!--<div class="field">-->
-    <%#= f.label :track_inventory %>
-    <%#= f.check_box :track_inventory %>
-  <!--</div>-->
-  <!--<div class="field">-->
-    <!--<%#= f.label :inventory, :class => "form_title" %>-->
-    <!--<%#= f.number_field :inventory %>-->
-  <!--</div>-->
-  <div class="actions">
-    <%= f.submit(:class => "btn_large")   %>
-  </div>
+          <div class="field_row">
+            <div class="label_field left single"><span>Item Name</span></div>
+            <div class="large_field">
+              <%= f.text_field :item_name %>
+            </div>
+          </div><!--field_row-->
+
+          <div class="field_row textarea">
+            <div class="label_field left single">Description</div>
+            <div class="large_field">
+              <%= f.text_area :item_description %>
+            </div>
+          </div><!--field_row-->
+
+          <div class="field_row">
+            <div class="label_field left single"><%= f.label :unit_cost %></div>
+            <div class="small_field"><%= f.text_field :unit_cost %></div>
+            <div class="label_field right single"><%= f.label :quantity %></div>
+            <div class="small_field"><%= f.number_field :quantity %></div>
+          </div><!--field_row-->
+
+          <div class="field_row">
+            <div class="label_field left single">Taxes</div>
+            <div class="small_field"><%= f.collection_select(:tax_1,Tax.all,:id,:name,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "extra_small tax1 small chzn-select"}) %></div>
+            <div class="small_field right"><%= f.collection_select(:tax_2,Tax.all,:id,:name,{:prompt => ""},{"data-placeholder" => "Select an industry...",:class => "extra_small tax2 small chzn-select"}) %></div>
+          </div><!--field_row-->
+
+        </div><!--fields_content_data-->
+      </div><!--fields_content_container-->
+    </div><!--fields_content-->
+
+
+  </div><!--content_middle-->
+
+  <div class="content_bottom">
+    <%= f.submit(:class => "btn_large submit")   %>
+  </div><!--content_bottom-->
+</div><!--new_item_form-->
 <% end %>

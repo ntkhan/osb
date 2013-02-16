@@ -1,387 +1,239 @@
 .reports {
-  p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    color: #464646;
-    margin-bottom: 0px;
-  }
-  a {
-    text-decoration: none;
-  }
-  ul {
-    margin: 0;
-  }
-  ul li {
-    list-style: none;
-    text-decoration: none;
-  }
-  h1 {
-    font-family: 'Dosis', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    font-size: 30px;
-    color: #00bde5;
-    font-weight: normal;
-    text-transform: capitalize;
-    margin: 0px;
-    line-height: 1.3;
-  }
-  h1 span {
-    font-size: 14px;
-  }
-  h1.small {
-    font-size: 20px;
-  }
-  /*General CSS Ends*/
-
-  /*Report Css Starts*/
-  .grey_container {
-    background: #ebebeb;
-    border-radius: 0px 5px 0px 0px;
-    -moz-border-radius: 0px 5px 0px 0px;
-    -webkit-border-radius: 0px 5px 0px 0px;
-  }
-  .grey_container_left {
-    background: url(/assets/grey_left.png) repeat-y left;
-  }
-  .grey_container_btm {
-    background: url(/assets/grey_btm.png) no-repeat bottom left;
-  }
-  .grey_container_top {
-    background: url(/assets/grey_top.png) no-repeat top left;
-    overflow: hidden;
-    padding: 0 5px 16px 0;
-  }
-  .report_header {
-    float: left;
-    width: 100%;
-  }
-  .report_header_content {
-    float: left;
-    padding: 10px 10px 10px 29px;
-    width: 94.8%;
-    height: 30px;
-  }
-  .report_date {
-    float: left;
-  }
-  .report_date p {
-    float: left;
-    line-height: 30px;
-  }
-  .control_name {
-    float: left;
-  }
-  .control_name p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    color: #464646;
-    font-weight: bold;
-    line-height: 30px;
-  }
-  .report_date input, .report_clients input {
-    float: left;
-    border: 1px solid #D7D7D7;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    color: #464646;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    height: 28px;
-    line-height: 28px;
-    padding: 0 9px;
-    text-align: center;
-    margin: 0 5px;
-  }
-  .report_date input {
-    width: 68px;
-  }
-  .report_clients {
-    float: left;
-    padding: 0 0 0 5px;
-  }
-  .report_clients input {
-    width: 72px;
-  }
-  .report_update {
-    float: right;
-    padding: 0 0 0 9px;
-  }
-  .report_update input[type=submit] {
-    display: block;
-    padding: 0 19px 0 19px;
-    background: #00bde5;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-color: transparent;
-    color: #ffffff;
-    text-decoration: none;
-    text-transform: uppercase;
-    line-height: 30px;
-    font-family: 'Dosis', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-  }
-  .report_content {
-    width: 100%;
-    overflow: hidden;
-  }
-  .report_content_container {
-    background: #ffffff;
-    border: 1px solid #d7d7d7;
-    border-radius: 4px 4px 0px 4px;
-    -moz-border-radius: 4px 4px 0px 4px;
-    -webkit-border-radius: 4px 4px 0px 4px;
-    overflow: hidden;
-    padding: 20px 29px 0 29px;
-  }
-  .report_content_header {
-    float: left;
-    width: 100%;
-  }
-  .report_content_heading {
-    float: left;
-  }
-  .content_header_data {
-    float: left;
-    width: 100%;
-    padding: 0 0 11px 0;
-  }
-  .header_data_left {
-    float: left;
-  }
-  .header_name {
-    font-weight: bold;
-    font-size: 13px;
-    padding: 4px 0 0 0;
-  }
-  .header_duration {
-    font-weight: normal;
-    font-size: 13px;
-    margin: -4px 0 0 0;
-  }
-  .header_description {
-    font-size: 11px;
-    padding: 5px 0 0 0;
-  }
-  .header_data_right {
-    float: right;
-    width: 170px;
-    padding: 16px 0 0 0;
-  }
-  .download_report {
-    float: right;
-    padding: 0 0 6px 0;
-  }
-  .download_report li {
-    float: left;
-    font-size: 11px;
-    color: #00ace5;
-    padding-left: 7px;
-    line-height: 10px;
-  }
-  .download_report_title {
-    color: #464646 !important;
-    padding: 0 1px 0 0;
-  }
-  .download_sep {
-    border-right: 1px solid #00ace5;
-    padding-right: 6px;
-  }
-  .print_report {
-    float: right;
-    width: 100%;
-    padding: 3px 0 0 0;
-  }
-  .print_report li a {
-    float: right;
-    display: block;
-    font-size: 11px;
-    color: #00ace5;
-  }
-  .report_duration {
-    float: left;
-    width: 100%;
-  }
-  .report_duration ul {
-    float: right;
-  }
-  .report_duration ul li {
-    float: left;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 0 0 0 9px;
-  }
-  .report_duration ul li span {
-    font-weight: normal;
-  }
-  .table_session {
-    float: left;
-    width: 100%;
-    padding: 5px 0 0 0;
-    .report-data-table {
-      width: 100%;
+    .content_top{
+        border: none;
     }
-  }
-  table col.first {
-    width: 81px;
-  }
-  table col.second {
-    width: 151px;
-  }
-  table col.third {
-    width: 71px;
-    *width: 55px;
-  }
-  table col.forth {
-    width: 194px;
-    *width: 210px;
-  }
-  noindex:-o-prefocus, table col.third {
-    width: 55px;
-  }
-  noindex:-o-prefocus, table col.forth {
-    width: 210px;
-  }
-  table col.fifth {
-    width: 91px;
-  }
-  table col.sixth {
-    width: 106px;
-  }
-  table tr {
-    height: 30px;
-  }
-  table th {
-    background: #898989;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    color: #ffffff;
-    border-right: 1px solid #ffffff !important;
-  }
-  table td {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    color: #464646;
-    border-bottom: 1px solid #D7D7D7
-  }
-  table td span {
-    font-size: 10px;
-    text-transform: uppercase;
-  }
-  table td, th {
-    padding: 0 11px;
-  }
-  table th:first-child {
-    border-radius: 5px 0 0 5px;
-    -moz-border-radius: 5px 0 0 5px;
-    -webkit-border-radius: 5px 0 0 5px;
-  }
-  table th:last-child {
-    border-radius: 0 5px 5px 0;
-    -moz-border-radius: 0 5px 5px 0;
-    -webkit-border-radius: 0 5px 5px 0;
-  }
-  .align_left {
-    text-align: left;
-  }
-  .align_right {
-    text-align: right;
-  }
-  .align_center {
-    text-align: center;
-  }
-  .no_border {
-    border-right: none !important;
-  }
-  .report_footer {
-    float: left;
-    padding: 26px 10px 65px 0;
-    width: 98.4%;
-  }
-  .total_payment {
-    float: left;
-    width: 100%;
-  }
-  .total_payment ul {
-    float: right;
-  }
-  .total_payment ul li {
-    font-family: Arial, Helvetica, sans-serif;
-    float: left;
-    font-weight: bold;
-    font-size: 13px;
-  }
-  .total_payment ul li span {
-    font-size: 10px;
-    text-transform: uppercase;
-    font-weight: normal;
-  }
-  .total_payment_title {
-    width: 200px;
-  }
-  .footer_note {
-    float: left;
-    width: 100%;
-  }
-  .footer_note p {
-    text-align: right;
-    font-size: 10px;
-  }
-  .client, .payment-method {
-    width: 130px;
-  }
-
-  .report_status {
-    color: #959595;
-  }
-  .reports_list li {
-    color: #464646;
-    font-size: 13px;
-  }
-  .chzn-container {
-    float: left !important;
-    margin: 0 5px 0 5px;
-  }
-  .chzn-container-single .chzn-single {
-    background-clip: padding-box;
-    background-color: #FFFFFF;
-    background-image: linear-gradient(#FFFFFF 20%, #F6F6F6 50%, #EEEEEE 52%, #F4F4F4 100%);
-    border: 1px solid #d7d7d7;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    box-shadow: none !important; /*0 0 3px #FFFFFF inset, 0 1px 1px rgba(0, 0, 0, 0.1);*/
-    color: #464646;
-    display: block;
-    height: 28px;
-    line-height: 28px;
-    overflow: hidden;
-    padding: 0 0 0 8px;
-    position: relative;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .chzn-container-single .chzn-single div b {
-    margin: 2px 0 0 0;
-  }
-  .chzn-drop {
-    padding-right: 10px !important;
-  }
-  /* Report Css Ends */
-
-  /*Chosen related CSS*/
-  .chzn-container-single {
-    .chzn-single abbr {
-      right: 19px;
-      top: 8px;
+    .report_header{
+        float: left;
+        width: 97.7%;
+        background: #f5f4f4;
+        border: 1px solid #d7d7d7;
+        border-radius: 4px 4px 0 0;
+        padding: 10px 9px 10px 9px;
     }
-  }
-
+    .report_header_content{
+        float: left;
+        width: 100%;
+    }
+    .report_date{
+        float: left;
+    }
+    .report_date p{
+        float: left;
+        line-height: 30px;
+    }
+    .control_name{
+        float: left;
+    }
+    .control_name p{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #464646;
+        font-weight: bold;
+        line-height: 30px;
+    }
+    .report_date input, .report_clients input{
+        float: left;
+        border: 1px solid #D7D7D7;
+        border-radius: 3px;
+        color: #464646;
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 9px;
+        text-align: center;
+        margin: 0 5px;
+    }
+    .report_date input{
+        width: 62px;
+    }
+    .client_select{
+        float: left;
+        padding: 0 5px;
+    }
+    .report_clients{
+        float: left;
+        padding: 0 0 0 5px;
+    }
+    .report_clients select{
+        width: 72px;
+    }
+    .report_update{
+        float: right;
+        padding: 0 0 0 9px;
+    }
+    .report_update input{
+        display: block;
+        padding: 0 19px 0 19px;
+        background: #00bde5;
+        border-radius: 3px;
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        height: 30px;
+        font-family: 'Dosis', sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size: 16px;
+        border:none;
+    }
+    .report_content{
+        width: 100%;
+        overflow: hidden;
+    }
+    .report_content_container{
+        background: #ffffff;
+        border: 1px solid #d7d7d7;
+        border-radius: 4px 0px 0px 4px;
+        overflow: hidden;
+        padding: 20px 29px 0 29px;
+    }
+    .report_content_header{
+        float: left;
+        width: 640px;
+        padding: 30px 0;
+    }
+    .report_content_heading{
+        float: left;
+    }
+    .content_header_data{
+        float: left;
+        width: 100%;
+        padding: 0 0 11px 0;
+    }
+    .header_data_left{
+        float: left;
+    }
+    .header_name{
+        font-weight: bold;
+        font-size: 13px;
+        padding: 4px 0 0 0;
+    }
+    .header_duration{
+        font-weight: normal;
+        font-size: 13px;
+        margin: -4px 0 0 0;
+    }
+    .header_description{
+        font-size: 11px;
+        padding: 5px 0 0 0;
+    }
+    .header_data_right{
+        float: right;
+        width: 200px;
+        padding: 90px 0 0 0;
+    }
+    .download_report{
+        float: right;
+        padding: 0 0 6px 0;
+    }
+    .download_report li{
+        float: left;
+        font-size: 11px;
+        color: #00ace5;
+        padding-left: 7px;
+        line-height: 10px;
+    }
+    .download_report_title{
+        color: #464646 !important;
+        padding: 0 1px 0 0;
+    }
+    .download_sep{
+        border-right: 1px solid #00ace5;
+        padding-right: 6px;
+    }
+    .print_report{
+        float: right;
+        width: 100%;
+        padding: 3px 0 0 0;
+    }
+    .print_report li a{
+        float: right;
+        display: block;
+        font-size: 11px;
+        color: #00ace5;
+    }
+    .report_duration{
+        float: left;
+        width: 100%;
+    }
+    .report_duration ul{
+        float: right;
+    }
+    .report_duration ul li{
+        float: left;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 0 0 0 9px;
+    }
+    .report_duration ul li span{
+        font-weight: normal;
+    }
+    .grid_table table col.one{
+        width : 81px;
+    }
+    .grid_table table col.two{
+        width : 201px;
+    }
+    .grid_table table col.three{
+        width: 71px;
+    }
+    .grid_table table col.four{
+        width : 286px;
+    }
+    .grid_table table col.five{
+        width : 92px;
+    }
+    .grid_table table col.six{
+        width : 110px;
+    }
+    .grid_table table th{
+        border-right:1px solid #c2c2c2 !important;
+    }
+    .grid_table table th:first-child {
+        border-radius: 5px 0 0 0;
+    }
+    .grid_table table th:last-child {
+        border-radius: 0 5px 0 0;
+        border-right: none !important;
+    }
+    .report_footer{
+        float: left;
+        padding: 0 10px 0 0;
+        width: 98.4%;
+    }
+    .total_payment{
+        float: left;
+        width: 100%;
+    }
+    .total_payment ul{
+        float: right;
+    }
+    .total_payment ul li{
+        font-family: Arial, Helvetica, sans-serif;
+        float: left;
+        font-weight: bold;
+        font-size: 13px;
+    }
+    .total_payment ul li span{
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+    .total_payment_title{
+        width: 211px;
+        text-align: left;
+    }
+    .footer_note{
+        float: left;
+        width: 100%;
+    }
+    .footer_note p{
+        text-align: right;
+        font-size: 10px;
+    }
+    
+    
 }
 
