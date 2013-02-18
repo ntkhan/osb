@@ -22,8 +22,7 @@ jQuery ->
     id: "thousands"
     is: (s) ->
       sp = s.replace(/,/, ".")
-      test = (/([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp)) #check currency with symbol
-      test
+      /([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp) #check currency with symbol
     format: (s) ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
