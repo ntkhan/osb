@@ -22,8 +22,7 @@ jQuery ->
     id: "thousands"
     is: (s) ->
       sp = s.replace(/,/, ".")
-      test = (/([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp)) #check currency with symbol
-      test
+      /([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp) #check currency with symbol
     format: (s) ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
@@ -292,9 +291,14 @@ jQuery ->
     jQuery(this).parent(".alert").hide()
 
 
- # Check all invoice checkboxes using from main checkbox
+ # Check/uncheck all invoice listing checkboxes using from main checkbox
   jQuery('#main-invoice-checkbox').live "click", ->
      jQuery(this).parents('table.table-striped').find(':checkbox').attr('checked', this.checked)
+
+ # Check/uncheck main checkbox if all checkboxes are checked
+  jQuery('table.table_listing tbody :checkbox').click ->
+     status = unless jQuery('table.table_listing tbody input[type=checkbox]:not(:checked)').length then true else false
+     jQuery('#select_all').attr('checked', status)
 
   jQuery('#active_links a').live 'click', ->
      jQuery('#active_links a').removeClass('active')
@@ -387,8 +391,5 @@ jQuery ->
     if jQuery("table.table_listing tbody").find(":checked").length is 0
        jQuery('.alert').hide();
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
-#       setTimeout (->
-#         jQuery('.alert').slideUp(300)
-#       ), 5000
        flag = false
     flag
