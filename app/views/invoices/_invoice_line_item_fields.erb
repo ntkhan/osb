@@ -1,47 +1,30 @@
-<tr class="fields">
-  <td>
-    <div class="action_links">
-      <%= f.link_to_remove "", :class => "remove_item" %>
-      <%#= image_tag "/assets/sort-arrow.gif", :class => "sort_icon" %>
-      <%= link_to "","javascript:", :class => "sort_icon" %>
-    </div>
+<tr>
+  <td class="align_center"><%= f.link_to_remove "", :class => "remove_item" %>
+    <%#= image_tag "/assets/sort-arrow.gif", :class => "sort_icon" %>
+    <%= link_to "","javascript:", :class => "sort_icon" %>
   </td>
-  <td>
-    <div class="field item">
-      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select"}) %>
-    </div>
+  <td class="align_center">
+      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select grid_large_medium"}) %>
   </td>
-  <td>
-    <div class="field description">
-      <%= f.text_field :item_description, :class => "description" %>
-      <%#= f.text_area :item_description, :class => "description", :rows => 3, :cols => 2 %>
-    </div>
+  <td class="align_left">
+    <%= f.text_field :item_description, :class => 'grid_large' %>
+      <%#= f.text_area :item_description, :rows => 3, :cols => 2 %>
   </td>
-  <td>
-    <div class="field unit_cost">
-      <%= f.text_field :item_unit_cost, :class => 'cost align_right' %>
-    </div>
-  </td>
-  <td>
-    <div class="field quantity">
-      <%= f.text_field :item_quantity, :class => 'qty align_right' %>
-    </div>
-  </td>
-  <td>
-    <div class="field tax1">
-      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select"}) %>
-    </div>
-  </td>
-  <td>
+  <td class="align_left">
+    <%= f.text_field :item_unit_cost, :class => 'grid_small' %>
 
-    <div class="field tax2">
-      <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
-      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "",:class => "tax2 chzn-select"}) %>
-    </div>
   </td>
-  <td>
-    <div class="field linetotal">
-      <%= label_tag 'line total', '0.00', :class => 'line_total' %>
-    </div>
+  <td class="align_center">
+    <%= f.text_field :item_quantity, :class => 'grid_small' %>
+  </td>
+  <td class="align_center">
+    <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select grid_small"}) %>
+  </td>
+  <td class="align_center draft">
+    <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
+      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "",:class => "tax2 chzn-select "}) %>
+  </td>
+  <td class="align_center">
+    <%= label_tag 'line total', '0.00', :class => 'grid_medium'%>
   </td>
 </tr>
