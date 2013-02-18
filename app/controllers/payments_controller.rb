@@ -61,10 +61,11 @@ class PaymentsController < ApplicationController
   # PUT /payments/1.json
   def update
     @payment = Payment.find(params[:id])
-
+    latest_amount = Payment.update_invoice_status params[:payment][:invoice_id], params[:payment][:payment_amount].to_i, @payment.payment_amount.to_i
+    params[:payment][:payment_amount] = latest_amount
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
-        format.html { redirect_to @payment, :notice => 'Payment was successfully updated.' }
+        format.html { redirect_to(edit_payment_url(@payment), :notice => 'Your Payment has been updated successfully.')}
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
