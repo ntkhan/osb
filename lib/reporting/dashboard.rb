@@ -36,14 +36,37 @@ module Reporting
       chart_data[:invoices] = chart_months.merge(invoices).map { |month, amount| amount }
       chart_data[:payments] = chart_months.merge(payments).map { |month, amount| amount }
       chart_data[:ticks] = chart_months.map { |month, amount| Date::ABBR_MONTHNAMES[month] }
-      Rails.logger.debug chart_data
       chart_data
-
     end
 
     # get outstanding invoices
     def self.get_outstanding_invoices
       Payment.total_payments_amount - Invoice.total_invoices_amount
+    end
+
+    # get outstanding invoices by period
+    def self.get_invoices_by_period period
+      start_date, end_date = 0, 0
+      case period
+        when '0-30' then
+          start_date = Date.today - 30.days
+          end_date = Date.today
+        when '30-60' then
+          start_date = Date.today - 60.days
+          end_date = Date.today - 30.days
+        when '60-90' then
+          start_date = Date.today - 90.days
+          end_date = Date.today - 60.days
+        when 'over-90' then
+          end_date = Date.today - 90.days
+          invoices = Invoice.where("invoice_date < '#{end_date}'").sum("invoice_total")
+          payments = Payment.where("payment_date < '#{end_date}'", :payment_type => "is null or payment_type != 'credit'").sum("payment_amount")
+      end
+      unless period == "over-90"
+        invoices = Invoice.where(:invoice_date => start_date..end_date).sum("invoice_total")
+        payments = Payment.where(:payment_date => start_date..end_date, :payment_type => "is null or payment_type != 'credit'").sum("payment_amount")
+      end
+      payments - invoices
     end
   end
 end
