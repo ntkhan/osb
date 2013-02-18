@@ -8,7 +8,7 @@
   </td>
   <td>
     <div class="field item">
-      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select"}) %>
+      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select", "data-form-container" => "items_holder"}) %>
     </div>
   </td>
   <td>
@@ -29,7 +29,7 @@
   </td>
   <td>
     <div class="field tax1">
-      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select"}) %>
+      <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select", "data-form-container" => "taxes_holder"}) %>
     </div>
   </td>
   <td>

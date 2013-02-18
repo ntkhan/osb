@@ -10,7 +10,7 @@ jQuery ->
     chzn_drop = jQuery(this).next().find(".chzn-drop")
     unless chzn_drop.find("div.add-new").length > 0
       select_id = this.id
-      chzn_drop.append("<div class='add-new no_links'><a href=\'http://www.google.com\' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
+      chzn_drop.append("<div data-dropdown-id='#{this.id}' class='add-new no_links'><a href='#' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
 
   # apply chosen on dropdown lists
   # trigger the "liszt:ready" manually so that we can add Add New button to list. See above
@@ -18,10 +18,7 @@ jQuery ->
 
   # Add New click handler to show form inside the list
   jQuery(".add-new").live "click", ->
-    chzn_list = jQuery(this).prev()
-    chzn_list.after(jQuery("#clients_holder form#create_client").parent().clone().wrap('<p>').parent().html())
-    chzn_list.next().show(100).addClass("animated flipInX")
-    chzn_list.hide()
+    new InlineForms(jQuery(this).attr("data-dropdown-id")).showForm()
 
 
   # setup talbesorter parser for amount columns with currency and ',' signs

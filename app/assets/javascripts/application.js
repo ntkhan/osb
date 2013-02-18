@@ -18,16 +18,37 @@
 //= require jqplot.barRenderer.min.js
 //= require jqplot.categoryAxisRenderer.min.js
 //= require jqplot.pointLabels.min.js
-//= require_tree .
 //= require jquery_nested_form
-//= require nav
+//= require nav.js
 //= require chosen.jquery
 //= require jquery.css3caching.js
+//= require invoice-classes.js.coffee
 //= require invoices.js.coffee
 //= require formatCurrency.js
 //= require tableSorter.js
 //= require tablesorter.staticrow.js
 //= require jquery.metadata.js
+//= require application.js
+//= require bootstrap.js.coffee
+//= require categories.js.coffee
+//= require clients.js.coffee
+//= require client_additional_contacts.js.coffee
+//= require client_billing_infos.js.coffee
+//= require client_contacts.js.coffee
+//= require companies.js.coffee
+//= require dashboard.js.coffee
+//= require invoice_line_items.js.coffee
+//= require items.js.coffee
+//= require jqamp-ui-spinner.min.js
+//= require jquery.qtip.min.js
+//= require jwerty.js
+//= require payments.js.coffee
+//= require payment_terms.js.coffee
+//= require recurring_profiles.js.coffee
+//= require recurring_profile_line_items.js.coffee
+//= require reports.js.coffee
+//= require taxes.js.coffee
+
 
 
 
@@ -52,10 +73,10 @@ jQuery(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
 
-    jwerty.key('a,i', function(){document.location.href = "http://" + document.location.host + "/invoices/new" });
-    jwerty.key('a,c', function(){document.location.href = "http://" + document.location.host + "/clients/new" });
-    jwerty.key('a,t', function(){document.location.href = "http://" + document.location.host + "/items/new" });
-    jwerty.key('a,p', function(){document.location.href = "http://" + document.location.host + "/payments" });
+    jwerty.key('a,i', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/invoices/new" });
+    jwerty.key('a,c', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/clients/new" });
+    jwerty.key('a,t', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/items/new" });
+    jwerty.key('a,p', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/payments" });
     jwerty.key('esc', function(){jQuery(document.activeElement).blur();});
 });
 
