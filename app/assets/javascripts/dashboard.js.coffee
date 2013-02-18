@@ -14,7 +14,7 @@ jQuery ->
   ,
     label: "Paid Invoices"
   ]
-  chart_legend = show: true, plcement: "outsideGrid"
+  chart_legend = show: true, placement: "insideGrid"
   chart_xaxis = renderer: jQuery.jqplot.CategoryAxisRenderer, ticks: chart_ticks
   chart_yaxis = pad: 1.05, tickOptions:
     formatString: "$%d"
