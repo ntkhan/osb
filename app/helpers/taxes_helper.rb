@@ -4,7 +4,7 @@ module TaxesHelper
        <p>Tax has been created successfully.</p>
        <ul>
          <li><a href="/taxes/new">Create another tax</a></li>
-         <li><a href="/taxes/new?id=#{id}">Create another by duplicating this tax</a></li>
+        <!-- <li><a href="/taxes/new?id=#{id}">Create another by duplicating this tax</a></li> -->
        </ul>
     HTML
     notice = notice.html_safe

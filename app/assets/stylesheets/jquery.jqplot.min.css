@@ -117,7 +117,7 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
     position: absolute;
     font-size: .75em;
     right: 9px !important;
-    top: -31px !important;
+    top: -40px !important;
 }
 
 td.jqplot-table-legend {

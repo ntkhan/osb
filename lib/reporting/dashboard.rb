@@ -41,7 +41,7 @@ module Reporting
 
     # get outstanding invoices
     def self.get_outstanding_invoices
-      Payment.total_payments_amount - Invoice.total_invoices_amount
+      Invoice.total_invoices_amount - Payment.total_payments_amount
     end
 
     # get outstanding invoices by period
@@ -66,7 +66,7 @@ module Reporting
         invoices = Invoice.where(:invoice_date => start_date..end_date).sum("invoice_total")
         payments = Payment.where(:payment_date => start_date..end_date, :payment_type => "is null or payment_type != 'credit'").sum("payment_amount")
       end
-      payments - invoices
+      invoices - payments
     end
   end
 end
