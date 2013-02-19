@@ -13,7 +13,7 @@ class window.InlineForms
     @chznResults = @chznContainer.find(".chzn-results")
     @chznSearchBox = @chznContainer.find(".chzn-drop .chzn-search input[type=text]")
     @addNewRecordButton = @chznContainer.find(".add-new")
-    @inlineForm = null # will be set later in showForm method below
+    @inlineFormContainer = null # will be set later in showForm method below
     @chznContainerOriginalWidth = parseInt(@chznContainer.css("width"), 10)
     console.log "@chznContainerOriginalWidth #{@chznContainerOriginalWidth}"
     # trigger these event from .js.erb file when record is saved
@@ -25,7 +25,6 @@ class window.InlineForms
       @dropdown.append(new_reocrd).trigger("liszt:update")
       @showForm()
 
-
   showForm: ->
     # code to show form
     @addFormToList()
@@ -36,7 +35,7 @@ class window.InlineForms
     # ajust chosen list width to fit the form
     @adjustChosenWidth()
     # Show form
-    @inlineForm.show()
+    @inlineFormContainer.show()
     # bind the hideForm to form's close button
     @chznContainer.find(".close_btn").live "click", (e) =>
       @hideForm()
@@ -49,7 +48,7 @@ class window.InlineForms
 
   hideForm: =>
     console.log "hiding form... #{@formContainerId}"
-    @inlineForm.removeClass("active-form").hide()
+    @inlineFormContainer.removeClass("active-form").hide()
     @chznResults.show()
     @addNewRecordButton.show()
     #closeButton.parents(".chzn-drop").find(".chzn-results").show()
@@ -57,9 +56,9 @@ class window.InlineForms
 
   addFormToList: =>
     # clone the form from DOM and append in chozen list and set the inlineForm
-    @inlineForm = jQuery(jQuery("##{@formContainerId}").clone().wrap('<p>').parent().html()).addClass("active-form").reset()
-    @chznResults.after(@inlineForm) unless @chznContainer.find("##{@formContainerId}").length
-    @inlineForm = @chznResults.next()
+    @inlineFormContainer = jQuery(jQuery("##{@formContainerId}").clone().wrap('<p>').parent().html()).addClass("active-form")
+    @chznResults.after(@inlineFormContainer) unless @chznContainer.find("##{@formContainerId}").length
+    @inlineFormContainer = @chznResults.next()
 
   adjustChosenWidth: =>
     console.log "adjusting chosen width"
