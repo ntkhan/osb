@@ -16,6 +16,15 @@ class window.InlineForms
     @inlineForm = null # will be set later in showForm method below
     @chznContainerOriginalWidth = parseInt(@chznContainer.css("width"), 10)
     console.log "@chznContainerOriginalWidth #{@chznContainerOriginalWidth}"
+    # trigger these event from .js.erb file when record is saved
+    @dropdown.on "inlineform:save", (new_record) ->
+      @dropdown.append(new_reocrd).trigger("liszt:update")
+      @hideForm()
+    # trigger these event from .js.erb file when use press "save & add more"
+    @dropdown.on "inlineform:save_and_add_more", (new_record) ->
+      @dropdown.append(new_reocrd).trigger("liszt:update")
+      @showForm()
+
 
   showForm: ->
     # code to show form
@@ -48,7 +57,7 @@ class window.InlineForms
 
   addFormToList: =>
     # clone the form from DOM and append in chozen list and set the inlineForm
-    @inlineForm = jQuery(jQuery("##{@formContainerId}").clone().wrap('<p>').parent().html()).addClass("active-form")
+    @inlineForm = jQuery(jQuery("##{@formContainerId}").clone().wrap('<p>').parent().html()).addClass("active-form").reset()
     @chznResults.after(@inlineForm) unless @chznContainer.find("##{@formContainerId}").length
     @inlineForm = @chznResults.next()
 
