@@ -10,20 +10,30 @@ jQuery ->
 		renderer: jQuery.jqplot.BarRenderer
 		rendererOptions:
 			fillToZero: true
+			barWidth: 10
+			barPadding: 0
 
 	chart_series =  [
-		label: "Invoices",
+		label: "Invoices"
+		shadow: false
+		color: '#00BDE5'
+	,
 		label: "Paid Invoices"
+		shadow: false
 	]
 
 	chart_legend = show: true, placement: "insideGrid"
 
-	chart_xaxis = renderer: jQuery.jqplot.CategoryAxisRenderer, ticks: chart_ticks, tickOptions:
-		showGridline: false
+	chart_xaxis =
+		renderer: jQuery.jqplot.CategoryAxisRenderer
+		ticks: chart_ticks
+		tickOptions:
+			showGridline: false
+
 
 	chart_yaxis = pad: 1.05, tickOptions:
 		formatString: "$%d"
-
+		showMark: false
 
 	chart_axis =
 		xaxis: chart_xaxis
@@ -32,6 +42,8 @@ jQuery ->
 	chart_grid =
 		background: '#FFFFFF'
 		drawBorder: false
+		shadow: false
+		borderWidth: 0
 
 	chart_options =
 		seriesDefaults: chart_defaults
@@ -39,7 +51,9 @@ jQuery ->
 		legend: chart_legend
 		axes: chart_axis
 		grid: chart_grid
-		seriesColors: ['#00BDE5','#00000']
+		axesDefaults:
+			rendererOptions:
+				drawBaseline: false
 
 	if gon?
 		invoices = gon.chart_data["invoices"]
