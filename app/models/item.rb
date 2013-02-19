@@ -13,6 +13,10 @@ class Item < ActiveRecord::Base
     where("id IN(?)", ids)
   end
 
+  def self.is_exits? item_name
+    where(:item_name => item_name).present?
+  end
+
   def self.archive_multiple ids
     self.multiple_items(ids).each { |item| item.archive }
   end

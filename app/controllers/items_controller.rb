@@ -44,7 +44,12 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
+    if Item.is_exits?(params[:item][:item_name])
+      redirect_to(new_item_path, :alert => "Item with same name already exists")
+      return
+    end
     @item = Item.new(params[:item])
+    is_item_exits =
     respond_to do |format|
       if @item.save
         format.js

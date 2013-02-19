@@ -49,4 +49,8 @@ class Tax < ActiveRecord::Base
     end
   end
 
+  def self.is_exits? tax_name
+    where(:name => tax_name).present?
+  end
+
 end

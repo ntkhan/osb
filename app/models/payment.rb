@@ -14,9 +14,9 @@ class Payment < ActiveRecord::Base
     "#{self.invoice.client.first_name}  #{self.invoice.client.last_name}"
   end
 
-  def self.update_invoice_status inv_id, c_pay
+  def self.update_invoice_status inv_id, c_pay, prev_amount= 0
     invoice = Invoice.find(inv_id)
-    diff = (self.invoice_paid_amount(invoice.id) + c_pay) - invoice.invoice_total
+    diff = (self.invoice_paid_amount(invoice.id)- prev_amount + c_pay) - invoice.invoice_total
     if diff > 0
       status = 'paid'
       self.add_credit_payment invoice, diff
@@ -37,6 +37,7 @@ class Payment < ActiveRecord::Base
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
     credit_pay.invoice_id = invoice.id
+    credit_pay.payment_date =  Date.today
     credit_pay.notes = "Overpayment against invoice# #{invoice.invoice_number}"
     credit_pay.payment_amount = amount
     credit_pay.save

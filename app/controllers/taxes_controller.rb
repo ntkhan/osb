@@ -42,6 +42,10 @@ class TaxesController < ApplicationController
   # POST /taxes
   # POST /taxes.json
   def create
+    if Tax.is_exits?(params[:tax][:name])
+      redirect_to(new_taxis_path, :alert => "Tax with same name already exists")
+      return
+    end
     @taxis = Tax.new(params[:tax])
 
     respond_to do |format|
@@ -49,7 +53,8 @@ class TaxesController < ApplicationController
         format.js
         format.html { redirect_to @taxis, notice: 'Tax was successfully created.' }
         format.json { render json: @taxis, status: :created, location: @taxis }
-        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id},:notice => 'Tax was successfully created.') unless params[:quick_create]
+        new_tax_message = new_tax(@taxis.id)
+        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id},:notice => new_tax_message) unless params[:quick_create]
         return
       else
         format.html { render action: "new" }
