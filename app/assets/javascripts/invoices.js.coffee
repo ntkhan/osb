@@ -2,14 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery ->
-
+window.applyChosen = =>
   # listen to Chosen liszt:ready even
   # add a Add New button at the bottom of every chosen list
-  jQuery(".chzn-select").on "liszt:ready", ->
+  jQuery(".invoices-main .chzn-select").on "liszt:ready", ->
     chzn_drop = jQuery(this).next().find(".chzn-drop")
     unless chzn_drop.find("div.add-new").length > 0
-      select_id = this.id
       chzn_drop.append("<div data-dropdown-id='#{this.id}' class='add-new no_links'><a href='#' target=\'_blank\' title='صبرکاپھل میٹھا'>Add New</a></div>")
 
   # apply chosen on dropdown lists
@@ -20,6 +18,10 @@ jQuery ->
   jQuery(".add-new").live "click", ->
     new InlineForms(jQuery(this).attr("data-dropdown-id")).showForm()
 
+
+jQuery ->
+
+  window.applyChosen()
 
   # setup talbesorter parser for amount columns with currency and ',' signs
   jQuery.tablesorter.addParser
@@ -133,12 +135,10 @@ jQuery ->
   addLineItemRow = (elem) ->
    if elem.parents('tr.fields').next('tr.fields:visible').length is 0
     jQuery(".add_nested_fields").click()
-    jQuery(".chzn-select").chosen({allow_single_deselect: true})
+    applyChosen()
 
   jQuery(".add_nested_fields").live "click", ->
-    setTimeout (->
-     jQuery(".chzn-select").chosen({allow_single_deselect: true})
-    ), 0
+    setTimeout "applyChosen()", 0
 
  # Re calculate the total invoice balance if an item is removed
   jQuery(".remove_nested_fields").live "click", ->
