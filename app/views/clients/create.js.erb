@@ -1,6 +1,2 @@
-$("#invoice_client_id").append("<option value='<%= @client.id%>' selected><%= @client.organization_name %></option>").trigger("liszt:updated");
-<% if params[:add_more] %>
-    $("#clients_holder").html("<%= escape_javascript render 'new_client'%>");
-<%else%>
-    $(".close_btn").click();
-<%end%>
+<% inlineform_event = params[:add_more] ? "inlineform:save_and_add_more" : "inlineform:save" %>
+$("#invoice_client_id").trigger(inlineform_event, "<option value='<%= @client.id%>' selected><%= @client.organization_name %></option>");

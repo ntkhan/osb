@@ -51,8 +51,6 @@ class window.InlineForms
     @inlineFormContainer.removeClass("active-form").hide()
     @chznResults.show()
     @addNewRecordButton.show()
-    #closeButton.parents(".chzn-drop").find(".chzn-results").show()
-    #closeButton.parents(".chzn-drop").find(".add-new").show()
 
   addFormToList: =>
     # clone the form from DOM and append in chozen list and set the inlineForm
@@ -76,4 +74,4 @@ class window.InlineForms
       @chznDrop.css width: "#{@chznContainerOriginalWidth - 2}px"
       @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 30}px"
     else
-      console.log "no need to adjust width"
+      console.log "no need to revert width"
