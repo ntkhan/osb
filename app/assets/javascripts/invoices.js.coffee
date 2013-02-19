@@ -361,7 +361,6 @@ jQuery ->
    new_date  = elem.getFullYear() 
    new_date += separator + ("0" + (elem.getMonth() + 1)).slice(-2)
    new_date += separator + ("0" + elem.getDate()).slice(-2)
-   new_date
 
   # Hide placeholder text on focus
   jQuery("input[type=text],input[type=number]",".quick_create_wrapper").live("focus",->
