@@ -42,6 +42,10 @@ class TaxesController < ApplicationController
   # POST /taxes
   # POST /taxes.json
   def create
+    if Tax.is_exits?(params[:tax][:name])
+      redirect_to(new_taxis_path, :alert => "Tax with same name already exists")
+      return
+    end
     @taxis = Tax.new(params[:tax])
 
     respond_to do |format|
