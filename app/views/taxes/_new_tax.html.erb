@@ -5,12 +5,12 @@
       <tbody>
       <tr>
         <td colspan="4" class="form_field">
-          <%= text_field_tag "tax[name]", '', :class => 'text_field', :placeholder => "Tax name *" %>
+          <%= text_field_tag "tax[name]", '', :class => 'text_field', :placeholder => "Tax name *", :required => 'required' %>
         </td>
       </tr>
       <tr>
         <td colspan="2" class="form_field">
-          <%= text_field_tag "tax[percentage]", '', :class => 'text_field', :placeholder => "Percentage *" %>
+          <%= text_field_tag "tax[percentage]", '', :class => 'text_field', :placeholder => "Percentage *", :required => 'required' %>
           <%= hidden_field_tag :quick_create %>
         </td>
       </tr>
