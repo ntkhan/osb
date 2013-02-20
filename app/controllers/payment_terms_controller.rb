@@ -45,8 +45,7 @@ class PaymentTermsController < ApplicationController
     respond_to do |format|
       if @payment_term.save
         format.js #if params[:quick_create]
-        format.html { redirect_to @payment_term, notice: 'Payment term was successfully created.' }
-        format.json { render json: @payment_term, status: :created, location: @payment_term }
+        format.json { render :json => @payment_term, :status => :created, :location => @payment_term }
       else
         format.html { render action: "new" }
         format.json { render json: @payment_term.errors, status: :unprocessable_entity }

@@ -1,6 +1,6 @@
-jQuery("select.items_list").append("<option value='<%= @item.id%>'><%= @item.item_name %></option>").trigger("liszt:updated");
-<% if params[:add_more] %>
-    $("#items_holder").html("<%= escape_javascript render 'new_item'%>");
+<%unless @item_exists%>
+    <% inlineform_action = params[:add_more] ? "inlineform:save_and_add_more" : "inlineform:save" %>
+    <%= "{\"action\": \"#{inlineform_action}\",\"exists\": \"#{@item_exists}\", \"record\": \"<option value='#{@item.id}' selected>#{@item.item_name}</option>\"}".html_safe%>
 <%else%>
-    $(".close_btn").click();
+    <%= "{\"exists\": \"#{@item_exists}\"}".html_safe%>
 <%end%>
