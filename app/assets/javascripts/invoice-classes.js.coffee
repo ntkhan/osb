@@ -1,4 +1,3 @@
-
 # Inline form handling inside Chosen list
 class window.InlineForms
 
@@ -6,6 +5,8 @@ class window.InlineForms
     # our dropdown and formcontainer to retrieve form html
     @dropdown = jQuery("##{@dropdownId}")
     @formContainerId = @dropdown.attr("data-form-container")
+    @resource = @formContainerId.split("_")[0]
+    # clients|items|taxes|terms
     # chosen elements
     @chznContainerWidth = @dropdown.attr("data-dropdown-width")
     @chznContainer = jQuery("##{@dropdownId}_chzn")
@@ -13,16 +14,16 @@ class window.InlineForms
     @chznResults = @chznContainer.find(".chzn-results")
     @chznSearchBox = @chznContainer.find(".chzn-drop .chzn-search input[type=text]")
     @addNewRecordButton = @chznContainer.find(".add-new")
-    @inlineFormContainer = null # will be set later in showForm method below
+    @inlineFormContainer = null
+    # will be set later in showForm method below
     @chznContainerOriginalWidth = parseInt(@chznContainer.css("width"), 10)
-    console.log "@chznContainerOriginalWidth #{@chznContainerOriginalWidth}"
     # trigger these event from .js.erb file when record is saved
-    @dropdown.on "inlineform:save", (new_record) ->
-      @dropdown.append(new_reocrd).trigger("liszt:update")
+    @dropdown.on "inlineform:save", (new_record) =>
+      @dropdown.append(new_record).trigger("liszt:update")
       @hideForm()
     # trigger these event from .js.erb file when use press "save & add more"
-    @dropdown.on "inlineform:save_and_add_more", (new_record) ->
-      @dropdown.append(new_reocrd).trigger("liszt:update")
+    @dropdown.on "inlineform:save_and_add_more", (new_record) =>
+      @dropdown.append(new_record).trigger("liszt:update")
       @showForm()
 
   showForm: ->
@@ -40,6 +41,9 @@ class window.InlineForms
     @chznContainer.find(".close_btn").live "click", (e) =>
       @hideForm()
       @revertChosenWidth()
+    # setup 'save' and 'save & add more' actions
+    @setupSaveActions()
+
     # listen to dropdown hiding event to revert width ajustments back to original
     @dropdown.unbind "liszt:hiding_dropdown liszt:showing_dropdown"
     @dropdown.on "liszt:hiding_dropdown liszt:showing_dropdown", =>
@@ -54,9 +58,25 @@ class window.InlineForms
 
   addFormToList: =>
     # clone the form from DOM and append in chozen list and set the inlineForm
-    @inlineFormContainer = jQuery(jQuery("##{@formContainerId}").clone().wrap('<p>').parent().html()).addClass("active-form")
-    @chznResults.after(@inlineFormContainer) unless @chznContainer.find("##{@formContainerId}").length
-    @inlineFormContainer = @chznResults.next()
+    @inlineFormContainer = jQuery(jQuery("##{@formContainerId}").clone().wrap('<p>').parent().html())
+    @inlineFormContainer.addClass("active-form")
+    @chznContainer.find("##{@formContainerId}").remove()
+    @chznResults.after(@inlineFormContainer)
+
+  setupSaveActions: =>
+    @chznContainer.find(".btn_large").live "click", =>
+      # serialize the inputs in tiny create form
+      form_data = @chznContainer.find(".tiny_create_form :input").serialize()
+      console.log "form data: #{form_data}"
+      jQuery.ajax "/#{@resource}/create",
+        type: 'POST'
+        data: form_data
+        dataType: 'html'
+        success: (data, textStatus, jqXHR) =>
+          data = JSON.parse(data)
+          @dropdown.trigger(data["action"], data["record"])
+        error: (jqXHR, textStatus, errorThrown) =>
+          alert "Error: #{textStatus}"
 
   adjustChosenWidth: =>
     console.log "adjusting chosen width"
