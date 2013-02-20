@@ -1,152 +1,178 @@
 <%= nested_form_for @invoice, :html => {:class => 'form-horizontal'} do |f| %>
-    <% @parent_f = f %>
-    <div class="invoice_top_section">
-      <div style="float:left;">
-        <div class="control-group">
-          <%= f.label :client_id, "Client", :class => 'control-label' %>
-          <div class="controls">
-            <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder"} %>
-            <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
-            <div style="float:right;">
-              <%#= link_to "New Client", 'javascript:', :class => "btn btn-mini quick_create", :name => "clients_holder" %>
-              <%#= link_to "New Item", 'javascript:', :class => "btn btn-mini quick_create", :name => "items_holder" %>
-              <%#= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+  <% @parent_f = f %>
+  <div class="_form">
+
+    <div class="content_middle">
+      <div class="fields_content">
+        <div class="fields_content_container">
+
+          <div class="fields_content_data new_invoice_fields">
+
+            <div class="fields_content_left">
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :client_id, "Client"%></div>
+                <div class="small_field">
+                  <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder"} %>
+  <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
+                  <%#= link_to "New Client", 'javascript:', :class => "btn btn-mini quick_create", :name => "clients_holder" %>
+                  <%#= link_to "New Item", 'javascript:', :class => "btn btn-mini quick_create", :name => "items_holder" %>
+  <%#= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
+                  <ul class="field_description">
+                    <li>client you want to send invoice</li>
+                    <span id="last_invoice" style="display: none;"></span>
+                  </ul>
+                </div>
+              </div><!--field_row-->
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :discount_percentage, "Discount %" %></div>
+                <div class="small_field">
+                  <%= f.number_field :discount_percentage %>
+                  <ul class="field_description">
+                    <li>will be applied to whole invoice amount</li>
+                  </ul>
+                </div>
+              </div><!--field_row-->
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :payment_terms_id, "Terms" %></div>
+                <div class="small_field">
+  <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
+                  <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder"}  %>
+                  <%#= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
+                  <%#= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
+                  <ul class="field_description">
+                    <li>will be applied to whole invoice amount</li>
+                  </ul>
+                </div>
+              </div><!--field_row-->
             </div>
-            <br/>
-            <span class="hint_text client_hint">client you want to send invoice</span>
-            <span id="last_invoice" style="display: none;"></span>
-          </div>
-        </div>
 
-        <div class="control-group">
-          <%= f.label :discount_percentage, "Discount %", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.number_field :discount_percentage, :class => 'number_field small' %>
-            <br/>
-            <span class="hint_text">will be applied to whole invoice amount</span>
-          </div>
-        </div>
+            <div class="fields_content_right">
 
-        <div class="control-group">
-          <%= f.label :payment_terms_id, "Terms", :class => 'control-label' %>
-          <div class="controls">
-            <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-           <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder"}  %>
-            <%#= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
-            <%#= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
-          </div>
-        </div>
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :invoice_number, "Invoice #" %></div>
+                <div class="small_field">
+                  <%= f.text_field :invoice_number %>
+                  <ul class="field_description">
+                    <li>auto generated</li>
+                  </ul>
+                </div>
+              </div><!--field_row-->
 
-      </div>
-      <!-- left -->
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :invoice_date, "Invoice Date" %></div>
+                <div class="small_field">
+                  <%= f.text_field :invoice_date %>
+                </div>
+              </div><!--field_row-->
 
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :due_date, "Invoice Due" %></div>
+                <div class="small_field">
+                  <%= f.text_field :due_date %>
+                </div>
+              </div><!--field_row-->
 
-      <div style="float:right;">
-        <div class="control-group">
-          <%= f.label :invoice_number, "Invoice #", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :invoice_number, :class => 'text_field small' %>
-            <br/>
-            <span class="hint_text">auto generated</span>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :invoice_date, "Invoice Date", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :invoice_date, :class => 'text_field small' %>
-              <br/>
-              <span class="hint_text"></span>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :due_date, "Invoice Due", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :due_date, :class => 'text_field small' %>
-          </div>
-        </div>
-      </div>
-      <!-- rigt -->
-    </div>  <!-- top section -->
+            </div>
 
-    <div class="invoice_grid_wrapper">
-      <table class="invoice_grid_header">
-        <thead>
-        <tr class="grid_head">
-          <th class="invoice_header_items align_left" width="165">Item</th>
-          <th class="invoice_header_items align_left" width="163">Description</th>
-          <th class="invoice_header_items align_right" width="70">Unit Cost</th>
-          <th class="invoice_header_items align_right" width="70">Qty</th>
-          <th class="invoice_header_items" width="71">Tax1</th>
-          <th class="invoice_header_items" width="72">Tax2</th>
-          <th class="invoice_header_items" style="border-right:none;">Line Total</th>
-        </tr>
-        </thead>
-      </table>
-      <table class="invoice_grid_fields" id="invoice_grid_fields" cellspacing="5" cellpadding="5">
-        <%= f.fields_for :invoice_line_items, :wrapper => false %>
-        <tr style="border:none;">
-          <td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %></td>
-        </tr>
-      </table>
-    </div><!-- task -->
-
-    <div class="invoice_balance">
-      <table cellpadding="3" class="invoice_total">
-        <tr class="sub_total_tr">
-          <td>Subtotal</td>
-          <td><%#= f.number_field :sub_total, :class => 'number_field',:readonly => true %>
-            <%= f.hidden_field :sub_total %>
-            <%= label_tag '', '', :id => 'invoice_sub_total_lbl' %>
-          </td>
-        </tr>
-        <tr>
-          <td>Discount</td>
-          <td><%= f.hidden_field :discount_amount %>
-            <%= label_tag '', '', :id => 'invoice_discount_amount_lbl' %>
-          </td>
-        </tr>
-        <tr>
-          <td>Tax</td>
-          <td><%= f.hidden_field :tax_amount %>
-            <%= label_tag '', '', :id => 'invoice_tax_amount_lbl' %>
-          </td>
-        </tr>
-        <tr class="invoice_total_tr">
-          <td><b>Net Total</b></td>
-          <td><%= f.hidden_field :invoice_total %>
-            <%= label_tag '', '', :id => 'invoice_total_lbl' %>
-          </td>
-        </tr>
-      </table>
-    </div> <!-- invoice balance -->
-
-    <div class="terms_notes">
-      <!--<div class="terms_div">-->
-      <!--<%= f.label :terms, :class => 'txt_label' %>-->
-      <!--<div class="txt_controls">-->
-      <!--<%= f.text_area :terms, :class => 'text_area', :rows => 5 %>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!-- terms -->
+          </div><!--fields_content_data-->
 
 
-      <div class="notes_div">
-        <%= f.label :notes, :class => 'txt_label', :style => "margin-left:20px;" %>
-        <div class="txt_controls">
-          <%= f.text_area :notes, :class => 'text_area', :rows => 5, :style => "float:right;" %>
-        </div>
-      </div>
-      <!-- notes -->
-    </div> <!-- Terms notes -->
+          <div class="grid_table">
+            <table cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col class="one"/>
+                <col class="two"/>
+                <col class="three"/>
+                <col class="four"/>
+                <col class="five"/>
+                <col class="six"/>
+                <col class="seven"/>
+                <col class="eight"/>
+              </colgroup>
+              <tr>
+                <th class="align_center">&nbsp;</th>
+                <th class="align_left">Item</th>
+                <th class="align_left">Description</th>
+                <th class="align_center">Unit Cost</th>
+                <th class="align_right">Qty</th>
+                <th class="align_center">Tax1</th>
+                <th class="align_center">Tax2</th>
+                <th class="align_right">Line Total</th>
+              </tr>
+            </table>
+            <table id="invoice_grid_fields" cellspacing="0" cellpadding="0">
+              <%= f.fields_for :invoice_line_items, :wrapper => false %>
+            </table>
+          </div><!--grid_table-->
 
-    <div class="control-group" style="clear:both;">
+          <div class="grid_summary">
+            <div style="float:left;"> <%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %> </div>
+            <div class="grid_summary_content">
+              <div class="grid_summary_row">
+                <div class="grid_summary_title">
+                  Subtotal
+                </div>
+                <div class="grid_summary_description">
+  <%#= f.number_field :sub_total,:readonly => true %>
+                  <%= f.hidden_field :sub_total %>
+                  <%= label_tag '', '', :id => 'invoice_sub_total_lbl' %>
+                </div>
+              </div>
+              <div class="grid_summary_row">
+                <div class="grid_summary_title">
+                  Discount
+                </div>
+                <div class="grid_summary_description">
+                  <%= f.hidden_field :discount_amount %>
+                  <%= label_tag '', '', :id => 'invoice_discount_amount_lbl' %>
+                </div>
+              </div>
+              <div class="grid_summary_row last">
+                <div class="grid_summary_title">
+                  Tax
+                </div>
+                <div class="grid_summary_description">
+                  <%= f.hidden_field :tax_amount %>
+                  <%= label_tag '', '', :id => 'invoice_tax_amount_lbl' %>
+                </div>
+              </div>
+              <div class="grid_summary_row net_total">
+                <div class="grid_summary_title">
+                  Tax
+                </div>
+                <div class="grid_summary_description">
+                  <%= f.hidden_field :invoice_total %>
+                  <%= label_tag '', '', :id => 'invoice_total_lbl', :class => 'net_total_value' %>
+                </div>
+              </div>
+            </div>
+          </div><!--grid_summary-->
 
-    </div>
-    <% button_text = action_name == "new" ? "SEND" : "UPDATE" %>
-    <div class="invoice_btn_session">
-      <%= f.submit "#{button_text} INVOICE", :class => 'btn_large' %>
-      <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large', :name => "save_as_draft" %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  invoices_path, :class => 'btn_large dark_grey' %>
-    </div>
+
+          <div class="fields_content_data new_invoice_fields">
+
+            <div class="field_row textarea">
+              <div class="label_field textarea"><%= f.label :notes %></div>
+              <div class="large_field">
+                <%= f.text_area :notes %>
+              </div>
+            </div><!--field_row-->
+
+          </div><!--fields_content_data-->
+
+
+        </div><!--fields_content_container-->
+      </div><!--fields_content-->
+    </div><!--content_middle-->
+
+    <div class="content_bottom">
+      <% button_text = action_name == "new" ? "SEND" : "UPDATE" %>
+      <%= f.submit "#{button_text} INVOICE", :class => 'btn_large submit' %>
+      <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large submit', :name => "save_as_draft" %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), invoices_path, :class => 'btn_large grey' %>
+    </div><!--content_bottom-->
+
+  </div><!--_form-->
 <% end %>
