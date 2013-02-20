@@ -22,6 +22,7 @@ class window.InlineForms
     @dropdown.on "inlineform:save", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
       @hideForm()
+
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
@@ -77,8 +78,18 @@ class window.InlineForms
         data: form_data
         dataType: 'html'
         success: (data, textStatus, jqXHR) =>
+	         console.log data
           data = JSON.parse(data)
-          @dropdown.trigger(data["action"], data["record"])
+          unless data["exists"]
+            @dropdown.trigger(data["action"], data["record"])
+          else
+	          @chznContainer.qtip({content:
+		          text: "Already exits choose another and try again.",
+		          show:
+			          event: false, hide:
+				          event: false,position:
+					          at: 'bottomLeft'})
+	          @chznContainer.qtip().show()
         error: (jqXHR, textStatus, errorThrown) =>
           alert "Error: #{textStatus}"
 

@@ -1,2 +1,2 @@
 <% inlineform_action = params[:add_more] ? "inlineform:save_and_add_more" : "inlineform:save" %>
-<%= "{\"action\": \"#{inlineform_action}\", \"record\": \"<option value='#{@terms.id}' selected>#{@client.organization_name}</option>\"}".html_safe%>
+<%= "{\"action\": \"#{inlineform_action}\", \"record\": \"<option value='#{@payment_term.id}' selected>#{@payment_term.description}</option>\"}".html_safe%>
