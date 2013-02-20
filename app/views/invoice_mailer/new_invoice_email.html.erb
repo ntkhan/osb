@@ -20,14 +20,6 @@
     view?inv_id=<%= @e_id %></a>
 </p>
 
-<p>To view payments history of <%= "#{@user.first_name}" %>, click the link below:</p>
-
-<p>
-  <a href="<%= Osb::Application.config.address %>payments/payments_history?inv_id=<%= @e_id %>">
-    <%= Osb::Application.config.address %>history?inv_id=<%= @e_id %>
-  </a>
-</p>
-
 <p>
   Best regards, <br/>
   <%= "#{sender_business_name}" %> (<%= @current_user.email %>)
