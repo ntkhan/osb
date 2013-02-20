@@ -66,13 +66,14 @@ class window.InlineForms
     @chznResults.after(@inlineFormContainer)
 
   setupSaveActions: =>
-    @chznContainer.find(".btn_large").live "click", =>
+    @chznContainer.find(".btn_large").live "click", (event) =>
       console.log "validating form"
       return unless @validateForm()
-      console.log "form validated."
+#      console.log "form validated."
       # serialize the inputs in tiny create form
       form_data = @chznContainer.find(".tiny_create_form :input").serialize()
-      console.log "form data: #{form_data}"
+      form_data += '&add_more=' if jQuery(event.target).hasClass('btn_save_and_add_more')
+#      console.log "form data: #{form_data}"
       jQuery.ajax "/#{@resource}/create",
         type: 'POST'
         data: form_data
