@@ -31,7 +31,7 @@
           <%= f.label :payment_terms_id, "Terms", :class => 'control-label' %>
           <div class="controls">
             <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-           <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "terms_holder"}  %>
+           <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder"}  %>
             <%#= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
             <%#= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
           </div>

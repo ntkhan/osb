@@ -5,7 +5,8 @@ class window.InlineForms
     # our dropdown and formcontainer to retrieve form html
     @dropdown = jQuery("##{@dropdownId}")
     @formContainerId = @dropdown.attr("data-form-container")
-    @resource = @formContainerId.split("_")[0]
+#    @resource = @formContainerId.split("_")[0]
+    @resource = @formContainerId.replace /_holder/, ''
     # clients|items|taxes|terms
     # chosen elements
     @chznContainerWidth = @dropdown.attr("data-dropdown-width")
