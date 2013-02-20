@@ -18,12 +18,12 @@ class window.InlineForms
     # will be set later in showForm method below
     @chznContainerOriginalWidth = parseInt(@chznContainer.css("width"), 10)
     # trigger these event from .js.erb file when record is saved
-    @dropdown.on "inlineform:save", (new_record) =>
-      @dropdown.append(new_record).trigger("liszt:update")
+    @dropdown.on "inlineform:save", (e, new_record) =>
+      @dropdown.append(new_record).trigger("liszt:updated")
       @hideForm()
     # trigger these event from .js.erb file when use press "save & add more"
-    @dropdown.on "inlineform:save_and_add_more", (new_record) =>
-      @dropdown.append(new_record).trigger("liszt:update")
+    @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
+      @dropdown.append(new_record).trigger("liszt:updated")
       @showForm()
 
   showForm: ->
@@ -65,6 +65,7 @@ class window.InlineForms
 
   setupSaveActions: =>
     @chznContainer.find(".btn_large").live "click", =>
+      return unless @validateForm()
       # serialize the inputs in tiny create form
       form_data = @chznContainer.find(".tiny_create_form :input").serialize()
       console.log "form data: #{form_data}"
@@ -95,3 +96,17 @@ class window.InlineForms
       @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 30}px"
     else
       console.log "no need to revert width"
+
+  validateForm: =>
+    valid_form = true
+    # fetch all required inputs with empty value
+    @chznContainer.find(".tiny_create_form input[required]").filter("input[value=]").each (e, elem) =>
+      console.log jQuery(elem)
+      jQuery(elem).qtip({content:
+        text: "This field is require",
+        show:
+          event: false, hide:
+            event: false})
+      jQuery(elem).qtip().show()
+      valid_form = false
+    valid_form
