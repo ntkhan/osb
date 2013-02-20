@@ -299,7 +299,6 @@ jQuery ->
   jQuery('#main-invoice-checkbox').live "click", ->
      jQuery(this).parents('table.table-striped').find(':checkbox').attr('checked', this.checked)
 
-<<<<<<< HEAD
  # Check/uncheck main checkbox if all checkboxes are checked
   jQuery('table.table_listing tbody :checkbox').click ->
      status = unless jQuery('table.table_listing tbody input[type=checkbox]:not(:checked)').length then true else false
@@ -307,10 +306,6 @@ jQuery ->
 
   jQuery('#active_links a').live 'click', ->
      jQuery('#active_links a').removeClass('active')
-=======
-  jQuery('#grid_control_right a').live 'click', ->
-     jQuery('#grid_control_right a').removeClass('active')
->>>>>>> resolving new layout conflict in the middle of rebase master
      jQuery(this).addClass('active')
 
   jQuery(".invoice_action_links input[type=submit]").click ->
