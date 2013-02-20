@@ -708,3 +708,12 @@ table.index th {
     cursor: pointer;
   }
 }
+.invoices_with_payments {
+  position: absolute;
+  width: 600px;
+  height: auto;
+  z-index: 1101;
+  display: none;
+  border: 1px solid #ccc;
+  background-color: #FFF;
+}

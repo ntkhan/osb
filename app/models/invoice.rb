@@ -5,7 +5,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :invoice
   belongs_to :payment_term
   has_many :invoice_line_items, :dependent => :destroy
-  has_many :payments
+  has_many :payments, :dependent => :destroy
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
   paginates_per 10
@@ -79,7 +79,24 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.delete_multiple ids
-    self.multiple_invoices(ids).each {|invoice| invoice.destroy}
+    invoices_with_payments = []
+    self.multiple_invoices(ids).each {|invoice|
+      if invoice.payments.blank?
+      invoice.destroy
+      else
+        invoices_with_payments << invoice
+      end
+    }
+    invoices_with_payments    #if there are invoices with payments
+  end
+  def self.delete_invoices_with_payments ids, convert_to_credit
+    self.multiple_invoices(ids).each {|invoice|
+      if convert_to_credit
+      invoice_total_payments = invoice.payments.sum('payment_amount')
+      self.add_credit_payment invoice, invoice_total_payments
+      end
+      invoice.destroy
+    }
   end
 
   def self.recover_archived ids
@@ -131,5 +148,14 @@ class Invoice < ActiveRecord::Base
 
   def self.total_invoices_amount
     sum('invoice_total')
+  end
+  def self.add_credit_payment invoice, amount
+    credit_pay = Payment.new
+    credit_pay.payment_type = 'credit'
+    credit_pay.invoice_id = invoice.id
+    credit_pay.payment_date =  Date.today
+    credit_pay.notes = "Converted from payments for invoice# #{invoice.invoice_number}"
+    credit_pay.payment_amount = amount
+    credit_pay.save
   end
 end
