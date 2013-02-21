@@ -24,6 +24,12 @@ class window.InlineForms
       @chznDrop.css left: "-9000px"
       @hideForm()
       @revertChosenWidth()
+      current_dropdown = @chznContainer
+      @chznContainer.qtip({content:
+        text: "Record saved and selected",
+        position: at: 'leftMiddle', style: tip: corner: 'rightMiddle',
+        api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),5000})
+      @chznContainer.qtip().show()
 
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
@@ -54,7 +60,7 @@ class window.InlineForms
     @dropdown.on "liszt:hiding_dropdown liszt:showing_dropdown", =>
       @hideForm()
       @revertChosenWidth()
-      @chznContainer.find('*').qtip("hide")
+      @chznContainer.find(':input').qtip("hide")
 
   hideForm: =>
     console.log "hiding form... #{@formContainerId}"
