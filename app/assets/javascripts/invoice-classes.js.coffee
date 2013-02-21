@@ -5,7 +5,7 @@ class window.InlineForms
     # our dropdown and formcontainer to retrieve form html
     @dropdown = jQuery("##{@dropdownId}")
     @formContainerId = @dropdown.attr("data-form-container")
-#    @resource = @formContainerId.split("_")[0]
+    #    @resource = @formContainerId.split("_")[0]
     @resource = @formContainerId.replace /_holder/, ''
     # clients|items|taxes|terms
     # chosen elements
@@ -72,28 +72,28 @@ class window.InlineForms
     @chznContainer.find(".btn_large").live "click", (event) =>
       console.log "validating form"
       return unless @validateForm()
-#      console.log "form validated."
+      #      console.log "form validated."
       # serialize the inputs in tiny create form
       form_data = @chznContainer.find(".tiny_create_form :input").serialize()
       form_data += '&add_more=' if jQuery(event.target).hasClass('btn_save_and_add_more')
-#      console.log "form data: #{form_data}"
+      #      console.log "form data: #{form_data}"
       jQuery.ajax "/#{@resource}/create",
         type: 'POST'
         data: form_data
         dataType: 'html'
         success: (data, textStatus, jqXHR) =>
-	         console.log data
+          console.log data
           data = JSON.parse(data)
           unless data["exists"]
             @dropdown.trigger(data["action"], data["record"])
           else
-	          @chznContainer.qtip({content:
-		          text: "Already exits choose another and try again.",
-		          show:
-			          event: false, hide:
-				          event: false,position:
-					          at: 'bottomLeft'})
-	          @chznContainer.qtip().show()
+            @chznContainer.qtip({content:
+              text: "Already exits choose another and try again.",
+              show:
+                event: false, hide:
+                  event: false, position:
+                    at: 'bottomLeft'})
+            @chznContainer.qtip().show()
         error: (jqXHR, textStatus, errorThrown) =>
           alert "Error: #{textStatus}"
 
