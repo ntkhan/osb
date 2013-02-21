@@ -114,6 +114,7 @@ class window.InlineForms
   revertChosenWidth: =>
     console.log "reverting chosen width..."
     if @chznContainerWidth?
+      console.log "original width: #{@chznContainerOriginalWidth}"
       @chznContainer.css width: "#{@chznContainerOriginalWidth}px", position: "relative", "z-index": ""
       @chznDrop.css width: "#{@chznContainerOriginalWidth - 2}px"
       @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 30}px"
