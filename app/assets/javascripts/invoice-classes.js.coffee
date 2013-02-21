@@ -23,6 +23,7 @@ class window.InlineForms
       @dropdown.trigger("change")
       @chznDrop.css left: "-9000px"
       @hideForm()
+      @revertChosenWidth()
 
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
@@ -73,6 +74,7 @@ class window.InlineForms
       return unless @validateForm()
       # serialize the inputs in tiny create form
       form_data = @chznContainer.find(".tiny_create_form :input").serialize()
+      # add an extra parameter "add_more" if save & add more button is clicked
       form_data += '&add_more=' if jQuery(event.target).hasClass('btn_save_and_add_more')
       jQuery.ajax "/#{@resource}/create",
         type: 'POST'
@@ -80,16 +82,16 @@ class window.InlineForms
         dataType: 'html'
         success: (data, textStatus, jqXHR) =>
           data = JSON.parse(data)
+          # check if record already exists in case of items and taxes
           unless data["exists"]
             @dropdown.trigger(data["action"], data["record"])
           else
-            @chznContainer.qtip({content:
-              text: "Already exits choose another and try again.",
-              show:
-                event: false, hide:
-                  event: false, position:
-                    at: 'bottomLeft'})
-            @chznContainer.qtip().show()
+            unique_field = @chznContainer.find("input[data-unique]")
+            unique_field.qtip({content:
+              text: "Already exists choose another and try again",
+              show: event: false, hide: event: false, position: at: 'rightMiddle', style: tip: corner: 'leftMiddle'})
+            unique_field.qtip().show()
+            unique_field.focus()
         error: (jqXHR, textStatus, errorThrown) =>
           alert "Error: #{textStatus}"
 

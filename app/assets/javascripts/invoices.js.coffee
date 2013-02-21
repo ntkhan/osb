@@ -33,7 +33,7 @@ jQuery ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
 
-  # Apply sorting on invoice table
+  # Apply sorting on listing tables
   jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
