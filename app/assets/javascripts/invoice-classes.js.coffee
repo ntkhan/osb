@@ -5,7 +5,6 @@ class window.InlineForms
     # our dropdown and formcontainer to retrieve form html
     @dropdown = jQuery("##{@dropdownId}")
     @formContainerId = @dropdown.attr("data-form-container")
-    #    @resource = @formContainerId.split("_")[0]
     @resource = @formContainerId.replace /_holder/, ''
     # clients|items|taxes|terms
     # chosen elements
@@ -22,7 +21,7 @@ class window.InlineForms
     @dropdown.on "inlineform:save", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
       @dropdown.trigger("change")
-      @chznDrop.css width: "-9000px"
+      @chznDrop.css left: "-9000px"
       @hideForm()
 
     # trigger these event from .js.erb file when use press "save & add more"
@@ -72,17 +71,14 @@ class window.InlineForms
     @chznContainer.find(".btn_large").live "click", (event) =>
       console.log "validating form"
       return unless @validateForm()
-      #      console.log "form validated."
       # serialize the inputs in tiny create form
       form_data = @chznContainer.find(".tiny_create_form :input").serialize()
       form_data += '&add_more=' if jQuery(event.target).hasClass('btn_save_and_add_more')
-      #      console.log "form data: #{form_data}"
       jQuery.ajax "/#{@resource}/create",
         type: 'POST'
         data: form_data
         dataType: 'html'
         success: (data, textStatus, jqXHR) =>
-          console.log data
           data = JSON.parse(data)
           unless data["exists"]
             @dropdown.trigger(data["action"], data["record"])
