@@ -5,12 +5,15 @@ class Invoice < ActiveRecord::Base
   belongs_to :invoice
   belongs_to :payment_term
   has_many :invoice_line_items, :dependent => :destroy
-  has_many :payments, :dependent => :destroy
+  has_many :payments
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
   paginates_per 10
   default_scope order("#{self.table_name}.created_at DESC")
-
+  before_destroy :change_status
+  def change_status
+    self.update_attribute("status","sent")
+  end
   def tooltip
     case self.status
     when "draft"
@@ -81,10 +84,10 @@ class Invoice < ActiveRecord::Base
   def self.delete_multiple ids
     invoices_with_payments = []
     self.multiple_invoices(ids).each {|invoice|
-      if invoice.payments.blank?
-      invoice.destroy
+      if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
+         invoice.destroy
       else
-        invoices_with_payments << invoice
+         invoices_with_payments << invoice
       end
     }
     invoices_with_payments    #if there are invoices with payments
@@ -92,9 +95,10 @@ class Invoice < ActiveRecord::Base
   def self.delete_invoices_with_payments ids, convert_to_credit
     self.multiple_invoices(ids).each {|invoice|
       if convert_to_credit
-      invoice_total_payments = invoice.payments.sum('payment_amount')
+      invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
       self.add_credit_payment invoice, invoice_total_payments
       end
+      invoice.payments.with_deleted.where("payment_type='credit' or payment_type is null").each {|payment| payment.destroy!}
       invoice.destroy
     }
   end

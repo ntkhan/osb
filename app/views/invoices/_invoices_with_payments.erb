@@ -1,7 +1,8 @@
-<div>
-  <div style="float:right;" class="close_popup">X</div>
+<div style="margin:20px">
+  <h1>How to handle invoice payments? </h1>
+  <div style=" cursor: pointer; float: right; position: absolute; right: 3px; top: 3px;" class="close_popup">X</div>
 </div>
-<div style="float:left;width:100%">
+<div style="float:left;width:95%;margin: 0 20px;">
 <%= form_tag "invoices/delete_invoices_with_payments", :remote => true do -%>
 <table class="table table-striped">
   <tr>
@@ -20,7 +21,7 @@
     </tr>
   <% end %>
 </table>
-  <div class="footer ">
+  <div class="footer " style="text-align:center">
         <%= submit_tag "Convert Payment to Credit", :name => "convert_to_credit", :class => "btn_large" %>
         <%= submit_tag "Permanently Delete Payment", :name => "destroy", :class => "btn_large" %>
         or <a class="close_popup" href="#" >cancel</a>

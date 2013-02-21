@@ -15,10 +15,10 @@
     <div class="action_links_wrapper">
       <div class="invoice_action_links">
         <p value="payment">
-          <%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
-          <%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
-          <%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
-          <%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %>
+          <%#= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %>
+          <%#= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %>
+          <%#= submit_tag "Archive", :name => "archive", :class => "top_links archive" %>
+          <%= submit_tag "Delete Forever", :name => "destroy", :class => "top_links destroy" %>
           <span>|</span>
           <a href="#" class="no_links">Copy</a>
           <a href="#" class="no_links">Print</a>
@@ -31,7 +31,7 @@
       <div class="invoice_search">
         <%#= text_field_tag 'search_invoice', '', :placeholder => "Search" %>
         <div class="active_links" id="active_links">
-          <%= render 'filter_links' %>
+          <%#= render 'filter_links' %>
         </div>
       </div>
     </div>
