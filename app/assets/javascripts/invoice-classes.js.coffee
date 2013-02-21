@@ -21,11 +21,14 @@ class window.InlineForms
     # trigger these event from .js.erb file when record is saved
     @dropdown.on "inlineform:save", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
+      @dropdown.trigger("change")
+      @chznDrop.css width: "-9000px"
       @hideForm()
 
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
+      @dropdown.trigger("change")
       @showForm()
 
   showForm: ->
