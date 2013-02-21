@@ -5,7 +5,6 @@ class window.InlineForms
     # our dropdown and formcontainer to retrieve form html
     @dropdown = jQuery("##{@dropdownId}")
     @formContainerId = @dropdown.attr("data-form-container")
-#    @resource = @formContainerId.split("_")[0]
     @resource = @formContainerId.replace /_holder/, ''
     # clients|items|taxes|terms
     # chosen elements
@@ -21,11 +20,21 @@ class window.InlineForms
     # trigger these event from .js.erb file when record is saved
     @dropdown.on "inlineform:save", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
+      @dropdown.trigger("change")
+      @chznDrop.css left: "-9000px"
       @hideForm()
+      @revertChosenWidth()
+      current_dropdown = @chznContainer
+      @chznContainer.qtip({content:
+        text: "Record saved and selected",
+        position: at: 'leftMiddle', style: tip: corner: 'rightMiddle',
+        api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),5000})
+      @chznContainer.qtip().show()
 
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
+      @dropdown.trigger("change")
       @showForm()
 
   showForm: ->
@@ -51,6 +60,7 @@ class window.InlineForms
     @dropdown.on "liszt:hiding_dropdown liszt:showing_dropdown", =>
       @hideForm()
       @revertChosenWidth()
+      @chznContainer.find(':input').qtip("hide")
 
   hideForm: =>
     console.log "hiding form... #{@formContainerId}"
@@ -69,28 +79,26 @@ class window.InlineForms
     @chznContainer.find(".btn_large").live "click", (event) =>
       console.log "validating form"
       return unless @validateForm()
-#      console.log "form validated."
       # serialize the inputs in tiny create form
       form_data = @chznContainer.find(".tiny_create_form :input").serialize()
+      # add an extra parameter "add_more" if save & add more button is clicked
       form_data += '&add_more=' if jQuery(event.target).hasClass('btn_save_and_add_more')
-#      console.log "form data: #{form_data}"
       jQuery.ajax "/#{@resource}/create",
         type: 'POST'
         data: form_data
         dataType: 'html'
         success: (data, textStatus, jqXHR) =>
-	         console.log data
           data = JSON.parse(data)
+          # check if record already exists in case of items and taxes
           unless data["exists"]
             @dropdown.trigger(data["action"], data["record"])
           else
-	          @chznContainer.qtip({content:
-		          text: "Already exits choose another and try again.",
-		          show:
-			          event: false, hide:
-				          event: false,position:
-					          at: 'bottomLeft'})
-	          @chznContainer.qtip().show()
+            unique_field = @chznContainer.find("input[data-unique]")
+            unique_field.qtip({content:
+              text: "Already exists choose another and try again",
+              show: event: false, hide: event: false, position: at: 'rightMiddle', style: tip: corner: 'leftMiddle'})
+            unique_field.qtip().show()
+            unique_field.focus()
         error: (jqXHR, textStatus, errorThrown) =>
           alert "Error: #{textStatus}"
 
@@ -106,6 +114,7 @@ class window.InlineForms
   revertChosenWidth: =>
     console.log "reverting chosen width..."
     if @chznContainerWidth?
+      console.log "original width: #{@chznContainerOriginalWidth}"
       @chznContainer.css width: "#{@chznContainerOriginalWidth}px", position: "relative", "z-index": ""
       @chznDrop.css width: "#{@chznContainerOriginalWidth - 2}px"
       @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 30}px"

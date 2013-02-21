@@ -8,7 +8,7 @@ window.applyChosen = =>
   jQuery(".invoices-main .chzn-select").on "liszt:ready", ->
     chzn_drop = jQuery(this).next().find(".chzn-drop")
     unless chzn_drop.find("div.add-new").length > 0
-      chzn_drop.append("<div data-dropdown-id='#{this.id}' class='add-new no_links'>Add New</div>")
+      chzn_drop.append("<div data-dropdown-id='#{this.id}' class='add-new'>Add New</div>")
 
   # apply chosen on dropdown lists
   # trigger the "liszt:ready" manually so that we can add Add New button to list. See above
@@ -33,7 +33,7 @@ jQuery ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
 
-  # Apply sorting on invoice table
+  # Apply sorting on listing tables
   jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
