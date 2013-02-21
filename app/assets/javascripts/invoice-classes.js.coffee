@@ -54,6 +54,7 @@ class window.InlineForms
     @dropdown.on "liszt:hiding_dropdown liszt:showing_dropdown", =>
       @hideForm()
       @revertChosenWidth()
+      @chznContainer.find('*').qtip("hide")
 
   hideForm: =>
     console.log "hiding form... #{@formContainerId}"
