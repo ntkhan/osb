@@ -137,6 +137,14 @@ h2 span{
     letter-spacing: 0.5px;
     text-transform: lowercase;
 }
+h4{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #00bde5;
+    font-weight: bold;
+    margin: 0px;
+    line-height: normal;
+}
 .main_container{
     width: 900px;
     padding: 40px 0 0 0;
@@ -185,8 +193,6 @@ h2 span{
 }
 .nav_container{
     background: url(/assets/nav_bg.png) repeat-x top;
-    border-left: 1px solid #ffffff;
-    border-right: 1px solid #ffffff;
     min-height: 86px;
 }
 #nav {
@@ -546,7 +552,8 @@ h2 span{
     margin: 0 11px 0 0;
 }
 input[type="text"],
-textarea{
+textarea,
+.blank_input{
     border: 1px solid #d7d7d7;
     height: 28px;
     line-height: 28px;
@@ -556,6 +563,7 @@ textarea{
     color: #464646;
     margin: 0px;
     border-radius: 4px;
+    background: #ffffff;
 }
 .options_content{
     float: left;

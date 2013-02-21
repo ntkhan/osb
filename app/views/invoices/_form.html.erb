@@ -99,12 +99,11 @@
                 <th class="align_right">Qty</th>
                 <th class="align_center">Tax1</th>
                 <th class="align_center">Tax2</th>
-                <th class="align_right">Line Total</th>
+                <th class="align_center">Line Total</th>
               </tr>
-            </table>
-            <table id="invoice_grid_fields" cellspacing="0" cellpadding="0">
               <%= f.fields_for :invoice_line_items, :wrapper => false %>
             </table>
+            
           </div><!--grid_table-->
 
           <div class="grid_summary">
@@ -171,7 +170,7 @@
       <% button_text = action_name == "new" ? "SEND" : "UPDATE" %>
       <%= f.submit "#{button_text} INVOICE", :class => 'btn_large submit' %>
       <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large submit', :name => "save_as_draft" %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), invoices_path, :class => 'btn_large grey' %>
+      <%= link_to 'Cancel', invoices_path, :class => 'btn_large grey' %>
     </div><!--content_bottom-->
 
   </div><!--_form-->

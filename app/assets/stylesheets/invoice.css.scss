@@ -36,7 +36,6 @@
 }
 
 .chzn-container {
-
   .add-new {
     background-color: #00BDE5;
     border-radius: 3px 3px 3px 3px;
@@ -47,5 +46,8 @@
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    font-family: "Dosis Regular", sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
   }
 }

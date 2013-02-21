@@ -37,9 +37,13 @@
     .grid_table table th:nth-child(2){
         border-radius: 5px 0 0 5px;
     }
+    .grid_table table tr:nth-child(2) td{
+        padding-top: 11px;
+    }
     .grid_table table td{
         border: none;
-        padding: 10px 2px 0 2px;
+        padding: 6px 2px 4px 2px;
+        vertical-align: middle;
     }
     .grid_table table td:nth-child(2){
         padding-left: 0px;
@@ -71,16 +75,24 @@
     .grid_table table col.eight{
         width : 112px;
     }
-    input.grid_small{
+    input.grid_small,
+    .blank_input,
+    select.grid_small{
         width: 60px;
     }
-    input.grid_medium{
-        width: 90px;
+    input.grid_medium,
+    .blank_input.grid_medium,
+    select.grid_medium{
+        width: 108px;
     }
-    input.grid_large{
+    input.grid_large,
+    .blank_input,
+    select.grid_large{
         width: 157px;
     }
-    input.grid_large_medium{
+    input.grid_large_medium,
+    .blank_input,
+    select.grid_large_medium{
         width: 153px;
     }
     .grid_summary{
