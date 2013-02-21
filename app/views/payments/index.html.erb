@@ -8,10 +8,10 @@
 
 <div class="page-header">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <span class="filter-tag">&nbsp;/&nbsp;Active</span>
+    <!-- <span class="filter-tag">&nbsp;/&nbsp;Active</span>  -->
   </h1>
 </div>
-<%= form_tag "payments/bulk_actions", :remote => true do -%>
+<%= form_tag "payments/bulk_actions", :remote => true  do -%>
     <div class="action_links_wrapper">
       <div class="invoice_action_links">
         <p value="payment">
