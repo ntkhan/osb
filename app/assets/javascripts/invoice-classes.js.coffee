@@ -24,18 +24,24 @@ class window.InlineForms
       @chznDrop.css left: "-9000px"
       @hideForm()
       @revertChosenWidth()
-      current_dropdown = @chznContainer
-      @chznContainer.qtip({content:
-        text: "Record saved and selected",
-        position: at: 'leftMiddle', style: tip: corner: 'rightMiddle',
-        api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),5000})
-      @chznContainer.qtip().show()
+      @showQtip()
 
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
       @dropdown.trigger("change")
       @showForm()
+
+  # show qtip when record is successfully added and selected
+  showQtip: ->
+    current_dropdown = @chznContainer
+    setTimeout (->
+      current_dropdown.qtip({content:
+        text: "Record saved and selected",
+        hide: event: false, show: event: false,
+        position: at: 'bottomMiddle', style: tip: corner: 'topLeft',
+        api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),10000})
+      current_dropdown.qtip().show()),100
 
   showForm: ->
     # code to show form
