@@ -396,7 +396,7 @@ jQuery ->
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
        flag = false
     else if title is "payment" and action is "delete forever"
-         sure = confirm("Are you sure?")
+         sure = confirm("Are you sure you want to delete these payment(s)?")
          if sure is false
             flag = false
     flag
