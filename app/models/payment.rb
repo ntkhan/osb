@@ -5,9 +5,13 @@ class Payment < ActiveRecord::Base
   acts_as_archival
   acts_as_paranoid
   default_scope order("#{self.table_name}.created_at DESC")
-
+  before_destroy :check_credit_payments
+  def check_credit_payments
+   false if self.payment_type == "credit" ||  self.payment_type != nil
+  end
   def client_name
-    self.invoice.client.organization_name rescue "credit?"
+    invoice = Invoice.with_deleted.find(self.invoice_id)
+    invoice.client.organization_name rescue "no client"
   end
 
   def client_full_name
@@ -89,7 +93,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.delete_multiple ids
-    self.multiple_payments(ids).each { |payment| payment.destroy }
+    self.multiple_payments(ids).each { |payment| payment.destroy! }
   end
 
   def self.recover_archived ids

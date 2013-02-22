@@ -24,12 +24,24 @@ class window.InlineForms
       @chznDrop.css left: "-9000px"
       @hideForm()
       @revertChosenWidth()
+      @showQtip()
 
     # trigger these event from .js.erb file when use press "save & add more"
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
       @dropdown.trigger("change")
       @showForm()
+
+  # show qtip when record is successfully added and selected
+  showQtip: ->
+    current_dropdown = @chznContainer
+    setTimeout (->
+      current_dropdown.qtip({content:
+        text: "Record saved and selected",
+        hide: event: false, show: event: false,
+        position: at: 'bottomMiddle', style: tip: corner: 'topLeft',
+        api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),10000})
+      current_dropdown.qtip().show()),100
 
   showForm: ->
     # code to show form
@@ -54,7 +66,7 @@ class window.InlineForms
     @dropdown.on "liszt:hiding_dropdown liszt:showing_dropdown", =>
       @hideForm()
       @revertChosenWidth()
-      @chznContainer.find('*').qtip("hide")
+      @chznContainer.find(':input').qtip("hide")
 
   hideForm: =>
     console.log "hiding form... #{@formContainerId}"
@@ -101,16 +113,17 @@ class window.InlineForms
     if @chznContainerWidth?
       @chznContainer.css width: "#{@chznContainerWidth}px", position: "absolute", "z-index": 9999
       @chznDrop.css width: "#{@chznContainerWidth - 2}px"
-      @chznSearchBox.css width: "#{@chznContainerWidth - 30}px"
+      @chznSearchBox.css width: "#{@chznContainerWidth - 37}px"
     else
       console.log "no need to adjust width"
 
   revertChosenWidth: =>
     console.log "reverting chosen width..."
     if @chznContainerWidth?
+      console.log "original width: #{@chznContainerOriginalWidth}"
       @chznContainer.css width: "#{@chznContainerOriginalWidth}px", position: "relative", "z-index": ""
       @chznDrop.css width: "#{@chznContainerOriginalWidth - 2}px"
-      @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 30}px"
+      @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 37}px"
     else
       console.log "no need to revert width"
 

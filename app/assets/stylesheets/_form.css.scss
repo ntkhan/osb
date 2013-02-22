@@ -29,6 +29,7 @@
     }
     .large_field textarea{
         width: 760px;
+        margin-bottom: 6px;
     }
     .grid_table table th:first-child {
         border-radius: 0px;
@@ -43,7 +44,7 @@
     .grid_table table td{
         border: none;
         padding: 6px 2px 4px 2px;
-        vertical-align: middle;
+        vertical-align: top;
     }
     .grid_table table td:nth-child(2){
         padding-left: 0px;
@@ -76,9 +77,14 @@
         width : 112px;
     }
     input.grid_small,
-    .blank_input,
-    select.grid_small{
+    .blank_input{
         width: 60px;
+    }
+    select.grid_small{
+        width: 80px;
+    }
+    .grid_table table tr th:first-child{
+        border-right: none !important;
     }
     input.grid_medium,
     .blank_input.grid_medium,
@@ -88,12 +94,12 @@
     input.grid_large,
     .blank_input,
     select.grid_large{
-        width: 157px;
+        width: 150px;
     }
     input.grid_large_medium,
     .blank_input,
     select.grid_large_medium{
-        width: 153px;
+        width: 173px;
     }
     .grid_summary{
         float: left;
@@ -122,6 +128,9 @@
         width: 60px;
         padding: 0 10px 0 0;
         text-align: right;
+        label{
+            float:right;
+        }
     }
     .grid_summary_row.net_total{
         border-top: double #d7d7d7;
@@ -132,5 +141,11 @@
     }
     .net_total_value{
         line-height: 34px;
+    }
+    .grid_table table td input, .grid_table table th input{
+        margin: 0px;
+    }
+    .btn_large.submit{
+        margin: -6px 0 0 0;
     }
 }

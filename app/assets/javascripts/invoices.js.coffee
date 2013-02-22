@@ -8,7 +8,7 @@ window.applyChosen = =>
   jQuery(".invoices-main .chzn-select").on "liszt:ready", ->
     chzn_drop = jQuery(this).next().find(".chzn-drop")
     unless chzn_drop.find("div.add-new").length > 0
-      chzn_drop.append("<div data-dropdown-id='#{this.id}' class='add-new no_links'>Add New</div>")
+      chzn_drop.append("<div data-dropdown-id='#{this.id}' class='add-new'>Add New</div>")
 
   # apply chosen on dropdown lists
   # trigger the "liszt:ready" manually so that we can add Add New button to list. See above
@@ -289,7 +289,9 @@ jQuery ->
 
   # Check all checkboxes using from main checkbox
   jQuery('#select_all').click ->
-    jQuery(this).parents('table.table_listing').find(':checkbox').attr('checked', this.checked)
+    listing_table =  jQuery(this).parents('table.table_listing')
+    selected = if @checked then "selected" else ""
+    listing_table.find(':checkbox').attr('checked', @checked).parents('tr').removeClass('selected').addClass(selected)
 
   jQuery(".alert button.close").click ->
     jQuery(this).parent(".alert").hide()
@@ -301,8 +303,10 @@ jQuery ->
 
  # Check/uncheck main checkbox if all checkboxes are checked
   jQuery('table.table_listing tbody :checkbox').click ->
+     jQuery(this).parents('tr').toggleClass('selected')
      status = unless jQuery('table.table_listing tbody input[type=checkbox]:not(:checked)').length then true else false
      jQuery('#select_all').attr('checked', status)
+
 
   jQuery('#active_links a').live 'click', ->
      jQuery('#active_links a').removeClass('active')
@@ -386,7 +390,7 @@ jQuery ->
   jQuery(".close_btn").live "click", ->
     jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
 
-  # Alert on no record selection
+  # Alert on no record selection and confirm to delete forever payment
   jQuery(".top_links").live "click", ->
     title = jQuery(this).parent("p").attr "value"
     action = jQuery(this).val().toLowerCase()
@@ -395,6 +399,10 @@ jQuery ->
        jQuery('.alert').hide();
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
        flag = false
+    else if title is "payment" and action is "delete forever"
+         sure = confirm("Are you sure?")
+         if sure is false
+            flag = false
     flag
   jQuery(".close_popup").live "click", ->
     jQuery(".invoices_with_payments").hide()

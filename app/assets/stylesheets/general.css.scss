@@ -105,6 +105,7 @@ a{
 }
 a:hover, input[type="submit"]:hover{
     text-decoration: underline;
+    color: #00ace5;
 }
 ul{
     margin: 0;
@@ -168,8 +169,8 @@ h4{
 /*-------------------------Header CSS Starts-------------------------*/
 .header{
     clear: both;
-    float: left;
-    width: 100%;
+    //float: left;
+    //width: 100%;
     min-height: 82px;
 }
 .logo{
@@ -400,7 +401,7 @@ h4{
     font-size:13px;
     font-weight:bold;
     color:#ffffff;
-    border-right:1px solid #ffffff !important;
+    border-right:1px solid #c2c2c2 !important;
 }
 .grid_table table td{
     font-family:Arial, Helvetica, sans-serif;
@@ -438,6 +439,11 @@ h4{
 }
 .align_center{
     text-align:center;
+}
+.align_left.left,
+.align_right.left,
+.align_center.left{
+    float: left;
 }
 .grid_table table td.draft{
     color: #757575;
@@ -695,6 +701,46 @@ textarea,
 }
 /*Buttons CSS Ends*/
 
-.modal .cross_btn{
-    margin: -50px -1px 0 0;
+
+
+.help_page{
+    float: left;
+    padding: 40px 0 0 0;
 }
+
+/*----------------------- Table sorter css start -------------- */
+
+table.table_listing,table.report-data-table {
+  thead {
+    tr {
+      .header {
+        background-image: url(/assets/bg.png);
+        background-repeat: no-repeat;
+        background-position: center right;
+        cursor: pointer;
+      }
+      .headerSortUp {
+        background-image: url(/assets/asc.png);
+      }
+      .headerSortDown {
+        background-image: url(/assets/desc.png);
+      }
+    }
+  }
+  tbody {
+    td {
+      color: #3D3D3D;
+      //padding: 4px;
+      //background-color: #FFF;
+      vertical-align: middle;
+      line-height: 20px;
+    }
+    tr.odd td {
+      background-color: #F0F0F6;
+    }
+  }
+}
+
+/* Table sorter css end */
+
+

@@ -52,6 +52,9 @@
 		width: 100%;
 		padding: 5px 0 8px 0;
 	}
+        .day_session_content_detail:last-child{
+                border-bottom: none;
+        }
 	.day_session_content_detail ul{
 		margin: 0 0 -2px 0;
 		overflow: hidden;
