@@ -161,8 +161,8 @@ h4{
 /*-------------------------Header CSS Starts-------------------------*/
 .header{
     clear: both;
-    float: left;
-    width: 100%;
+    //float: left;
+    //width: 100%;
     min-height: 82px;
 }
 .logo{
@@ -687,4 +687,39 @@ textarea,
     color: #ffffff;
 }
 /*Buttons CSS Ends*/
+
+/*----------------------- Table sorter css start -------------- */
+
+table.table_listing,table.report-data-table {
+  thead {
+    tr {
+      .header {
+        background-image: url(/assets/bg.png);
+        background-repeat: no-repeat;
+        background-position: center right;
+        cursor: pointer;
+      }
+      .headerSortUp {
+        background-image: url(/assets/asc.png);
+      }
+      .headerSortDown {
+        background-image: url(/assets/desc.png);
+      }
+    }
+  }
+  tbody {
+    td {
+      color: #3D3D3D;
+      //padding: 4px;
+      background-color: #FFF;
+      vertical-align: middle;
+      line-height: 20px;
+    }
+    tr.odd td {
+      background-color: #F0F0F6;
+    }
+  }
+}
+
+/* Table sorter css end */
 
