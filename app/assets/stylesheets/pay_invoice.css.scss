@@ -1,0 +1,93 @@
+.pay_invoice{
+
+    .fields_content_data{
+    border-bottom: 1px solid #d7d7d7;
+    padding-bottom: 30px;
+    }
+    .payment_left{
+        float: left;
+        width: 225px;
+    }
+    .payment_serial{
+        float: left;
+        width: 30px;
+        height: auto;
+    }
+    .payment_serial span{
+        display: block;
+        width: 30px;
+        height: 30px;
+        background: #d7d7d7;
+        color: #ffffff;
+        font-size: 19px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 4px;
+    }
+    .payment_summary{
+        float: left;
+        padding: 0 0 0 19px;
+    }
+    .invoice_serial{
+        width: 100%;
+    }
+    .invoice_serial h2{
+        text-transform: capitalize;
+    }
+    .payment_price{
+        width: 100%;
+    }
+    .payment_person{
+        width: 100%;
+    }
+    .payment_person p.organization{
+        font-weight: bold;
+    }
+    .payment_person p.person_name{
+        font-weight: normal;
+    }
+    .payment_right{
+        float: right;
+        width: 415px;
+    }
+    .label_field.left{
+        width: 106px;
+    }
+    .label_field.right{
+        width: 39px;
+        padding: 0 0 0 20px;
+    }
+    .small_field input{
+        width: 105px;
+    }
+    .small_field select{
+        width: 125px;
+    }
+    .large_field textarea{
+        width: 289px;
+        min-height: 40px;
+    }
+    .field_check{
+        float: left;
+        padding: 5px 0 0 20px;
+    }
+    .field_check.btm{
+        float: left;
+        padding: 10px 0 0 0;
+    }
+    .field_check input{
+        float: left;
+    }
+    .field_check p,
+    .field_check p label{
+        float: left;
+        padding: 0 0 0 5px;
+        font-weight: normal;
+    }
+    .modal .cross_btn{
+        margin-top: -50px;
+    }
+    
+
+}

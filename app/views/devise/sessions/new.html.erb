@@ -6,7 +6,7 @@
       <h1>Sign in to Open<span>Source</span>Billing</h1>
     </div><!--log_top-->
 
-    <div class="notice" style=""><%= flash[:alert] %></div>
+    <div class="notice"><%= flash[:alert] %></div>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
       <div class="log_fields">
