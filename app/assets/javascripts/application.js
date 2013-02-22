@@ -73,11 +73,11 @@ jQuery(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
 
-    jwerty.key('a,i', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/invoices/new" });
-    jwerty.key('a,c', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/clients/new" });
-    jwerty.key('a,t', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/items/new" });
-    jwerty.key('a,p', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/payments" });
-    jwerty.key('esc', function(){jQuery(document.activeElement).blur();});
+//    jwerty.key('a,i', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/invoices/new" });
+//    jwerty.key('a,c', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/clients/new" });
+//    jwerty.key('a,t', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/items/new" });
+//    jwerty.key('a,p', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/payments" });
+//    jwerty.key('esc', function(){jQuery(document.activeElement).blur();});
 });
 
 

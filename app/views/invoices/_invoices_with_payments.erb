@@ -1,0 +1,29 @@
+<div>
+  <div style="float:right;" class="close_popup">X</div>
+</div>
+<div style="float:left;width:100%">
+<%= form_tag "invoices/delete_invoices_with_payments", :remote => true do -%>
+<table class="table table-striped">
+  <tr>
+    <th>Invoice#</th>
+    <th>Client</th>
+    <th>Date</th>
+    <th>Amount</</th>
+  </tr>
+  <% @invoices_with_payments.each do |inv|%>
+      <%= hidden_field_tag "invoice_ids[]", inv.id %>
+    <tr>
+      <td class="invoice"><%= inv.invoice_number %></td>
+      <td><%= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
+      <td class="invoice"><%= inv.invoice_date.to_date %></td>
+      <td class="ta_right currency no-sort"><%= inv.invoice_total %><span class="tt"> <%= current_user.currency_code %></span></td>
+    </tr>
+  <% end %>
+</table>
+  <div class="footer ">
+        <%= submit_tag "Convert Payment to Credit", :name => "convert_to_credit", :class => "btn_large" %>
+        <%= submit_tag "Permanently Delete Payment", :name => "destroy", :class => "btn_large" %>
+        or <a class="close_popup" href="#" >cancel</a>
+   </div>
+<% end%>
+</div>
