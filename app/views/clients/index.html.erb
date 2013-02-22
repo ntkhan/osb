@@ -34,7 +34,7 @@
         </div>
         <!--grid_control-->
         <div class="grid_table">
-          <table cellpadding="0" cellspacing="0">
+          <table cellpadding="0" cellspacing="0" class="table table_listing client_listing">
             <colgroup>
               <col class="one"/>
               <col class="two"/>
@@ -45,12 +45,12 @@
             </colgroup>
             <thead>
             <tr>
-              <th class="align_center"><%= check_box_tag 'select_all' %></th>
+              <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
               <th class="align_left">Organization</th>
               <th class="align_left">Contact</th>
               <th class="align_left">Email</th>
               <th class="align_left">Phone</th>
-              <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+              <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
             <tbody id="client_body">

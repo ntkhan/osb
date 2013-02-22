@@ -3,26 +3,26 @@
       <%#= image_tag "/assets/sort-arrow.gif", :class => "sort_icon" %>
       <%= link_to "","javascript:", :class => "sort_icon" %>
   </td>
-  <td class="align_center">
-      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select grid_large_medium", "data-form-container" => "items_holder", "data-dropdown-width" => "230"}) %>
+  <td class="align_left">
+      <%= f.collection_select(:item_id, Item.all, :id, :item_name,{:prompt => ""}, {"data-placeholder" => "Select an item...", :class => "items_list medium chzn-select grid_large_medium", "data-form-container" => "items_holder", "data-dropdown-width" => "300"}) %>
   </td>
   <td class="align_left">
     <%= f.text_field :item_description, :class => 'grid_large' %>
       <%#= f.text_area :item_description, :rows => 3, :cols => 2 %>
   </td>
-  <td class="align_left">
-    <%= f.text_field :item_unit_cost, :class => 'grid_small' %>
+  <td class="align_right">
+    <%= f.text_field :item_unit_cost, :class => 'grid_small align_right' %>
 
   </td>
-  <td class="align_center">
-    <%= f.text_field :item_quantity, :class => 'grid_small' %>
+  <td class="align_right">
+    <%= f.text_field :item_quantity, :class => 'grid_small align_right' %>
   </td>
-  <td class="align_center">
-    <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select grid_small", "data-form-container" => "taxes_holder", "data-dropdown-width" => "230"}) %>
+  <td class="align_left">
+    <%= f.select(:tax_1, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_1' => tax.percentage}] }, :selected => f.object.tax_1), {:prompt => ""}, {"data-placeholder" => "",:class => "tax1 chzn-select grid_small", "data-form-container" => "taxes_holder", "data-dropdown-width" => "300"}) %>
   </td>
-  <td class="align_center draft">
+  <td class="align_left draf">
       <%#=f.collection_select(:tax_2, Tax.all, :id, :name, {:prompt => ""}, {:class => "tax2 medium"}) %>
-      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "",:class => "tax2 chzn-select grid_small", "data-form-container" => "taxes_holder", "data-dropdown-width" => "230"}) %>
+      <%= f.select(:tax_2, options_for_select(Tax.all.map { |tax| [tax.name, tax.id, {'data-tax_2' => tax.percentage}] }, :selected => f.object.tax_2), {:prompt => ""}, {"data-placeholder" => "",:class => "tax2 chzn-select grid_small", "data-form-container" => "taxes_holder", "data-dropdown-width" => "300"}) %>
   </td>
   <td class="align_right">
     <%= label_tag 'line total', '0.00', :class => 'blank_input grid_medium'%>

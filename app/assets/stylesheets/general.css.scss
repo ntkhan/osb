@@ -86,6 +86,9 @@
     margin: 0;
     padding: 0;
 }
+html{
+    overflow-y: scroll;
+}
 body{
     background: url(/assets/body-bg.png) repeat;
     font-family: Arial, Helvetica, sans-serif;
@@ -102,6 +105,7 @@ a{
 }
 a:hover, input[type="submit"]:hover{
     text-decoration: underline;
+    color: #00ace5;
 }
 ul{
     margin: 0;
@@ -121,6 +125,10 @@ h1{
 h1 span{
     font-size: 17px;
     color: #959595; /*grey*/
+}
+h1.green{
+    font-family: 'Dosis Medium';
+    color: #8bc126;
 }
 h2{
     font-family: 'Dosis Regular', sans-serif;
@@ -393,7 +401,7 @@ h4{
     font-size:13px;
     font-weight:bold;
     color:#ffffff;
-    border-right:1px solid #ffffff !important;
+    border-right:1px solid #c2c2c2 !important;
 }
 .grid_table table td{
     font-family:Arial, Helvetica, sans-serif;
@@ -431,6 +439,11 @@ h4{
 }
 .align_center{
     text-align:center;
+}
+.align_left.left,
+.align_right.left,
+.align_center.left{
+    float: left;
 }
 .grid_table table td.draft{
     color: #757575;
@@ -688,6 +701,13 @@ textarea,
 }
 /*Buttons CSS Ends*/
 
+
+
+.help_page{
+    float: left;
+    padding: 40px 0 0 0;
+}
+
 /*----------------------- Table sorter css start -------------- */
 
 table.table_listing,table.report-data-table {
@@ -722,4 +742,5 @@ table.table_listing,table.report-data-table {
 }
 
 /* Table sorter css end */
+
 

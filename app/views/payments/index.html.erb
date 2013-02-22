@@ -31,7 +31,7 @@
         </div>
       </div><!--grid_control-->
       <div class="grid_table">
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table table_listing payment_listing">
           <colgroup>
             <col class="one"/>
             <col class="two"/>
@@ -44,14 +44,14 @@
           </colgroup>
           <thead>
             <tr>
-              <th class="align_center"><%= check_box_tag 'select_all' %></th>
+              <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
               <th class="align_center">Invoices</th>
               <th class="align_left">Client</th>
               <th class="align_center">Type</th>
               <th class="align_center">Notes</th>
               <th class="align_center">Date</th>
-              <th class="align_center">Amount</th>
-              <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+              <th class="align_center {sorter:'thousands'}">Amount</th>
+              <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
           </thead>
           <tbody id="payment_body">

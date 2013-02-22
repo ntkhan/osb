@@ -113,7 +113,7 @@ class window.InlineForms
     if @chznContainerWidth?
       @chznContainer.css width: "#{@chznContainerWidth}px", position: "absolute", "z-index": 9999
       @chznDrop.css width: "#{@chznContainerWidth - 2}px"
-      @chznSearchBox.css width: "#{@chznContainerWidth - 30}px"
+      @chznSearchBox.css width: "#{@chznContainerWidth - 37}px"
     else
       console.log "no need to adjust width"
 
@@ -123,7 +123,7 @@ class window.InlineForms
       console.log "original width: #{@chznContainerOriginalWidth}"
       @chznContainer.css width: "#{@chznContainerOriginalWidth}px", position: "relative", "z-index": ""
       @chznDrop.css width: "#{@chznContainerOriginalWidth - 2}px"
-      @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 30}px"
+      @chznSearchBox.css width: "#{@chznContainerOriginalWidth - 37}px"
     else
       console.log "no need to revert width"
 
