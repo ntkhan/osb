@@ -1,7 +1,6 @@
 <%= nested_form_for @invoice, :html => {:class => 'form-horizontal'} do |f| %>
   <% @parent_f = f %>
   <div class="_form">
-
     <div class="content_middle">
       <div class="fields_content">
         <div class="fields_content_container">
@@ -12,7 +11,7 @@
               <div class="field_row description">
                 <div class="label_field left single"><%= f.label :client_id, "Client"%></div>
                 <div class="small_field">
-                  <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder"} %>
+                  <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300"} %>
   <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
                   <%#= link_to "New Client", 'javascript:', :class => "btn btn-mini quick_create", :name => "clients_holder" %>
                   <%#= link_to "New Item", 'javascript:', :class => "btn btn-mini quick_create", :name => "items_holder" %>
@@ -38,7 +37,7 @@
                 <div class="label_field left single"><%= f.label :payment_terms_id, "Terms" %></div>
                 <div class="small_field">
   <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-                  <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder"}  %>
+                  <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder",  "data-dropdown-width" => "300"}  %>
                   <%#= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
                   <%#= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
                   <ul class="field_description">

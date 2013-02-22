@@ -33,7 +33,7 @@ jQuery ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
 
-  # Apply sorting on invoice table
+  # Apply sorting on listing tables
   jQuery("table.table_listing,table.report-data-table").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
@@ -396,3 +396,5 @@ jQuery ->
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
        flag = false
     flag
+  jQuery(".close_popup").live "click", ->
+    jQuery(".invoices_with_payments").hide()

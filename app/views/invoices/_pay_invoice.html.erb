@@ -10,12 +10,12 @@
       </div>
     </div>
     <%= form_tag "payments/update_individual_payment", :method => :put, :remote => true do %>
-        <div class="modal-body">
-        </div>
-     <%= hidden_field_tag :pay_invoice %>
+      <div class="modal-body">
+      </div>
+      <%= hidden_field_tag :pay_invoice %>
     <% end %>
     <div class="footer ">
-
+        <p id="submit_button"><%= submit_tag "Save", :id=>'submit_payment_form', :class => "btn_large submit" %></p>
     </div>
   </div>
 </div>

@@ -129,9 +129,10 @@ class InvoicesController < ApplicationController
       @action = "archived"
       @message = invoices_archived(ids) unless ids.blank?
     elsif params[:destroy]
-      Invoice.delete_multiple(ids)
+      @invoices_with_payments = Invoice.delete_multiple(ids)
       @invoices = Invoice.unarchived.page(params[:page])
       @action = "deleted"
+      @action = "invoices_with_payments" unless @invoices_with_payments.blank?
       @message = invoices_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Invoice.recover_archived(ids)
@@ -168,6 +169,12 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find_by_id(params[:id])
     @invoice.send_invoice(current_user, encrypt(params[:id]))
     redirect_to(invoice_path(@invoice),:notice => "Invoice has been sent successfully")
+  end
+  def delete_invoices_with_payments
+    ids = params[:invoice_ids]
+    Invoice.delete_invoices_with_payments(ids,!params[:convert_to_credit].blank?)
+    @invoices = Invoice.unarchived.page(params[:page])
+    respond_to { |format| format.js }
   end
 
 
