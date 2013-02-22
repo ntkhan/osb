@@ -386,7 +386,7 @@ jQuery ->
   jQuery(".close_btn").live "click", ->
     jQuery(this).parents('.quick_create_wrapper').hide().find("input").qtip("hide")
 
-  # Alert on no record selection
+  # Alert on no record selection and confirm to delete forever payment
   jQuery(".top_links").live "click", ->
     title = jQuery(this).parent("p").attr "value"
     action = jQuery(this).val().toLowerCase()
@@ -395,6 +395,10 @@ jQuery ->
        jQuery('.alert').hide();
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
        flag = false
+    else if title is "payment" and action is "delete forever"
+         sure = confirm("Are you sure?")
+         if sure is false
+            flag = false
     flag
   jQuery(".close_popup").live "click", ->
     jQuery(".invoices_with_payments").hide()
