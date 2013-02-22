@@ -289,7 +289,9 @@ jQuery ->
 
   # Check all checkboxes using from main checkbox
   jQuery('#select_all').click ->
-    jQuery(this).parents('table.table_listing').find(':checkbox').attr('checked', this.checked)
+    listing_table =  jQuery(this).parents('table.table_listing')
+    selected = if @checked then "selected" else ""
+    listing_table.find(':checkbox').attr('checked', @checked).parents('tr').removeClass('selected').addClass(selected)
 
   jQuery(".alert button.close").click ->
     jQuery(this).parent(".alert").hide()
@@ -301,8 +303,10 @@ jQuery ->
 
  # Check/uncheck main checkbox if all checkboxes are checked
   jQuery('table.table_listing tbody :checkbox').click ->
+     jQuery(this).parents('tr').toggleClass('selected')
      status = unless jQuery('table.table_listing tbody input[type=checkbox]:not(:checked)').length then true else false
      jQuery('#select_all').attr('checked', status)
+
 
   jQuery('#active_links a').live 'click', ->
      jQuery('#active_links a').removeClass('active')
