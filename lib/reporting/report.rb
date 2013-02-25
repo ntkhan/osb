@@ -5,6 +5,10 @@ module Reporting
     attr_accessor :report_name, :report_criteria, :report_data, :client_name, :report_duration, :report_total
   end
 
+  class ReportData < ActiveRecord::Base
+    self.abstract_class = true
+  end
+
   class AgedAccountsReceivable < Reporting::Report
     def initialize(options={})
       #raise "debugging..."
@@ -14,27 +18,34 @@ module Reporting
       @report_total= @report_data.inject(0) { |total, p| total + p[:payment_amount] }
     end
 
+    class Data < Reporting::ReportData
+      attr_accessor :client_name, :invoice_total, :zero_to_thirty, :thirty_one_to_sixty, :sixty_one_to_ninety, :ninety_one_and_above
+    end
+
     def period
       @report_criteria.to_date
     end
 
     def get_report_data
-      # Report columns: Invoice# 	Client Name 	Type 	Note 	Date 	Amount
-      payments = Payment.select("
-        payments.id as payment_id,
-        clients.organization_name as client_name,
-        invoices.invoice_total,
-        invoices.invoice_date,
-        payments.payment_amount,
-        payments.created_at").includes(:invoice => :client).joins(:invoice => :client).
-          where("payments.created_at < ?", @report_criteria.to_date).
-          where("invoices.created_at < ?", @report_criteria.to_date)
-
-
-      payments = payments.where(["clients.id = ?", @report_criteria.client_id]) unless @report_criteria.client_id == 0
-      payments = payments.where(["payments.payment_method = ?", @report_criteria.payment_method]) unless @report_criteria.payment_method == ""
-      payments = payments.except(:order)
-      payments
+      # Report columns: Client, 0_30, 31_60, 61_90, Over_90
+      aged_invoices = Data.find_by_sql(<<-eos
+          SELECT
+            clients.organization_name AS client_name,
+            invoices.invoice_total,
+            SUM(payments.payment_amount) payment_received,
+            DATEDIFF('#{@report_criteria.to_date}', invoices.invoice_date) age
+          FROM `invoices`
+            LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id`
+            INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`
+          WHERE
+            (`payments`.`deleted_at` IS NULL)
+            AND (payments.created_at <= '#{@report_criteria.to_date}')
+            AND (invoices.created_at <= '#{@report_criteria.to_date}')
+            AND (invoices.`status` != "paid")
+          GROUP BY clients.organization_name,  invoices.invoice_total
+      eos
+      )
+      aged_invoices
     end
 
   end
