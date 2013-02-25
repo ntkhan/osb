@@ -2,7 +2,7 @@
   <div class="paginator">
     <%= paginate @clients, :remote => true %>
     <div class="paging_info">
-      <%= page_entries_info @clients %>
+      <%= page_entries_info @clients unless @clients.blank? %>
       <%#= custom_per_page %>
     </div>
   </div>
