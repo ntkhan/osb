@@ -61,13 +61,18 @@
             <h2>Additional Contacts <span>(click to expand)</span></h2>
           </div>
           <div id="adCntcts" class="fields_content_data" style="display:none;">
-            <div class="client_cantacts_container">
+            <div class="client_contacts_container">
               <%= f.fields_for :client_contacts, :wrapper => false %>
             </div>
-            <!--client_cantacts_container-->
-
+            <!--client_contacts_container-->
+            <div class="options_row">
+              <div class="options_content">
+                <div class="options_content_row">
+                  <a href="#" class="remove">Remove this contact</a>
                   <%= f.link_to_add "Add new contact", :client_contacts, :class => 'add' %>
-
+                </div>
+              </div>
+            </div>
           </div>
           <!--fields_content_data-->
         </div>
