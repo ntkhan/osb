@@ -1,5 +1,4 @@
-.items{
-
+.items {
     .grid_table table col.one{ /*check box*/
         width : 33px;
     }
@@ -24,6 +23,11 @@
     .grid_table table col.eight{ /*actions*/
         min-width : 70px;
     }
-    
+}
 
+
+.items_wrapper {
+  .fields_content {
+    overflow: visible;
+  }
 }

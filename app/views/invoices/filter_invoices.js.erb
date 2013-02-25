@@ -5,7 +5,7 @@ jQuery('tfoot#paging_links').html('<%= escape_javascript render("paging") %>');
 <% status = params[:status]%>
 jQuery('.top_links').hide();
 jQuery('#active_links a').removeClass('active');
-jQuery('.page-header h1 span').html("&nbsp;/&nbsp;<%= status.capitalize%>");
+jQuery('.primary_heading h1 span').html("&nbsp;/&nbsp;<%= status.capitalize%>");
  <%if status == "active" %>
     jQuery('.archive,.destroy,.payment').show();
     jQuery('#active_links a.get_actives').addClass('active');
