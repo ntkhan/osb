@@ -54,10 +54,10 @@
 
 jQuery(function () {
     //override default behavior of inserting new subforms into form    
-    window.NestedFormEvents.prototype.insertFields = function (content, assoc, link) {
-        var $tr = $(link).closest('tr');
-        return $(content).insertBefore($tr);
-    }
+//    window.NestedFormEvents.prototype.insertFields = function (content, assoc, link) {
+//        var $tr = $(link).closest('tr');
+//        return $(content).insertBefore($tr);
+//    }
     jQuery("#nav .select .sub li").find("a.active").parents("ul.sub").prev("a").addClass("active");
     jQuery("#nav ul.select > li").mouseover(function () {
         jQuery(".sub").hide();
