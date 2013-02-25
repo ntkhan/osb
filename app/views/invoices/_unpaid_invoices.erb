@@ -1,11 +1,11 @@
 <script type="text/javascript">
-  jQuery(function(){
-    jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed").qtip();
-  });
+    jQuery(function () {
+        jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed").qtip();
+    });
 </script>
 <div class="unpaid_invoice">
   <div class="grid_table">
-    <table cellpadding="0" cellspacing="0">
+    <table cellpadding="0" cellspacing="0" class="table_listing">
       <colgroup>
         <col class="one"/>
         <col class="two"/>
@@ -15,6 +15,7 @@
         <col class="six"/>
         <col class="seven"/>
       </colgroup>
+      <thead>
       <tr>
         <th class="align_center"><%= check_box_tag 'select_all' %></th>
         <th class="align_center">Invoice#</th>
@@ -24,22 +25,27 @@
         <th class="align_center">Date</th>
         <th class="align_center">Status</th>
       </tr>
-      <% @invoices.each do |inv|%>
-        <tr>
-          <td class="align_center"><%= check_box_tag "invoice_ids[]", inv.id%>
-          <td class="align_center"><%= inv.invoice_number %></td>
-          <td class="align_left"><%= inv.description %></td>
-          <td class="align_center"><%#= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
-          <td class="align_left currency"><%= inv.invoice_total %><span class="tt"> <%= current_user.currency_code %></span></td>
-          <td class="align_center"><%= "2013-01-01" %></td>
-          <td class="align_center <%= inv.status %>" title="<%= inv.tooltip %>">
-            <span class="invoice-status invoice-sent" >
+      </thead>
+      <tbody>
+      <% @invoices.each do |inv| %>
+          <tr>
+            <td class="align_center"><%= check_box_tag "invoice_ids[]", inv.id %>
+            <td class="align_center"><%= inv.invoice_number %></td>
+            <td class="align_left"><%= inv.description %></td>
+            <td class="align_center"><%#= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
+            <td class="align_left currency"><%= inv.invoice_total %>
+              <span class="tt"> <%= current_user.currency_code %></span></td>
+            <td class="align_center"><%= "2013-01-01" %></td>
+            <td class="align_center <%= inv.status %>" title="<%= inv.tooltip %>">
+            <span class="invoice-status invoice-sent">
               <%= inv.status.downcase %>
             </span>
-          </td>
-        </tr>
+            </td>
+          </tr>
       <% end %>
+      </tbody>
     </table>
 
-  </div><!--grid_table-->
+  </div>
+  <!--grid_table-->
 </div><!--unpaid_invoices-->

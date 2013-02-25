@@ -288,7 +288,7 @@ jQuery ->
     updateInvoiceTotal()
 
   # Check all checkboxes using from main checkbox
-  jQuery('#select_all').click ->
+  jQuery('#select_all').live "click", ->
     listing_table =  jQuery(this).parents('table.table_listing')
     selected = if @checked then "selected" else ""
     listing_table.find(':checkbox').attr('checked', @checked).parents('tr').removeClass('selected').addClass(selected)
@@ -302,7 +302,7 @@ jQuery ->
      jQuery(this).parents('table.table-striped').find(':checkbox').attr('checked', this.checked)
 
  # Check/uncheck main checkbox if all checkboxes are checked
-  jQuery('table.table_listing tbody :checkbox').click ->
+  jQuery('table.table_listing tbody :checkbox').live "click", ->
      jQuery(this).parents('tr').toggleClass('selected')
      status = unless jQuery('table.table_listing tbody input[type=checkbox]:not(:checked)').length then true else false
      jQuery('#select_all').attr('checked', status)
