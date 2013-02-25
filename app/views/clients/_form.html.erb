@@ -54,44 +54,18 @@
         <div id="contact" class="fields_content_heading">
           <h2>Additional Contacts <span>(click to expand)</span></h2>
         </div>
-
         <div id="adCntcts" class="fields_content_data" style="display:none;">
-
-          <div class="field_row">
-            <div class="label_field left single"><span>Email</span></div>
-            <div class="medium_field">
-              <input type="text" id="" name="" value="" />
-            </div>
-            <div class="label_field right">Home Phone</div>
-            <div class="small_field"><input type="text" id="" name="" value="" /></div>
-          </div><!--field_row-->
-
-          <div class="field_row description">
-            <div class="label_field left single">Contact Name</div>
-            <div class="small_field">
-              <input type="text" id="" name="" value="" />
-              <ul class="field_description">
-                <li>First name</li>
-              </ul>
-            </div>
-            <div class="small_field right">
-              <input type="text" id="" name="" value="" />
-              <ul class="field_description">
-                <li>Last name</li>
-              </ul>
-            </div>
-            <div class="label_field right single">Mobile</div>
-            <div class="small_field"><input type="text" id="" name="" value="" /></div>
-          </div><!--field_row-->
-
-          <div class="options_row">
-            <div class="options_content">
+           <div class="client_cantacts_container">
+             <%= f.fields_for :client_contacts, :wrapper => true,:wrapper_tag => 'div'%>
+            <div class="options_row">
+             <div class="options_content">
               <div class="options_content_row">
                 <a href="#" class="remove">Remove this contact</a>
-                <a href="" class="add">Add another contact</a>
+                <%= f.link_to_add "Add new contact", :client_contacts,:class=>'add' %>
               </div>
+             </div>
             </div>
-          </div><!--field_row-->
+          </div><!--client_cantacts_container-->
 
         </div><!--fields_content_data-->
       </div><!--fields_content_container-->
