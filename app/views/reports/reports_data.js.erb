@@ -1,2 +1,3 @@
 jQuery('.report_content').html("<%= escape_javascript render("reports/report_partials/#{@report.report_name}")%>");
+jQuery("table.table_listing").trigger('update');
 
