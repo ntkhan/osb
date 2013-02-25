@@ -22,3 +22,7 @@ en:
         separator: "."
         delimiter: ","
         precision: 2
+  helpers:
+      page_entries_info:
+        more_pages:
+          display_entries: "Displaying %{entry_name} <b>%{first}-%{last}</b> of <b>%{total}</b>"
