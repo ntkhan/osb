@@ -1,5 +1,5 @@
 jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');
-jQuery(".invoices_with_payments").hide()
+jQuery('#invoices_with_payments').modal('hide')
 <%if !params[:invoice_ids].blank? %>
         jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
  <%end%>
