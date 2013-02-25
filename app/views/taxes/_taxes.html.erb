@@ -1,3 +1,11 @@
+<%
+   no_record_message = "You haven't created any tax yet. Please click on New Tax button to create new tax."
+   if params[:status] == "archived"
+     no_record_message = "You haven't any archived tax yet."
+   elsif params[:status] == "deleted"
+     no_record_message = "You haven't any deleted tax yet."
+   end
+%>
 <% if @taxes.length > 0 %>
   <% @taxes.each do |taxis| %>
     <tr>
@@ -21,7 +29,7 @@
 <% else %>
   <tr>
     <td colspan="4">
-      <div class="no_record_container">You haven't created any tax yet. Please click on New Tax button to create new tax.</div>
+      <div class="no_record_container"><%= no_record_message %></div>
     </td>
   </tr>
 <% end %>

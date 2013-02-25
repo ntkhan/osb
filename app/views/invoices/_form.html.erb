@@ -12,10 +12,6 @@
                 <div class="label_field left single"><%= f.label :client_id, "Client"%></div>
                 <div class="small_field">
                   <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300"} %>
-  <%#= link_to "New Client",'#', "data-toggle" => "client-modal", "data-target" => "#clientModal" %>
-                  <%#= link_to "New Client", 'javascript:', :class => "btn btn-mini quick_create", :name => "clients_holder" %>
-                  <%#= link_to "New Item", 'javascript:', :class => "btn btn-mini quick_create", :name => "items_holder" %>
-  <%#= link_to "New Item", '#', "data-toggle" => "modal", "data-target" => "#itemModal" %>
                   <ul class="field_description">
                     <li>client you want to send invoice</li>
                     <span id="last_invoice" style="display: none;"></span>
@@ -38,8 +34,6 @@
                 <div class="small_field">
   <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
                   <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder",  "data-dropdown-width" => "300"}  %>
-                  <%#= link_to "New Term", 'javascript:', :class => "btn btn-mini quick_create", :name => "terms_holder" %>
-                  <%#= link_to "New Tax", 'javascript:', :class => "btn btn-mini quick_create", :name => "taxes_holder" %>
                   <ul class="field_description">
                     <li>will be applied to whole invoice amount</li>
                   </ul>
@@ -79,7 +73,7 @@
 
 
           <div class="grid_table">
-            <table cellpadding="0" cellspacing="0">
+            <table cellpadding="0" cellspacing="0" class="invoice_grid_fields">
               <colgroup>
                 <col class="one"/>
                 <col class="two"/>
@@ -101,12 +95,15 @@
                 <th class="align_center">Line Total</th>
               </tr>
               <%= f.fields_for :invoice_line_items, :wrapper => false %>
+                <tr style="border:none;" class="no_hover">
+                  <td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %></td>
+                </tr>
             </table>
-            
+
           </div><!--grid_table-->
 
           <div class="grid_summary">
-            <div style="float:left;"> <%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %> </div>
+            <!--<div style="float:left;"> <%#= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %> </div>-->
             <div class="grid_summary_content">
               <div class="grid_summary_row">
                 <div class="grid_summary_title">
