@@ -1,151 +1,153 @@
-._form{
-    .fields_content_container{
-        width: 100%;
+._form {
+  .fields_content_container {
+    width: 100%;
+  }
+  .fields_content_data {
+    width: 780px;
+    margin: auto;
+    float: none;
+  }
+  .fields_content_left {
+    float: left;
+    width: 490px;
+  }
+  .fields_content_right {
+    float: right;
+    width: 220px;
+  }
+  .fields_content_left .label_field,
+  .fields_content_right .label_field {
+    width: 90px;
+  }
+  .field_row .btn {
+    float: right;
+    margin: 0 0 0 5px;
+  }
+  .label_field.textarea {
+    float: none;
+    padding: 0 0 7px 0;
+  }
+  .large_field textarea {
+    width: 760px;
+    margin-bottom: 6px;
+  }
+  .grid_table table th:first-child {
+    border-radius: 0px;
+    background: #ffffff;
+  }
+  .grid_table table th:nth-child(2) {
+    border-radius: 5px 0 0 5px;
+  }
+  .grid_table table tr:nth-child(2) td {
+    padding-top: 11px;
+  }
+  .grid_table table td {
+    border: none;
+    padding: 6px 2px 4px 2px;
+    vertical-align: top;
+  }
+  .grid_table table td:nth-child(2) {
+    padding-left: 0px;
+  }
+  .grid_table table td:last-child {
+    padding-right: 0px;
+  }
+  .grid_table table col.one {
+    width: 33px;
+  }
+  .grid_table table col.two {
+    width: 176px;
+  }
+  .grid_table table col.three {
+    width: 183px;
+  }
+  .grid_table table col.four {
+    width: 84px;
+  }
+  .grid_table table col.five {
+    width: 85px;
+  }
+  .grid_table table col.six {
+    width: 85px;
+  }
+  .grid_table table col.seven {
+    width: 85px;
+  }
+  .grid_table table col.eight {
+    width: 112px;
+  }
+  input.grid_small,
+  .blank_input {
+    width: 60px;
+  }
+  select.grid_small {
+    width: 80px;
+  }
+  .grid_table table tr th:first-child {
+    border-right: none !important;
+  }
+  input.grid_medium,
+  .blank_input.grid_medium,
+  select.grid_medium {
+    width: 108px;
+  }
+  input.grid_large,
+  .blank_input,
+  select.grid_large {
+    width: 150px;
+  }
+  input.grid_large_medium,
+  .blank_input,
+  select.grid_large_medium {
+    width: 173px;
+  }
+  .grid_summary {
+    //padding: 30px 0;
+    float: right;
+    margin: -26px 0 0;
+    padding: 0 0 30px;
+    width: 50%;
+  }
+  .grid_summary_content {
+    width: 190px;
+    float: right;
+  }
+  .grid_summary_row {
+    float: left;
+    width: 100%;
+    min-height: 31px;
+  }
+  .grid_summary_row.last {
+    min-height: 23px;
+  }
+  .grid_summary_title {
+    float: left;
+    width: 110px;
+    padding: 0 0 0 10px;
+  }
+  .grid_summary_description {
+    float: right;
+    width: 60px;
+    padding: 0 10px 0 0;
+    text-align: right;
+    label {
+      float: right;
     }
-    .fields_content_data{
-        width: 780px;
-        margin: auto;
-        float: none;
-    }
-    .fields_content_left{
-        float: left;
-        width: 490px;
-    }
-    .fields_content_right{
-        float: right;
-        width: 220px;
-    }
-    .fields_content_left .label_field,
-    .fields_content_right .label_field{
-        width: 90px;
-    }
-    .field_row .btn{
-        float: right;
-        margin: 0 0 0 5px;
-    }
-    .label_field.textarea{
-        float: none;
-        padding: 0 0 7px 0;
-    }
-    .large_field textarea{
-        width: 760px;
-        margin-bottom: 6px;
-    }
-    .grid_table table th:first-child {
-        border-radius: 0px;
-        background: #ffffff;
-    }
-    .grid_table table th:nth-child(2){
-        border-radius: 5px 0 0 5px;
-    }
-    .grid_table table tr:nth-child(2) td{
-        padding-top: 11px;
-    }
-    .grid_table table td{
-        border: none;
-        padding: 6px 2px 4px 2px;
-        vertical-align: top;
-    }
-    .grid_table table td:nth-child(2){
-        padding-left: 0px;
-    }
-    .grid_table table td:last-child{
-        padding-right: 0px;
-    }
-    .grid_table table col.one{
-        width : 33px;
-    }
-    .grid_table table col.two{
-        width : 176px;
-    }
-    .grid_table table col.three{
-        width: 183px;
-    }
-    .grid_table table col.four{
-        width : 84px;
-    }
-    .grid_table table col.five{
-        width : 85px;
-    }
-    .grid_table table col.six{
-        width : 85px;
-    }
-    .grid_table table col.seven{
-        width : 85px;
-    }
-    .grid_table table col.eight{
-        width : 112px;
-    }
-    input.grid_small,
-    .blank_input{
-        width: 60px;
-    }
-    select.grid_small{
-        width: 80px;
-    }
-    .grid_table table tr th:first-child{
-        border-right: none !important;
-    }
-    input.grid_medium,
-    .blank_input.grid_medium,
-    select.grid_medium{
-        width: 108px;
-    }
-    input.grid_large,
-    .blank_input,
-    select.grid_large{
-        width: 150px;
-    }
-    input.grid_large_medium,
-    .blank_input,
-    select.grid_large_medium{
-        width: 173px;
-    }
-    .grid_summary{
-        float: left;
-        width: 100%;
-        padding: 30px 0;
-    }
-    .grid_summary_content{
-        width: 190px;
-        float: right;
-    }
-    .grid_summary_row{
-        float: left;
-        width: 100%;
-        min-height: 31px;
-    }
-    .grid_summary_row.last{
-        min-height: 23px;
-    }
-    .grid_summary_title{
-        float: left;
-        width: 110px;
-        padding: 0 0 0 10px;
-    }
-    .grid_summary_description{
-        float: right;
-        width: 60px;
-        padding: 0 10px 0 0;
-        text-align: right;
-        label{
-            float:right;
-        }
-    }
-    .grid_summary_row.net_total{
-        border-top: double #d7d7d7;
-        border-bottom: double #d7d7d7;
-        min-height: 34px;
-        line-height: 34px;
-        font-weight: bold;
-    }
-    .net_total_value{
-        line-height: 34px;
-    }
-    .grid_table table td input, .grid_table table th input{
-        margin: 0px;
-    }
-    .btn_large.submit{
-        margin: -6px 0 0 0;
-    }
+  }
+  .grid_summary_row.net_total {
+    border-top: double #d7d7d7;
+    border-bottom: double #d7d7d7;
+    min-height: 34px;
+    line-height: 34px;
+    font-weight: bold;
+  }
+  .net_total_value {
+    line-height: 34px;
+  }
+  .grid_table table td input, .grid_table table th input {
+    margin: 0px;
+  }
+  .btn_large.submit {
+    margin: -6px 0 0 0;
+  }
 }

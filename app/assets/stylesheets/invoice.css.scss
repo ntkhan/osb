@@ -58,3 +58,14 @@
   background-color: #FFF;
 }
 
+._form {
+  .grid_table table {
+    tr.no_hover:hover {
+      background: #FFFFFF;
+    }
+    td.add_line_item_row{
+      padding: 15px 0 0;
+    }
+  }
+}
+
