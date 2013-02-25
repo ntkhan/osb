@@ -95,12 +95,15 @@
                 <th class="align_center">Line Total</th>
               </tr>
               <%= f.fields_for :invoice_line_items, :wrapper => false %>
+                <tr style="border:none;" class="no_hover">
+                  <td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %></td>
+                </tr>
             </table>
 
           </div><!--grid_table-->
 
           <div class="grid_summary">
-            <div style="float:left;"> <%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %> </div>
+            <!--<div style="float:left;"> <%#= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %> </div>-->
             <div class="grid_summary_content">
               <div class="grid_summary_row">
                 <div class="grid_summary_title">
