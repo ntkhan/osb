@@ -1,15 +1,15 @@
 .taxes{
 
-    .grid_table table col.one{
+    .grid_table table col.one{ /*check box*/
         width : 33px;
     }
-    .grid_table table col.two{
-        min-width : 354px;
+    .grid_table table col.two{ /*name*/
+        min-width : 359px;
     }
-    .grid_table table col.three{
+    .grid_table table col.three{ /*percentage*/
         width: 378px;
     }
-    .grid_table table col.four{
+    .grid_table table col.four{ /*actions*/
         min-width : 70px;
     }
    

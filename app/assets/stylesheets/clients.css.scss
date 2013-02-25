@@ -1,21 +1,20 @@
 .clients{
-    /*total width 832*/
-    .grid_table table col.one{
+    .grid_table table col.one{ /*check box*/
         width : 33px;
     }
-    .grid_table table col.two{
+    .grid_table table col.two{ /*organization*/
         min-width : 234px;
     }
-    .grid_table table col.three{
-        width: 142px;
+    .grid_table table col.three{ /*contacts*/
+        width: 138px;
     }
-    .grid_table table col.four{
+    .grid_table table col.four{ /*email*/
         width : 235px;
     }
-    .grid_table table col.five{
+    .grid_table table col.five{ /*phone*/
         min-width : 130px;
     }
-    .grid_table table col.six{
+    .grid_table table col.six{ /*actions*/
         min-width : 70px;
     }
 

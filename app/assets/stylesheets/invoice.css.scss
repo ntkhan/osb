@@ -1,31 +1,31 @@
 .invoice {
 
   .grid_table table {
-    col.one {
+    col.one { /*check box*/
       width: 33px;
     }
-    col.two {
+    col.two { /*invoice*/
       min-width: 82px;
     }
-    col.three {
-      width: 154px;
+    col.three { /*clients*/
+      width: 212px;
     }
-    col.four {
-      width: 181px;
+    col.four { /*description*/
+      width: 106px;
     }
-    col.five {
-      min-width: 75px;
-    }
-    col.six {
-      min-width: 83px;
-    }
-    col.seven {
-      min-width: 83px;
-    }
-    col.eight {
+    col.five { /*total*/
       min-width: 82px;
     }
-    col.nine {
+    col.six { /*date*/
+      min-width: 90px;
+    }
+    col.seven { /*due date*/
+      min-width: 90px;
+    }
+    col.eight { /*status*/
+      min-width: 75px; 
+    }
+    col.nine { /*actions*/
       min-width: 70px;
     }
   }

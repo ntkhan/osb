@@ -1,28 +1,28 @@
 .payment{
 
-    .grid_table table col.one{
+    .grid_table table col.one{ /*check box*/
         width : 33px;
     }
-    .grid_table table col.two{
-        min-width : 125px;
+    .grid_table table col.two{ /*invoice*/
+        min-width : 94px;
     }
-    .grid_table table col.three{
-        width: 119px;
+    .grid_table table col.three{ /*clients*/
+        width: 278px;
     }
-    .grid_table table col.four{
-        width : 110px;
+    .grid_table table col.four{ /*type*/
+        width : 82px;
     }
-    .grid_table table col.five{
-        min-width : 115px;
+    .grid_table table col.five{ /*notes*/
+        min-width : 116px;
     }
-    .grid_table table col.six{
-        min-width : 132px;
+    .grid_table table col.six{ /*date*/
+        min-width : 90px;
     }
-    .grid_table table col.seven{
-        min-width : 139px;
+    .grid_table table col.seven{ /*date*/
+        min-width : 82px;
     }
-    .grid_table table col.eight{
-        min-width : 70px;
+    .grid_table table col.eight{ /*actions*/
+        min-width : 65px;
     }
 
 }

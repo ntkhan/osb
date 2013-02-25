@@ -50,12 +50,12 @@
             <thead>
             <tr>
               <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
-              <th class="align_center">Invoices</th>
+              <th class="align_center sorting">Invoices</th>
               <th class="align_left">Client</th>
               <th class="align_left">Description</th>
-              <th class="align_center {sorter:'thousands'}">Total</th>
+              <th class="align_right sorting {sorter:'thousands'}">Total</th>
               <th class="align_center">Date</th>
-              <th class="align_center">Due Date</th>
+              <th class="align_left">Due Date</th>
               <th class="align_center">Status</th>
               <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
