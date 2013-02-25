@@ -1,9 +1,15 @@
-<div class="page-header">
-  <h1>Reports</h1>
+<div class="content_top">
+  <div class="primary_heading">
+    <h1>Reports</h1>
+  </div>
 </div>
-<ol style="margin-top:25px;" class="reports_list">
-  <li><%= link_to "Payments Collected", "/reports/payments_collected", :class => "invoices_link" %> <span class="report_status">(in progress 90% completed)</span></li>
-  <li><%= link_to "Revenue by Client", "/reports/revenue_by_client", :class => "invoices_link"  %> <span class="report_status">(in progress 80% completed)</span></li>
-  <li><%= link_to "Aged Accounts Receivable", "/reports/aged_accounts_receivable", :class => "invoices_link"  %> <span class="report_status">(in progress, just started)</span></li>
-  <li><%= link_to "Item Sales", "/reports/item_sales", :class => "invoices_link"  %> <span class="report_status">(not started yet)</span></li>
-</ol>
+<!--content_top-->
+
+<div class="content_middle">
+  <ol style="margin-top:25px;" class="reports_list">
+    <li><%= link_to "Payments Collected", "/reports/payments_collected", :class => "invoices_link" %> <span class="report_status">(in progress 90% completed)</span></li>
+    <li><%= link_to "Revenue by Client", "/reports/revenue_by_client", :class => "invoices_link"  %> <span class="report_status">(in progress 80% completed)</span></li>
+    <li><%= link_to "Aged Accounts Receivable", "/reports/aged_accounts_receivable", :class => "invoices_link"  %> <span class="report_status">(in progress, just started)</span></li>
+    <li><%= link_to "Item Sales", "/reports/item_sales", :class => "invoices_link"  %> <span class="report_status">(not started yet)</span></li>
+  </ol>
+</div><!--content_top-->

@@ -114,6 +114,9 @@ ul li{
     list-style: none;
     text-decoration: none;
 }
+form{
+    margin: 0;
+}
 h1{
     font-family: 'Dosis Regular', sans-serif;
     font-size: 24px;
@@ -179,7 +182,7 @@ h4{
 }
 .header_menu{
     float: right;
-    padding: 32px 22px 0 0;
+    padding: 31px 23px 0 0;
 }
 .header_menu ul li{
     float: left;
@@ -212,12 +215,12 @@ h4{
 }
 #nav .select {
   white-space: nowrap;
-  width: 840px;
+  width: 841px;
   margin: auto;
 }
 #nav li {
   float: left;
-  padding: 0 20px 0 0;
+  padding: 0 19px 0 0;
 }
 
 #nav .select a {
@@ -290,6 +293,20 @@ h4{
     overflow: hidden;
     min-height: 360px;
 }
+
+/*----page top distance----*/
+.dashboard-main{
+    padding: 18px 0 20px 0;
+}
+.invoices-main, .sent_emails-main,
+.payments-main, .reports-main, .help-main{
+    padding: 5px 0 0 0;
+}
+.clients-main, .items-main, .taxes-main{
+    padding: 48px 0 0 0;
+}
+/*----page top distance----*/
+
 .content_container{
     padding: 0 30px 0 30px;
 }
@@ -701,7 +718,11 @@ textarea,
 }
 /*Buttons CSS Ends*/
 
-
+/*Bootstrap OverRide*/
+input[type="radio"], input[type="checkbox"]{
+    margin-top: 2px;
+}
+/*Bootstrap OverRide*/
 
 .help_page{
     float: left;
