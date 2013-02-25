@@ -125,9 +125,13 @@ jQuery ->
          success: (data, textStatus, jqXHR) ->
           item = JSON.parse(data)
           container = elem.parents("tr.fields")
+          # populate item's discription, cost, quantity and taxes.
           container.find("input.description").val(item[0])
           container.find("input.cost").val(item[1].toFixed(2))
           container.find("input.qty").val(item[2])
+          container.find("select.tax1,select.tax2").val('').trigger("liszt:updated")
+          container.find("select.tax1").val(item[3]).trigger("liszt:updated") if item[3] isnt 0
+          container.find("select.tax2").val(item[4]).trigger("liszt:updated") if item[4] isnt 0
           updateLineTotal(elem)
           updateInvoiceTotal()
 
@@ -284,6 +288,7 @@ jQuery ->
     container.find("input.description").val('')
     container.find("input.cost").val('')
     container.find("input.qty").val('')
+    container.find("select.tax1,select.tax2").val('').trigger("liszt:updated")
     updateLineTotal(elem)
     updateInvoiceTotal()
 
@@ -362,7 +367,7 @@ jQuery ->
  # Date formating function
   formated_date = (elem) ->
    separator = "-"
-   new_date  = elem.getFullYear() 
+   new_date  = elem.getFullYear()
    new_date += separator + ("0" + (elem.getMonth() + 1)).slice(-2)
    new_date += separator + ("0" + elem.getDate()).slice(-2)
 
