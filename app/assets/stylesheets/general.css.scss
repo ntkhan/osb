@@ -140,10 +140,9 @@ h1{
     font-weight: normal;
     line-height: normal;
 }
-h1 span {
-  color: #333333; /* black*/
-  font-size: 14px;
-  font-weight: bold;
+h1 span{
+    font-size: 17px;
+    color: #959595; /*grey*/
 }
 h1.green{
     font-family: 'Dosis Medium';
@@ -438,7 +437,7 @@ h4{
 }
 
 .grid_control_right ul li a.active {
-  color: #898989; /*light grey*/
+  color: #333333; /*black*/
   font-weight: bold;
 }
 
