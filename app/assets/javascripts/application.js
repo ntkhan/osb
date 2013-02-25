@@ -50,14 +50,17 @@
 //= require taxes.js.coffee
 
 
-
-
 jQuery(function () {
     //override default behavior of inserting new subforms into form    
-//    window.NestedFormEvents.prototype.insertFields = function (content, assoc, link) {
-//        var $tr = $(link).closest('tr');
-//        return $(content).insertBefore($tr);
-//    }
+    window.NestedFormEvents.prototype.insertFields = function (content, assoc, link) {
+        if (document.location.pathname.search(/\/invoices\//) != -1) {
+            var $tr = $(link).closest('tr');
+            return $(content).insertBefore($tr);
+        } else if (document.location.pathname.search(/\/clients\//) != -1) {
+            var $contact_container = $(link).parents('#adCntcts').find(".client_contacts_container");
+            return $contact_container.append(content)
+        }
+    }
     jQuery("#nav .select .sub li").find("a.active").parents("ul.sub").prev("a").addClass("active");
     jQuery("#nav ul.select > li").mouseover(function () {
         jQuery(".sub").hide();
