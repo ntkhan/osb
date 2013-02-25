@@ -1,29 +1,34 @@
-.items{
+.items {
 
-    .grid_table table col.one{
-        width : 33px;
-    }
-    .grid_table table col.two{
-        min-width : 123px;
-    }
-    .grid_table table col.three{
-        width: 146px;
-    }
-    .grid_table table col.four{
-        width : 126px;
-    }
-    .grid_table table col.five{
-        min-width : 141px;
-    }
-    .grid_table table col.six{
-        min-width : 103px;
-    }
-    .grid_table table col.seven{
-        min-width : 104px;
-    }
-    .grid_table table col.eight{
-        min-width : 70px;
-    }
-    
+  .grid_table table col.one {
+    width: 33px;
+  }
+  .grid_table table col.two {
+    min-width: 123px;
+  }
+  .grid_table table col.three {
+    width: 146px;
+  }
+  .grid_table table col.four {
+    width: 126px;
+  }
+  .grid_table table col.five {
+    min-width: 141px;
+  }
+  .grid_table table col.six {
+    min-width: 103px;
+  }
+  .grid_table table col.seven {
+    min-width: 104px;
+  }
+  .grid_table table col.eight {
+    min-width: 70px;
+  }
 
+}
+
+.items_wrapper {
+  .fields_content {
+    overflow: visible;
+  }
 }
