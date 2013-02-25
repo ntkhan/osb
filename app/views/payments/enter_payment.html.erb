@@ -1,7 +1,16 @@
-
-<div class="page-header">
-  <h1>Enter Payment</h1>
+<div class="content_top">
+  <div class="primary_heading">
+    <h1>Enter Payment</h1>
+  </div>
 </div>
+<!--content_top-->
 <%= form_tag "update_individual_payment", :method => :put do %>
-    <%= render "enter_payment" %>
+  <%= render "enter_payment" %>
 <% end %>
+
+<div class="content_bottom">
+  <input type="submit" value="Save" name="commit" id="submit_payment_form" class="btn_large submit"/>
+       
+      </div>
+      <!--content_bottom-->
+
