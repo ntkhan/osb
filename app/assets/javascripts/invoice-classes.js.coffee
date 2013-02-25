@@ -41,7 +41,7 @@ class window.InlineForms
         hide: event: false, show: event: false,
         position: at: 'bottomMiddle', style: tip: corner: 'topLeft',
         api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),10000})
-      current_dropdown.qtip().show()),100
+      current_dropdown.qtip().show()),200
 
   showForm: ->
     # code to show form

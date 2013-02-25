@@ -12,12 +12,16 @@
             <ul>
               <li class="header_name"><%= @report.client_name %></li>
               <li class="header_duration"><%= @report.period %></li>
-              <li class="header_description">This report shows a history of all payments made for every invoice selectable by client and by date.</li>
+              <li class="header_description">This report shows a history of all payments made for every invoice
+                selectable by client and by date.
+              </li>
             </ul>
           </div>
         </div>
-      </div><!-- content_header_data -->
-    </div><!-- report_content_header -->
+      </div>
+      <!-- content_header_data -->
+    </div>
+    <!-- report_content_header -->
 
     <div class="header_data_right">
       <ul class="download_report">
@@ -34,11 +38,12 @@
           <li><span>to</span></li>
           <li>01/01/2013</li>
         </ul>
-      </div><!-- report_duration -->
+      </div>
+      <!-- report_duration -->
     </div>
 
     <div class="grid_table">
-      <table cellpadding="0" cellspacing="0">
+      <table cellpadding="0" cellspacing="0" class="table_listing">
         <colgroup>
           <col class="one">
           <col class="two">
@@ -47,30 +52,35 @@
           <col class="five">
           <col class="six">
         </colgroup>
+        <thead>
         <tr>
           <th class="align_left">Invoices</th>
           <th class="align_left">Client Name</th>
           <th class="align_left">Type</th>
           <th class="align_center">Note</th>
           <th class="align_center">Date</th>
-          <th class="align_center">Amount</th>
+          <th class="align_center {sorter:'thousands'}">Amount</th>
         </tr>
+        </thead>
+        <tbody>
         <% @report.report_data.each do |payment| %>
             <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
-        <tr>
-          <td class="align_left"><%= payment.invoice.invoice_number %></td>
-          <td class="align_left"><%= payment.client_name %></td>
-          <td class="align_left"><%= payment.payment_type || payment.payment_method %></td>
-          <td class="align_center"><%= payment.notes %></td>
-          <td class="align_center"><%= payment.created_at.to_date %></td>
-          <td class="align_right currency">$ <%= payment.payment_amount %> <span>usd</span></td>
-        </tr>
-         <% end %>
-
+            <tr>
+              <td class="align_left"><%= payment.invoice.invoice_number %></td>
+              <td class="align_left"><%= payment.client_name %></td>
+              <td class="align_left"><%= payment.payment_type || payment.payment_method %></td>
+              <td class="align_center"><%= payment.notes %></td>
+              <td class="align_center"><%= payment.created_at.to_date %></td>
+              <td class="align_right currency">$ <%= payment.payment_amount %> <span>usd</span></td>
+            </tr>
+        <% end %>
+        </tbody>
       </table>
-    </div><!--grid_table-->
+    </div>
+    <!--grid_table-->
 
-  </div><!--content_middle-->
+  </div>
+  <!--content_middle-->
 
   <div class="content_bottom">
     <div class="report_footer">
@@ -83,6 +93,8 @@
       <div class="footer_note">
         <p>* Payments applied from credit do not count towards the total</p>
       </div>
-    </div><!-- report_footer -->
-  </div><!--content_bottom-->
+    </div>
+    <!-- report_footer -->
+  </div>
+  <!--content_bottom-->
 </div><!--reports-->
