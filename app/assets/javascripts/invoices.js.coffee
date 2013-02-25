@@ -34,7 +34,7 @@ jQuery ->
     type: "numeric"
 
   # Apply sorting on listing tables
-  jQuery("table.table_listing,table.report-data-table").tablesorter
+  jQuery("table.table_listing").tablesorter
     widgets: ['staticRow']
     sortList: [[1,1]]
 
