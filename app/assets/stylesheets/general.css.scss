@@ -817,13 +817,13 @@ table.table_listing, table.report-data-table {
     margin-bottom: 40px;
 }
 .intimation_container.success{
-    background: url(images/success.png) no-repeat 19px 19px;
+    background: url(/assets/success.png) no-repeat 19px 19px;
 }
 .intimation_container.warning{
-    background: url(images/warning.png) no-repeat 19px 19px;
+    background: url(/assets/warning.png) no-repeat 19px 19px;
 }
 .intimation_container.invalid{
-    background: url(images/invalid.png) no-repeat 19px 19px;
+    background: url(/assets/invalid.png) no-repeat 19px 19px;
 }
 .intimation_container p{
     float: left;
