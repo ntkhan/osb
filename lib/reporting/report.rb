@@ -7,7 +7,7 @@ module Reporting
 
   class AgedAccountsReceivable < Reporting::Report
     def initialize(options={})
-      #raise "debugging..."
+      #raise "debugging...#{options[:report_criteria].to_date}"
       @report_name = options[:report_name] || "no report"
       @report_criteria = options[:report_criteria]
       @report_data = get_report_data
@@ -36,14 +36,14 @@ module Reporting
               clients.organization_name AS client_name,
               invoices.invoice_total,
               IFNULL(SUM(payments.payment_amount), 0) payment_received,
-              DATEDIFF('#{@report_criteria.to_date}', invoices.invoice_date) age,
+              DATEDIFF('#{@report_criteria.to_date}', DATE(IFNULL(invoices.due_date, invoices.invoice_date))) age,
               invoices.`status`
             FROM `invoices`
               INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`
               LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id` AND (payments.payment_date <= '#{@report_criteria.to_date}')
             WHERE
               (`payments`.`deleted_at` IS NULL)
-              AND (IFNULL(invoices.due_date, invoices.invoice_date) <= '#{@report_criteria.to_date}')
+              AND (DATE(IFNULL(invoices.due_date, invoices.invoice_date)) <= '#{@report_criteria.to_date}')
               AND (invoices.`status` != "paid")
               #{@report_criteria.client_id == 0 ? "" : "AND invoices.client_id = #{@report_criteria.client_id}"}
             GROUP BY clients.organization_name,  invoices.invoice_total, invoices.`status`, invoices.invoice_number
