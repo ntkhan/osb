@@ -1,9 +1,9 @@
 <%
 no_record_message = "You haven't entered any payment yet. Please click on New Payment button to enter new payment."
 if params[:status] == "archived" || @action == "recovered from archived"
-  no_record_message = "You haven't any archived payment yet."
+  no_record_message = "You haven't any archived payment."
 elsif params[:status] == "deleted" || @action == "recovered from deleted"
-  no_record_message = "You haven't any deleted payment yet."
+  no_record_message = "You haven't any deleted payment."
 end
 %>
 <% if @payments.length > 0 %>
