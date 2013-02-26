@@ -44,9 +44,9 @@
             <div class="fields_content_right">
 
               <div class="field_row description">
-                <div class="label_field left single"><%= f.label :invoice_number, "Invoice #" %></div>
+                <div class="label_field left single"><%= f.label :invoice_number, content_tag(:span,'Invoice #') %></div>
                 <div class="small_field">
-                  <%= f.text_field :invoice_number %>
+                  <%= f.text_field :invoice_number, :readonly => "" %>
                   <ul class="field_description">
                     <li>auto generated</li>
                   </ul>
@@ -54,7 +54,7 @@
               </div><!--field_row-->
 
               <div class="field_row description">
-                <div class="label_field left single"><%= f.label :invoice_date, "Invoice Date" %></div>
+                <div class="label_field left single"><%= f.label :invoice_date, content_tag(:span,'Invoice date') %></div>
                 <div class="small_field">
                   <%= f.text_field :invoice_date %>
                 </div>
