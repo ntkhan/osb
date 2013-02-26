@@ -907,8 +907,7 @@ table.table_listing, table.report-data-table {
 
 /* Pagination links css end */
 
-/*----------------------- Intimation Messages Starts----------------------- */
-.intimation_container {
+.alert {
   width: 400px;
   margin: auto;
   border: 1px solid #99e5f5;
@@ -916,75 +915,44 @@ table.table_listing, table.report-data-table {
   padding: 19px 19px 16px 79px;
   overflow: hidden;
   margin-bottom: 40px;
-  background-color: white;
+  background-color: #FFFFFF;
+  &.alert-success {
+    background: url(/assets/success.png) no-repeat 19px 19px #ffffff;
+  }
+  &.alert-warning {
+    background: url(/assets/warning.png) no-repeat 19px 19px #ffffff;
+  }
+  &.alert-error {
+    background: url(/assets/invalid.png) no-repeat 19px 19px #ffffff;
+  }
+  p {
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    color: #454545;
+    line-height: 1.7;
+    padding: 0px;
+    margin: -3px 0 0 0;
+  }
+  ul {
+    float: left;
+    width: 100%;
+    li {
+      margin: 8px 0 0 0;
+      background: url(/assets/intimation_bullet.png) no-repeat 0px 5px;
+    }
+  }
+  &.single{
+    p{
+      line-height: 40px;
+      padding: 0 0 4px 0;
+      margin: -1px 0 0 -1px;
+    }
+  }
+  .close {
+    line-height: 20px;
+    position: relative;
+    right: -9px;
+    top: -13px;
+  }
 }
-
-.intimation_container.success {
-  background: url(/assets/success.png) no-repeat 19px 19px;
-}
-
-.intimation_container.warning {
-  background: url(/assets/warning.png) no-repeat 19px 19px;
-}
-
-.intimation_container.invalid {
-  background: url(/assets/invalid.png) no-repeat 19px 19px;
-}
-
-.intimation_container p {
-  float: left;
-  width: 100%;
-  font-size: 14px;
-  color: #454545;
-}
-
-.intimation_container p span,
-.intimation_container p span {
-  color: #00a8d8;
-}
-
-.intimation_container.listing p {
-  padding: 0 0 6px 0;
-  margin: -3px 0 0 -1px;
-  line-height: normal;
-}
-
-.intimation_container.listing ul {
-  float: left;
-  width: 100%;
-}
-
-.intimation_container.listing ul li {
-  margin: 8px 0 0 0;
-  background: url(/assets/intimation_bullet.png) no-repeat 0px 5px;
-}
-
-.intimation_container.listing ul li a {
-  display: block;
-  font-size: 14px;
-  color: #00a8d8;
-  line-height: normal;
-  padding: 0 0 0 11px;
-}
-
-.intimation_container.multiple p {
-  line-height: 1.7;
-  padding: 0px;
-  margin: -3px 0 0 0;
-}
-
-.intimation_container.single p {
-  line-height: 40px;
-  padding: 0 0 4px 0;
-  margin: -1px 0 0 -1px;
-}
-
-.alert .close {
-  line-height: 20px;
-  position: relative;
-  right: -9px;
-  top: -13px;
-}
-
-/*----------------------- Intimation Messages Ends----------------------- */
-
