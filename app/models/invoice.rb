@@ -11,9 +11,16 @@ class Invoice < ActiveRecord::Base
   paginates_per 10
   default_scope order("#{self.table_name}.created_at DESC")
   before_destroy :change_status
+  before_create :set_invoice_number
+
+  def set_invoice_number
+    self.invoice_number = Invoice.get_next_invoice_number(nil)
+  end
+
   def change_status
     self.update_attribute("status","sent")
   end
+
   def tooltip
     case self.status
     when "draft"
@@ -30,6 +37,7 @@ class Invoice < ActiveRecord::Base
       ""
     end
   end
+
   def currency_symbol
     # self.company.currency_symbol
     "$"
