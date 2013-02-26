@@ -16,6 +16,7 @@ jQuery('.primary_heading h1 span').html("&nbsp;/&nbsp;<%= status.capitalize%>");
     jQuery('.recover_deleted,.payment').show();
     jQuery('#active_links a.get_deleted').addClass('active');
 <%end%>
+jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed, .viewed").qtip();
 jQuery('#select_all').attr('checked',false);
 
 

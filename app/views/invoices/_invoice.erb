@@ -16,7 +16,7 @@
           <td class="align_right"><%= "#{number_to_currency(invoice.invoice_total)}" %></td>
           <td class="align_center"><%= invoice.invoice_date.to_time.strftime("%m/%d/%Y") rescue "" %></td>
           <td class="align_center"><%= invoice.due_date.to_time.strftime("%m/%d/%Y") rescue "" %></td>
-          <td class="align_center <%= invoice.status %>"><span title="<%= invoice.tooltip %>"><%= invoice.status %></span></td>
+          <td class="align_center <%= invoice.status %>" title="<%= invoice.tooltip %>"><span><%= invoice.status %></span></td>
           <td class="align_center">
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_invoice_path(invoice) %>
