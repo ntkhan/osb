@@ -12,11 +12,11 @@
     </div>
   </div>
   <!--content_top-->
-  <%= form_tag "invoices/bulk_actions", :remote => true do -%>
+  <%= form_tag "taxes/bulk_actions", :remote => true do -%>
       <div class="content_middle">
         <div class="grid_control">
           <div class="grid_control_left">
-            <ul>
+            <ul value='tax'>
               <li><%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %></li>
               <li><%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %></li>
               <li><%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %></li>
@@ -31,7 +31,7 @@
         </div>
         <!--grid_control-->
         <div class="grid_table">
-          <table cellpadding="0" cellspacing="0">
+          <table cellpadding="0" cellspacing="0" class="table table_listing tax_listing">
             <colgroup>
               <col class="one"/>
               <col class="two"/>
@@ -43,7 +43,7 @@
               <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
               <th class="align_center">Name</th>
               <th class="align_center">Percentage</th>
-              <th class="align_center"><%= t '.actions', :default => t("helpers.actions") %></th>
+              <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
             <tbody id="tax_body">

@@ -14,7 +14,7 @@ jQuery('.alert').hide();
     <% end %>
 
     <%if !params[:invoice_ids].blank? && @action != "paid invoices"%>
-        jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
+        jQuery('tbody#invoice_body').html('<%= escape_javascript(render :partial=>"invoice") %>');
     <%end%>
 
 // Enable/Disable action links(Archive,Delete,Recover). //
