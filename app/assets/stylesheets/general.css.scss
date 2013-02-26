@@ -924,10 +924,13 @@ table.table_listing, table.report-data-table {
   }
   &.alert-error {
     background: url(/assets/invalid.png) no-repeat 19px 19px #ffffff;
+    span{
+        color: #CD0011 !important;
+    }
   }
-  p {
+  span{
     float: left;
-    width: 100%;
+    width: 95%;
     font-size: 14px;
     color: #454545;
     line-height: 1.7;
@@ -940,10 +943,11 @@ table.table_listing, table.report-data-table {
     li {
       margin: 8px 0 0 0;
       background: url(/assets/intimation_bullet.png) no-repeat 0px 5px;
+      padding-left: 12px;
     }
   }
   &.single{
-    p{
+    span{
       line-height: 40px;
       padding: 0 0 4px 0;
       margin: -1px 0 0 -1px;
