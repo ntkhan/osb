@@ -59,7 +59,7 @@ jQuery ->
     invoices = gon.chart_data["invoices"]
     payments = gon.chart_data["payments"]
     chart_data = [invoices, payments]
-    alert chart_data
+
   try
     jQuery.jqplot "dashboard-chart", chart_data, chart_options
   catch e
