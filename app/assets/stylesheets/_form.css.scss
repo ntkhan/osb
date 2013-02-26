@@ -31,6 +31,12 @@
     width: 760px;
     margin-bottom: 6px;
   }
+  table {
+        border-collapse: separate;
+    }
+  .grid_table table tr:hover {
+      background: none !important;
+   }
   .grid_table table th:first-child {
     border-radius: 0px;
     background: #ffffff;
@@ -53,28 +59,28 @@
     padding-right: 0px;
   }
   .grid_table table col.one {
-    width: 33px;
+    width: 45px;
   }
-  .grid_table table col.two {
+  .grid_table table col.two { /*item*/
     width: 176px;
   }
-  .grid_table table col.three {
-    width: 183px;
+  .grid_table table col.three { /*description*/
+    width: 174px;
   }
-  .grid_table table col.four {
-    width: 84px;
+  .grid_table table col.four { /*unit cost*/
+    width: 83px;
   }
-  .grid_table table col.five {
-    width: 85px;
+  .grid_table table col.five { /*qty*/
+    width: 83px;
   }
-  .grid_table table col.six {
-    width: 85px;
+  .grid_table table col.six { /*tax*/
+    width: 83px;
   }
-  .grid_table table col.seven {
-    width: 85px;
+  .grid_table table col.seven { /*tax2*/
+    width: 83px;
   }
-  .grid_table table col.eight {
-    width: 112px;
+  .grid_table table col.eight { /*line total*/
+    width: 113px;
   }
   input.grid_small,
   .blank_input {
