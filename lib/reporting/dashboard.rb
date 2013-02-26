@@ -53,10 +53,10 @@ module Reporting
           end_date = Date.today
         when '30-60' then
           start_date = Date.today - 60.days
-          end_date = Date.today - 30.days
+          end_date = Date.today - 31.days
         when '60-90' then
           start_date = Date.today - 90.days
-          end_date = Date.today - 60.days
+          end_date = Date.today - 61.days
         when 'over-90' then
           end_date = Date.today - 90.days
           invoices = Invoice.where("invoice_date < '#{end_date}'").sum("invoice_total")
