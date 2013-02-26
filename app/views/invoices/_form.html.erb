@@ -35,7 +35,7 @@
   <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
                   <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map{ |p| [p.description, p.id, {'number_of_days'=>p.number_of_days}] },:selected => f.object.payment_terms_id),{:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder",  "data-dropdown-width" => "300"}  %>
                   <ul class="field_description">
-                    <li>will be applied to whole invoice amount</li>
+                    <li>payment terms agains this invoice</li>
                   </ul>
                 </div>
               </div><!--field_row-->
