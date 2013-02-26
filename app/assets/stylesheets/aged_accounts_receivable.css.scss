@@ -1,0 +1,39 @@
+.reports.aged_accounts {
+  select#criteria_client_id {
+    width: 180px;
+  }
+  .report_update {
+    float: left;
+  }
+}
+
+.reports {
+  .grid_table table.aged_accounts_listing {
+    width: 100%;
+    col.one {
+      width: 120px;
+    }
+    col.two {
+      width: 70px;
+    }
+    col.three {
+      width: 70px;
+    }
+    col.four {
+      width: 70px;
+    }
+    col.five {
+      width: 70px;
+    }
+    col.six {
+      width: 92px;
+    }
+    tfoot{
+      font-weight: bold;
+      border-bottom: 1px solid #D7D7D7;
+    }
+    td:last-child{
+      font-weight: bold;
+    }
+  }
+}

@@ -12,12 +12,16 @@
             <ul>
               <li class="header_name"><%= @report.client_name %></li>
               <li class="header_duration"><%= @report.period %></li>
-              <li class="header_description">This report shows a history of all payments made for every invoice selectable by client and by date.</li>
+              <li class="header_description">This report shows a history of all payments made for every invoice
+                selectable by client and by date.
+              </li>
             </ul>
           </div>
         </div>
-      </div><!-- content_header_data -->
-    </div><!-- report_content_header -->
+      </div>
+      <!-- content_header_data -->
+    </div>
+    <!-- report_content_header -->
 
     <div class="header_data_right">
       <ul class="download_report">
@@ -32,62 +36,71 @@
         <ul>
           <li><%= @report.period %></li>
         </ul>
-      </div><!-- report_duration -->
+      </div>
+      <!-- report_duration -->
     </div>
 
     <div class="grid_table">
-      <table cellpadding="0" cellspacing="0">
+      <table cellpadding="0" cellspacing="0" class="table_listing aged_accounts_listing">
         <colgroup>
-          <col class="one1">
-          <col class="two1">
-          <col class="three1">
-          <col class="four1">
-          <col class="five1">
-          <col class="six1">
+          <col class="one">
+          <col class="two">
+          <col class="three">
+          <col class="four">
+          <col class="five">
+          <col class="six">
         </colgroup>
+        <thead>
         <tr>
           <th class="align_left">Client Name</th>
-          <th class="align_left">0-30 days</th>
-          <th class="align_center">31-60 days</th>
-          <th class="align_center">61-90 days</th>
-          <th class="align_center">90+ days</th>
-          <th class="align_center">Client Total AR</th>
+          <th class="align_center {sorter:'thousands'}">0-30 days</th>
+          <th class="align_center {sorter:'thousands'}">31-60 days</th>
+          <th class="align_center {sorter:'thousands'}">61-90 days</th>
+          <th class="align_center {sorter:'thousands'}">90+ days</th>
+          <th class="align_center {sorter:'thousands'}">Client Total AR</th>
         </tr>
+        </thead>
+        <body>
         <% @report.report_data.each do |aged| %>
             <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
-        <tr>
-          <td class="align_left"><%= aged.attributes["client_name"] %></td>
-          <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]) %></td>
-          <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]) %></td>
-          <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]) %></td>
-          <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]) %></td>
-          <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"] + aged.attributes["thirty_one_to_sixty"] + aged.attributes["sixty_one_to_ninety"] + aged.attributes["ninety_one_and_above"]) %></td>
-        </tr>
-         <% end %>
-        <tr>
+            <tr>
+              <td class="align_left"><%= aged.attributes["client_name"] %></td>
+              <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]) %></td>
+              <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]) %></td>
+              <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]) %></td>
+              <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]) %></td>
+              <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"] + aged.attributes["thirty_one_to_sixty"] + aged.attributes["sixty_one_to_ninety"] + aged.attributes["ninety_one_and_above"]) %></td>
+            </tr>
+        <% end %>
+        <tfoot>
           <td class="align_left"><%= "Total" %></td>
           <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"]) %></td>
           <td class="align_right"><%= number_to_currency(@report.report_total["thirty_one_to_sixty"]) %></td>
           <td class="align_right"><%= number_to_currency(@report.report_total["sixty_one_to_ninety"]) %></td>
           <td class="align_right"><%= number_to_currency(@report.report_total["ninety_one_and_above"]) %></td>
           <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"] + @report.report_total["thirty_one_to_sixty"] + @report.report_total["sixty_one_to_ninety"] + @report.report_total["ninety_one_and_above"]) %></td>
-        </tr>
+        </tfoot>
+        </body>
       </table>
-    </div><!--grid_table-->
+    </div>
+    <!--grid_table-->
 
-  </div><!--content_middle-->
+  </div>
+  <!--content_middle-->
 
   <div class="content_bottom">
     <div class="report_footer">
-      <div class="total_payment">
-        <ul>
-          <li class="total_payment_title">Total Payments Received:</li>
-          <li>$ <%= @report.report_total || "Total object missing" %> <span>usd</span></li>
-        </ul>
-      </div>
+      <!--<div class="total_payment">-->
+        <!--<ul>-->
+          <!--<li class="total_payment_title">Total Payments Received:</li>-->
+          <!--<li>$ <%#= @report.report_total || "Total object missing" %> <span>usd</span></li>-->
+        <!--</ul>-->
+      <!--</div>-->
       <div class="footer_note">
         <p>* Payments applied from credit do not count towards the total</p>
       </div>
-    </div><!-- report_footer -->
-  </div><!--content_bottom-->
+    </div>
+    <!-- report_footer -->
+  </div>
+  <!--content_bottom-->
 </div><!--reports-->
