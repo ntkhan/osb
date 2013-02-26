@@ -823,7 +823,9 @@ table.table_listing, table.report-data-table {
     background: url(/assets/warning.png) no-repeat 19px 19px;
 }
 .intimation_container.invalid{
-    background: url(/assets/invalid.png) no-repeat 19px 19px;
+    background: url(/assets/invalid.png) no-repeat 19px 19px #F2DEDE;
+    color: #CD0011 !important;
+    border-color: #CD0011;
 }
 .intimation_container p{
     float: left;
@@ -846,7 +848,7 @@ table.table_listing, table.report-data-table {
 }
 .intimation_container.listing ul li{
     margin: 8px 0 0 0;
-    background: url(images/intimation_bullet.png) no-repeat 0px 5px;
+    background: url(/assets/intimation_bullet.png) no-repeat 0px 5px;
 }
 .intimation_container.listing ul li a{
     display: block;
@@ -864,6 +866,12 @@ table.table_listing, table.report-data-table {
     line-height: 40px;
     padding: 0 0 4px 0;
     margin: -1px 0 0 -1px;
+}
+.alert .close {
+    line-height: 20px;
+    position: relative;
+    right: -9px;
+    top: -13px;
 }
 /*----------------------- Intimation Messages Ends----------------------- */
 
