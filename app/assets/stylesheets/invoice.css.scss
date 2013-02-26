@@ -1,31 +1,40 @@
 .invoice {
 
   .grid_table table {
-    col.one { /*check box*/
+    col.one {
+    /*check box*/
       width: 33px;
     }
-    col.two { /*invoice*/
+    col.two {
+    /*invoice*/
       min-width: 82px;
     }
-    col.three { /*clients*/
+    col.three {
+    /*clients*/
       width: 212px;
     }
-    col.four { /*description*/
+    col.four {
+    /*description*/
       width: 106px;
     }
-    col.five { /*total*/
+    col.five {
+    /*total*/
       min-width: 82px;
     }
-    col.six { /*date*/
+    col.six {
+    /*date*/
       min-width: 90px;
     }
-    col.seven { /*due date*/
+    col.seven {
+    /*due date*/
       min-width: 90px;
     }
-    col.eight { /*status*/
-      min-width: 75px; 
+    col.eight {
+    /*status*/
+      min-width: 75px;
     }
-    col.nine { /*actions*/
+    col.nine {
+    /*actions*/
       min-width: 70px;
     }
   }
@@ -63,9 +72,39 @@
     tr.no_hover:hover {
       background: #FFFFFF;
     }
-    td.add_line_item_row{
-      padding: 15px 0 0;
+    td.add_line_item_row {
+      padding: 15px 0 0 24px;
     }
   }
 }
+
+table.invoice_grid_fields {
+  .action_links {
+    .remove_item {
+      background: url("/assets/del-move-icons.png") no-repeat scroll 0 0 transparent;
+      float: left;
+      height: 10px;
+      width: 7px;
+    }
+    .remove_item:hover{
+      background-position: 0 -12px;
+    }
+    .sort_icon {
+      background: url("/assets/del-move-icons.png") no-repeat scroll -7px 0 transparent;
+      float: left;
+      height: 12px;
+      margin-left: 4px;
+      width: 9px;
+    }
+    .sort_icon:hover{
+      background-position: -7px -12px;
+    }
+  }
+  tbody{
+    tr td:first-child{
+      vertical-align: middle;
+    }
+  }
+}
+
 
