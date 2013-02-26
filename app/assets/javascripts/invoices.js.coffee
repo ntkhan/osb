@@ -189,11 +189,16 @@ jQuery ->
     if jQuery("#invoice_client_id").val() is ""
       applyPopover(jQuery("#invoice_client_id_chzn"),"bottomMiddle","topLeft","Select a client")
       flag = false
+    # check if invoice date is selected
+    else if jQuery("#invoice_invoice_date").val() is ""
+      applyPopover(jQuery("#invoice_invoice_date"),"rightTop","leftMiddle","Select invoice date")
+      flag =false
     # Check if item is selected
     else if item_rows.find("select.items_list option:selected[value='']").length is item_rows.length
       first_item = jQuery("table#invoice_grid_fields tr.fields:visible:first").find("select.items_list").next()
       applyPopover(first_item,"bottomMiddle","topLeft","Select an item")
       flag = false
+
     # Item cost and quantity should be greater then 0
     else
       jQuery("tr.fields:visible").each ->
@@ -375,6 +380,7 @@ jQuery ->
 
   # re calculate invoice due date on invoice date change
   jQuery("#invoice_invoice_date").change ->
+    jQuery(this).qtip("hide") if jQuery(this).qtip()
     term_days = jQuery("#invoice_payment_terms_id option:selected").attr('number_of_days')
     setDuedate(jQuery(this).val(),term_days)
 
