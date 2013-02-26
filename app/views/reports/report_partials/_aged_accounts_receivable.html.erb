@@ -3,7 +3,7 @@
 
     <div class="report_content_header">
       <div class="report_content_heading">
-        <h1>Payments Collected</h1>
+        <h1>Aged Accounts Receivable</h1>
       </div>
 
       <div class="content_header_data">
@@ -30,9 +30,7 @@
       </ul>
       <div class="report_duration">
         <ul>
-          <li>01/01/2013</li>
-          <li><span>to</span></li>
-          <li>01/01/2013</li>
+          <li><%= @report.period %></li>
         </ul>
       </div><!-- report_duration -->
     </div>
@@ -40,33 +38,40 @@
     <div class="grid_table">
       <table cellpadding="0" cellspacing="0">
         <colgroup>
-          <col class="one">
-          <col class="two">
-          <col class="three">
-          <col class="four">
-          <col class="five">
-          <col class="six">
+          <col class="one1">
+          <col class="two1">
+          <col class="three1">
+          <col class="four1">
+          <col class="five1">
+          <col class="six1">
         </colgroup>
         <tr>
-          <th class="align_left">Invoices</th>
           <th class="align_left">Client Name</th>
-          <th class="align_left">Type</th>
-          <th class="align_center">Note</th>
-          <th class="align_center">Date</th>
-          <th class="align_center">Amount</th>
+          <th class="align_left">0-30 days</th>
+          <th class="align_center">31-60 days</th>
+          <th class="align_center">61-90 days</th>
+          <th class="align_center">90+ days</th>
+          <th class="align_center">Client Total AR</th>
         </tr>
-        <% @report.report_data.each do |payment| %>
+        <% @report.report_data.each do |aged| %>
             <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
         <tr>
-          <td class="align_left"><%= payment.invoice.invoice_number %></td>
-          <td class="align_left"><%= payment.client_name %></td>
-          <td class="align_left"><%= payment.payment_type || payment.payment_method %></td>
-          <td class="align_center"><%= payment.notes %></td>
-          <td class="align_center"><%= payment.created_at.to_date %></td>
-          <td class="align_right currency">$ <%= payment.payment_amount %> <span>usd</span></td>
+          <td class="align_left"><%= aged.attributes["client_name"] %></td>
+          <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]) %></td>
+          <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]) %></td>
+          <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]) %></td>
+          <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]) %></td>
+          <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"] + aged.attributes["thirty_one_to_sixty"] + aged.attributes["sixty_one_to_ninety"] + aged.attributes["ninety_one_and_above"]) %></td>
         </tr>
          <% end %>
-
+        <tr>
+          <td class="align_left"><%= "Total" %></td>
+          <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"]) %></td>
+          <td class="align_right"><%= number_to_currency(@report.report_total["thirty_one_to_sixty"]) %></td>
+          <td class="align_right"><%= number_to_currency(@report.report_total["sixty_one_to_ninety"]) %></td>
+          <td class="align_right"><%= number_to_currency(@report.report_total["ninety_one_and_above"]) %></td>
+          <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"] + @report.report_total["thirty_one_to_sixty"] + @report.report_total["sixty_one_to_ninety"] + @report.report_total["ninety_one_and_above"]) %></td>
+        </tr>
       </table>
     </div><!--grid_table-->
 
