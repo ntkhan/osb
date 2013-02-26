@@ -165,7 +165,7 @@ jQuery ->
      e.preventDefault()
 
   # Add date picker to invoice date field
-  jQuery("#invoice_invoice_date, #invoice_due_date").datepicker
+  jQuery("#invoice_invoice_date").datepicker
     dateFormat: 'yy-mm-dd'
 #    beforeShow: (input, inst) ->
 #     widget = jQuery(inst).datepicker('widget');
@@ -286,8 +286,7 @@ jQuery ->
     #elem.next(".popover").hide()
     elem.qtip("hide")
 
-  jQuery("#invoice_client_id_chzn,.chzn-container").click ->
-#    jQuery(this).popover "hide"
+  jQuery("#invoice_client_id_chzn,.chzn-container").live "click", ->
     jQuery(this).qtip("hide")
 
   # Don't send an ajax request if an item is deselected.

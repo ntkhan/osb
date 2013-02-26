@@ -1,9 +1,9 @@
 <%
    no_record_message = "You haven't created any invoice yet. Please click on New Invoice button to create new invoice."
    if params[:status] == "archived" || @action == "recovered from archived"
-     no_record_message = "You haven't any archived invoice yet."
+     no_record_message = "You haven't any archived invoice."
    elsif params[:status] == "deleted" || @action == "recovered from deleted"
-     no_record_message = "You haven't any deleted invoice yet."
+     no_record_message = "You haven't any deleted invoice."
    end
 %>
 <% if  @invoices.length > 0 %>

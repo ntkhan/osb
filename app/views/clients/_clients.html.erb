@@ -1,9 +1,9 @@
 <%
 no_record_message = "You haven't created any client yet. Please click on New Client button to create new client."
 if params[:status] == "archived" ||  @action == "recovered from archived"
-  no_record_message = "You haven't any archived client yet."
+  no_record_message = "You haven't any archived client."
 elsif params[:status] == "deleted" || @action == "recovered from deleted"
-  no_record_message = "You haven't any deleted client yet."
+  no_record_message = "You haven't any deleted client."
 end
 %>
 <% if @clients.length > 0 %>
