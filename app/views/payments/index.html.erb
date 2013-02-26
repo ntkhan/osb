@@ -18,16 +18,16 @@
       <div class="grid_control">
         <div class="grid_control_left">
           <ul value='<%= model_class.model_name%>'>
-            <li><%= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %></li>
-            <li><%= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %></li>
-            <li><%= submit_tag "Archive", :name => "archive", :class => "top_links archive" %></li>
-            <li class="grid_control_sep"><%= submit_tag "Delete", :name => "destroy", :class => "top_links destroy" %></li>
+            <li><%#= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %></li>
+            <li><%#= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %></li>
+            <li><%#= submit_tag "Archive", :name => "archive", :class => "top_links archive" %></li>
+            <li class="grid_control_sep"><%= submit_tag "Delete Forever", :name => "destroy", :class => "top_links destroy" %></li>
             <li><a href="#" class="no_links">Copy</a></li>
             <li><a href="#" class="no_links">Print</a></li>
           </ul>
         </div>
         <div class="grid_control_right" id="active_links">
-          <%= render 'filter_links' %>
+          <%#= render 'filter_links' %>
         </div>
       </div><!--grid_control-->
       <div class="grid_table">
