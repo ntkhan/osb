@@ -286,8 +286,7 @@ jQuery ->
     #elem.next(".popover").hide()
     elem.qtip("hide")
 
-  jQuery("#invoice_client_id_chzn,.chzn-container").click ->
-#    jQuery(this).popover "hide"
+  jQuery("#invoice_client_id_chzn,.chzn-container").live "click", ->
     jQuery(this).qtip("hide")
 
   # Don't send an ajax request if an item is deselected.

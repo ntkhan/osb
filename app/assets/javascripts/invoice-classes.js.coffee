@@ -139,5 +139,6 @@ class window.InlineForms
             event: false, hide:
               event: false})
         jQuery(elem).qtip().show()
+        jQuery(elem).focus()
         valid_form = false
     valid_form
