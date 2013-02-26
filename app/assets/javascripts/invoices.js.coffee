@@ -165,7 +165,7 @@ jQuery ->
      e.preventDefault()
 
   # Add date picker to invoice date field
-  jQuery("#invoice_invoice_date").datepicker
+  jQuery("#invoice_invoice_date, #invoice_due_date").datepicker
     dateFormat: 'yy-mm-dd'
     beforeShow: (input, inst) ->
       widget = $(inst).datepicker('widget');
