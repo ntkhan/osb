@@ -5,49 +5,64 @@ module Reporting
     attr_accessor :report_name, :report_criteria, :report_data, :client_name, :report_duration, :report_total
   end
 
-  class ReportData < ActiveRecord::Base
-    self.abstract_class = true
-  end
-
   class AgedAccountsReceivable < Reporting::Report
     def initialize(options={})
       #raise "debugging..."
       @report_name = options[:report_name] || "no report"
       @report_criteria = options[:report_criteria]
       @report_data = get_report_data
-      @report_total= @report_data.inject(0) { |total, p| total + p[:payment_amount] }
+      calculate_report_totals
     end
 
-    class Data < Reporting::ReportData
+    class ReportData
       attr_accessor :client_name, :invoice_total, :zero_to_thirty, :thirty_one_to_sixty, :sixty_one_to_ninety, :ninety_one_and_above
     end
 
     def period
-      @report_criteria.to_date
+      "Period ending #{@report_criteria.to_date}"
     end
 
     def get_report_data
       # Report columns: Client, 0_30, 31_60, 61_90, Over_90
-      aged_invoices = Data.find_by_sql(<<-eos
-          SELECT
-            clients.organization_name AS client_name,
-            invoices.invoice_total,
-            SUM(payments.payment_amount) payment_received,
-            DATEDIFF('#{@report_criteria.to_date}', invoices.invoice_date) age
-          FROM `invoices`
-            LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id`
-            INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`
-          WHERE
-            (`payments`.`deleted_at` IS NULL)
-            AND (payments.created_at <= '#{@report_criteria.to_date}')
-            AND (invoices.created_at <= '#{@report_criteria.to_date}')
-            AND (invoices.`status` != "paid")
-          GROUP BY clients.organization_name,  invoices.invoice_total
+      aged_invoices = Invoice.find_by_sql(<<-eos
+          SELECT aged.client_name,
+            SUM(CASE WHEN aged.age BETWEEN 0 AND 30 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS zero_to_thirty,
+            SUM(CASE WHEN aged.age BETWEEN 31 AND 60 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS thirty_one_to_sixty,
+            SUM(CASE WHEN aged.age BETWEEN 61 AND 90 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS sixty_one_to_ninety,
+            SUM(CASE WHEN aged.age > 90 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS ninety_one_and_above,
+            0 AS client_total
+          FROM (
+            SELECT
+              clients.organization_name AS client_name,
+              invoices.invoice_total,
+              IFNULL(SUM(payments.payment_amount), 0) payment_received,
+              DATEDIFF('#{@report_criteria.to_date}', invoices.invoice_date) age,
+              invoices.`status`
+            FROM `invoices`
+              INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`
+              LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id` AND (payments.payment_date <= '#{@report_criteria.to_date}')
+            WHERE
+              (`payments`.`deleted_at` IS NULL)
+              AND (IFNULL(invoices.due_date, invoices.invoice_date) <= '#{@report_criteria.to_date}')
+              AND (invoices.`status` != "paid")
+              #{@report_criteria.client_id == 0 ? "" : "AND invoices.client_id = #{@report_criteria.client_id}"}
+            GROUP BY clients.organization_name,  invoices.invoice_total, invoices.`status`, invoices.invoice_number
+          ) AS aged
+          GROUP BY aged.client_name
       eos
       )
       aged_invoices
     end
 
+    def calculate_report_totals
+      @report_total = Hash.new(0)
+      @report_data.each do |row|
+        @report_total["zero_to_thirty"] += row.attributes["zero_to_thirty"]
+        @report_total["thirty_one_to_sixty"] += row.attributes["thirty_one_to_sixty"]
+        @report_total["sixty_one_to_ninety"] += row.attributes["sixty_one_to_ninety"]
+        @report_total["ninety_one_and_above"] += row.attributes["ninety_one_and_above"]
+      end
+    end
   end
 
   class RevenueByClient < Reporting::Report
