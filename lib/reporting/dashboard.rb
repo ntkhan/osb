@@ -37,6 +37,7 @@ module Reporting
       chart_data[:payments] = chart_months.merge(payments).map { |month, amount| amount }
       chart_data[:ticks] = chart_months.map { |month, amount| Date::ABBR_MONTHNAMES[month] }
       chart_data
+      Rails.logger.debug ">>>>>>>>>>>>>>>>>>>>>>>>>>>#{chart_data}"
     end
 
     # get outstanding invoices
