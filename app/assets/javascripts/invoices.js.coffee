@@ -167,6 +167,9 @@ jQuery ->
   # Add date picker to invoice date field
   jQuery("#invoice_invoice_date").datepicker
     dateFormat: 'yy-mm-dd'
+    beforeShow: (input, inst) ->
+     widget = jQuery(inst).datepicker('widget');
+     widget.css('margin-left', jQuery(input).outerWidth() - widget.outerWidth());
   # Add date picker to payment date field
   jQuery(".date_picker_class").datepicker
     dateFormat: 'yy-mm-dd'
