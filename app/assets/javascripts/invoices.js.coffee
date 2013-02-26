@@ -411,7 +411,8 @@ jQuery ->
 
   # Alert on no record selection and confirm to delete forever payment
   jQuery(".top_links").live "click", ->
-    title = jQuery(this).parent("p").attr "value"
+    title = jQuery(this).parents("ul").attr "value"
+    title = title.toLowerCase()
     action = jQuery(this).val().toLowerCase()
     flag = true
     if jQuery("table.table_listing tbody").find(":checked").length is 0
