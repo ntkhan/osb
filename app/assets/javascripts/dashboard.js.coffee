@@ -41,9 +41,9 @@ jQuery ->
 
   chart_grid =
     background: '#FFFFFF'
-    drawBorder: false
+#    drawBorder: false
     shadow: false
-    borderWidth: 0
+    borderWidth: 0.5
 
   chart_options =
     seriesDefaults: chart_defaults
