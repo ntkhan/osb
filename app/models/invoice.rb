@@ -33,6 +33,10 @@ class Invoice < ActiveRecord::Base
       "Your client has partially paid this invoice. Hover over the total to see the amount outstanding."
     when "draft-partial"
       "Invoice created and partial payment applied. Your client has no access to this invoice."
+    when "disputed"
+      "Your client has disputed this invoice. Click on this invoice to view their comments."
+    when "viewed"
+      "Your client has viewed this invoice, but not made any payments."
     else
       ""
     end
