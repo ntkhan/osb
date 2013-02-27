@@ -3,6 +3,10 @@ module Reporting
   class Report
     #include ClassLevelInheritableAttributes
     attr_accessor :report_name, :report_criteria, :report_data, :client_name, :report_duration, :report_total
+
+    def client_name
+      @report_criteria.client_id == 0 ? "All Clients" : Client.where(:id => @report_criteria.client_id).first.organization_name
+    end
   end
 
   class AgedAccountsReceivable < Reporting::Report
@@ -19,7 +23,7 @@ module Reporting
     end
 
     def period
-      "Period ending #{@report_criteria.to_date}"
+      "As of #{@report_criteria.to_date}"
     end
 
     def get_report_data
@@ -110,10 +114,6 @@ module Reporting
       "Between #{@report_criteria.from_date} and #{@report_criteria.to_date}"
     end
 
-    def client_name
-      @report_criteria.client_id == 0 ? "All Clients" : Client.where(:id => @report_criteria.client_id).first.organization_name
-    end
-
     def get_report_data
       # Report columns: Invoice# 	Client Name 	Type 	Note 	Date 	Amount
       payments = Payment.select(
@@ -133,6 +133,4 @@ module Reporting
       payments
     end
   end
-
-
 end
