@@ -166,6 +166,7 @@ class Invoice < ActiveRecord::Base
   def self.total_invoices_amount
     sum('invoice_total')
   end
+
   def self.add_credit_payment invoice, amount
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
@@ -174,5 +175,9 @@ class Invoice < ActiveRecord::Base
     credit_pay.notes = "Converted from payments for invoice# #{invoice.invoice_number}"
     credit_pay.payment_amount = amount
     credit_pay.save
+  end
+
+  def partial_payments
+    where("status = 'partial'")
   end
 end

@@ -3,4 +3,4 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  jQuery(".reports #from_date, .reports #to_date").datepicker({ dateFormat: 'yy-mm-dd' });
+  jQuery(".reports #from_date, .reports #to_date").datepicker dateFormat: 'yy-mm-dd'

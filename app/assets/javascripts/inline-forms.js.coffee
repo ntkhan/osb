@@ -107,6 +107,7 @@ class window.InlineForms
             unique_field.focus()
         error: (jqXHR, textStatus, errorThrown) =>
           alert "Error: #{textStatus}"
+      event.stopImmediatePropagation()
 
   adjustChosenWidth: =>
     console.log "adjusting chosen width"

@@ -242,6 +242,7 @@ h4 {
 #nav li {
   float: left;
   padding: 0 19px 0 0;
+  height: 43px;
 }
 
 #nav .select a {
@@ -305,7 +306,7 @@ h4 {
 #nav .select li:hover .sub li a:hover, #nav .select li .sub li a.active {
   display: block;
   color: #00ace5;
-  /*background: url(/assets/sub_hover.png) no-repeat bottom center;*/
+/*background: url(/assets/sub_hover.png) no-repeat bottom center;*/
 }
 
 #nav .select li .sub li a.active {
@@ -691,7 +692,10 @@ textarea,
   border-radius: 4px;
   background-color: #ffffff;
 }
-
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+  background-color: #EEEEEE;
+  cursor: not-allowed;
+}
 .options_content {
   float: left;
   margin: 0 0 0 130px;
@@ -800,8 +804,8 @@ textarea,
   display: block;
   background-color: #00BDE5;
   border-radius: 4px;
-  /*-moz-border-radius: 4px;
- -webkit-border-radius: 4px;*/
+/*-moz-border-radius: 4px;
+-webkit-border-radius: 4px;*/
 
   color: #FFFFFF;
   display: inline-block;
@@ -924,11 +928,11 @@ table.table_listing, table.report-data-table {
   }
   &.alert-error {
     background: url(/assets/invalid.png) no-repeat 19px 19px #ffffff;
-    span{
-        color: #CD0011 !important;
+    span {
+      color: #CD0011 !important;
     }
   }
-  span{
+  span {
     float: left;
     width: 95%;
     font-size: 14px;
@@ -946,8 +950,8 @@ table.table_listing, table.report-data-table {
       padding-left: 12px;
     }
   }
-  &.single{
-    span{
+  &.single {
+    span {
       line-height: 40px;
       padding: 0 0 4px 0;
       margin: -1px 0 0 -1px;
@@ -959,4 +963,21 @@ table.table_listing, table.report-data-table {
     right: -9px;
     top: -13px;
   }
+}
+
+#progress_indicator {
+  background: none repeat scroll 0 0 white;
+  border: 1px solid #EFEFEF;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 1px 6px #BCBCBC;
+  height: 103px;
+  left: 50%;
+  margin: -75px 0 0 -75px;
+  opacity: 0.85;
+  padding: 12px;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  width: 100px;
+  z-index: 1000;
 }

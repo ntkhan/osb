@@ -15,8 +15,10 @@
             </ul>
           </div>
         </div>
-      </div><!-- content_header_data -->
-    </div><!-- report_content_header -->
+      </div>
+      <!-- content_header_data -->
+    </div>
+    <!-- report_content_header -->
 
     <div class="header_data_right">
       <ul class="download_report">
@@ -33,7 +35,8 @@
           <li><span>to</span></li>
           <li>01/01/2013</li>
         </ul>
-      </div><!-- report_duration -->
+      </div>
+      <!-- report_duration -->
     </div>
 
     <div class="revnue_by_client">
@@ -56,28 +59,36 @@
             <col class="fourteen"/>
           </colgroup>
           <tbody>
-            <tr>
-              <th class="align_left">Client</th>
-              <% 12.times do |month| %>
+          <tr>
+            <th class="align_left">Client</th>
+            <% 12.times do |month| %>
                 <th class="align_right"><%= Date::MONTHNAMES[month+1].to_s[0..2] %></th>
-              <% end %>
-              <th class="align_right">Total</th>
-            </tr>
-            <% @report.report_data.each do |revenue| %>
-                      <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
-              <tr>
-                <td class="align_center"><%= revenue.organization_name %></td>
-                <% 12.times do |month| %>
-                  <td class="align_rirght"><%= number_to_currency(revenue["#{Date::MONTHNAMES[month+1]}"]) %></td>
-                <% end %>
-                <td class="align_right"><%= number_to_currency(revenue.client_total) %></td>
-              </tr>
             <% end %>
+            <th class="align_right">Total</th>
+          </tr>
+          <% unless @report.report_data.blank? %>
+              <% @report.report_data.each do |revenue| %>
+                  <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
+                  <tr>
+                    <td class="align_center"><%= revenue.organization_name %></td>
+                    <% 12.times do |month| %>
+                        <td class="align_rirght"><%= number_to_currency(revenue["#{Date::MONTHNAMES[month+1]}"]) %></td>
+                    <% end %>
+                    <td class="align_right"><%= number_to_currency(revenue.client_total) %></td>
+                  </tr>
+              <% end %>
+          <% else %>
+              <tr>
+                <td colspan="14">No data found against the selected criteria. Please change criteria and try again.
+                </td>
+              </tr>
+          <% end %>
           </tbody>
         </table>
-      </div><!--grid_table-->
-    </div><!--revnue_by_client-->
-
+      </div>
+      <!--grid_table-->
+    </div>
+    <!--revnue_by_client-->
 
 
     <div class="content_bottom">
@@ -93,7 +104,9 @@
         </div>
       </div>
       <!-- report_footer -->
-    </div><!--content_bottom-->
+    </div>
+    <!--content_bottom-->
 
-  </div><!--content_middle-->
+  </div>
+  <!--content_middle-->
 </div><!--reports-->
