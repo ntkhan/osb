@@ -107,6 +107,7 @@ class window.InlineForms
             unique_field.focus()
         error: (jqXHR, textStatus, errorThrown) =>
           alert "Error: #{textStatus}"
+      event.stopImmediatePropagation()
 
   adjustChosenWidth: =>
     console.log "adjusting chosen width"
@@ -134,7 +135,7 @@ class window.InlineForms
       console.log jQuery(elem)
       unless jQuery(elem).val()
         jQuery(elem).qtip({content:
-          text: "This field is required",
+          text: "This field is require",
           show:
             event: false, hide:
               event: false})

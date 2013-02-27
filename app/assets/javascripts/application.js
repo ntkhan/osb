@@ -22,7 +22,7 @@
 //= require nav.js
 //= require chosen.jquery
 //= require jquery.css3caching.js
-//= require invoice-classes.js.coffee
+//= require inline-forms.js.coffee
 //= require invoices.js.coffee
 //= require formatCurrency.js
 //= require tableSorter.js
@@ -69,7 +69,7 @@ jQuery(function () {
         jQuery(".sub", jQuery(this)).show();
     });
     jQuery("#nav").mouseout(function (event) {
-        e = event.toElement || event.relatedTarget;
+        var e = event.toElement || event.relatedTarget;
         if (e.parentNode == jQuery(this).find('ul.select') || e == this)
             return;
         else {

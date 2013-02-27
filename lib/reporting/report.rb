@@ -44,9 +44,9 @@ module Reporting
               invoices.`status`
             FROM `invoices`
               INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`
-              LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id` AND (payments.payment_date <= '#{@report_criteria.to_date}')
+              LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id` AND (payments.payment_date <= '#{@report_criteria.to_date}') AND (`payments`.`deleted_at` IS NULL)
             WHERE
-              (`payments`.`deleted_at` IS NULL)
+              (`invoices`.`deleted_at` IS NULL)
               AND (DATE(IFNULL(invoices.due_date, invoices.invoice_date)) <= '#{@report_criteria.to_date}')
               AND (invoices.`status` != "paid")
               #{@report_criteria.client_id == 0 ? "" : "AND invoices.client_id = #{@report_criteria.client_id}"}
