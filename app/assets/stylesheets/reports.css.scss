@@ -92,7 +92,7 @@
     .report_content_header{
         float: left;
         width: 640px;
-        padding: 30px 0;
+        padding: 30px 0 0;
     }
     .report_content_heading{
         float: left;
@@ -108,12 +108,11 @@
     .header_name{
         font-weight: bold;
         font-size: 13px;
-        padding: 4px 0 0 0;
+        padding: 6px 0 0 0;
     }
     .header_duration{
         font-weight: normal;
         font-size: 13px;
-        margin: -4px 0 0 0;
     }
     .header_description{
         font-size: 11px;

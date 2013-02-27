@@ -12,8 +12,9 @@
             <ul>
               <li class="header_name"><%= @report.client_name %></li>
               <li class="header_duration"><%= @report.period %></li>
-              <li class="header_description">This report shows a history of all payments made for every invoice
-                selectable by client and by date.
+              <li class="header_description">
+                This report shows summary of outstanding amount against unpaid and/or partially paid invoices for each
+                client.
               </li>
             </ul>
           </div>
@@ -73,12 +74,12 @@
             </tr>
         <% end %>
         <tfoot>
-          <td class="align_left"><%= "Total" %></td>
-          <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"]) %></td>
-          <td class="align_right"><%= number_to_currency(@report.report_total["thirty_one_to_sixty"]) %></td>
-          <td class="align_right"><%= number_to_currency(@report.report_total["sixty_one_to_ninety"]) %></td>
-          <td class="align_right"><%= number_to_currency(@report.report_total["ninety_one_and_above"]) %></td>
-          <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"] + @report.report_total["thirty_one_to_sixty"] + @report.report_total["sixty_one_to_ninety"] + @report.report_total["ninety_one_and_above"]) %></td>
+        <td class="align_left"><%= "Total" %></td>
+        <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"]) %></td>
+        <td class="align_right"><%= number_to_currency(@report.report_total["thirty_one_to_sixty"]) %></td>
+        <td class="align_right"><%= number_to_currency(@report.report_total["sixty_one_to_ninety"]) %></td>
+        <td class="align_right"><%= number_to_currency(@report.report_total["ninety_one_and_above"]) %></td>
+        <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"] + @report.report_total["thirty_one_to_sixty"] + @report.report_total["sixty_one_to_ninety"] + @report.report_total["ninety_one_and_above"]) %></td>
         </tfoot>
         </body>
       </table>
@@ -90,14 +91,8 @@
 
   <div class="content_bottom">
     <div class="report_footer">
-      <!--<div class="total_payment">-->
-        <!--<ul>-->
-          <!--<li class="total_payment_title">Total Payments Received:</li>-->
-          <!--<li>$ <%#= @report.report_total || "Total object missing" %> <span>usd</span></li>-->
-        <!--</ul>-->
       <!--</div>-->
       <div class="footer_note">
-        <p>* Payments applied from credit do not count towards the total</p>
       </div>
     </div>
     <!-- report_footer -->
