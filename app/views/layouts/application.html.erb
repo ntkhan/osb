@@ -63,10 +63,10 @@
              <% if notice.blank? %> style="display: none;"
              <% end %>>
           <button type="button" class="close">&times;</button>
-          <table style="width:96%">
+          <table>
             <tbody>
             <tr>
-              <td style="vertical-align: middle; min-height: 40px; height: 40px;">
+              <td>
                 <span><%= notice %></span>
               </td>
             </tr>
@@ -75,10 +75,10 @@
         </div>
         <div class="alert alert-error" style="<%= display %>">
           <button type="button" class="close">&times;</button>
-          <table style="width:96%">
+          <table>
             <tbody>
             <tr>
-              <td style="vertical-align: middle; min-height: 40px; height: 40px;">
+              <td>
                 <span><%= alert %></span>
               </td>
             </tr>

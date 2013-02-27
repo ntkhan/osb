@@ -27,7 +27,7 @@
           </ul>
         </div>
         <div class="grid_control_right" id="active_links">
-          <%#= render 'filter_links' %>
+  <%#= render 'filter_links' %>
         </div>
       </div><!--grid_control-->
       <div class="grid_table">
@@ -70,12 +70,12 @@
     </div><!--content_bottom-->
   <% end %>
 
-<!-- START: Unpaid invoices popup -->
+  <!-- START: Unpaid invoices popup -->
   <%= form_tag "/payments/enter_payment",:id=>"invoice_selection" do %>
     <div id="myModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="model_grey_container">
         <div class="modal-header">
-          
+
           <h1>Which Invoices have you received payment for?</h1>
           <p>Select one or more Invoices from the list below to apply payment.</p>
           <div class="cross_btn">
@@ -84,10 +84,18 @@
             </button>
           </div>
         </div>
-        <div id="invoice_popup_error" class="alert alert-error single" style="display:none;">
-            <button  class="close" type="button" style="margin:0px;">×</button>
-            <span>No Invoice has been selected.</span>
-          </div>
+        <div id="invoice_popup_error" class="alert alert-error popup" style="display:none;">
+          <button  class="close" type="button" style="margin:0px;">×</button>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <span>No Invoice has been selected.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="modal-body">
         </div>
         <div class="footer ">
@@ -98,4 +106,5 @@
     </div>
   <% end %>
   <!-- END: Unpaid invoices popup -->
-  </div><!--payment-->
+</div><!--payment-->
+
