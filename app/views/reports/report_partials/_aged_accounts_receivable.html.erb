@@ -62,15 +62,21 @@
         </tr>
         </thead>
         <body>
-        <% @report.report_data.each do |aged| %>
-            <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
+        <% unless @report.report_data.blank? %>
+            <% @report.report_data.each do |aged| %>
+                <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
+                <tr>
+                  <td class="align_left"><%= aged.attributes["client_name"] %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]) %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]) %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]) %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]) %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"] + aged.attributes["thirty_one_to_sixty"] + aged.attributes["sixty_one_to_ninety"] + aged.attributes["ninety_one_and_above"]) %></td>
+                </tr>
+            <% end %>
+        <% else %>
             <tr>
-              <td class="align_left"><%= aged.attributes["client_name"] %></td>
-              <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]) %></td>
-              <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]) %></td>
-              <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]) %></td>
-              <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]) %></td>
-              <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"] + aged.attributes["thirty_one_to_sixty"] + aged.attributes["sixty_one_to_ninety"] + aged.attributes["ninety_one_and_above"]) %></td>
+              <td colspan="6">"No data found against the selected criteria. Please change criteria and try again."</td>
             </tr>
         <% end %>
         <tfoot>
