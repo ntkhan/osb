@@ -6,11 +6,10 @@
 <body>
 <p>Dear <%= @client.first_name %>,</p>
 <p>
-  We have received your payment in the amount of <%= @client.invoices.first.currency_symbol %><%= @amount %> for invoice <%= @invoice%>.
+ Your invoice <%= @invoice.invoice_number %> due date is <%= @invoice.due_date %>
 </p>
-
 <p>Thanks,<br>
-vteams
+  vteams
 </p>
 </body>
 </html>

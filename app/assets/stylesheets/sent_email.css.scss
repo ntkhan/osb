@@ -1,18 +1,18 @@
 .sent_email{
 
-    .grid_table table col.one{ /*date*/
-        width : 90px;
+    .grid_table table col.one{ /*subject*/
+        width : 270px;
     }
-    .grid_table table col.two{
-        min-width : 186px;
+    .grid_table table col.two{  /*receipt*/
+        min-width : 270px;
     }
-    .grid_table table col.three{ /*receipt*/
+    .grid_table table col.three{ /*type*/
         width: 214px;
     }
-    .grid_table table col.four{ /*type*/
-        width : 170px;
+    .grid_table table col.four{ /*date*/
+        width : 90px;
     }
-    .grid_table table col.five{ /*subject*/
+    .grid_table table col.five{
         min-width : 180px;
     }
     
