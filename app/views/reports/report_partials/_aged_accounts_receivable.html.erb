@@ -76,17 +76,19 @@
             <% end %>
         <% else %>
             <tr>
-              <td colspan="6">No data found against the selected criteria. Please change criteria and try again.</td>
+              <td colspan="6" class="report_no_data">No data found against the selected criteria. Please change criteria and try again.</td>
             </tr>
         <% end %>
-        <tfoot>
-        <td class="align_left"><%= "Total" %></td>
-        <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"]) %></td>
-        <td class="align_right"><%= number_to_currency(@report.report_total["thirty_one_to_sixty"]) %></td>
-        <td class="align_right"><%= number_to_currency(@report.report_total["sixty_one_to_ninety"]) %></td>
-        <td class="align_right"><%= number_to_currency(@report.report_total["ninety_one_and_above"]) %></td>
-        <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"] + @report.report_total["thirty_one_to_sixty"] + @report.report_total["sixty_one_to_ninety"] + @report.report_total["ninety_one_and_above"]) %></td>
-        </tfoot>
+        <% unless @report.report_data.blank? %>
+            <tfoot>
+            <td class="align_left"><%= "Total" %></td>
+            <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"]) %></td>
+            <td class="align_right"><%= number_to_currency(@report.report_total["thirty_one_to_sixty"]) %></td>
+            <td class="align_right"><%= number_to_currency(@report.report_total["sixty_one_to_ninety"]) %></td>
+            <td class="align_right"><%= number_to_currency(@report.report_total["ninety_one_and_above"]) %></td>
+            <td class="align_right"><%= number_to_currency(@report.report_total["zero_to_thirty"] + @report.report_total["thirty_one_to_sixty"] + @report.report_total["sixty_one_to_ninety"] + @report.report_total["ninety_one_and_above"]) %></td>
+            </tfoot>
+        <% end %>
         </body>
       </table>
     </div>
