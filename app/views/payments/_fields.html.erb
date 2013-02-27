@@ -36,7 +36,7 @@
               <%= f.text_field :payment_amount,:id=>"payments_#{index}_payment_amount", :value=>''%>
             </div>
             <div class="field_check">
-              <input id="payments_<%= index%>_paid_full"  type="checkbox"  name="payments[][paid_full]"/>
+              <input id="payments_<%= index%>_paid_full"  type="checkbox" class="paid_full"  name="payments[][paid_full]"/>
               <div  id="<%= index %>"style="display:none" class="rem_payment_amount" value="<%=  Payment.invoice_remaining_amount(payment.invoice.id) %>"></div>
               <p><%= f.label(:paid_full,:class=>'text-left paid_full_label',:for=>"payments_#{index}_paid_full") {"Pay Full"}%></p>
             </div>
@@ -46,7 +46,7 @@
             <%  if client_credit > 0 %>
             <div class="label_field left single">&nbsp;</div>
             <div class="field_check btm">
-              <%= check_box " ",index , :id=>"#{index}"%>
+              <%= check_box " ",index , :id=>"#{index}", :class => "apply_credit"%>
               <p><label for="payments_<%= index%>" id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply from Credit <%= current_user.currency_code %>.<%= number_to_currency(client_credit) %> available</label></p>
             </div>
             <% end %>
