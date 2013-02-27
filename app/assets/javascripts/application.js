@@ -49,6 +49,7 @@
 //= require reports.js.coffee
 //= require taxes.js.coffee
 //= require sonic.js
+//= require progress_indicator.js.coffee
 
 
 jQuery(function () {
@@ -81,48 +82,6 @@ jQuery(function () {
     jQuery(".logo_tag").click(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
-
-    // Progress indicator
-    var square = new Sonic({
-        width:100,
-        height:100,
-
-        stepsPerFrame:1,
-        trailLength:1,
-        pointDistance:.05,
-
-        strokeColor:'#00BDE5',
-
-        fps:20,
-
-        setup:function () {
-            this._.lineWidth = 4;
-        },
-        step:function (point, index) {
-
-            var cx = this.padding + 50,
-                cy = this.padding + 50,
-                _ = this._,
-                angle = (Math.PI / 180) * (point.progress * 360),
-                innerRadius = index === 1 ? 10 : 25;
-
-            _.beginPath();
-            _.moveTo(point.x, point.y);
-            _.lineTo(
-                (Math.cos(angle) * innerRadius) + cx,
-                (Math.sin(angle) * innerRadius) + cy
-            );
-            _.closePath();
-            _.stroke();
-
-        },
-        path:[
-            ['arc', 50, 50, 40, 0, 360]
-        ]
-    });
-
-    square.play();
-    jQuery("#progress_indicator").append(square.canvas);
 
 });
 
