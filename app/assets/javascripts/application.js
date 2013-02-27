@@ -69,7 +69,7 @@ jQuery(function () {
         jQuery(".sub", jQuery(this)).show();
     });
     jQuery("#nav").mouseout(function (event) {
-        e = event.toElement || event.relatedTarget;
+        var e = event.toElement || event.relatedTarget;
         if (e.parentNode == jQuery(this).find('ul.select') || e == this)
             return;
         else {
