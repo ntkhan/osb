@@ -963,15 +963,17 @@ table.table_listing, table.report-data-table {
 }
 
 #progress_indicator {
-  background: none repeat scroll 0 0 #FFFFFF;
-  border: 2px solid #898989;
-  height: 125px;
+  background: none repeat scroll 0 0 white;
+  border: 1px solid #EFEFEF;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 1px 6px #BCBCBC;
+  height: 103px;
   left: 50%;
   margin: -75px 0 0 -75px;
-  padding: 25px 0 0;
+  padding: 12px;
   position: fixed;
   text-align: center;
   top: 50%;
-  width: 150px;
+  width: 125px;
   z-index: 1000;
 }
