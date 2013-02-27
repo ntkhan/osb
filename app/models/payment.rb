@@ -16,7 +16,7 @@ class Payment < ActiveRecord::Base
   end
 
   def client_full_name
-    "#{self.invoice.client.first_name}  #{self.invoice.client.last_name}"
+    "#{self.invoice.client.first_name rescue ''}  #{self.invoice.client.last_name rescue ''}"
   end
 
   def self.update_invoice_status inv_id, c_pay, prev_amount= 0
@@ -131,5 +131,9 @@ class Payment < ActiveRecord::Base
 
   def self.total_payments_amount
     where('payment_type is null or payment_type != "credit"').sum('payment_amount')
+  end
+
+  def self.partial_payments invoice_id
+    where("invoice_id = ?",invoice_id)
   end
 end
