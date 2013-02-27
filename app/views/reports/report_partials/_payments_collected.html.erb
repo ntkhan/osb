@@ -57,7 +57,7 @@
           <th class="align_left">Invoices</th>
           <th class="align_left">Client Name</th>
           <th class="align_left">Type</th>
-          <th class="align_center">Note</th>
+          <th class="align_left">Note</th>
           <th class="align_center">Date</th>
           <th class="align_center {sorter:'thousands'}">Amount</th>
         </tr>
@@ -69,7 +69,7 @@
               <td class="align_left"><%= payment.invoice.invoice_number %></td>
               <td class="align_left"><%= payment.client_name %></td>
               <td class="align_left"><%= payment.payment_type || payment.payment_method %></td>
-              <td class="align_center"><%= payment.notes %></td>
+              <td class="align_left"><%= payment.notes %></td>
               <td class="align_center"><%= payment.created_at.to_date %></td>
               <td class="align_right currency">$ <%= payment.payment_amount %> <span>usd</span></td>
             </tr>

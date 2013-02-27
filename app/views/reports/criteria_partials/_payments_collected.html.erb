@@ -6,9 +6,9 @@
       <div class="control_name">
         <p>Date Range</p>
       </div>
-      <input name="criteria[from_date]" type="text" id="from_date" value=""/>
+      <input name="criteria[from_date]" type="text" id="from_date" value="<%= 1.month.ago.to_date %>"/>
       <p>to</p>
-      <input name="criteria[to_date]" type="text" id="to_date"  value="" />
+      <input name="criteria[to_date]" type="text" id="to_date"  value="<%= Date.today %>" />
     </div>
     <div class="report_clients">
       <div class="control_name">
