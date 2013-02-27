@@ -13,4 +13,9 @@ class InvoiceMailer < ActionMailer::Base
     sentemail.date = Date.today
     sentemail.save
   end
+
+  def due_date_reminder_email(client, invoice ,current_user_email)
+    @client,@invoice,@current_user_email = client,invoice,current_user_email
+    mail(:to => client.email, :subject => "Due Date Reminder")
+  end
 end
