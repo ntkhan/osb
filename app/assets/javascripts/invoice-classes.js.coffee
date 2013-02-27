@@ -134,7 +134,7 @@ class window.InlineForms
       console.log jQuery(elem)
       unless jQuery(elem).val()
         jQuery(elem).qtip({content:
-          text: "This field is require",
+          text: "This field is required",
           show:
             event: false, hide:
               event: false})
