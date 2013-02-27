@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211122020) do
+ActiveRecord::Schema.define(:version => 20130227052012) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -253,8 +253,10 @@ ActiveRecord::Schema.define(:version => 20130211122020) do
     t.string   "type"
     t.string   "subject"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "notification_id"
+    t.string   "notification_type"
   end
 
   create_table "taxes", :force => true do |t|
