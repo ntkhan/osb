@@ -66,9 +66,14 @@ jQuery(function () {
         jQuery(".sub").hide();
         jQuery(".sub", jQuery(this)).show();
     });
-    jQuery("#nav").mouseout(function () {
-        jQuery(".sub").hide();
-        jQuery("li a.active", jQuery(this)).next(".sub").show();
+    jQuery("#nav").mouseout(function (event) {
+        e = event.toElement || event.relatedTarget;
+        if (e.parentNode == jQuery(this).find('ul.select') || e == this)
+            return;
+        else {
+            jQuery(".sub").hide();
+            jQuery("li a.active", jQuery(this)).next(".sub").show();
+        }
     });
 
     // toggle page effect by clicking on alpha tag
@@ -76,11 +81,6 @@ jQuery(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
 
-//    jwerty.key('a,i', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/invoices/new" });
-//    jwerty.key('a,c', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/clients/new" });
-//    jwerty.key('a,t', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/items/new" });
-//    jwerty.key('a,p', function(){document.location.href = document.location.protocol + "//" + document.location.host + "/payments" });
-//    jwerty.key('esc', function(){jQuery(document.activeElement).blur();});
 });
 
 
