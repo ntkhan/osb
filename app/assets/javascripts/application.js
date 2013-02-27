@@ -22,7 +22,7 @@
 //= require nav.js
 //= require chosen.jquery
 //= require jquery.css3caching.js
-//= require invoice-classes.js.coffee
+//= require inline-forms.js.coffee
 //= require invoices.js.coffee
 //= require formatCurrency.js
 //= require tableSorter.js
