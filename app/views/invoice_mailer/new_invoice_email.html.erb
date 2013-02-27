@@ -7,11 +7,11 @@
 <%
    sender_business_name ||= "OSB LLC"
 %>
-<p>Dear <%= @user.first_name %>,</p>
+<p>Dear <%= @client.first_name %>,</p>
 
 <p>
   To view your invoice from <%= "#{sender_business_name}" %>
-  for <%= @user.invoices.first.currency_symbol %><%= @invoice.invoice_total %>, or to download a PDF copy for
+  for <%= @client.invoices.first.currency_symbol %><%= @invoice.invoice_total %>, or to download a PDF copy for
   your records, click the link below:
 </p>
 

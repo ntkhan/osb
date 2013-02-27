@@ -133,4 +133,13 @@ module Reporting
       payments
     end
   end
+  class Reminder
+    def self.due_date_reminder
+      invoices = Invoice.where(:due_date => Date.today+1 )
+      invoices.each do |invoice|
+      InvoiceMailer.delay.due_date_reminder_email(invoice)
+      end
+      Reporting::Reminder.delay(:run_at => 1.day.from_now).due_date_reminder
+    end
+  end
 end
