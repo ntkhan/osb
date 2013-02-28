@@ -354,7 +354,7 @@ jQuery ->
       at: "bottomCenter"
 
   # tool tip on invoice statuses
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .viewed").qtip
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .viewed, .remove_item, .sort_icon").qtip
     position:
       at: "bottomCenter"
 
