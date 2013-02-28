@@ -1,4 +1,4 @@
-<%= form_for(@item) do |f| %>
+<%= form_for(@item,:html=>{:novalidate => ""}) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -22,7 +22,7 @@
           <div class="field_row">
             <div class="label_field left single"><span>Item Name</span></div>
             <div class="large_field">
-              <%= f.text_field :item_name %>
+              <%= f.text_field :item_name , :required => ""%>
             </div>
           </div><!--field_row-->
 
