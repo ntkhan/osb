@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                   <td>Amount</td>
-                  <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></td>
+                  <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></td>
                 </tr>
               </table>
             </div>
