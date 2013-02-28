@@ -1,48 +1,15 @@
-// Place all the styles related to the Companies controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 .companies-main{
-  label {
-    float: left;
-    padding-right: 10px;
-    text-align: right;
-    width: 180px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    color: #464646;
-    font-size: 13px;
-    font-weight: bold;
-    div{
-      float: right;
-      width: auto;
+  .label_field.left{
+        width: 150px;
     }
-    span{
-      float: right;
+  .label_field label{
+        width:130px;
+        text-align: right;
     }
-  }
-  .field {
-    margin-bottom: 20px;
-  }
-  h1 {
-    background-color: #E8E8E8;
-    color: #474747;
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 5px 10px;
-  }
-  select#company_country{
-    width: 196px;
-  }
-  input[type=text]{
-    width: 176px;
-  }
-
-}
-.content.companies-main{
-  overflow: visible;
-  #company_time_zone_chzn.chzn-container .chzn-results{
-    max-height: 120px;
-  }
+    #company_time_zone_chzn.chzn-container .chzn-results{
+        max-height: 120px;
+    }
+    select{
+        width: 226px;
+    }
 }
