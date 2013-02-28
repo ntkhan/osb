@@ -221,7 +221,6 @@ h4 {
 }
 
 .nav_container {
-  background: url(/assets/nav_bg.png) repeat-x top;
   min-height: 86px;
 }
 
@@ -230,18 +229,28 @@ h4 {
   position: relative;
   z-index: 500;
   width: 100%;
-  background: url(/assets/nav_bg.png) repeat-x top;
 }
-
+.nav_left{
+    background: #00BDE5;
+    float: left;
+    height: 38px;
+    overflow: hidden;
+    width: 18px;
+}
+.nav_right{
+    background: #00BDE5;
+    float: left;
+    height: 38px;
+    min-width: 370px;
+}
 #nav .select {
   white-space: nowrap;
-  width: 841px;
+  width: 100%;
   margin: auto;
 }
 
 #nav li {
   float: left;
-  padding: 0 19px 0 0;
   height: 43px;
 }
 
@@ -262,6 +271,8 @@ h4 {
   text-align: center;
   cursor: pointer;
   text-decoration: none;
+  padding: 0 10px;
+  background: #00BDE5;
 }
 
 /*#nav .select li:hover a,*/
