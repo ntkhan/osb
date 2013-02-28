@@ -28,13 +28,19 @@
             <br/>
 
             <div class="payment_person">
-              <% if payment.invoice.status == 'partial' %>
-                  <p><b>Partial payments</b></p>
-                  <% Payment.partial_payments(payment.invoice.id).each do |partial_payment| %>
+              <% if payment.invoice.status == 'partial' or payment.invoice.status == 'draft-partial' %>
+                  <p><b><%= payment.invoice.status.gsub(/-/, ' ').capitalize %> payments</b></p>
+                  <% payment.invoice.payments.each do |partial_payment| %>
                       <p><%= "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>
                   <% end %>
               <% end %>
             </div>
+            <% if Payment.invoice_remaining_amount(payment.invoice.id) > 0 %>
+            <div class="payment_person">
+              <p><b>Amount Due</b></p>
+                <%= number_to_currency(Payment.invoice_remaining_amount(payment.invoice.id)) %>
+            </div>
+            <% end %>
           </div>
         </div>
         <!--payment_left-->
