@@ -33,8 +33,12 @@ jQuery ->
     flag
   # show intimation message on selection no invoice.
   jQuery('#invoice_selection').submit ->
-    flag = true
-    if jQuery("table.table_listing").find(":checked").length is 0
-      jQuery("#invoice_popup_error").show()
-      flag = false
-    flag
+    invoices = jQuery("table.table_listing tbody")
+    flag = if invoices.find('tr.no-invoices').length
+      jQuery("#invoice_popup_error").show().find('span').html('There are no unpaid invoices to enter payment against.')
+      false
+    else if invoices.find(":checked").length is 0
+      jQuery("#invoice_popup_error").show().find('span').html("You haven't selected any invoice. Please select one or more invoices and try again.")
+      false
+    else
+      true
