@@ -6,13 +6,14 @@ module Reporting
         @report_name = options[:report_name] || "no report"
         @report_criteria = options[:report_criteria]
         @report_data = get_report_data
+        @report_total = 0
+        calculate_report_total
         #raise "debugging..."
       end
 
       def period
         @report_criteria.year
       end
-
 
       def get_report_data
         # Report columns Client name, January to December months (12 columns)
@@ -29,6 +30,10 @@ module Reporting
 					      GROUP BY c.organization_name, month(p.created_at)
               ")
         revenue_by_client
+      end
+
+      def calculate_report_total
+        @report_total = @report_data.inject(0){|total, payment| total + (payment.attributes["client_total"] || 0)}
       end
     end
   end
