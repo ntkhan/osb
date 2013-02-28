@@ -65,7 +65,6 @@ class Payment < ActiveRecord::Base
   def self.invoice_remaining_amount inv_id
     invoice = Invoice.find(inv_id)
     invoice_payments = self.invoice_paid_detail(inv_id)
-    # invoice_paid_amount =  invoice_payments.sum{|f| f.payment_amount || 0}
     invoice_paid_amount = 0
     invoice_payments.each do |inv_p|
       invoice_paid_amount= invoice_paid_amount + inv_p.payment_amount unless inv_p.payment_amount.blank?

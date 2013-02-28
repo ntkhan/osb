@@ -187,6 +187,8 @@ class Invoice < ActiveRecord::Base
   end
 
   def encrypted_id
-    Base64.encode64(encrypt(self.id))
+    secret = Digest::SHA1.hexdigest("yourpass")
+    e = ActiveSupport::MessageEncryptor.new(secret)
+    Base64.encode64(e.encrypt(self.id))
   end
 end

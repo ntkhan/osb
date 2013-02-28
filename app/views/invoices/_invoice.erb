@@ -14,7 +14,7 @@
           <td class="align_left"><%= invoice.client.organization_name rescue "" %></td>
           <td class="align_left"><%= invoice.notes %></td>
           <td class="align_right"><%= "#{number_to_currency(invoice.invoice_total)}" %></td>
-          <td class="align_center"><%= invoice.invoice_date.to_time.strftime("%m/%d/%Y") rescue "" %></td>
+          <td class="align_center"><%= link_to invoice.invoice_date.to_time.strftime("%m/%d/%Y"), "/invoices/preview?inv_id=#{invoice.encrypted_id}", :target => "_blank" rescue "" %></td>
           <td class="align_center"><%= invoice.due_date.to_time.strftime("%m/%d/%Y") rescue "" %></td>
           <td class="align_center <%= invoice.status %>" title="<%= invoice.tooltip %>">
             <span><%= invoice.status %></span></td>
