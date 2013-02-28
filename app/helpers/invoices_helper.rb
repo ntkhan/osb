@@ -1,7 +1,8 @@
 module InvoicesHelper
-  def new_invoice id
+  def new_invoice id,is_draft
+    message = is_draft ? "The invoice has been saved as draft." : "Invoice has been created and sent to #{@invoice.client.organization_name}."
     notice = <<-HTML
-       <p>Invoice has been created and sent to #{@invoice.client.organization_name}.</p>
+       <p>#{message}.</p>
        <ul>
          <li><a href="/invoices/enter_single_payment?ids=#{id}">Enter payment against this invoice</a></li>
          <li><a href="/invoices/new">Create another invoice</a></li>

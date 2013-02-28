@@ -72,7 +72,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.save
         @invoice.notify(current_user, encrypt(@invoice.id))
-        new_invoice_message = new_invoice(@invoice.id)
+        new_invoice_message = new_invoice(@invoice.id,params[:save_as_draft])
         redirect_to(edit_invoice_url(@invoice), :notice => new_invoice_message)
         return
       else
