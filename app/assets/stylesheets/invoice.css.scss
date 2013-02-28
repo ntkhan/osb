@@ -45,18 +45,22 @@
         margin-top: -93px;
     }
     .grid_table table {
-        col.one {/*check box*/
-          width: 33px;
+        col.one {/*invoice*/
+            min-width: 82px;
         }
-        col.two {/*invoice*/
-          min-width: 82px;
+        col.two {/*clients*/
+            min-width: 450px;
         }
-        col.three {/*clients*/
-          width: 200px;
+        col.three { /*date*/
+            min-width: 90px;
         }
-        col.four {/*description*/
-          width: 103px;
+        col.four { /*amount*/
+            min-width: 82px;
         }
+    }
+    .btn_large.small_case{
+        text-transform: none;
+        padding: 0 15px;
     }
 }
 .chzn-container {
