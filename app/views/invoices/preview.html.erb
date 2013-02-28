@@ -93,11 +93,11 @@
                   <th><%= number_to_currency(@invoice.sub_total) %></th>
                 </tr>
                 <tr>
-                  <td>Discount - <%= @invoice.discount_percentage.to_s + "%" %></td>
+                  <td>Discount <%= @invoice.discount_percentage %></td>
                   <td><%= number_to_currency(@invoice.discount_amount) %></td>
                 </tr>
                 <tr>
-                  <td class="bottom_padding">Tax - %</td>
+                  <td class="bottom_padding">Tax</td>
                   <td><%= number_to_currency(@invoice.tax_amount) %></td>
                 </tr>
                 <tr class="single_border">
