@@ -1,61 +1,73 @@
 <%= form_for(@client_billing_info) do |f| %>
-  <% if @client_billing_info.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client_billing_info.errors.count, "error") %> prohibited this client_billing_info from being saved:</h2>
+    <% if @client_billing_info.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@client_billing_info.errors.count, "error") %> prohibited this client_billing_info from
+            being saved:</h2>
 
-      <ul>
-      <% @client_billing_info.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @client_billing_info.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :country %>
+      <br/>
+      <%= f.text_field :country %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :street_address_1 %><br />
-    <%= f.text_field :street_address_1 %>
-  </div>
-  <div class="field">
-    <%= f.label :street_address_2 %><br />
-    <%= f.text_field :street_address_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :province_or_state %><br />
-    <%= f.text_field :province_or_state %>
-  </div>
-  <div class="field">
-    <%= f.label :postal_or_zip_code %><br />
-    <%= f.text_field :postal_or_zip_code %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_business %><br />
-    <%= f.text_field :phone_business %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_mobile %><br />
-    <%= f.text_field :phone_mobile %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_home %><br />
-    <%= f.text_field :phone_home %>
-  </div>
-  <div class="field">
-    <%= f.label :fax %><br />
-    <%= f.text_field :fax %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_field :notes %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :street_address_1 %>
+      <br/>
+      <%= f.text_field :street_address_1 %>
+    </div>
+    <div class="field">
+      <%= f.label :street_address_2 %>
+      <br/>
+      <%= f.text_field :street_address_2 %>
+    </div>
+    <div class="field">
+      <%= f.label :city %>
+      <br/>
+      <%= f.text_field :city %>
+    </div>
+    <div class="field">
+      <%= f.label :province_or_state %>
+      <br/>
+      <%= f.text_field :province_or_state %>
+    </div>
+    <div class="field">
+      <%= f.label :postal_or_zip_code %>
+      <br/>
+      <%= f.text_field :postal_or_zip_code %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_business %>
+      <br/>
+      <%= f.text_field :phone_business %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_mobile %>
+      <br/>
+      <%= f.text_field :phone_mobile %>
+    </div>
+    <div class="field">
+      <%= f.label :phone_home %>
+      <br/>
+      <%= f.text_field :phone_home %>
+    </div>
+    <div class="field">
+      <%= f.label :fax %>
+      <br/>
+      <%= f.text_field :fax %>
+    </div>
+    <div class="field">
+      <%= f.label :notes %>
+      <br/>
+      <%= f.text_field :notes %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

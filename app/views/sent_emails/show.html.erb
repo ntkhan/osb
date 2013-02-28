@@ -3,9 +3,9 @@
 <p>
   <b>Email Contents:</b>
 <div id="email_body" style="padding:10px;border:1px solid #ccc;">
-<%= @sent_email.content.html_safe unless @sent_email.content.blank?%>
+  <%= @sent_email.content.html_safe unless @sent_email.content.blank? %>
 </div>
 </p>
 
 
-<%= link_to 'Back', :controller=>"sent_emails"%>
+<%= link_to 'Back', :controller => "sent_emails" %>

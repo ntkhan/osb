@@ -1,7 +1,7 @@
 <% grand_total, due_amount, payments_entered = 0, 0, 0 %>
 
 <% @payments.each_with_index do |payment, index| %>
-    <% #grand_total = grand_total + payment.invoice.invoice_total   %>
+    <% #grand_total = grand_total + payment.invoice.invoice_total    %>
     <% due_amount += Payment.invoice_remaining_amount(payment.invoice.id)
        payments_entered += Payment.invoice_paid_amount(payment.invoice.id)
     %>
