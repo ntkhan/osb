@@ -1,4 +1,4 @@
-<%= nested_form_for @invoice, :html => {:class => 'form-horizontal'} do |f| %>
+<%= nested_form_for @invoice, :html => {:class => 'form-horizontal',:novalidate => ""} do |f| %>
   <% @parent_f = f %>
   <div class="_form">
     <div class="content_middle">
@@ -56,7 +56,7 @@
               <div class="field_row description">
                 <div class="label_field left single"><%= f.label :invoice_date, content_tag(:span,'Invoice Date') %></div>
                 <div class="small_field">
-                  <%= f.text_field :invoice_date %>
+                  <%= f.text_field :invoice_date, :required => "" %>
                 </div>
               </div><!--field_row-->
 

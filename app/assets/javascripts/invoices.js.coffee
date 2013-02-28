@@ -362,14 +362,6 @@ jQuery ->
   jQuery("#invoice_payment_terms_id").change ->
     number_of_days = jQuery("option:selected",this).attr('number_of_days')
     setDuedate(jQuery("#invoice_invoice_date").val(),number_of_days)
-#    if number_of_days?
-#     number_of_days = parseInt(number_of_days)
-#     invoice_invoice_date = new Date(jQuery("#invoice_invoice_date").val());
-#     invoice_due_date = new Date(invoice_invoice_date);
-#     invoice_due_date.setDate(invoice_due_date.getDate() + number_of_days);
-#     jQuery("#invoice_due_date").val(formated_date(invoice_due_date))
-#    else
-#     jQuery("#invoice_due_date").val("")
 
   # calculate invoice due date
   setDuedate = (invoice_date,term_days) ->
