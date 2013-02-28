@@ -39,7 +39,6 @@ class window.InlineForms
       current_dropdown.qtip({content:
         text: "Record saved and selected",
         hide: event: false, show: event: false,
-        tigger: 'manual',
         position: at: 'bottomMiddle', style: tip: corner: 'topLeft',
         api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),10000})
       current_dropdown.qtip().show()),300
