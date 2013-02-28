@@ -20,8 +20,8 @@
         <th class="align_center"><%= check_box_tag 'select_all' %></th>
         <th class="align_center">Invoice#</th>
         <th class="align_left">Invoice Description</th>
-        <th class="align_center">Client</th>
-        <th class="align_right">Total</th>
+        <th class="align_left">Client</th>
+        <th class="align_center">Total</th>
         <th class="align_center">Date</th>
         <th class="align_center">Status</th>
       </tr>
@@ -32,9 +32,9 @@
             <td class="align_center"><%= check_box_tag "invoice_ids[]", inv.id %>
             <td class="align_center"><%= inv.invoice_number %></td>
             <td class="align_left"><%= inv.notes %></td>
-            <td class="align_center"><%#= inv.client.organization_name unless inv.client.organization_name.blank?%></td>
-            <td class="align_right currency"><%= number_to_currency(inv.invoice_total) %>
-            <td class="align_center"><%= "2013-01-01" %></td>
+            <td class="align_left"><%= inv.client.organization_name rescue ""%></td>
+            <td class="align_center currency"><%= number_to_currency(inv.invoice_total) %>
+            <td class="align_center"><%= inv.invoice_date.to_date.strftime("%m/%d/%Y") rescue "" %></td>
             <td class="align_center <%= inv.status %>" title="<%= inv.tooltip %>">
             <span class="invoice-status invoice-sent">
               <%= inv.status.downcase %>
