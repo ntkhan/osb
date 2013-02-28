@@ -1,10 +1,10 @@
 <%
-no_record_message = "You haven't entered any payment yet. Please click on New Payment button to enter new payment."
-if params[:status] == "archived" || @action == "recovered from archived"
-  no_record_message = "You haven't any archived payment."
-elsif params[:status] == "deleted" || @action == "recovered from deleted"
-  no_record_message = "You haven't any deleted payment."
-end
+   no_record_message = "You haven't entered any payment yet. Please click on New Payment button to enter new payment."
+   if params[:status] == "archived" || @action == "recovered from archived"
+     no_record_message = "You haven't any archived payment."
+   elsif params[:status] == "deleted" || @action == "recovered from deleted"
+     no_record_message = "You haven't any deleted payment."
+   end
 %>
 <% if @payments.length > 0 %>
     <% @payments.each do |payment| %>
@@ -12,7 +12,7 @@ end
           <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
           <td class="align_center"><%= link_to payment.invoice.invoice_number, invoice_path(payment.invoice), :class => "invoices_link" rescue "" %><%#= link_to payment.invoice_id, payment%></td>
           <td class="align_left"><%= payment.client_name %></td>
-          <td class="align_center"><%= payment.payment_method || payment.payment_type%></td>
+          <td class="align_center"><%= payment.payment_method || payment.payment_type %></td>
           <td class="align_center"><%= payment.notes %></td>
           <td class="align_center"><%= payment.payment_date %></td>
           <td class="align_right"><%= "#{number_to_currency(payment.payment_amount)}" %></td>
@@ -33,7 +33,7 @@ end
     <tr>
       <td colspan="9">
         <div class="no_record_container">
-          <%=  no_record_message %>
+          <%= no_record_message %>
         </div>
       </td>
     </tr>

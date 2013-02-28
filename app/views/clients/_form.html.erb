@@ -1,4 +1,4 @@
-<%= nested_form_for @client, :html => {:id => 'newClient'} do |f| %>
+<%= nested_form_for @client, :html => {:id => 'newClient', :novalidate => ""} do |f| %>
     <% @parent_f = f %>
 
     <div class="content_middle">
@@ -22,7 +22,7 @@
             <div class="field_row">
               <div class="label_field left single"><span>Email</span></div>
               <div class="medium_field">
-                <%= f.text_field :email %>
+                <%= f.text_field :email, :required => "" %>
               </div>
               <div class="label_field right">Business Phone</div>
               <div class="small_field"><%= f.text_field :business_phone %></div>

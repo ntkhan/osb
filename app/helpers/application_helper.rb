@@ -19,7 +19,7 @@ module ApplicationHelper
                 :data => {
                     :remote => true,
                     :url => url_for(:action => action_name, :params => params)},
-                    :style => "width:60px;"
+                :style => "width:60px;"
     )
   end
 

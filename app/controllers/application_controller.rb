@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
   before_filter :_reload_libs #reload libs on every request for dev environment only
-  #layout :choose_layout
+                              #layout :choose_layout
 
-  #reload libs on every request for dev environment only
+                              #reload libs on every request for dev environment only
   def _reload_libs
     if defined? RELOAD_LIBS
       RELOAD_LIBS.each do |lib|
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def choose_layout
-    ['preview', 'payments_history'].include?(action_name) ?  'preview_mode' :  'application'
+    ['preview', 'payments_history'].include?(action_name) ? 'preview_mode' : 'application'
   end
 
 end

@@ -1,49 +1,58 @@
 <%= form_for(@recurring_profile_line_item) do |f| %>
-  <% if @recurring_profile_line_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recurring_profile_line_item.errors.count, "error") %> prohibited this recurring_profile_line_item from being saved:</h2>
+    <% if @recurring_profile_line_item.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@recurring_profile_line_item.errors.count, "error") %> prohibited this
+            recurring_profile_line_item from being saved:</h2>
 
-      <ul>
-      <% @recurring_profile_line_item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @recurring_profile_line_item.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :invoice_id %>
+      <br/>
+      <%= f.number_field :invoice_id %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :invoice_id %><br />
-    <%= f.number_field :invoice_id %>
-  </div>
-  <div class="field">
-    <%= f.label :item_id %><br />
-    <%= f.number_field :item_id %>
-  </div>
-  <div class="field">
-    <%= f.label :item_name %><br />
-    <%= f.text_field :item_name %>
-  </div>
-  <div class="field">
-    <%= f.label :item_description %><br />
-    <%= f.text_field :item_description %>
-  </div>
-  <div class="field">
-    <%= f.label :item_unit_cost %><br />
-    <%= f.text_field :item_unit_cost %>
-  </div>
-  <div class="field">
-    <%= f.label :item_quantity %><br />
-    <%= f.text_field :item_quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :tax_1 %><br />
-    <%= f.number_field :tax_1 %>
-  </div>
-  <div class="field">
-    <%= f.label :tax_2 %><br />
-    <%= f.number_field :tax_2 %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :item_id %>
+      <br/>
+      <%= f.number_field :item_id %>
+    </div>
+    <div class="field">
+      <%= f.label :item_name %>
+      <br/>
+      <%= f.text_field :item_name %>
+    </div>
+    <div class="field">
+      <%= f.label :item_description %>
+      <br/>
+      <%= f.text_field :item_description %>
+    </div>
+    <div class="field">
+      <%= f.label :item_unit_cost %>
+      <br/>
+      <%= f.text_field :item_unit_cost %>
+    </div>
+    <div class="field">
+      <%= f.label :item_quantity %>
+      <br/>
+      <%= f.text_field :item_quantity %>
+    </div>
+    <div class="field">
+      <%= f.label :tax_1 %>
+      <br/>
+      <%= f.number_field :tax_1 %>
+    </div>
+    <div class="field">
+      <%= f.label :tax_2 %>
+      <br/>
+      <%= f.number_field :tax_2 %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

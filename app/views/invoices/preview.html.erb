@@ -16,7 +16,9 @@
           <div class="primary_address">
             <address>
               <p><%= @invoice.client.organization_name %></p>
+
               <p><%= @invoice.client.address_street1 %></p>
+
               <p><%= @invoice.client.city %></p>
             </address>
           </div>
@@ -24,16 +26,19 @@
             <div class="secondary_address">
               <address>
                 <p class="bold"><%= @invoice.client.organization_name %></p>
+
                 <p><%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %></p>
+
                 <p><%= @invoice.client.city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %></p>
+
                 <p><%= @invoice.client.address_street1.to_s+ " " +@invoice.client.address_street2.to_s %></p>
               </address>
             </div>
             <div class="payment_summary_table">
               <table cellpadding="0" cellspacing="0">
                 <colgroup>
-                  <col class="first" />
-                  <col class="second" />
+                  <col class="first"/>
+                  <col class="second"/>
                 </colgroup>
                 <tr>
                   <td>Invoice #</td>
@@ -93,11 +98,11 @@
                   <th><%= number_to_currency(@invoice.sub_total) %></th>
                 </tr>
                 <tr>
-                  <td>Discount - <%= @invoice.discount_percentage.to_s + "%" %></td>
+                  <td>Discount <%= @invoice.discount_percentage %></td>
                   <td><%= number_to_currency(@invoice.discount_amount) %></td>
                 </tr>
                 <tr>
-                  <td class="bottom_padding">VAT - %</td>
+                  <td class="bottom_padding">Tax</td>
                   <td><%= number_to_currency(@invoice.tax_amount) %></td>
                 </tr>
                 <tr class="single_border">

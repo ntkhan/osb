@@ -9,17 +9,17 @@
     <th></th>
   </tr>
 
-<% @payment_terms.each do |payment_term| %>
-  <tr>
-    <td><%= payment_term.number_of_days %></td>
-    <td><%= payment_term.description %></td>
-    <td><%= link_to 'Show', payment_term %></td>
-    <td><%= link_to 'Edit', edit_payment_term_path(payment_term) %></td>
-    <td><%= link_to 'Destroy', payment_term, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @payment_terms.each do |payment_term| %>
+      <tr>
+        <td><%= payment_term.number_of_days %></td>
+        <td><%= payment_term.description %></td>
+        <td><%= link_to 'Show', payment_term %></td>
+        <td><%= link_to 'Edit', edit_payment_term_path(payment_term) %></td>
+        <td><%= link_to 'Destroy', payment_term, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Payment term', new_payment_term_path %>

@@ -6,18 +6,18 @@ jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');
 jQuery('.top_links').hide();
 jQuery('#active_links a').removeClass('active');
 jQuery('.primary_heading h1 span').html("&nbsp;/&nbsp;<%= status.capitalize%>");
- <%if status == "active" %>
-    jQuery('.archive,.destroy,.payment').show();
-    jQuery('#active_links a.get_actives').addClass('active');
+<%if status == "active" %>
+jQuery('.archive,.destroy,.payment').show();
+jQuery('#active_links a.get_actives').addClass('active');
 <% elsif status == "archived"%>
-    jQuery('.recover_archived,.destroy,.payment').show();
-    jQuery('#active_links a.get_archived').addClass('active');
+jQuery('.recover_archived,.destroy,.payment').show();
+jQuery('#active_links a.get_archived').addClass('active');
 <% elsif status == "deleted"%>
-    jQuery('.recover_deleted,.payment').show();
-    jQuery('#active_links a.get_deleted').addClass('active');
+jQuery('.recover_deleted,.payment').show();
+jQuery('#active_links a.get_deleted').addClass('active');
 <%end%>
 jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed, .viewed").qtip();
-jQuery('#select_all').attr('checked',false);
+jQuery('#select_all').attr('checked', false);
 
 jQuery("table.invoice_listing").trigger('update');
 
