@@ -5,7 +5,7 @@ module Reporting
     # Receives report name and criteria as an options hash  and returns the Report object
     def self.get_report options={}
       report_name = options[:report_name] || "no report"
-      report =  "Reporting::#{report_name.camelize}".constantize.new(options)
+      report =  "Reporting::Reports::#{report_name.camelize}".constantize.new(options)
     end
   end
 end

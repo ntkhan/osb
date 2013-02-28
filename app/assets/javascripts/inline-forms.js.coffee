@@ -53,7 +53,7 @@ class window.InlineForms
     # ajust chosen list width to fit the form
     @adjustChosenWidth()
     # Show form
-    @inlineFormContainer.show()
+    @inlineFormContainer.show().find("input:eq(0)").focus()
     # bind the hideForm to form's close button
     @chznContainer.find(".close_btn").live "click", (e) =>
       @hideForm()
