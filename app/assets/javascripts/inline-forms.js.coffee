@@ -40,7 +40,7 @@ class window.InlineForms
         text: "Record saved and selected",
         hide: event: false, show: event: false,
         position: at: 'bottomMiddle', style: tip: corner: 'topLeft',
-        api: onShow:  setTimeout (-> current_dropdown.qtip "hide"),10000})
+        api: onShow:  setTimeout (-> current_dropdown.qtip "destroy"),10000})
       current_dropdown.qtip().show()),300
 
   showForm: ->

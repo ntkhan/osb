@@ -69,13 +69,15 @@ jQuery(function () {
         jQuery(".sub", jQuery(this)).show();
     });
     jQuery("#nav").mouseout(function (event) {
+        try {
         var e = event.toElement || event.relatedTarget;
         if (e.parentNode == jQuery(this).find('ul.select') || e == this)
             return;
         else {
             jQuery(".sub").hide();
             jQuery("li a.active", jQuery(this)).next(".sub").show();
-        }
+        }    }
+        catch(e){}
     });
 
     // toggle page effect by clicking on alpha tag
