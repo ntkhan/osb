@@ -545,11 +545,11 @@ h4 {
   color: #757575;
 }
 
-.grid_table table td.sent {
+.grid_table table td.sent, .grid_table table td.viewed,{
   color: #00ace5;
 }
 
-.grid_table table td.partial {
+.grid_table table td.partial, .grid_table table td.draft-partial {
   color: #f26522;
 }
 
