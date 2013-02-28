@@ -25,8 +25,7 @@ module Reporting
         payments.notes,
         payments.payment_amount,
         payments.created_at").includes(:invoice => :client).joins(:invoice => :client).
-            where("payments.created_at" => @report_criteria.from_date.to_time.beginning_of_day..@report_criteria.to_date.to_time.end_of_day).
-            where("payments.payment_type <> ?", "credit")
+            where("payments.created_at" => @report_criteria.from_date.to_time.beginning_of_day..@report_criteria.to_date.to_time.end_of_day)
 
 
         payments = payments.where(["clients.id = ?", @report_criteria.client_id]) unless @report_criteria.client_id == 0
