@@ -55,7 +55,7 @@ class Invoice < ActiveRecord::Base
 
   class << self
     def get_next_invoice_number user_id
-      ((Invoice.maximum("id") || 0) + 1).to_s.rjust(5, "0")
+      ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
     end
   end
 

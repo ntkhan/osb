@@ -11,7 +11,7 @@
                 <div class="field_row description">
                   <div class="label_field left single"><%= f.label :client_id, content_tag(:span, 'Client') %></div>
                   <div class="small_field">
-                    <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300"} %>
+                    <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300", :required => ""} %>
                     <ul class="field_description">
                       <li>client you want to send invoice</li>
                       <span id="last_invoice" style="display: none;"></span>
@@ -68,7 +68,7 @@
                 <div class="field_row description">
                   <div class="label_field left single"><%= f.label :due_date, "Due Date" %></div>
                   <div class="small_field">
-                    <%= f.text_field :due_date %>
+                    <%= f.text_field :due_date, :placeholder => "TBD" %>
                   </div>
                 </div>
                 <!--field_row-->
