@@ -1,29 +1,17 @@
 <%= form_for(@company) do |f| %>
-  <% if @company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-      <ul>
-        <% @company.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%#= f.label "company_name" %>
-    <label class="form_title" for="company_org_name"><span>*</span><div>Company name</div></label>
+    <label class="form_title label_field" for="company_org_name"><span>Company name</span></label>
     <%= f.text_field :org_name %>
   </div>
   <div class="field">
     <%#= f.label "first_name" %>
-    <label class="form_title" for="company_admin_first_name"><span>*</span><div>First name</div></label>
+    <label class="form_title label_field" for="company_admin_first_name"><span>First name</span></label>
     <%= f.text_field :admin_first_name %>
   </div>
   <div class="field">
     <%#= f.label "last_name" %>
-    <label class="form_title" for="company_admin_last_name"><span>*</span><div>Last name</div></label>
+    <label class="form_title label_field" for="company_admin_last_name"><span>Last name</span></label>
     <%= f.text_field :admin_last_name %>
   </div>
   <div class="field">
@@ -65,8 +53,8 @@
     <%= f.select :time_zone,ActiveSupport::TimeZone.all, {:prompt => ""}, {"data-placeholder" => "Select a time zone...",:class => "chzn-select"} %>
   <%#= f.text_field :time_zone %>
   </div>
-  <div class="actions" style="text-align: center;">
-    <%= f.submit :class => "btn_large" %>
+  <div class="content_bottom" style="text-align: center;">
+    <%= f.submit :class => "btn_large submit" %>
   </div>
 <% end %>
 
