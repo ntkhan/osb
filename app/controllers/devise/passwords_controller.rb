@@ -41,16 +41,16 @@ class Devise::PasswordsController < DeviseController
 
   protected
 
-    # The path used after sending reset password instructions
-    def after_sending_reset_password_instructions_path_for(resource_name)
-      new_session_path(resource_name)
-    end
+  # The path used after sending reset password instructions
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    new_session_path(resource_name)
+  end
 
-    # Check if a reset_password_token is provided in the request
-    def assert_reset_token_passed
-      if params[:reset_password_token].blank?
-        set_flash_message(:error, :no_token)
-        redirect_to new_session_path(resource_name)
-      end
+  # Check if a reset_password_token is provided in the request
+  def assert_reset_token_passed
+    if params[:reset_password_token].blank?
+      set_flash_message(:error, :no_token)
+      redirect_to new_session_path(resource_name)
     end
+  end
 end

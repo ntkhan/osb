@@ -4,7 +4,7 @@
     <div class="primary_heading">
       <h1>
         <%= t '.title', :default => model_class.model_name.human.pluralize %>
-       <span>&nbsp;/&nbsp;Active</span>
+        <span>&nbsp;/&nbsp;Active</span>
       </h1>
     </div>
     <div class="primary_btn">
@@ -81,47 +81,47 @@
 </div><!--invoice-->
 
 <div class="invoice_model">
-<%= render 'pay_invoice' %>
+  <%= render 'pay_invoice' %>
 <%# b = "" %>
 <%# a = open(File.join(Rails.root, 'app', 'assets', '/stylesheets/','application.css'), 'rb') {|f| b += f.read} %>
 <%#= a %>
-<!-- START: invoices with payments popup -->
-<%= form_tag "invoices/delete_invoices_with_payments", :remote => true do -%>
-    <div id="invoices_with_payments" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="model_grey_container">
-        <div class="modal-header">
-          <div id="invoice_popup_error" class="alert alert-error" style="display:none;">
-            <button class="close" type="button" style="margin:0px;">×</button>
-            <table>
-              <tbody>
-              <tr>
-                <td>
-                  <span>You haven't selected any invoice. Please select one or more invoices and try again.</span>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <h1>How to handle invoice payments ?</h1>
+  <!-- START: invoices with payments popup -->
+  <%= form_tag "invoices/delete_invoices_with_payments", :remote => true do -%>
+      <div id="invoices_with_payments" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="model_grey_container">
+          <div class="modal-header">
+            <div id="invoice_popup_error" class="alert alert-error" style="display:none;">
+              <button class="close" type="button" style="margin:0px;">×</button>
+              <table>
+                <tbody>
+                <tr>
+                  <td>
+                    <span>You haven't selected any invoice. Please select one or more invoices and try again.</span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <h1>How to handle invoice payments ?</h1>
 
-          <p>The invoice you are trying to delete has payments associated with it. You must decide what
-            to do with payments before the invoice can be deleted.</p>
+            <p>The invoice you are trying to delete has payments associated with it. You must decide what
+              to do with payments before the invoice can be deleted.</p>
 
-          <div class="cross_btn">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-              <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
-            </button>
+            <div class="cross_btn">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="footer ">
-          <%= submit_tag "Convert Payment to Credit", :name => "convert_to_credit", :class => "btn_large submit small_case" %>
-          <%= submit_tag "Permanently Delete Payment", :name => "destroy", :class => "btn_large submit small_case" %>
-          <a href="#" data-dismiss="modal" class="btn_large grey">cancel</a>
+          <div class="modal-body">
+          </div>
+          <div class="footer ">
+            <%= submit_tag "Convert Payment to Credit", :name => "convert_to_credit", :class => "btn_large submit small_case" %>
+            <%= submit_tag "Permanently Delete Payment", :name => "destroy", :class => "btn_large submit small_case" %>
+            <a href="#" data-dismiss="modal" class="btn_large grey">cancel</a>
+          </div>
         </div>
       </div>
-    </div>
-<% end %>
-<!-- END: invoices with payments popup -->
+  <% end %>
+  <!-- END: invoices with payments popup -->
 </div><!--invoice_model-->

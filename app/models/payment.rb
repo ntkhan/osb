@@ -7,9 +7,11 @@ class Payment < ActiveRecord::Base
   acts_as_paranoid
   default_scope order("#{self.table_name}.created_at DESC")
   before_destroy :check_credit_payments
+
   def check_credit_payments
-   false if self.payment_type == "credit" ||  self.payment_type != nil
+    false if self.payment_type == "credit" || self.payment_type != nil
   end
+
   def client_name
     invoice = Invoice.with_deleted.find(self.invoice_id)
     invoice.client.organization_name rescue "no client"
@@ -42,7 +44,7 @@ class Payment < ActiveRecord::Base
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
     credit_pay.invoice_id = invoice.id
-    credit_pay.payment_date =  Date.today
+    credit_pay.payment_date = Date.today
     credit_pay.notes = "Overpayment against invoice# #{invoice.invoice_number}"
     credit_pay.payment_amount = amount
     credit_pay.save
@@ -118,18 +120,21 @@ class Payment < ActiveRecord::Base
         self.only_deleted.page(params[:page])
     end
   end
-  
+
   def notify_client current_user_email
-    PaymentMailer.payment_notification_email(current_user_email,self.invoice.client, self.invoice.invoice_number, self).deliver if self.send_payment_notification
+    PaymentMailer.payment_notification_email(current_user_email, self.invoice.client, self.invoice.invoice_number, self).deliver if self.send_payment_notification
   end
 
   def self.payments_history client
-    ids = client.invoices.collect{|invoice| invoice.id}
-    where("invoice_id IN(?)",ids)
+    ids = client.invoices.collect { |invoice| invoice.id }
+    where("invoice_id IN(?)", ids)
   end
 
   def self.total_payments_amount
     where('payment_type is null or payment_type != "credit"').sum('payment_amount')
   end
 
+  def self.partial_payments invoice_id
+    where("invoice_id = ?", invoice_id)
+  end
 end

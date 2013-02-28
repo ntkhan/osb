@@ -14,7 +14,8 @@
           <div class="medium_field">
             <%= f.text_field :payment_method %>
           </div>
-        </div><!--field_row-->
+        </div>
+        <!--field_row-->
 
         <div class="field_row">
           <div class="label_field left single"><%= f.label :payment_amount %></div>
@@ -25,29 +26,35 @@
           <div class="medium_field">
             <%= f.text_field :payment_date %>
           </div>
-        </div><!--field_row-->
+        </div>
+        <!--field_row-->
 
         <div class="field_row textarea">
           <div class="label_field left single"><%= f.label :notes %></div>
           <div class="large_field">
             <%= f.text_area :notes %>
           </div>
-        </div><!--field_row-->
+        </div>
+        <!--field_row-->
 
         <div class="options_row">
           <div class="options_content">
             <div class="options_content_row">
               <ul>
-                <li><%= f.check_box :send_payment_notification %><%= f.label :send_payment_notification, :class=> "checkbox"  %></li>
-                <li><%= f.check_box :paid_full %><%= f.label :paid_full, :class=> "checkbox" %></li>
+                <li><%= f.check_box :send_payment_notification %><%= f.label :send_payment_notification, :class => "checkbox" %></li>
+                <li><%= f.check_box :paid_full %><%= f.label :paid_full, :class => "checkbox" %></li>
               </ul>
             </div>
           </div>
-        </div><!--field_row-->
+        </div>
+        <!--field_row-->
 
-      </div><!--fields_content_data-->
-    </div><!--fields_content_container-->
-  </div><!--fields_content-->
+      </div>
+      <!--fields_content_data-->
+    </div>
+    <!--fields_content_container-->
+  </div>
+  <!--fields_content-->
 
 </div><!--content_middle-->
 

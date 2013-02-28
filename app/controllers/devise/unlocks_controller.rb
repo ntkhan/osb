@@ -23,22 +23,22 @@ class Devise::UnlocksController < DeviseController
 
     if resource.errors.empty?
       set_flash_message :notice, :unlocked if is_navigational_format?
-      respond_with_navigational(resource){ redirect_to after_unlock_path_for(resource) }
+      respond_with_navigational(resource) { redirect_to after_unlock_path_for(resource) }
     else
-      respond_with_navigational(resource.errors, :status => :unprocessable_entity){ render :new }
+      respond_with_navigational(resource.errors, :status => :unprocessable_entity) { render :new }
     end
   end
 
   protected
 
-    # The path used after sending unlock password instructions
-    def after_sending_unlock_instructions_path_for(resource)
-      new_session_path(resource)
-    end
+  # The path used after sending unlock password instructions
+  def after_sending_unlock_instructions_path_for(resource)
+    new_session_path(resource)
+  end
 
-    # The path used after unlocking the resource
-    def after_unlock_path_for(resource)
-      new_session_path(resource)
-    end
+  # The path used after unlocking the resource
+  def after_unlock_path_for(resource)
+    new_session_path(resource)
+  end
 
 end

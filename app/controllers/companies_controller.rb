@@ -26,11 +26,11 @@ class CompaniesController < ApplicationController
   def new
     user_company = current_user.companies
     if user_company.present?
-      @company =  user_company.first
+      @company = user_company.first
       redirect_to edit_company_url(@company)
     else
       @company = user_company.build
-      respond_to {|format| format.html}
+      respond_to { |format| format.html }
     end
   end
 
