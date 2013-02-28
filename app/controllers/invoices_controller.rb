@@ -44,6 +44,7 @@ class InvoicesController < ApplicationController
   def new
     if params[:invoice_for_client]
       @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today, :client_id => params[:invoice_for_client]})
+      3.times { @invoice.invoice_line_items.build() }
     elsif params[:id]
       @invoice = Invoice.find(params[:id]).use_as_template
       @invoice.invoice_line_items.build()

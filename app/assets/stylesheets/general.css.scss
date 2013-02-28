@@ -691,8 +691,12 @@ textarea,
   border-radius: 4px;
   background-color: #ffffff;
 }
-input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+ select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
   background-color: #EEEEEE;
+  cursor: not-allowed;
+}
+input[disabled]{
+  background-color: #CCCCCC;
   cursor: not-allowed;
 }
 .options_content {

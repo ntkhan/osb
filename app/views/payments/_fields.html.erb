@@ -24,12 +24,14 @@
               <p class="organization"><%= payment.client_name %></p>
 
               <p class="person_name"><%= payment.client_full_name %></p>
-            </div>   <br />
+            </div>
+            <br/>
+
             <div class="payment_person">
               <% if payment.invoice.status == 'partial' %>
                   <p><b>Partial payments</b></p>
                   <% Payment.partial_payments(payment.invoice.id).each do |partial_payment| %>
-                      <p><%=  "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>
+                      <p><%= "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>
                   <% end %>
               <% end %>
             </div>
@@ -53,9 +55,9 @@
             </div>
           </div>
           <!--field_row-->
+          <% if client_credit > 0 %>
+              <div class="field_row">
 
-          <div class="field_row">
-            <% if client_credit > 0 %>
                 <div class="label_field left single">&nbsp;</div>
                 <div class="field_check btm">
                   <%= check_box " ", index, :id => "#{index}", :class => "apply_credit" %>
@@ -63,8 +65,8 @@
                     from Credit <%= current_user.currency_code %>.<%= number_to_currency(client_credit) %>
                     available</label></p>
                 </div>
-            <% end %>
-          </div>
+              </div>
+          <% end %>
           <!--field_row-->
 
           <div class="field_row">
