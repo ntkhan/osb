@@ -1,4 +1,4 @@
 jQuery(".modal-body").html("<%= escape_javascript(render(:partial=>"unpaid_invoices")) %>");
 <% if @invoices.blank? %>
-    jQuery("form#invoice_selection input[type=submit]").attr('disabled','disabled');
+
 <% end %>
