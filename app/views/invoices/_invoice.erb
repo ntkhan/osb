@@ -22,6 +22,7 @@
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_invoice_path(invoice) %>
             <%= link_to "Pay", "payments/enter_payment?invoice_id=#{invoice.id}&pay_invoice=true", :remote => true, "data-toggle" => "modal", "data-target" => "#paymentModal" %>
+            <%#= link_to "Pay", invoice.paypal_url(invoices_url,paypal_payments_invoices_path) %>
             <%# unless params[:status] == "deleted" %>
             <%#= link_to t('.destroy', :default => "Delete"),
                             invoice_path(invoice),
