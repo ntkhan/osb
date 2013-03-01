@@ -35,7 +35,7 @@ class InvoicesController < ApplicationController
   end
 
   def preview
-    @id = decrypt(Base64.decode64(params[:id])).to_i rescue @id = nil
+    @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
     @invoice = @id.blank? ? nil : Invoice.find(@id)
     @invoice.update_attribute("status", "viewed") if @invoice.present? && @invoice.status == "sent"
   end
