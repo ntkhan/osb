@@ -1,8 +1,24 @@
 <%= nested_form_for @invoice, :html => {:class => 'form-horizontal', :novalidate => ""} do |f| %>
     <% @parent_f = f %>
+
     <div class="_form">
       <div class="content_middle">
         <div class="fields_content">
+          <% if @invoice.status == "disputed"%>
+            <div class="response_to_client">
+             <div class="response_container">
+               <div>
+               <h1>Dispute History</h1>
+               </div>
+               <div class="field_row textarea">
+               <div class="label_field textarea" ><label>Response to Client</label></div>
+               <div class="large_field" style="clear:both;">
+                <%= text_area_tag "response_to_client" %>
+               </div>
+               </div>
+             </div>
+            </div>
+            <% end%>
           <div class="fields_content_container">
 
             <div class="fields_content_data new_invoice_fields">
