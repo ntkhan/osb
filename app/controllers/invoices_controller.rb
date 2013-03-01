@@ -189,9 +189,11 @@ class InvoicesController < ApplicationController
      respond_to { |format| format.js }
    end
   def paypal_payments
-    # send a post request to paypal to varify payment data
+    # send a post request to paypal to verify payment data
     response = RestClient.post("https://www.sandbox.paypal.com/cgi-bin/webscr", params.merge({"cmd" => "_notify-validate"}), :content_type => "application/x-www-form-urlencoded")
-    Rails.logger.debug "Paypal Response: #{response}"
+    invoice = Invoice.find(params[:invoice])
+    status = response == "VERIFIED" ? "success" : "fail"
+    invoice.update_attribute('status', status)
     render :nothing => true
   end
 
