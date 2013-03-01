@@ -9,7 +9,11 @@
       <li class="no_border"><%= link_to "Payments history", {:controller => 'payments', :action => 'payments_history', :id => @invoice.id}, :class => "no_padding" %></li>
     </ul>
   </div>
-  <div class="payment_content" style="padding: 30px 0 0;">
+  <div class="enter_payment_btn">
+    <!--<a href="#">enter payment on invoice</a>-->
+    <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.id}","http://#{request.host_with_port}/invoices/paypal_payments") %>
+  </div>
+  <div class="payment_content">
     <div class="payment_container">
       <div class="payment_corner <%= @invoice.status %>"></div>
       <div class="payment_invoice_data">

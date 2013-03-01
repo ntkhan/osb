@@ -30,7 +30,7 @@ Osb::Application.routes.draw do
     end
   end
 
-  match "invoices/preview" => "invoices#preview"
+  #match "invoices/preview" => "invoices#preview"
 
   match "invoices/unpaid_invoices" => "invoices#unpaid_invoices"
 
@@ -85,6 +85,8 @@ Osb::Application.routes.draw do
       post 'duplicate_invoice'
       get 'enter_single_payment'
       get 'send_invoice'
+      post 'paypal_payments'
+      get 'preview'
     end
   end
 
