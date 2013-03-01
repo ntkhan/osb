@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                   <td>Amount</td>
-                  <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></td>
+                  <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></td>
                 </tr>
               </table>
             </div>
@@ -107,7 +107,7 @@
                 </tr>
                 <tr class="double_border">
                   <th class="top_padding">Amount Due</th>
-                  <th><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></th>
+                  <th><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></th>
                 </tr>
               </table>
             </div>
