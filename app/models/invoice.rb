@@ -198,7 +198,7 @@ class Invoice < ActiveRecord::Base
         :cmd => '_cart',
         :upload => 1,
         :return => return_url,
-        :notify_url => "http://osb.vteamslabs.com/invoices/invoice_pdf/54", #notify_url,
+        :notify_url => notify_url,
         :invoice => id
     }
 
