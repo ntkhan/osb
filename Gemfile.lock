@@ -122,6 +122,8 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     sass (3.2.4)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -150,6 +152,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -175,7 +178,9 @@ DEPENDENCIES
   nested_form
   pdfkit
   rails (= 3.2.9)
+  rest-client
   sass-rails (~> 3.2.3)
   turbo-sprockets-rails3
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  wkhtmltopdf-binary

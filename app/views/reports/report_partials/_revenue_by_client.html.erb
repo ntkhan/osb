@@ -71,7 +71,7 @@
               <% @report.report_data.each do |revenue| %>
                   <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
                   <tr>
-                    <td class="align_center"><%= revenue.organization_name %></td>
+                    <td class="align_left"><%= revenue.organization_name %></td>
                     <% 12.times do |month| %>
                         <td class="align_rirght"><%= number_to_currency(revenue["#{Date::MONTHNAMES[month+1]}"]) %></td>
                     <% end %>
@@ -97,7 +97,7 @@
         <div class="total_payment">
           <ul>
             <li class="total_payment_title">Total Payments Received:</li>
-            <li>$ <%= @report.report_total || "Total object missing" %> <span>usd</span></li>
+            <li>$ <%= @report.report_total || "" %></li>
           </ul>
         </div>
         <div class="footer_note">

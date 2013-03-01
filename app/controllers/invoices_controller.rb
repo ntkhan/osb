@@ -1,5 +1,6 @@
 class InvoicesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:preview, :invoice_pdf]
+  before_filter :authenticate_user!, :except => [:preview, :invoice_pdf, :paypal_payments]
+  protect_from_forgery :except => [:paypal_payments]
   # GET /invoices
   # GET /invoices.json
   layout :choose_layout
@@ -34,7 +35,7 @@ class InvoicesController < ApplicationController
   end
 
   def preview
-    @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
+    @id = params[:inv_id] #decrypt(Base64.decode64(params[:id])).to_i rescue @id = nil
     @invoice = @id.blank? ? nil : Invoice.find(@id)
     @invoice.update_attribute("status", "viewed") if @invoice.present? && @invoice.status == "sent"
   end
@@ -179,6 +180,21 @@ class InvoicesController < ApplicationController
     @invoices = Invoice.unarchived.page(params[:page])
     respond_to { |format| format.js }
   end
-
+   def dispute_invoice
+     invoice_id = params[:invoice_id]
+     invoice = Invoice.find(invoice_id)
+     invoice.update_attribute('status','disputed')
+     reason_for_dispute = params[:reason_for_dispute]
+     InvoiceMailer.dispute_invoice_email(current_user, invoice, reason_for_dispute).deliver
+     respond_to { |format| format.js }
+   end
+  def paypal_payments
+    # send a post request to paypal to verify payment data
+    response = RestClient.post("https://www.sandbox.paypal.com/cgi-bin/webscr", params.merge({"cmd" => "_notify-validate"}), :content_type => "application/x-www-form-urlencoded")
+    invoice = Invoice.find(params[:invoice])
+    status = response == "VERIFIED" ? "success" : "fail"
+    invoice.update_attribute('status', status)
+    render :nothing => true
+  end
 
 end
