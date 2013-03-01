@@ -111,7 +111,7 @@ ul li {
 }
 
 h1 {
-  font-family: 'Dosis Regular', sans-serif;
+  font-family: 'Dosis Medium', sans-serif;
   font-size: 24px;
   color: #00bde5; /*blue*/
   margin: 0px;
@@ -226,32 +226,22 @@ h4 {
 
 .nav_container {
   min-height: 86px;
+  background: url(/assets/nav_left.gif) no-repeat top left;
 }
 
 #nav {
   height: 43px;
   position: relative;
   z-index: 500;
-  width: 100%;
+  width: 98%;
   background: url(/assets/nav_right.gif) no-repeat top right;
-}
-.nav_left{
-    background: #00BDE5;
-    float: left;
-    height: 38px;
-    overflow: hidden;
-    width: 18px;
-}
-.nav_right{
-    background: #00BDE5;
-    float: left;
-    height: 38px;
-    min-width: 370px;
+  padding: 0 0 0 18px;
 }
 #nav .select {
   white-space: nowrap;
   width: 100%;
   margin: auto;
+  *width: 98%;
 }
 
 #nav li {
@@ -266,8 +256,7 @@ h4 {
 
 #nav .select a {
   display: block;
-  font-family: 'Dosis', sans-serif;
-  font-weight: normal;
+  font-family: 'Dosis Regular' , sans-serif;
   font-style: normal;
   font-size: 18px;
   color: #ffffff;
@@ -310,11 +299,9 @@ h4 {
   display: block;
   float: left;
   background: transparent;
-  font-family: 'Dosis', sans-serif;
-  font-weight: 300;
+  font-family: 'Dosis Regular', sans-serif;
   font-style: normal;
   color: #7d7d7d;
-  font-weight: normal;
   line-height: 34px;
   min-width: 39px;
 }
@@ -470,6 +457,9 @@ h4 {
   width: 100%;
   padding: 15px 0 0 0;
 }
+x:-o-prefocus, .grid_table table{
+    border-collapse: separate;
+}
 
 .grid_table table tr:first-child {
   height: 30px;
@@ -485,6 +475,10 @@ h4 {
 
 .grid_table table tr:hover {
   background-color: #f7f7f7;
+}
+
+tfoot tr:hover{
+    background: none !important;
 }
 
 .grid_table table th {
@@ -1030,3 +1024,4 @@ table.table_listing, table.report-data-table {
   width: 100px;
   z-index: 1000;
 }
+
