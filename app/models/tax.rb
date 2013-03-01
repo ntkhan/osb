@@ -15,11 +15,11 @@ class Tax < ActiveRecord::Base
   end
 
   def self.archive_multiple ids
-    self.multiple_taxes(ids).each {|tax| tax.archive}
+    self.multiple_taxes(ids).each { |tax| tax.archive }
   end
 
   def self.delete_multiple ids
-    self.multiple_taxes(ids).each {|tax| tax.destroy}
+    self.multiple_taxes(ids).each { |tax| tax.destroy }
   end
 
   def self.recover_archived ids
@@ -43,9 +43,12 @@ class Tax < ActiveRecord::Base
 
   def self.filter params
     case params[:status]
-      when "active"   then self.unarchived.page(params[:page])
-      when "archived" then self.archived.page(params[:page])
-      when "deleted"  then self.only_deleted.page(params[:page])
+      when "active" then
+        self.unarchived.page(params[:page])
+      when "archived" then
+        self.archived.page(params[:page])
+      when "deleted" then
+        self.only_deleted.page(params[:page])
     end
   end
 

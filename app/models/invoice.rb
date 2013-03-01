@@ -19,27 +19,27 @@ class Invoice < ActiveRecord::Base
   end
 
   def change_status
-    self.update_attribute("status","sent")
+    self.update_attribute("status", "sent")
   end
 
   def tooltip
     case self.status
-    when "draft"
-      "Invoice created, but you have not notified your client. Your client will not see this invoice if they log in."
-    when "sent"
-      "Your client has been notified. When they log in the invoice will be visible for printing and payment."
-    when "paid"
-      "Your client has paid this invoice - either online or you have received their funds and updated your records."
-    when "partial"
-      "Your client has partially paid this invoice. Hover over the total to see the amount outstanding."
-    when "draft-partial"
-      "Invoice created and partial payment applied. Your client has no access to this invoice."
-    when "disputed"
-      "Your client has disputed this invoice. Click on this invoice to view their comments."
-    when "viewed"
-      "Your client has viewed this invoice, but not made any payments."
-    else
-      ""
+      when "draft"
+        "Invoice created, but you have not notified your client. Your client will not see this invoice if they log in."
+      when "sent"
+        "Your client has been notified. When they log in the invoice will be visible for printing and payment."
+      when "paid"
+        "Your client has paid this invoice - either online or you have received their funds and updated your records."
+      when "partial"
+        "Your client has partially paid this invoice. Hover over the total to see the amount outstanding."
+      when "draft-partial"
+        "Invoice created and partial payment applied. Your client has no access to this invoice."
+      when "disputed"
+        "Your client has disputed this invoice. Click on this invoice to view their comments."
+      when "viewed"
+        "Your client has viewed this invoice, but not made any payments."
+      else
+        ""
     end
   end
 
@@ -52,9 +52,10 @@ class Invoice < ActiveRecord::Base
     # self.company.currency_code
     "USD"
   end
+
   class << self
     def get_next_invoice_number user_id
-      ((Invoice.maximum("id") || 0) + 1).to_s.rjust(5, "0")
+      ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
     end
   end
 
@@ -63,7 +64,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.paid_invoices ids
-    where("id IN(?) AND status = 'paid'",ids)
+    where("id IN(?) AND status = 'paid'", ids)
   end
 
   def total
@@ -91,33 +92,34 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.archive_multiple ids
-    self.multiple_invoices(ids).each {|invoice| invoice.archive}
+    self.multiple_invoices(ids).each { |invoice| invoice.archive }
   end
 
   def self.delete_multiple ids
     invoices_with_payments = []
-    self.multiple_invoices(ids).each {|invoice|
+    self.multiple_invoices(ids).each { |invoice|
       if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
-         invoice.destroy
+        invoice.destroy
       else
-         invoices_with_payments << invoice
+        invoices_with_payments << invoice
       end
     }
-    invoices_with_payments    #if there are invoices with payments
+    invoices_with_payments #if there are invoices with payments
   end
+
   def self.delete_invoices_with_payments ids, convert_to_credit
-    self.multiple_invoices(ids).each {|invoice|
+    self.multiple_invoices(ids).each { |invoice|
       if convert_to_credit
-      invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
-      self.add_credit_payment invoice, invoice_total_payments
+        invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
+        self.add_credit_payment invoice, invoice_total_payments
       end
-      invoice.payments.with_deleted.where("payment_type='credit' or payment_type is null").each {|payment| payment.destroy!}
+      invoice.payments.with_deleted.where("payment_type='credit' or payment_type is null").each { |payment| payment.destroy! }
       invoice.destroy
     }
   end
 
   def self.recover_archived ids
-    self.multiple_invoices(ids).each {|invoice| invoice.unarchive}
+    self.multiple_invoices(ids).each { |invoice| invoice.unarchive }
   end
 
   def self.recover_deleted ids
@@ -130,37 +132,40 @@ class Invoice < ActiveRecord::Base
 
   def self.filter params
     case params[:status]
-    when "active"   then self.unarchived.page(params[:page])
-    when "archived" then self.archived.page(params[:page])
-    when "deleted"  then self.only_deleted.page(params[:page])
+      when "active" then
+        self.unarchived.page(params[:page])
+      when "archived" then
+        self.archived.page(params[:page])
+      when "deleted" then
+        self.only_deleted.page(params[:page])
     end
   end
 
   def self.paid_full ids
     self.multiple_invoices(ids).each do |invoice|
       Payment.create({
-          :payment_amount => Payment.update_invoice_status(invoice.id, invoice.invoice_total.to_i),
-          :invoice_id => invoice.id,
-          :paid_full => 1,
-          :payment_date => Date.today
-        })
+                         :payment_amount => Payment.update_invoice_status(invoice.id, invoice.invoice_total.to_i),
+                         :invoice_id => invoice.id,
+                         :paid_full => 1,
+                         :payment_date => Date.today
+                     })
     end
   end
 
-  def notify current_user,id
+  def notify current_user, id
     encrypted_id = Base64.encode64(id)
     InvoiceMailer.delay.new_invoice_email(self.client, self, encrypted_id, current_user)
   end
 
-  def send_invoice current_user,id
+  def send_invoice current_user, id
     status = if self.status == "draft-partial"
-              "partial"
+               "partial"
              elsif self.status == "draft"
-              "sent"
+               "sent"
              else
-                self.status
+               self.status
              end
-    self.notify(current_user,id) if self.update_attributes(:status => status)
+    self.notify(current_user, id) if self.update_attributes(:status => status)
   end
 
   def self.total_invoices_amount
@@ -171,7 +176,7 @@ class Invoice < ActiveRecord::Base
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
     credit_pay.invoice_id = invoice.id
-    credit_pay.payment_date =  Date.today
+    credit_pay.payment_date = Date.today
     credit_pay.notes = "Converted from payments for invoice# #{invoice.invoice_number}"
     credit_pay.payment_amount = amount
     credit_pay.save
@@ -179,5 +184,11 @@ class Invoice < ActiveRecord::Base
 
   def partial_payments
     where("status = 'partial'")
+  end
+
+  def encrypted_id
+    secret = Digest::SHA1.hexdigest("yourpass")
+    e = ActiveSupport::MessageEncryptor.new(secret)
+    Base64.encode64(e.encrypt(self.id))
   end
 end

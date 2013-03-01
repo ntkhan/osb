@@ -1,8 +1,6 @@
 <%- model_class = Invoice -%>
 <div class="invoice_preview">
   <div class="content_container">
-
-
     <div class="payment_content">
       <div class="payment_container">
         <div class="payment_corner sent_green"></div>
@@ -31,8 +29,8 @@
             <div class="payment_summary_table">
               <table cellpadding="0" cellspacing="0">
                 <colgroup>
-                  <col class="first" />
-                  <col class="second" />
+                  <col class="first"/>
+                  <col class="second"/>
                 </colgroup>
                 <tr>
                   <td>Invoice #</td>
@@ -53,11 +51,11 @@
             <div class="time_entry">
               <table cellpadding="0" cellspacing="0">
                 <colgroup>
-                  <col class="first">
-                  <col class="second">
-                  <col class="third">
-                  <col class="forth">
-                  <col class="fifth">
+                  <col class="first"/>
+                  <col class="second"/>
+                  <col class="third"/>
+                  <col class="forth"/>
+                  <col class="fifth"/>
                 </colgroup>
                 <tr>
                   <th class="align_left">Item</th>
@@ -69,13 +67,13 @@
                 <% @invoice.invoice_line_items.each do |item|
                   item_line_total= (item.item_unit_cost ||0) * (item.item_quantity ||0)
                 %>
-                    <tr>
-                      <td class="align_left"><%= item.item.item_name %></td>
-                      <td class="align_left"><%= item.item_description %></td>
-                      <td class="align_right"><%= number_to_currency(item.item_unit_cost) %></td>
-                      <td class="align_right"><%= item.item_quantity %></td>
-                      <td class="align_right"><%= number_to_currency(item_line_total) %></td>
-                    </tr>
+                  <tr>
+                    <td class="align_left"><%= item.item.item_name %></td>
+                    <td class="align_left"><%= item.item_description %></td>
+                    <td class="align_right"><%= number_to_currency(item.item_unit_cost) %></td>
+                    <td class="align_right"><%= item.item_quantity %></td>
+                    <td class="align_right"><%= number_to_currency(item_line_total) %></td>
+                  </tr>
                 <% end %>
               </table>
             </div>
@@ -84,8 +82,8 @@
             <div class="payment_summary_table">
               <table cellpadding="0" cellspacing="0">
                 <colgroup>
-                  <col class="first">
-                  <col class="second">
+                  <col class="first"/>
+                  <col class="second"/>
                 </colgroup>
                 <tr>
                   <th>Subtotal</th>
@@ -126,7 +124,8 @@
             </div>
           </div>
           <div class="payment_footer">
-            <p>This invoice was sent using<%= image_tag "#{@images_path}/payment_logo.png", :size => "74x13", :alt => "" %></p>
+            <p>This invoice was sent
+              using<%= image_tag "#{@images_path}/payment_logo.png", :size => "74x13", :alt => "" %></p>
           </div>
         </div>
         <!-- payment_invoice_data -->

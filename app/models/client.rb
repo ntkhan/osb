@@ -1,7 +1,7 @@
 class Client < ActiveRecord::Base
   acts_as_archival
   acts_as_paranoid
-  attr_accessible :address_street1, :address_street2, :business_phone, :city, :company_size, :country, :fax, :industry, :internal_notes, :organization_name, :postal_zip_code, :province_state, :send_invoice_by ,:email, :home_phone, :first_name, :last_name, :mobile_number,:client_contacts_attributes, :archive_number, :archived_at, :deleted_at
+  attr_accessible :address_street1, :address_street2, :business_phone, :city, :company_size, :country, :fax, :industry, :internal_notes, :organization_name, :postal_zip_code, :province_state, :send_invoice_by, :email, :home_phone, :first_name, :last_name, :mobile_number, :client_contacts_attributes, :archive_number, :archived_at, :deleted_at
   has_many :invoices
   has_many :client_contacts, :dependent => :destroy
   accepts_nested_attributes_for :client_contacts, :allow_destroy => true
@@ -43,9 +43,12 @@ class Client < ActiveRecord::Base
 
   def self.filter params
     case params[:status]
-      when "active"   then self.unarchived.page(params[:page])
-      when "archived" then self.archived.page(params[:page])
-      when "deleted"  then self.only_deleted.page(params[:page])
+      when "active" then
+        self.unarchived.page(params[:page])
+      when "archived" then
+        self.archived.page(params[:page])
+      when "deleted" then
+        self.only_deleted.page(params[:page])
     end
   end
 end

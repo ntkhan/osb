@@ -7,6 +7,6 @@ class Company < ActiveRecord::Base
   before_save :change_currency_symbol
 
   def change_currency_symbol
-    self.currency_symbol  = CURRENCY_SYMBOL[self.currency_code]
+    self.currency_symbol = CURRENCY_SYMBOL[self.currency_code]
   end
 end

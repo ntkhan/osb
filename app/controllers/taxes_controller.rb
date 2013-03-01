@@ -2,6 +2,7 @@ class TaxesController < ApplicationController
   # GET /taxes
   # GET /taxes.json
   include TaxesHelper
+
   def index
     @taxes = Tax.unarchived.page(params[:page])
 
@@ -55,7 +56,7 @@ class TaxesController < ApplicationController
         format.html { redirect_to @taxis, notice: 'Tax was successfully created.' }
         format.json { render json: @taxis, status: :created, location: @taxis }
         new_tax_message = new_tax(@taxis.id)
-        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id},:notice => new_tax_message) unless params[:quick_create]
+        redirect_to({:action => "edit", :controller => "taxes", :id => @taxis.id}, :notice => new_tax_message) unless params[:quick_create]
         return
       else
         format.html { render action: "new" }

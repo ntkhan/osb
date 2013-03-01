@@ -44,19 +44,19 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
 
-      @client = Client.new(params[:client])
-      respond_to do |format|
-        if @client.save
-          format.js
-          format.json { render :json => @client, :status => :created, :location => @client }
-          new_client_message = new_client(@client.id)
-          redirect_to({:action => "edit", :controller => "clients", :id => @client.id}, :notice => new_client_message) unless params[:quick_create]
-          return
-        else
-          format.html { render :action => "new" }
-          format.json { render :json => @client.errors, :status => :unprocessable_entity }
-        end
+    @client = Client.new(params[:client])
+    respond_to do |format|
+      if @client.save
+        format.js
+        format.json { render :json => @client, :status => :created, :location => @client }
+        new_client_message = new_client(@client.id)
+        redirect_to({:action => "edit", :controller => "clients", :id => @client.id}, :notice => new_client_message) unless params[:quick_create]
+        return
+      else
+        format.html { render :action => "new" }
+        format.json { render :json => @client.errors, :status => :unprocessable_entity }
       end
+    end
   end
 
   # PUT /clients/1

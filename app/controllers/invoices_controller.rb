@@ -36,7 +36,7 @@ class InvoicesController < ApplicationController
   def preview
     @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
     @invoice = @id.blank? ? nil : Invoice.find(@id)
-    @invoice.update_attribute("status","viewed") unless @invoice.blank?
+    @invoice.update_attribute("status", "viewed") if @invoice.present? && @invoice.status == "sent"
   end
 
   # GET /invoices/new
@@ -73,7 +73,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.save
         @invoice.notify(current_user, encrypt(@invoice.id))
-        new_invoice_message = new_invoice(@invoice.id,params[:save_as_draft])
+        new_invoice_message = new_invoice(@invoice.id, params[:save_as_draft])
         redirect_to(edit_invoice_url(@invoice), :notice => new_invoice_message)
         return
       else
@@ -170,11 +170,12 @@ class InvoicesController < ApplicationController
   def send_invoice
     @invoice = Invoice.find_by_id(params[:id])
     @invoice.send_invoice(current_user, encrypt(params[:id]))
-    redirect_to(invoice_path(@invoice),:notice => "Invoice has been sent successfully")
+    redirect_to(invoice_path(@invoice), :notice => "Invoice has been sent successfully")
   end
+
   def delete_invoices_with_payments
     ids = params[:invoice_ids]
-    Invoice.delete_invoices_with_payments(ids,!params[:convert_to_credit].blank?)
+    Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
     @invoices = Invoice.unarchived.page(params[:page])
     respond_to { |format| format.js }
   end

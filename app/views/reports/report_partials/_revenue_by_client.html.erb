@@ -41,7 +41,7 @@
 
     <div class="revnue_by_client">
       <div class="grid_table">
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table_listing">
           <colgroup>
             <col class="one"/>
             <col class="two"/>
@@ -58,19 +58,20 @@
             <col class="thirteen"/>
             <col class="fourteen"/>
           </colgroup>
-          <tbody>
-          <tr>
+
+          <thead>
             <th class="align_left">Client</th>
             <% 12.times do |month| %>
                 <th class="align_right"><%= Date::MONTHNAMES[month+1].to_s[0..2] %></th>
             <% end %>
             <th class="align_right">Total</th>
-          </tr>
+          </thead>
+          <tbody>
           <% unless @report.report_data.blank? %>
               <% @report.report_data.each do |revenue| %>
                   <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
                   <tr>
-                    <td class="align_center"><%= revenue.organization_name %></td>
+                    <td class="align_left"><%= revenue.organization_name %></td>
                     <% 12.times do |month| %>
                         <td class="align_rirght"><%= number_to_currency(revenue["#{Date::MONTHNAMES[month+1]}"]) %></td>
                     <% end %>
@@ -96,7 +97,7 @@
         <div class="total_payment">
           <ul>
             <li class="total_payment_title">Total Payments Received:</li>
-            <li>$ <%= @report.report_total || "Total object missing" %> <span>usd</span></li>
+            <li>$ <%= @report.report_total || "" %></li>
           </ul>
         </div>
         <div class="footer_note">

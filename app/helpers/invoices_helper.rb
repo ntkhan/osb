@@ -1,5 +1,5 @@
 module InvoicesHelper
-  def new_invoice id,is_draft
+  def new_invoice id, is_draft
     message = is_draft ? "The invoice has been saved as draft." : "Invoice has been created and sent to #{@invoice.client.organization_name}."
     notice = <<-HTML
        <p>#{message}.</p>
@@ -14,7 +14,7 @@ module InvoicesHelper
   end
 
   def invoices_archived ids
-   notice = <<-HTML
+    notice = <<-HTML
      <p>#{ids.size} invoice(s) have been archived. You can find them under
      <a href="invoices/filter_invoices?status=archived" data-remote="true">Archived</a> section on this page.</p>
      <p><a href='invoices/undo_actions?ids=#{ids.join(",")}&archived=true'  data-remote="true">Undo this action</a> to move archived invoices back to active.</p>

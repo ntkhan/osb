@@ -9,43 +9,45 @@
     </div>
     <div class="primary_btn">
       <%= link_to (content_tag(:span, "NEW Payment")),
-        '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal",
-        :class => 'btn_large', :remote => true %>
+                  '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal",
+                  :class => 'btn_large', :remote => true %>
     </div>
-  </div><!--content_top-->
+  </div>
+  <!--content_top-->
   <%= form_tag "payments/bulk_actions", :remote => true do -%>
-    <div class="content_middle">
-      <div class="grid_control">
-        <div class="grid_control_left">
-          <ul value='<%= model_class.model_name%>'>
-            <li><%#= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %></li>
-            <li><%#= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %></li>
-            <li><%#= submit_tag "Archive", :name => "archive", :class => "top_links archive" %></li>
-            <li class="grid_control_sep"><%= submit_tag "Delete Forever", :name => "destroy", :class => "top_links destroy" %></li>
-            <li><a href="#" class="no_links">Copy</a></li>
-            <li><a href="#" class="no_links">Print</a></li>
-          </ul>
+      <div class="content_middle">
+        <div class="grid_control">
+          <div class="grid_control_left">
+            <ul value='<%= model_class.model_name %>'>
+              <li><%#= submit_tag "Recover", :name => "recover_archived", :class => "top_links recover_archived", :style => "display:none;" %></li>
+              <li><%#= submit_tag "Recover", :name => "recover_deleted", :class => "top_links recover_deleted", :style => "display:none;" %></li>
+              <li><%#= submit_tag "Archive", :name => "archive", :class => "top_links archive" %></li>
+              <li class="grid_control_sep"><%= submit_tag "Delete Forever", :name => "destroy", :class => "top_links destroy" %></li>
+              <li><a href="#" class="no_links">Copy</a></li>
+              <li><a href="#" class="no_links">Print</a></li>
+            </ul>
+          </div>
+          <div class="grid_control_right" id="active_links">
+            <%#= render 'filter_links' %>
+          </div>
         </div>
-        <div class="grid_control_right" id="active_links">
-  <%#= render 'filter_links' %>
-        </div>
-      </div><!--grid_control-->
-      <div class="grid_table">
-        <table cellpadding="0" cellspacing="0" class="table table_listing payment_listing">
-          <colgroup>
-            <col class="one"/>
-            <col class="two"/>
-            <col class="three"/>
-            <col class="four"/>
-            <col class="five"/>
-            <col class="six"/>
-            <col class="seven"/>
-            <col class="eight"/>
-          </colgroup>
-          <thead>
+        <!--grid_control-->
+        <div class="grid_table">
+          <table cellpadding="0" cellspacing="0" class="table table_listing payment_listing">
+            <colgroup>
+              <col class="one"/>
+              <col class="two"/>
+              <col class="three"/>
+              <col class="four"/>
+              <col class="five"/>
+              <col class="six"/>
+              <col class="seven"/>
+              <col class="eight"/>
+            </colgroup>
+            <thead>
             <tr>
               <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
-              <th class="align_center">Invoices</th>
+              <th class="align_center">Invoice #</th>
               <th class="align_left">Client</th>
               <th class="align_center">Type</th>
               <th class="align_center">Notes</th>
@@ -53,57 +55,62 @@
               <th class="align_right sorting {sorter:'thousands'}">Amount</th>
               <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
-          </thead>
-          <tbody id="payment_body">
+            </thead>
+            <tbody id="payment_body">
             <%= render 'payment' %>
-          <tfoot id="paging_links">
+            <tfoot id="paging_links">
             <%= render "paging" %>
-          </tfoot>
-          </tbody>
-        </table>
-      </div><!--grid_table-->
-    </div><!--content_middle-->
-    <div class="content_bottom">
-      <%= link_to (content_tag(:span, "NEW Payment")),
-        '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal",
-        :class => 'btn_large', :remote => true %>
-    </div><!--content_bottom-->
+            </tfoot>
+            </tbody>
+          </table>
+        </div>
+        <!--grid_table-->
+      </div>
+      <!--content_middle-->
+      <div class="content_bottom">
+        <%= link_to (content_tag(:span, "NEW Payment")),
+                    '/invoices/unpaid_invoices', "data-toggle" => "modal", "data-target" => "#myModal",
+                    :class => 'btn_large', :remote => true %>
+      </div>
+      <!--content_bottom-->
   <% end %>
 
   <!-- START: Unpaid invoices popup -->
-  <%= form_tag "/payments/enter_payment",:id=>"invoice_selection" do %>
-    <div id="myModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="model_grey_container">
-        <div class="modal-header">
+  <%= form_tag "/payments/enter_payment", :id => "invoice_selection" do %>
+      <div id="myModal" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="model_grey_container">
+          <div class="modal-header">
 
-          <h1>Which Invoices have you received payment for?</h1>
-          <p>Select one or more Invoices from the list below to apply payment.</p>
-          <div class="cross_btn">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-              <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
-            </button>
+            <h1>Which Invoices have you received payment for?</h1>
+
+            <p>Select one or more Invoices from the list below to apply payment.</p>
+
+            <div class="cross_btn">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+              </button>
+            </div>
           </div>
-        </div>
-        <div id="invoice_popup_error" class="alert alert-error popup" style="display:none;">
-          <button  class="close" type="button" style="margin:0px;">×</button>
-          <table>
-            <tbody>
+          <div id="invoice_popup_error" class="alert alert-error popup" style="display:none;">
+            <button class="close" type="button" style="margin:0px;">×</button>
+            <table>
+              <tbody>
               <tr>
                 <td>
                   <span></span>
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="footer ">
-          <%= submit_tag "Enter Payment", :class => "btn_large submit" %>
-          <a class="btn_large grey" href="#" data-dismiss="modal">cancel</a>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="footer ">
+            <%= submit_tag "Enter Payment", :class => "btn_large submit" %>
+            <a class="btn_large grey" href="#" data-dismiss="modal">cancel</a>
+          </div>
         </div>
       </div>
-    </div>
   <% end %>
   <!-- END: Unpaid invoices popup -->
 </div><!--payment-->

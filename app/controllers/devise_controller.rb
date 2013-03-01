@@ -2,7 +2,7 @@
 class DeviseController < Devise.parent_controller.constantize
   include Devise::Controllers::ScopedViews
   layout "login"
-  
+
   helper DeviseHelper
 
   helpers = %w(resource scope_name resource_name signed_in_resource
@@ -22,6 +22,7 @@ class DeviseController < Devise.parent_controller.constantize
   def resource_name
     devise_mapping.name
   end
+
   alias :scope_name :resource_name
 
   # Proxy to devise map class
@@ -49,10 +50,10 @@ class DeviseController < Devise.parent_controller.constantize
   # loaded before even having a request object.
   def _prefixes #:nodoc:
     @_prefixes ||= if self.class.scoped_views? && request && devise_mapping
-      super.unshift("#{devise_mapping.scoped_path}/#{controller_name}")
-    else
-      super
-    end
+                     super.unshift("#{devise_mapping.scoped_path}/#{controller_name}")
+                   else
+                     super
+                   end
   end
 
   hide_action :_prefixes
@@ -76,7 +77,7 @@ This may happen for two reasons:
    
    @request.env["devise.mapping"] = Devise.mappings[:user]
 
-MESSAGE
+    MESSAGE
   end
 
   # Returns real navigational formats which are supported by Rails
@@ -121,11 +122,11 @@ MESSAGE
     no_input = devise_mapping.no_input_strategies
 
     authenticated = if no_input.present?
-      args = no_input.dup.push :scope => resource_name
-      warden.authenticate?(*args)
-    else
-      warden.authenticated?(resource_name)
-    end
+                      args = no_input.dup.push :scope => resource_name
+                      warden.authenticate?(*args)
+                    else
+                      warden.authenticated?(resource_name)
+                    end
 
     if authenticated && resource = warden.user(resource_name)
       flash[:alert] = I18n.t("devise.failure.already_authenticated")
@@ -138,11 +139,11 @@ MESSAGE
   # and instructions were sent.
   def successfully_sent?(resource)
     notice = if Devise.paranoid
-      resource.errors.clear
-      :send_paranoid_instructions
-    elsif resource.errors.empty?
-      :send_instructions
-    end
+               resource.errors.clear
+               :send_paranoid_instructions
+             elsif resource.errors.empty?
+               :send_instructions
+             end
 
     if notice
       set_flash_message :notice, notice if is_navigational_format?

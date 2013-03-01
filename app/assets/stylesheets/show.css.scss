@@ -108,6 +108,7 @@
     .payment_content{
         float: left;
         width: 100%;
+        padding: 0 0 40px 0;
     }
     .payment_container{
         border: 1px solid #d7d7d7;
@@ -115,6 +116,7 @@
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
         overflow: hidden;
+        background: #ffffff;
     }
     .payment_corner{
         float: left;
@@ -124,23 +126,26 @@
         width: 100px;
         height:100px;
     }
-    .sent_green{
-        background: url(/assets/sent_green.png) no-repeat;
-    }
-    .sent_blue{
-        background: url(/assets/sent_blue.png) no-repeat;
-    }
     .draft{
         background: url(/assets/draft.png) no-repeat;
     }
-    .disputed{
-        background: url(/assets/disputed.png) no-repeat;
+    .sent{
+        background: url(/assets/sent_green.png) no-repeat;
     }
-    .draft_partial{
+    .draft-partial{
         background: url(/assets/draft_partial.png) no-repeat;
     }
     .partial{
         background: url(/assets/partial.png) no-repeat;
+    }
+    .paid{
+        background: url(/assets/paid.png) no-repeat;
+    }
+    .disputed{
+        background: url(/assets/disputed.png) no-repeat;
+    }
+    .sent_blue{
+        background: url(/assets/sent_blue.png) no-repeat;
     }
     .payment_invoice_data{
         float: left;
