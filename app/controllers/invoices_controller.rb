@@ -35,7 +35,7 @@ class InvoicesController < ApplicationController
   end
 
   def preview
-    @id = params[:inv_id] #decrypt(Base64.decode64(params[:id])).to_i rescue @id = nil
+    @id = decrypt(Base64.decode64(params[:id])).to_i rescue @id = nil
     @invoice = @id.blank? ? nil : Invoice.find(@id)
     @invoice.update_attribute("status", "viewed") if @invoice.present? && @invoice.status == "sent"
   end
@@ -185,8 +185,17 @@ class InvoicesController < ApplicationController
     # send a post request to paypal to verify payment data
     response = RestClient.post("https://www.sandbox.paypal.com/cgi-bin/webscr", params.merge({"cmd" => "_notify-validate"}), :content_type => "application/x-www-form-urlencoded")
     invoice = Invoice.find(params[:invoice])
-    status = response == "VERIFIED" ? "success" : "fail"
-    invoice.update_attribute('status', status)
+    # if status is verified make an entry in payments and update the status on invoice
+    if response == "VERIFIED"
+      invoice.payments.create({
+          :payment_method => "paypal",
+          :payment_amount => params[:payment_gross],
+          :payment_date => Date.today,
+          :notes => params[:txn_id],
+          :paid_full => 1
+                             })
+      invoice.update_attribute('status', 'paid')
+    end
     render :nothing => true
   end
 
