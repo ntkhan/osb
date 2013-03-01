@@ -185,6 +185,7 @@ class InvoicesController < ApplicationController
     # send a post request to paypal to varify payment data
     response = RestClient.post("https://www.sandbox.paypal.com/cgi-bin/webscr", params.merge({"cmd" => "_notify-validate"}), :content_type => "application/x-www-form-urlencoded")
     Rails.logger.debug "Paypal Response: #{response}"
+    render :nothing => true
   end
 
 end
