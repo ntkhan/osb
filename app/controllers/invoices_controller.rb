@@ -180,7 +180,14 @@ class InvoicesController < ApplicationController
     @invoices = Invoice.unarchived.page(params[:page])
     respond_to { |format| format.js }
   end
-
+   def dispute_invoice
+     invoice_id = params[:invoice_id]
+     invoice = Invoice.find(invoice_id)
+     invoice.update_attribute('status','disputed')
+     reason_for_dispute = params[:reason_for_dispute]
+     InvoiceMailer.dispute_invoice_email(current_user, invoice, reason_for_dispute).deliver
+     respond_to { |format| format.js }
+   end
   def paypal_payments
     # send a post request to paypal to verify payment data
     response = RestClient.post("https://www.sandbox.paypal.com/cgi-bin/webscr", params.merge({"cmd" => "_notify-validate"}), :content_type => "application/x-www-form-urlencoded")

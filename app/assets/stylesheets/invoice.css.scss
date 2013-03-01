@@ -1,41 +1,32 @@
 .invoice {
 
   .grid_table table {
-    col.one {
-    /*check box*/
+    col.one { /*check box*/
       width: 33px;
     }
-    col.two {
-    /*invoice*/
-      min-width: 94px;
+    col.two { /*invoice*/
+      width: 100px;
     }
-    col.three {
-    /*clients*/
-      width: 150px;
+    col.three { /*clients*/
+      width: 140px;
     }
-    col.four {
-    /*description*/
-      width: 153px;
+    col.four { /*description*/
+      width: 145px;
     }
-    col.five {
-    /*total*/
-      min-width: 82px;
+    col.five { /*total*/
+      width: 82px;
     }
-    col.six {
-    /*date*/
-      min-width: 90px;
+    col.six { /*date*/
+      width: 90px;
     }
-    col.seven {
-    /*due date*/
-      min-width: 90px;
+    col.seven { /*due date*/
+      width: 90px;
     }
-    col.eight {
-    /*status*/
-      min-width: 90px;
+    col.eight { /*status*/
+      width: 90px;
     }
-    col.nine {
-    /*actions*/
-      min-width: 70px;
+    col.nine { /*actions*/
+      width: 70px;
     }
   }
 }
@@ -46,16 +37,16 @@
     }
     .grid_table table {
         col.one {/*invoice*/
-            min-width: 82px;
+            width: 82px;
         }
         col.two {/*clients*/
-            min-width: 450px;
+            width: 450px;
         }
         col.three { /*date*/
-            min-width: 90px;
+            width: 90px;
         }
         col.four { /*amount*/
-            min-width: 82px;
+            width: 82px;
         }
     }
     .btn_large.small_case{
