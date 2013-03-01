@@ -252,6 +252,7 @@ h4 {
   white-space: nowrap;
   width: 100%;
   margin: auto;
+  *width: 98%;
 }
 
 #nav li {
@@ -266,8 +267,7 @@ h4 {
 
 #nav .select a {
   display: block;
-  font-family: 'Dosis', sans-serif;
-  font-weight: normal;
+  font-family: 'Dosis Regular' , sans-serif;
   font-style: normal;
   font-size: 18px;
   color: #ffffff;
@@ -310,11 +310,9 @@ h4 {
   display: block;
   float: left;
   background: transparent;
-  font-family: 'Dosis', sans-serif;
-  font-weight: 300;
+  font-family: 'Dosis Regular', sans-serif;
   font-style: normal;
   color: #7d7d7d;
-  font-weight: normal;
   line-height: 34px;
   min-width: 39px;
 }
@@ -469,6 +467,9 @@ h4 {
   float: left;
   width: 100%;
   padding: 15px 0 0 0;
+}
+x:-o-prefocus, .grid_table table{
+    border-collapse: separate;
 }
 
 .grid_table table tr:first-child {
@@ -1030,3 +1031,4 @@ table.table_listing, table.report-data-table {
   width: 100px;
   z-index: 1000;
 }
+
