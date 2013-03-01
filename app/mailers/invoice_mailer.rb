@@ -25,5 +25,9 @@ class InvoiceMailer < ActionMailer::Base
                                    :date => Date.today
                                })
   end
+  def dispute_invoice_email(user, invoice, reason)
+    @user, @invoice, @reason = user, invoice, reason
+    mail(:to => user.email, :subject => "Invoice Disputed")
+  end
 
 end

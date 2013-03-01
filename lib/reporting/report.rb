@@ -138,7 +138,6 @@ module Reporting
     def self.due_date_reminder
       invoices = Invoice.where(:due_date => Date.today+1 )
       invoices.each do |invoice|
-      Rails.logger.debig "LLLLLLLLLLLLLLLLLLLLLLLLLLLLL #{invoice.sent_emails.length}"
       InvoiceMailer.delay.due_date_reminder_email(invoice)  if invoice.sent_emails.blank?
 
       end
