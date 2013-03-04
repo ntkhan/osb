@@ -10,7 +10,7 @@
                <div class="response_top">
                <h1>Dispute History</h1>
                  <% @invoice.sent_emails.where("type = 'Disputed'").each do |email_detail|%>
-                 <% float_class = email_detail.subject == "Dispute sent" ? "float-left" : "float-right"  %>
+                 <% float_class = email_detail.subject == "Dispute sent" ? "float-right" : "float-left"  %>
                  <div class="<%= float_class%>">
                  <span class="detail"><%= email_detail.content%></span>
                    <span class="info"><%= current_user.email == email_detail.sender ? "You": email_detail.sender %>, <%= email_detail.date%></span>
