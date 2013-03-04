@@ -32,7 +32,46 @@
     border: 1px solid #CCCCCC;
     float: left;
     margin-bottom: 30px;
-    padding: 20px 15px;
+
+    .response_top{
+      float: left;
+      padding: 20px 15px;
+      border-bottom: 1px solid #CCCCCC;
+      width:510px;
+      .float-right{
+        float:right;
+        clear:both;
+        text-align: right;
+        .detail{
+          float:right;
+          background-color: #FFFBE1;
+          border: 1px solid #E4DFBE;
+          border-radius: 5px 5px 5px 5px;
+          padding: 10px 15px;
+        }
+        .info{
+          clear:both;
+          float: right;
+        }
+      }
+      .float-left{
+        clear:both;
+        .detail{
+          float:left;
+          background-color: #FFFBE1;
+          border: 1px solid #E4DFBE;
+          border-radius: 5px 5px 5px 5px;
+          padding: 10px 15px;
+        }
+        .info{
+          clear:both;
+          float: left;
+        }
+      }
+    }
+    .response_bottom{
+      padding: 20px 15px;
+    }
   }
 }
 
