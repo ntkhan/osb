@@ -111,7 +111,7 @@ ul li {
 }
 
 h1 {
-  font-family: 'Dosis Regular', sans-serif;
+  font-family: 'Dosis Medium', sans-serif;
   font-size: 24px;
   color: #00bde5; /*blue*/
   margin: 0px;
@@ -226,27 +226,16 @@ h4 {
 
 .nav_container {
   min-height: 86px;
+  background: url(/assets/nav_left.gif) no-repeat top left;
 }
 
 #nav {
   height: 43px;
   position: relative;
   z-index: 500;
-  width: 100%;
+  width: 98%;
   background: url(/assets/nav_right.gif) no-repeat top right;
-}
-.nav_left{
-    background: #00BDE5;
-    float: left;
-    height: 38px;
-    overflow: hidden;
-    width: 18px;
-}
-.nav_right{
-    background: #00BDE5;
-    float: left;
-    height: 38px;
-    min-width: 370px;
+  padding: 0 0 0 18px;
 }
 #nav .select {
   white-space: nowrap;
@@ -486,6 +475,10 @@ x:-o-prefocus, .grid_table table{
 
 .grid_table table tr:hover {
   background-color: #f7f7f7;
+}
+
+tfoot tr:hover{
+    background: none !important;
 }
 
 .grid_table table th {

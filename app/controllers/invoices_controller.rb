@@ -93,7 +93,11 @@ class InvoicesController < ApplicationController
   # PUT /invoices/1.json
   def update
     @invoice = Invoice.find(params[:id])
-
+    response_to_client = params[:response_to_client]
+     unless response_to_client.blank?
+      @invoice.update_attribute("status","sent")
+      InvoiceMailer.response_to_client(current_user, @invoice, response_to_client).deliver
+     end
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }

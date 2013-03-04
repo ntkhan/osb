@@ -29,5 +29,9 @@ class InvoiceMailer < ActionMailer::Base
     @user, @invoice, @reason = user, invoice, reason
     mail(:to => user.email, :subject => "Invoice Disputed")
   end
+  def response_to_client(user, invoice, response)
+    @user, @invoice, @response = user, invoice, response
+    mail(:to => @invoice.client.email, :subject => "Invoice Undisputed")
+  end
 
 end
