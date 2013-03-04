@@ -10,7 +10,6 @@
     </ul>
   </div>
   <div class="enter_payment_btn">
-    <!--<a href="#">enter payment on invoice</a>-->
     <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}","http://#{request.host_with_port}/invoices/paypal_payments") %>
   </div>
   <div class="payment_content">
