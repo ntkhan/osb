@@ -13,6 +13,22 @@
     <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}","http://#{request.host_with_port}/invoices/paypal_payments") %>
   </div>
   <div class="payment_content">
+    <% if @invoice.status == "disputed"%>
+        <div class="response_to_client">
+          <div class="response_container" style="border-bottom: none;">
+            <div class="response_top" >
+              <h1>Dispute History</h1>
+              <% @dispute_history.each do |email_detail|%>
+                  <% float_class = email_detail.subject == "Reason from client" ? "float-right" : "float-left"  %>
+                  <div class="<%= float_class%>">
+                    <span class="detail"><%= email_detail.content%></span>
+                    <span class="info"><%= email_detail.subject == "Reason from client" ? "You": email_detail.sender %>, <%= email_detail.date%></span>
+                  </div>
+              <% end%>
+            </div>
+          </div>
+        </div>
+    <% end%>
     <div class="payment_container">
       <div class="payment_corner <%= @invoice.status %>"></div>
       <%= render :partial=>"show_invoice"%>
