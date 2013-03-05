@@ -3,12 +3,16 @@
   <div class="content_header">
     <h1><%= t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
     <ul>
+      <li><a  href="#dispute_invoice_popup" data-toggle="modal">Dispute</a></li>
       <li><%= link_to "PDF", {:controller => 'invoices', :action => 'invoice_pdf', :id => @invoice.id, :format => "pdf"}, :target => '_blank' %></li>
       <li><a href="#">Print</a></li>
       <li class="no_border"><%= link_to "Payments history", {:controller => 'payments', :action => 'payments_history', :id => @invoice.id}, :class => "no_padding" %></li>
     </ul>
   </div>
-  <div class="payment_content" style="padding: 30px 0 0;">
+  <div class="enter_payment_btn">
+    <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}","http://#{request.host_with_port}/invoices/paypal_payments") %>
+  </div>
+  <div class="payment_content">
     <div class="payment_container">
       <div class="payment_corner <%= @invoice.status %>"></div>
       <div class="payment_invoice_data">
@@ -50,6 +54,10 @@
               <tr>
                 <td>Amount</td>
                 <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></td>
+              </tr>
+              <tr>
+                <td>Terms</td>
+                <td><%= @invoice.terms %></td>
               </tr>
             </table>
           </div>
@@ -120,11 +128,7 @@
           </div>
         </div>
         <div class="terms_notes">
-          <div class="terms">
-            <h3>Terms</h3>
 
-            <p><%= @invoice.terms %></p>
-          </div>
           <div class="notes">
             <h3>Notes</h3>
             <%= @invoice.notes %>
@@ -140,3 +144,48 @@
   </div>
   <!-- payment_content -->
 </div>
+<%= form_tag "/invoices/dispute_invoice", :remote => true  do %>
+    <div id="dispute_invoice_popup" class="modal hide fad"  style="width:auto;left:50%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="model_grey_container">
+        <div class="modal-header">
+
+          <h1>Dispute invoice</h1>
+
+          <p>&nbsp</p>
+
+          <div class="cross_btn">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+            </button>
+          </div>
+        </div>
+        <div id="invoice_popup_error" class="alert alert-error popup" style="display:none;">
+          <button class="close" type="button" style="margin:0px;">×</button>
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <span></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-body">
+          <%= hidden_field_tag "invoice_id", @invoice.id %>
+          <div class="fields_content_data new_invoice_fields">
+            <div class="field_row textarea">
+              <div class="label_field textarea" ><label>Reason For Dispute</label></div>
+              <div class="large_field" style="clear:both;">
+                <%= text_area_tag "reason_for_dispute" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer ">
+          <%= submit_tag "Send", :class => "btn_large submit" %>
+          <a class="btn_large grey" href="#" data-dismiss="modal">cancel</a>
+        </div>
+      </div>
+    </div>
+<% end %>

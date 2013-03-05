@@ -14,6 +14,8 @@ class Invoice < ActiveRecord::Base
   before_destroy :change_status
   before_create :set_invoice_number
 
+  include ActionView::Helpers::NumberHelper
+
   def set_invoice_number
     self.invoice_number = Invoice.get_next_invoice_number(nil)
   end
@@ -191,4 +193,34 @@ class Invoice < ActiveRecord::Base
     e = ActiveSupport::MessageEncryptor.new(secret)
     Base64.encode64(e.encrypt(self.id))
   end
+
+  def paypal_url(return_url, notify_url)
+    values = {
+        :business => 'onlyfo_1362112350_biz@hotmail.com',
+        :cmd => '_cart',
+        :upload => 1,
+        :return => return_url,
+        :notify_url => notify_url,
+        :invoice => id
+    }
+    item_discount = number_with_precision(-(discount_amount.to_d / (invoice_line_items.size.to_d)),:precision => 2).to_d
+    invoice_line_items.each_with_index do |item, index|
+      values.merge!({
+                        "amount_#{index+1}" => item.item_unit_cost,
+                        "item_name_#{index+1}" => (item.item.item_name rescue ""),
+                        "item_number_#{index+1}" => item.id,
+                        "quantity_#{index+1}" => item.item_quantity,
+                        "tax_#{index+1}" => ((item.tax1.percentage rescue 0) + (item.tax2.percentage rescue 0)),
+                        "discount_amount_#{index+1}" => (index+1 == invoice_line_items.size ? last_invoice_discount(item_discount, discount_amount, invoice_line_items.size) : item_discount)
+                    })
+    end
+    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
+  def last_invoice_discount(discount_amount, total_discount, index)
+    discount_amount = -(discount_amount * (index - 1))
+    Rails.logger.debug ">>>>>>>>>>>>>> #{discount_amount}"
+    -(total_discount - discount_amount)
+  end
+
 end

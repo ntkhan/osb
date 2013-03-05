@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227052012) do
+ActiveRecord::Schema.define(:version => 20130305053931) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -129,15 +129,15 @@ ActiveRecord::Schema.define(:version => 20130227052012) do
     t.string   "invoice_number"
     t.datetime "invoice_date"
     t.string   "po_number"
-    t.decimal  "discount_percentage", :precision => 10, :scale => 0
+    t.decimal  "discount_percentage", :precision => 10, :scale => 2
     t.integer  "client_id"
     t.text     "terms"
     t.text     "notes"
     t.string   "status"
-    t.decimal  "sub_total",           :precision => 10, :scale => 0
-    t.decimal  "discount_amount",     :precision => 10, :scale => 0
-    t.decimal  "tax_amount",          :precision => 10, :scale => 0
-    t.decimal  "invoice_total",       :precision => 10, :scale => 0
+    t.decimal  "sub_total",           :precision => 10, :scale => 2
+    t.decimal  "discount_amount",     :precision => 10, :scale => 2
+    t.decimal  "tax_amount",          :precision => 10, :scale => 2
+    t.decimal  "invoice_total",       :precision => 10, :scale => 2
     t.string   "archive_number"
     t.datetime "archived_at"
     t.datetime "deleted_at"
@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(:version => 20130227052012) do
   create_table "items", :force => true do |t|
     t.string   "item_name"
     t.string   "item_description"
-    t.decimal  "unit_cost",        :precision => 10, :scale => 0
-    t.integer  "quantity"
+    t.decimal  "unit_cost",        :precision => 10, :scale => 2
+    t.decimal  "quantity",         :precision => 10, :scale => 2
     t.integer  "tax_1"
     t.integer  "tax_2"
     t.boolean  "track_inventory"
@@ -191,8 +191,8 @@ ActiveRecord::Schema.define(:version => 20130227052012) do
     t.integer  "item_id"
     t.string   "item_name"
     t.string   "item_description"
-    t.decimal  "item_unit_cost",   :precision => 10, :scale => 0
-    t.decimal  "item_quantity",    :precision => 10, :scale => 0
+    t.decimal  "item_unit_cost",   :precision => 10, :scale => 2
+    t.decimal  "item_quantity",    :precision => 10, :scale => 2
     t.integer  "tax_1"
     t.integer  "tax_2"
     t.datetime "created_at",                                      :null => false
@@ -202,19 +202,19 @@ ActiveRecord::Schema.define(:version => 20130227052012) do
   create_table "recurring_profiles", :force => true do |t|
     t.datetime "first_invoice_date"
     t.string   "po_number"
-    t.decimal  "discount_percentage", :precision => 10, :scale => 0
+    t.decimal  "discount_percentage", :precision => 10, :scale => 2
     t.string   "frequency"
     t.integer  "occurrences"
     t.boolean  "prorate"
-    t.decimal  "prorate_for",         :precision => 10, :scale => 0
+    t.decimal  "prorate_for",         :precision => 10, :scale => 2
     t.integer  "gateway_id"
     t.integer  "client_id"
     t.text     "tems"
     t.text     "notes"
     t.string   "status"
-    t.decimal  "sub_total",           :precision => 10, :scale => 0
-    t.decimal  "discount_amount",     :precision => 10, :scale => 0
-    t.decimal  "tax_amount",          :precision => 10, :scale => 0
+    t.decimal  "sub_total",           :precision => 10, :scale => 2
+    t.decimal  "discount_amount",     :precision => 10, :scale => 2
+    t.decimal  "tax_amount",          :precision => 10, :scale => 2
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
   end
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(:version => 20130227052012) do
 
   create_table "taxes", :force => true do |t|
     t.string   "name"
-    t.decimal  "percentage",     :precision => 10, :scale => 0
+    t.decimal  "percentage",     :precision => 10, :scale => 2
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
     t.string   "archive_number"

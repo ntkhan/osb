@@ -1,5 +1,6 @@
 class InvoicesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:preview, :invoice_pdf]
+  before_filter :authenticate_user!, :except => [:preview, :invoice_pdf, :paypal_payments]
+  protect_from_forgery :except => [:paypal_payments]
   # GET /invoices
   # GET /invoices.json
   layout :choose_layout
@@ -92,7 +93,11 @@ class InvoicesController < ApplicationController
   # PUT /invoices/1.json
   def update
     @invoice = Invoice.find(params[:id])
-
+    response_to_client = params[:response_to_client]
+     unless response_to_client.blank?
+      @invoice.update_attribute("status","sent")
+      InvoiceMailer.response_to_client(current_user, @invoice, response_to_client).deliver
+     end
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         #format.html { redirect_to @invoice, :notice => 'Invoice was successfully updated.' }
@@ -177,8 +182,33 @@ class InvoicesController < ApplicationController
     ids = params[:invoice_ids]
     Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
     @invoices = Invoice.unarchived.page(params[:page])
+    @message = invoices_deleted(ids) unless ids.blank?
     respond_to { |format| format.js }
   end
-
+   def dispute_invoice
+     invoice_id = params[:invoice_id]
+     invoice = Invoice.find(invoice_id)
+     invoice.update_attribute('status','disputed')
+     reason_for_dispute = params[:reason_for_dispute]
+     InvoiceMailer.dispute_invoice_email(current_user, invoice, reason_for_dispute).deliver
+     respond_to { |format| format.js }
+   end
+  def paypal_payments
+    # send a post request to paypal to verify payment data
+    response = RestClient.post("https://www.sandbox.paypal.com/cgi-bin/webscr", params.merge({"cmd" => "_notify-validate"}), :content_type => "application/x-www-form-urlencoded")
+    invoice = Invoice.find(params[:invoice])
+    # if status is verified make an entry in payments and update the status on invoice
+    if response == "VERIFIED"
+      invoice.payments.create({
+          :payment_method => "paypal",
+          :payment_amount => params[:payment_gross],
+          :payment_date => Date.today,
+          :notes => params[:txn_id],
+          :paid_full => 1
+                             })
+      invoice.update_attribute('status', 'paid')
+    end
+    render :nothing => true
+  end
 
 end

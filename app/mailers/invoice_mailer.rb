@@ -25,5 +25,29 @@ class InvoiceMailer < ActionMailer::Base
                                    :date => Date.today
                                })
   end
+  def dispute_invoice_email(user, invoice, reason)
+    @user, @invoice, @reason = user, invoice, reason
+    mail(:to => user.email, :subject => "Invoice Disputed")
+    invoice.sent_emails.create({
+                                   :content => reason,
+                                   :sender => invoice.client.email, #User email
+                                   :recipient => user.email, #client email
+                                   :subject => "Dispute sent",
+                                   :type => "Disputed",
+                                   :date => Date.today
+                               })
+  end
+  def response_to_client(user, invoice, response)
+    @user, @invoice, @response = user, invoice, response
+    mail(:to => @invoice.client.email, :subject => "Invoice Undisputed")
+    invoice.sent_emails.create({
+                                   :content => response,
+                                   :sender => user.email, #User email
+                                   :recipient => invoice.client.email, #client email
+                                   :subject => "Dispute received",
+                                   :type => "Disputed",
+                                   :date => Date.today
+                               })
+  end
 
 end
