@@ -222,5 +222,17 @@ class Invoice < ActiveRecord::Base
     Rails.logger.debug ">>>>>>>>>>>>>> #{discount_amount}"
     -(total_discount - discount_amount)
   end
+  def update_dispute_invoice response_to_client
+    self.update_attribute("status","sent")
+    self.notify(current_user, encrypt(self.id))
+    self.sent_emails.create({
+                                    :content => response_to_client,
+                                    :sender => current_user.email, #User email
+                                    :recipient => self.client.email, #client email
+                                    :subject => "Response to client",
+                                    :type => "Disputed",
+                                    :date => Date.today
+                                })
+  end
 
 end

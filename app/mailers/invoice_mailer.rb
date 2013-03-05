@@ -32,7 +32,7 @@ class InvoiceMailer < ActionMailer::Base
                                    :content => reason,
                                    :sender => invoice.client.email, #User email
                                    :recipient => user.email, #client email
-                                   :subject => "Dispute sent",
+                                   :subject => "Reason from client",
                                    :type => "Disputed",
                                    :date => Date.today
                                })
@@ -44,7 +44,7 @@ class InvoiceMailer < ActionMailer::Base
                                    :content => response,
                                    :sender => user.email, #User email
                                    :recipient => invoice.client.email, #client email
-                                   :subject => "Dispute received",
+                                   :subject => "Response to client",
                                    :type => "Disputed",
                                    :date => Date.today
                                })
