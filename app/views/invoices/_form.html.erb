@@ -34,7 +34,7 @@
                 <div class="field_row description">
                   <div class="label_field left single"><%= f.label :client_id, content_tag(:span, 'Client') %></div>
                   <div class="small_field">
-                    <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300", :required => ""} %>
+                    <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "",:include_blank => ""}, {"data-placeholder" => "Select a client...", :class => "medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300", :required => ""} %>
                     <ul class="field_description">
                       <li>client you want to send invoice</li>
                       <span id="last_invoice" style="display: none;"></span>
@@ -58,7 +58,7 @@
                   <div class="label_field left single"><%= f.label :payment_terms_id, "Terms" %></div>
                   <div class="small_field">
                     <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-                    <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map { |p| [p.description, p.id, {'number_of_days' => p.number_of_days}] }, :selected => f.object.payment_terms_id), {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder", "data-dropdown-width" => "300"} %>
+                    <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map { |p| [p.description, p.id, {'number_of_days' => p.number_of_days}] }, :selected => f.object.payment_terms_id), {:prompt => "",:include_blank => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select", "data-form-container" => "payment_terms_holder", "data-dropdown-width" => "300"} %>
                     <ul class="field_description">
                       <li>payment terms for this invoice</li>
                     </ul>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="grid_summary_row net_total">
                   <div class="grid_summary_title">
-                    Tax
+                    Balance
                   </div>
                   <div class="grid_summary_description">
                     <%= f.hidden_field :invoice_total %>

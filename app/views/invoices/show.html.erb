@@ -5,7 +5,7 @@
       <ul>
         <li><%= link_to "Edit", edit_invoice_path(@invoice) %></li>
         <!--<li><a href="#">Send</a></li>-->
-        <li><%= link_to "send", "send_invoice?id=#{@invoice.id}" %></li>
+        <li><%= link_to "Send", "send_invoice?id=#{@invoice.id}" %></li>
         <li><%= link_to "PDF", {:controller => 'invoices', :action => 'invoice_pdf', :id => @invoice.id, :format => "pdf"}, :target => '_blank' %></li>
         <li class="no_border"><a class="no_padding" href="#">Print</a></li>
       </ul>

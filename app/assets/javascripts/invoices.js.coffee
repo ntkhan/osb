@@ -22,7 +22,6 @@ window.applyChosen = =>
 jQuery ->
 
   window.applyChosen()
-
   # setup talbesorter parser for amount columns with currency and ',' signs
   jQuery.tablesorter.addParser
     id: "thousands"
