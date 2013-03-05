@@ -63,6 +63,7 @@ class InvoicesController < ApplicationController
   def edit
     @invoice = Invoice.find(params[:id])
     @invoice.invoice_date = @invoice.invoice_date.to_date
+    @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
     @invoice.invoice_line_items.build()
   end
 
