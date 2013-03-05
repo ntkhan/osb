@@ -16,19 +16,19 @@
       <tbody>
       <tr>
         <td>0 - 30 days old</td>
-        <td>: <span><%= number_to_currency(invoices_by_period '0-30') %></span></td>
+        <td>: <span><%= number_to_currency(@aged_invoices.attributes["zero_to_thirty"]) %></span></td>
       </tr>
       <tr>
         <td>30 - 60 days old</td>
-        <td>: <%= number_to_currency(invoices_by_period '30-60') %></td>
+        <td>: <%= number_to_currency(@aged_invoices.attributes["zero_to_thirty"]) %></td>
       </tr>
       <tr>
         <td>60 - 90 days old</td>
-        <td>: <%= number_to_currency(invoices_by_period '60-90') %></td>
+        <td>: <%= number_to_currency(@aged_invoices.attributes["zero_to_thirty"]) %></td>
       </tr>
       <tr>
         <td>Over 90 days old</td>
-        <td>: <%= number_to_currency(invoices_by_period 'over-90') %></td>
+        <td>: <%= number_to_currency(@aged_invoices.attributes["zero_to_thirty"]) %></td>
       </tr>
       </tbody>
     </table>
