@@ -50,6 +50,7 @@
 //= require taxes.js.coffee
 //= require sonic.js
 //= require progress_indicator.js.coffee
+//= require jquery.tablehover.min.js
 
 
 jQuery(function () {
@@ -84,6 +85,8 @@ jQuery(function () {
     jQuery(".logo_tag").click(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
+
+    jQuery(".revenue_by_client .grid_table table").tableHover({colClass: 'col_hover'})
 
 });
 
