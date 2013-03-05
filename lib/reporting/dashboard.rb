@@ -44,7 +44,7 @@ module Reporting
       Invoice.total_invoices_amount - Payment.total_payments_amount
     end
 
-    def get_aging_data
+    def self.get_aging_data
       aged_invoices = Invoice.find_by_sql(<<-eos
           SELECT zero_to_thirty, thirty_one_to_sixty, sixty_one_to_ninety, ninety_one_and_above
           FROM (
