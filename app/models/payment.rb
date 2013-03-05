@@ -21,6 +21,11 @@ class Payment < ActiveRecord::Base
     "#{self.invoice.client.first_name rescue ''}  #{self.invoice.client.last_name rescue ''}"
   end
 
+  # either it's a normal payment, a credit due to overpayment or a converted payment
+  def payment_reference
+   self.payment_type == "credit" ? "credit-#{self.id.to_s.rjust(5, '0')}"  : "#{self.invoice.invoice_number}"
+  end
+
   def self.update_invoice_status inv_id, c_pay, prev_amount= 0
     invoice = Invoice.find(inv_id)
     diff = (self.invoice_paid_amount(invoice.id)- prev_amount + c_pay) - invoice.invoice_total
