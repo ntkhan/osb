@@ -73,7 +73,7 @@
                   <tr>
                     <td class="align_left"><%= revenue.organization_name %></td>
                     <% 12.times do |month| %>
-                        <td class="align_rirght"><%= number_to_currency(revenue["#{Date::MONTHNAMES[month+1]}"]) %></td>
+                        <td class="align_right"><%= number_to_currency(revenue["#{Date::MONTHNAMES[month+1]}"]).to_s.gsub("$", "").gsub(".00", "") %></td>
                     <% end %>
                     <td class="align_right"><%= number_to_currency(revenue.client_total) %></td>
                   </tr>
@@ -96,12 +96,12 @@
       <div class="report_footer">
         <div class="total_payment">
           <ul>
-            <li class="total_payment_title">Total Payments Received:</li>
+            <li class="total_payment_title">Total Revenue:</li>
             <li>$ <%= @report.report_total || "" %></li>
           </ul>
         </div>
         <div class="footer_note">
-          <p>* Payments applied from credit do not count towards the total</p>
+          <p></p>
         </div>
       </div>
       <!-- report_footer -->

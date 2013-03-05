@@ -44,11 +44,11 @@ module Reporting
       Invoice.total_invoices_amount - Payment.total_payments_amount
     end
 
-    def get_aging_data
+    def self.get_aging_data
       aged_invoices = Invoice.find_by_sql(<<-eos
           SELECT zero_to_thirty, thirty_one_to_sixty, sixty_one_to_ninety, ninety_one_and_above
           FROM (
-            SELECT aged.client_name,
+            SELECT
               SUM(CASE WHEN aged.age BETWEEN 0 AND 30 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS zero_to_thirty,
               SUM(CASE WHEN aged.age BETWEEN 31 AND 60 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS thirty_one_to_sixty,
               SUM(CASE WHEN aged.age BETWEEN 61 AND 90 THEN aged.invoice_total - aged.payment_received ELSE 0 END) AS sixty_one_to_ninety,
@@ -59,22 +59,20 @@ module Reporting
                 clients.organization_name AS client_name,
                 invoices.invoice_total,
                 IFNULL(SUM(payments.payment_amount), 0) payment_received,
-                DATEDIFF('#{@report_criteria.to_date}', DATE(IFNULL(invoices.due_date, invoices.invoice_date))) age,
+                DATEDIFF('#{Date.today}', DATE(IFNULL(invoices.due_date, invoices.invoice_date))) age,
                 invoices.`status`
               FROM `invoices`
                 INNER JOIN `clients` ON `clients`.`id` = `invoices`.`client_id`
-                LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id` AND (payments.payment_date <= '#{@report_criteria.to_date}') AND (`payments`.`deleted_at` IS NULL)
+                LEFT JOIN `payments` ON `invoices`.`id` = `payments`.`invoice_id` AND (payments.payment_date <= '#{Date.today}') AND (`payments`.`deleted_at` IS NULL)
               WHERE
                 (`invoices`.`deleted_at` IS NULL)
-                AND (DATE(IFNULL(invoices.due_date, invoices.invoice_date)) <= '#{@report_criteria.to_date}')
+                AND (DATE(IFNULL(invoices.due_date, invoices.invoice_date)) <= '#{Date.today}')
                 AND (invoices.`status` != "paid")
-                #{@report_criteria.client_id == 0 ? "" : "AND invoices.client_id = #{@report_criteria.client_id}"}
               GROUP BY clients.organization_name,  invoices.invoice_total, invoices.`status`, invoices.invoice_number
             ) AS aged
-            GROUP BY aged.client_name
           ) total_aged
       eos
-      )
+      ).first
     end
     # get outstanding invoices by period
     def self.get_invoices_by_period1 period

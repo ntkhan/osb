@@ -219,6 +219,18 @@ class Invoice < ActiveRecord::Base
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
 
+  def update_dispute_invoice(current_user,encrypt_id,response_to_client)
+    self.update_attribute("status","sent")
+    self.notify(current_user, encrypt_id)
+    self.sent_emails.create({
+                                    :content => response_to_client,
+                                    :sender => current_user.email, #User email
+                                    :recipient => self.client.email, #client email
+                                    :subject => "Response to client",
+                                    :type => "Disputed",
+                                    :date => Date.today
+                                })
+  end
   #def last_invoice_discount(discount_amount, total_discount, index)
   #  discount_amount = -(discount_amount * (index - 1))
   #  Rails.logger.debug ">>>>>>>>>>>>>> #{discount_amount}"
