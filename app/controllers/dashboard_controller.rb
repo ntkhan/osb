@@ -3,6 +3,6 @@ class DashboardController < ApplicationController
     @recent_activity = Reporting::Dashboard.get_recent_activity
     gon.chart_data = Reporting::Dashboard.get_chart_data
     @outstanding_invoices = Reporting::Dashboard.get_outstanding_invoices
-    @aged_invoices = Reporting::Dashboard.get_aging_invoices
+    @aged_invoices = Reporting::Dashboard.get_aging_data
   end
 end
