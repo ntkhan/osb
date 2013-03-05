@@ -182,6 +182,7 @@ class InvoicesController < ApplicationController
     ids = params[:invoice_ids]
     Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
     @invoices = Invoice.unarchived.page(params[:page])
+    @message = invoices_deleted(ids) unless ids.blank?
     respond_to { |format| format.js }
   end
    def dispute_invoice
