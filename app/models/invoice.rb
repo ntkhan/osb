@@ -201,19 +201,26 @@ class Invoice < ActiveRecord::Base
         :upload => 1,
         :return => return_url,
         :notify_url => notify_url,
-        :invoice => id
+        :invoice => id,
+        :discount_amount_cart => 10
     }
-    item_discount = number_with_precision(-(discount_amount.to_d / (invoice_line_items.size.to_d)),:precision => 2).to_d
+    #item_discount = number_with_precision(-(discount_amount.to_d / (invoice_line_items.size.to_d)),:precision => 2).to_d
     invoice_line_items.each_with_index do |item, index|
       values.merge!({
                         "amount_#{index+1}" => item.item_unit_cost,
                         "item_name_#{index+1}" => (item.item.item_name rescue ""),
                         "item_number_#{index+1}" => item.id,
                         "quantity_#{index+1}" => item.item_quantity,
-                        "tax_#{index+1}" => ((item.tax1.percentage rescue 0) + (item.tax2.percentage rescue 0)),
-                        "discount_amount_#{index+1}" => (index+1 == invoice_line_items.size ? last_invoice_discount(item_discount, discount_amount, invoice_line_items.size) : item_discount)
+                        "tax_#{index+1}" => ((item.tax1.percentage rescue 0) + (item.tax2.percentage rescue 0))
+                        #"discount_amount_#{index+1}" => (index+1 == invoice_line_items.size ? last_invoice_discount(item_discount, discount_amount, invoice_line_items.size) : item_discount)
                     })
     end
+    #values.merge!({
+    #                  "amount_#{invoice_line_items.size + 1}" => discount_amount,
+    #                  "item_name_#{invoice_line_items.size + 1}" => "Discount",
+    #                  "quantity_#{invoice_line_items.size + 1}" => 1,
+    #                  #"quantity_#{index+1}" => ,
+    #              }) #if discount_amount > 0
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
 
