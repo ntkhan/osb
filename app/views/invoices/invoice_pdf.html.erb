@@ -44,6 +44,10 @@
                   <td>Amount</td>
                   <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></td>
                 </tr>
+                <tr>
+                  <td>Terms</td>
+                  <td><%= @invoice.terms %></td>
+                </tr>
               </table>
             </div>
           </div>
@@ -113,11 +117,6 @@
             </div>
           </div>
           <div class="terms_notes">
-            <div class="terms">
-              <h3>Terms</h3>
-
-              <p><%= @invoice.terms %></p>
-            </div>
             <div class="notes">
               <h3>Notes</h3>
               <%= @invoice.notes %>
