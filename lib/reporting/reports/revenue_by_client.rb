@@ -27,6 +27,7 @@ module Reporting
                 FROM invoices i INNER JOIN clients c ON i.client_id = c.id
                 WHERE YEAR(IFNULL(i.due_date, i.invoice_date)) = #{@report_criteria.year}
                       AND i.status <> 'draft'
+                      AND i.deleted_at IS NULL
                                                 #{client_filter}
 					      GROUP BY c.organization_name
               ")
