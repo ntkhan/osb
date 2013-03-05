@@ -95,7 +95,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     response_to_client = params[:response_to_client]
      unless response_to_client.blank?
-      @invoice.update_dispute_invoice response_to_client
+      @invoice.update_dispute_invoice(current_user,encrypt(@invoice.id), response_to_client)
       #InvoiceMailer.response_to_client(current_user, @invoice, response_to_client).deliver
      end
     respond_to do |format|
@@ -183,6 +183,7 @@ class InvoicesController < ApplicationController
     Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
     @invoices = Invoice.unarchived.page(params[:page])
     @message = invoices_deleted(ids) unless ids.blank?
+    @message += params[:convert_to_credit].blank? ? "Corresponding payments have been deleted." : "Corresponding payments have been converted to client credit."
     respond_to { |format| format.js }
   end
    def dispute_invoice
