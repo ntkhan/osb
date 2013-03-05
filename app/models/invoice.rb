@@ -14,6 +14,8 @@ class Invoice < ActiveRecord::Base
   before_destroy :change_status
   before_create :set_invoice_number
 
+  include ActionView::Helpers::NumberHelper
+
   def set_invoice_number
     self.invoice_number = Invoice.get_next_invoice_number(nil)
   end
@@ -201,7 +203,7 @@ class Invoice < ActiveRecord::Base
         :notify_url => notify_url,
         :invoice => id
     }
-    item_discount = -(discount_amount.to_d / (invoice_line_items.size.to_d))
+    item_discount = number_with_precision(-(discount_amount.to_d / (invoice_line_items.size.to_d)),:precision => 2).to_d
     invoice_line_items.each_with_index do |item, index|
       values.merge!({
                         "amount_#{index+1}" => item.item_unit_cost,
@@ -217,6 +219,7 @@ class Invoice < ActiveRecord::Base
 
   def last_invoice_discount(discount_amount, total_discount, index)
     discount_amount = -(discount_amount * (index - 1))
+    Rails.logger.debug ">>>>>>>>>>>>>> #{discount_amount}"
     -(total_discount - discount_amount)
   end
 

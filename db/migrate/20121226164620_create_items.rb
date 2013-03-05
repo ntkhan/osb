@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :item_name
       t.string :item_description
       t.decimal :unit_cost
-      t.integer :quantity
+      t.decimal :quantity
       t.integer :tax_1
       t.integer :tax_2
       t.boolean :track_inventory
