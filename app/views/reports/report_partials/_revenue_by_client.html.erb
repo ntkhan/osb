@@ -39,7 +39,7 @@
       <!-- report_duration -->
     </div>
 
-    <div class="revnue_by_client">
+    <div class="revenue_by_client">
       <div class="grid_table">
         <table cellpadding="0" cellspacing="0" class="table_listing">
           <colgroup>
@@ -62,9 +62,9 @@
           <thead>
             <th class="align_left">Client</th>
             <% 12.times do |month| %>
-                <th class="align_right"><%= Date::MONTHNAMES[month+1].to_s[0..2] %></th>
+                <th class="align_left"><%= Date::MONTHNAMES[month+1].to_s[0..2] %></th>
             <% end %>
-            <th class="align_right">Total</th>
+            <th class="align_center">Total</th>
           </thead>
           <tbody>
           <% unless @report.report_data.blank? %>
@@ -78,6 +78,13 @@
                     <td class="align_right"><%= number_to_currency(revenue.client_total) %></td>
                   </tr>
               <% end %>
+              <tfoot>
+              <td class="align_left">Total</td>
+              <% 12.times do |month| %>
+                  <td class="align_right"><%= @report.report_total["#{Date::MONTHNAMES[month+1]}"] == 0 ? "" : @report.report_total["#{Date::MONTHNAMES[month+1]}"]  %></td>
+              <% end %>
+              <td class="align_right"><%= number_to_currency(@report.report_total["net_total"] || "") %></td>
+              </tfoot>
           <% else %>
               <tr>
                 <td colspan="14">No data found against the selected criteria. Please change criteria and try again.
@@ -94,15 +101,7 @@
 
     <div class="content_bottom">
       <div class="report_footer">
-        <div class="total_payment">
-          <ul>
-            <li class="total_payment_title">Total Revenue:</li>
-            <li>$ <%= @report.report_total || "" %></li>
-          </ul>
-        </div>
-        <div class="footer_note">
-          <p></p>
-        </div>
+
       </div>
       <!-- report_footer -->
     </div>
