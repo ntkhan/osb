@@ -15,13 +15,29 @@
     min-height: 234px;
   }
   .payment_serial {
-    background: url("/assets/draft_payment.png") no-repeat scroll left top transparent;
-    float: left;
-    height: auto;
+    position: absolute;
+    width: 69px;
+    height: 69px;
     margin: -1px 0 0 -1px;
-    position: relative;
-    width: 100%;
   }
+  .draft{
+        background: url(/assets/draft_pmt.png) no-repeat;
+    }
+    .sent{
+        background: url(/assets/sent_pmt.png) no-repeat;
+    }
+    .draft-partial{
+        background: url(/assets/draft_partial_pmt.png) no-repeat;
+    }
+    .partial{
+        background: url(/assets/partial_pmt.png) no-repeat;
+    }
+    .paid{
+        background: url(/assets/paid_pmt.png) no-repeat;
+    }
+    .disputed{
+        background: url(/assets/disputed_pmt.png) no-repeat;
+    }
   .payment_summary {
     float: left;
     padding: 36px 39px 15px 39px;
