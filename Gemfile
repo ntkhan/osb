@@ -42,6 +42,7 @@ gem "browser"
 gem "gon"
 gem "wkhtmltopdf-binary"
 gem "rest-client"
+gem "activemerchant"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
