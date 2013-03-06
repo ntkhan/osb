@@ -200,11 +200,12 @@ class InvoicesController < ApplicationController
   end
    def dispute_invoice
      invoice_id = params[:invoice_id]
-     invoice = Invoice.find(invoice_id)
-     invoice.update_attribute('status','disputed')
+     @invoice = Invoice.find(invoice_id)
+     @invoice.update_attribute('status','disputed')
      reason_for_dispute = params[:reason_for_dispute]
-     InvoiceMailer.dispute_invoice_email(current_user, invoice, reason_for_dispute).deliver
+     InvoiceMailer.dispute_invoice_email(current_user, @invoice, reason_for_dispute).deliver
      @message = dispute_invoice_message(current_user.companies.first.org_name)
+     @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
      respond_to { |format| format.js }
    end
   def paypal_payments

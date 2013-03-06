@@ -411,7 +411,7 @@ jQuery ->
     else if title is "payment" and action is "delete forever"
          flag = confirm("Are you sure you want to delete these payment(s)?")
     else if title is "invoice" and action is "send"
-         flag = confirm("Are you sure you want to send this invoice?")
+         flag = confirm("Are you sure you want to send selected invoice(s)?")
     flag
   # Alert on dispute if invoice is paid
   jQuery('#dispute_link').click ->
