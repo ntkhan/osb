@@ -1024,4 +1024,14 @@ table.table_listing, table.report-data-table {
   width: 100px;
   z-index: 1000;
 }
+.use_as_template{
+  top: 280px !important;
+  .close_qtip{
+    cursor: pointer;
+    position: absolute;
+    float: right;
+    right: 4px;
+    top: 0;
+  }
+}
 

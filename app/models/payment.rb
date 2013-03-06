@@ -42,7 +42,7 @@ class Payment < ActiveRecord::Base
     end
     invoice.status = status
     invoice.save
-    return return_v
+    return_v
   end
 
   def self.add_credit_payment invoice, amount
