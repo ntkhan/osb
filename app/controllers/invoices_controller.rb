@@ -38,6 +38,7 @@ class InvoicesController < ApplicationController
     @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
     @invoice = @id.blank? ? nil : Invoice.find(@id)
     @invoice.update_attribute("status", "viewed") if @invoice.present? && @invoice.status == "sent"
+    @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
   end
 
   # GET /invoices/new
