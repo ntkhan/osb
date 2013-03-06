@@ -929,6 +929,38 @@ table.table_listing, table.report-data-table {
 
 /* Pagination links css end */
 
+/*-------------------------Calendar CSS Starts-------------------------*/
+.ui-widget-content{
+    border: 1px solid #D7D7D7 !important;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
+}
+.ui-widget-header, .ui-state-default, .ui-widget-content, .ui-widget-header{
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    background-image: linear-gradient(#FFFFFF 20%, #F6F6F6 50%, #EEEEEE 52%, #F4F4F4 100%) !important;
+    border: 1px solid #D7D7D7 !important;
+    border-radius: 2px;
+}
+.ui-state-active{
+    border: 1px solid #00BDE5 !important;
+}
+.ui-widget-header{
+    color: #464646 !important;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+.ui-widget{
+    font-family: Arial,Helvetica,sans-serif !important;
+}
+.ui-widget-content{
+    color: #00BDE5 !important;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/*-------------------------Calendar CSS Ends-------------------------*/
+
 .alert {
   width: 400px;
   min-height: 42px;
