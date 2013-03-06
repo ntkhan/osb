@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
   end
 
   def last_invoice
-    self.invoices.last.id unless self.invoices.blank?
+    self.invoices.unarchived.last.id rescue nil
   end
 
   def self.multiple_clients ids
