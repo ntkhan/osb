@@ -1,49 +1,56 @@
 <div class="pay_invoice">
   <% client_credit = payment.client_credit payment.invoice.client_id
-     rowspan = 4
-     if client_credit > 0
-       rowspan =5
-     end
-  %>
+  rowspan = 4
+  if client_credit > 0
+    rowspan =5
+  end
+%>
   <div class="fields_content">
     <div class="fields_content_container">
       <div class="fields_content_data">
 
         <div class="payment_left">
-          <div class="payment_serial">
-            <span><%= index+1 %></span>
-          </div>
+
+          <div class="payment_serial draft"></div><!--payment_serial-->
+
           <div class="payment_summary">
-            <div class="invoice_serial">
-              <h2>Invoice#<%= h payment.invoice.invoice_number %></h2>
-            </div>
-            <div class="payment_price">
-              <h1 class="green"><%= h number_to_currency(payment.invoice.invoice_total) %></h1>
-            </div>
+
             <div class="payment_person">
               <p class="organization"><%= payment.client_name %></p>
-
               <p class="person_name"><%= payment.client_full_name %></p>
-            </div>
-            <br/>
+            </div><!--payment_person-->
+
+            <div class="invoice_data">
+
+              <div class="invoice_data_row">
+                <div class="invoice_label">Invoice#<span>:</span></div>
+                <div class="inovice_description"><%= h payment.invoice.invoice_number %></div>
+              </div>
+
+              <div class="invoice_data_row">
+                <div class="invoice_label">Due Date<span>:</span></div>
+                <div class="inovice_description">04Mar13</div>
+              </div>
+
+              <div class="invoice_data_row">
+                <div class="invoice_label">Amount Due<span>:</span></div>
+                <div class="inovice_description amount"><%= number_to_currency(Payment.invoice_remaining_amount(payment.invoice.id)) %></div>
+              </div>
+
+            </div><!--invoice_data-->
 
             <div class="payment_person">
               <% if payment.invoice.status == 'partial' or payment.invoice.status == 'draft-partial' %>
-                  <p><b><%= payment.invoice.status.gsub(/-/, ' ').capitalize %> payments</b></p>
-                  <% payment.invoice.payments.each do |partial_payment| %>
-                      <p><%= "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>
-                  <% end %>
+                <p><b><%= payment.invoice.status.gsub(/-/, ' ').capitalize %> payments</b></p>
+                <% payment.invoice.payments.each do |partial_payment| %>
+                  <p><%= "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>
+                <% end %>
               <% end %>
             </div>
-            <% if Payment.invoice_remaining_amount(payment.invoice.id) > 0 %>
-            <div class="payment_person">
-              <p><b>Amount Due</b></p>
-                <%= number_to_currency(Payment.invoice_remaining_amount(payment.invoice.id)) %>
-            </div>
-            <% end %>
-          </div>
-        </div>
-        <!--payment_left-->
+
+          </div><!--payment_summary-->
+
+        </div><!--payment_left-->
 
         <div class="payment_right">
 
@@ -62,16 +69,16 @@
           </div>
           <!--field_row-->
           <% if client_credit > 0 %>
-              <div class="field_row">
+            <div class="field_row">
 
-                <div class="label_field left single">&nbsp;</div>
-                <div class="field_check btm">
-                  <%= check_box " ", index, :id => "#{index}", :class => "apply_credit" %>
-                  <p><label for="payments_<%= index %>" id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply
+              <div class="label_field left single">&nbsp;</div>
+              <div class="field_check btm">
+                <%= check_box " ", index, :id => "#{index}", :class => "apply_credit" %>
+                <p><label for="payments_<%= index %>" id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply
                     from Credit <%= current_user.currency_code %>.<%= number_to_currency(client_credit) %>
                     available</label></p>
-                </div>
               </div>
+            </div>
           <% end %>
           <!--field_row-->
 

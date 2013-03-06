@@ -431,9 +431,15 @@ jQuery ->
        jQuery(".alert.alert-error").show().find("span").html "You haven't selected any #{title} to #{action}. Please select one or more #{title}s and try again."
        flag = false
     else if title is "payment" and action is "delete forever"
-         sure = confirm("Are you sure you want to delete these payment(s)?")
-         if sure is false
-            flag = false
+         flag = confirm("Are you sure you want to delete these payment(s)?")
+    else if title is "invoice" and action is "send"
+         flag = confirm("Are you sure you want to send this invoice?")
     flag
-  jQuery(".close_popup").live "click", ->
-    jQuery(".invoices_with_payments").hide()
+  # Alert on dispute if invoice is paid
+  jQuery('#dispute_link').click ->
+    flag = true
+    status = jQuery(this).attr "value"
+    if status is "paid"
+           alert "Paid invoice can not be disputed."
+           flag = false
+    flag

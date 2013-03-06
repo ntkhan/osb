@@ -3,42 +3,47 @@
   <div class="content_header">
     <h1><%= t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
     <ul>
-      <li><a  href="#dispute_invoice_popup" data-toggle="modal">Dispute</a></li>
+      <li><a id="dispute_link" value="<%= @invoice.status %>" href="#dispute_invoice_popup" data-toggle="modal">Dispute</a></li>
       <li><%= link_to "PDF", {:controller => 'invoices', :action => 'invoice_pdf', :id => @invoice.id, :format => "pdf"}, :target => '_blank' %></li>
       <li><a href="#">Print</a></li>
       <li class="no_border"><%= link_to "Payments history", {:controller => 'payments', :action => 'payments_history', :id => @invoice.id}, :class => "no_padding" %></li>
     </ul>
   </div>
   <div class="enter_payment_btn">
-    <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}","http://#{request.host_with_port}/invoices/paypal_payments") %>
+    <% if @invoice.status != "paid" %>
+        <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}", "http://#{request.host_with_port}/invoices/paypal_payments") %>
+    <% else %>
+        <div></div>
+    <% end %>
   </div>
   <div class="payment_content">
-    <% if @invoice.status == "disputed"%>
+    <% unless @dispute_history.blank?%>
         <div class="response_to_client">
           <div class="response_container" style="border-bottom: none;">
-            <div class="response_top" >
+            <div class="response_top">
               <h1>Dispute History</h1>
-              <% @dispute_history.each do |email_detail|%>
-                  <% float_class = email_detail.subject == "Reason from client" ? "float-right" : "float-left"  %>
-                  <div class="<%= float_class%>">
-                    <span class="detail"><%= email_detail.content%></span>
-                    <span class="info"><%= email_detail.subject == "Reason from client" ? "You": email_detail.sender %>, <%= email_detail.date%></span>
+              <% @dispute_history.each do |email_detail| %>
+                  <% float_class = email_detail.subject == "Reason from client" ? "float-right" : "float-left" %>
+                  <div class="<%= float_class %>">
+                    <span class="detail"><%= email_detail.content %></span>
+                    <span class="info"><%= email_detail.subject == "Reason from client" ? "You" : email_detail.sender %>
+                      , <%= email_detail.date %></span>
                   </div>
-              <% end%>
+              <% end %>
             </div>
           </div>
         </div>
-    <% end%>
+    <% end %>
     <div class="payment_container">
       <div class="payment_corner <%= @invoice.status %>"></div>
-      <%= render :partial=>"show_invoice"%>
+      <%= render :partial => "show_invoice" %>
       <!-- payment_invoice_data -->
     </div>
     <!-- payment_container -->
   </div>
 </div>
-<%= form_tag "/invoices/dispute_invoice", :remote => true  do %>
-    <div id="dispute_invoice_popup" class="modal hide fad"  style="width:auto;left:50%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<%= form_tag "/invoices/dispute_invoice", :remote => true do %>
+    <div id="dispute_invoice_popup" class="modal hide fad" style="width:auto;left:50%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="model_grey_container">
         <div class="modal-header">
 
@@ -68,7 +73,7 @@
           <%= hidden_field_tag "invoice_id", @invoice.id %>
           <div class="fields_content_data new_invoice_fields">
             <div class="field_row textarea">
-              <div class="label_field textarea" ><label>Reason For Dispute</label></div>
+              <div class="label_field textarea"><label>Reason For Dispute</label></div>
               <div class="large_field" style="clear:both;">
                 <%= text_area_tag "reason_for_dispute" %>
               </div>

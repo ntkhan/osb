@@ -109,7 +109,7 @@
     .payment_content{
         float: left;
         width: 100%;
-        padding: 0 0 40px 0;
+        padding: 0 0 60px 0;
     }
     .payment_container{
         border: 1px solid #d7d7d7;
@@ -123,10 +123,9 @@
     .payment_corner{
         float: left;
         position: absolute;
-        margin: -1px 0 0 -1px;
         *margin: -1px 0 0 -760px;
-        width: 100px;
-        height:100px;
+        width: 90px;
+        height: 90px;
     }
     .draft{
         background: url(/assets/draft.png) no-repeat;

@@ -162,7 +162,7 @@ h4 {
 
 .main_container {
   width: 900px;
-  padding: 40px 0 0 0;
+  padding: 40px 0;
   overflow: hidden;
   margin: auto;
 }
@@ -223,7 +223,6 @@ h4 {
     min-height: 38px;
    }
 }
-
 .nav_container {
   min-height: 86px;
   background: url(/assets/nav_left.gif) no-repeat top left;
@@ -243,17 +242,14 @@ h4 {
   margin: auto;
   *width: 98%;
 }
-
 #nav li {
   float: left;
   height: 43px;
 }
-
 #nav .select a {
   display: block;
   white-space: nowrap;
 }
-
 #nav .select a {
   display: block;
   font-family: 'Dosis Regular' , sans-serif;
@@ -268,7 +264,6 @@ h4 {
   padding: 0 10px;
   background: #00BDE5;
 }
-
 /*#nav .select li:hover a,*/
 #nav .select li a.active {
   display: block;
@@ -276,7 +271,6 @@ h4 {
   height: 43px;
   text-decoration: none;
 }
-
 #nav .sub {
   display: none;
   margin: 0;
@@ -285,7 +279,6 @@ h4 {
   width: 870px;
   background: url(/assets/sub_bg.png) repeat-x bottom;
 }
-
 #nav .select li:hover .sub, #nav .select li a.active + .sub {
   height: 43px;
   display: block;
@@ -294,7 +287,6 @@ h4 {
   left: 0;
   text-align: center;
 }
-
 #nav .select li:hover .sub li a, #nav .select li .sub li a {
   display: block;
   float: left;
@@ -305,17 +297,14 @@ h4 {
   line-height: 34px;
   min-width: 39px;
 }
-
 #nav .select li:hover .sub li a:hover, #nav .select li .sub li a.active {
   display: block;
   color: #00ace5;
 /*background: url(/assets/sub_hover.png) no-repeat bottom center;*/
 }
-
 #nav .select li .sub li a.active {
   background: url(/assets/sub_hover.png) no-repeat bottom center;
 }
-
 /*Navigation CSS Ends*/
 
 /*-------------------------Content CSS Starts-------------------------*/
@@ -333,13 +322,15 @@ h4 {
 }
 
 .invoices-main, .sent_emails-main,
-.payments-main, .reports-main, .help-main {
-  padding: 5px 0 0 0;
+.payments-main, .reports-main, .help-main,
+.clients-main, .items-main, .taxes-main {
+  padding: 23px 0 0 0;
 }
 
-.clients-main, .items-main, .taxes-main {
-  padding: 48px 0 0 0;
-}
+/*.clients-main, .items-main, .taxes-main {
+ padding: 48px 0 0 0;
+  padding: 23px 0 0 0;
+}*/
 
 /*----page top distance----*/
 
@@ -416,6 +407,7 @@ h4 {
   width: auto;
   background: none;
   font-size: 13px;
+  font-weight: normal;
 }
 
 .grid_control_sep {
@@ -928,6 +920,38 @@ table.table_listing, table.report-data-table {
 }
 
 /* Pagination links css end */
+
+/*-------------------------Calendar CSS Starts-------------------------*/
+.ui-widget-content{
+    border: 1px solid #D7D7D7 !important;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
+}
+.ui-widget-header, .ui-state-default, .ui-widget-content, .ui-widget-header{
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    background-image: linear-gradient(#FFFFFF 20%, #F6F6F6 50%, #EEEEEE 52%, #F4F4F4 100%) !important;
+    border: 1px solid #D7D7D7 !important;
+    border-radius: 2px;
+}
+.ui-state-active{
+    border: 1px solid #00BDE5 !important;
+}
+.ui-widget-header{
+    color: #464646 !important;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+.ui-widget{
+    font-family: Arial,Helvetica,sans-serif !important;
+}
+.ui-widget-content{
+    color: #00BDE5 !important;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/*-------------------------Calendar CSS Ends-------------------------*/
 
 .alert {
   width: 400px;
