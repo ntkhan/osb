@@ -10,24 +10,9 @@
 .reports {
   .grid_table table.aged_accounts_listing {
     width: 100%;
-    col.one {
-      width: 120px;
-    }
-    col.two {
-      width: 70px;
-    }
-    col.three {
-      width: 70px;
-    }
-    col.four {
-      width: 70px;
-    }
-    col.five {
-      width: 70px;
-    }
-    col.six {
-      width: 92px;
-    }
+    col.one {width: 120px;}
+    col.two, col.three, col.four, col.five {width: 70px;}
+    col.six {width: 92px;}
     tfoot{
       font-weight: bold;
       border-bottom: 1px solid #D7D7D7;
@@ -38,5 +23,7 @@
     td:last-child.report_no_data{
       font-weight: normal;
     }
+    .col_hover, .row_hover, tfoot tr:hover{background-color: #F7F7F7;}
+    tfoot{border-bottom: medium double #dadada; font-weight: bold;}
   }
 }

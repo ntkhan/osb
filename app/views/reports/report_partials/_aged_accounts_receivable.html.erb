@@ -34,9 +34,9 @@
         <li><a href="#">Print Report</a></li>
       </ul>
       <div class="report_duration">
-        <ul>
-          <li><%= @report.period %></li>
-        </ul>
+        <!--<ul>-->
+          <!--<li><%= @report.period %></li>-->
+        <!--</ul>-->
       </div>
       <!-- report_duration -->
     </div>
@@ -67,10 +67,10 @@
                 <!--tr><td colspan="6"><%#= payment.inspect %></td> </tr-->
                 <tr>
                   <td class="align_left"><%= aged.attributes["client_name"] %></td>
-                  <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]) %></td>
-                  <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]) %></td>
-                  <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]) %></td>
-                  <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]) %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"]).gsub("$", "") %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["thirty_one_to_sixty"]).gsub("$", "") %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["sixty_one_to_ninety"]).gsub("$", "") %></td>
+                  <td class="align_right"><%= number_to_currency(aged.attributes["ninety_one_and_above"]).gsub("$", "") %></td>
                   <td class="align_right"><%= number_to_currency(aged.attributes["zero_to_thirty"] + aged.attributes["thirty_one_to_sixty"] + aged.attributes["sixty_one_to_ninety"] + aged.attributes["ninety_one_and_above"]) %></td>
                 </tr>
             <% end %>

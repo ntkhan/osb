@@ -13,7 +13,7 @@
           </div>
           <div class="report_clients">
             <div class="control_name">
-              <p>Clients</p>
+              <p>Client</p>
             </div>
             <div class="client_select">
               <%= collection_select "criteria", "client_id", [Client.new({:id => 0, :organization_name => "All"})] + Client.all, :id, :organization_name, {:prompt => "All"}, {:class => "client chzn-select"} %>

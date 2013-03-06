@@ -86,7 +86,7 @@ jQuery(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
 
-    jQuery(".revenue_by_client .grid_table table").tableHover({colClass: 'col_hover'})
+    jQuery(".revenue_by_client .grid_table table, .payments_collected .grid_table table").tableHover({colClass: 'col_hover', footCols: true, footRows: true, rowClass: 'row_hover'})
 
 });
 
