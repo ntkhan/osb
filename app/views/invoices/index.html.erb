@@ -26,8 +26,7 @@
               <li><a href="#" class="no_links">Copy</a></li>
               <li><a href="#" class="no_links">Print</a></li>
               <li class="grid_control_sep"><%= submit_tag "Send", :name => "send", :class => "top_links send" %></li>
-              <li><%= submit_tag "Enter payment", :name => "payment", :class => "top_links" %></li>
-            </ul>
+              <li><%= submit_tag "Enter payment", :name => "payment", :class => "top_links payment" %></li>
           </div>
           <div class="grid_control_right" id="active_links">
             <%= render "invoices/filter_links" %>

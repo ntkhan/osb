@@ -235,13 +235,6 @@ jQuery ->
     flag
 
   applyPopover = (elem,position,corner,message) ->
-#    elem.popover
-#      trigger: "manual"
-#      content: message
-#      placement: position
-#      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-error'><p></p></div></div></div>"
-#    elem.attr('data-content',message).popover "show"
-#    elem.focus
     elem.qtip
       content:
         text: message
@@ -258,32 +251,29 @@ jQuery ->
     elem.focus()
 
   useAsTemplatePopover = (elem,id,client_name) ->
-#    message =  "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
-#    elem.popover
-#      trigger: "manual"
-#      content: message
-#      placement: "right"
-#      template: "<div class='popover'><div class='arrow'></div><div class='popover-inner'><div class='popover-content alert-success'><p></p></div></div></div>"
-#      html: true
-#    elem.attr('data-content',message).popover "show"
     elem.qtip
       content:
-        text: "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a>"
+        text: "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a><span class='close_qtip'>x</span>"
       show:
         event: false
       hide:
         event: false
       position:
-        at: "bottomMiddle"
+        at: "topMiddle"
       style:
+        classes: 'use_as_template'
         tip:
-          corner: "topLeft"
+          corner: "bottomLeft"
     elem.qtip().show()
     elem.focus()
 
   hidePopover = (elem) ->
     #elem.next(".popover").hide()
     elem.qtip("hide")
+
+  # Hide use as template qtip
+  jQuery('.use_as_template .close_qtip').live "click", ->
+    hidePopover(jQuery("#invoice_client_id_chzn"))
 
   jQuery("#invoice_client_id_chzn,.chzn-container").live "click", ->
     jQuery(this).qtip("hide")

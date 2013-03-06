@@ -103,7 +103,7 @@ class PaymentsController < ApplicationController
 
   def update_individual_payment
     params[:payments].each do |pay|
-      pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_i
+      pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_f
       pay[:payment_date] ||= Date.today
       Payment.create!(pay).notify_client current_user.email
     end
