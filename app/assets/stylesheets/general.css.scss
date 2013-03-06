@@ -162,7 +162,7 @@ h4 {
 
 .main_container {
   width: 900px;
-  padding: 40px 0 0 0;
+  padding: 40px 0;
   overflow: hidden;
   margin: auto;
 }
@@ -416,6 +416,7 @@ h4 {
   width: auto;
   background: none;
   font-size: 13px;
+  font-weight: normal;
 }
 
 .grid_control_sep {

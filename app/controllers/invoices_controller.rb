@@ -151,6 +151,10 @@ class InvoicesController < ApplicationController
       Invoice.recover_deleted(ids)
       @invoices = Invoice.only_deleted.page(params[:page])
       @action = "recovered from deleted"
+    elsif params[:send]
+      send_invoices(ids)
+      @invoices = Invoice.unarchived.page(params[:page])
+      @action = "sent"
     elsif params[:payment]
       @action = unless Invoice.paid_invoices(ids).present?
                   #Invoice.paid_full(ids)
@@ -172,6 +176,12 @@ class InvoicesController < ApplicationController
 
   def filter_invoices
     @invoices = Invoice.filter(params)
+  end
+
+  def send_invoices ids
+    Invoice.multiple_invoices(ids).each { |invoice|
+      invoice.send_invoice(current_user, encrypt(invoice.id))
+    }
   end
 
   def send_invoice
