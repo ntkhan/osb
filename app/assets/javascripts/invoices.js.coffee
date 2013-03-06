@@ -64,6 +64,7 @@ jQuery ->
     jQuery("#invoice_tax_amount_lbl").text(tax_amount.toFixed(2))
     jQuery("#invoice_tax_amount").val(tax_amount.toFixed(2))
     jQuery("#invoice_discount_amount_lbl").text((discount_amount * -1).toFixed(2))
+    jQuery("span.discount_percentage_lbl").text(jQuery("#invoice_discount_percentage").val())
     jQuery("#invoice_discount_amount").val((discount_amount * -1).toFixed(2))
     total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
     jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
@@ -86,6 +87,26 @@ jQuery ->
     discount_percentage = 0 if not discount_percentage? or discount_percentage is ""
     (subtotal * (parseFloat(discount_percentage)/100))
 
+  # update taxes rows in invoice total section
+  updateIndividualTaxes = (tax_dropdown) ->
+    # get tax amount and tax name from tax dropdown
+    tax = tax_dropdown.find('option:selected')
+    tax_name = tax.text()
+    tax_percentage = if tax.parents('select').hasClass('tax1') then tax.attr('data-tax_1') else tax.attr('data-tax_2')
+    getTaxRow(tax_name,tax_percentage)
+
+    #alert "#{tax_name} : #{tax_amount}"
+
+  # Individual taxes row
+  getTaxRow = (tax_name,tax_percentage) ->
+    tax_row = "<div class='grid_summary_row' id='tax_#{tax_name}'><div class='grid_summary_title'>
+    Tax <span class='tax_percentage_lbl'>#{tax_percentage}</span>%
+    </div>
+    <div class='grid_summary_description'>
+    <label id = 'invoice_tax_amount_#{tax_name}'></label>
+    </div></div>"
+    jQuery('#tax_totals').append(tax_row)
+
   # Update line and grand total if line item fields are changed
   jQuery("input.cost, input.qty").live "blur", ->
      updateLineTotal(jQuery(this))
@@ -98,6 +119,7 @@ jQuery ->
 
   # Update line and grand total when tax is selected from dropdown
   jQuery("select.tax1, select.tax2").live "change", ->
+     #updateIndividualTaxes(jQuery(this))
      updateInvoiceTotal()
 
   # Prevent form submission if enter key is press in cost,quantity or tax inputs.
