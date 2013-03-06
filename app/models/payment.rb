@@ -9,7 +9,7 @@ class Payment < ActiveRecord::Base
   before_destroy :check_credit_payments
 
   def check_credit_payments
-    false if self.payment_type == "credit" || self.payment_type != nil
+    #false if self.payment_type == "credit" || self.payment_type != nil
   end
 
   def client_name
@@ -42,7 +42,7 @@ class Payment < ActiveRecord::Base
     end
     invoice.status = status
     invoice.save
-    return return_v
+    return_v
   end
 
   def self.add_credit_payment invoice, amount
