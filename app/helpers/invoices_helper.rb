@@ -7,7 +7,7 @@ module InvoicesHelper
          <li><a href="/invoices/enter_single_payment?ids=#{id}">Enter payment against this invoice</a></li>
          <li><a href="/invoices/new">Create another invoice</a></li>
          <li><a href="/invoices/new?id=#{id}">Create another by duplicating this invoice</a></li>
-         <li><a href="/invoices/invoice_pdf/#{id}.pdf">Download this invoice as PDF</a></li>
+         <li><a href="/invoices/invoice_pdf/#{id}.pdf" target="_blank">Download this invoice as PDF</a></li>
        </ul>
     HTML
     notice = notice.html_safe
@@ -35,6 +35,13 @@ module InvoicesHelper
     notice = <<-HTML
      <p>Payments of ${amount} against <a>N invoices</a> have been recorded successfully.
      <a href="invoices/filter_invoices?status=deleted" data-remote="true">Deleted</a> section on this page.</p>
+    HTML
+    notice = notice.html_safe
+  end
+  def dispute_invoice_message company_name
+    notice = <<-HTML
+     <p>Invoice disputed.</p>
+     <p> #{company_name} has been notified of the dispute.</p>
     HTML
     notice = notice.html_safe
   end

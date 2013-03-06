@@ -204,6 +204,7 @@ class InvoicesController < ApplicationController
      invoice.update_attribute('status','disputed')
      reason_for_dispute = params[:reason_for_dispute]
      InvoiceMailer.dispute_invoice_email(current_user, invoice, reason_for_dispute).deliver
+     @message = dispute_invoice_message(current_user.companies.first.org_name)
      respond_to { |format| format.js }
    end
   def paypal_payments
