@@ -1,71 +1,71 @@
-<div class="payment_corner <%= @invoice.status %>"></div>
-<div class="payment_invoice_data">
-      <div class="primary_address">
-        <address>
-          <p><%= @invoice.client.organization_name %></p>
 
-          <p><%= @invoice.client.address_street1 %></p>
+  <div class="invoice_preview">
+    <div class="inovice_preview_contianer">
+      <div class="invoice_tag paid <%= @invoice.status %>"></div>
 
-          <p><%= @invoice.client.city %></p>
-        </address>
-      </div>
-      <div class="payment_summary">
-        <div class="secondary_address">
-          <address>
-            <p class="bold"><%= @invoice.client.organization_name %></p>
+      <div class="invoice_preview_content">
 
-            <p><%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %></p>
+        <div class="preview_content_top">
 
-            <p><%= @invoice.client.city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %></p>
+          <div class="preview_left">
+            <div class="invoice_name"><%= @invoice.client.organization_name %></div>
+            <div class="invoice_address">
+              <p><%= @invoice.client.address_street1 %></p>
+              <p><%= @invoice.client.city %></p>
+            </div>
+            <div class="invoice_organization">
+              <p class="preview_heading"><%= @invoice.client.organization_name %></p>
+              <p><%= @invoice.client.first_name.to_s + " " +@invoice.client.last_name.to_s %></p>
+              <p><%= @invoice.client.city %>&nbsp;&nbsp;<%= @invoice.client.postal_zip_code %></p>
+              <p><%= @invoice.client.address_street1.to_s+ " " +@invoice.client.address_street2.to_s %></p>
+            </div>
+          </div><!--preview_top_left-->
 
-            <p><%= @invoice.client.address_street1.to_s+ " " +@invoice.client.address_street2.to_s %></p>
-          </address>
-        </div>
-        <div class="payment_summary_table">
-          <table cellpadding="0" cellspacing="0">
-            <colgroup>
-              <col class="first"/>
-              <col class="second"/>
-            </colgroup>
-            <tr>
-              <td>Invoice #</td>
-              <td><%= @invoice.invoice_number %></td>
-            </tr>
-            <tr>
-              <td>Invoice Date</td>
-              <td><%= @invoice.invoice_date.strftime('%B %d , %Y') rescue "" %></td>
-            </tr>
-            <tr>
-              <td>Due Date</td>
-              <td><%= @invoice.due_date.strftime('%B %d , %Y') rescue "" %></td>
-            </tr>
-            <tr>
-              <td>Amount</td>
-              <td><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="payment_invoice_table">
-        <div class="time_entry">
-          <table cellpadding="0" cellspacing="0">
-            <colgroup>
-              <col class="first"/>
-              <col class="second"/>
-              <col class="third"/>
-              <col class="forth"/>
-              <col class="fifth"/>
-            </colgroup>
-            <tr>
-              <th class="align_left">Item</th>
-              <th class="align_left">Description</th>
-              <th class="align_right">Unit Cost</th>
-              <th class="align_right">Quantity</th>
-              <th class="align_right">Line Total</th>
-            </tr>
-            <% @invoice.invoice_line_items.each do |item|
-              item_line_total= (item.item_unit_cost ||0) * (item.item_quantity ||0)
-            %>
+          <div class="preview_right">
+            <div class="top_right_row">
+              <div class="preview_right_label">Invoice #</div>
+              <div class="preview_right_description"><%= @invoice.invoice_number %></div>
+            </div><!--top_right_row-->
+
+            <div class="top_right_row">
+              <div class="preview_right_label">Invoice Date</div>
+              <div class="preview_right_description"><%= @invoice.invoice_date.strftime('%B %d , %Y') rescue "" %></div>
+            </div><!--top_right_row-->
+
+            <div class="top_right_row">
+              <div class="preview_right_label">Amount</div>
+              <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></div>
+            </div><!--top_right_row-->
+
+            <div class="top_right_row">
+              <div class="preview_right_label">Due Date</div>
+              <div class="preview_right_description"><%= @invoice.due_date.strftime('%B %d , %Y') rescue "" %></div>
+            </div><!--top_right_row-->
+          </div><!--preview_top_right-->
+
+        </div><!--preview_content_top-->
+
+        <div class="preview_content_middle">
+          <div class="grid_table">
+            <table cellpadding="0" cellspacing="0">
+              <colgroup>
+                <col class="one"/>
+                <col class="two"/>
+                <col class="three"/>
+                <col class="four"/>
+                <col class="five"/>
+
+              </colgroup>
+              <tr>
+                <th class="align_left">Item</th>
+                <th class="align_left">Description</th>
+                <th class="align_right">Unit Cost</th>
+                <th class="align_right">Quantity</th>
+                <th class="align_right">Line Total</th>
+              </tr>
+              <% @invoice.invoice_line_items.each do |item|
+                item_line_total= (item.item_unit_cost ||0) * (item.item_quantity ||0)
+              %>
                 <tr>
                   <td class="align_left"><%= item.item.item_name rescue "" %></td>
                   <td class="align_left"><%= item.item_description %></td>
@@ -73,51 +73,71 @@
                   <td class="align_right"><%= item.item_quantity %></td>
                   <td class="align_right"><%= number_to_currency(item_line_total) %></td>
                 </tr>
-            <% end %>
-          </table>
-        </div>
-      </div>
-      <div class="payment_total">
-        <div class="payment_summary_table">
-          <table cellpadding="0" cellspacing="0">
-            <colgroup>
-              <col class="first"/>
-              <col class="second"/>
-            </colgroup>
-            <tr>
-              <th>Subtotal</th>
-              <th><%= number_to_currency(@invoice.sub_total) %></th>
-            </tr>
-            <tr>
-              <td>Discount <%= @invoice.discount_percentage %></td>
-              <td><%= number_to_currency(@invoice.discount_amount) %></td>
-            </tr>
-            <tr>
-              <td class="bottom_padding">Tax</td>
-              <td><%= number_to_currency(@invoice.tax_amount) %></td>
-            </tr>
-            <tr class="single_border">
-              <th class="top_padding">Total</th>
-              <th><%= number_to_currency(@invoice.invoice_total) %></th>
-            </tr>
-            <tr>
-              <td class="bottom_padding">Amount Paid</td>
-              <td>-<%= number_to_currency(Payment.invoice_paid_amount(@invoice.id)) %></td>
-            </tr>
-            <tr class="double_border">
-              <th class="top_padding">Amount Due</th>
-              <th><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></th>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="terms_notes">
-        <div class="notes">
-          <h3>Notes</h3>
-          <%= @invoice.notes %>
-        </div>
-      </div>
-      <div class="payment_footer">
-        <p>This invoice was sent using<%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></p>
-      </div>
- </div>
+              <% end %>
+            </table>
+          </div><!--grid_table-->
+        </div><!--preview_content_middle-->
+
+        <div class="preview_content_btm">
+          <div class="preview_btm_top">
+
+            <div class="preview_left btm">
+              <div class="preview_terms">
+                <p class="preview_heading">Terms</p>
+                <p>Set Default Invoice Terms</p>
+                <p>The default terms you set here will be re-used on future Invoices.</p>
+              </div>
+              <div class="preview_notes">
+                <p class="preview_heading">Notes</p>
+                <p><%= @invoice.notes %></p>
+              </div>
+            </div><!--preview_top_left-->
+
+            <div class="preview_right btm">
+              <div class="top_right_row preview_heading">
+                <div class="preview_right_label">Subtotal</div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.sub_total) %></div>
+              </div><!--top_right_row-->
+
+              <div class="top_right_row">
+                <div class="preview_right_label">Discount <%= @invoice.discount_percentage %></div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.discount_amount) %></div>
+              </div><!--top_right_row-->
+
+              <div class="top_right_row border">
+                <div class="preview_right_label">Tax</div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.tax_amount) %></div>
+              </div><!--top_right_row-->
+
+              <div class="top_right_row preview_heading">
+                <div class="preview_right_label">Total</div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total) %></div>
+              </div><!--top_right_row-->
+
+              <div class="top_right_row border amt_paid">
+                <div class="preview_right_label">Amount Paid</div>
+                <div class="preview_right_description">-<%= number_to_currency(Payment.invoice_paid_amount(@invoice.id)) %></div>
+              </div><!--top_right_row-->
+
+              <div class="top_right_row border preview_heading">
+                <div class="preview_right_label">Amount Due</div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></div>
+              </div><!--top_right_row-->
+            </div><!--preview_top_right-->
+
+          </div><!--preview_btm_top-->
+
+
+          <div class="preview_btm_footer">
+            <ul>
+              <li class="footer_txt">This invoice was sent using</li>
+              <li><%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></li>
+            </ul>
+          </div><!--preview_btm_footer-->
+
+        </div><!--preview_content_btm-->
+
+
+      </div><!--invoice_preview_content-->
+    </div><!--inovice_preview_contianer-->
+  </div><!--invoice_preview-->
