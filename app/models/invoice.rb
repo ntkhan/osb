@@ -162,7 +162,7 @@ class Invoice < ActiveRecord::Base
   def send_invoice current_user, id
     status = if self.status == "draft-partial"
                "partial"
-             elsif self.status == "draft" || self.status == "viewed"
+             elsif self.status == "draft" || self.status == "viewed" || self.status =="disputed"
                "sent"
              else
                self.status
