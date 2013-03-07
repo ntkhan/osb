@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-window.applyChosen = =>
+window.applyChosen = (single_row) =>
   # listen to Chosen liszt:ready even
   # add a Add New button at the bottom of every chosen list
   jQuery(".invoices-main .chzn-select").on "liszt:ready", ->
@@ -12,7 +12,8 @@ window.applyChosen = =>
 
   # apply chosen on dropdown lists
   # trigger the "liszt:ready" manually so that we can add Add New button to list. See above
-  jQuery(".chzn-select").chosen({allow_single_deselect: true}).trigger("liszt:ready", this)
+  dropdowns = unless single_row? then jQuery(".chzn-select") else jQuery(single_row)
+  dropdowns.chosen({allow_single_deselect: true}).trigger("liszt:ready", this)
 
   # Add New click handler to show form inside the list
   jQuery(".add-new").live "click", ->
@@ -88,24 +89,53 @@ jQuery ->
     (subtotal * (parseFloat(discount_percentage)/100))
 
   # update taxes rows in invoice total section
-  updateIndividualTaxes = (tax_dropdown) ->
-    # get tax amount and tax name from tax dropdown
-    tax = tax_dropdown.find('option:selected')
-    tax_name = tax.text()
-    tax_percentage = if tax.parents('select').hasClass('tax1') then tax.attr('data-tax_1') else tax.attr('data-tax_2')
-    getTaxRow(tax_name,tax_percentage)
+#  updateIndividualTaxes = (tax_dropdown) ->
+#    # get tax amount and tax name from tax dropdown
+#    tax = tax_dropdown.find('option:selected')
+#    tax_name = tax.text()
+#    tax_percentage = if tax.parents('select').hasClass('tax1') then tax.attr('data-tax_1') else tax.attr('data-tax_2')
+#    line_total = parseFloat(tax_dropdown.parents('tr.fields').find('.line_total').text())
+#    removeTaxRow(tax_name)
+#    getTaxRow(tax_name,tax_percentage,line_total)
 
-    #alert "#{tax_name} : #{tax_amount}"
+  # Remove tax row if it is not applied on any item.
+#  removeTaxRow = (tax_name) ->
+#    jQuery("#tax_totals .tax_amount").each ->
+#      tax_name = jQuery(this).attr 'data-name'
+#      found = false
+#      jQuery("table.invoice_grid_fields tr.fields:visible").each ->
+#        tax1 = jQuery(this).find("select.tax1 option:selected").text()
+#        tax2 = jQuery(this).find("select.tax2 option:selected").text()
+#        if tax1 is tax_name or tax2 is tax_name
+#          found = true
+#          false
+#      #console.log "#{tax_name}: #{found}"
+#      if found is false
+#        jQuery("#tax_totals #tax_#{tax_name}").remove()
+        #console.log "#{tax_name} is removed."
 
   # Individual taxes row
-  getTaxRow = (tax_name,tax_percentage) ->
-    tax_row = "<div class='grid_summary_row' id='tax_#{tax_name}'><div class='grid_summary_title'>
-    Tax <span class='tax_percentage_lbl'>#{tax_percentage}</span>%
-    </div>
-    <div class='grid_summary_description'>
-    <label id = 'invoice_tax_amount_#{tax_name}'></label>
-    </div></div>"
-    jQuery('#tax_totals').append(tax_row)
+#  getTaxRow = (tax_name,tax_percentage,line_total) ->
+#    discount_amount = applyDiscount(line_total)
+#    tax_amount = ((line_total - discount_amount) * (parseFloat(tax_percentage) / 100))
+#    #console.log "Line total: #{line_total}, Disount: #{discount_amount}, Tax: #{tax_amount}"
+#    # Create and append selected tax row to invoice total section.
+#    unless jQuery("#tax_totals #tax_#{tax_name}").length or tax_name is ""
+#      tax_row = "<div class='grid_summary_row' id='tax_#{tax_name}'><div class='grid_summary_title'>
+#      #{tax_name} <span class='tax_percentage_lbl'>#{tax_percentage}</span>%
+#      </div>
+#      <div class='grid_summary_description'>
+#      <label id = 'tax_#{tax_name}_amount' class='tax_amount' data-name='#{tax_name}'>#{tax_amount}</label>
+#      </div></div>"
+#      jQuery('#tax_totals').append(tax_row)
+#      console.log "#{tax_name} added"
+#    else
+#      # if tax row already exists change its value accordinly
+#      existing_tax = parseFloat(jQuery("#tax_totals #tax_#{tax_name}_amount").text()) + tax_amount
+#      #console.log "Existing: #{existing_tax}, tax_amount: #{tax_amount}"
+#      unless tax_name is ""
+#        jQuery("#tax_totals #tax_#{tax_name}_amount").text(existing_tax)
+#        console.log "#{tax_name} updated, Amount: #{existing_tax}"
 
   # Update line and grand total if line item fields are changed
   jQuery("input.cost, input.qty").live "blur", ->
@@ -155,15 +185,18 @@ jQuery ->
           container.find("select.tax2").val(item[4]).trigger("liszt:updated") if item[4] isnt 0
           updateLineTotal(elem)
           updateInvoiceTotal()
+          #jQuery("table.invoice_grid_fields tr.fields:visible").each ->
+          #updateIndividualTaxes(container.find("select.tax1"))
+          #updateIndividualTaxes(container.find("select.tax2"))
 
   # Add empty line item row
   addLineItemRow = (elem) ->
    if elem.parents('tr.fields').next('tr.fields:visible').length is 0
     jQuery(".add_nested_fields").click()
-    applyChosen()
+    applyChosen(jQuery('.invoice_grid_fields tr.fields:last .chzn-select'))
 
   jQuery(".add_nested_fields").live "click", ->
-    setTimeout "applyChosen()", 0
+    setTimeout "applyChosen(jQuery('.invoice_grid_fields tr.fields:last .chzn-select'))", 0
 
  # Re calculate the total invoice balance if an item is removed
   jQuery(".remove_nested_fields").live "click", ->
