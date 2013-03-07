@@ -16,10 +16,21 @@ jQuery ->
   #Select credit from method dropdown if apply from credit checkbox is checked
   jQuery(".apply_credit").live "click", ->
     apply_credit_id = jQuery(this).attr("id")
+    credit_selected = if jQuery(this).is ":checked" then "Credit" else ""
+    jQuery("#payments_#{apply_credit_id}_payment_method").val credit_selected
+    # if amount due is greate or equal to credit then apply all credit
+    credit = jQuery(this).parents('.payment_right').find('.rem_payment_amount');
     if jQuery(this).is ":checked"
-      jQuery("#payments_" + apply_credit_id + "_payment_method").val "Credit"
+      credit_amount = parseFloat(jQuery(this).parents('.field_check').find('.credit_amount').text())
+      amount_due = parseFloat(credit.attr('value'))
+      payment = if amount_due >= credit_amount
+        credit_amount
+      else if amount_due <= credit_amount
+        amount_due
+      jQuery("input#payments_#{credit.attr('id')}_payment_amount").val(payment.toFixed(2))
     else
-      jQuery("#payments_" + apply_credit_id + "_payment_method").val ""
+      jQuery("input#payments_#{credit.attr('id')}_payment_amount").val('')
+
   jQuery('#submit_payment_form').live "click", ->
     flag = true
     jQuery(".apply_credit:checked").each ->

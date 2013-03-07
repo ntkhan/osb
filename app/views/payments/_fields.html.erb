@@ -11,7 +11,7 @@
 
         <div class="payment_left">
 
-          <div class="payment_serial <%= payment.invoice.status%>"></div>
+          <div class="payment_serial <%= payment.invoice.status %>"></div>
           <!--payment_serial-->
 
           <div class="payment_summary">
@@ -32,7 +32,7 @@
 
               <div class="invoice_data_row">
                 <div class="invoice_label">Due Date<span>:</span></div>
-                <div class="inovice_description"><%= (payment.invoice.due_date || payment.invoice.invoice_date).to_date%></div>
+                <div class="inovice_description"><%= (payment.invoice.due_date || payment.invoice.invoice_date).to_date %></div>
               </div>
 
               <div class="invoice_data_row">
@@ -40,7 +40,7 @@
                 <div class="inovice_description amount"><%= number_to_currency(payment.invoice.invoice_total) %></div>
               </div>
 
-              <% if %w(partial draft-partial).include?(payment.invoice.status) && payment.invoice.invoice_total > Payment.invoice_remaining_amount(payment.invoice.id)%>
+              <% if %w(partial draft-partial).include?(payment.invoice.status) && payment.invoice.invoice_total > Payment.invoice_remaining_amount(payment.invoice.id) %>
                   <div class="invoice_data_row">
                     <div class="invoice_label">Received<span>:</span></div>
                     <div class="inovice_description"><%= number_to_currency(payment.invoice.invoice_total - Payment.invoice_remaining_amount(payment.invoice.id)) %></div>
@@ -56,12 +56,16 @@
             <!--invoice_data-->
 
             <!--<div class="payment_person">-->
-              <!--<% if payment.invoice.status == 'partial' or payment.invoice.status == 'draft-partial' %>-->
-                  <!--<p><b><%= payment.invoice.status.gsub(/-/, ' ').capitalize %> payments</b></p>-->
-                  <!--<% payment.invoice.payments.each do |partial_payment| %>-->
-                      <!--<p><%= "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>-->
-                  <!--<% end %>-->
-              <!--<% end %>-->
+            <!--
+            <% if payment.invoice.status == 'partial' or payment.invoice.status == 'draft-partial' %>-->
+                <!--<p><b><%= payment.invoice.status.gsub(/-/, ' ').capitalize %> payments</b></p>-->
+                <!--
+                <% payment.invoice.payments.each do |partial_payment| %>-->
+                    <!--<p><%= "#{partial_payment.payment_date} - #{number_to_currency(partial_payment.payment_amount)}" %></p>-->
+                    <!--
+                <% end %>-->
+                <!--
+            <% end %>-->
             <!--</div>-->
 
           </div>
@@ -88,12 +92,12 @@
           <!--field_row-->
           <% if client_credit > 0 %>
               <div class="field_row">
-
                 <div class="label_field left single">&nbsp;</div>
                 <div class="field_check btm">
                   <%= check_box " ", index, :id => "#{index}", :class => "apply_credit" %>
                   <p><label for="payments_<%= index %>" id="rem_credit_<%= index %>" value="<%= client_credit %>">Apply
-                    from Credit <%= current_user.currency_code %>.<%= number_to_currency(client_credit) %>
+                    from Credit <%= current_user.currency_code %>
+                    .<span class="credit_amount" style="display: none;"><%= client_credit %></span><%= number_to_currency(client_credit) %>
                     available</label></p>
                 </div>
               </div>
