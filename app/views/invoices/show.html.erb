@@ -1,7 +1,6 @@
 <%- model_class = Invoice -%>
 <div class="show_invoice">
 
-
   <div class="content_top">
     <div class="primary_heading">
       <h1><%= t '.title', :default => model_class.model_name.human %>:<%= @invoice.invoice_number %></h1>
@@ -31,17 +30,13 @@
 
   </div><!--content_top-->
 
-
-
   <div class="content_bottom top">
     <!--<a href="#">enter payment on invoice</a>-->
     <%= link_to "enter payment on invoice", "enter_single_payment?ids=#{@invoice.id}", :class => "btn_large big" %>
   </div><!--content_bottom-->
 
-
   <div class="content_middle">
     <%= render :partial=>"show_invoice"%>
   </div><!--content_middle-->
-
 
 </div><!--show_invoice-->

@@ -1,450 +1,328 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Open Source Billing</title>
-<style type="text/css">
-    @import url(http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
-
-    body {
+  <head>
+    <title>Open Source Billing</title>
+    <style type="text/css">
+      /*-----------------General Css Starts-----------------*/
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        overflow-y: scroll;
+      }
+      body {
+        background: #ffffff;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-    }
-
-    .content {
+        font-size: 13px;
+        color: #464646;
+        padding: 0px;
+      }
+      .content {
         clear: both;
         margin: auto;
         min-height: 360px;
         overflow: hidden;
-        padding: 50px 0 0;
-        width: 758px;
-    }
-
-    .invoice_preview {
-        /*General CSS Ends*/
-        /* Payment Css Starts */
-    }
-
-    .invoice_preview p {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        color: #000000;
-        margin-bottom: 0px;
-    }
-
-    .invoice_preview a {
-        text-decoration: none;
-    }
-
-    .invoice_preview ul {
-        margin: 0;
-    }
-
-    .invoice_preview ul li {
-        list-style: none;
-        text-decoration: none;
-    }
-
-    .invoice_preview h1 {
-        font-family: 'Dosis', sans-serif;
-        font-weight: 300;
+        padding: 50px 0;
+        width: 840px;
+      }
+      @font-face {
+        font-family: 'Dosis Medium';
         font-style: normal;
-        font-size: 30px;
-        color: #00bde5;
-        font-weight: normal;
-        text-transform: capitalize;
-        margin: 0px;
-    }
+        font-weight: 500;
+        src: url(http://themes.googleusercontent.com/static/fonts/dosis/v1/ELvCmRUbtOdCk3jbD-FqUPesZW2xOQ-xsNqO47m55DA.eot);
+        src: local('Dosis Medium'), local('Dosis-Medium'), url(http://themes.googleusercontent.com/static/fonts/dosis/v1/ELvCmRUbtOdCk3jbD-FqUPesZW2xOQ-xsNqO47m55DA.eot) format('embedded-opentype'), url(http://themes.googleusercontent.com/static/fonts/dosis/v1/obisuY-MenYRAFwd-r2NhfesZW2xOQ-xsNqO47m55DA.ttf) format('truetype'), url(http://themes.googleusercontent.com/static/fonts/dosis/v1/A4RWZsncmJ25G8iqn2EHN_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+      }
+      /*-----------------General Css Ends-----------------*/
 
-    .invoice_preview h1 span {
-        font-size: 14px;
-    }
-
-    .invoice_preview h1.small {
-        font-size: 20px;
-    }
-
-    .invoice_preview .content_header {
+      /*-----------------Grid CSS Starts-----------------*/
+      .grid_table {
         float: left;
         width: 100%;
-        border-bottom: 1px solid #99E5F5;
-    }
-
-    .invoice_preview .content_header h1 {
-        float: left;
-        padding: 0 0 2px;
-        line-height: normal;
-    }
-
-    .invoice_preview .content_header ul {
-        float: right;
-        padding: 20px 0 0 0;
-    }
-
-    .invoice_preview .content_header ul li {
-        float: left;
-        height: 12px;
-        border-right: 1px solid #00ace5;
-    }
-
-    .invoice_preview .content_header ul li a {
-        font-family: Arial, Helvetica, sans-serif;
-        display: block;
-        font-size: 13px;
-        color: #00ace5;
-        padding: 0 13px 0 13px;
-        line-height: 10px;
-    }
-
-    .invoice_preview .content_header ul li a:hover {
-        text-decoration: underline;
-    }
-
-    .invoice_preview .no_border {
-        border: none !important;
-    }
-
-    .invoice_preview .no_padding {
-        padding-right: 0px !important;
-    }
-
-    .invoice_preview .enter_payment_btn {
-        float: left;
-        text-align: center;
-        width: 100%;
-        padding: 30px 0;
-    }
-
-    .invoice_preview .enter_payment_btn a {
-        background-color: #00BDE5;
-        border-radius: 3px;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        color: #FFFFFF;
-        display: inline-block;
-        font-family: 'Dosis', sans-serif;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 38px;
-        padding: 0 25px;
-        text-decoration: none;
-        text-transform: uppercase;
-    }
-
-    .invoice_preview .pdf_link {
-        width: 100%;
-        float: left;
-    }
-
-    .invoice_preview .pdf_link p a {
-        color: #00ACE5;
-        float: right;
-        margin: 0 0 7px 0;
-    }
-
-    .invoice_preview .pdf_link p a:hover {
-        color: #00ACE5;
-        text-decoration: underline;
-    }
-
-    .invoice_preview .payment_content {
-        float: left;
-        width: 100%;
-    }
-
-    .invoice_preview .payment_container {
-        border: 1px solid #d7d7d7;
-        border-radius: 4px;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-        overflow: hidden;
-    }
-
-    .invoice_preview .payment_corner {
-        float: left;
-        position: absolute;
-        margin: -1px 0 0 -1px;
-        *margin: -1px 0 0 -760px;
-        width: 100px;
-        height: 100px;
-    }
-
-    .invoice_preview .sent_green {
-        background: url(/assets/sent_green.png) no-repeat;
-    }
-
-    .invoice_preview .sent_blue {
-        background: url(/assets/sent_blue.png) no-repeat;
-    }
-
-    .invoice_preview .draft {
-        background: url(/assets/draft.png) no-repeat;
-    }
-
-    .invoice_preview .disputed {
-        background: url(/assets/disputed.png) no-repeat;
-    }
-
-    .invoice_preview .draft_partial {
-        background: url(/assets/draft_partial.png) no-repeat;
-    }
-
-    .invoice_preview .partial {
-        background: url(/assets/partial.png) no-repeat;
-    }
-
-    .invoice_preview .payment_invoice_data {
-        float: left;
-        width: 92.3%;
-        position: relative;
-        padding: 56px 29px 0 29px;
-        min-height: 800px;
-    }
-
-    .invoice_preview .primary_address {
-        float: left;
-        width: 100%;
-    }
-
-    .invoice_preview .primary_address address, .invoice_preview .secondary_address address {
-        padding: 0 0 0 31px;
-        margin: 0;
-    }
-
-    .invoice_preview .primary_address address p {
-        margin: 0 0 -2px 0;
-    }
-
-    .invoice_preview .payment_summary {
-        float: left;
-        width: 100%;
-        padding: 17px 0 0 0;
-    }
-
-    .invoice_preview .secondary_address {
-        float: left;
-    }
-
-    .invoice_preview .bold {
-        font-weight: bold;
-    }
-
-    .invoice_preview .payment_summary_table {
-        float: right;
-        padding: 10px 0 0 0;
-    }
-
-    .invoice_preview .payment_summary_table col.first {
-        width: 132px;
-    }
-
-    .invoice_preview .payment_summary_table col.second {
-        width: 148px;
-    }
-
-    .invoice_preview .payment_summary_table table tr td:first-child,
-    .invoice_preview .payment_summary_table table th:first-child {
-        text-align: left;
-        padding: 0 0 2px 10px;
-    }
-
-    .invoice_preview .payment_summary_table table tr td:last-child,
-    .invoice_preview .payment_summary_table table th:last-child {
-        text-align: right;
-        padding: 0 10px 0 0;
-    }
-
-    .invoice_preview .payment_summary_table table tr th {
-        font-weight: bold;
-    }
-
-    .invoice_preview .single_border {
-        border-top: 1px solid #d7d7d7;
-    }
-
-    .invoice_preview .double_border {
-        border-top: 1px solid #d7d7d7;
-        border-bottom: 1px solid #d7d7d7;
-    }
-
-    .invoice_preview .payment_invoice_table {
-        float: left;
-        width: 100%;
-        padding: 55px 0 0 0;
-    }
-
-    .invoice_preview .top_padding {
-        padding-top: 5px !important;
-    }
-
-    .invoice_preview .bottom_padding {
-        padding-bottom: 3px !important;
-    }
-
-    .invoice_preview .time_entry {
-        float: left;
-        width: 100%;
-        padding: 0 0 30px 0;
-    }
-
-    .invoice_preview .time_entry table {
-        width: 100%;
-    }
-
-    .invoice_preview .time_entry table col.first {
-        width: 140px;
-    }
-
-    .invoice_preview .time_entry table col.second {
-        width: 278px;
-    }
-
-    .invoice_preview .time_entry table col.third {
-        width: 100px;
-    }
-
-    .invoice_preview .time_entry table col.forth {
-        width: 82px;
-    }
-
-    .invoice_preview .time_entry table col.fifth {
-        width: 100px;
-    }
-
-    .invoice_preview .time_entry table tr {
+        padding: 15px 0 0 0;
+      }
+      x:-o-prefocus, .grid_table table{
+        border-collapse: separate;
+      }
+      .grid_table table tr:first-child {
         height: 30px;
-    }
-
-    .invoice_preview .time_entry table th {
+      }
+      .grid_table table tr {
+        height: 31px;
+      }
+      .grid_table table tr.selected {
+        background-color: #ebebeb;
+      }
+      .grid_table table tr:hover {
+        background-color: #f7f7f7;
+      }
+      tfoot tr:hover{
+        background: none !important;
+      }
+      .grid_table table th {
         background-color: #898989;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
+        font-size: 13px;
         font-weight: bold;
         color: #ffffff;
-        border-right: 1px solid #ffffff !important;
-    }
-
-    .invoice_preview .time_entry table td {
+        border-right: 1px solid #c2c2c2 !important;
+      }
+      .grid_table table td {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        color: #000000;
-        border-bottom: 1px solid #d7d7d7;
-    }
-
-    .invoice_preview .time_entry table td span {
-        font-size: 10px;
+        font-size: 13px;
+        color: #464646;
+        border-bottom: 1px solid #D7D7D7
+      }
+      .grid_table table tfoot td {
+        border-bottom: none;
+      }
+      .grid_table table td a:hover {
+        color: #00ace5;
+      }
+      .grid_table table tr td.currency span {
+        font-size: 9px;
         text-transform: uppercase;
-    }
+      }
+      .grid_table table td, .grid_table table th {
+        padding: 0 10px;
+      }
+      .grid_table table td.sorting, .grid_table table th.sorting {
+        padding-right: 25px;
+      }
 
-    .invoice_preview .time_entry table td, .invoice_preview .time_entry table th {
-        padding: 0 11px;
-    }
-
-    .invoice_preview .time_entry table th:first-child {
+      .grid_table table td input, .grid_table table th input {
+        margin: -2px 0 0 0;
+      }
+      .grid_table table th:first-child {
         border-radius: 5px 0 0 5px;
-        -moz-border-radius: 5px 0 0 5px;
-        -webkit-border-radius: 5px 0 0 5px;
-    }
-
-    .invoice_preview .time_entry table th:last-child {
+      }
+      .grid_table table th:last-child {
         border-radius: 0 5px 5px 0;
-        -moz-border-radius: 0 5px 5px 0;
-        -webkit-border-radius: 0 5px 5px 0;
-    }
-
-    .invoice_preview .align_left {
-        text-align: left;
-    }
-
-    .invoice_preview .align_right {
-        text-align: right;
-    }
-
-    .invoice_preview .align_center {
-        text-align: center;
-    }
-
-    .invoice_preview .time_entry .no_border {
+        -o-border-radius-topleft: 10px;
         border-right: none !important;
-    }
+      }
+      .align_left {
+        text-align: left !important;
+      }
+      .align_right {
+        text-align: right !important;
+      }
+      .align_center {
+        text-align: center !important;
+      }
+      .grid_table table td.draft {
+        color: #757575;
+      }
+      .grid_table table td.sent, .grid_table table td.viewed{
+        color: #00ace5;
+      }
+      .grid_table table td.partial, .grid_table table td.draft-partial {
+        color: #f26522;
+      }
+      .grid_table table td.paid {
+        color: #6ba500;
+      }
+      .grid_table table td.disputed {
+        color: #b1212d;
+      }
+      /*-----------------Grid CSS Ends-----------------*/
 
-    .invoice_preview .payment_total {
+      /*-----------------Invoice Preview CSS Starts-----------------*/
+      .inovice_preview_contianer{
+        margin: auto;
+        width: 99.8%;
+        border: 1px solid #d7d7d7;
+        overflow: hidden;
+        border-radius: 4px;
+        min-height: 90px;
+        background: #ffffff;
+      }
+      .invoice_tag{
+        position: absolute;
+        margin: -1px 0 0 -1px;
+        width: 90px;
+        height: 90px;
+        *margin: -1px 0 0 -839px;
+      }
+      .draft{
+        background: url(/assets/draft.png) no-repeat;
+      }
+      .sent{
+        background: url(/assets/sent.png) no-repeat;
+      }
+      .draft-partial{
+        background: url(/assets/draft_partial.png) no-repeat;
+      }
+      .partial{
+        background: url(/assets/partial.png) no-repeat;
+      }
+      .paid{
+        background: url(/assets/paid.png) no-repeat;
+      }
+      .disputed{
+        background: url(/assets/disputed.png) no-repeat;
+      }
+      .viewed{
+        background: url(/assets/viewed.png) no-repeat;
+      }
+      .invoice_preview_content{
+        float: left;
+        position: relative;
+        width: 780px;
+        padding: 54px 29px 0 29px;
+      }
+      .preview_content_top{
+        float: left;
+        width: 100%;
+        padding-bottom: 40px;
+      }
+      .preview_left{
+        float: left;
+        width: 475px;
+        padding: 0 0 0 25px;
+      }
+      .invoice_name{
+        float: left;
+        width: 100%;
+        padding: 0 0 24px 0;
+        font-family: 'Dosis Medium';
+        font-size: 24px;
+      }
+      .invoice_address{
+        float: left;
+        width: 100%;
+        padding: 0 0 24px 0;
+      }
+      .invoice_address p, .invoice_organization p{
+        float: left;
+        width: 100%;
+        line-height: normal;
+        padding: 0 0 2px 0;
+      }
+      .invoice_organization{
+        float: left;
+        width: 100%;
+      }
+      .preview_heading{
+        font-weight: bold;
+      }
+      .preview_right{
+        float: right;
+        width: 254px;
+        padding: 66px 0 0 0;
+      }
+      .top_right_row{
+        float: left;
+        width: 235px;
+        height: 22px;
+        padding: 0 10px 0 9px
+      }
+      .top_right_row:last-child{
+        height: auto;
+      }
+      .preview_right_label{
+        float: left;
+        width: 120px;
+        text-align: left;
+      }
+      .preview_right_description{
+        float: left;
+        width: 115px;
+        text-align: right;
+      }
+      .preview_content_middle{
         float: left;
         width: 100%;
         padding: 0 0 40px 0;
-    }
-
-    .invoice_preview .terms_notes {
+      }
+      .grid_table table col.one{
+        width : 140px;
+      }
+      .grid_table table col.two{
+        width : 400px;
+      }
+      .grid_table table col.three{
+        width: 120px;
+      }
+      .grid_table table col.four{
+        width : 80px;
+      }
+      .grid_table table col.five{
+        width : 100px;
+      }
+      .preview_content_btm{
         float: left;
         width: 100%;
-    }
-
-    .invoice_preview .terms_notes h3 {
-        font-size: 16px;
-        font-weight: bold;
+        padding: 0 0 30px 0;
+      }
+      .preview_btm_top{
+        float: left;
+        width: 100%;
+      }
+      .preview_left.btm{
+        padding-left: 0px;
+        width: 500px;
+      }
+      .preview_terms{
+        float: left;
+        width: 100%;
+        padding: 0 0 22px 0;
+      }
+      .preview_terms p, .preview_notes p{
+        float: left;
+        width: 100%;
+        padding: 0 0 6px 0;
         line-height: normal;
-        margin: 0px;
-    }
-
-    .invoice_preview .terms {
+      }
+      .preview_notes{
         float: left;
-        padding: 0 52px 0 0;
-        width: 47%;
-    }
-
-    .invoice_preview .notes {
+        width: 100%;
+      }
+      .preview_right.btm{
+        padding-top: 0px;
+      }
+      .top_right_row.border{
+        border-bottom: 1px solid #d7d7d7;
+        margin-bottom: 5px;
+        padding-bottom: 3px;
+      }
+      .top_right_row.amt_paid{
+        color: #00ace5;
+      }
+      .preview_btm_footer{
         float: left;
-        width: 45%;
-    }
-
-    .invoice_preview .payment_footer {
-        bottom: 0;
-        float: left;
-        padding: 62px 0 32px;
-        position: absolute;
-        width: 700px;
-    }
-
-    .invoice_preview .payment_footer p {
+        width: 100%;
+        padding: 90px 0 0 0;
+      }
+      .preview_btm_footer ul{
         float: right;
-        font-size: 10px;
-        text-align: right;
-    }
-
-    @media all {
-        .invoice_preview .payment_footer p {
-            width: 100%;
-        }
-    }
-
-    .invoice_preview .payment_footer p img {
+      }
+      .preview_btm_footer ul li{
+        float: left;
+        display: block;
         padding: 0 0 0 4px;
-        float: right;
-    }
+      }
+      .footer_txt{
+        font-size: 10px;
+        padding: 1px 0 0 0 !important;
+      }
+      /*-----------------Invoice Preview CSS Ends-----------------*/
+    </style>
+  </head>
+  <body>
+    <div class="mainContainer">
 
+      <div class="header">
+        <div class="logo">
+          <!--<%= image_tag "logo.png", :size => "185x30" %>-->
+        </div>
+      </div>
 
+      <div class="content">
+        <!-- <div class="notice"><%#= notice %></div> -->
+        <%= yield %>
+      </div>
 
-
-</style>
-</head>
-<body>
-<!-- MAIN CONTAINER START-->
-<div class="mainContainer">
-  <!-- HEADER START -->
-  <div class="header">
-    <div class="logo">
-      <!--<%= image_tag "logo.png", :size => "185x30" %>-->
     </div>
-  </div>
-  <!-- HEADER END -->
-  <!-- CONTENT AREA START-->
-  <div class="content">
-    <!-- <div class="notice"><%#= notice %></div> -->
-    <%= yield %>
-  </div>
-  <!-- CONTENT AREA END-->
-
-</div>
-<!-- MAIN CONTAINER END -->
-</body>
+  </body>
 </html>
