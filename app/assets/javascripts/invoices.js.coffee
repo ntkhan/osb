@@ -205,6 +205,14 @@ jQuery ->
     updateLineTotal(jQuery(this))
   updateInvoiceTotal()
 
+  # dispute popup validation
+  jQuery("form.dispute_form").submit ->
+    flag = true
+    if jQuery("#reason_for_dispute").val() is ""
+       applyPopover(jQuery("#reason_for_dispute"),"bottomMiddle","topLeft","Enter reason for dispute")
+       flag = false
+    flag
+
   # Validate client, cost and quantity on invoice save
   jQuery("form.form-horizontal").submit ->
     item_rows = jQuery("table#invoice_grid_fields tr.fields:visible")
