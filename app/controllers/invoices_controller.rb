@@ -157,14 +157,11 @@ class InvoicesController < ApplicationController
       @action = "sent"
     elsif params[:payment]
       @action = unless Invoice.paid_invoices(ids).present?
-                  #Invoice.paid_full(ids)
                   "enter payment"
                 else
                   "paid invoices"
                 end
-      #@invoices = Invoice.unarchived.page(params[:page])
     end
-
     respond_to { |format| format.js }
   end
 
@@ -200,10 +197,12 @@ class InvoicesController < ApplicationController
   end
    def dispute_invoice
      invoice_id = params[:invoice_id]
-     invoice = Invoice.find(invoice_id)
-     invoice.update_attribute('status','disputed')
+     @invoice = Invoice.find(invoice_id)
+     @invoice.update_attribute('status','disputed')
      reason_for_dispute = params[:reason_for_dispute]
-     InvoiceMailer.dispute_invoice_email(current_user, invoice, reason_for_dispute).deliver
+     InvoiceMailer.dispute_invoice_email(current_user, @invoice, reason_for_dispute).deliver
+     @message = dispute_invoice_message(current_user.companies.first.org_name)
+     @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
      respond_to { |format| format.js }
    end
   def paypal_payments

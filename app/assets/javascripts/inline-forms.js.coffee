@@ -21,7 +21,7 @@ class window.InlineForms
     @dropdown.on "inlineform:save", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
       @dropdown.trigger("change").trigger("click")
-#      @chznDrop.css left: "-9000px"
+      @appendToAllDropdowns(new_record)
       @hideForm()
       @revertChosenWidth()
       @showQtip()
@@ -30,7 +30,16 @@ class window.InlineForms
     @dropdown.on "inlineform:save_and_add_more", (e, new_record) =>
       @dropdown.append(new_record).trigger("liszt:updated")
       @dropdown.trigger("change")
+      @appendToAllDropdowns(new_record)
       @showForm()
+
+
+  # append newly added record to all dropdowns
+  appendToAllDropdowns: (new_record) ->
+    dropdown_class = @dropdown.attr('class').split(' ')[0]
+    dropdown_id = @dropdown.attr('id')
+    all_dropdowns = jQuery(".#{dropdown_class}:not('##{dropdown_id}')").append(new_record.replace('selected','')).trigger("liszt:updated")
+
 
   # show qtip when record is successfully added and selected
   showQtip: ->
@@ -132,7 +141,6 @@ class window.InlineForms
     valid_form = true
     # fetch all required inputs with empty value
     @chznContainer.find(".tiny_create_form input[required]").each (e, elem) =>
-      console.log jQuery(elem)
       unless jQuery(elem).val()
         jQuery(elem).qtip({content:
           text: "This field is require",
