@@ -16,17 +16,19 @@
         <div></div>
     <% end %>
   </div>
-  <div class="payment_content">
+
+
+  <div class="content_middle">
     <div class="response_to_client">
     <% unless @dispute_history.blank?%>
          <%= render :partial=>"dispute_history"%>
     <% end %>
     </div>
-    <div class="payment_container">
-      <%= render :partial => "show_invoice" %>
-    </div>
-    <!-- payment_container -->
+    <%= render :partial => "show_invoice" %>
+    
   </div>
+
+  
 </div>
 <%= form_tag "/invoices/dispute_invoice",:class=>"dispute_form",:novalidate => "", :remote => true do %>
     <div id="dispute_invoice_popup" class="modal hide fad" style="width:auto;left:50%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
