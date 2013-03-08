@@ -33,10 +33,11 @@ jQuery ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
 
+  sort_list = if jQuery("table.table_listing").hasClass('emails_listing') then [[3,1]] else [[1,1]]
   # Apply sorting on listing tables
   jQuery("table.table_listing").tablesorter
     widgets: ['staticRow']
-    sortList: [[1,1]]
+    sortList: sort_list
 
 # Calculate the line total for invoice
   updateLineTotal = (elem) ->
@@ -71,6 +72,7 @@ jQuery ->
     jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").text(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").formatCurrency()
+    window.taxByCategory()
 
   # Apply Tax on totals
   applyTax = (line_total,elem) ->

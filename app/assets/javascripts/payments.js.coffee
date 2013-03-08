@@ -16,20 +16,27 @@ jQuery ->
   #Select credit from method dropdown if apply from credit checkbox is checked
   jQuery(".apply_credit").live "click", ->
     apply_credit_id = jQuery(this).attr("id")
+    payfull = jQuery(".paid_full")
+
+    # make credit option selected in drop if credit checkbox is selected
     credit_selected = if jQuery(this).is ":checked" then "Credit" else ""
-    jQuery("#payments_#{apply_credit_id}_payment_method").val credit_selected
+    jQuery("#payments_#{apply_credit_id}_payment_method").val(credit_selected).trigger("liszt:updated")
+
     # if amount due is greate or equal to credit then apply all credit
     credit = jQuery(this).parents('.payment_right').find('.rem_payment_amount');
+    payment_field = jQuery("input#payments_#{credit.attr('id')}_payment_amount")
     if jQuery(this).is ":checked"
       credit_amount = parseFloat(jQuery(this).parents('.field_check').find('.credit_amount').text())
       amount_due = parseFloat(credit.attr('value'))
-      payment = if amount_due >= credit_amount
-        credit_amount
+      if amount_due >= credit_amount
+        payment_field.val(credit_amount.toFixed(2))
+        if payfull.is ":checked"
+         payfull.removeAttr('checked')
+         payment_field.removeAttr('readonly')
       else if amount_due <= credit_amount
-        amount_due
-      jQuery("input#payments_#{credit.attr('id')}_payment_amount").val(payment.toFixed(2))
+         payment_field.val(amount_due.toFixed(2))
     else
-      jQuery("input#payments_#{credit.attr('id')}_payment_amount").val('')
+      payment_field.val('') unless payfull.is ":checked"
 
   jQuery('#submit_payment_form').live "click", ->
     flag = true
@@ -42,6 +49,22 @@ jQuery ->
       else
         flag = true
     flag
+
+  # validate payments fields on enter payment form submit
+  jQuery('#payments_form').submit ->
+    validate = true
+    payment_fields = jQuery('.payment_amount')
+    payment_fields.each ->
+      unless jQuery(this).val()
+        jQuery(this).qtip({content: text: "Enter payment amount", show: event: false, hide: event: false})
+        jQuery(this).focus().qtip().show()
+        validate = false
+    validate
+
+  # hide qtip when enter some text in payment field
+  jQuery(".payment_amount").keyup ->
+    jQuery(this).qtip("hide")
+
   # show intimation message on selection no invoice.
   jQuery('#invoice_selection').submit ->
     invoices = jQuery("table.table_listing tbody")
