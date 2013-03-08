@@ -161,17 +161,18 @@
             <!--<div class="last" id="tax_totals">-->
             <!--<%#= f.hidden_field :tax_amount %>-->
             <!--</div>-->
-
-            <div class="grid_summary_row last tax_totals">
-              <div class="grid_summary_title">
-                Tax
-              </div>
-              <div class="grid_summary_description">
-                <%= f.hidden_field :tax_amount %>
-                <%= label_tag '', '', :id => 'invoice_tax_amount_lbl' %>
-              </div>
-            </div>
-
+            <%= f.hidden_field :tax_amount %>
+            <% @invoice.tax_details.map do |tax_name, tax_amount| %>
+                <div class="grid_summary_row last tax_totals">
+                  <div class="grid_summary_title">
+                    <%= tax_name %>
+                  </div>
+                  <div class="grid_summary_description">
+                    <div><%= tax_amount %> </div>
+                    <%#= label_tag tax_amount, '', :id => 'invoice_tax_amount_lbl' %>
+                  </div>
+                </div>
+            <% end %>
             <div class="grid_summary_row net_total">
               <div class="grid_summary_title">
                 Balance

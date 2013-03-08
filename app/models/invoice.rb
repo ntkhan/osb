@@ -219,17 +219,34 @@ class Invoice < ActiveRecord::Base
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
 
-  def update_dispute_invoice(current_user,encrypt_id,response_to_client)
-    self.update_attribute("status","sent")
+  def update_dispute_invoice(current_user, encrypt_id, response_to_client)
+    self.update_attribute("status", "sent")
     self.notify(current_user, encrypt_id)
     self.sent_emails.create({
-                                    :content => response_to_client,
-                                    :sender => current_user.email, #User email
-                                    :recipient => self.client.email, #client email
-                                    :subject => "Response to client",
-                                    :type => "Disputed",
-                                    :date => Date.today
-                                })
+                                :content => response_to_client,
+                                :sender => current_user.email, #User email
+                                :recipient => self.client.email, #client email
+                                :subject => "Response to client",
+                                :type => "Disputed",
+                                :date => Date.today
+                            })
+  end
+
+  def tax_details
+    taxes = []
+    tlist = Hash.new(0)
+    self.invoice_line_items.each do |li|
+      next unless [li.item_unit_cost, li.item_quantity].all?
+      line_total = li.item_unit_cost * li.item_quantity
+      # calculate tax1 and tax2
+      taxes.push({name: li.tax1.name, pct: "#{li.tax1.percentage.to_s.gsub(".0", "")}%", amount: (line_total * li.tax1.percentage / 100.0)}) unless li.tax1.blank?
+      taxes.push({name: li.tax2.name, pct: "#{li.tax2.percentage.to_s.gsub(".0", "")}%", amount: (line_total * li.tax2.percentage / 100.0)}) unless li.tax2.blank?
+    end
+
+    taxes.each do |tax|
+      tlist["#{tax[:name]} #{tax[:pct]}"] += tax[:amount]
+    end
+    tlist
   end
   #def last_invoice_discount(discount_amount, total_discount, index)
   #  discount_amount = -(discount_amount * (index - 1))
