@@ -218,15 +218,12 @@ jQuery ->
   jQuery("#invoice_discount_percentage,.qty").bind "paste contextmenu", (e) ->
      e.preventDefault()
 
-  # Add date picker to invoice date field
-  jQuery("#invoice_invoice_date, #invoice_due_date").datepicker
+  # Add date picker to invoice date , invoice due date and payment date.
+  jQuery("#invoice_invoice_date, #invoice_due_date, .date_picker_class").datepicker
     dateFormat: 'yy-mm-dd'
     beforeShow: (input, inst) ->
      widget = jQuery(inst).datepicker('widget');
      widget.css('margin-left', jQuery(input).outerWidth() - widget.outerWidth());
-  # Add date picker to payment date field
-  jQuery(".date_picker_class").datepicker
-    dateFormat: 'yy-mm-dd'
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
