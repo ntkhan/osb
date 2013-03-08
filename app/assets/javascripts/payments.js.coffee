@@ -41,8 +41,8 @@ jQuery ->
   jQuery('#submit_payment_form').live "click", ->
     flag = true
     jQuery(".apply_credit:checked").each ->
-      pay_amount = parseInt(jQuery("#payments_" + this.id + "_payment_amount").val())
-      rem_credit = parseInt(jQuery("#rem_credit_" + this.id).attr("value"))
+      pay_amount = parseFloat(jQuery("#payments_#{@id}_payment_amount").val())
+      rem_credit = parseFloat(jQuery("#rem_credit_#{@id}").attr("value"))
       if pay_amount > rem_credit
         alert "Payment from credit cannot exceed available credit."
         flag = false
