@@ -122,6 +122,9 @@
     float: left;
     width: 100%;
     min-height: 31px;
+    ul li{
+      min-height: 31px;
+    }
   }
   .grid_summary_row.last {
     min-height: 23px;

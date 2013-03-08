@@ -52,6 +52,7 @@
 //= require progress_indicator.js.coffee
 //= require jquery.tablehover.min.js
 //= require tax-calculations.js.coffee
+//= require jquery.formatCurrency-1.4.0.js
 
 
 jQuery(function () {

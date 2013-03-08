@@ -35,8 +35,8 @@ window.taxByCategory = ->
     a = (a || 0) + t["amount"] if !isNaN(t["amount"])
 
   console.log tlist
-  li = ""
+  lis = "" # list items
   for tax, amount of tlist
-    li += "<li><span class='tax_name_in_totals'>#{tax}</span> <span class='tax_amount_in_totals'>#{amount}</span></li>\n"
+    lis += "<li><span class='grid_summary_title'>#{tax}</span> <span class='grid_summary_description tax_amount'>#{amount}</span></li>\n"
 
-  li
+  jQuery(".grid_summary_row.taxes_total").html("<ul>#{lis}</ul>").parents(".grid_summary").find("#invoice_sub_total_lbl, #invoice_discount_amount_lbl, .tax_amount").formatCurrency();
