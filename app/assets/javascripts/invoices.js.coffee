@@ -244,6 +244,8 @@ jQuery ->
        applyPopover(jQuery("#reason_for_dispute"),"bottomMiddle","topLeft","Enter reason for dispute")
        flag = false
     flag
+  jQuery("#reason_for_dispute").live "keyup", ->
+    jQuery(this).qtip("hide")
 
   # Validate client, cost and quantity on invoice save
   jQuery("form.form-horizontal").submit ->

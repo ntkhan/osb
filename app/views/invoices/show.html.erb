@@ -15,7 +15,7 @@
             </li>
             <!--<li><a href="#">Send</a></li>-->
             <li class="grid_control_sep sep_right">
-              <%= link_to "Send", "send_invoice?id=#{@invoice.id}", :class => "links_dd" %>
+              <%= link_to "Send", "send_invoice?id=#{@invoice.id}" %>
             </li>
             <li class="grid_control_sep sep_right">
               <%= link_to "PDF", {:controller => 'invoices', :action => 'invoice_pdf', :id => @invoice.id, :format => "pdf"}, :target => '_blank' %>
