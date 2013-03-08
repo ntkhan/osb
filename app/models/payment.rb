@@ -56,7 +56,7 @@ class Payment < ActiveRecord::Base
   end
 
   def client_credit client_id
-    invoice_ids = Invoice.where("client_id = ?", client_id).all
+    invoice_ids = Invoice.with_deleted.where("client_id = ?", client_id).all
     # total credit
     client_payments = Payment.where("payment_type = 'credit' AND invoice_id in (?)", invoice_ids).all
     client_total_credit = client_payments.sum { |f| f.payment_amount }
