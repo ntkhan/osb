@@ -51,7 +51,7 @@
 //= require sonic.js
 //= require progress_indicator.js.coffee
 //= require jquery.tablehover.min.js
-//= tax-calculations.js.coffee
+//= require tax-calculations.js.coffee
 
 
 jQuery(function () {

@@ -5,7 +5,7 @@
 #   ABC 6     800
 
 # itrate to line items
-window.taxByCategory ->
+window.taxByCategory = ->
   taxes = []
   jQuery("table.invoice_grid_fields tr:visible").each ->
     # TODO: apply discount on lineTotal
