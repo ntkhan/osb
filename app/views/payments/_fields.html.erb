@@ -111,7 +111,7 @@
             </div>
             <div class="label_field right single"><%= f.label "Date", :for => "payments_#{index}_payment_date" %></div>
             <div class="small_field">
-              <%= f.text_field :payment_date, :id => "payments_#{index}_payment_date" %>
+              <%= f.text_field :payment_date, :id => "payments_#{index}_payment_date",:class=>"date_picker_class" %>
             </div>
           </div>
           <!--field_row-->

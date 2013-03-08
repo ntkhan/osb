@@ -34,5 +34,5 @@ jQuery('tfoot#paging_links').html('<%= escape_javascript render :partial => "pag
 jQuery('#bulk_actions').html('<%= escape_javascript render("bulk_actions") %>');
 jQuery("table.table_listing").trigger('update');
 <%end%>
-
+jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed, .viewed").qtip();
 <%end%>
