@@ -889,10 +889,11 @@ table.table_listing, table.report-data-table {
   tbody {
     td {
       color: #3D3D3D;
-      //padding: 4px;
+      padding-top: 5px;
+      padding-bottom: 6px;
       //background-color: #FFF;
       vertical-align: middle;
-      line-height: 20px;
+      line-height: normal;
     }
     tr.odd td {
       background-color: #F0F0F6;
