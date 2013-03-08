@@ -72,6 +72,7 @@ jQuery ->
     jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").text(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").formatCurrency()
+    window.taxByCategory()
 
   # Apply Tax on totals
   applyTax = (line_total,elem) ->
