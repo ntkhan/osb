@@ -115,7 +115,7 @@ class Invoice < ActiveRecord::Base
         invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
         self.add_credit_payment invoice, invoice_total_payments
       end
-      invoice.payments.with_deleted.where("payment_type='credit' or payment_type is null").each { |payment| payment.destroy! }
+      invoice.payments.with_deleted.where("payment_type !='credit' or payment_type is null").each { |payment| payment.destroy! }
       invoice.destroy
     }
   end
