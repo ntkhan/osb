@@ -102,11 +102,11 @@ class PaymentsController < ApplicationController
   end
 
   def update_individual_payment
-    params[:payments].reject!{|payment| payment["payment_amount"] == ""}.each do |pay|
+    params[:payments].reject{|payment| payment["payment_amount"] == ""}.each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_f
       pay[:payment_date] ||= Date.today
       Payment.create!(pay).notify_client current_user.email
-    end
+    end unless params[:payments].blank?
     unless params[:pay_invoice]
       redirect_to(payments_url, :notice => 'Payments against selected invoices have been recorded successfully.')
     else

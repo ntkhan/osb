@@ -49,6 +49,22 @@ jQuery ->
       else
         flag = true
     flag
+
+  # validate payments fields on enter payment form submit
+  jQuery('#payments_form').submit ->
+    validate = true
+    payment_fields = jQuery('.payment_amount')
+    payment_fields.each ->
+      unless jQuery(this).val()
+        jQuery(this).qtip({content: text: "Enter payment amount", show: event: false, hide: event: false})
+        jQuery(this).focus().qtip().show()
+        validate = false
+    validate
+
+  # hide qtip when enter some text in payment field
+  jQuery(".payment_amount").keyup ->
+    jQuery(this).qtip("hide")
+
   # show intimation message on selection no invoice.
   jQuery('#invoice_selection').submit ->
     invoices = jQuery("table.table_listing tbody")
