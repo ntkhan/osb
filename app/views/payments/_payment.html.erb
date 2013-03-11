@@ -11,9 +11,9 @@
         <tr>
           <td class="align_center"> <%= check_box_tag "payment_ids[]", payment.id, false, :id => "payment_#{payment.id}" %></td>
           <% if payment.payment_type == "credit" %>
-              <td class="align_center"><%= payment.payment_reference %>
+              <td class="align_center"><%= payment.payment_reference %></td>
           <% else %>
-              <td class="align_center"><%= link_to payment.payment_reference, invoice_path(payment.invoice), :class => "invoices_link" rescue "" %>
+              <td class="align_center"><%= link_to payment.payment_reference, invoice_path(payment.invoice), :class => "invoices_link" rescue "" %></td>
           <% end %>
           <td class="align_left"><%= payment.client_name %></td>
           <td class="align_center"><%= (payment.payment_method || payment.payment_type || "").capitalize %></td>
