@@ -34,7 +34,7 @@
 
             <div class="top_right_row">
               <div class="preview_right_label">Amount</div>
-              <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></div>
+              <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></div>
             </div><!--top_right_row-->
 
             <div class="top_right_row">
@@ -116,7 +116,7 @@
 
               <div class="top_right_row border preview_heading">
                 <div class="preview_right_label">Amount Due</div>
-                <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></div>
               </div><!--top_right_row-->
             </div><!--preview_top_right-->
 
