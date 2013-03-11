@@ -33,9 +33,10 @@ module Reporting
       payments = Payment.group("month(payment_date)").where(:payment_date => start_date..end_date).sum("payment_amount")
 
       chart_data = {}
-      chart_data[:invoices] = chart_months.merge(invoices).map { |month, amount| amount }
-      chart_data[:payments] = chart_months.merge(payments).map { |month, amount| amount }
+      chart_data[:invoices] = chart_months.merge(invoices).map { |month, amount| amount.to_f }
+      chart_data[:payments] = chart_months.merge(payments).map { |month, amount| amount.to_f }
       chart_data[:ticks] = chart_months.map { |month, amount| Date::ABBR_MONTHNAMES[month] }
+      Rails.logger.debug "chart data: >>>>> #{chart_data}"
       chart_data
     end
 
