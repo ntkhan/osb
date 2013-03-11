@@ -15,7 +15,7 @@
           <% else %>
               <td class="align_center"><%= link_to payment.payment_reference, invoice_path(payment.invoice), :class => "invoices_link" rescue "" %></td>
           <% end %>
-          <td class="align_left"><%= payment.client_name %></td>
+          <td class="align_left text-overflow-class"><%= payment.client_name %></td>
           <td class="align_center"><%= (payment.payment_method || payment.payment_type || "").capitalize %></td>
           <td class="align_left"><%= payment.notes %></td>
           <td class="align_center"><%= payment.payment_date %></td>

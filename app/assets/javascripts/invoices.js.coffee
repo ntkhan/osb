@@ -485,3 +485,11 @@ jQuery ->
            alert "Paid invoice can not be disputed."
            flag = false
     flag
+  # Test-overflow and ellipses and Display full content on mouse over
+  jQuery(".text-overflow-class").live "mouseenter",(evt) ->
+    left_position = jQuery(this).offset().left  + "px";
+    top_position = jQuery(this).offset().top - 1 + "px";
+    full_content = jQuery(this).text()
+    jQuery(this).append "<span class='mouseover_full_content' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
+  jQuery('.text-overflow-class').live "mouseleave", ->
+    jQuery('.mouseover_full_content').remove()
