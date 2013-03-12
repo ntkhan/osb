@@ -1,20 +1,39 @@
 class Invoice < ActiveRecord::Base
-  acts_as_archival
-  acts_as_paranoid
+  default_scope order("#{self.table_name}.created_at DESC")
+
+  # constants
+  STATUS_DESCRIPTION = {
+      draft: "Invoice created, but you have not notified your client.",
+      sent: "Invoice created and sent to your client.",
+      viewed: "Client has clicked the invoice URL in the email and viewed the invoice in browser.",
+      paid: "Client has made full payment against the invoice.",
+      partial: "Client has made partial payment against the invoice.",
+      draft_partial: "Payment received against the draft invoice.",
+      disputed: "Client has disputed this invoice.",
+  }
+
+  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
+
+  # associations
   belongs_to :client
   belongs_to :invoice
   belongs_to :payment_term
   has_many :invoice_line_items, :dependent => :destroy
   has_many :payments
   has_many :sent_emails, :as => :notification
-  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
+
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
-  paginates_per 10
-  default_scope order("#{self.table_name}.created_at DESC")
+
+  # callbacks
   before_destroy :change_status
   before_create :set_invoice_number
 
-  include ActionView::Helpers::NumberHelper
+  paginates_per 20
+
+  acts_as_archival
+  acts_as_paranoid
+
+  #include ActionView::Helpers::NumberHelper
 
   def set_invoice_number
     self.invoice_number = Invoice.get_next_invoice_number(nil)
@@ -25,24 +44,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def tooltip
-    case self.status
-      when "draft"
-        "Invoice created, but you have not notified your client. Your client will not see this invoice if they log in."
-      when "sent"
-        "Your client has been notified. When they log in the invoice will be visible for printing and payment."
-      when "paid"
-        "Your client has paid this invoice - either online or you have received their funds and updated your records."
-      when "partial"
-        "Your client has partially paid this invoice. Hover over the total to see the amount outstanding."
-      when "draft-partial"
-        "Invoice created and partial payment applied. Your client has no access to this invoice."
-      when "disputed"
-        "Your client has disputed this invoice. Click on this invoice to view their comments."
-      when "viewed"
-        "Your client has viewed this invoice, but not made any payments."
-      else
-        ""
-    end
+    STATUS_DESCRIPTION[self.status.gsub("-", "_").to_sym]
   end
 
   def currency_symbol
@@ -55,14 +57,8 @@ class Invoice < ActiveRecord::Base
     "USD"
   end
 
-  class << self
-    def get_next_invoice_number user_id
-      ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
-    end
-  end
-
-  def description
-    self.invoice_line_items.first.item_description unless self.invoice_line_items.blank?
+  def self.get_next_invoice_number user_id
+    ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
   end
 
   def self.paid_invoices ids
@@ -74,17 +70,14 @@ class Invoice < ActiveRecord::Base
   end
 
   def duplicate_invoice
-    new_invoice = self.dup
-    new_invoice.invoice_line_items << self.invoice_line_items.map { |line_item| line_item.dup }
-    new_invoice.save
-    new_invoice
+    (self.dup.invoice_line_items << self.invoice_line_items.map(&:dup)).save
   end
 
   def use_as_template
     invoice = self.dup
     invoice.invoice_number = Invoice.get_next_invoice_number(nil)
     invoice.invoice_date = Date.today
-    invoice.invoice_line_items << self.invoice_line_items.map { |line_item| line_item.dup }
+    invoice.invoice_line_items << self.invoice_line_items.map(&:dup)
     invoice
   end
 
@@ -99,13 +92,13 @@ class Invoice < ActiveRecord::Base
 
   def self.delete_multiple ids
     invoices_with_payments = []
-    self.multiple_invoices(ids).each { |invoice|
+    self.multiple_invoices(ids).each do |invoice|
       if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
         invoice.destroy
       else
         invoices_with_payments << invoice
       end
-    }
+    end
     invoices_with_payments #if there are invoices with payments
   end
 
@@ -248,10 +241,5 @@ class Invoice < ActiveRecord::Base
     end
     tlist
   end
-  #def last_invoice_discount(discount_amount, total_discount, index)
-  #  discount_amount = -(discount_amount * (index - 1))
-  #  Rails.logger.debug ">>>>>>>>>>>>>> #{discount_amount}"
-  #  -(total_discount - discount_amount)
-  #end
 
 end
