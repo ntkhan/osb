@@ -18,8 +18,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /invoices/1
-  # GET /invoices/1.json
   def show
     @invoice = Invoice.find(params[:id])
     respond_to do |format|
@@ -42,26 +40,15 @@ class InvoicesController < ApplicationController
     @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
   end
 
-  # GET /invoices/new
-  # GET /invoices/new.json
   def new
-    if params[:invoice_for_client]
-      @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today, :client_id => params[:invoice_for_client]})
-      3.times { @invoice.invoice_line_items.build() }
-    elsif params[:id]
-      @invoice = Invoice.find(params[:id]).use_as_template
-      @invoice.invoice_line_items.build()
-    else
-      @invoice = Invoice.new({:invoice_number => Invoice.get_next_invoice_number(nil), :invoice_date => Date.today})
-      3.times { @invoice.invoice_line_items.build() }
-    end
+    @invoice = InvoiceService.build_new_invoice(params)
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @invoice }
     end
   end
 
-  # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
     @invoice.invoice_date = @invoice.invoice_date.to_date
@@ -69,8 +56,6 @@ class InvoicesController < ApplicationController
     @invoice.invoice_line_items.build()
   end
 
-  # POST /invoices
-  # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
     params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
@@ -92,8 +77,6 @@ class InvoicesController < ApplicationController
     redirect_to({:action => "enter_payment", :controller => "payments", :invoice_ids => invoice_ids})
   end
 
-  # PUT /invoices/1
-  # PUT /invoices/1.json
   def update
     @invoice = Invoice.find(params[:id])
     response_to_client = params[:response_to_client]
@@ -114,8 +97,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # DELETE /invoices/1
-  # DELETE /invoices/1.json
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy

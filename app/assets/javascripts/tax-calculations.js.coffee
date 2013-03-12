@@ -9,21 +9,25 @@ window.taxByCategory = ->
   taxes = []
   jQuery("table.invoice_grid_fields tr:visible").each ->
     # TODO: apply discount on lineTotal
-    #discount = parseFloat jQuery("#invoice_discount_amount").val()
-    lineTotal = parseFloat $(this).find(".line_total").text() #- (discount * -1)
-    #console.log "Discount amount: #{discount}, Line total: #{lineTotal}"
+    discountPct = parseFloat($("#invoice_discount_percentage").val())
+    discountAmount = 0
+
+    lineTotal = parseFloat $(this).find(".line_total").text()
+    discountAmount = (lineTotal * discountPct / 100.0 )
+    discountedLineTotal = lineTotal - discountAmount
+
     tax1Select = $(this).find("select.tax1 option:selected")
     tax2Select = $(this).find("select.tax2 option:selected")
 
     # calculate tax1
     tax1Name = tax1Select.text()
     tax1Pct = parseFloat tax1Select.attr "data-tax_1"
-    tax1Amount = lineTotal * tax1Pct / 100.0
+    tax1Amount = discountedLineTotal * tax1Pct / 100.0
 
     # calculate tax2
     tax2Name = tax2Select.text()
     tax2Pct = parseFloat tax2Select.attr "data-tax_2"
-    tax2Amount = lineTotal * tax2Pct / 100.0
+    tax2Amount = discountedLineTotal * tax2Pct / 100.0
 
     taxes.push {name: tax1Name, pct: tax1Pct, amount: tax1Amount} #if tax1Name && tax1Pct && tax1Amount
     taxes.push {name: tax2Name, pct: tax2Pct, amount: tax2Amount} #if tax2Name && tax2Pct && tax2Amount
