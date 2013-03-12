@@ -1,6 +1,6 @@
 class SentEmailsController < ApplicationController
   def index
-    @sent_emails = SentEmail.page(params[:page]).order('created_at DESC')
+    @sent_emails = SentEmail.page(params[:page]).per(params[:per]).order('created_at DESC')
   end
 
   def show

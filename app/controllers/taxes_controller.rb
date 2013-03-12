@@ -4,7 +4,7 @@ class TaxesController < ApplicationController
   include TaxesHelper
 
   def index
-    @taxes = Tax.unarchived.page(params[:page])
+    @taxes = Tax.unarchived.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -97,21 +97,21 @@ class TaxesController < ApplicationController
     ids = params[:tax_ids]
     if params[:archive]
       Tax.archive_multiple(ids)
-      @taxes = Tax.unarchived.page(params[:page])
+      @taxes = Tax.unarchived.page(params[:page]).per(params[:per])
       @action = "archived"
       @message = taxes_archived(ids) unless ids.blank?
     elsif params[:destroy]
       Tax.delete_multiple(ids)
-      @taxes = Tax.unarchived.page(params[:page])
+      @taxes = Tax.unarchived.page(params[:page]).per(params[:per])
       @action = "deleted"
       @message = taxes_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Tax.recover_archived(ids)
-      @taxes = Tax.archived.page(params[:page])
+      @taxes = Tax.archived.page(params[:page]).per(params[:per])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
       Tax.recover_deleted(ids)
-      @taxes = Tax.only_deleted.page(params[:page])
+      @taxes = Tax.only_deleted.page(params[:page]).per(params[:per])
       @action = "recovered from deleted"
     end
     respond_to { |format| format.js }
@@ -123,7 +123,7 @@ class TaxesController < ApplicationController
 
   def undo_actions
     params[:archived] ? Tax.recover_archived(params[:ids]) : Tax.recover_deleted(params[:ids])
-    @taxes = Tax.unarchived.page(params[:page])
+    @taxes = Tax.unarchived.page(params[:page]).per(params[:per])
     respond_to { |format| format.js }
   end
 

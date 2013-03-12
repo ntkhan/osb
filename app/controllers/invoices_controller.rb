@@ -7,8 +7,6 @@ class InvoicesController < ApplicationController
   include InvoicesHelper
 
   def index
-    #per_page = params[:per]
-    logger.debug params
     @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
 
     respond_to do |format|

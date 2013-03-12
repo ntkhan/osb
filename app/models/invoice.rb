@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
   before_destroy :change_status
   before_create :set_invoice_number
 
-  paginates_per 20
+  paginates_per 10
 
   acts_as_archival
   acts_as_paranoid
