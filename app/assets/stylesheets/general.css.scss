@@ -234,7 +234,7 @@ h4 {
   z-index: 500;
   width: 98%;
   background: url(/assets/nav_right.gif) no-repeat top right;
-  padding: 0 0 0 18px;
+  padding: 0 0 0 20px;
 }
 #nav .select {
   white-space: nowrap;
@@ -257,11 +257,11 @@ h4 {
   font-size: 18px;
   color: #ffffff;
   line-height: 38px;
-  min-width: 39px;
+  min-width: 36px;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  padding: 0 10px;
+  padding: 0 9px;
   background: #00BDE5;
 }
 /*#nav .select li:hover a,*/
@@ -274,9 +274,9 @@ h4 {
 #nav .sub {
   display: none;
   margin: 0;
-  padding-left: 30px;
+  padding-left: 20px;
   list-style: none;
-  width: 870px;
+  width: 880px;
   background: url(/assets/sub_bg.png) repeat-x bottom;
 }
 #nav .select li:hover .sub, #nav .select li a.active + .sub {
@@ -318,7 +318,7 @@ h4 {
 
 /*----page top distance----*/
 .dashboard-main {
-  padding: 18px 0 20px 0;
+  padding: 25px 0 20px 0;
 }
 
 .invoices-main, .sent_emails-main,
@@ -451,6 +451,9 @@ h4 {
 }
 x:-o-prefocus, .grid_table table{
     border-collapse: separate;
+}
+.grid_table table{
+  table-layout:fixed;
 }
 
 .grid_table table tr:first-child {
@@ -764,7 +767,7 @@ input[disabled]{
   width: 100%;
   border-top: 1px solid #d7d7d7; /*grey*/
   text-align: center;
-  padding: 4px 0 21px 0;
+  padding: 4px 0 31px 0;
 }
 
 .footer_content ul {
@@ -793,7 +796,7 @@ input[disabled]{
 }
 
 .privacy_policy {
-  background: url(/assets/footer_sep.png) no-repeat left;
+  background: url(/assets/footer_sep.png) no-repeat 0px 6px;
   padding: 0 7px;
 }
 
@@ -887,6 +890,11 @@ table.table_listing, table.report-data-table {
     }
   }
   tbody {
+    .text-overflow-class{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     td {
       color: #3D3D3D;
       padding-top: 5px;
@@ -1058,5 +1066,11 @@ table.table_listing, table.report-data-table {
     right: 4px;
     top: 0;
   }
+}
+.mouseover_full_content {
+  position: absolute;
+  background-color: #FFFBE1;
+  border: 1px solid #E4DFBE;
+  padding: 7.5px;
 }
 

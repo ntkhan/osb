@@ -14,15 +14,8 @@ window.taxByCategory = ->
 
     lineTotal = parseFloat $(this).find(".line_total").text()
     discountAmount = (lineTotal * discountPct / 100.0 )
-    #discountAmount = isNaN(discountPct) ? 0 : 1 #lineTotal - (lineTotal * discountPct / 100.0 )
-
-    console.log "---------------------------"
-    console.log "DiscountPct: #{discountPct}"
-    console.log "lineTotal: #{lineTotal}"
-    console.log "DiscountAmount: #{discountAmount}"
-    console.log "---------------------------"
-
     discountedLineTotal = lineTotal - discountAmount
+
     tax1Select = $(this).find("select.tax1 option:selected")
     tax2Select = $(this).find("select.tax2 option:selected")
 
@@ -47,7 +40,7 @@ window.taxByCategory = ->
     tlist[tax_key] = (tlist[tax_key] || 0) + t["amount"] if !isNaN(t["amount"])
     a = (a || 0) + t["amount"] if !isNaN(t["amount"])
 
-  console.log tlist
+  #console.log tlist
   lis = "" # list items
   for tax, amount of tlist
     lis += "<li><span class='grid_summary_title'>#{tax}</span> <span class='grid_summary_description tax_amount'>#{amount}</span></li>\n"

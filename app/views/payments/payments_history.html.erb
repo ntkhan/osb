@@ -1,45 +1,61 @@
 <%- model_class = Payment -%>
-<div id="invoices_container">default data</div>
-<div class="payment_history">
 
+<div class="show_invoice">
   <div class="content_top">
     <div class="primary_heading">
       <h1>Payments History</h1>
     </div>
-  </div>
-  <!--content_top-->
+    <div class="primary_links">
+      <div id="active_links" class="grid_control_right">
+        <div class="grid_control_right" style="display: none;">
+          <ul>
+            <li class="grid_control_sep sep_right"><a href="#">Payments history</a></li>
+            <li class="grid_control_sep sep_right"><a href="#">Preview</a></li>
+            <li class="grid_control_sep sep_right"><a href="#">Dispute</a></li>
+            <li class="grid_control_sep sep_right"><a href="#">PDF</a></li>
+            <li><a class="no_padding" href="#">Print</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!--primary_links-->
+  </div><!--content_top-->
+
+  <div class="content_bottom top" style="text-align: right;">
+    <%= link_to "Back to invoice", {:controller => 'invoices', :action => 'preview', :inv_id => params[:encrypted_id]}, :class => "btn_large big" %>
+    <!--<a class="btn_large big" href="#">Back to invoice</a>-->
+  </div><!--content_bottom-->
+
+</div><!--show_invoice-->
+
+<div class="payment_history">
   <div class="content_middle">
-  <div class="grid_table">
-    <table cellpadding="0" cellspacing="0" class="table table_listing payment_listing">
-      <colgroup>
-        <col class="one"/>
-        <col class="two"/>
-        <col class="three"/>
-        <col class="four"/>
-        <col class="five"/>
-        <col class="six"/>
-      </colgroup>
-      <thead>
-        <tr>
-          <th class="align_center">Invoice</th>
-          <th class="align_left">Client</th>
-          <th class="align_center">Type</th>
-          <th class="align_center">Notes</th>
-          <th class="align_center">Date</th>
-          <th class="align_right {sorter:'thousands'}" style="padding-right: 20px;">Amount</th>
-        </tr>
-      </thead>
-      <tbody id="payment_body">
-        <%= render 'payments_history' %>
-      <tfoot id="paging_links">
-        <%= render "paging" %>
-      </tfoot>
-      </tbody>
-    </table>
-  </div><!--grid_table-->
+    <div class="grid_table">
+      <table cellpadding="0" cellspacing="0" class="table table_listing payment_listing">
+        <colgroup>
+          <col class="one"/>
+          <col class="two"/>
+          <col class="three"/>
+          <col class="four"/>
+          <col class="five"/>
+          <col class="six"/>
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="align_center">Invoice</th>
+            <th class="align_left">Client</th>
+            <th class="align_center">Type</th>
+            <th class="align_center">Notes</th>
+            <th class="align_center">Date</th>
+            <th class="align_right {sorter:'thousands'}" style="padding-right: 20px;">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="payment_body">
+          <%= render 'payments_history' %>
+        <tfoot id="paging_links">
+          <%= render "paging" %>
+        </tfoot>
+        </tbody>
+      </table>
+    </div><!--grid_table-->
   </div><!--content_middle-->
-
-</div>
-
-
-
+</div><!--payment_history-->
