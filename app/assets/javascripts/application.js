@@ -1,4 +1,5 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+
+// // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -88,7 +89,7 @@ jQuery(function () {
         jQuery("#main-container").toggleClass("page-effect");
     }).qtip();
 
-    jQuery(".revenue_by_client .grid_table table, .payments_collected .grid_table table").tableHover({colClass: 'col_hover', footCols: true, footRows: true, rowClass: 'row_hover'})
+    //jQuery(".revenue_by_client .grid_table table, .payments_collected .grid_table table").tableHover({colClass: 'col_hover', footCols: true, footRows: true, rowClass: 'row_hover'})
 
 });
 
