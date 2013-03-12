@@ -112,6 +112,7 @@ class Invoice < ActiveRecord::Base
   def self.delete_invoices_with_payments ids, convert_to_credit
     self.multiple_invoices(ids).each { |invoice|
       if convert_to_credit
+        invoice.payments.with_deleted.where("payment_method = 'Credit'").each { |payment| payment.destroy! }
         invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
         self.add_credit_payment invoice, invoice_total_payments
       end

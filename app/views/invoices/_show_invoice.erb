@@ -34,7 +34,7 @@
 
             <div class="top_right_row">
               <div class="preview_right_label">Amount</div>
-              <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %> <%= current_user.currency_code %></div>
+              <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></div>
             </div><!--top_right_row-->
 
             <div class="top_right_row">
@@ -116,21 +116,19 @@
 
               <div class="top_right_row border preview_heading">
                 <div class="preview_right_label">Amount Due</div>
-                <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %>  <%= current_user.currency_code %></div>
+                <div class="preview_right_description"><%= number_to_currency(@invoice.invoice_total - Payment.invoice_paid_amount(@invoice.id)) %></div>
               </div><!--top_right_row-->
             </div><!--preview_top_right-->
 
           </div><!--preview_btm_top-->
-
-
-          <div class="preview_btm_footer">
-            <ul>
-              <li class="footer_txt">This invoice was sent using</li>
-              <li><%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></li>
-            </ul>
-          </div><!--preview_btm_footer-->
-
         </div><!--preview_content_btm-->
+
+        <div class="preview_btm_footer">
+          <ul>
+            <li class="footer_txt">This invoice was sent using</li>
+            <li><%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></li>
+          </ul>
+        </div><!--preview_btm_footer-->
 
 
       </div><!--invoice_preview_content-->
