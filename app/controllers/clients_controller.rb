@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
   include ClientsHelper
 
   def index
-    @clients = Client.unarchived.page(params[:page])
+    @clients = Client.unarchived.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -93,21 +93,21 @@ class ClientsController < ApplicationController
     ids = params[:client_ids]
     if params[:archive]
       Client.archive_multiple(ids)
-      @clients = Client.unarchived.page(params[:page])
+      @clients = Client.unarchived.page(params[:page]).per(params[:per])
       @action = "archived"
       @message = clients_archived(ids) unless ids.blank?
     elsif params[:destroy]
       Client.delete_multiple(ids)
-      @clients = Client.unarchived.page(params[:page])
+      @clients = Client.unarchived.page(params[:page]).per(params[:per])
       @action = "deleted"
       @message = clients_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Client.recover_archived(ids)
-      @clients = Client.archived.page(params[:page])
+      @clients = Client.archived.page(params[:page]).per(params[:per])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
       Client.recover_deleted(ids)
-      @clients = Client.only_deleted.page(params[:page])
+      @clients = Client.only_deleted.page(params[:page]).per(params[:per])
       @action = "recovered from deleted"
     end
     respond_to { |format| format.js }
@@ -119,7 +119,7 @@ class ClientsController < ApplicationController
 
   def undo_actions
     params[:archived] ? Client.recover_archived(params[:ids]) : Client.recover_deleted(params[:ids])
-    @clients = Client.unarchived.page(params[:page])
+    @clients = Client.unarchived.page(params[:page]).per(params[:per])
     respond_to { |format| format.js }
   end
 

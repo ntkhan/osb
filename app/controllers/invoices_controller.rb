@@ -7,7 +7,7 @@ class InvoicesController < ApplicationController
   include InvoicesHelper
 
   def index
-    @invoices = Invoice.unarchived.page(params[:page])
+    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -117,26 +117,26 @@ class InvoicesController < ApplicationController
     ids = params[:invoice_ids]
     if params[:archive]
       Invoice.archive_multiple(ids)
-      @invoices = Invoice.unarchived.page(params[:page])
+      @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
       @action = "archived"
       @message = invoices_archived(ids) unless ids.blank?
     elsif params[:destroy]
       @invoices_with_payments = Invoice.delete_multiple(ids)
-      @invoices = Invoice.unarchived.page(params[:page])
+      @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
       @action = "deleted"
       @action = "invoices_with_payments" unless @invoices_with_payments.blank?
       @message = invoices_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Invoice.recover_archived(ids)
-      @invoices = Invoice.archived.page(params[:page])
+      @invoices = Invoice.archived.page(params[:page]).per(params[:per])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
       Invoice.recover_deleted(ids)
-      @invoices = Invoice.only_deleted.page(params[:page])
+      @invoices = Invoice.only_deleted.page(params[:page]).per(params[:per])
       @action = "recovered from deleted"
     elsif params[:send]
       send_invoices(ids)
-      @invoices = Invoice.unarchived.page(params[:page])
+      @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
       @action = "sent"
     elsif params[:payment]
       @action = unless Invoice.paid_invoices(ids).present?
@@ -150,7 +150,7 @@ class InvoicesController < ApplicationController
 
   def undo_actions
     params[:archived] ? Invoice.recover_archived(params[:ids]) : Invoice.recover_deleted(params[:ids])
-    @invoices = Invoice.unarchived.page(params[:page])
+    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
     respond_to { |format| format.js }
   end
 

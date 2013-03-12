@@ -28,7 +28,7 @@ class Invoice < ActiveRecord::Base
   before_destroy :change_status
   before_create :set_invoice_number
 
-  paginates_per 20
+  paginates_per 10
 
   acts_as_archival
   acts_as_paranoid
@@ -129,11 +129,11 @@ class Invoice < ActiveRecord::Base
   def self.filter params
     case params[:status]
       when "active" then
-        self.unarchived.page(params[:page])
+        self.unarchived.page(params[:page]).per(params[:per])
       when "archived" then
-        self.archived.page(params[:page])
+        self.archived.page(params[:page]).per(params[:per])
       when "deleted" then
-        self.only_deleted.page(params[:page])
+        self.only_deleted.page(params[:page]).per(params[:per])
     end
   end
 

@@ -3,7 +3,7 @@
     <%= paginate @sent_emails, :remote => true %>
     <div class="paging_info">
       <%= page_entries_info @sent_emails %>
-      <%#= custom_per_page %>
+      <%= custom_per_page %> per page
     </div>
   </div>
 </td>

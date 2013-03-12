@@ -3,7 +3,7 @@
     <%= paginate @invoices, :remote => true %>
     <div class="paging_info">
       <%= page_entries_info @invoices unless @invoices.blank? %>
-      <%#= custom_per_page %>
+      <%= custom_per_page %> per page
     </div>
   </div>
 </td>
