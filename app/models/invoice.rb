@@ -213,20 +213,20 @@ class Invoice < ActiveRecord::Base
   end
 
   def encrypted_id
-    OSB::Util::encrypt(self.id)
+    OSB::Util::encrypt(id)
   end
 
   def paypal_url(return_url, notify_url)
     values = {
+        :business => 'onlyfo_1362543783_biz@hotmail.com',
         #:business => 'onlyfo_1362112292_per@hotmail.com',
-        :business => 'onlyforarif-facilitator@gmail.com',
-        :cmd => '_cart',
+        :cmd => '_xclick',
         :upload => 1,
         :return => return_url,
         :notify_url => notify_url,
         :invoice => id,
-        :item_name => "Test",
-        :amount => invoice_total
+        :item_name => "Invoice",
+        :amount => unpaid_amount
     }
     OSB::Paypal::URL + values.to_query
   end
