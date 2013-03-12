@@ -36,7 +36,7 @@ window.taxByCategory = ->
     tlist[tax_key] = (tlist[tax_key] || 0) + t["amount"] if !isNaN(t["amount"])
     a = (a || 0) + t["amount"] if !isNaN(t["amount"])
 
-  console.log tlist
+  #console.log tlist
   lis = "" # list items
   for tax, amount of tlist
     lis += "<li><span class='grid_summary_title'>#{tax}</span> <span class='grid_summary_description tax_amount'>#{amount}</span></li>\n"

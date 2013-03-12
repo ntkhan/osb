@@ -38,6 +38,7 @@ module InvoicesHelper
     HTML
     notice.html_safe
   end
+
   def dispute_invoice_message company_name
     notice = <<-HTML
      <p>Invoice disputed.</p>
@@ -45,4 +46,15 @@ module InvoicesHelper
     HTML
     notice.html_safe
   end
+
+  def taxes_list list
+    tax_list = ""
+    for tax, amount in list
+      tax_list += <<-HTML
+      <div class="top_right_row"><div class="preview_right_label">#{tax}</div><div class="preview_right_description">#{number_to_currency(amount)}</div></div>
+      HTML
+    end
+    tax_list.html_safe
+  end
+
 end

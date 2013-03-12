@@ -65,7 +65,7 @@ jQuery ->
     discount_amount = applyDiscount(total)
     jQuery("#invoice_tax_amount_lbl").text(tax_amount.toFixed(2))
     jQuery("#invoice_tax_amount").val(tax_amount.toFixed(2))
-    jQuery("#invoice_discount_amount_lbl").text((discount_amount * -1).toFixed(2))
+    jQuery("#invoice_discount_amount_lbl").text(discount_amount.toFixed(2))
     jQuery("span.discount_percentage_lbl").text(jQuery("#invoice_discount_percentage").val())
     jQuery("#invoice_discount_amount").val((discount_amount * -1).toFixed(2))
     total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
@@ -182,6 +182,12 @@ jQuery ->
   # Calculate line total and invoice total on page load
   jQuery(".invoice_grid_fields tr:visible .line_total").each ->
     updateLineTotal(jQuery(this))
+    # dont use decimal points in quantity and make cost 2 decimal points
+    container = jQuery(this).parents("tr.fields")
+    cost = jQuery(container).find("input.cost")
+    qty = jQuery(container).find("input.qty")
+    cost.val(parseFloat(cost.val()).toFixed(2)) if cost.val()
+    qty.val(parseInt(cost.val())) if qty.val()
   updateInvoiceTotal()
 
   # dispute popup validation
