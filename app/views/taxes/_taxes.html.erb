@@ -16,16 +16,6 @@
             <%#= link_to 'Delete', taxis, :class => "del_action", :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
         </tr>
     <% end %>
-    <tr class="static">
-      <td colspan="4">
-        <div class="paginator">
-          <%= paginate @taxes, :remote => true %>
-          <div class="paging_info">
-            <%= page_entries_info @taxes %>
-          </div>
-        </div>
-      </td>
-    </tr>
 <% else %>
     <tr>
       <td colspan="4">

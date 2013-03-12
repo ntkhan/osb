@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   include PaymentsHelper
 
   def index
-    @payments = Payment.unarchived.page(params[:page])
+    @payments = Payment.unarchived.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -119,21 +119,21 @@ class PaymentsController < ApplicationController
     ids = params[:payment_ids]
     if params[:archive]
       Payment.archive_multiple(ids)
-      @payments = Payment.unarchived.page(params[:page])
+      @payments = Payment.unarchived.page(params[:page]).per(params[:per])
       @action = "archived"
       @message = payments_archived(ids) unless ids.blank?
     elsif params[:destroy]
       Payment.delete_multiple(ids)
-      @payments = Payment.unarchived.page(params[:page])
+      @payments = Payment.unarchived.page(params[:page]).per(params[:per])
       @action = "deleted"
       @message = payments_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Payment.recover_archived(ids)
-      @payments = Payment.archived.page(params[:page])
+      @payments = Payment.archived.page(params[:page]).per(params[:per])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
       Payment.recover_deleted(ids)
-      @payments = Payment.only_deleted.page(params[:page])
+      @payments = Payment.only_deleted.page(params[:page]).per(params[:per])
       @action = "recovered from deleted"
     end
     respond_to { |format| format.js }
@@ -145,7 +145,7 @@ class PaymentsController < ApplicationController
 
   def undo_actions
     params[:archived] ? Payment.recover_archived(params[:ids]) : Payment.recover_deleted(params[:ids])
-    @payments = Payment.unarchived.page(params[:page])
+    @payments = Payment.unarchived.page(params[:page]).per(params[:per])
     respond_to { |format| format.js }
   end
 
