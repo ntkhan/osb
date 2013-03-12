@@ -248,10 +248,5 @@ class Invoice < ActiveRecord::Base
     end
     tlist
   end
-  #def last_invoice_discount(discount_amount, total_discount, index)
-  #  discount_amount = -(discount_amount * (index - 1))
-  #  Rails.logger.debug ">>>>>>>>>>>>>> #{discount_amount}"
-  #  -(total_discount - discount_amount)
-  #end
 
 end
