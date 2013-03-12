@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :_reload_libs #reload libs on every request for dev environment only
                               #layout :choose_layout
-
                               #reload libs on every request for dev environment only
   def _reload_libs
     if defined? RELOAD_LIBS

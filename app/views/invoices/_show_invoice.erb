@@ -116,7 +116,7 @@
               </div>
               <!--top_right_row-->
               <% unless @invoice.tax_details.blank? %>
-                    <%= taxes_list(@invoice.tax_details) %>
+                  <%= taxes_list(@invoice.tax_details) %>
               <% end %>
               <!--top_right_row-->
 
@@ -142,22 +142,19 @@
 
           </div>
           <!--preview_btm_top-->
+          <div class="preview_btm_footer">
+            <ul>
+              <li class="footer_txt">This invoice was sent using</li>
+              <li><%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></li>
+            </ul>
+          </div>
+          <!--preview_btm_footer-->
         </div>
         <!--preview_content_btm-->
-
-        <div class="preview_btm_footer">
-          <ul>
-            <li class="footer_txt">This invoice was sent using</li>
-            <li><%= image_tag "payment_logo.png", :size => "74x13", :alt => "" %></li>
-          </ul>
-        </div>
-        <!--preview_btm_footer-->
-
-
       </div>
       <!--invoice_preview_content-->
     </div>
-    <!--inovice_preview_contianer-->
+    <!--invoice_preview_container-->
   </div>
-  <!--inovice_preview-->
+  <!--invoice_preview-->
 </div><!--show_invoice-->

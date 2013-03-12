@@ -7,37 +7,37 @@
     </div>
     <div class="primary_btn">
       <%= link_to (content_tag(:span, "NEW Item")),
-                  new_item_path,
-                  :class => 'btn_large' %>
+        new_item_path,
+        :class => 'btn_large' %>
     </div>
   </div>
   <!--content_top-->
   <%= form_tag "items/bulk_actions", :remote => true do -%>
-      <div class="content_middle">
-        <div class="grid_control">
-          <div class="grid_control_left">
-            <ul value='item' id="bulk_actions">
-              <%= render "bulk_actions" %>
-            </ul>
-          </div>
-          <div class="grid_control_right" id="active_links">
-            <%= render 'items/filter_links' %>
-          </div>
+    <div class="content_middle">
+      <div class="grid_control">
+        <div class="grid_control_left">
+          <ul value='item' id="bulk_actions">
+            <%= render "bulk_actions" %>
+          </ul>
         </div>
-        <!--grid_control-->
-        <div class="grid_table">
-          <table cellpadding="0" cellspacing="0" class="table table_listing item_listing">
-            <colgroup>
-              <col class="one"/>
-              <col class="two"/>
-              <col class="three"/>
-              <col class="four"/>
-              <col class="five"/>
-              <col class="six"/>
-              <col class="seven"/>
-              <col class="eight"/>
-            </colgroup>
-            <thead>
+        <div class="grid_control_right" id="active_links">
+          <%= render 'items/filter_links' %>
+        </div>
+      </div>
+      <!--grid_control-->
+      <div class="grid_table">
+        <table cellpadding="0" cellspacing="0" class="table table_listing item_listing">
+          <colgroup>
+            <col class="one"/>
+            <col class="two"/>
+            <col class="three"/>
+            <col class="four"/>
+            <col class="five"/>
+            <col class="six"/>
+            <col class="seven"/>
+            <col class="eight"/>
+          </colgroup>
+          <thead>
             <tr>
               <th class="align_center not-sortable"><%= check_box_tag 'select_all' %></th>
               <th class="align_left">Item name</th>
@@ -48,24 +48,23 @@
               <th class="align_center">Tax 2</th>
               <th class="align_center not-sortable"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
-            </thead>
-            <tbody id="item_body">
+          </thead>
+          <tbody id="item_body">
             <%= render 'items' %>
-            <tfoot id="paging_links">
+          <tfoot id="paging_links">
             <%= render "paging" %>
-            </tfoot>
-            </tbody>
-          </table>
-        </div>
-        <!--grid_table-->
+          </tfoot>
+          </tbody>
+        </table>
       </div>
-      <!--content_middle-->
-      <div class="content_bottom">
-        <%= link_to (content_tag(:span, "NEW Item")),
-                    new_item_path,
-                    :class => 'btn_large' %>
-      </div>
-      <!--content_bottom-->
+      <!--grid_table-->
+    </div>
+    <!--content_middle-->
+    <div class="content_bottom">
+      <%= link_to (content_tag(:span, "NEW Item")),
+        new_item_path,
+        :class => 'btn_large' %>
+    </div>
+    <!--content_bottom-->
   <% end %>
 </div><!--items-->
-

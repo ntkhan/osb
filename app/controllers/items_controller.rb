@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   include ItemsHelper
 
   def index
-    @items = Item.unarchived.page(params[:page])
+    @items = Item.unarchived.page(params[:page]).per(params[:per])
 
     respond_to do |format|
       format.js
@@ -107,21 +107,21 @@ class ItemsController < ApplicationController
     ids = params[:item_ids]
     if params[:archive]
       Item.archive_multiple(ids)
-      @items = Item.unarchived.page(params[:page])
+      @items = Item.unarchived.page(params[:page]).per(params[:per])
       @action = "archived"
       @message = items_archived(ids) unless ids.blank?
     elsif params[:destroy]
       Item.delete_multiple(ids)
-      @items = Item.unarchived.page(params[:page])
+      @items = Item.unarchived.page(params[:page]).per(params[:per])
       @action = "deleted"
       @message = items_deleted(ids) unless ids.blank?
     elsif params[:recover_archived]
       Item.recover_archived(ids)
-      @items = Item.archived.page(params[:page])
+      @items = Item.archived.page(params[:page]).per(params[:per])
       @action = "recovered from archived"
     elsif params[:recover_deleted]
       Item.recover_deleted(ids)
-      @items = Item.only_deleted.page(params[:page])
+      @items = Item.only_deleted.page(params[:page]).per(params[:per])
       @action = "recovered from deleted"
     end
     respond_to { |format| format.js }
@@ -133,7 +133,7 @@ class ItemsController < ApplicationController
 
   def undo_actions
     params[:archived] ? Item.recover_archived(params[:ids]) : Item.recover_deleted(params[:ids])
-    @items = Item.unarchived.page(params[:page])
+    @items = Item.unarchived.page(params[:page]).per(params[:per])
     respond_to { |format| format.js }
   end
 end

@@ -2,8 +2,8 @@
   <div class="paginator">
     <%= paginate @taxes, :remote => true %>
     <div class="paging_info">
-      <%= page_entries_info @taxes %>
-      <%#= custom_per_page %>
+      <%= page_entries_info @taxes unless @taxes.blank? %>
+      <%= custom_per_page %> per page
     </div>
   </div>
 </td>

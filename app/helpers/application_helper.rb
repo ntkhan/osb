@@ -15,11 +15,12 @@ module ApplicationHelper
 
   def custom_per_page
     content_tag(:select,
-                options_for_select([1, 2, 3, 4], params[:per].to_i),
+                options_for_select([10, 5, 3, 2, 1], params[:per].to_i),
                 :data => {
                     :remote => true,
                     :url => url_for(:action => action_name, :params => params)},
-                :style => "width:60px;"
+                :name => "per",
+                :class => "per_page"
     )
   end
 
