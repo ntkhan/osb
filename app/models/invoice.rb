@@ -136,11 +136,11 @@ class Invoice < ActiveRecord::Base
   def self.filter params
     case params[:status]
       when "active" then
-        self.unarchived.page(params[:page])
+        self.unarchived.page(params[:page]).per(params[:per])
       when "archived" then
-        self.archived.page(params[:page])
+        self.archived.page(params[:page]).per(params[:per])
       when "deleted" then
-        self.only_deleted.page(params[:page])
+        self.only_deleted.page(params[:page]).per(params[:per])
     end
   end
 
