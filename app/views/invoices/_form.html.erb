@@ -135,14 +135,12 @@
         <!--grid_table-->
 
         <div class="grid_summary">
-          <!--<div style="float:left;"> <%#= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %> </div>-->
           <div class="grid_summary_content">
             <div class="grid_summary_row">
               <div class="grid_summary_title">
                 Subtotal
               </div>
               <div class="grid_summary_description">
-                <%#= f.number_field :sub_total,:readonly => true %>
                 <%= f.hidden_field :sub_total %>
                 <%= label_tag '', '', :id => 'invoice_sub_total_lbl' %>
               </div>
@@ -154,15 +152,11 @@
               </div>
               <div class="grid_summary_description">
                 <%= f.hidden_field :discount_amount %>
-                <%= label_tag '', '', :id => 'invoice_discount_amount_lbl' %>
+                <%= label_tag '', '', :id => 'invoice_discount_amount_lbl', :style => 'font-weight:normal' %>
               </div>
             </div>
 
-            <!--<div class="last" id="tax_totals">-->
-            <!--<%#= f.hidden_field :tax_amount %>-->
-            <!--</div>-->
             <%= f.hidden_field :tax_amount %>
-            <%#= label_tag tax_amount, '', :id => 'invoice_tax_amount_lbl' %>
             <div class="grid_summary_row taxes_total">
               <ul>
                 <% @invoice.tax_details.map do |tax, amount| %>

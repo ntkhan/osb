@@ -65,7 +65,7 @@ jQuery ->
     discount_amount = applyDiscount(total)
     jQuery("#invoice_tax_amount_lbl").text(tax_amount.toFixed(2))
     jQuery("#invoice_tax_amount").val(tax_amount.toFixed(2))
-    jQuery("#invoice_discount_amount_lbl").text((discount_amount * -1).toFixed(2))
+    jQuery("#invoice_discount_amount_lbl").text(discount_amount.toFixed(2))
     jQuery("span.discount_percentage_lbl").text(jQuery("#invoice_discount_percentage").val())
     jQuery("#invoice_discount_amount").val((discount_amount * -1).toFixed(2))
     total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
@@ -82,62 +82,13 @@ jQuery ->
     tax2 = 0 if not tax2? or tax2 is ""
     discount_amount = applyDiscount(line_total)
     total_tax = (parseFloat(tax1) + parseFloat(tax2))
-    ((line_total - discount_amount) * (parseFloat(total_tax) / 100))
+    (line_total - discount_amount) * (parseFloat(total_tax) / 100.0)
 
   # Apply discount percentage on subtotals
   applyDiscount = (subtotal) ->
     discount_percentage = jQuery("#invoice_discount_percentage").val()
     discount_percentage = 0 if not discount_percentage? or discount_percentage is ""
-    (subtotal * (parseFloat(discount_percentage)/100))
-
-  # update taxes rows in invoice total section
-#  updateIndividualTaxes = (tax_dropdown) ->
-#    # get tax amount and tax name from tax dropdown
-#    tax = tax_dropdown.find('option:selected')
-#    tax_name = tax.text()
-#    tax_percentage = if tax.parents('select').hasClass('tax1') then tax.attr('data-tax_1') else tax.attr('data-tax_2')
-#    line_total = parseFloat(tax_dropdown.parents('tr.fields').find('.line_total').text())
-#    removeTaxRow(tax_name)
-#    getTaxRow(tax_name,tax_percentage,line_total)
-
-  # Remove tax row if it is not applied on any item.
-#  removeTaxRow = (tax_name) ->
-#    jQuery("#tax_totals .tax_amount").each ->
-#      tax_name = jQuery(this).attr 'data-name'
-#      found = false
-#      jQuery("table.invoice_grid_fields tr.fields:visible").each ->
-#        tax1 = jQuery(this).find("select.tax1 option:selected").text()
-#        tax2 = jQuery(this).find("select.tax2 option:selected").text()
-#        if tax1 is tax_name or tax2 is tax_name
-#          found = true
-#          false
-#      #console.log "#{tax_name}: #{found}"
-#      if found is false
-#        jQuery("#tax_totals #tax_#{tax_name}").remove()
-        #console.log "#{tax_name} is removed."
-
-  # Individual taxes row
-#  getTaxRow = (tax_name,tax_percentage,line_total) ->
-#    discount_amount = applyDiscount(line_total)
-#    tax_amount = ((line_total - discount_amount) * (parseFloat(tax_percentage) / 100))
-#    #console.log "Line total: #{line_total}, Disount: #{discount_amount}, Tax: #{tax_amount}"
-#    # Create and append selected tax row to invoice total section.
-#    unless jQuery("#tax_totals #tax_#{tax_name}").length or tax_name is ""
-#      tax_row = "<div class='grid_summary_row' id='tax_#{tax_name}'><div class='grid_summary_title'>
-#      #{tax_name} <span class='tax_percentage_lbl'>#{tax_percentage}</span>%
-#      </div>
-#      <div class='grid_summary_description'>
-#      <label id = 'tax_#{tax_name}_amount' class='tax_amount' data-name='#{tax_name}'>#{tax_amount}</label>
-#      </div></div>"
-#      jQuery('#tax_totals').append(tax_row)
-#      console.log "#{tax_name} added"
-#    else
-#      # if tax row already exists change its value accordinly
-#      existing_tax = parseFloat(jQuery("#tax_totals #tax_#{tax_name}_amount").text()) + tax_amount
-#      #console.log "Existing: #{existing_tax}, tax_amount: #{tax_amount}"
-#      unless tax_name is ""
-#        jQuery("#tax_totals #tax_#{tax_name}_amount").text(existing_tax)
-#        console.log "#{tax_name} updated, Amount: #{existing_tax}"
+    (subtotal * (parseFloat(discount_percentage)/100.0))
 
   # Update line and grand total if line item fields are changed
   jQuery("input.cost, input.qty").live "blur", ->
@@ -151,7 +102,6 @@ jQuery ->
 
   # Update line and grand total when tax is selected from dropdown
   jQuery("select.tax1, select.tax2").live "change", ->
-     #updateIndividualTaxes(jQuery(this))
      updateInvoiceTotal()
 
   # Prevent form submission if enter key is press in cost,quantity or tax inputs.
@@ -187,9 +137,6 @@ jQuery ->
           container.find("select.tax2").val(item[4]).trigger("liszt:updated") if item[4] isnt 0
           updateLineTotal(elem)
           updateInvoiceTotal()
-          #jQuery("table.invoice_grid_fields tr.fields:visible").each ->
-          #updateIndividualTaxes(container.find("select.tax1"))
-          #updateIndividualTaxes(container.find("select.tax2"))
 
   # Add empty line item row
   addLineItemRow = (elem) ->
@@ -235,6 +182,12 @@ jQuery ->
   # Calculate line total and invoice total on page load
   jQuery(".invoice_grid_fields tr:visible .line_total").each ->
     updateLineTotal(jQuery(this))
+    # dont use decimal points in quantity and make cost 2 decimal points
+    container = jQuery(this).parents("tr.fields")
+    cost = jQuery(container).find("input.cost")
+    qty = jQuery(container).find("input.qty")
+    cost.val(parseFloat(cost.val()).toFixed(2)) if cost.val()
+    qty.val(parseInt(cost.val())) if qty.val()
   updateInvoiceTotal()
 
   # dispute popup validation
@@ -486,10 +439,10 @@ jQuery ->
            flag = false
     flag
   # Test-overflow and ellipses and Display full content on mouse over
-  jQuery(".text-overflow-class").live "mouseenter",(evt) ->
+  jQuery(".text-overflow-class").live "mouseenter", ->
     left_position = jQuery(this).offset().left  + "px";
     top_position = jQuery(this).offset().top - 1 + "px";
     full_content = jQuery(this).text()
-    jQuery(this).append "<span class='mouseover_full_content' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
+    #jQuery(this).append "<span class='mouseover_full_content' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
   jQuery('.text-overflow-class').live "mouseleave", ->
     jQuery('.mouseover_full_content').remove()
