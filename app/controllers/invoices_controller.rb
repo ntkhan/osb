@@ -7,13 +7,11 @@ class InvoicesController < ApplicationController
   include InvoicesHelper
 
   def index
-    #per_page = params[:per]
     @invoices = Invoice.unarchived.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.js
-      #format.json { render json: @invoices }
     end
   end
 
@@ -109,6 +107,10 @@ class InvoicesController < ApplicationController
   def unpaid_invoices
     @invoices = Invoice.where("status != 'paid' or status is null").all
     respond_to { |format| format.js }
+  end
+
+  def bulk_actions2
+    @invoices, @action, @message = InvoiceService.perform_bulk_action(params)
   end
 
   def bulk_actions
