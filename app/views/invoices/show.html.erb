@@ -11,6 +11,9 @@
         <div class="grid_control_right">
           <ul>
             <li class="grid_control_sep sep_right">
+              <%= link_to "Payments history", {:controller => 'payments', :action => 'invoice_payments_history', :id => @invoice.id} %>
+            </li>
+            <li class="grid_control_sep sep_right">
               <%= link_to "Edit", edit_invoice_path(@invoice) %>
             </li>
             <!--<li><a href="#">Send</a></li>-->
