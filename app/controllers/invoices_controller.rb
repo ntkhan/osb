@@ -110,7 +110,7 @@ class InvoicesController < ApplicationController
   end
 
   def bulk_actions2
-    @invoices, @action, @message = InvoiceService.perform_bulk_action(params)
+    #@invoices, @action, @message = InvoiceService.perform_bulk_action(params)
   end
 
   def bulk_actions
