@@ -49,7 +49,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def has_payment?
-    self.payments.where("payment_type !='credit' or payment_type is null")
+    self.payments.where("payment_type !='credit' or payment_type is null").present?
   end
 
   def currency_symbol
@@ -188,9 +188,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def encrypted_id
-    secret = Digest::SHA1.hexdigest("yourpass")
-    e = ActiveSupport::MessageEncryptor.new(secret)
-    Base64.encode64(e.encrypt(self.id))
+    Services::InvoiceService.encrypt(self.id)
   end
 
   def paypal_url(return_url, notify_url)

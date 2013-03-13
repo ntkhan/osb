@@ -109,16 +109,17 @@ class InvoicesController < ApplicationController
     respond_to { |format| format.js }
   end
 
-  def bulk_actions2
-    result = InvoiceService.perform_bulk_action(params)
+  def bulk_actions
+    result = Services::InvoiceService.perform_bulk_action(params.merge({current_user: current_user}))
 
     @invoices = result[:invoices]
     @message = result[:message]
     @action = result[:action]
     @invoices_with_payments = result[:invoices_with_payments]
+    respond_to { |format| format.js }
   end
 
-  def bulk_actions
+  def bulk_actions2
     ids = params[:invoice_ids]
     if params[:archive]
       Invoice.archive_multiple(ids)
