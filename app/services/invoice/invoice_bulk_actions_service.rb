@@ -13,7 +13,7 @@ class InvoiceBulkActionsService
   end
 
   def destroy
-    puts "
+    puts ""
 
   end
 
