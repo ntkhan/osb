@@ -1080,3 +1080,15 @@ select.per_page{
   padding:  0;
   margin: 0 0 3px;
 }
+
+.display_none{
+    display:none;
+}
+.increase_width{
+    width: 215px !important;
+}
+.last_child_rounded{
+    border-radius: 0 5px 5px 0;
+      -o-border-radius-topleft: 10px;
+      border-right: none !important;
+}
