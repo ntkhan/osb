@@ -382,7 +382,7 @@ h4 {
 .grid_control {
   float: left;
   width: 100%;
-  padding: 35px 0 0 0;
+  padding: 37px 0 0 0;
 }
 
 .grid_control_left {
@@ -422,7 +422,7 @@ h4 {
 
 .grid_control_right {
   float: right;
-  margin: 0 -1px 0 0;
+  margin: -1px -1px 0 0;
 }
 
 .grid_control_right ul li a {
@@ -442,12 +442,15 @@ h4 {
   color: #898989; /*light grey*/
   padding: 0 0 0 4px;
   letter-spacing: .3px;
+  margin: 1px 0 0 0;
 }
-
+.table{
+    margin: 0px;
+}
 .grid_table {
   float: left;
   width: 100%;
-  padding: 15px 0 0 0;
+  padding: 14px 0 0 0;
 }
 x:-o-prefocus, .grid_table table{
     border-collapse: separate;
@@ -1079,16 +1082,4 @@ select.per_page{
   height: 20px;
   padding:  0;
   margin: 0 0 3px;
-}
-
-.display_none{
-    display:none;
-}
-.increase_width{
-    width: 215px !important;
-}
-.last_child_rounded{
-    border-radius: 0 5px 5px 0;
-      -o-border-radius-topleft: 10px;
-      border-right: none !important;
 }
