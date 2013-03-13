@@ -240,7 +240,7 @@ h4 {
   white-space: nowrap;
   width: 100%;
   margin: auto;
-  *width: 98%;
+  *width: 98.1%;
 }
 #nav li {
   float: left;
@@ -493,6 +493,10 @@ tfoot tr:hover{
   font-size: 13px;
   color: #464646;
   border-bottom: 1px solid #D7D7D7
+}
+
+.grid_table table td{
+    *padding: 0px 0px 0px 0px !important;
 }
 
 .grid_table table tfoot td {
@@ -1082,16 +1086,4 @@ select.per_page{
   height: 20px;
   padding:  0;
   margin: 0 5px 3px;
-}
-
-.display_none{
-    display:none;
-}
-.increase_width{
-    width: 215px !important;
-}
-.last_child_rounded{
-    border-radius: 0 5px 5px 0;
-      -o-border-radius-topleft: 10px;
-      border-right: none !important;
 }
