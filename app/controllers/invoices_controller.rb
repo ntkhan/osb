@@ -38,7 +38,7 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Services::InvoiceServices::InvoiceService.build_new_invoice(params)
+    @invoice = Services::InvoiceService.build_new_invoice(params)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -110,7 +110,12 @@ class InvoicesController < ApplicationController
   end
 
   def bulk_actions2
-    @invoices, @action, @message = InvoiceService.perform_bulk_action(params)
+    result = InvoiceService.perform_bulk_action(params)
+
+    @invoices = result[:invoices]
+    @message = result[:message]
+    @action = result[:action]
+    @invoices_with_payments = result[:invoices_with_payments]
   end
 
   def bulk_actions

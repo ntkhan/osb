@@ -1,5 +1,6 @@
 class Invoice < ActiveRecord::Base
   default_scope order("#{self.table_name}.created_at DESC")
+  scope :multiple, lambda {|ids_list| where("id in (?)", ids_list.is_a?(String) ? ids_list.split(',') : [*ids_list])}
 
   # constants
   STATUS_DESCRIPTION = {
@@ -47,6 +48,10 @@ class Invoice < ActiveRecord::Base
     STATUS_DESCRIPTION[self.status.gsub("-", "_").to_sym]
   end
 
+  def has_payment?
+    self.payments.where("payment_type !='credit' or payment_type is null")
+  end
+
   def currency_symbol
     # self.company.currency_symbol
     "$"
@@ -86,9 +91,9 @@ class Invoice < ActiveRecord::Base
     where("id IN(?)", ids)
   end
 
-  def self.archive_multiple ids
-    self.multiple_invoices(ids).each { |invoice| invoice.archive }
-  end
+  #def self.archive_multiple ids
+  #  self.multiple_invoices(ids).each { |invoice| invoice.archive }
+  #end
 
   def self.delete_multiple ids
     invoices_with_payments = []

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def _reload_libs
     if defined? RELOAD_LIBS
       RELOAD_LIBS.each do |lib|
-        require_dependency lib
+        #require_dependency lib
       end
     end
   end

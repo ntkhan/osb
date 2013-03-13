@@ -10,12 +10,22 @@ jQuery('.primary_heading h1 span').html("&nbsp;/&nbsp;<%= status.capitalize%>");
 <%if status == "active" %>
 jQuery('.archive,.destroy,.payment,.send').show();
 jQuery('#active_links a.get_actives').addClass('active');
+//if (!jQuery(".invoice_listing tr th:last-child").hasClass("nine")) {
+//    jQuery(".invoice_listing tr th:last-child").after("<col class='nine'>Actions</col>");
+//    jQuery(".invoice_listing col.four").width("143px")
+//}
 <% elsif status == "archived"%>
 jQuery('.recover_archived,.destroy,.send').show();
 jQuery('#active_links a.get_archived').addClass('active');
+//if (!jQuery(".invoice_listing tr th:last-child").hasClass("nine")) {
+//    jQuery(".invoice_listing tr th:last-child").after("<col class='nine'>Actions</col>");
+//    jQuery(".invoice_listing col.four").width("143px")
+//}
 <% elsif status == "deleted"%>
 jQuery('.recover_deleted,.send').show();
 jQuery('#active_links a.get_deleted').addClass('active');
+//jQuery(".invoice_listing tr td:last-child, .invoice_listing tr th:last-child").remove();
+//jQuery(".invoice_listing col.four").width("215px");
 <%end%>
 jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed, .viewed").qtip();
 jQuery('#select_all').attr('checked', false);
