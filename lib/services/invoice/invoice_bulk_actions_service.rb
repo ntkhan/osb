@@ -5,7 +5,7 @@ module Services
     def initialize(options)
       actions_list = %w(archive destroy recover_archived recover_deleted send payment)
       @options = options
-      @action_to_perform = actions_list.map{|action| action if @options[action]}.compact.first #@options[:commit]
+      @action_to_perform = actions_list.map { |action| action if @options[action] }.compact.first #@options[:commit]
       @invoice_ids = @options[:invoice_ids]
       @invoices = ::Invoice.multiple(@invoice_ids)
       @current_user = @options[:current_user]
@@ -20,7 +20,7 @@ module Services
 
     def archive
       @invoices.map(&:archive)
-      prepare_result("invoices_archived").merge({action: "archived"})
+      prepare_result('invoices_archived').merge({action: 'archived'})
     end
 
     def destroy
@@ -28,29 +28,29 @@ module Services
 
       (@invoices - invoices_with_payments).map(&:destroy)
 
-      action = invoices_with_payments.present? ? "invoices_with_payments" : "deleted"
-      prepare_result("invoices_deleted").merge({action: action, invoices_with_payments: invoices_with_payments})
+      action = invoices_with_payments.present? ? 'invoices_with_payments' : 'deleted'
+      prepare_result('invoices_deleted').merge({action: action, invoices_with_payments: invoices_with_payments})
     end
 
     def recover_archived
       @invoices.map(&:unarchive)
-      prepare_result(nil).merge({action: "recovered from archived"})
+      prepare_result(nil).merge({action: 'recovered from archived'})
     end
 
     def recover_deleted
       @invoices.only_deleted.map { |invoice| invoice.recover; invoice.unarchive }
       invoices = ::Invoice.only_deleted.page(@options[:page]).per(@options[:per])
-      {invoices: invoices, action: "recovered from deleted"}
+      {invoices: invoices, action: 'recovered from deleted'}
     end
 
     def send_invoices
-      @invoices.map { |invoice| invoice.update_attribute(:status, "sent") if send_invoice_to_client(invoice) }
-      prepare_result(nil).merge({action: "sent"})
+      @invoices.map { |invoice| invoice.update_attribute(:status, 'sent') if send_invoice_to_client(invoice) }
+      prepare_result(nil).merge({action: 'sent'})
     end
 
     def payment
-      action = @invoices.where(status: 'paid').present? ? "paid_invoices" : "enter_payment"
-      {action: action}
+      action = @invoices.where(status: 'paid').present? ? 'paid invoices' : 'enter payment'
+      {action: action, invoices: @invoices}
     end
 
     private

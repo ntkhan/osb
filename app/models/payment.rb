@@ -2,7 +2,7 @@ class Payment < ActiveRecord::Base
   attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at
   belongs_to :invoice
   has_many :sent_emails, :as => :notification
-  validates :payment_amount, :numericality => { :greater_than => 0}
+  validates :payment_amount, :numericality => {:greater_than => 0}
   paginates_per 10
   acts_as_archival
   acts_as_paranoid
@@ -24,10 +24,10 @@ class Payment < ActiveRecord::Base
 
   # either it's a normal payment, a credit due to overpayment or a converted payment
   def payment_reference
-   self.payment_type == "credit" ? "credit-#{self.id.to_s.rjust(5, '0')}"  : "#{self.invoice.invoice_number}"
+    self.payment_type == "credit" ? "credit-#{self.id.to_s.rjust(5, '0')}" : "#{self.invoice.invoice_number}"
   end
 
-  def self.update_invoice_status inv_id, c_pay, prev_amount= 0
+  def self.update_invoice_status(inv_id, c_pay, prev_amount=0)
     invoice = Invoice.find(inv_id)
     diff = (self.invoice_paid_amount(invoice.id)- prev_amount + c_pay) - invoice.invoice_total
     if diff > 0

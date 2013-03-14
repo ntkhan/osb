@@ -37,9 +37,15 @@ module Services
       InvoiceMailer.dispute_invoice_email(current_user, invoice, dispute_reason).deliver
     end
 
-    def self.delete_invoices_with_payments(invoices_ids, convert_to_credit, )
-      ids = params[:invoice_ids]
-      Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
+    def self.delete_invoices_with_payments(invoices_ids, convert_to_credit)
+      Invoice.multiple(invoices_ids).each do |invoice|
+        if convert_to_credit
+          invoice.delete_credit_payments
+          invoice.create_credit(invoice.non_credit_payment_total)
+        end
+        invoice.delete_none_credit_payments
+        invoice.destroy
+      end
     end
   end
 end

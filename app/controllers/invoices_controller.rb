@@ -1,8 +1,7 @@
 class InvoicesController < ApplicationController
   before_filter :authenticate_user!, :except => [:preview, :invoice_pdf, :paypal_payments]
   protect_from_forgery :except => [:paypal_payments]
-  # GET /invoices
-  # GET /invoices.json
+
   layout :choose_layout
   include InvoicesHelper
 
@@ -51,15 +50,15 @@ class InvoicesController < ApplicationController
 
   def create
     @invoice = Invoice.new(params[:invoice])
-    params[:save_as_draft] ? @invoice.status = "draft" : @invoice.status = "sent"
+    @invoice.status = params[:save_as_draft] ? 'draft' : 'sent'
     respond_to do |format|
       if @invoice.save
-        @invoice.notify(current_user, encrypt(@invoice.id))
+        @invoice.notify(current_user, @invoice.encrypted_id)
         new_invoice_message = new_invoice(@invoice.id, params[:save_as_draft])
         redirect_to(edit_invoice_url(@invoice), :notice => new_invoice_message)
         return
       else
-        format.html { render :action => "new" }
+        format.html { render :action => 'new' }
         format.json { render :json => @invoice.errors, :status => :unprocessable_entity }
       end
     end
@@ -67,7 +66,7 @@ class InvoicesController < ApplicationController
 
   def enter_single_payment
     invoice_ids = [params[:ids]]
-    redirect_to({:action => "enter_payment", :controller => "payments", :invoice_ids => invoice_ids})
+    redirect_to({:action => 'enter_payment', :controller => 'payments', :invoice_ids => invoice_ids})
   end
 
   def update
@@ -174,11 +173,13 @@ class InvoicesController < ApplicationController
   #end
 
   def delete_invoices_with_payments
-    ids = params[:invoice_ids]
-    Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
+    invoices_ids = params[:invoice_ids]
+    convert_to_credit = params[:convert_to_credit].present?
+
+    Services::InvoiceService.delete_invoices_with_payments(invoices_ids, convert_to_credit)
     @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-    @message = invoices_deleted(ids) unless ids.blank?
-    @message += params[:convert_to_credit].blank? ? "Corresponding payments have been deleted." : "Corresponding payments have been converted to client credit."
+    @message = invoices_deleted(invoices_ids) unless ids.blank?
+    @message += convert_to_credit ? 'Corresponding payments have been converted to client credit.' : 'Corresponding payments have been deleted.'
 
     respond_to { |format| format.js }
   end
