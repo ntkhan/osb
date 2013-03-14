@@ -123,10 +123,16 @@ class PaymentsController < ApplicationController
       @action = "archived"
       @message = payments_archived(ids) unless ids.blank?
     elsif params[:destroy]
-      Payment.delete_multiple(ids)
-      @payments = Payment.unarchived.page(params[:page]).per(params[:per])
-      @action = "deleted"
-      @message = payments_deleted(ids) unless ids.blank?
+      # check if payment is a credit and applied to any other invoice payment
+      if Payment.is_credit_entry? ids
+        @action = "credit entry"
+        @payments_with_credit = Payment.payments_with_credit ids
+      else
+        Payment.delete_multiple(ids)
+        @payments = Payment.unarchived.page(params[:page]).per(params[:per])
+        @action = "deleted"
+        @message = payments_deleted(ids) unless ids.blank?
+      end
     elsif params[:recover_archived]
       Payment.recover_archived(ids)
       @payments = Payment.archived.page(params[:page]).per(params[:per])
