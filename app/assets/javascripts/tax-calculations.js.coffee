@@ -10,10 +10,10 @@ window.taxByCategory = ->
   jQuery("table.invoice_grid_fields tr:visible").each ->
     # TODO: apply discount on lineTotal
     discountPct = parseFloat($("#invoice_discount_percentage").val())
-    discountAmount = 0
 
     lineTotal = parseFloat $(this).find(".line_total").text()
     discountAmount = (lineTotal * discountPct / 100.0 )
+    discountAmount = 0 if isNaN(discountAmount)
     discountedLineTotal = lineTotal - discountAmount
 
     tax1Select = $(this).find("select.tax1 option:selected")
@@ -40,7 +40,7 @@ window.taxByCategory = ->
     tlist[tax_key] = (tlist[tax_key] || 0) + t["amount"] if !isNaN(t["amount"])
     a = (a || 0) + t["amount"] if !isNaN(t["amount"])
 
-  #console.log tlist
+#  console.log tlist
   lis = "" # list items
   for tax, amount of tlist
     lis += "<li><span class='grid_summary_title'>#{tax}</span> <span class='grid_summary_description tax_amount'>#{amount}</span></li>\n"

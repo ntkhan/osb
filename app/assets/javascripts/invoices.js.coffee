@@ -39,7 +39,9 @@ jQuery ->
     widgets: ['staticRow']
     sortList: sort_list
 
-# Calculate the line total for invoice
+  # make 10 option selected by default in invoice per page
+  jQuery("select.per_page").val('10');
+  # Calculate the line total for invoice
   updateLineTotal = (elem) ->
     container = elem.parents("tr.fields")
     cost = jQuery(container).find("input.cost").val()
@@ -187,7 +189,7 @@ jQuery ->
     cost = jQuery(container).find("input.cost")
     qty = jQuery(container).find("input.qty")
     cost.val(parseFloat(cost.val()).toFixed(2)) if cost.val()
-    qty.val(parseInt(cost.val())) if qty.val()
+    qty.val(parseInt(qty.val())) if qty.val()
   updateInvoiceTotal()
 
   # dispute popup validation

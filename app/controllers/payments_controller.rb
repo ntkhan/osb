@@ -150,9 +150,14 @@ class PaymentsController < ApplicationController
   end
 
   def payments_history
-    #id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue id = nil
     client = Invoice.find_by_id(params[:id]).client
     @payments = Payment.payments_history(client).page(params[:page])
+  end
+
+  def invoice_payments_history
+    client = Invoice.find_by_id(params[:id]).client
+    @payments = Payment.payments_history(client).page(params[:page])
+    @invoice = Invoice.find(params[:id])
   end
 
 end

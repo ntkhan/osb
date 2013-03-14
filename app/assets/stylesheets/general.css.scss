@@ -225,7 +225,7 @@ h4 {
 }
 .nav_container {
   min-height: 86px;
-  background: url(/assets/nav_left.gif) no-repeat top left;
+  background: url(/assets/nav_bg.png) no-repeat top center;
 }
 
 #nav {
@@ -233,14 +233,13 @@ h4 {
   position: relative;
   z-index: 500;
   width: 98%;
-  background: url(/assets/nav_right.gif) no-repeat top right;
   padding: 0 0 0 20px;
 }
 #nav .select {
   white-space: nowrap;
   width: 100%;
   margin: auto;
-  *width: 98%;
+  *width: 98.1%;
 }
 #nav li {
   float: left;
@@ -382,7 +381,7 @@ h4 {
 .grid_control {
   float: left;
   width: 100%;
-  padding: 35px 0 0 0;
+  padding: 37px 0 0 0;
 }
 
 .grid_control_left {
@@ -422,7 +421,7 @@ h4 {
 
 .grid_control_right {
   float: right;
-  margin: 0 -1px 0 0;
+  margin: -1px -1px 0 0;
 }
 
 .grid_control_right ul li a {
@@ -442,12 +441,15 @@ h4 {
   color: #898989; /*light grey*/
   padding: 0 0 0 4px;
   letter-spacing: .3px;
+  margin: 1px 0 0 0;
 }
-
+.table{
+    margin: 0px;
+}
 .grid_table {
   float: left;
   width: 100%;
-  padding: 15px 0 0 0;
+  padding: 14px 0 0 0;
 }
 x:-o-prefocus, .grid_table table{
     border-collapse: separate;
@@ -565,7 +567,7 @@ tfoot tr:hover{
 .fields_content {
   float: left;
   width: 100%;
-  padding: 30px 0;
+  padding: 0 0 30px 0;
   border-bottom: 1px solid #99E5F5;
 }
 
@@ -907,6 +909,9 @@ table.table_listing, table.report-data-table {
       background-color: #F0F0F6;
     }
   }
+  #paging_links td{
+      border-top: none !important;
+  }
 }
 
 /* Table sorter css end */
@@ -938,7 +943,7 @@ table.table_listing, table.report-data-table {
 .ui-widget-header, .ui-state-default, .ui-widget-content, .ui-widget-header{
     background-clip: padding-box;
     background-color: #FFFFFF;
-    background-image: linear-gradient(#FFFFFF 20%, #F6F6F6 50%, #EEEEEE 52%, #F4F4F4 100%) !important;
+    background-image: linear-gradient(#FFFFFF 20%, #ffffff 50%, #EEEEEE 50%, #FdFdFd 100%) !important;
     border: 1px solid #D7D7D7 !important;
     border-radius: 2px;
 }
@@ -1078,5 +1083,5 @@ select.per_page{
   width: 50px;
   height: 20px;
   padding:  0;
-  margin: 0 0 3px;
+  margin: 0 5px 3px;
 }
