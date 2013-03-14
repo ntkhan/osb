@@ -15,10 +15,13 @@
     float: right;
     width: 242px;
   }
-  .fields_content_left .label_field,
+  .fields_content_left .label_field{
+    width: 90px;
+  }
   .fields_content_right .label_field {
     width: 112px;
   }
+
   .field_row .btn {
     float: right;
     margin: 0 0 0 5px;
@@ -85,6 +88,9 @@
   input.grid_small,
   .blank_input {
     width: 60px;
+  }
+  select{
+    width: 300px;
   }
   select.grid_small {
     width: 80px;
@@ -155,5 +161,8 @@
   }
   .grid_table table td input, .grid_table table th input {
     margin: 0px;
+  }
+  .field_description.select li{
+    line-height: normal;
   }
 }
