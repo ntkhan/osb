@@ -2,19 +2,17 @@
     .grid_table{
         padding: 35px 0 40px 0;
         table col.one{ /*subject*/
-        width : 270px;
+        width : 330px;
         }
         table col.two{  /*receipt*/
-        width : 270px;
+        width : 330px;
         }
         table col.three{ /*type*/
-        width: 214px;
+        width: 90px;
         }
         table col.four{ /*date*/
         width : 90px;
         }
-        table col.five{
-        width : 180px;
-        }
+        
     }
 }
