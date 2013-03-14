@@ -440,7 +440,6 @@ jQuery ->
            alert "Paid invoice can not be disputed."
            flag = false
     flag
-
   # Test-overflow and ellipses and Display full content on mouse over
   jQuery(".text-overflow-class").live "mouseenter", ->
     adjust_position = (jQuery(this).height() - 19)/2 -1;
