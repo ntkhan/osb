@@ -109,5 +109,31 @@
       </div>
   <% end %>
   <!-- END: Unpaid invoices popup -->
+
+  <!-- START: Credit entries -->
+  <%= form_tag "/payments/enter_payment", :id => "", :remote => true do %>
+      <div id="credit_payments" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="model_grey_container">
+          <div class="modal-header">
+            <h1>Following credit payments are applied to invoices and can't be deleted.</h1>
+            <div class="cross_btn" style="margin:-50px -1px 0 0">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
+              </button>
+            </div>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <p class="continue_delete_msg">To continue deleting other payments please press the Delete Payments button below.</p>
+          <div class="footer ">
+            <%= submit_tag "Delete Payments", :class => "btn_large submit" %>
+            <a class="btn_large grey" href="#" data-dismiss="modal">cancel</a>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <!-- END: Credit entries -->
+
 </div><!--payment-->
 
