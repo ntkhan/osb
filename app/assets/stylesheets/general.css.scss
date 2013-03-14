@@ -494,10 +494,6 @@ tfoot tr:hover{
   border-bottom: 1px solid #D7D7D7
 }
 
-.grid_table table td{
-    *padding: 0px 0px 0px 0px !important;
-}
-
 .grid_table table tfoot td {
   border-bottom: none;
 }
@@ -571,7 +567,7 @@ tfoot tr:hover{
 .fields_content {
   float: left;
   width: 100%;
-  padding: 30px 0;
+  padding: 0 0 30px 0;
   border-bottom: 1px solid #99E5F5;
 }
 
@@ -913,6 +909,9 @@ table.table_listing, table.report-data-table {
       background-color: #F0F0F6;
     }
   }
+  #paging_links td{
+      border-top: none !important;
+  }
 }
 
 /* Table sorter css end */
@@ -944,7 +943,7 @@ table.table_listing, table.report-data-table {
 .ui-widget-header, .ui-state-default, .ui-widget-content, .ui-widget-header{
     background-clip: padding-box;
     background-color: #FFFFFF;
-    background-image: linear-gradient(#FFFFFF 20%, #F6F6F6 50%, #EEEEEE 52%, #F4F4F4 100%) !important;
+    background-image: linear-gradient(#FFFFFF 20%, #ffffff 50%, #EEEEEE 50%, #FdFdFd 100%) !important;
     border: 1px solid #D7D7D7 !important;
     border-radius: 2px;
 }
