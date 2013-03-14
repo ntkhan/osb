@@ -360,7 +360,7 @@ jQuery ->
       at: "bottomCenter"
 
   # tool tip on invoice statuses
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .viewed, .remove_item, .sort_icon").qtip
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .viewed, .remove_item, .sort_icon, .text-overflow-class").qtip
     position:
       at: "bottomCenter"
 
@@ -441,8 +441,9 @@ jQuery ->
 
   # Test-overflow and ellipses and Display full content on mouse over
   jQuery(".text-overflow-class").live "mouseenter", ->
+    adjust_position = (jQuery(this).height() - 19)/2 -1;
     left_position = jQuery(this).offset().left  + "px";
-    top_position = jQuery(this).offset().top - 1 + "px";
+    top_position = jQuery(this).offset().top + adjust_position + "px";
     full_content = jQuery(this).text()
     html_text =  "<span class='mouseover_full_content' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
     jQuery(this).append html_text
