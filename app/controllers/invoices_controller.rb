@@ -27,14 +27,11 @@ class InvoicesController < ApplicationController
     @images_path = "#{request.protocol}#{request.host_with_port}/assets"
 
     @invoice = Invoice.find(params[:id])
-    render :layout => "pdf_mode"
+    render :layout => 'pdf_mode'
   end
 
   def preview
-    @id = decrypt(Base64.decode64(params[:inv_id])).to_i rescue @id = nil
-    @invoice = @id.blank? ? nil : Invoice.find(@id)
-    @invoice.update_attribute("status", "viewed") if @invoice.present? && @invoice.status == "sent"
-    @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
+    @invoice = Services::InvoiceService.get_invoice_for_preview(params[:inv_id])
   end
 
   def new
@@ -49,7 +46,6 @@ class InvoicesController < ApplicationController
   def edit
     @invoice = Invoice.find(params[:id])
     @invoice.invoice_date = @invoice.invoice_date.to_date
-    @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
     @invoice.invoice_line_items.build()
   end
 
@@ -113,46 +109,47 @@ class InvoicesController < ApplicationController
     result = Services::InvoiceService.perform_bulk_action(params.merge({current_user: current_user}))
 
     @invoices = result[:invoices]
-    @message = result[:message]
+    @message = get_intimation_message(result[:action_to_perform], result[:invoice_ids])
     @action = result[:action]
     @invoices_with_payments = result[:invoices_with_payments]
+
     respond_to { |format| format.js }
   end
 
-  def bulk_actions2
-    ids = params[:invoice_ids]
-    if params[:archive]
-      Invoice.archive_multiple(ids)
-      @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-      @action = "archived"
-      @message = invoices_archived(ids) unless ids.blank?
-    elsif params[:destroy]
-      @invoices_with_payments = Invoice.delete_multiple(ids)
-      @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-      @action = "deleted"
-      @action = "invoices_with_payments" unless @invoices_with_payments.blank?
-      @message = invoices_deleted(ids) unless ids.blank?
-    elsif params[:recover_archived]
-      Invoice.recover_archived(ids)
-      @invoices = Invoice.archived.page(params[:page]).per(params[:per])
-      @action = "recovered from archived"
-    elsif params[:recover_deleted]
-      Invoice.recover_deleted(ids)
-      @invoices = Invoice.only_deleted.page(params[:page]).per(params[:per])
-      @action = "recovered from deleted"
-    elsif params[:send]
-      send_invoices(ids)
-      @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-      @action = "sent"
-    elsif params[:payment]
-      @action = unless Invoice.paid_invoices(ids).present?
-                  "enter payment"
-                else
-                  "paid invoices"
-                end
-    end
-    respond_to { |format| format.js }
-  end
+  #def bulk_actions2
+  #  ids = params[:invoice_ids]
+  #  if params[:archive]
+  #    Invoice.archive_multiple(ids)
+  #    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
+  #    @action = "archived"
+  #    @message = invoices_archived(ids) unless ids.blank?
+  #  elsif params[:destroy]
+  #    @invoices_with_payments = Invoice.delete_multiple(ids)
+  #    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
+  #    @action = "deleted"
+  #    @action = "invoices_with_payments" unless @invoices_with_payments.blank?
+  #    @message = invoices_deleted(ids) unless ids.blank?
+  #  elsif params[:recover_archived]
+  #    Invoice.recover_archived(ids)
+  #    @invoices = Invoice.archived.page(params[:page]).per(params[:per])
+  #    @action = "recovered from archived"
+  #  elsif params[:recover_deleted]
+  #    Invoice.recover_deleted(ids)
+  #    @invoices = Invoice.only_deleted.page(params[:page]).per(params[:per])
+  #    @action = "recovered from deleted"
+  #  elsif params[:send]
+  #    send_invoices(ids)
+  #    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
+  #    @action = "sent"
+  #  elsif params[:payment]
+  #    @action = unless Invoice.paid_invoices(ids).present?
+  #                "enter payment"
+  #              else
+  #                "paid invoices"
+  #              end
+  #  end
+  #  respond_to { |format| format.js }
+  #end
 
   def undo_actions
     params[:archived] ? Invoice.recover_archived(params[:ids]) : Invoice.recover_deleted(params[:ids])
@@ -164,35 +161,32 @@ class InvoicesController < ApplicationController
     @invoices = Invoice.filter(params)
   end
 
-  def send_invoices ids
-    Invoice.multiple_invoices(ids).each { |invoice|
-      invoice.send_invoice(current_user, encrypt(invoice.id))
-    }
-  end
-
-  def send_invoice
-    @invoice = Invoice.find_by_id(params[:id])
-    @invoice.send_invoice(current_user, encrypt(params[:id]))
-    redirect_to(invoice_path(@invoice), :notice => "Invoice has been sent successfully")
-  end
+  #def send_invoices ids
+  #  Invoice.multiple_invoices(ids).each { |invoice|
+  #    invoice.send_invoice(current_user, encrypt(invoice.id))
+  #  }
+  #end
+  #
+  #def send_invoice
+  #  @invoice = Invoice.find_by_id(params[:id])
+  #  @invoice.send_invoice(current_user, encrypt(params[:id]))
+  #  redirect_to(invoice_path(@invoice), :notice => "Invoice has been sent successfully")
+  #end
 
   def delete_invoices_with_payments
     ids = params[:invoice_ids]
     Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
-    @invoices = Invoice.unarchived.page(params[:page])
+    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
     @message = invoices_deleted(ids) unless ids.blank?
     @message += params[:convert_to_credit].blank? ? "Corresponding payments have been deleted." : "Corresponding payments have been converted to client credit."
+
     respond_to { |format| format.js }
   end
 
   def dispute_invoice
-    invoice_id = params[:invoice_id]
-    @invoice = Invoice.find(invoice_id)
-    @invoice.update_attribute('status', 'disputed')
-    reason_for_dispute = params[:reason_for_dispute]
-    InvoiceMailer.dispute_invoice_email(current_user, @invoice, reason_for_dispute).deliver
+    @invoice = Services::InvoiceService.dispute_invoice(params[:invoice_id], params[:reason_for_dispute], current_user)
     @message = dispute_invoice_message(current_user.companies.first.org_name)
-    @dispute_history = @invoice.sent_emails.where("type = 'Disputed'")
+
     respond_to { |format| format.js }
   end
 
@@ -212,6 +206,16 @@ class InvoicesController < ApplicationController
       invoice.update_attribute('status', 'paid')
     end
     render :nothing => true
+  end
+
+  private
+
+  def get_intimation_message(action_key, invoice_ids)
+    helper_methods = {archive: 'invoices_archived', destroy: 'invoices_deleted'}
+    helper_method = helper_methods[action_key.to_sym]
+    message = helper_method.present? ? send(helper_method, invoice_ids) : nil
+    Rails.logger.debug "==> helper_method: #{helper_method}, action_key: #{action_key}, invoice_ids: #{invoice_ids}, message: #{message}"
+    message
   end
 
 end

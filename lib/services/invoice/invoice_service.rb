@@ -22,17 +22,24 @@ module Services
       Services::InvoiceBulkActionsService.new(params).perform
     end
 
-    def self.encrypt(value_to_encrypt)
-      secret = Digest::SHA1.hexdigest("osb-dey-lashkarey-jagh-mag-bill-sarey")
-      e = ActiveSupport::MessageEncryptor.new(secret)
-      Base64.encode64(e.encrypt_and_sign(value_to_encrypt))
+    def self.get_invoice_for_preview(encrypted_invoice_id)
+      invoice_id = OSB::Util::decrypt(encrypted_invoice_id).to_i rescue invoice_id = nil
+      invoice = Invoice.find_by_id(invoice_id)
+      return nil if invoice.blank?
+      invoice.viewed!
+      invoice
     end
 
-    def self.decrypt(value_to_decrypt)
-      secret = Digest::SHA1.hexdigest("osb-dey-lashkarey-jagh-mag-bill-sarey")
-      e = ActiveSupport::MessageEncryptor.new(secret)
-      e.decrypt_and_verify(Base64.decode64(value_to_decrypt))
+    def self.dispute_invoice(invoice_id, dispute_reason, current_user)
+      invoice = Invoice.find_by_id(invoice_id)
+      return nil if invoice.blank?
+      invoice.disputed!
+      InvoiceMailer.dispute_invoice_email(current_user, invoice, dispute_reason).deliver
     end
 
+    def self.delete_invoices_with_payments(invoices_ids, convert_to_credit, )
+      ids = params[:invoice_ids]
+      Invoice.delete_invoices_with_payments(ids, !params[:convert_to_credit].blank?)
+    end
   end
 end

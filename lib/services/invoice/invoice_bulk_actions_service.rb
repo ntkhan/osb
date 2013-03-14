@@ -1,6 +1,6 @@
 module Services
   class InvoiceBulkActionsService
-    attr_reader :invoices, :invoice_ids, :options
+    attr_reader :invoices, :invoice_ids, :options, :action_to_perform
 
     def initialize(options)
       actions_list = %w(archive destroy recover_archived recover_deleted send payment)
@@ -15,7 +15,7 @@ module Services
       #TODO: for send_invoices the value for action_to_perform is 'send', need to take care of that
       #the above 'TODO:' has been taken care of in a bit ugly way
       #TODO now: do some makeup :)
-      return method(@action_to_perform == 'send' ? 'send_invoices' : @action_to_perform).call
+      return method(@action_to_perform == 'send' ? 'send_invoices' : @action_to_perform).call.merge({invoice_ids: @invoice_ids, action_to_perform: @action_to_perform})
     end
 
     def archive
@@ -61,8 +61,8 @@ module Services
 
     def prepare_result(message_helper)
       invoices = ::Invoice.unarchived.page(@options[:page]).per(@options[:per])
-      message = InvoicesController.helpers.send(message_helper, @invoice_ids) if @invoice_ids.present? && message_helper rescue message = "#{message_helper}: some issue in console"
-      {message: message, invoices: invoices}
+      #message = InvoicesController.helpers.send(message_helper, @invoice_ids) if @invoice_ids.present? && message_helper #rescue message = "#{message_helper}: #{}"
+      {invoices: invoices}
     end
   end
 end

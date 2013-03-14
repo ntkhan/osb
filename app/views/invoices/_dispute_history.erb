@@ -1,7 +1,7 @@
 <div class="response_container" style="border-bottom: none;">
   <div class="response_top">
     <h1>Dispute History</h1>
-    <% @dispute_history.each do |email_detail| %>
+    <% @invoice.dispute_history.each do |email_detail| %>
         <% float_class = email_detail.subject == "Reason from client" ? "float-right" : "float-left" %>
         <div class="<%= float_class %>">
           <span class="detail"><%= email_detail.content %></span>

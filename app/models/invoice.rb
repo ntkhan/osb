@@ -26,7 +26,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
   # callbacks
-  before_destroy :change_status
+  before_destroy :sent!
   before_create :set_invoice_number
 
   paginates_per 10
@@ -40,12 +40,26 @@ class Invoice < ActiveRecord::Base
     self.invoice_number = Invoice.get_next_invoice_number(nil)
   end
 
-  def change_status
-    self.update_attribute("status", "sent")
+  def sent!
+    self.update_attribute(:status, 'sent')
+  end
+
+  def viewed!
+    self.update_attribute(:status, 'viewed') if self.status == 'sent'
+  end
+
+  # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
+  # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
+  def disputed!
+    self.update_attribute('status', 'disputed')
+  end
+
+  def dispute_history
+    self.sent_emails.where("type = 'Disputed'")
   end
 
   def tooltip
-    STATUS_DESCRIPTION[self.status.gsub("-", "_").to_sym]
+    STATUS_DESCRIPTION[self.status.gsub('-', '_').to_sym]
   end
 
   def has_payment?
@@ -66,9 +80,9 @@ class Invoice < ActiveRecord::Base
     ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
   end
 
-  def self.paid_invoices ids
-    where("id IN(?) AND status = 'paid'", ids)
-  end
+  #def self.paid_invoices ids
+  #  where("id IN(?) AND status = 'paid'", ids)
+  #end
 
   def total
     self.invoice_line_items.sum { |li| (li.item_unit_cost || 0) *(li.item_quantity || 0) }
@@ -95,17 +109,17 @@ class Invoice < ActiveRecord::Base
   #  self.multiple_invoices(ids).each { |invoice| invoice.archive }
   #end
 
-  def self.delete_multiple ids
-    invoices_with_payments = []
-    self.multiple_invoices(ids).each do |invoice|
-      if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
-        invoice.destroy
-      else
-        invoices_with_payments << invoice
-      end
-    end
-    invoices_with_payments #if there are invoices with payments
-  end
+  #def self.delete_multiple ids
+  #  invoices_with_payments = []
+  #  self.multiple_invoices(ids).each do |invoice|
+  #    if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
+  #      invoice.destroy
+  #    else
+  #      invoices_with_payments << invoice
+  #    end
+  #  end
+  #  invoices_with_payments #if there are invoices with payments
+  #end
 
   def self.delete_invoices_with_payments ids, convert_to_credit
     self.multiple_invoices(ids).each { |invoice|
@@ -188,7 +202,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def encrypted_id
-    Services::InvoiceService.encrypt(self.id)
+    OSB::Util::encrypt(self.id)
   end
 
   def paypal_url(return_url, notify_url)
