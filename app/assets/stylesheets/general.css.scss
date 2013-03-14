@@ -225,7 +225,7 @@ h4 {
 }
 .nav_container {
   min-height: 86px;
-  background: url(/assets/nav_left.gif) no-repeat top left;
+  background: url(/assets/nav_bg.png) no-repeat top center;
 }
 
 #nav {
@@ -233,7 +233,6 @@ h4 {
   position: relative;
   z-index: 500;
   width: 98%;
-  background: url(/assets/nav_right.gif) no-repeat top right;
   padding: 0 0 0 20px;
 }
 #nav .select {

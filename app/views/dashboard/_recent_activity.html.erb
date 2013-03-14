@@ -17,9 +17,11 @@
             </ul>
             <p><%= "#{activity[:activity_action]} #{activity[:client]} on #{activity[:activity_date].to_date}" %></p>
           </div>
+          <script>$(".day_session_content_detail").last().css('border-bottom', 'none');</script>
       <% end %>
     </div>
     <!--day_session_content-->
+
   </div>
   <!--day_session-->
 </div><!--overview_box-->
