@@ -2,7 +2,8 @@ class Payment < ActiveRecord::Base
   attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at
   belongs_to :invoice
   has_many :sent_emails, :as => :notification
-  validates :payment_amount, :numericality => {:greater_than => 0}
+  has_many :credit_payments
+  validates :payment_amount, :numericality => { :greater_than => 0}
   paginates_per 10
   acts_as_archival
   acts_as_paranoid
@@ -101,7 +102,11 @@ class Payment < ActiveRecord::Base
   end
 
   def self.delete_multiple ids
-    self.multiple_payments(ids).each { |payment| payment.destroy! }
+    #
+    self.multiple_payments(ids).each do |payment|
+      #invoice = payment.invoice
+      payment.destroy!
+    end
   end
 
   def self.recover_archived ids
@@ -143,4 +148,13 @@ class Payment < ActiveRecord::Base
   def self.partial_payments invoice_id
     where("invoice_id = ?", invoice_id)
   end
+
+  def self.is_credit_entry? ids
+    multiple_payments(ids).select{|payment| payment.payment_type == "credit"}.length > 0
+  end
+
+  def self.payments_with_credit ids
+    multiple_payments(ids).where("payment_type = 'credit'")
+  end
+
 end
