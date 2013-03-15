@@ -3,7 +3,7 @@ class Payment < ActiveRecord::Base
   belongs_to :invoice
   has_many :sent_emails, :as => :notification
   has_many :credit_payments
-  validates :payment_amount, :numericality => { :greater_than => 0}
+  validates :payment_amount, :numericality => {:greater_than => 0}
   paginates_per 10
   acts_as_archival
   acts_as_paranoid
@@ -150,7 +150,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.is_credit_entry? ids
-    multiple_payments(ids).select{|payment| payment.payment_type == "credit"}.length > 0
+    multiple_payments(ids).select { |payment| payment.payment_type == "credit" }.length > 0
   end
 
   def self.payments_with_credit ids

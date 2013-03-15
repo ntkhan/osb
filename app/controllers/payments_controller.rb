@@ -102,7 +102,7 @@ class PaymentsController < ApplicationController
   end
 
   def update_individual_payment
-    params[:payments].delete_if { |payment| payment["payment_amount"].blank? }.each do |pay|
+    params[:payments].delete_if { |payment| payment["payment_amount"].blank? || payment["payment_amount"].to_i == 0 }.each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_f
       pay[:payment_date] ||= Date.today
       Payment.create!(pay).notify_client current_user.email

@@ -178,7 +178,7 @@ class InvoicesController < ApplicationController
 
     Services::InvoiceService.delete_invoices_with_payments(invoices_ids, convert_to_credit)
     @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-    @message = invoices_deleted(invoices_ids) unless ids.blank?
+    @message = invoices_deleted(invoices_ids) unless invoices_ids.blank?
     @message += convert_to_credit ? 'Corresponding payments have been converted to client credit.' : 'Corresponding payments have been deleted.'
 
     respond_to { |format| format.js }

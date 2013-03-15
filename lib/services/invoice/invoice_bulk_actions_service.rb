@@ -20,7 +20,7 @@ module Services
 
     def archive
       @invoices.map(&:archive)
-      prepare_result('invoices_archived').merge({action: 'archived'})
+      {action: 'archived', invoices: get_invoices('unarchived')}
     end
 
     def destroy
@@ -29,23 +29,23 @@ module Services
       (@invoices - invoices_with_payments).map(&:destroy)
 
       action = invoices_with_payments.present? ? 'invoices_with_payments' : 'deleted'
-      prepare_result('invoices_deleted').merge({action: action, invoices_with_payments: invoices_with_payments})
+      {action: action, invoices_with_payments: invoices_with_payments, invoices: get_invoices('unarchived')}
     end
 
     def recover_archived
       @invoices.map(&:unarchive)
-      prepare_result(nil).merge({action: 'recovered from archived'})
+      {action: 'recovered from archived', invoices: get_invoices('archived')}
     end
 
     def recover_deleted
       @invoices.only_deleted.map { |invoice| invoice.recover; invoice.unarchive }
       invoices = ::Invoice.only_deleted.page(@options[:page]).per(@options[:per])
-      {invoices: invoices, action: 'recovered from deleted'}
+      {action: 'recovered from deleted', invoices: get_invoices('only_deleted')}
     end
 
     def send_invoices
       @invoices.map { |invoice| invoice.update_attribute(:status, 'sent') if send_invoice_to_client(invoice) }
-      prepare_result(nil).merge({action: 'sent'})
+      {action: 'sent', invoices: get_invoices('unarchived')}
     end
 
     def payment
@@ -59,10 +59,10 @@ module Services
       InvoiceMailer.delay.new_invoice_email(invoice.client, invoice, invoice.encrypted_id, @current_user)
     end
 
-    def prepare_result(message_helper)
-      invoices = ::Invoice.unarchived.page(@options[:page]).per(@options[:per])
-      #message = InvoicesController.helpers.send(message_helper, @invoice_ids) if @invoice_ids.present? && message_helper #rescue message = "#{message_helper}: #{}"
-      {invoices: invoices}
+    private
+
+    def get_invoices(invoice_filter)
+      ::Invoice.send(invoice_filter).page(@options[:page]).per(@options[:per])
     end
   end
 end

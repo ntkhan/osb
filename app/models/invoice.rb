@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  include ::OSB
+
   default_scope order("#{self.table_name}.created_at DESC")
   scope :multiple, lambda { |ids_list| where("id in (?)", ids_list.is_a?(String) ? ids_list.split(',') : [*ids_list]) }
 
@@ -191,19 +193,18 @@ class Invoice < ActiveRecord::Base
     self.notify(current_user, id) if self.update_attributes(:status => status)
   end
 
-  def self.total_invoices_amount
+  def total_invoices_amount
     sum('invoice_total')
   end
 
-  def self.create_credit(amount)
-    attribs = {
-        payment_type: 'credit',
-        invoice_id: self.id,
-        payment_date: Date.today,
-        notes: "Converted from payments for invoice# #{self.invoice_number}",
-        payment_amount: amount
-    }
-    Payment.create!(attribs)
+  def create_credit(amount)
+    credit_pay = Payment.new
+    credit_pay.payment_type = 'credit'
+    credit_pay.invoice_id = self.id
+    credit_pay.payment_date = Date.today
+    credit_pay.notes = "Converted from payments for invoice# #{self.invoice_number}"
+    credit_pay.payment_amount = amount
+    credit_pay.save
   end
 
   def partial_payments
