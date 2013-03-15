@@ -445,7 +445,8 @@ jQuery ->
     flag
 
   # Test-overflow and ellipses and Display full content on mouse over
-  jQuery(".text-overflow-class").ellipsis row:1;
+  jQuery(".invoice_listing .text-overflow-class,.client_report_listing .text-overflow-class").ellipsis row:1;
+  jQuery(".payment_listing .text-overflow-class").ellipsis row:2;
   jQuery(".text-overflow-class").live "mouseenter", ->
     left_position = jQuery(this).offset().left  + "px";
     top_position = jQuery(this).offset().top + -1+ "px";
