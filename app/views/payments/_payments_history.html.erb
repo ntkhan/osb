@@ -2,7 +2,7 @@
     <% @payments.each do |payment| %>
         <tr>
           <td class="align_center"><%= payment.invoice.invoice_number %></td>
-          <td class="align_left"><%= payment.client_name %></td>
+          <td class="align_left text-overflow-class" value="<%= payment.client_name %>"><%= payment.client_name %></td>
           <td class="align_center"><%= payment.payment_method || payment.payment_type %></td>
           <td class="align_center"><%= payment.notes %></td>
           <td class="align_center"><%= payment.payment_date %></td>

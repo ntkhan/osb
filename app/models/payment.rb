@@ -47,6 +47,8 @@ class Payment < ActiveRecord::Base
     return_v
   end
 
+
+
   def self.add_credit_payment invoice, amount
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
@@ -155,6 +157,33 @@ class Payment < ActiveRecord::Base
 
   def self.payments_with_credit ids
     multiple_payments(ids).where("payment_type = 'credit'")
+  end
+
+  def self.do_payment_amount_comparison invoice, payment_amount
+
+    # loop through all the credit payments of client
+    invoice.client.invoices.each do |client_invoice|
+      client_invoice.credit_payments.each do |credit_payment|
+        credit_amount = credit_payment.payment_amount
+
+        next if credit_amount < payment_amount
+
+        credit_applied = if credit_amount > payment_amount or credit_amount == payment_amount
+                           payment_amount
+                         else
+                           distribute_credit_amount(credit_amount,payment_amount)
+                         end
+
+        credit_payment.update_attribute('credit_applied',credit_applied)
+
+      end unless client_invoice.credit_payments.blank?
+    end
+  end
+
+  private
+
+  def self.distribute_credit_amount credit_payment, payment_amount
+
   end
 
 end

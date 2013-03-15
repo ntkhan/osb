@@ -275,20 +275,18 @@ jQuery ->
         text: "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a><span class='close_qtip'>x</span>"
       show:
         event: false
-        fixed: true
       hide:
         event: false
-        fixed: true
       position:
         at: "rightTop"
       style:
         classes: 'use_as_template'
         tip:
-          corner: "leftMiddle"
+          corner: "bottomLeft"
     elem.qtip().show()
-#    qtip = jQuery(".qtip.use_as_template")
-#    console.log qtip.offset().top - qtip.height()
-#    qtip.css("cssText",qtip.attr("style") + "top: 220px !important;")
+    qtip = jQuery(".qtip.use_as_template")
+    qtip.css("top",qtip.offset().top - qtip.height())
+    qtip.attr('data-top',qtip.offset().top - qtip.height())
     elem.focus()
 
   hidePopover = (elem) ->
@@ -367,7 +365,7 @@ jQuery ->
       at: "bottomCenter"
 
   # tool tip on invoice statuses
-  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .viewed, .remove_item, .sort_icon").qtip
+  jQuery(".sent, .draft, .partial, .draft-partial, .paid, .disputed, .viewed, .remove_item, .sort_icon, .text-overflow-class").qtip
     position:
       at: "bottomCenter"
 
@@ -447,13 +445,17 @@ jQuery ->
     flag
 
   # Test-overflow and ellipses and Display full content on mouse over
+  jQuery(".text-overflow-class").ellipsis row:1;
   jQuery(".text-overflow-class").live "mouseenter", ->
     left_position = jQuery(this).offset().left  + "px";
-    top_position = jQuery(this).offset().top - 1 + "px";
-    full_content = jQuery(this).text()
+    top_position = jQuery(this).offset().top + -1+ "px";
+    full_content = jQuery(this).attr "value"
+    contains = (jQuery(this).text().indexOf("...") > -1)
     html_text =  "<span class='mouseover_full_content' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
     jQuery(this).append html_text
-    diff =  jQuery(this).width() - jQuery(".mouseover_full_content").width();
-    jQuery(".mouseover_full_content").show() if diff < 0
+    #jQuery(".mouseover_full_content").height(jQuery(this).height());
+    jQuery(".mouseover_full_content").width(jQuery(this).width());
+    jQuery(".mouseover_full_content").show() if contains
   jQuery('.text-overflow-class').live "mouseleave", ->
     jQuery('.mouseover_full_content').remove()
+

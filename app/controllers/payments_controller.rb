@@ -102,17 +102,29 @@ class PaymentsController < ApplicationController
   end
 
   def update_individual_payment
+    # dont save the payment if payment amount is not provided or it's zero
     params[:payments].delete_if { |payment| payment["payment_amount"].blank? || payment["payment_amount"].to_i == 0 }.each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_f
       pay[:payment_date] ||= Date.today
-      Payment.create!(pay).notify_client current_user.email
+
+      # how much credit is applied from which credit payment
+      #compare_payment_amount(pay[:invoice_id], pay[:payment_amount]) if pay[:payment_method] == "Credit"
+
+      create_payment_and_send_email(pay)
     end
-    unless params[:pay_invoice]
-      redirect_to(payments_url, :notice => 'Payments against selected invoices have been recorded successfully.')
-    else
-      @invoices = Invoice.unarchived.page(params[:page])
-      respond_to { |format| format.js }
-    end
+
+    where_to_redirect = params[:from_invoices] ? invoices_url : payments_url
+    redirect_to(where_to_redirect, :notice => 'Payments against selected invoices have been recorded successfully.')
+  end
+
+  def compare_payment_amount invoice_id, payment_amount
+    invoice = Invoice.find(invoice_id)
+
+    Payment.do_payment_amount_comparison(invoice,payment_amount)
+  end
+
+  def create_payment_and_send_email pay
+    Payment.create!(pay).notify_client(current_user.email)
   end
 
   def bulk_actions

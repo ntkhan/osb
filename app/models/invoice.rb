@@ -211,6 +211,10 @@ class Invoice < ActiveRecord::Base
     where("status = 'partial'")
   end
 
+  def credit_payments
+    payments.where("payment_method = 'credit'")
+  end
+
   def encrypted_id
     OSB::Util::encrypt(self.id)
   end
