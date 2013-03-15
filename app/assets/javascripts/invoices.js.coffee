@@ -275,20 +275,18 @@ jQuery ->
         text: "<a href='/invoices/new/#{id}'>To create new invoice use the last invoice send to '#{client_name}'.</a><span class='close_qtip'>x</span>"
       show:
         event: false
-        fixed: true
       hide:
         event: false
-        fixed: true
       position:
         at: "rightTop"
       style:
         classes: 'use_as_template'
         tip:
-          corner: "leftMiddle"
+          corner: "bottomLeft"
     elem.qtip().show()
-#    qtip = jQuery(".qtip.use_as_template")
-#    console.log qtip.offset().top - qtip.height()
-#    qtip.css("cssText",qtip.attr("style") + "top: 220px !important;")
+    qtip = jQuery(".qtip.use_as_template")
+    qtip.css("top",qtip.offset().top - qtip.height())
+    qtip.attr('data-top',qtip.offset().top - qtip.height())
     elem.focus()
 
   hidePopover = (elem) ->

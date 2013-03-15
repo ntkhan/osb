@@ -54,9 +54,11 @@ jQuery ->
   jQuery('#payments_form').submit ->
     validate = true
     payment_fields = jQuery('.payment_amount')
+
+    # show a message if 0 is entered in payment amount
     payment_fields.each ->
-      unless jQuery(this).val()
-        jQuery(this).qtip({content: text: "Enter payment amount", show: event: false, hide: event: false})
+      if parseFloat(jQuery(this).val()) is 0
+        jQuery(this).qtip({content: text: "Payments with 0 amount are not allowed. Either leave it blank to skip or enter a value greater than 0.", show: event: false, hide: event: false})
         jQuery(this).focus().qtip().show()
         validate = false
     validate

@@ -1,6 +1,6 @@
 jQuery('.alert').hide();
 <% if @action == "enter payment" %>
-window.location.href = "/payments/enter_payment?invoice_ids=<%= params[:invoice_ids].join(",") %>"
+window.location.href = "/payments/enter_payment?invoice_ids=<%= params[:invoice_ids].join(",") %>&from_invoices=true"
 <%else%>
 <% if @action == "archived" or @action == "deleted" %>
 jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
