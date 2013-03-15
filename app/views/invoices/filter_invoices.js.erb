@@ -18,6 +18,7 @@ jQuery('.recover_deleted,.send').show();
 jQuery('#active_links a.get_deleted').addClass('active');
 <%end%>
 jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed, .viewed").qtip();
+jQuery(".text-overflow-class").ellipsis({row:1})
 jQuery('#select_all').attr('checked', false);
 
 jQuery("table.invoice_listing").trigger('update');

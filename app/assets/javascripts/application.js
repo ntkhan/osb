@@ -54,6 +54,7 @@
 //= require jquery.tablehover.min.js
 //= require tax-calculations.js.coffee
 //= require jquery.formatCurrency-1.4.0.js
+//= require jquery.ellipsis.min.js
 
 
 jQuery(function () {

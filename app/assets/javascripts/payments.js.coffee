@@ -76,3 +76,4 @@ jQuery ->
       false
     else
       true
+   jQuery(".text-overflow-class").ellipsis row:2;

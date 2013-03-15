@@ -893,9 +893,9 @@ table.table_listing, table.report-data-table {
   }
   tbody {
     .text-overflow-class{
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      //white-space: nowrap;
+      //overflow: hidden;
+      //text-overflow: ellipsis;
     }
     td {
       color: #3D3D3D;
@@ -1071,13 +1071,6 @@ table.table_listing, table.report-data-table {
     right: 4px;
     top: 0;
   }
-}
-.mouseover_full_content {
-  position: absolute;
-  background-color: #FFFBE1;
-  border: 1px solid #E4DFBE;
-  padding: 7px 9px 8px 9px;
-  display:none;
 }
 select.per_page{
   width: 50px;
