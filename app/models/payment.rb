@@ -3,7 +3,7 @@ class Payment < ActiveRecord::Base
   belongs_to :invoice
   has_many :sent_emails, :as => :notification
   has_many :credit_payments
-  validates :payment_amount, :numericality => { :greater_than => 0}
+  validates :payment_amount, :numericality => {:greater_than => 0}
   paginates_per 10
   acts_as_archival
   acts_as_paranoid
@@ -25,10 +25,10 @@ class Payment < ActiveRecord::Base
 
   # either it's a normal payment, a credit due to overpayment or a converted payment
   def payment_reference
-   self.payment_type == "credit" ? "credit-#{self.id.to_s.rjust(5, '0')}"  : "#{self.invoice.invoice_number}"
+    self.payment_type == "credit" ? "credit-#{self.id.to_s.rjust(5, '0')}" : "#{self.invoice.invoice_number}"
   end
 
-  def self.update_invoice_status inv_id, c_pay, prev_amount= 0
+  def self.update_invoice_status(inv_id, c_pay, prev_amount=0)
     invoice = Invoice.find(inv_id)
     diff = (self.invoice_paid_amount(invoice.id)- prev_amount + c_pay) - invoice.invoice_total
     if diff > 0
@@ -46,7 +46,6 @@ class Payment < ActiveRecord::Base
     invoice.save
     return_v
   end
-
 
 
   def self.add_credit_payment invoice, amount
@@ -104,11 +103,7 @@ class Payment < ActiveRecord::Base
   end
 
   def self.delete_multiple ids
-    #
-    self.multiple_payments(ids).each do |payment|
-      #invoice = payment.invoice
-      payment.destroy!
-    end
+    multiple_payments(ids).each{|payment| payment.destroy!}
   end
 
   def self.recover_archived ids
@@ -152,38 +147,38 @@ class Payment < ActiveRecord::Base
   end
 
   def self.is_credit_entry? ids
-    multiple_payments(ids).select{|payment| payment.payment_type == "credit"}.length > 0
+    CreditPayment.where("payment_id IN(?)",ids).length > 0
   end
 
   def self.payments_with_credit ids
-    multiple_payments(ids).where("payment_type = 'credit'")
+    where("payments.id IN(?)",ids).joins(:credit_payments).group("payments.id")
   end
 
   def self.do_payment_amount_comparison invoice, payment_amount
+    remaining, collected = payment_amount, 0
 
     # loop through all the credit payments of client
     invoice.client.invoices.each do |client_invoice|
       client_invoice.credit_payments.each do |credit_payment|
-        credit_amount = credit_payment.payment_amount
 
-        next if credit_amount < payment_amount
+        credit_amount, credit_applied =  credit_payment.payment_amount.to_f, credit_payment.credit_applied.to_f
+        credit_amount -= credit_applied
 
-        credit_applied = if credit_amount > payment_amount or credit_amount == payment_amount
-                           payment_amount
-                         else
-                           distribute_credit_amount(credit_amount,payment_amount)
-                         end
+        current = remaining >= credit_amount ? {:amount => credit_amount, :still_remaining => true} : {:amount => remaining, :still_remaining => false}
 
+        collected += current[:still_remaining] ? current[:amount] : remaining
+
+        credit_applied += current[:amount]
+
+        remaining = payment_amount - collected
+
+        #Rails.logger.debug "\n #{payment_amount} \n #{collected} \n #{remaining} \n #{payment_amount} \n #{current[:amount]} \n #{credit_applied}"
         credit_payment.update_attribute('credit_applied',credit_applied)
+        CreditPayment.create({:payment_id => credit_payment.id, :invoice_id => credit_payment.invoice.id, :amount => credit_applied})
 
-      end unless client_invoice.credit_payments.blank?
+        break if remaining == 0
+      end #unless client_invoice.credit_payments.blank?
     end
-  end
-
-  private
-
-  def self.distribute_credit_amount credit_payment, payment_amount
-
   end
 
 end

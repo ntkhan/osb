@@ -16,7 +16,8 @@ jQuery ->
   #Select credit from method dropdown if apply from credit checkbox is checked
   jQuery(".apply_credit").live "click", ->
     apply_credit_id = jQuery(this).attr("id")
-    payfull = jQuery(".paid_full")
+    parent = jQuery(this).parents(".pay_invoice")
+    payfull = jQuery(".paid_full",parent)
 
     # make credit option selected in drop if credit checkbox is selected
     credit_selected = if jQuery(this).is ":checked" then "Credit" else ""

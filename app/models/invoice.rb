@@ -1,15 +1,18 @@
 class Invoice < ActiveRecord::Base
+  include ::OSB
+
   default_scope order("#{self.table_name}.created_at DESC")
+  scope :multiple, lambda { |ids_list| where("id in (?)", ids_list.is_a?(String) ? ids_list.split(',') : [*ids_list]) }
 
   # constants
   STATUS_DESCRIPTION = {
-      draft: "Invoice created, but you have not notified your client.",
-      sent: "Invoice created and sent to your client.",
-      viewed: "Client has clicked the invoice URL in the email and viewed the invoice in browser.",
-      paid: "Client has made full payment against the invoice.",
-      partial: "Client has made partial payment against the invoice.",
-      draft_partial: "Payment received against the draft invoice.",
-      disputed: "Client has disputed this invoice.",
+      draft: 'Invoice created, but you have not notified your client.',
+      sent: 'Invoice created and sent to your client.',
+      viewed: 'Client has clicked the invoice URL in the email and viewed the invoice in browser.',
+      paid: 'Client has made full payment against the invoice.',
+      partial: 'Client has made partial payment against the invoice.',
+      draft_partial: 'Payment received against the draft invoice.',
+      disputed: 'Client has disputed this invoice.',
   }
 
   attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
@@ -26,7 +29,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
   # callbacks
-  before_destroy :change_status
+  before_destroy :sent!
   before_create :set_invoice_number
 
   paginates_per 10
@@ -40,12 +43,42 @@ class Invoice < ActiveRecord::Base
     self.invoice_number = Invoice.get_next_invoice_number(nil)
   end
 
-  def change_status
-    self.update_attribute("status", "sent")
+  def sent!
+    self.update_attribute(:status, 'sent')
+  end
+
+  def viewed!
+    self.update_attribute(:status, 'viewed') if self.status == 'sent'
+  end
+
+  # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
+  # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
+  def disputed!
+    self.update_attribute('status', 'disputed')
+  end
+
+  def dispute_history
+    self.sent_emails.where("type = 'Disputed'")
+  end
+
+  def delete_credit_payments
+    self.payments.with_deleted.where("payment_method = 'Credit'").map(&:destroy!)
+  end
+
+  def delete_none_credit_payments
+    self.payments.with_deleted.where("payment_type !='credit' or payment_type is null").map(&:destroy!)
+  end
+
+  def non_credit_payment_total
+    self.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
   end
 
   def tooltip
-    STATUS_DESCRIPTION[self.status.gsub("-", "_").to_sym]
+    STATUS_DESCRIPTION[self.status.gsub('-', '_').to_sym]
+  end
+
+  def has_payment?
+    self.payments.where("payment_type !='credit' or payment_type is null").present?
   end
 
   def currency_symbol
@@ -62,9 +95,9 @@ class Invoice < ActiveRecord::Base
     ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
   end
 
-  def self.paid_invoices ids
-    where("id IN(?) AND status = 'paid'", ids)
-  end
+  #def self.paid_invoices ids
+  #  where("id IN(?) AND status = 'paid'", ids)
+  #end
 
   def total
     self.invoice_line_items.sum { |li| (li.item_unit_cost || 0) *(li.item_quantity || 0) }
@@ -87,33 +120,33 @@ class Invoice < ActiveRecord::Base
     where("id IN(?)", ids)
   end
 
-  def self.archive_multiple ids
-    self.multiple_invoices(ids).each { |invoice| invoice.archive }
-  end
+  #def self.archive_multiple ids
+  #  self.multiple_invoices(ids).each { |invoice| invoice.archive }
+  #end
 
-  def self.delete_multiple ids
-    invoices_with_payments = []
-    self.multiple_invoices(ids).each do |invoice|
-      if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
-        invoice.destroy
-      else
-        invoices_with_payments << invoice
-      end
-    end
-    invoices_with_payments #if there are invoices with payments
-  end
+  #def self.delete_multiple ids
+  #  invoices_with_payments = []
+  #  self.multiple_invoices(ids).each do |invoice|
+  #    if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
+  #      invoice.destroy
+  #    else
+  #      invoices_with_payments << invoice
+  #    end
+  #  end
+  #  invoices_with_payments #if there are invoices with payments
+  #end
 
-  def self.delete_invoices_with_payments ids, convert_to_credit
-    self.multiple_invoices(ids).each { |invoice|
-      if convert_to_credit
-        invoice.payments.with_deleted.where("payment_method = 'Credit'").each { |payment| payment.destroy! }
-        invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
-        self.add_credit_payment invoice, invoice_total_payments
-      end
-      invoice.payments.with_deleted.where("payment_type !='credit' or payment_type is null").each { |payment| payment.destroy! }
-      invoice.destroy
-    }
-  end
+  #def self.delete_invoices_with_payments ids, convert_to_credit
+  #  self.multiple_invoices(ids).each { |invoice|
+  #    if convert_to_credit
+  #      invoice.payments.with_deleted.where("payment_method = 'Credit'").each { |payment| payment.destroy! }
+  #      invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
+  #      self.add_credit_payment invoice, invoice_total_payments
+  #    end
+  #    invoice.delete_non_credit_payments
+  #    invoice.destroy
+  #  }
+  #end
 
   def self.recover_archived ids
     self.multiple_invoices(ids).each { |invoice| invoice.unarchive }
@@ -128,14 +161,9 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.filter params
-    case params[:status]
-      when "active" then
-        self.unarchived.page(params[:page]).per(params[:per])
-      when "archived" then
-        self.archived.page(params[:page]).per(params[:per])
-      when "deleted" then
-        self.only_deleted.page(params[:page]).per(params[:per])
-    end
+    mappings = {active: 'unarchived', archived: 'archived', deleted: 'only_deleted'}
+    method = mappings[params[:status].to_sym]
+    self.send(method).page(params[:page]).per(params[:per])
   end
 
   def self.paid_full ids
@@ -165,16 +193,16 @@ class Invoice < ActiveRecord::Base
     self.notify(current_user, id) if self.update_attributes(:status => status)
   end
 
-  def self.total_invoices_amount
+  def total_invoices_amount
     sum('invoice_total')
   end
 
-  def self.add_credit_payment invoice, amount
+  def create_credit(amount)
     credit_pay = Payment.new
     credit_pay.payment_type = 'credit'
-    credit_pay.invoice_id = invoice.id
+    credit_pay.invoice_id = self.id
     credit_pay.payment_date = Date.today
-    credit_pay.notes = "Converted from payments for invoice# #{invoice.invoice_number}"
+    credit_pay.notes = "Converted from payments for invoice# #{self.invoice_number}"
     credit_pay.payment_amount = amount
     credit_pay.save
   end
@@ -184,13 +212,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def credit_payments
-    payments.where("payment_method = 'credit'")
+    payments.where("payment_type = 'credit'")
   end
 
   def encrypted_id
-    secret = Digest::SHA1.hexdigest("yourpass")
-    e = ActiveSupport::MessageEncryptor.new(secret)
-    Base64.encode64(e.encrypt(self.id))
+    OSB::Util::encrypt(self.id)
   end
 
   def paypal_url(return_url, notify_url)
@@ -219,14 +245,14 @@ class Invoice < ActiveRecord::Base
   end
 
   def update_dispute_invoice(current_user, encrypt_id, response_to_client)
-    self.update_attribute("status", "sent")
+    self.update_attribute('status', 'sent')
     self.notify(current_user, encrypt_id)
     self.sent_emails.create({
                                 :content => response_to_client,
                                 :sender => current_user.email, #User email
                                 :recipient => self.client.email, #client email
-                                :subject => "Response to client",
-                                :type => "Disputed",
+                                :subject => 'Response to client',
+                                :type => 'Disputed',
                                 :date => Date.today
                             })
   end
@@ -238,8 +264,8 @@ class Invoice < ActiveRecord::Base
       next unless [li.item_unit_cost, li.item_quantity].all?
       line_total = li.item_unit_cost * li.item_quantity
       # calculate tax1 and tax2
-      taxes.push({name: li.tax1.name, pct: "#{li.tax1.percentage.to_s.gsub(".0", "")}%", amount: (line_total * li.tax1.percentage / 100.0)}) unless li.tax1.blank?
-      taxes.push({name: li.tax2.name, pct: "#{li.tax2.percentage.to_s.gsub(".0", "")}%", amount: (line_total * li.tax2.percentage / 100.0)}) unless li.tax2.blank?
+      taxes.push({name: li.tax1.name, pct: "#{li.tax1.percentage.to_s.gsub('.0', '')}%", amount: (line_total * li.tax1.percentage / 100.0)}) unless li.tax1.blank?
+      taxes.push({name: li.tax2.name, pct: "#{li.tax2.percentage.to_s.gsub('.0', '')}%", amount: (line_total * li.tax2.percentage / 100.0)}) unless li.tax2.blank?
     end
 
     taxes.each do |tax|
