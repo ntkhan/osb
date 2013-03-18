@@ -567,7 +567,7 @@ tfoot tr:hover{
 .fields_content {
   float: left;
   width: 100%;
-  padding: 0 0 30px 0;
+  padding: 30px 0 30px 0;
   border-bottom: 1px solid #99E5F5;
 }
 
@@ -1077,4 +1077,13 @@ select.per_page{
   height: 20px;
   padding:  0;
   margin: 0 5px 3px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select.per_page
+    {
+        line-height: 20px;
+    }
+}
+.link_disabled{
+  color: #00ACE5;
 }

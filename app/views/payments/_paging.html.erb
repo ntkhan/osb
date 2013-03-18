@@ -2,8 +2,10 @@
   <div class="paginator">
     <%= paginate @payments, :remote => true %>
     <div class="paging_info">
-      <%= page_entries_info @payments %>
-      <%= custom_per_page %> per page
+      <% unless @payments.blank? %>
+          <%= page_entries_info @payments %>
+          <%= custom_per_page %> per page
+      <% end %>
     </div>
   </div>
 </td>

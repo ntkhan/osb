@@ -1,12 +1,17 @@
 jQuery(".alert").hide()
-<% if @action == "archived" or @action == "deleted" %>
-jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
-<% else %>
-jQuery(".alert.alert-success").show().find('span').html("Tax(es) are <%= @action %> successfully");
+
+<% unless params[:flag]%>
+    <% if @action == "archived" or @action == "deleted" %>
+    jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
+    <% else %>
+    jQuery(".alert.alert-success").show().find('span').html("Tax(es) are <%= @action %> successfully");
+    <% end %>
 <% end %>
+
 <% unless params[:tax_ids].blank? %>
 jQuery('tbody#tax_body').html('<%= escape_javascript render("taxes") %>');
 <% end %>
+
 jQuery('#active_links').html('<%= escape_javascript render("filter_links") %>');
 jQuery('#active_links a').removeClass('active');
 <% if @action == "recovered from archived"%>
