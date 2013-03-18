@@ -5,7 +5,7 @@
 </head>
 <body>
 <p>
-<%= @user.companies.first.org_name%>,
+<%= @user.companies.first.org_name rescue 'Hi' %>,
 </p>
  <p>
    Invoice <%= @invoice.invoice_number%>  has been disputed by <%= @invoice.client.organization_name%> for the following reasons:

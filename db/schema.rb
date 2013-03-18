@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314125105) do
+ActiveRecord::Schema.define(:version => 20130318093546) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -114,10 +114,8 @@ ActiveRecord::Schema.define(:version => 20130314125105) do
   end
 
   create_table "company_users", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "company_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer "user_id"
+    t.integer "company_id"
   end
 
   create_table "credit_payments", :force => true do |t|

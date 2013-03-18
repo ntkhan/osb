@@ -183,7 +183,17 @@ class Payment < ActiveRecord::Base
   private
 
   def self.distribute_credit_amount credit_payment, payment_amount
+    credit_payments = [
+        {id: 1, amount: 100, order: 1, remaining: 100},
+        {id: 2, amount: 200, order: 2, remaining: 200},
+        {id: 3, amount: 300, order: 3, remaining: 300}
+    ]
 
+    payment_amount = 400
+
+    credit_payments.each do |cp|
+      puts "#{cp[:id]} #{cp[:amount]}, #{cp[:remaining]}"
+    end
   end
 
 end

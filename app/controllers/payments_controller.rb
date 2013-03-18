@@ -120,7 +120,7 @@ class PaymentsController < ApplicationController
   def compare_payment_amount invoice_id, payment_amount
     invoice = Invoice.find(invoice_id)
 
-    Payment.do_payment_amount_comparison(invoice,payment_amount)
+    Payment.do_payment_amount_comparison(invoice, payment_amount)
   end
 
   def create_payment_and_send_email pay

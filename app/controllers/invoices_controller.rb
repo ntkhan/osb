@@ -186,7 +186,8 @@ class InvoicesController < ApplicationController
 
   def dispute_invoice
     @invoice = Services::InvoiceService.dispute_invoice(params[:invoice_id], params[:reason_for_dispute], current_user)
-    @message = dispute_invoice_message(current_user.companies.first.org_name)
+    org_name = current_user.companies.first.org_name rescue or_name = ''
+    @message = dispute_invoice_message(org_name)
 
     respond_to { |format| format.js }
   end

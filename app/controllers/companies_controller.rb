@@ -43,10 +43,12 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     #@company = Company.new(params[:company])
-    @company = current_user.companies.build(params[:company])
+    #@company.created_at = DateTime.now
+    #@company.updated_at = DateTime.now
+    #@company.user_id = current_user.id
+    @company = current_user.companies.build(params[:company].merge({ created_at: DateTime.now, updated_at: DateTime.now}))
 
     respond_to do |format|
-      #if @company.save
       if current_user.save
         format.html { redirect_to edit_company_url(@company), notice: 'Company was successfully created.' }
         format.json { render json: @company, status: :created, location: @company }
@@ -54,6 +56,7 @@ class CompaniesController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
