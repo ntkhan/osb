@@ -182,7 +182,7 @@ h4 {
 /*General CSS Ends*/
 
 /*-------------------------Header CSS Starts-------------------------*/
-.header {
+.primary_header {
   clear: both;
   //float: left;
   //width: 100%;
@@ -194,16 +194,16 @@ h4 {
   padding: 29px 0 0 30px;
 }
 
-.header_menu {
+.primary_menu {
   float: right;
   padding: 31px 23px 0 0;
 }
 
-.header_menu ul li {
+.primary_menu ul li {
   float: left;
 }
 
-.header_menu ul li a {
+.primary_menu ul li a {
   display: block;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
