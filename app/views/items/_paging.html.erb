@@ -2,8 +2,10 @@
   <div class="paginator">
     <%= paginate @items, :remote => true %>
     <div class="paging_info">
-      <%= page_entries_info @items unless @items.blank? %>
-      <%= custom_per_page %> per page
+      <% unless @items.blank? %>
+          <%= page_entries_info @items %>
+          <%= custom_per_page %> per page
+      <% end %>
     </div>
   </div>
 </td>
