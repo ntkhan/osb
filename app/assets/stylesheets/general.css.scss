@@ -1078,6 +1078,12 @@ select.per_page{
   padding:  0;
   margin: 0 5px 3px;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select.per_page
+    {
+        line-height: 20px;
+    }
+}
 .link_disabled{
   color: #00ACE5;
 }
