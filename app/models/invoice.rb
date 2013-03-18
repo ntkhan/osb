@@ -184,7 +184,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def credit_payments
-    payments.where("payment_method = 'credit'")
+    payments.where("payment_type = 'credit'")
   end
 
   def encrypted_id

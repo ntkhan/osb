@@ -54,6 +54,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    copyright-header (1.0.8)
     daemons (1.1.9)
     delayed_job (3.0.4)
       activesupport (~> 3.0)
@@ -170,6 +171,7 @@ DEPENDENCIES
   binding_of_caller
   browser
   coffee-rails (~> 3.2.1)
+  copyright-header
   daemons
   delayed_job_active_record
   devise
