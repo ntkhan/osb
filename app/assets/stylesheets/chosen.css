@@ -94,11 +94,12 @@
   margin-top: 2px;
 }
 .chzn-container-single .chzn-search {
-  padding: 3px 4px;
+  padding: 6px 4px;
   position: relative;
   margin: 0;
   white-space: nowrap;
   z-index: 1010;
+  overflow: hidden;
 }
 .chzn-container-single .chzn-search input {
   background: #fff url('chosen-sprite.png') no-repeat 100% -22px;
