@@ -111,7 +111,7 @@
   <!-- END: Unpaid invoices popup -->
 
   <!-- START: Credit entries -->
-  <%= form_tag "/payments/enter_payment", :id => "", :remote => true do %>
+  <%= form_tag "/payments/delete_non_credit_payments", :id => "delete_non_credit_payments", :remote => true do %>
       <div id="credit_payments" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="model_grey_container">
           <div class="modal-header">
@@ -127,6 +127,7 @@
           </div>
           <p class="continue_delete_msg">To continue deleting other payments please press the Delete Payments button below.</p>
           <div class="footer ">
+            <%= hidden_field_tag :non_credit_payments %>
             <%= submit_tag "Delete Payments", :class => "btn_large submit" %>
             <a class="btn_large grey" href="#" data-dismiss="modal">cancel</a>
           </div>

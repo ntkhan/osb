@@ -42,6 +42,7 @@ gem "browser"
 gem "gon"
 gem "rest-client"
 gem "slim"
+gem "copyright-header"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

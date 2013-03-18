@@ -106,9 +106,10 @@ class PaymentsController < ApplicationController
     params[:payments].delete_if { |payment| payment["payment_amount"].blank? || payment["payment_amount"].to_i == 0 }.each do |pay|
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_f
       pay[:payment_date] ||= Date.today
+      pay[:credit_applied] ||= 0.00
 
       # how much credit is applied from which credit payment
-      #compare_payment_amount(pay[:invoice_id], pay[:payment_amount]) if pay[:payment_method] == "Credit"
+      compare_payment_amount(pay[:invoice_id], pay[:payment_amount]) if pay[:payment_method] == "Credit"
 
       create_payment_and_send_email(pay)
     end
@@ -119,8 +120,7 @@ class PaymentsController < ApplicationController
 
   def compare_payment_amount invoice_id, payment_amount
     invoice = Invoice.find(invoice_id)
-
-    Payment.do_payment_amount_comparison(invoice, payment_amount)
+    Payment.do_payment_amount_comparison(invoice,payment_amount)
   end
 
   def create_payment_and_send_email pay
@@ -139,6 +139,7 @@ class PaymentsController < ApplicationController
       if Payment.is_credit_entry? ids
         @action = "credit entry"
         @payments_with_credit = Payment.payments_with_credit ids
+        @non_credit_payments = ids - @payments_with_credit.collect{|p| p.id.to_s}
       else
         Payment.delete_multiple(ids)
         @payments = Payment.unarchived.page(params[:page]).per(params[:per])
@@ -176,6 +177,12 @@ class PaymentsController < ApplicationController
     client = Invoice.find_by_id(params[:id]).client
     @payments = Payment.payments_history(client).page(params[:page])
     @invoice = Invoice.find(params[:id])
+  end
+
+  def delete_non_credit_payments
+    Payment.delete_multiple(params[:non_credit_payments])
+    @payments = Payment.unarchived.page(params[:page]).per(params[:per])
+    respond_to { |format| format.js }
   end
 
 end
