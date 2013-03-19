@@ -51,6 +51,18 @@ class Invoice < ActiveRecord::Base
     self.update_attribute(:status, 'viewed') if self.status == 'sent'
   end
 
+  def draft!
+    update_attribute(:status, 'draft')
+  end
+
+  def partial!
+    update_attribute(:status, 'partial')
+  end
+
+  def has_payments?
+    payments.present?
+  end
+
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
   # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
   def disputed!
