@@ -99,6 +99,15 @@
         line-height: 13px;
         font-weight: normal;
         *line-height: 1.5;
+        width: 90%;
+    }
+    @media all {
+    .field_row.checkbox label {
+    line-height: 1.5;\0/; /*IE8*/
+        }
+    }
+    @media all and (min-width:0) {
+        .field_row.checkbox label { line-height: 1.5; \0/; }  /* IE9-IE10pp4 */
     }
     .field_row label span{
         color: #9b9b9b;
