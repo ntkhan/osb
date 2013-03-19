@@ -102,7 +102,12 @@
   }
   .field_row.checkbox label {
     .ie7 &, .ie8 &, .ie9 &, .ie10 {
-      line-height: 1.4;
+      line-height: 1.5;
+    }
+  }
+  .field_row.checkbox label {
+    .ie8 &, .ie9 &, .ie10 {
+      margin-top: -2px;
     }
   }
   .field_row label span {
