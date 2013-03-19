@@ -1,202 +1,224 @@
 <%= nested_form_for @invoice, :html => {:class => 'form-horizontal', :novalidate => ""} do |f| %>
-    <% @parent_f = f %>
+  <% @parent_f = f %>
 
-    <div class="_form">
+  <div class="_form">
     <div class="content_middle">
-    <div class="fields_content">
-      <% if @invoice.status == "disputed" %>
-          <div class="response_to_client">
-            <div class="response_container">
-              <div class="response_top">
-                <h1>Dispute History</h1>
-                <% @invoice.dispute_history.each do |email_detail| %>
-                    <% float_class = email_detail.subject == "Reason from client" ? "float-right" : "float-left" %>
-                    <div class="<%= float_class %>">
-                      <span class="detail"><%= email_detail.content %></span>
-                    <span class="info"><%= email_detail.subject == "Response to client" ? "You" : email_detail.sender %>
-                      , <%= email_detail.date %></span>
-                    </div>
-                <% end %>
-              </div>
-              <div class="field_row textarea response_bottom">
-                <div class="label_field textarea"><label>Response to Client</label></div>
-                <div class="large_field" style="clear:both;">
+      <div class="fields_content">
+
+
+        <% if @invoice.status == "disputed" %>
+          <div class="dispute_history">
+            <div class="dispute_wrapper">
+              <div class="dispute_container">
+                <div class="dispute_heading">
+                  <h1>Dispute History</h1>
+                </div>
+                <div class="dispute_content">
+                  <p>
+                    It is to let you know that we have transferred February salaries of all employees in their SCB accounts.
+                    Please ensure that your payments are made. All those employees who don't have SCB accounts, they can collect
+                    their salary cheques from Accounts Department.
+                  </p>
+                  <div class="dispute_content_btm">
+                    From client: Name. 2013/03/19
+                  </div>
+                </div>
+                <div class="dispute_content">
+                  <p>
+                    Please let me know if you have any questions/concerns regarding your salary. I know you are thinking that
+                    we are paying you less than your expectations but keep in mind you have to manage it. Thanks.
+                  </p>
+                  <div class="dispute_content_btm">
+                    <span>From OSB: 2013/03/19</span>
+                  </div>
+                </div>
+                <div class="dispute_contorl">
+                  <ul>
+                    <li><a class="less" href="#">less</a></li>
+                    <li><a class="more" href="#">more</a></li>
+                  </ul>
+                </div>
+
+                <div class="dispute_input">
+                  <h4>Response to Client</h4>
                   <%= text_area_tag "response_to_client" %>
+                  <p><a href="#">Send this note only</a> or click ‘Resend Invoice’ button below to resend invoice too.</p>
+                </div>
+
+              </div><!--dispute_container-->
+            </div><!--dispute_wrapper-->
+          </div><!--dispute_history-->
+        <% end %>
+        <div class="fields_content_container">
+
+          <div class="fields_content_data new_invoice_fields">
+
+            <div class="fields_content_left">
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :client_id, content_tag(:span, 'Client') %></div>
+                <div class="small_field">
+                  <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "", :include_blank => ""}, {"data-placeholder" => "Select a client...", :class => "invoice_client medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300", :required => ""} %>
+                  <ul class="field_description select">
+                    <li>client you want to send invoice</li>
+                    <span id="last_invoice" style="display: none;"></span>
+                  </ul>
+                </div>
+              </div>
+              <!--field_row-->
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :discount_percentage, "Discount %" %></div>
+                <div class="small_field">
+                  <%= f.text_field :discount_percentage %>
+                  <ul class="field_description">
+                    <li>will be applied to whole invoice amount</li>
+                  </ul>
+                </div>
+              </div>
+              <!--field_row-->
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :payment_terms_id, "Terms" %></div>
+                <div class="small_field">
+  <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
+                  <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map { |p| [p.description, p.id, {'number_of_days' => p.number_of_days}] }, :selected => f.object.payment_terms_id), {:prompt => "", :include_blank => ""}, {"data-placeholder" => "Select a payment term...", :class => "payment_terms medium chzn-select", "data-form-container" => "payment_terms_holder", "data-dropdown-width" => "300"} %>
+                  <ul class="field_description select">
+                    <li>payment terms for this invoice</li>
+                  </ul>
+                </div>
+              </div>
+              <!--field_row-->
+            </div>
+
+            <div class="fields_content_right">
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :invoice_number, content_tag(:span, 'Invoice #') %></div>
+                <div class="small_field">
+                  <%= f.text_field :invoice_number, :readonly => "", :required => "" %>
+                  <ul class="field_description">
+                    <li>auto generated</li>
+                  </ul>
+                </div>
+              </div>
+              <!--field_row-->
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :invoice_date, content_tag(:span, 'Invoice Date') %></div>
+                <div class="small_field">
+                  <%= f.text_field :invoice_date, :required => "" %>
+                </div>
+              </div>
+              <!--field_row-->
+
+              <div class="field_row description">
+                <div class="label_field left single"><%= f.label :due_date, "Due Date" %></div>
+                <div class="small_field">
+                  <%= f.text_field :due_date, :placeholder => "TBD" %>
+                </div>
+              </div>
+              <!--field_row-->
+
+            </div>
+
+          </div>
+          <!--fields_content_data-->
+
+
+          <div class="grid_table">
+            <table cellpadding="0" cellspacing="0" class="invoice_grid_fields" id="invoice_grid_fields">
+              <colgroup>
+                <col class="one"/>
+                <col class="two"/>
+                <col class="three"/>
+                <col class="four"/>
+                <col class="five"/>
+                <col class="six"/>
+                <col class="seven"/>
+                <col class="eight"/>
+              </colgroup>
+              <tr>
+                <th class="align_center">&nbsp;</th>
+                <th class="align_left">Item</th>
+                <th class="align_left">Description</th>
+                <th class="align_center">Unit Cost</th>
+                <th class="align_right">Qty</th>
+                <th class="align_center">Tax1</th>
+                <th class="align_center">Tax2</th>
+                <th class="align_center">Line Total</th>
+              </tr>
+              <%= f.fields_for :invoice_line_items, :wrapper => false %>
+              <tr style="border:none;" class="no_hover">
+                <td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %></td>
+              </tr>
+            </table>
+
+          </div>
+          <!--grid_table-->
+
+          <div class="grid_summary">
+            <div class="grid_summary_content">
+              <div class="grid_summary_row">
+                <div class="grid_summary_title">
+                  Subtotal
+                </div>
+                <div class="grid_summary_description">
+                  <%= f.hidden_field :sub_total %>
+                  <%= label_tag '', '', :id => 'invoice_sub_total_lbl' %>
+                </div>
+              </div>
+
+              <div class="grid_summary_row">
+                <div class="grid_summary_title">
+                  Discount <span class="discount_percentage_lbl"></span>%
+                </div>
+                <div class="grid_summary_description">
+                  <%= f.hidden_field :discount_amount %>
+                  <%= label_tag '', '', :id => 'invoice_discount_amount_lbl', :style => 'font-weight:normal' %>
+                </div>
+              </div>
+
+              <%= f.hidden_field :tax_amount %>
+              <div class="grid_summary_row taxes_total">
+                <ul>
+                  <% @invoice.tax_details.map do |tax, amount| %>
+                    <li><span class='grid_summary_title'><%= tax %></span> <span class='grid_summary_description tax_amount'><%= number_to_currency(amount).gsub("$", "") %></span></li>
+                  <% end %>
+                </ul>
+              </div>
+
+              <div class="grid_summary_row net_total">
+                <div class="grid_summary_title">
+                  Balance
+                </div>
+                <div class="grid_summary_description">
+                  <%= f.hidden_field :invoice_total %>
+                  <%= label_tag '', '', :id => 'invoice_total_lbl', :class => 'net_total_value' %>
                 </div>
               </div>
             </div>
           </div>
-      <% end %>
-      <div class="fields_content_container">
+          <!--grid_summary-->
 
-        <div class="fields_content_data new_invoice_fields">
 
-          <div class="fields_content_left">
-            <div class="field_row description">
-              <div class="label_field left single"><%= f.label :client_id, content_tag(:span, 'Client') %></div>
-              <div class="small_field">
-                <%= collection_select :invoice, :client_id, Client.all, :id, :organization_name, {:prompt => "", :include_blank => ""}, {"data-placeholder" => "Select a client...", :class => "invoice_client medium chzn-select", "data-form-container" => "clients_holder", "data-dropdown-width" => "300", :required => ""} %>
-                <ul class="field_description select">
-                  <li>client you want to send invoice</li>
-                  <span id="last_invoice" style="display: none;"></span>
-                </ul>
-              </div>
-            </div>
-            <!--field_row-->
+          <div class="fields_content_data new_invoice_fields">
 
-            <div class="field_row description">
-              <div class="label_field left single"><%= f.label :discount_percentage, "Discount %" %></div>
-              <div class="small_field">
-                <%= f.text_field :discount_percentage %>
-                <ul class="field_description">
-                  <li>will be applied to whole invoice amount</li>
-                </ul>
-              </div>
-            </div>
-            <!--field_row-->
-
-            <div class="field_row description">
-              <div class="label_field left single"><%= f.label :payment_terms_id, "Terms" %></div>
-              <div class="small_field">
-                <%#= collection_select :invoice, :payment_terms_id, PaymentTerm.all, :id, :description, {:prompt => ""}, {"data-placeholder" => "Select a payment term...", :class => "medium chzn-select"} %>
-                <%= f.select :payment_terms_id, options_for_select(PaymentTerm.all.map { |p| [p.description, p.id, {'number_of_days' => p.number_of_days}] }, :selected => f.object.payment_terms_id), {:prompt => "", :include_blank => ""}, {"data-placeholder" => "Select a payment term...", :class => "payment_terms medium chzn-select", "data-form-container" => "payment_terms_holder", "data-dropdown-width" => "300"} %>
-                <ul class="field_description select">
-                  <li>payment terms for this invoice</li>
-                </ul>
-              </div>
-            </div>
-            <!--field_row-->
-          </div>
-
-          <div class="fields_content_right">
-
-            <div class="field_row description">
-              <div class="label_field left single"><%= f.label :invoice_number, content_tag(:span, 'Invoice #') %></div>
-              <div class="small_field">
-                <%= f.text_field :invoice_number, :readonly => "", :required => "" %>
-                <ul class="field_description">
-                  <li>auto generated</li>
-                </ul>
-              </div>
-            </div>
-            <!--field_row-->
-
-            <div class="field_row description">
-              <div class="label_field left single"><%= f.label :invoice_date, content_tag(:span, 'Invoice Date') %></div>
-              <div class="small_field">
-                <%= f.text_field :invoice_date, :required => "" %>
-              </div>
-            </div>
-            <!--field_row-->
-
-            <div class="field_row description">
-              <div class="label_field left single"><%= f.label :due_date, "Due Date" %></div>
-              <div class="small_field">
-                <%= f.text_field :due_date, :placeholder => "TBD" %>
+            <div class="field_row textarea">
+              <div class="label_field textarea"><%= f.label :notes %></div>
+              <div class="large_field">
+                <%= f.text_area :notes %>
               </div>
             </div>
             <!--field_row-->
 
           </div>
+          <!--fields_content_data-->
+
 
         </div>
-        <!--fields_content_data-->
-
-
-        <div class="grid_table">
-          <table cellpadding="0" cellspacing="0" class="invoice_grid_fields" id="invoice_grid_fields">
-            <colgroup>
-              <col class="one"/>
-              <col class="two"/>
-              <col class="three"/>
-              <col class="four"/>
-              <col class="five"/>
-              <col class="six"/>
-              <col class="seven"/>
-              <col class="eight"/>
-            </colgroup>
-            <tr>
-              <th class="align_center">&nbsp;</th>
-              <th class="align_left">Item</th>
-              <th class="align_left">Description</th>
-              <th class="align_center">Unit Cost</th>
-              <th class="align_right">Qty</th>
-              <th class="align_center">Tax1</th>
-              <th class="align_center">Tax2</th>
-              <th class="align_center">Line Total</th>
-            </tr>
-            <%= f.fields_for :invoice_line_items, :wrapper => false %>
-            <tr style="border:none;" class="no_hover">
-              <td class="add_line_item_row" colspan="2"><%= f.link_to_add "Add Line Item", :invoice_line_items, :class => "btn btn-mini" %></td>
-            </tr>
-          </table>
-
-        </div>
-        <!--grid_table-->
-
-        <div class="grid_summary">
-          <div class="grid_summary_content">
-            <div class="grid_summary_row">
-              <div class="grid_summary_title">
-                Subtotal
-              </div>
-              <div class="grid_summary_description">
-                <%= f.hidden_field :sub_total %>
-                <%= label_tag '', '', :id => 'invoice_sub_total_lbl' %>
-              </div>
-            </div>
-
-            <div class="grid_summary_row">
-              <div class="grid_summary_title">
-                Discount <span class="discount_percentage_lbl"></span>%
-              </div>
-              <div class="grid_summary_description">
-                <%= f.hidden_field :discount_amount %>
-                <%= label_tag '', '', :id => 'invoice_discount_amount_lbl', :style => 'font-weight:normal' %>
-              </div>
-            </div>
-
-            <%= f.hidden_field :tax_amount %>
-            <div class="grid_summary_row taxes_total">
-              <ul>
-                <% @invoice.tax_details.map do |tax, amount| %>
-                    <li><span class='grid_summary_title'><%= tax %></span> <span class='grid_summary_description tax_amount'><%= number_to_currency(amount).gsub("$", "") %></span></li>
-                <% end %>
-              </ul>
-            </div>
-
-            <div class="grid_summary_row net_total">
-              <div class="grid_summary_title">
-                Balance
-              </div>
-              <div class="grid_summary_description">
-                <%= f.hidden_field :invoice_total %>
-                <%= label_tag '', '', :id => 'invoice_total_lbl', :class => 'net_total_value' %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--grid_summary-->
-
-
-        <div class="fields_content_data new_invoice_fields">
-
-          <div class="field_row textarea">
-            <div class="label_field textarea"><%= f.label :notes %></div>
-            <div class="large_field">
-              <%= f.text_area :notes %>
-            </div>
-          </div>
-          <!--field_row-->
-
-        </div>
-        <!--fields_content_data-->
-
-
+        <!--fields_content_container-->
       </div>
-      <!--fields_content_container-->
-    </div>
-    <!--fields_content-->
+      <!--fields_content-->
     </div>
     <!--content_middle-->
 
@@ -208,5 +230,5 @@
     </div>
     <!--content_bottom-->
 
-    </div><!--_form-->
+  </div><!--_form-->
 <% end %>
