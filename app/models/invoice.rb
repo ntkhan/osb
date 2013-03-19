@@ -216,6 +216,7 @@ class Invoice < ActiveRecord::Base
     credit_pay.payment_date = Date.today
     credit_pay.notes = "Converted from payments for invoice# #{self.invoice_number}"
     credit_pay.payment_amount = amount
+    credit_pay.credit_applied = 0.00
     credit_pay.save
   end
 

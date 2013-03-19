@@ -18,7 +18,7 @@ class Payment < ActiveRecord::Base
 
   # callbacks
   before_destroy :check_credit_payments
-  after_destroy :change_invoice_status
+  #after_destroy :change_invoice_status
 
   def check_credit_payments
     #false if self.payment_type == "credit" || self.payment_type != nil
@@ -56,7 +56,6 @@ class Payment < ActiveRecord::Base
     invoice.save
     return_v
   end
-
 
   def self.add_credit_payment invoice, amount
     credit_pay = Payment.new
@@ -113,7 +112,10 @@ class Payment < ActiveRecord::Base
   end
 
   def self.delete_multiple ids
-    multiple_payments(ids).each{|payment| payment.destroy!}
+    multiple_payments(ids).each do |payment|
+      payment.destroy!
+      payment.change_invoice_status
+    end
   end
 
   def self.recover_archived ids
@@ -168,7 +170,7 @@ class Payment < ActiveRecord::Base
     remaining, collected = payment_amount, 0
 
     # loop through all the credit payments of client
-    invoice.client.invoices.each do |client_invoice|
+    invoice.client.invoices.with_deleted.each do |client_invoice|
       client_invoice.credit_payments.each do |credit_payment|
 
         credit_amount, credit_applied =  credit_payment.payment_amount.to_f, credit_payment.credit_applied.to_f
@@ -183,10 +185,10 @@ class Payment < ActiveRecord::Base
         remaining = payment_amount - collected
 
         credit_payment.update_attribute('credit_applied',credit_applied)
-        CreditPayment.create({:payment_id => credit_payment.id, :invoice_id => credit_payment.invoice.id, :amount => credit_applied})
+        CreditPayment.create({:payment_id => credit_payment.id, :invoice_id => credit_payment.invoice_id, :amount => credit_applied})
 
         break if remaining == 0
-      end #unless client_invoice.credit_payments.blank?
+      end unless client_invoice.credit_payments.blank?
     end
   end
 
@@ -200,7 +202,7 @@ class Payment < ActiveRecord::Base
       else
     end if invoice.present?
 
-    #Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
+    Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
   end
 
 end
