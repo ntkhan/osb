@@ -24,20 +24,23 @@ jQuery ->
 
   window.applyChosen()
   # setup talbesorter parser for amount columns with currency and ',' signs
-  jQuery.tablesorter.addParser
-    id: "thousands"
-    is: (s) ->
-      sp = s.replace(/,/, ".")
-      /([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp) #check currency with symbol
-    format: (s) ->
-      jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
-    type: "numeric"
 
   sort_list = if jQuery("table.table_listing").hasClass('emails_listing') then [[3,1]] else [[1,1]]
   # Apply sorting on listing tables
   jQuery("table.table_listing").tablesorter
     widgets: ['staticRow']
     sortList: sort_list
+
+  try
+    jQuery.tablesorter.addParser
+      id: "thousands"
+      is: (s) ->
+        sp = s.replace(/,/, ".")
+        /([£$€] ?\d+\.?\d*|\d+\.?\d* ?)/.test(sp) #check currency with symbol
+      format: (s) ->
+        jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
+      type: "numeric"
+  catch e
 
   # make 10 option selected by default in invoice per page
   jQuery("select.per_page").val('10');
@@ -326,7 +329,10 @@ jQuery ->
 
  # Check/uncheck main checkbox if all checkboxes are checked
   jQuery('table.table_listing tbody :checkbox').live "click", ->
-     jQuery(this).parents('tr').toggleClass('selected')
+     if jQuery(this).is(":checked")
+        jQuery(this).parents('tr').addClass('selected')
+     else
+        jQuery(this).parents('tr').removeClass('selected')
      status = unless jQuery('table.table_listing tbody input[type=checkbox]:not(:checked)').length then true else false
      jQuery('#select_all').attr('checked', status)
 

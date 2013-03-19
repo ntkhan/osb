@@ -90,7 +90,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def has_payment?
-    self.payments.where("payment_type !='credit' or payment_type is null").present?
+    payments.where("payment_type !='credit' or payment_type is null").present?
   end
 
   def currency_symbol

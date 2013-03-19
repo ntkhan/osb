@@ -182,7 +182,6 @@ class Payment < ActiveRecord::Base
 
         remaining = payment_amount - collected
 
-        #Rails.logger.debug "\n #{payment_amount} \n #{collected} \n #{remaining} \n #{payment_amount} \n #{current[:amount]} \n #{credit_applied}"
         credit_payment.update_attribute('credit_applied',credit_applied)
         CreditPayment.create({:payment_id => credit_payment.id, :invoice_id => credit_payment.invoice.id, :amount => credit_applied})
 
@@ -192,7 +191,6 @@ class Payment < ActiveRecord::Base
   end
 
   def change_invoice_status
-    #Rails.logger.debug "\e[1;31m Before Status: #{invoice.status} \e[0m"
 
     # update invoice status when a payment is deleted
     case invoice.status
@@ -200,7 +198,7 @@ class Payment < ActiveRecord::Base
       when "partial","paid" then (invoice.has_payments? ? invoice.partial! : invoice.sent! )
       when "disputed" then (invoice.has_payments? ? invoice.partial! : invoice.disputed! )
       else
-    end
+    end if invoice.present?
 
     #Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
   end
