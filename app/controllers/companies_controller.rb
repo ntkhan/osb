@@ -42,11 +42,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    #@company = Company.new(params[:company])
-    #@company.created_at = DateTime.now
-    #@company.updated_at = DateTime.now
-    #@company.user_id = current_user.id
-    @company = current_user.companies.build(params[:company].merge({ created_at: DateTime.now, updated_at: DateTime.now}))
+    @company = current_user.companies.build(params[:company])
 
     respond_to do |format|
       if current_user.save
