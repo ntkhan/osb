@@ -18,8 +18,6 @@
             <% if client.deleted_at.nil? %>
                 <%= link_to t('.edit', :default => t("helpers.links.edit")),
                             edit_client_path(client), :class => 'edit_action' %>
-            <% else %>
-                <span class="link_disabled">Edit</span>
             <% end %>
           </td>
         </tr>
