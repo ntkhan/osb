@@ -100,13 +100,11 @@
     font-weight: normal;
     width: 90%;
   }
-
   .field_row.checkbox label {
     .ie7 &, .ie8 &, .ie9 &, .ie10 {
-      line-height: 1.5;
+      line-height: 1.4;
     }
   }
-
   .field_row label span {
     color: #9b9b9b;
   }
