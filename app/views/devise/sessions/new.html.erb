@@ -32,7 +32,7 @@
 
                 <div class="field_row checkbox">
                   <%= f.check_box :remember_me %>
-                  <p><%= f.label (:remember_me) {"Keep me signed-in <span style='color:#ababab'> (in #{browser.name} on this machine)</span>".html_safe} %></p>
+                  <%= f.label (:remember_me) {"Keep me signed-in <span style='color:#ababab'> (in #{browser.name} on this machine)</span>".html_safe} %>
                 </div>
                 <!--field_row-->
             <% end %>
