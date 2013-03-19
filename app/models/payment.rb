@@ -1,14 +1,24 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at
+
+  attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at, :credit_applied
+
+  # associations
   belongs_to :invoice
   has_many :sent_emails, :as => :notification
   has_many :credit_payments
+
   validates :payment_amount, :numericality => {:greater_than => 0}
+
   paginates_per 10
+
   acts_as_archival
   acts_as_paranoid
+
   default_scope order("#{self.table_name}.created_at DESC")
+
+  # callbacks
   before_destroy :check_credit_payments
+  after_destroy :change_invoice_status
 
   def check_credit_payments
     #false if self.payment_type == "credit" || self.payment_type != nil
@@ -179,6 +189,20 @@ class Payment < ActiveRecord::Base
         break if remaining == 0
       end #unless client_invoice.credit_payments.blank?
     end
+  end
+
+  def change_invoice_status
+    #Rails.logger.debug "\e[1;31m Before Status: #{invoice.status} \e[0m"
+
+    # update invoice status when a payment is deleted
+    case invoice.status
+      when "draft-partial" then invoice.draft! unless invoice.has_payments?
+      when "partial","paid" then (invoice.has_payments? ? invoice.partial! : invoice.sent! )
+      when "disputed" then (invoice.has_payments? ? invoice.partial! : invoice.disputed! )
+      else
+    end
+
+    #Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
   end
 
 end
