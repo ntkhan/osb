@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
   end
 
   def last_invoice
-    self.invoices.unarchived.last.id rescue nil
+    self.invoices.unarchived.first.id rescue nil
   end
 
   def self.multiple_clients ids
