@@ -40,10 +40,11 @@ jQuery('#select_all').attr('checked', false);
 
 jQuery('.top_links').hide();
 <% if @action == "recovered from archived"%>
+jQuery('.send').parent("li").removeClass("grid_control_sep")
 jQuery('.recover_archived,.destroy,.send').show();
 jQuery('.get_archived').addClass('active');
 <% elsif @action == "recovered from deleted" %>
-jQuery('.recover_deleted,.send').show();
+jQuery('.recover_deleted').show();
 jQuery('.get_deleted').addClass('active');
 <%else%>
 jQuery('.archive,.destroy,.payment,.send').show();

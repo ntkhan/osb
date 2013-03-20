@@ -31,6 +31,7 @@ class InvoicesController < ApplicationController
 
   def preview
     @invoice = Services::InvoiceService.get_invoice_for_preview(params[:inv_id])
+    Rails.logger.debug "INNNNNNNNNNNNNN #{@invoice}"
   end
 
   def new
