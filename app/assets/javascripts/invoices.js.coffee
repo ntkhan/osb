@@ -454,11 +454,13 @@ jQuery ->
   jQuery(".invoice_listing .text-overflow-class,.client_report_listing .text-overflow-class").ellipsis row:1;
   jQuery(".payment_listing .text-overflow-class").ellipsis row:2;
   jQuery(".text-overflow-class").live "mouseenter", ->
+    field_class = "single_line"
     left_position = jQuery(this).offset().left  + "px";
     top_position = jQuery(this).offset().top + -1+ "px";
     full_content = jQuery(this).attr "value"
     contains = (jQuery(this).text().indexOf("...") > -1)
-    html_text =  "<span class='mouseover_full_content' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
+    field_class = "multi_line" if jQuery(this).height() > 20
+    html_text =  "<span class='mouseover_full_content #{field_class}' style='left:#{left_position};top:#{top_position}'>#{full_content}<span>"
     jQuery(this).append html_text
     #jQuery(".mouseover_full_content").height(jQuery(this).height());
     jQuery(".mouseover_full_content").width(jQuery(this).width());
@@ -466,3 +468,9 @@ jQuery ->
   jQuery('.text-overflow-class').live "mouseleave", ->
     jQuery('.mouseover_full_content').remove()
 
+  jQuery(".more").click -> 
+    jQuery(".toggleable").removeClass("collapse")
+    
+  jQuery(".less").click -> 
+    jQuery(".toggleable").addClass("collapse")
+    
