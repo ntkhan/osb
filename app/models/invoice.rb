@@ -24,13 +24,14 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_line_items, :dependent => :destroy
   has_many :payments
   has_many :sent_emails, :as => :notification
-  has_many :credit_payments
+  has_many :credit_payments, :dependent => :destroy
 
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
   # callbacks
   before_destroy :sent!
   before_create :set_invoice_number
+  after_destroy :destroy_credit_payments
 
   paginates_per 10
 
@@ -224,9 +225,9 @@ class Invoice < ActiveRecord::Base
     where("status = 'partial'")
   end
 
-  def credit_payments
-    payments.where("payment_type = 'credit'")
-  end
+  #def credit_payments
+  #  payments.where("payment_type = 'credit'")
+  #end
 
   def encrypted_id
     OSB::Util::encrypt(self.id)
@@ -234,8 +235,9 @@ class Invoice < ActiveRecord::Base
 
   def paypal_url(return_url, notify_url)
     values = {
-        :business => 'onlyfo_1362112292_per@hotmail.com',
-        :cmd => '_xclick',
+        #:business => 'onlyfo_1362112292_per@hotmail.com',
+        :business => 'onlyforarif-facilitator@gmail.com',
+        :cmd => '_cart',
         :upload => 1,
         :return => return_url,
         :notify_url => notify_url,
@@ -285,6 +287,24 @@ class Invoice < ActiveRecord::Base
       tlist["#{tax[:name]} #{tax[:pct]}"] += tax[:amount]
     end
     tlist
+  end
+
+  def status_after_payment_deleted
+    Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
+
+    # update invoice status when a payment is deleted
+    case status
+      when "draft-partial" then draft! unless has_payments?
+      when "partial","paid" then (has_payments? ? partial! : sent! )
+      when "disputed" then (has_payments? ? partial! : disputed! )
+      else
+    end if present?
+
+    Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
+  end
+
+  def destroy_credit_payments
+    credit_payments.map(&:destroy)
   end
 
 end

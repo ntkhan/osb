@@ -108,23 +108,11 @@ class PaymentsController < ApplicationController
       pay[:payment_date] ||= Date.today
       pay[:credit_applied] ||= 0.00
 
-      # how much credit is applied from which credit payment
-      compare_payment_amount(pay[:invoice_id], pay[:payment_amount]) if pay[:payment_method] == "Credit"
-
-      create_payment_and_send_email(pay)
+      pay[:payment_method] == "Credit" ? Services::PaymentService.distribute_credit_payment(pay,current_user.email) : Payment.create!(pay).notify_client(current_user.email)
     end
 
     where_to_redirect = params[:from_invoices] ? invoices_url : payments_url
     redirect_to(where_to_redirect, :notice => 'Payments against selected invoices have been recorded successfully.')
-  end
-
-  def compare_payment_amount invoice_id, payment_amount
-    invoice = Invoice.find(invoice_id)
-    Payment.do_payment_amount_comparison(invoice,payment_amount)
-  end
-
-  def create_payment_and_send_email pay
-    Payment.create!(pay).notify_client(current_user.email)
   end
 
   def bulk_actions
@@ -139,7 +127,7 @@ class PaymentsController < ApplicationController
       if Payment.is_credit_entry? ids
         @action = "credit entry"
         @payments_with_credit = Payment.payments_with_credit ids
-        @non_credit_payments = ids - @payments_with_credit.collect{|p| p.id.to_s}
+        @non_credit_payments = ids - @payments_with_credit.collect { |p| p.id.to_s }
       else
         Payment.delete_multiple(ids)
         @payments = Payment.unarchived.page(params[:page]).per(params[:per])

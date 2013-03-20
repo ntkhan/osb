@@ -51,4 +51,11 @@ class Client < ActiveRecord::Base
         self.only_deleted.page(params[:page]).per(params[:per])
     end
   end
+
+  def credit_payments
+    payments = []
+    invoices.with_deleted.each { |invoice| payments << invoice.payments.where("payment_type = 'credit'") }
+    payments.flatten
+  end
 end
+
