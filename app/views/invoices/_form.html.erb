@@ -218,9 +218,9 @@
     <!--content_middle-->
 
     <div class="content_bottom">
-      <% button_text = action_name == "new" ? "SEND" : "UPDATE" %>
-      <%= f.submit "#{button_text} INVOICE", :class => 'btn_large submit' %>
-      <%= f.submit 'SAVE AS DRAFT', :class => 'btn_large submit', :name => "save_as_draft" %>
+      <% button_text = action_name == "new" ? "SAVE AS DRAFT" : "SAVE" %>
+      <%= f.submit "SEND INVOICE", :class => 'btn_large submit' %>
+      <%= f.submit "#{button_text}", :class => 'btn_large submit', :name => "save_as_draft" %>
       <%= link_to 'Cancel', invoices_path, :class => 'btn_large grey' %>
     </div>
     <!--content_bottom-->
