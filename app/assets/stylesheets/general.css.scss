@@ -832,6 +832,10 @@ input[disabled]{
   text-transform: uppercase;
   border: none;
   font-weight: normal;
+  margin-right: 6px;
+}
+.btn_large:last-child{
+    margin-right: 0px !important;
 }
 
 .btn_large.submit {

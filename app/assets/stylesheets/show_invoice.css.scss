@@ -61,7 +61,6 @@
         position: relative;
         width: 780px;
         padding: 54px 29px 0 29px;
-        min-height: 950px;
     }
     .preview_content_top{
         float: left;
@@ -202,5 +201,34 @@
       border-top: 1px solid #D7D7D7;
       padding-top: 3px;
       margin-top: 5px;
+    }
+}
+
+.dispute_popup{
+    .modal .cross_btn{
+        margin-top: -50px;
+    }
+    .fields_content_data{
+        padding-top: 1px;
+    }
+    label{
+        font-weight: normal;
+        padding-bottom: 2px;
+    }
+    .large_field textarea{
+        width: 690px;
+        min-height: 60px;
+    }
+    .modal .modal-body{
+        min-height: auto;
+    }
+    .modal .footer{
+        padding-top: 11px;
+    }
+    .modal-backdrop, .modal-backdrop.fade.in{
+        opacity: 0.5;
+    }
+    .modal{
+        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
     }
 }

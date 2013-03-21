@@ -15,7 +15,7 @@ class Invoice < ActiveRecord::Base
       disputed: 'Client has disputed this invoice.',
   }
 
-  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
+  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date, :last_invoice_status
 
   # associations
   belongs_to :client
@@ -24,13 +24,14 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_line_items, :dependent => :destroy
   has_many :payments
   has_many :sent_emails, :as => :notification
-  has_many :credit_payments
+  has_many :credit_payments, :dependent => :destroy
 
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
   # callbacks
   before_destroy :sent!
   before_create :set_invoice_number
+  after_destroy :destroy_credit_payments
 
   paginates_per 10
 
@@ -44,19 +45,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def sent!
-    self.update_attribute(:status, 'sent')
+    update_attributes(:last_invoice_status => status, :status => 'sent')
   end
 
   def viewed!
-    self.update_attribute(:status, 'viewed') if self.status == 'sent'
+    update_attributes(:last_invoice_status => status, :status => 'viewed') if status == 'sent'
   end
 
   def draft!
-    update_attribute(:status, 'draft')
+    update_attributes(:last_invoice_status => status, :status => 'draft')
+  end
+
+  def draft_partial!
+    update_attributes(:last_invoice_status => status, :status => 'draft-partial')
   end
 
   def partial!
-    update_attribute(:status, 'partial')
+    update_attributes(:last_invoice_status => status, :status => 'partial')
   end
 
   def has_payments?
@@ -80,7 +85,7 @@ class Invoice < ActiveRecord::Base
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
   # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
   def disputed!
-    self.update_attribute('status', 'disputed')
+    self.update_attributes(:last_invoice_status => status, :status => 'disputed')
   end
 
   def dispute_history
@@ -104,7 +109,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def has_payment?
-    self.payments.where("payment_type !='credit' or payment_type is null").present?
+    payments.where("payment_type !='credit' or payment_type is null").present?
   end
 
   def currency_symbol
@@ -203,9 +208,8 @@ class Invoice < ActiveRecord::Base
     end
   end
 
-  def notify current_user, id
-    encrypted_id = Base64.encode64(id)
-    InvoiceMailer.delay.new_invoice_email(self.client, self, encrypted_id, current_user)
+  def notify current_user, id = nil
+    InvoiceMailer.delay.new_invoice_email(self.client, self, self.encrypted_id, current_user)
   end
 
   def send_invoice current_user, id
@@ -230,6 +234,7 @@ class Invoice < ActiveRecord::Base
     credit_pay.payment_date = Date.today
     credit_pay.notes = "Converted from payments for invoice# #{self.invoice_number}"
     credit_pay.payment_amount = amount
+    credit_pay.credit_applied = 0.00
     credit_pay.save
   end
 
@@ -237,9 +242,9 @@ class Invoice < ActiveRecord::Base
     where("status = 'partial'")
   end
 
-  def credit_payments
-    payments.where("payment_type = 'credit'")
-  end
+  #def credit_payments
+  #  payments.where("payment_type = 'credit'")
+  #end
 
   def encrypted_id
     OSB::Util::encrypt(self.id)
@@ -247,8 +252,9 @@ class Invoice < ActiveRecord::Base
 
   def paypal_url(return_url, notify_url)
     values = {
-        :business => 'onlyfo_1362112292_per@hotmail.com',
-        :cmd => '_xclick',
+        #:business => 'onlyfo_1362112292_per@hotmail.com',
+        :business => 'onlyforarif-facilitator@gmail.com',
+        :cmd => '_cart',
         :upload => 1,
         :return => return_url,
         :notify_url => notify_url,
@@ -270,9 +276,9 @@ class Invoice < ActiveRecord::Base
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
 
-  def update_dispute_invoice(current_user, encrypt_id, response_to_client)
+  def update_dispute_invoice(current_user, id, response_to_client)
     self.update_attribute('status', 'sent')
-    self.notify(current_user, encrypt_id)
+    self.notify(current_user, id)
     self.sent_emails.create({
                                 :content => response_to_client,
                                 :sender => current_user.email, #User email
@@ -298,6 +304,39 @@ class Invoice < ActiveRecord::Base
       tlist["#{tax[:name]} #{tax[:pct]}"] += tax[:amount]
     end
     tlist
+  end
+
+  def status_after_payment_deleted
+    Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
+
+    # update invoice status when a payment is deleted
+    case status
+      when "draft-partial" then draft! unless has_payments?
+
+      when "partial" then (has_payments? ? partial! : sent! )
+
+      when "paid" then
+        if has_payments?
+
+          case last_invoice_status
+            when 'draft-partial' then  draft_partial!
+            when 'disputed' then  disputed!
+            else partial!
+          end
+
+        else
+          sent!
+        end
+
+      when "disputed" then (has_payments? ? partial! : disputed! )
+      else
+    end if present?
+
+    Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
+  end
+
+  def destroy_credit_payments
+    credit_payments.map(&:destroy)
   end
 
 end

@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
   end
 
   def last_invoice
-    self.invoices.unarchived.last.id rescue nil
+    self.invoices.unarchived.first.id rescue nil
   end
 
   def purchase_options
@@ -79,4 +79,11 @@ class Client < ActiveRecord::Base
         self.unarchived.page(params[:page]).per(params[:per])
     end
   end
+
+  def credit_payments
+    payments = []
+    invoices.with_deleted.each { |invoice| payments << invoice.payments.where("payment_type = 'credit'").order("created_at ASC") }
+    payments.flatten
+  end
 end
+

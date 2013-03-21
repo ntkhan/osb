@@ -19,8 +19,6 @@
           <td class="align_center">
             <% if item.deleted_at.nil? %>
                 <%= link_to 'Edit', edit_item_path(item), :class => "edit_action" %>
-            <% else %>
-                <span class="link_disabled">Edit</span>
             <% end %>
           </td>
         </tr>

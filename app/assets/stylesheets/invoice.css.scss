@@ -121,12 +121,18 @@ table.invoice_grid_fields {
   }
 }
 
-.invoice_listing .mouseover_full_content {
+.mouseover_full_content {
   position: absolute;
   background-color: #FFFBE1;
   border: 1px solid #E4DFBE;
-  padding: 7px 9px 8px 9px;
-  display:none;
+  display: none;
+  &.multi_line {
+    padding: 5px 9px 6px 9px;
+  }
+  &.single_line {
+    padding: 7px 9px 8px 9px;
+  }
 }
+
 
 

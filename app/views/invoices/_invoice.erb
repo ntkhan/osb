@@ -22,8 +22,6 @@
             <% if invoice.deleted_at.nil? %>
                 <%= link_to t('.edit', :default => t("helpers.links.edit")),
                             edit_invoice_path(invoice) %>
-            <% else %>
-                <span class="link_disabled">Edit</span>
             <% end %>
           </td>
         </tr>

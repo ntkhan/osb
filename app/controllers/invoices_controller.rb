@@ -31,8 +31,11 @@ class InvoicesController < ApplicationController
 
   def preview
     @invoice = Services::InvoiceService.get_invoice_for_preview(params[:inv_id])
+    render :action=>'invoice_deleted_message',:notice => "This invoice has been deleted."  if @invoice == 'invoice deleted'
   end
 
+  def invoice_deleted_message
+  end
   def new
     @invoice = Services::InvoiceService.build_new_invoice(params)
 
@@ -53,7 +56,7 @@ class InvoicesController < ApplicationController
     @invoice.status = params[:save_as_draft] ? 'draft' : 'sent'
     respond_to do |format|
       if @invoice.save
-        @invoice.notify(current_user, @invoice.encrypted_id)
+        @invoice.notify(current_user, @invoice.id)
         new_invoice_message = new_invoice(@invoice.id, params[:save_as_draft])
         redirect_to(edit_invoice_url(@invoice), :notice => new_invoice_message)
         return
@@ -73,7 +76,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     response_to_client = params[:response_to_client]
     unless response_to_client.blank?
-      @invoice.update_dispute_invoice(current_user, encrypt(@invoice.id), response_to_client)
+      @invoice.update_dispute_invoice(current_user, @invoice.id, response_to_client)
       #InvoiceMailer.response_to_client(current_user, @invoice, response_to_client).deliver
     end
     respond_to do |format|

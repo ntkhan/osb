@@ -32,7 +32,7 @@
 
               <div class="invoice_data_row">
                 <div class="invoice_label">Due Date<span>:</span></div>
-                <div class="inovice_description"><%= (payment.invoice.due_date || payment.invoice.invoice_date).to_date %></div>
+                <div class="inovice_description"><%= (payment.invoice.due_date || payment.invoice.invoice_date).to_date rescue "" %></div>
               </div>
 
               <div class="invoice_data_row">
