@@ -106,9 +106,13 @@ class Payment < ActiveRecord::Base
   def self.delete_multiple ids
     multiple_payments(ids).each do |payment|
       invoice = payment.invoice
+
+      # delete all the associations with credit payments
       payment.destroy_credit_applied(payment.id) if payment.payment_method == "Credit"
       payment.destroy!
-      invoice.status_after_payment_deleted
+
+      # change invoice status on non credit payments deletion
+      invoice.status_after_payment_deleted if invoice.present? && payment.payment_type.blank?
     end
   end
 
