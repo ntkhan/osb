@@ -305,9 +305,6 @@ class Invoice < ActiveRecord::Base
 
   def destroy_credit_payments
     credit_payments.map(&:destroy)
-    #credit_payments.each do |credit_payment|
-    #
-    #end
   end
 
 end
