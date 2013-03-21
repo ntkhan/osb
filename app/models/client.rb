@@ -54,7 +54,7 @@ class Client < ActiveRecord::Base
 
   def credit_payments
     payments = []
-    invoices.with_deleted.each { |invoice| payments << invoice.payments.where("payment_type = 'credit'") }
+    invoices.with_deleted.each { |invoice| payments << invoice.payments.where("payment_type = 'credit'").order("created_at ASC") }
     payments.flatten
   end
 end

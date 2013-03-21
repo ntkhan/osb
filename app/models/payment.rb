@@ -16,14 +16,6 @@ class Payment < ActiveRecord::Base
 
   default_scope order("#{self.table_name}.created_at DESC")
 
-  # callbacks
-  before_destroy :check_credit_payments
-  #after_destroy :change_invoice_status
-
-  def check_credit_payments
-    #false if self.payment_type == "credit" || self.payment_type != nil
-  end
-
   def client_name
     invoice = Invoice.with_deleted.find(self.invoice_id)
     invoice.client.organization_name rescue "no client"
@@ -64,6 +56,7 @@ class Payment < ActiveRecord::Base
     credit_pay.payment_date = Date.today
     credit_pay.notes = "Overpayment against invoice# #{invoice.invoice_number}"
     credit_pay.payment_amount = amount
+    credit_pay.credit_applied = 0.00
     credit_pay.save
   end
 
@@ -119,8 +112,8 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  def destroy_credit_applied payment_id
-    CreditPayment.where("credit_id = ?",payment_id).map(&:destroy)
+  def destroy_credit_applied(payment_id)
+    CreditPayment.where("credit_id = ?", payment_id).map(&:destroy)
   end
 
   def self.recover_archived ids
@@ -143,6 +136,7 @@ class Payment < ActiveRecord::Base
         self.archived.page(params[:page]).per(params[:per])
       when "deleted" then
         self.only_deleted.page(params[:page]).per(params[:per])
+      else
     end
   end
 
@@ -197,17 +191,17 @@ class Payment < ActiveRecord::Base
   #  end
   #end
 
-  def change_invoice_status
+  #def change_invoice_status
 
-    ## update invoice status when a payment is deleted
-    #case invoice.status
-    #  when "draft-partial" then invoice.draft! unless invoice.has_payments?
-    #  when "partial","paid" then (invoice.has_payments? ? invoice.partial! : invoice.sent! )
-    #  when "disputed" then (invoice.has_payments? ? invoice.partial! : invoice.disputed! )
-    #  else
-    #end if invoice.present?
-    #
-    #Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
-  end
+  ## update invoice status when a payment is deleted
+  #case invoice.status
+  #  when "draft-partial" then invoice.draft! unless invoice.has_payments?
+  #  when "partial","paid" then (invoice.has_payments? ? invoice.partial! : invoice.sent! )
+  #  when "disputed" then (invoice.has_payments? ? invoice.partial! : invoice.disputed! )
+  #  else
+  #end if invoice.present?
+  #
+  #Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
+  #end
 
 end
