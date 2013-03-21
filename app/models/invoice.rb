@@ -299,13 +299,22 @@ class Invoice < ActiveRecord::Base
     # update invoice status when a payment is deleted
     case status
       when "draft-partial" then draft! unless has_payments?
+
       when "partial" then (has_payments? ? partial! : sent! )
+
       when "paid" then
         if has_payments?
-          last_invoice_status == 'draft-partial' ? draft_partial! : partial!
+
+          case last_invoice_status
+            when 'draft-partial' then  draft_partial!
+            when 'disputed' then  disputed!
+            else partial!
+          end
+
         else
           sent!
         end
+
       when "disputed" then (has_payments? ? partial! : disputed! )
       else
     end if present?
