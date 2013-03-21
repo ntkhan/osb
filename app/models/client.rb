@@ -16,6 +16,32 @@ class Client < ActiveRecord::Base
     self.invoices.unarchived.last.id rescue nil
   end
 
+  def purchase_options
+    {
+        :ip => OSB::Util.local_ip,
+        :billing_address => {
+            :name => self.organization_name.strip! || 'Arif Khan',
+            :address1 => self.address_street1 || '1 Main St',
+            :city => self.city || 'San Jose',
+            :state => self.province_state || 'CA',
+            :country => self.country || 'US',
+            :zip => self.postal_zip_code || '95131'
+        }
+    }
+  end
+
+  def get_credit_card
+    ActiveMerchant::Billing::CreditCard.new(
+        :type => 'visa',
+        :first_name => 'Arif',
+        :last_name => 'Khan',
+        :number => '4650161406428289',
+        :month => '8',
+        :year => '2015',
+        :verification_value => '123'
+    )
+  end
+
   def self.multiple_clients ids
     ids = ids.split(",") if ids and ids.class == String
     where("id IN(?)", ids)
@@ -34,8 +60,8 @@ class Client < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids).only_deleted.each do |client|
+    ids = ids.split(',') if ids and ids.class == String
+    where('id IN(?)', ids).only_deleted.each do |client|
       client.recover
       client.unarchive
     end
@@ -43,12 +69,14 @@ class Client < ActiveRecord::Base
 
   def self.filter params
     case params[:status]
-      when "active" then
+      when 'active' then
         self.unarchived.page(params[:page]).per(params[:per])
-      when "archived" then
+      when 'archived' then
         self.archived.page(params[:page]).per(params[:per])
-      when "deleted" then
+      when 'deleted' then
         self.only_deleted.page(params[:page]).per(params[:per])
+      else
+        self.unarchived.page(params[:page]).per(params[:per])
     end
   end
 end

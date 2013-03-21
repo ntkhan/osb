@@ -11,5 +11,16 @@ module OSB
       e = ActiveSupport::MessageEncryptor.new(secret)
       e.decrypt_and_verify(Base64.decode64(value_to_decrypt))
     end
+
+    def self.local_ip
+      require "socket"
+      orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true
+      UDPSocket.open do |s|
+        s.connect '64.233.187.99', 1
+        s.addr.last
+      end
+    ensure
+      Socket.do_not_reverse_lookup = orig
+    end
   end
 end
