@@ -190,9 +190,8 @@ class Invoice < ActiveRecord::Base
     end
   end
 
-  def notify current_user, id
-    encrypted_id = Base64.encode64(id)
-    InvoiceMailer.delay.new_invoice_email(self.client, self, encrypted_id, current_user)
+  def notify current_user, id = nil
+    InvoiceMailer.delay.new_invoice_email(self.client, self, self.encrypted_id, current_user)
   end
 
   def send_invoice current_user, id
@@ -259,9 +258,9 @@ class Invoice < ActiveRecord::Base
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
 
-  def update_dispute_invoice(current_user, encrypt_id, response_to_client)
+  def update_dispute_invoice(current_user, id, response_to_client)
     self.update_attribute('status', 'sent')
-    self.notify(current_user, encrypt_id)
+    self.notify(current_user, id)
     self.sent_emails.create({
                                 :content => response_to_client,
                                 :sender => current_user.email, #User email

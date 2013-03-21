@@ -23,9 +23,13 @@ module Services
     end
 
     def self.get_invoice_for_preview(encrypted_invoice_id)
+      Rails.logger.debug "ENCCCCCCCCCCCCCCCCCCCCCCCCCC#{encrypted_invoice_id}"
       invoice_id = OSB::Util::decrypt(encrypted_invoice_id).to_i rescue invoice_id = nil
+      Rails.logger.debug "INVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV #{invoice_id}"
       invoice = Invoice.find_by_id(invoice_id)
-      return nil if invoice.blank?
+      if invoice.blank?
+        return Invoice.only_deleted.find_by_id(invoice_id).blank? ? nil : "invoice deleted"
+      end
       invoice.viewed!
       invoice
     end
