@@ -313,19 +313,18 @@ class Invoice < ActiveRecord::Base
     case status
       when "draft-partial" then draft! unless has_payments?
 
-      when "partial" then (has_payments? ? partial! : sent! )
+      when "partial" then
+        if has_payments?
+           partial!
+        else
+          last_invoice_status == "disputed" ? disputed! : sent!
+        end
 
       when "paid" then
         if has_payments?
-
-          case last_invoice_status
-            when 'draft-partial' then  draft_partial!
-            when 'disputed' then  disputed!
-            else partial!
-          end
-
+           last_invoice_status == "draft-partial" ? draft_partial! : partial!
         else
-          sent!
+          last_invoice_status == "disputed" ? disputed! : sent!
         end
 
       when "disputed" then (has_payments? ? partial! : disputed! )
