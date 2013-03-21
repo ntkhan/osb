@@ -15,7 +15,7 @@ class Invoice < ActiveRecord::Base
       disputed: 'Client has disputed this invoice.',
   }
 
-  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date
+  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date, :last_invoice_status
 
   # associations
   belongs_to :client
@@ -45,19 +45,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def sent!
-    self.update_attribute(:status, 'sent')
+    update_attributes(:last_invoice_status => status, :status => 'sent')
   end
 
   def viewed!
-    self.update_attribute(:status, 'viewed') if self.status == 'sent'
+    update_attributes(:last_invoice_status => status, :status => 'viewed') if status == 'sent'
   end
 
   def draft!
-    update_attribute(:status, 'draft')
+    update_attributes(:last_invoice_status => status, :status => 'draft')
+  end
+
+  def draft_partial!
+    update_attributes(:last_invoice_status => status, :status => 'draft-partial')
   end
 
   def partial!
-    update_attribute(:status, 'partial')
+    update_attributes(:last_invoice_status => status, :status => 'partial')
   end
 
   def has_payments?
@@ -67,7 +71,7 @@ class Invoice < ActiveRecord::Base
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
   # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
   def disputed!
-    self.update_attribute('status', 'disputed')
+    self.update_attributes(:last_invoice_status => status, :status => 'disputed')
   end
 
   def dispute_history
@@ -294,7 +298,22 @@ class Invoice < ActiveRecord::Base
     # update invoice status when a payment is deleted
     case status
       when "draft-partial" then draft! unless has_payments?
-      when "partial","paid" then (has_payments? ? partial! : sent! )
+
+      when "partial" then (has_payments? ? partial! : sent! )
+
+      when "paid" then
+        if has_payments?
+
+          case last_invoice_status
+            when 'draft-partial' then  draft_partial!
+            when 'disputed' then  disputed!
+            else partial!
+          end
+
+        else
+          sent!
+        end
+
       when "disputed" then (has_payments? ? partial! : disputed! )
       else
     end if present?
