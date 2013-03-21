@@ -44,6 +44,7 @@ class Payment < ActiveRecord::Base
       status = 'paid'
       return_v = c_pay
     end
+    invoice.last_invoice_status = invoice.status
     invoice.status = status
     invoice.save
     return_v
