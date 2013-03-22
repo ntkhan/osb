@@ -20,3 +20,4 @@
 #
 require 'services/invoice_services/invoice_service'
 require 'services/invoice_services/invoice_bulk_actions_service'
+require 'services/payment_gateway/paypal_service'

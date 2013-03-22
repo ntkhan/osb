@@ -68,6 +68,20 @@ class Invoice < ActiveRecord::Base
     payments.present?
   end
 
+  def unpaid?
+    self.status != 'paid'
+  end
+
+  def paid?
+    !unpaid?
+  end
+
+
+  def unpaid_amount
+    #TODO: deduct the partial payment from invoice total if any
+    self.invoice_total
+  end
+
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
   # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
   def disputed!
@@ -299,19 +313,18 @@ class Invoice < ActiveRecord::Base
     case status
       when "draft-partial" then draft! unless has_payments?
 
-      when "partial" then (has_payments? ? partial! : sent! )
+      when "partial" then
+        if has_payments?
+           partial!
+        else
+          last_invoice_status == "disputed" ? disputed! : sent!
+        end
 
       when "paid" then
         if has_payments?
-
-          case last_invoice_status
-            when 'draft-partial' then  draft_partial!
-            when 'disputed' then  disputed!
-            else partial!
-          end
-
+           last_invoice_status == "draft-partial" ? draft_partial! : partial!
         else
-          sent!
+          last_invoice_status == "disputed" ? disputed! : sent!
         end
 
       when "disputed" then (has_payments? ? partial! : disputed! )

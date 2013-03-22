@@ -61,6 +61,7 @@ module Osb
     config.assets.version = '1.0'
     require 'pdfkit'
     config.middleware.use "PDFKit::Middleware", :print_media_type => true
+    ActiveMerchant::Billing::Base.mode = :test
   end
 
 end
