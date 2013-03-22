@@ -337,7 +337,7 @@ class Invoice < ActiveRecord::Base
   def change_status_after_recover
     Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
     case status
-      when "paid","partial" then sent!
+      when "paid","partial","viewed" then sent!
       when "draft-partial" then draft!
       else
     end
