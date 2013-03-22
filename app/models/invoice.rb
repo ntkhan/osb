@@ -29,7 +29,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
   # callbacks
-  before_destroy :sent!
+  #before_destroy :sent!
   before_create :set_invoice_number
   after_destroy :destroy_credit_payments
 
@@ -184,10 +184,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids).only_deleted.each do |invoice|
+    multiple_invoices(ids).only_deleted.each  do |invoice|
       invoice.recover
       invoice.unarchive
+      invoice.change_status_after_recover
     end
   end
 
@@ -331,6 +331,16 @@ class Invoice < ActiveRecord::Base
       else
     end if present?
 
+    Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
+  end
+
+  def change_status_after_recover
+    Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
+    case status
+      when "paid","partial" then sent!
+      when "draft-partial" then draft!
+      else
+    end
     Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
   end
 

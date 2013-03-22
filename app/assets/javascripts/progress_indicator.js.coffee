@@ -29,6 +29,7 @@ $ ->
   jQuery("#progress_indicator").append square.canvas
   $(document).ajaxStart ->
     $("#progress_indicator").show()
+    $(".alert").hide()
 
   $(document).ajaxComplete ->
     setTimeout (->
