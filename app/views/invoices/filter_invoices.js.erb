@@ -29,7 +29,10 @@ jQuery('#active_links a.get_deleted').addClass('active');
 //jQuery(".invoice_listing col.four").width("215px");
 <%end%>
 jQuery(".sent, .partial,.draft, .draft-partial, .paid, .disputed, .viewed").qtip();
-jQuery(".text-overflow-class").ellipsis({row:1})
+setTimeout(function(){
+ jQuery(".invoice_listing .text-overflow-class").ellipsis({row:1});
+},0);
+
 jQuery('#select_all').attr('checked', false);
 
 jQuery("table.invoice_listing").trigger('update');
