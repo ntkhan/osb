@@ -36,7 +36,6 @@ class InvoiceMailer < ActionMailer::Base
                                    :type => "Disputed",
                                    :date => Date.today
                                })
-    invoice
   end
   def response_to_client(user, invoice, response)
     @user, @invoice, @response = user, invoice, response
