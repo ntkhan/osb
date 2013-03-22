@@ -5,7 +5,7 @@
     <div class="content_middle">
 
 
-    <% if @invoice.status == "disputed" %>
+    <% unless @invoice.dispute_history.blank? %>
         <div class="dispute_history">
           <div class="dispute_wrapper">
             <div class="dispute_container">

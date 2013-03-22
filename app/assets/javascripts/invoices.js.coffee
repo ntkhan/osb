@@ -443,6 +443,7 @@ jQuery ->
     flag
   # Alert on dispute if invoice is paid
   jQuery('#dispute_link').click ->
+    jQuery('#reason_for_dispute').val('')
     flag = true
     status = jQuery(this).attr "value"
     if status is "paid"
