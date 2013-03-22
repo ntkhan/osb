@@ -468,9 +468,9 @@ jQuery ->
   jQuery('.text-overflow-class').live "mouseleave", ->
     jQuery('.mouseover_full_content').remove()
 
-  jQuery(".more").click -> 
+  jQuery(".more").live "click", ->
     jQuery(".toggleable").removeClass("collapse")
     
-  jQuery(".less").click -> 
+  jQuery(".less").live "click", ->
     jQuery(".toggleable").addClass("collapse")
     
