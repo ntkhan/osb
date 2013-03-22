@@ -77,9 +77,12 @@
         }
         textarea{
             width: 488px;
-            min-height: 78px;
+            min-height: 60px;
             overflow: auto;
             resize: none;
+            line-height: normal;
+            padding-bottom: 9px;
+            padding-top: 9px;
         }
         p{
             padding: 10px 0 0 0;
