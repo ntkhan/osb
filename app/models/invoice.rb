@@ -187,7 +187,7 @@ class Invoice < ActiveRecord::Base
     multiple_invoices(ids).only_deleted.each  do |invoice|
       invoice.recover
       invoice.unarchive
-      invoice.change_status_after_recover!
+      invoice.change_status_after_recover
     end
   end
 
@@ -334,12 +334,14 @@ class Invoice < ActiveRecord::Base
     Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
   end
 
-  def change_status_after_recover!
+  def change_status_after_recover
+    Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
     case status
       when "paid","partial" then sent!
       when "draft-partial" then draft!
       else
     end
+    Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
   end
 
   def destroy_credit_payments
