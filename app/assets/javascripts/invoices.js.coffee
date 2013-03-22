@@ -465,6 +465,7 @@ jQuery ->
     #jQuery(".mouseover_full_content").height(jQuery(this).height());
     jQuery(".mouseover_full_content").width(jQuery(this).width());
     jQuery(".mouseover_full_content").show() if contains
+
   jQuery('.text-overflow-class').live "mouseleave", ->
     jQuery('.mouseover_full_content').remove()
 
@@ -473,4 +474,7 @@ jQuery ->
     
   jQuery(".less").live "click", ->
     jQuery(".toggleable").addClass("collapse")
+
+  # add a space if td is empty in table listing
+  jQuery("table.table_listing tbody td:empty").html("&nbsp;")
     
