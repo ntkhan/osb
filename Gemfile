@@ -45,6 +45,8 @@ gem "slim"
 gem "copyright-header"
 gem 'paypal-sdk-rest'
 gem 'activemerchant'
+gem 'paper_trail'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
