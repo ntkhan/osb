@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325052925) do
+ActiveRecord::Schema.define(:version => 20130325121722) do
 
   create_table "categories", :force => true do |t|
     t.string   "category"
@@ -55,8 +55,9 @@ ActiveRecord::Schema.define(:version => 20130325052925) do
     t.string   "archive_number"
     t.datetime "archived_at"
     t.datetime "deleted_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+    t.decimal  "available_credit",  :precision => 8, :scale => 2
   end
 
   create_table "companies", :force => true do |t|
@@ -180,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20130325052925) do
     t.integer  "payment_terms_id"
     t.date     "due_date"
     t.string   "last_invoice_status"
+    t.string   "discount_type"
   end
 
   create_table "items", :force => true do |t|

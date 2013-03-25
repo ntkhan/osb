@@ -62,21 +62,33 @@ jQuery ->
     jQuery("table.invoice_grid_fields tr:visible .line_total").each ->
       line_total = parseFloat(jQuery(this).text())
       total += line_total
+
+      #update invoice sub total lable and hidden field
       jQuery("#invoice_sub_total").val(total.toFixed(2))
       jQuery("#invoice_sub_total_lbl").text(total.toFixed(2))
+
+      #update invoice total lable and hidden field
       jQuery("#invoice_invoice_total").val(total.toFixed(2))
       jQuery("#invoice_total_lbl").text(total.toFixed(2))
+
       tax_amount += applyTax(line_total,jQuery(this))
+
     discount_amount = applyDiscount(total)
+
+    #update tax amount label and tax amount hidden field
     jQuery("#invoice_tax_amount_lbl").text(tax_amount.toFixed(2))
     jQuery("#invoice_tax_amount").val(tax_amount.toFixed(2))
-    jQuery("#invoice_discount_amount_lbl").text(discount_amount.toFixed(2))
-    jQuery("span.discount_percentage_lbl").text(jQuery("#invoice_discount_percentage").val())
+
+    #update discount amount lable and discount hidden field
+#    jQuery("#invoice_discount_amount_lbl").text(discount_amount.toFixed(2))
     jQuery("#invoice_discount_amount").val((discount_amount * -1).toFixed(2))
+
     total_balance = (parseFloat(jQuery("#invoice_total_lbl").text() - discount_amount) + tax_amount)
+
     jQuery("#invoice_invoice_total").val(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").text(total_balance.toFixed(2))
     jQuery("#invoice_total_lbl").formatCurrency()
+
     window.taxByCategory()
 
   # Apply Tax on totals
@@ -92,8 +104,11 @@ jQuery ->
   # Apply discount percentage on subtotals
   applyDiscount = (subtotal) ->
     discount_percentage = jQuery("#invoice_discount_percentage").val()
+    discount_type = jQuery("select#discount_type").val()
     discount_percentage = 0 if not discount_percentage? or discount_percentage is ""
-    (subtotal * (parseFloat(discount_percentage)/100.0))
+    discount = if discount_type == "%" then (subtotal * (parseFloat(discount_percentage) / 100.0)) else discount_percentage
+    console.log "Type: #{discount_type}, Discount: #{discount}"
+    discount
 
   # Update line and grand total if line item fields are changed
   jQuery("input.cost, input.qty").live "blur", ->
@@ -161,6 +176,10 @@ jQuery ->
   # Subtract discount percentage from subtotal
   jQuery("#invoice_discount_percentage").blur ->
      updateInvoiceTotal()
+
+  # Subtract discount percentage from subtotal
+  jQuery("select#discount_type").change ->
+    updateInvoiceTotal()
 
   # Don't allow nagetive value for discount
   jQuery("#invoice_discount_percentage,.qty").keydown (e) ->
