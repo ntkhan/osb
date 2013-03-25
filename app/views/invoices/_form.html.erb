@@ -5,7 +5,7 @@
     <div class="content_middle">
 
 
-    <% if @invoice.status == "disputed" %>
+    <% unless @invoice.dispute_history.blank? %>
         <div class="dispute_history">
           <div class="dispute_wrapper">
             <div class="dispute_container">
@@ -179,14 +179,14 @@
             Discount <span class="discount_percentage_lbl"></span>%
           </div>
 
-          <div class="grid_summary_row net_total">
-            <div class="grid_summary_title">
-              Net Total
-            </div>
-            <div class="grid_summary_description">
-              <%= f.hidden_field :invoice_total %>
-              <%= label_tag '', '', :id => 'invoice_total_lbl', :class => 'net_total_value' %>
-            </div>
+          <!--<div class="grid_summary_row net_total">-->
+            <!--<div class="grid_summary_title">-->
+              <!--Net Total-->
+            <!--</div>-->
+            <!--<div class="grid_summary_description">-->
+              <!--<%#= f.hidden_field :invoice_total %>-->
+              <!--<%#= label_tag '', '', :id => 'invoice_total_lbl', :class => 'net_total_value' %>-->
+            <!--</div>-->
             <div class="grid_summary_description">
               <%= f.hidden_field :discount_amount %>
               <%= label_tag '', '', :id => 'invoice_discount_amount_lbl', :style => 'font-weight:normal' %>

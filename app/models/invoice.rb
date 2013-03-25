@@ -29,7 +29,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
   # callbacks
-  before_destroy :sent!
+  #before_destroy :sent!
   before_create :set_invoice_number
   after_destroy :destroy_credit_payments
 
@@ -37,6 +37,7 @@ class Invoice < ActiveRecord::Base
 
   acts_as_archival
   acts_as_paranoid
+  has_paper_trail :on => [:update], :only => [:last_invoice_status], :if => Proc.new {|invoice| invoice.last_invoice_status == 'disputed'}
 
   #include ActionView::Helpers::NumberHelper
 
@@ -184,10 +185,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids).only_deleted.each do |invoice|
+    multiple_invoices(ids).only_deleted.each  do |invoice|
       invoice.recover
       invoice.unarchive
+      invoice.change_status_after_recover
     end
   end
 
@@ -310,29 +311,40 @@ class Invoice < ActiveRecord::Base
     Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
 
     # update invoice status when a payment is deleted
-    case status
-      when "draft-partial" then draft! unless has_payments?
+    if present?
+      case status
+        when "draft-partial" then
+          draft! unless has_payments?
 
-      when "partial" then (has_payments? ? partial! : sent! )
-
-      when "paid" then
-        if has_payments?
-
-          case last_invoice_status
-            when 'draft-partial' then  draft_partial!
-            when 'disputed' then  disputed!
-            else partial!
+        when "partial" then
+          if has_payments?
+            partial!
+          else
+            previous_version && previous_version.status == "disputed" ? disputed! : sent!
           end
 
-        else
-          sent!
-        end
+        when "paid" then
+          if has_payments?
+            last_invoice_status == "draft-partial" ? draft_partial! : partial!
+          else
+            previous_version && previous_version.status == "disputed" ? disputed! : sent!
+          end
 
-      when "disputed" then (has_payments? ? partial! : disputed! )
-      else
-    end if present?
+        when "disputed" then
+          (has_payments? ? partial! : disputed!)
+        else
+      end
+    end
 
     Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
+  end
+
+  def change_status_after_recover
+    case status
+      when "paid","partial","viewed" then sent!
+      when "draft-partial" then draft!
+      else
+    end
   end
 
   def destroy_credit_payments
