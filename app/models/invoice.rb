@@ -37,6 +37,7 @@ class Invoice < ActiveRecord::Base
 
   acts_as_archival
   acts_as_paranoid
+  has_paper_trail :on => [:update], :only => [:last_invoice_status], :if => Proc.new {|invoice| invoice.last_invoice_status == 'disputed'}
 
   #include ActionView::Helpers::NumberHelper
 
@@ -310,38 +311,40 @@ class Invoice < ActiveRecord::Base
     Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
 
     # update invoice status when a payment is deleted
-    case status
-      when "draft-partial" then draft! unless has_payments?
+    if present?
+      case status
+        when "draft-partial" then
+          draft! unless has_payments?
 
-      when "partial" then
-        if has_payments?
-           partial!
+        when "partial" then
+          if has_payments?
+            partial!
+          else
+            previous_version && previous_version.status == "disputed" ? disputed! : sent!
+          end
+
+        when "paid" then
+          if has_payments?
+            last_invoice_status == "draft-partial" ? draft_partial! : partial!
+          else
+            previous_version && previous_version.status == "disputed" ? disputed! : sent!
+          end
+
+        when "disputed" then
+          (has_payments? ? partial! : disputed!)
         else
-          last_invoice_status == "disputed" ? disputed! : sent!
-        end
-
-      when "paid" then
-        if has_payments?
-           last_invoice_status == "draft-partial" ? draft_partial! : partial!
-        else
-          last_invoice_status == "disputed" ? disputed! : sent!
-        end
-
-      when "disputed" then (has_payments? ? partial! : disputed! )
-      else
-    end if present?
+      end
+    end
 
     Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
   end
 
   def change_status_after_recover
-    Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
     case status
       when "paid","partial","viewed" then sent!
       when "draft-partial" then draft!
       else
     end
-    Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
   end
 
   def destroy_credit_payments

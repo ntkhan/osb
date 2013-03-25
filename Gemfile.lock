@@ -108,8 +108,12 @@ GEM
     mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
     nested_form (0.3.1)
+    nokogiri (1.5.8)
     nokogiri (1.5.8-x86-mingw32)
     orm_adapter (0.4.0)
+    paper_trail (2.7.1)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     paypal-sdk-core (0.2.0)
       multi_json (~> 1.0)
       xml-simple
@@ -204,6 +208,7 @@ DEPENDENCIES
   kaminari
   mysql2
   nested_form
+  paper_trail
   paypal-sdk-rest
   pdfkit
   rails (= 3.2.9)
