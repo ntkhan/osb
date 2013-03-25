@@ -311,10 +311,8 @@ class Invoice < ActiveRecord::Base
     Rails.logger.debug "\e[1;31m Before: #{status} \e[0m"
 
     # update invoice status when a payment is deleted
-    if present?
       case status
-        when "draft-partial" then
-          draft! unless has_payments?
+        when "draft-partial" then draft! unless has_payments?
 
         when "partial" then
           if has_payments?
@@ -327,14 +325,18 @@ class Invoice < ActiveRecord::Base
           if has_payments?
             last_invoice_status == "draft-partial" ? draft_partial! : partial!
           else
-            previous_version && previous_version.status == "disputed" ? disputed! : sent!
+            if previous_version && previous_version.status == "disputed"
+              disputed!
+            elsif last_invoice_status == "draft"
+              draft!
+            else
+              sent!
+            end
           end
 
-        when "disputed" then
-          (has_payments? ? partial! : disputed!)
+        when "disputed" then (has_payments? ? partial! : disputed!)
         else
-      end
-    end
+      end if present?
 
     Rails.logger.debug "\e[1;31m After: #{status} \e[0m"
   end
