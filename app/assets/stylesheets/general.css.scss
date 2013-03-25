@@ -549,6 +549,10 @@ tfoot tr:hover{
   color: #00ace5;
 }
 
+.grid_table table td.viewed,{
+  color: #C2C2C2;
+}
+
 .grid_table table td.partial, .grid_table table td.draft-partial {
   color: #f26522;
 }
