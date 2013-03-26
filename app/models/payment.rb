@@ -89,9 +89,9 @@ class Payment < ActiveRecord::Base
     where("id IN(?)", ids)
   end
 
-  def self.archive_multiple ids
-    self.multiple_payments(ids).each { |payment| payment.archive }
-  end
+  #def self.archive_multiple ids
+  #  self.multiple_payments(ids).each { |payment| payment.archive }
+  #end
 
   def self.delete_multiple ids
     multiple_payments(ids).each do |payment|
@@ -110,29 +110,29 @@ class Payment < ActiveRecord::Base
     CreditPayment.where("credit_id = ?", payment_id).map(&:destroy)
   end
 
-  def self.recover_archived ids
-    self.multiple_payments(ids).each { |payment| payment.unarchive }
-  end
-
-  def self.recover_deleted ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids).only_deleted.each do |payment|
-      payment.recover
-      payment.unarchive
-    end
-  end
-
-  def self.filter params
-    case params[:status]
-      when "active" then
-        self.unarchived.page(params[:page]).per(params[:per])
-      when "archived" then
-        self.archived.page(params[:page]).per(params[:per])
-      when "deleted" then
-        self.only_deleted.page(params[:page]).per(params[:per])
-      else
-    end
-  end
+  #def self.recover_archived ids
+  #  self.multiple_payments(ids).each { |payment| payment.unarchive }
+  #end
+  #
+  #def self.recover_deleted ids
+  #  ids = ids.split(",") if ids and ids.class == String
+  #  where("id IN(?)", ids).only_deleted.each do |payment|
+  #    payment.recover
+  #    payment.unarchive
+  #  end
+  #end
+  #
+  #def self.filter params
+  #  case params[:status]
+  #    when "active" then
+  #      self.unarchived.page(params[:page]).per(params[:per])
+  #    when "archived" then
+  #      self.archived.page(params[:page]).per(params[:per])
+  #    when "deleted" then
+  #      self.only_deleted.page(params[:page]).per(params[:per])
+  #    else
+  #  end
+  #end
 
   def notify_client current_user_email
     PaymentMailer.payment_notification_email(current_user_email, self.invoice.client, self.invoice.invoice_number, self).deliver if self.send_payment_notification

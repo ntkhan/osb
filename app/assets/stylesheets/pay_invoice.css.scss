@@ -130,4 +130,25 @@
   .modal .cross_btn {
     margin-top: -50px;
   }
+  .grand_total{
+    float: left;
+    width: 100%;
+    clear: both;
+    padding: 16px 0 0 0;
+    .grand_total_box{
+      padding: 0 30px;
+      float: right;
+    }
+    p{
+      padding: 0 0 4px 0;
+      &:last-child{
+        padding: 0px;
+      }
+      span{
+        float: right;
+        font-weight: bold;
+        padding: 0 0 0 8px;
+      }
+    }
+  }
 }

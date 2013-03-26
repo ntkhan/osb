@@ -90,15 +90,17 @@ class PaymentsController < ApplicationController
     ids = params[:invoice_ids]
     @payments = []
     ids = ids.split(",") if ids and ids.is_a?(String)
-    unless params[:pay_invoice]
-      ids.each do |inv_id|
-        payment = Payment.new({:invoice_id => inv_id, :payment_date => Date.today})
-        @payments << payment
-      end
-    else
-      @payments << Payment.new({:invoice_id => params[:invoice_id], :payment_date => Date.today})
-      respond_to { |format| format.js }
-    end
+    ids.each { |inv_id| @payments << Payment.new({:invoice_id => inv_id, :payment_date => Date.today}) }
+
+    #if params[:pay_invoice]
+    #  @payments << Payment.new({:invoice_id => params[:invoice_id], :payment_date => Date.today})
+    #  respond_to { |format| format.js }
+    #else
+    #  ids.each do |inv_id|
+    #    payment = Payment.new({:invoice_id => inv_id, :payment_date => Date.today})
+    #    @payments << payment
+    #  end
+    #end
   end
 
   def update_individual_payment
@@ -107,8 +109,7 @@ class PaymentsController < ApplicationController
       pay[:payment_amount] = Payment.update_invoice_status pay[:invoice_id], pay[:payment_amount].to_f
       pay[:payment_date] ||= Date.today
       pay[:credit_applied] ||= 0.00
-
-      pay[:payment_method] == "Credit" ? Services::PaymentService.distribute_credit_payment(pay,current_user.email) : Payment.create!(pay).notify_client(current_user.email)
+      pay[:payment_method] == "Credit" ? Services::PaymentService.distribute_credit_payment(pay, current_user.email) : Payment.create!(pay).notify_client(current_user.email)
     end
 
     where_to_redirect = params[:from_invoices] ? invoices_url : payments_url
@@ -117,38 +118,38 @@ class PaymentsController < ApplicationController
 
   def bulk_actions
     ids = params[:payment_ids]
-    if params[:archive]
-      Payment.archive_multiple(ids)
+    #if params[:archive]
+    #  Payment.archive_multiple(ids)
+    #  @payments = Payment.unarchived.page(params[:page]).per(params[:per])
+    #  @action = "archived"
+    #  @message = payments_archived(ids) unless ids.blank?
+    #if params[:destroy]
+    # check if payment is a credit and applied to any other invoice payment
+    if Payment.is_credit_entry? ids
+      @action = "credit entry"
+      @payments_with_credit = Payment.payments_with_credit ids
+      @non_credit_payments = ids - @payments_with_credit.collect { |p| p.id.to_s }
+    else
+      Payment.delete_multiple(ids)
       @payments = Payment.unarchived.page(params[:page]).per(params[:per])
-      @action = "archived"
-      @message = payments_archived(ids) unless ids.blank?
-    elsif params[:destroy]
-      # check if payment is a credit and applied to any other invoice payment
-      if Payment.is_credit_entry? ids
-        @action = "credit entry"
-        @payments_with_credit = Payment.payments_with_credit ids
-        @non_credit_payments = ids - @payments_with_credit.collect { |p| p.id.to_s }
-      else
-        Payment.delete_multiple(ids)
-        @payments = Payment.unarchived.page(params[:page]).per(params[:per])
-        @action = "deleted"
-        @message = payments_deleted(ids) unless ids.blank?
-      end
-    elsif params[:recover_archived]
-      Payment.recover_archived(ids)
-      @payments = Payment.archived.page(params[:page]).per(params[:per])
-      @action = "recovered from archived"
-    elsif params[:recover_deleted]
-      Payment.recover_deleted(ids)
-      @payments = Payment.only_deleted.page(params[:page]).per(params[:per])
-      @action = "recovered from deleted"
+      @action = "deleted"
+      @message = payments_deleted(ids) unless ids.blank?
     end
+    #elsif params[:recover_archived]
+    #  Payment.recover_archived(ids)
+    #  @payments = Payment.archived.page(params[:page]).per(params[:per])
+    #  @action = "recovered from archived"
+    #elsif params[:recover_deleted]
+    #  Payment.recover_deleted(ids)
+    #  @payments = Payment.only_deleted.page(params[:page]).per(params[:per])
+    #  @action = "recovered from deleted"
+    #end
     respond_to { |format| format.js }
   end
 
-  def filter_payments
-    @payments = Payment.filter(params)
-  end
+  #def filter_payments
+  #  @payments = Payment.filter(params)
+  #end
 
   def undo_actions
     params[:archived] ? Payment.recover_archived(params[:ids]) : Payment.recover_deleted(params[:ids])

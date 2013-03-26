@@ -241,6 +241,7 @@ INDUSTRY_LIST = ["Accommodation & Hospitality",
   "Wholesale Trade",
   "Other"
 ]
+DISCOUNT_TYPE = %w(% $)
 COMPANY_SIZE = ["1-10 employees",
   "11-100 employees",
   "101-500 employees",
