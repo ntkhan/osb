@@ -87,9 +87,12 @@ p {
   margin-bottom: 0px;
 }
 
-a {
+a, input{
   text-decoration: none;
   color: #00ace5;
+  outline: 0;
+  outline-style:none;
+  outline-width:0;
 }
 
 a:hover, input[type="submit"]:hover {
@@ -1095,12 +1098,12 @@ select.per_page,select.discount_select{
 select.discount_select
 {
   line-height: 20px;
-  width: 38px;
+  width: 42px;
   margin: 0 5px 3px 0;
 }
 input.invoice_discount{
   height: 20px;
-  width: 29px;
+  width: 32px;
   padding: 0 2px 0 9px;
   text-align: right;
 }

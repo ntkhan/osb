@@ -56,6 +56,7 @@
 //= require jquery.formatCurrency-1.4.0.js
 //= require jquery.ellipsis.min.js
 //= require table-listing.js.coffee
+//= require credit-payment.js.coffee
 
 
 jQuery(function () {
