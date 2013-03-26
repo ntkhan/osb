@@ -1,7 +1,7 @@
 class Client < ActiveRecord::Base
   acts_as_archival
   acts_as_paranoid
-  attr_accessible :address_street1, :address_street2, :business_phone, :city, :company_size, :country, :fax, :industry, :internal_notes, :organization_name, :postal_zip_code, :province_state, :send_invoice_by, :email, :home_phone, :first_name, :last_name, :mobile_number, :client_contacts_attributes, :archive_number, :archived_at, :deleted_at
+  attr_accessible :address_street1, :address_street2, :business_phone, :city, :company_size, :country, :fax, :industry, :internal_notes, :organization_name, :postal_zip_code, :province_state, :send_invoice_by, :email, :home_phone, :first_name, :last_name, :mobile_number, :client_contacts_attributes, :archive_number, :archived_at, :deleted_at,:available_credit
   has_many :invoices
   has_many :client_contacts, :dependent => :destroy
   accepts_nested_attributes_for :client_contacts, :allow_destroy => true
@@ -84,6 +84,17 @@ class Client < ActiveRecord::Base
     payments = []
     invoices.with_deleted.each { |invoice| payments << invoice.payments.where("payment_type = 'credit'").order("created_at ASC") }
     payments.flatten
+  end
+  def client_credit
+    invoice_ids = Invoice.with_deleted.where("client_id = ?", self.id).all
+    # total credit
+    client_payments = Payment.where("payment_type = 'credit' AND invoice_id in (?)", invoice_ids).all
+    client_total_credit = client_payments.sum { |f| f.payment_amount }
+    # avail credit
+    client_payments = Payment.where("payment_method = 'credit' AND invoice_id in (?)", invoice_ids).all
+    client_avail_credit = client_payments.sum { |f| f.payment_amount }
+    # Total available credit of client
+    client_total_credit - client_avail_credit + self.available_credit.to_i
   end
 end
 
