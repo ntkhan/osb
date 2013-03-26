@@ -1,5 +1,5 @@
 <div class="pay_invoice">
-  <% client_credit = payment.client_credit payment.invoice.client_id
+  <% client_credit =payment.invoice.client.client_credit
      rowspan = 4
      if client_credit > 0
        rowspan =5

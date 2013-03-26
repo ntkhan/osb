@@ -28,5 +28,16 @@ module ClientsHelper
     HTML
     notice = notice.html_safe
   end
+  def is_client_credit_payments client
+    flag = false
+    invoice_ids = Invoice.with_deleted.where("client_id = ?", client.id).all
+    # total credit
+    client_payments = Payment.where("payment_type = 'credit' AND invoice_id in (?)", invoice_ids).all
+    client_total_credit = client_payments.sum { |f| f.payment_amount }
+    total_credit = client_total_credit || 0 + client.available_credit.to_i || 0
+    avail_credit = client.available_credit.to_i
+    flag = true if total_credit > avail_credit
+    flag
+  end
 
 end

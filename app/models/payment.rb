@@ -61,17 +61,6 @@ class Payment < ActiveRecord::Base
     credit_pay.save
   end
 
-  def client_credit client_id
-    invoice_ids = Invoice.with_deleted.where("client_id = ?", client_id).all
-    # total credit
-    client_payments = Payment.where("payment_type = 'credit' AND invoice_id in (?)", invoice_ids).all
-    client_total_credit = client_payments.sum { |f| f.payment_amount }
-    # avail credit
-    client_payments = Payment.where("payment_method = 'credit' AND invoice_id in (?)", invoice_ids).all
-    client_avail_credit = client_payments.sum { |f| f.payment_amount }
-    client_total_credit - client_avail_credit
-  end
-
   def self.invoice_remaining_amount inv_id
     invoice = Invoice.find(inv_id)
     invoice_payments = self.invoice_paid_detail(inv_id)
