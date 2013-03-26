@@ -151,11 +151,11 @@ class PaymentsController < ApplicationController
   #  @payments = Payment.filter(params)
   #end
 
-  def undo_actions
-    params[:archived] ? Payment.recover_archived(params[:ids]) : Payment.recover_deleted(params[:ids])
-    @payments = Payment.unarchived.page(params[:page]).per(params[:per])
-    respond_to { |format| format.js }
-  end
+  #def undo_actions
+  #  params[:archived] ? Payment.recover_archived(params[:ids]) : Payment.recover_deleted(params[:ids])
+  #  @payments = Payment.unarchived.page(params[:page]).per(params[:per])
+  #  respond_to { |format| format.js }
+  #end
 
   def payments_history
     client = Invoice.find_by_id(params[:id]).client

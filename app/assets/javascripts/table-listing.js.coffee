@@ -1,11 +1,5 @@
 window.tableListing = ->
 
-  # Apply sorting on listing tables
-  sort_list = if jQuery("table.table_listing").hasClass('emails_listing') then [[3,1]] else [[1,1]]
-  jQuery("table.table_listing").tablesorter
-    widgets: ['staticRow']
-    sortList: sort_list
-
   # setup talbesorter parser for amount columns with currency and ',' signs
   jQuery.tablesorter.addParser
     id: "thousands"
@@ -15,6 +9,12 @@ window.tableListing = ->
     format: (s) ->
       jQuery.tablesorter.formatFloat s.replace(new RegExp(/[^\d\.]/g), "")
     type: "numeric"
+
+  # Apply sorting on listing tables
+  sort_list = if jQuery("table.table_listing").hasClass('emails_listing') then [[3,1]] else [[1,1]]
+  jQuery("table.table_listing").tablesorter
+    widgets: ['staticRow']
+    sortList: sort_list
 
   # make 10 option selected by default in invoice per page
   jQuery("select.per_page").val('10');
