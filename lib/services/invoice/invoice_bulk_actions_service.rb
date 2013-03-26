@@ -12,10 +12,7 @@ module Services
     end
 
     def perform
-      #TODO: for send_invoices the value for action_to_perform is 'send', need to take care of that
-      #the above 'TODO:' has been taken care of in a bit ugly way
-      #TODO now: do some makeup :)
-      return method(@action_to_perform == 'send' ? 'send_invoices' : @action_to_perform).call.merge({invoice_ids: @invoice_ids, action_to_perform: @action_to_perform})
+      method(@action_to_perform == 'send' ? 'send_invoices' : @action_to_perform).call.merge({invoice_ids: @invoice_ids, action_to_perform: @action_to_perform})
     end
 
     def archive

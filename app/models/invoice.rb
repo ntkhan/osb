@@ -46,23 +46,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def sent!
-    update_attributes(:last_invoice_status => status, :status => 'sent')
+    update_attributes(last_invoice_status: status, status: 'sent')
   end
 
   def viewed!
-    update_attributes(:last_invoice_status => status, :status => 'viewed') if status == 'sent'
+    update_attributes(last_invoice_status: status, status: 'viewed') if status == 'sent'
   end
 
   def draft!
-    update_attributes(:last_invoice_status => status, :status => 'draft')
+    update_attributes(last_invoice_status: status, status: 'draft')
   end
 
   def draft_partial!
-    update_attributes(:last_invoice_status => status, :status => 'draft-partial')
+    update_attributes(last_invoice_status: status, status: 'draft-partial')
   end
 
   def partial!
-    update_attributes(:last_invoice_status => status, :status => 'partial')
+    update_attributes(last_invoice_status: status, status: 'partial')
   end
 
   def has_payments?
@@ -86,7 +86,7 @@ class Invoice < ActiveRecord::Base
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
   # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
   def disputed!
-    self.update_attributes(:last_invoice_status => status, :status => 'disputed')
+    self.update_attributes(last_invoice_status: status, status: 'disputed')
   end
 
   def dispute_history

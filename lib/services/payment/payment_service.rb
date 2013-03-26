@@ -27,7 +27,7 @@ module Services
 
           break if remaining == 0
         end unless client.credit_payments.blank?
-
     end
+
   end
 end
