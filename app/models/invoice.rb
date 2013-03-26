@@ -352,5 +352,7 @@ class Invoice < ActiveRecord::Base
   def destroy_credit_payments
     credit_payments.map(&:destroy)
   end
-
+   def send_note_only response_to_client, current_user
+     InvoiceMailer.delay.send_note_email(response_to_client, self,self.client, current_user)
+   end
 end

@@ -92,6 +92,13 @@ class InvoicesController < ApplicationController
     end
   end
 
+
+  def send_note_only
+    @invoice = Invoice.find(params[:inv_id])
+    @invoice.send_note_only params[:response_to_client], current_user
+    render :text=>''
+  end
+
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy

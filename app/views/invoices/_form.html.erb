@@ -37,7 +37,8 @@
               <div class="dispute_input">
                 <h4>Response to Client</h4>
                 <%= text_area_tag "response_to_client" %>
-                <p><a href="#">Send this note only</a> or click ‘Resend Invoice’ button below to resend invoice too.</p>
+                <%= hidden_field_tag :inv_id, @invoice.id %>
+                <p><a href="javascript:" id="send_note_only">Send this note only</a> or click ‘Resend Invoice’ button below to resend invoice too.</p>
               </div>
 
             </div>

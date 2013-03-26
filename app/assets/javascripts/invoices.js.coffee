@@ -407,3 +407,12 @@ jQuery ->
   jQuery(".less").live "click", ->
     jQuery(".toggleable").addClass("collapse")
 
+  #send only email to client on clicking send this note only link.
+#  jQuery('#send_note_only').click ->
+#    jQuery.ajax '/invoices/send_note_only',
+#      type: 'POST'
+#      data: "response_to_client=" + jQuery("#response_to_client").val() + "&inv_id=" + jQuery("#inv_id").val()
+#      dataType: 'html'
+#      error: (jqXHR, textStatus, errorThrown) ->
+#        alert "Error: #{textStatus}"
+
