@@ -10,7 +10,7 @@ window.taxByCategory = ->
   jQuery("table.invoice_grid_fields tr:visible").each ->
     # TODO: apply discount on lineTotal
     discountPct = parseFloat($("#invoice_discount_percentage").val())
-    discountType = parseFloat($("select#discount_type").val())
+    discountType = $("select#discount_type").val()
 
     lineTotal = parseFloat $(this).find(".line_total").text()
     discountAmount = if discountType == "%" then (lineTotal * discountPct / 100.0 ) else discountPct
