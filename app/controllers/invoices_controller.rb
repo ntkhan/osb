@@ -223,11 +223,10 @@ class InvoicesController < ApplicationController
     result = paypal.process_payment
 
     # where to redirect after the payment process
-    response = result[:status] == "SUCCESS" ? {notice: result[:message]} : {alert: result[:message]}
+    response = result[:status].to_s == "SUCCESS" ? {notice: result[:message]} : {alert: result[:message]}
     redirect_to({controller: 'invoices', action: 'credit_card_info', inv_id: OSB::Util.encrypt(params[:invoice_id])}, response)
   end
 
-end
 
 private
 

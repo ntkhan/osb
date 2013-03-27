@@ -26,7 +26,7 @@ class PaypalService
         {status: OSB::Paypal::TransStatus::FAILED, message: response.message}
       end
     else
-      {status: OSB::Paypal::TransStatus::INVALID_CARD, message: @credit_card.errors.full_messages.join(',') || "Invalid Credit Card"}
+      {status: OSB::Paypal::TransStatus::INVALID_CARD, message: "Credit Card is not valid"} #@credit_card.errors.full_messages.join(',') || }
     end
   end
 
