@@ -1,59 +1,73 @@
 .invoice {
 
   .grid_table table {
-    col.one { /*check box*/
+    col.one {
+    /*check box*/
       width: 33px;
     }
-    col.two { /*invoice*/
+    col.two {
+    /*invoice*/
       width: 100px;
     }
-    col.three { /*clients*/
+    col.three {
+    /*clients*/
       width: 140px;
     }
-    col.four { /*description*/
+    col.four {
+    /*description*/
       width: 143px;
     }
-    col.five { /*total*/
+    col.five {
+    /*total*/
       width: 82px;
     }
-    col.six { /*date*/
+    col.six {
+    /*date*/
       width: 90px;
     }
-    col.seven { /*due date*/
+    col.seven {
+    /*due date*/
       width: 90px;
     }
-    col.eight { /*status*/
+    col.eight {
+    /*status*/
       width: 90px;
     }
-    col.nine { /*actions*/
+    col.nine {
+    /*actions*/
       width: 72px;
     }
   }
 }
 
-.invoice_model{
-    .cross_btn{
-        margin-top: -93px;
+.invoice_model {
+  .cross_btn {
+    margin-top: -93px;
+  }
+  .grid_table table {
+    col.one {
+    /*invoice*/
+      width: 82px;
     }
-    .grid_table table {
-        col.one {/*invoice*/
-            width: 82px;
-        }
-        col.two {/*clients*/
-            width: 450px;
-        }
-        col.three { /*date*/
-            width: 90px;
-        }
-        col.four { /*amount*/
-            width: 82px;
-        }
+    col.two {
+    /*clients*/
+      width: 450px;
     }
-    .btn_large.small_case{
-        text-transform: none;
-        padding: 0 15px;
+    col.three {
+    /*date*/
+      width: 90px;
     }
+    col.four {
+    /*amount*/
+      width: 82px;
+    }
+  }
+  .btn_large.small_case {
+    text-transform: none;
+    padding: 0 15px;
+  }
 }
+
 .chzn-container {
   .add-new {
     background-color: #00BDE5;
@@ -100,7 +114,7 @@ table.invoice_grid_fields {
       height: 10px;
       width: 7px;
     }
-    .remove_item:hover{
+    .remove_item:hover {
       background-position: 0 -12px;
     }
     .sort_icon {
@@ -110,12 +124,12 @@ table.invoice_grid_fields {
       margin-left: 4px;
       width: 9px;
     }
-    .sort_icon:hover{
+    .sort_icon:hover {
       background-position: -7px -12px;
     }
   }
-  tbody{
-    tr td:first-child{
+  tbody {
+    tr td:first-child {
       vertical-align: middle;
     }
   }
@@ -131,6 +145,25 @@ table.invoice_grid_fields {
   }
   &.single_line {
     padding: 7px 9px 8px 9px;
+  }
+}
+
+#cc_popup.modal {
+  .cross_btn {
+    margin: -50px -1px 0 0;
+  }
+  .modal-body {
+    max-height: 340px;
+  }
+  .fields_content:last-child{
+    padding: 0;
+  }
+  .field_row:last-child{
+    margin-bottom: 10px;
+  }
+  select{
+    width: 130px;
+    margin-bottom: 0;
   }
 }
 

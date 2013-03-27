@@ -14,7 +14,7 @@
           <div class="fields_content_data">
 
             <div class="field_row">
-              <div class="label_field left single">Type</div>
+              <div class="label_field left single"><span>Type</span></div>
               <div class="large_field">
                 <%= select_tag "cc_type",options_for_select(CREDIT_CARD_TYPE),{:class => "cc_type", :id => "cc_type"} %>
               </div>
@@ -22,15 +22,15 @@
             <!--field_row-->
 
             <div class="field_row">
-              <div class="label_field left single">Contact Name</div>
+              <div class="label_field left single"><span>Contact Name</span></div>
               <div class="small_field">
-                <%= text_field_tag :first_name %>
+                <%= text_field_tag :first_name, :required => "" %>
                 <ul class="field_description">
                   <li>First name</li>
                 </ul>
               </div>
               <div class="small_field right">
-                <%= text_field_tag :last_name %>
+                <%= text_field_tag :last_name, :required => "" %>
                 <ul class="field_description">
                   <li>Last name</li>
                 </ul>
@@ -47,7 +47,7 @@
             <!--field_row-->
 
             <div class="field_row">
-              <div class="label_field left single">Date</div>
+              <div class="label_field left single"><span>Expiry Date</span></div>
               <div class="small_field">
                 <%= text_field_tag :cc_month %>
                 <ul class="field_description">
