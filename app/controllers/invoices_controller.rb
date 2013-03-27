@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:preview, :invoice_pdf, :paypal_payments]
+  before_filter :authenticate_user!, :except => [:preview, :invoice_pdf, :paypal_payments, :pay_with_credit_card]
   protect_from_forgery :except => [:paypal_payments]
 
   layout :choose_layout
@@ -31,11 +31,12 @@ class InvoicesController < ApplicationController
 
   def preview
     @invoice = Services::InvoiceService.get_invoice_for_preview(params[:inv_id])
-    render :action=>'invoice_deleted_message',:notice => "This invoice has been deleted."  if @invoice == 'invoice deleted'
+    render :action => 'invoice_deleted_message', :notice => "This invoice has been deleted." if @invoice == 'invoice deleted'
   end
 
   def invoice_deleted_message
   end
+
   def new
     @invoice = Services::InvoiceService.build_new_invoice(params)
 
@@ -220,14 +221,24 @@ class InvoicesController < ApplicationController
     render :nothing => true
   end
 
-  private
+  def pay_with_credit_card
+    paypal = PaypalService.new(params)
+    result = paypal.process_payment
 
-  def get_intimation_message(action_key, invoice_ids)
-    helper_methods = {archive: 'invoices_archived', destroy: 'invoices_deleted'}
-    helper_method = helper_methods[action_key.to_sym]
-    message = helper_method.present? ? send(helper_method, invoice_ids) : nil
-    Rails.logger.debug "==> helper_method: #{helper_method}, action_key: #{action_key}, invoice_ids: #{invoice_ids}, message: #{message}"
-    message
+    # where to redirect after the payment process
+    response = result[:status].to_s != "SUCCESS" ? {alert: result[:message]}  : {notice: result[:message]}
+    redirect_to({controller: 'invoices', action: 'preview', inv_id: params[:invoice_id]}, response)
   end
+
+
+private
+
+def get_intimation_message(action_key, invoice_ids)
+  helper_methods = {archive: 'invoices_archived', destroy: 'invoices_deleted'}
+  helper_method = helper_methods[action_key.to_sym]
+  message = helper_method.present? ? send(helper_method, invoice_ids) : nil
+  Rails.logger.debug "==> helper_method: #{helper_method}, action_key: #{action_key}, invoice_ids: #{invoice_ids}, message: #{message}"
+  message
+end
 
 end
