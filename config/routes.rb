@@ -4,6 +4,7 @@ Osb::Application.routes.draw do
 
   resources :companies
 
+  #match "invoices/credit_card_info/:inv_id" => "invoices#credit_card_info"
   match "help" => "help#index"
   match "reports/:report_name" => "reports#reports"
   match "reports/data/:report_name" => "reports#reports_data"
@@ -88,6 +89,7 @@ Osb::Application.routes.draw do
       get 'send_invoice'
       post 'paypal_payments'
       get 'preview'
+      get 'credit_card_info'
     end
   end
 
