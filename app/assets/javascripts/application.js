@@ -57,6 +57,7 @@
 //= require jquery.ellipsis.min.js
 //= require table-listing.js.coffee
 //= require credit-payment.js.coffee
+//= require cc-validation.js.coffee
 
 
 jQuery(function () {

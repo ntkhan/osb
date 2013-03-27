@@ -417,3 +417,6 @@ jQuery ->
       error: (jqXHR, textStatus, errorThrown) ->
         alert "Error: #{textStatus}"
 
+  # Validate credit card
+  window.validateCreditCard()
+

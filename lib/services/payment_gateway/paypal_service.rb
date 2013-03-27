@@ -4,7 +4,7 @@ class PaypalService
   #  options => {invoice_id: id}
   #  options => invoice_id
   def initialize(options)
-    @invoice_id = options.is_a?(Hash) ? options[:invoice_id] : options
+    @invoice_id = options.is_a?(Hash) ? OSB::Util.decrypt(options[:invoice_id]).to_i : options
     @invoice = Invoice.find_by_id(@invoice_id)
     return nil unless @invoice
     @client = @invoice.client

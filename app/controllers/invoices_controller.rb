@@ -221,17 +221,13 @@ class InvoicesController < ApplicationController
     render :nothing => true
   end
 
-  def credit_card_info
-
-  end
-
   def pay_with_credit_card
     paypal = PaypalService.new(params)
     result = paypal.process_payment
 
     # where to redirect after the payment process
-    response = result[:status].to_s == "SUCCESS" ? {notice: result[:message]} : {alert: result[:message]}
-    redirect_to({controller: 'invoices', action: 'credit_card_info', inv_id: OSB::Util.encrypt(params[:invoice_id])}, response)
+    response = result[:status].to_s != "SUCCESS" ? {alert: result[:message]}  : {notice: result[:message]}
+    redirect_to({controller: 'invoices', action: 'preview', inv_id: params[:invoice_id]}, response)
   end
 
 
