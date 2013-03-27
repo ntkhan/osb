@@ -51,8 +51,8 @@
             <div class="field_row">
               <div class="label_field left single">Available Credit</div>
               <div class="medium_field">
-                <% @readonly = is_client_credit_payments @client %>
-                <%= f.text_field :available_credit,:readonly=>@readonly%>
+                <% @readonly = is_client_credit_payments @client%>
+                <%= f.text_field :available_credit,:value =>@client.client_credit ,:readonly=>@readonly%>
                 <ul class="field_description">
                   <li>This credit can be applied to invoice for this client.</li>
                 </ul>
