@@ -68,16 +68,16 @@
     width: 33px;
   }
   .grid_table table col.two { /*item*/
-    width: 176px;
+    width: 148px;
   }
   .grid_table table col.three { /*description*/
-    width: 174px;
+    width: 144px;
   }
   .grid_table table col.four { /*unit cost*/
-    width: 83px;
+    width: 144px;
   }
   .grid_table table col.five { /*qty*/
-    width: 83px;
+    width: 98px;
   }
   .grid_table table col.six { /*tax*/
     width: 83px;
@@ -90,7 +90,7 @@
   }
   input.grid_small,
   .blank_input {
-    width: 60px;
+    width: 71px;
   }
   select{
     width: 300px;
@@ -109,12 +109,12 @@
   input.grid_large,
   .blank_input,
   select.grid_large {
-    width: 150px;
+    width: 120px;
   }
   input.grid_large_medium,
   .blank_input,
   select.grid_large_medium {
-    width: 173px;
+    width: 138px;
   }
   .grid_summary {
     //padding: 30px 0;

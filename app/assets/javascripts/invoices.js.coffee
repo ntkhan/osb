@@ -175,8 +175,9 @@ jQuery ->
   jQuery("#invoice_invoice_date, #invoice_due_date, .date_picker_class").datepicker
     dateFormat: 'yy-mm-dd'
     beforeShow: (input, inst) ->
-     widget = jQuery(inst).datepicker('widget');
-     widget.css('margin-left', jQuery(input).outerWidth() - widget.outerWidth());
+      widget = jQuery(inst).datepicker('widget')
+      widget.css('margin-left', jQuery(input).outerWidth() - widget.outerWidth())
+
   # Makes the invoice line item list sortable
   jQuery("#invoice_grid_fields tbody").sortable
     handle: ".sort_icon"
