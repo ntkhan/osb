@@ -87,9 +87,12 @@ p {
   margin-bottom: 0px;
 }
 
-a {
+a, input{
   text-decoration: none;
   color: #00ace5;
+  outline: 0;
+  outline-style:none;
+  outline-width:0;
 }
 
 a:hover, input[type="submit"]:hover {
@@ -547,6 +550,10 @@ tfoot tr:hover{
 
 .grid_table table td.sent, .grid_table table td.viewed,{
   color: #00ace5;
+}
+
+.grid_table table td.viewed,{
+  color: #C2C2C2;
 }
 
 .grid_table table td.partial, .grid_table table td.draft-partial {
@@ -1076,7 +1083,7 @@ table.table_listing, table.report-data-table {
     top: 0;
   }
 }
-select.per_page{
+select.per_page,select.discount_select{
   width: 50px;
   height: 20px;
   padding:  0;
@@ -1087,6 +1094,18 @@ select.per_page{
     {
         line-height: 20px;
     }
+}
+select.discount_select
+{
+  line-height: 20px;
+  width: 42px;
+  margin: 0 5px 3px 0;
+}
+input.invoice_discount{
+  height: 20px;
+  width: 32px;
+  padding: 0 2px 0 9px;
+  text-align: right;
 }
 .link_disabled{
   color: #00ACE5;

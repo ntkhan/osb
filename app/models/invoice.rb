@@ -15,7 +15,7 @@ class Invoice < ActiveRecord::Base
       disputed: 'Client has disputed this invoice.',
   }
 
-  attr_accessible :client_id, :discount_amount, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date, :last_invoice_status
+  attr_accessible :client_id, :discount_amount, :discount_type, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date, :last_invoice_status
 
   # associations
   belongs_to :client
@@ -46,23 +46,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def sent!
-    update_attributes(:last_invoice_status => status, :status => 'sent')
+    update_attributes(last_invoice_status: status, status: 'sent')
   end
 
   def viewed!
-    update_attributes(:last_invoice_status => status, :status => 'viewed') if status == 'sent'
+    update_attributes(last_invoice_status: status, status: 'viewed') if status == 'sent'
   end
 
   def draft!
-    update_attributes(:last_invoice_status => status, :status => 'draft')
+    update_attributes(last_invoice_status: status, status: 'draft')
   end
 
   def draft_partial!
-    update_attributes(:last_invoice_status => status, :status => 'draft-partial')
+    update_attributes(last_invoice_status: status, status: 'draft-partial')
   end
 
   def partial!
-    update_attributes(:last_invoice_status => status, :status => 'partial')
+    update_attributes(last_invoice_status: status, status: 'partial')
   end
 
   def has_payments?
@@ -86,7 +86,7 @@ class Invoice < ActiveRecord::Base
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
   # To perform a full 'dispute' process use *Services::InvoiceService.dispute_invoice(invoice_id, dispute_reason)*
   def disputed!
-    self.update_attributes(:last_invoice_status => status, :status => 'disputed')
+    self.update_attributes(last_invoice_status: status, status: 'disputed')
   end
 
   def dispute_history
@@ -352,5 +352,7 @@ class Invoice < ActiveRecord::Base
   def destroy_credit_payments
     credit_payments.map(&:destroy)
   end
-
+   def send_note_only response_to_client, current_user
+     InvoiceMailer.delay.send_note_email(response_to_client, self,self.client, current_user)
+   end
 end
