@@ -36,9 +36,9 @@
               <!--field_row-->
 
               <div class="field_row">
-                <div class="label_field left single"><%= f.label :unit_cost %></div>
+                <div class="label_field left single"><%= f.label :Default_Unit_Cost %></div>
                 <div class="small_field"><%= f.text_field :unit_cost %></div>
-                <div class="label_field right single"><%= f.label :quantity %></div>
+                <div class="label_field right single"><%= f.label :Default_Quantity %></div>
                 <div class="small_field"><%= f.number_field :quantity %></div>
               </div>
               <!--field_row-->
@@ -59,7 +59,9 @@
           <!--fields_content_container-->
         </div>
         <!--fields_content-->
+
         <script>$(".fields_content").last().css('border-bottom', 'none');</script>
+        <script>$(".fields_content").last().css('padding-bottom', '0');</script>
 
 
       </div>
