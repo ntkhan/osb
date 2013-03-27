@@ -241,11 +241,16 @@ INDUSTRY_LIST = ["Accommodation & Hospitality",
   "Wholesale Trade",
   "Other"
 ]
+
 DISCOUNT_TYPE = %w(% $)
+
+CREDIT_CARD_TYPE = ["Visa" ,"Master Card" ,"Discover", "American Express"]
+
 COMPANY_SIZE = ["1-10 employees",
   "11-100 employees",
   "101-500 employees",
   "Over 500 employees"]
+
 PAYMENT_METHODS = ["Check", "Bank Transfer", "Credit", "Cash", "Debit"]
 
 CURRENCY_CODE = [

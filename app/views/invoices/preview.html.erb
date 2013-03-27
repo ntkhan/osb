@@ -21,7 +21,8 @@
 
   <div class="content_bottom top">
     <% if @invoice.status != "paid" %>
-      <%= link_to "enter payment on invoice", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}", "http://#{request.host_with_port}/invoices/paypal_payments"), :class => "btn_large big" %>
+      <%= link_to "Pay with Paypal", @invoice.paypal_url("http://#{request.host_with_port}/invoices/preview/?inv_id=#{@invoice.encrypted_id}", "http://#{request.host_with_port}/invoices/paypal_payments"), :class => "btn_large big" %>
+      <%= link_to "Pay by Credit Card", "http://#{request.host_with_port}/invoices/credit_card_info/?inv_id=#{@invoice.encrypted_id}", :class => "btn_large big" %>
     <% else %>
       <div></div>
     <% end %>

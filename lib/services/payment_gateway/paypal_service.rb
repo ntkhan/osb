@@ -8,6 +8,7 @@ class PaypalService
     @invoice = Invoice.find_by_id(@invoice_id)
     return nil unless @invoice
     @client = @invoice.client
+    @options = options
 
     prepare_payment
   end
@@ -19,18 +20,30 @@ class PaypalService
       response = OSB::Paypal::gateway.authorize(@amount, @credit_card, @purchase_options)
       if response.success?
         OSB::Paypal::gateway.capture(@amount, response.authorization)
-        {status: OSB::Paypal::TransStatus::SUCCESS, amount_in_cents: @amount}
+        add_payment_on_success
+        {status: OSB::Paypal::TransStatus::SUCCESS, amount_in_cents: @amount, message: response.message}
       else
         {status: OSB::Paypal::TransStatus::FAILED, message: response.message}
       end
     else
-      {status: OSB::Paypal::TransStatus::INVALID_CARD, message: @credit_card.errors.fullmessages.join()}
+      {status: OSB::Paypal::TransStatus::INVALID_CARD, message: "Credit Card is not valid"} #@credit_card.errors.full_messages.join(',') || }
     end
   end
 
   def prepare_payment
     @purchase_options = @client.purchase_options
-    @credit_card = @client.get_credit_card
+    @credit_card = @client.get_credit_card(@options)
     @amount = ((@invoice.unpaid_amount || 0).to_f * 100).to_i
   end
+
+  def add_payment_on_success
+    @invoice.payments.create({
+                                :payment_method => "paypal",
+                                :payment_amount => @amount,
+                                :payment_date => Date.today,
+                                :paid_full => 1
+                            })
+    @invoice.update_attributes(status: 'paid')
+  end
+
 end
