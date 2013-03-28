@@ -1,4 +1,5 @@
 class CreditPayment < ActiveRecord::Base
+  # attr
   attr_accessible :amount, :invoice_id, :payment_id, :credit_id
 
   # associations

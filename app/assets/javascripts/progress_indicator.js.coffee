@@ -34,4 +34,4 @@ $ ->
   $(document).ajaxComplete ->
     setTimeout (->
       $("#progress_indicator").hide()
-    ), 500
+    ), 100

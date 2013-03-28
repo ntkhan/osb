@@ -1,7 +1,5 @@
 class PaymentsController < ApplicationController
   before_filter :authenticate_user!, :except => [:payments_history]
-  # GET /payments
-  # GET /payments.json
   layout :choose_layout
   include PaymentsHelper
 
@@ -14,8 +12,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # GET /payments/1
-  # GET /payments/1.json
   def show
     @payment = Payment.find(params[:id])
 
@@ -25,8 +21,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # GET /payments/new
-  # GET /payments/new.json
   def new
     @payment = Payment.new
 
@@ -36,13 +30,10 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # GET /payments/1/edit
   def edit
     @payment = Payment.find(params[:id])
   end
 
-  # POST /payments
-  # POST /payments.json
   def create
     @payment = Payment.new(params[:payment])
 
@@ -57,8 +48,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # PUT /payments/1
-  # PUT /payments/1.json
   def update
     @payment = Payment.find(params[:id])
     latest_amount = Payment.update_invoice_status params[:payment][:invoice_id], params[:payment][:payment_amount].to_i, @payment.payment_amount.to_i
@@ -91,16 +80,6 @@ class PaymentsController < ApplicationController
     @payments = []
     ids = ids.split(",") if ids and ids.is_a?(String)
     ids.each { |inv_id| @payments << Payment.new({:invoice_id => inv_id, :payment_date => Date.today}) }
-
-    #if params[:pay_invoice]
-    #  @payments << Payment.new({:invoice_id => params[:invoice_id], :payment_date => Date.today})
-    #  respond_to { |format| format.js }
-    #else
-    #  ids.each do |inv_id|
-    #    payment = Payment.new({:invoice_id => inv_id, :payment_date => Date.today})
-    #    @payments << payment
-    #  end
-    #end
   end
 
   def update_individual_payment
@@ -118,13 +97,6 @@ class PaymentsController < ApplicationController
 
   def bulk_actions
     ids = params[:payment_ids]
-    #if params[:archive]
-    #  Payment.archive_multiple(ids)
-    #  @payments = Payment.unarchived.page(params[:page]).per(params[:per])
-    #  @action = "archived"
-    #  @message = payments_archived(ids) unless ids.blank?
-    #if params[:destroy]
-    # check if payment is a credit and applied to any other invoice payment
     if Payment.is_credit_entry? ids
       @action = "credit entry"
       @payments_with_credit = Payment.payments_with_credit ids
@@ -135,27 +107,8 @@ class PaymentsController < ApplicationController
       @action = "deleted"
       @message = payments_deleted(ids) unless ids.blank?
     end
-    #elsif params[:recover_archived]
-    #  Payment.recover_archived(ids)
-    #  @payments = Payment.archived.page(params[:page]).per(params[:per])
-    #  @action = "recovered from archived"
-    #elsif params[:recover_deleted]
-    #  Payment.recover_deleted(ids)
-    #  @payments = Payment.only_deleted.page(params[:page]).per(params[:per])
-    #  @action = "recovered from deleted"
-    #end
     respond_to { |format| format.js }
   end
-
-  #def filter_payments
-  #  @payments = Payment.filter(params)
-  #end
-
-  #def undo_actions
-  #  params[:archived] ? Payment.recover_archived(params[:ids]) : Payment.recover_deleted(params[:ids])
-  #  @payments = Payment.unarchived.page(params[:page]).per(params[:per])
-  #  respond_to { |format| format.js }
-  #end
 
   def payments_history
     client = Invoice.find_by_id(params[:id]).client

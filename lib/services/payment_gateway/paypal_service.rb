@@ -4,7 +4,7 @@ class PaypalService
   #  options => {invoice_id: id}
   #  options => invoice_id
   def initialize(options)
-    @invoice_id = options.is_a?(Hash) ? options[:invoice_id] : options
+    @invoice_id = options.is_a?(Hash) ? OSB::Util.decrypt(options[:invoice_id]).to_i : options
     @invoice = Invoice.find_by_id(@invoice_id)
     return nil unless @invoice
     @client = @invoice.client
@@ -21,7 +21,7 @@ class PaypalService
       if response.success?
         OSB::Paypal::gateway.capture(@amount, response.authorization)
         add_payment_on_success
-        {status: OSB::Paypal::TransStatus::SUCCESS, amount_in_cents: @amount, message: response.message}
+        {status: OSB::Paypal::TransStatus::SUCCESS, amount_in_cents: @amount, message: "Invoice has been paid successfully"}
       else
         {status: OSB::Paypal::TransStatus::FAILED, message: response.message}
       end
@@ -39,7 +39,7 @@ class PaypalService
   def add_payment_on_success
     @invoice.payments.create({
                                 :payment_method => "paypal",
-                                :payment_amount => @amount,
+                                :payment_amount => @amount / 100,
                                 :payment_date => Date.today,
                                 :paid_full => 1
                             })
