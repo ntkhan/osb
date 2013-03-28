@@ -126,41 +126,6 @@ class InvoicesController < ApplicationController
     respond_to { |format| format.js }
   end
 
-  #def bulk_actions2
-  #  ids = params[:invoice_ids]
-  #  if params[:archive]
-  #    Invoice.archive_multiple(ids)
-  #    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-  #    @action = "archived"
-  #    @message = invoices_archived(ids) unless ids.blank?
-  #  elsif params[:destroy]
-  #    @invoices_with_payments = Invoice.delete_multiple(ids)
-  #    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-  #    @action = "deleted"
-  #    @action = "invoices_with_payments" unless @invoices_with_payments.blank?
-  #    @message = invoices_deleted(ids) unless ids.blank?
-  #  elsif params[:recover_archived]
-  #    Invoice.recover_archived(ids)
-  #    @invoices = Invoice.archived.page(params[:page]).per(params[:per])
-  #    @action = "recovered from archived"
-  #  elsif params[:recover_deleted]
-  #    Invoice.recover_deleted(ids)
-  #    @invoices = Invoice.only_deleted.page(params[:page]).per(params[:per])
-  #    @action = "recovered from deleted"
-  #  elsif params[:send]
-  #    send_invoices(ids)
-  #    @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
-  #    @action = "sent"
-  #  elsif params[:payment]
-  #    @action = unless Invoice.paid_invoices(ids).present?
-  #                "enter payment"
-  #              else
-  #                "paid invoices"
-  #              end
-  #  end
-  #  respond_to { |format| format.js }
-  #end
-
   def undo_actions
     params[:archived] ? Invoice.recover_archived(params[:ids]) : Invoice.recover_deleted(params[:ids])
     @invoices = Invoice.unarchived.page(params[:page]).per(params[:per])
@@ -170,18 +135,6 @@ class InvoicesController < ApplicationController
   def filter_invoices
     @invoices = Invoice.filter(params)
   end
-
-  #def send_invoices ids
-  #  Invoice.multiple_invoices(ids).each { |invoice|
-  #    invoice.send_invoice(current_user, encrypt(invoice.id))
-  #  }
-  #end
-  #
-  #def send_invoice
-  #  @invoice = Invoice.find_by_id(params[:id])
-  #  @invoice.send_invoice(current_user, encrypt(params[:id]))
-  #  redirect_to(invoice_path(@invoice), :notice => "Invoice has been sent successfully")
-  #end
 
   def delete_invoices_with_payments
     invoices_ids = params[:invoice_ids]

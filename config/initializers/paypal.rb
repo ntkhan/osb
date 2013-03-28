@@ -1,5 +1,6 @@
 module OSB
   module Paypal
+    URL = "https://www.sandbox.paypal.com/cgi-bin/webscr?"
     module TransStatus
       SUCCESS = :SUCCESS
       FAILED = :FAILED

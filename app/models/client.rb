@@ -1,12 +1,20 @@
 class Client < ActiveRecord::Base
-  acts_as_archival
-  acts_as_paranoid
+  # default scope
+  default_scope order("#{self.table_name}.created_at DESC")
+
+  # attr
   attr_accessible :address_street1, :address_street2, :business_phone, :city, :company_size, :country, :fax, :industry, :internal_notes, :organization_name, :postal_zip_code, :province_state, :send_invoice_by, :email, :home_phone, :first_name, :last_name, :mobile_number, :client_contacts_attributes, :archive_number, :archived_at, :deleted_at, :available_credit
+
+  # associations
   has_many :invoices
   has_many :client_contacts, :dependent => :destroy
   accepts_nested_attributes_for :client_contacts, :allow_destroy => true
+
+  acts_as_archival
+  acts_as_paranoid
+
   paginates_per 10
-  default_scope order("#{self.table_name}.created_at DESC")
+
 
   def contact_name
     "#{self.first_name} #{self.last_name}"
