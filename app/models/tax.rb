@@ -1,17 +1,25 @@
 class Tax < ActiveRecord::Base
+  # default scope
+  default_scope order("#{self.table_name}.created_at DESC")
+
+  # attr
   attr_accessible :name, :percentage
+
+  # associations
   has_many :invoice_line_items
   has_many :items
   validates :name, :presence => true
   validates :percentage, :presence => true
-  paginates_per 10
+
+  # archive and delete
   acts_as_archival
   acts_as_paranoid
-  default_scope order("#{self.table_name}.created_at DESC")
+
+  paginates_per 10
 
   def self.multiple_taxes ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids)
+    ids = ids.split(',') if ids and ids.class == String
+    where('id IN(?)', ids)
   end
 
   def self.archive_multiple ids
@@ -32,8 +40,8 @@ class Tax < ActiveRecord::Base
   end
 
   def self.recover_deleted ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids).only_deleted.each do |tax|
+    ids = ids.split(',') if ids and ids.class == String
+    where('id IN(?)', ids).only_deleted.each do |tax|
       tax.archive_number = nil
       tax.archived_at = nil
       tax.deleted_at = nil
@@ -43,11 +51,11 @@ class Tax < ActiveRecord::Base
 
   def self.filter params
     case params[:status]
-      when "active" then
+      when 'active' then
         self.unarchived.page(params[:page]).per(params[:per])
-      when "archived" then
+      when 'archived' then
         self.archived.page(params[:page]).per(params[:per])
-      when "deleted" then
+      when 'deleted' then
         self.only_deleted.page(params[:page]).per(params[:per])
     end
   end

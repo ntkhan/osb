@@ -1,5 +1,8 @@
 class Payment < ActiveRecord::Base
+  # default scope
+  default_scope order("#{self.table_name}.created_at DESC")
 
+  # attr
   attr_accessible :invoice_id, :notes, :paid_full, :payment_amount, :payment_date, :payment_method, :send_payment_notification, :archive_number, :archived_at, :deleted_at, :credit_applied
 
   # associations
@@ -7,18 +10,19 @@ class Payment < ActiveRecord::Base
   has_many :sent_emails, :as => :notification
   has_many :credit_payments
 
+  # validation
   validates :payment_amount, :numericality => {:greater_than => 0}
 
   paginates_per 10
 
+  # archive and delete
   acts_as_archival
   acts_as_paranoid
 
-  default_scope order("#{self.table_name}.created_at DESC")
 
   def client_name
     invoice = Invoice.with_deleted.find(self.invoice_id)
-    invoice.client.organization_name rescue "no client"
+    invoice.client.organization_name rescue 'no client'
   end
 
   def client_full_name
@@ -85,20 +89,16 @@ class Payment < ActiveRecord::Base
   end
 
   def self.multiple_payments ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids)
+    ids = ids.split(',') if ids and ids.class == String
+    where('id IN(?)', ids)
   end
-
-  #def self.archive_multiple ids
-  #  self.multiple_payments(ids).each { |payment| payment.archive }
-  #end
 
   def self.delete_multiple ids
     multiple_payments(ids).each do |payment|
       invoice = payment.invoice
 
       # delete all the associations with credit payments
-      payment.destroy_credit_applied(payment.id) if payment.payment_method == "Credit"
+      payment.destroy_credit_applied(payment.id) if payment.payment_method == 'Credit'
       payment.destroy!
 
       # change invoice status on non credit payments deletion
@@ -107,32 +107,8 @@ class Payment < ActiveRecord::Base
   end
 
   def destroy_credit_applied(payment_id)
-    CreditPayment.where("credit_id = ?", payment_id).map(&:destroy)
+    CreditPayment.where('credit_id = ?', payment_id).map(&:destroy)
   end
-
-  #def self.recover_archived ids
-  #  self.multiple_payments(ids).each { |payment| payment.unarchive }
-  #end
-  #
-  #def self.recover_deleted ids
-  #  ids = ids.split(",") if ids and ids.class == String
-  #  where("id IN(?)", ids).only_deleted.each do |payment|
-  #    payment.recover
-  #    payment.unarchive
-  #  end
-  #end
-  #
-  #def self.filter params
-  #  case params[:status]
-  #    when "active" then
-  #      self.unarchived.page(params[:page]).per(params[:per])
-  #    when "archived" then
-  #      self.archived.page(params[:page]).per(params[:per])
-  #    when "deleted" then
-  #      self.only_deleted.page(params[:page]).per(params[:per])
-  #    else
-  #  end
-  #end
 
   def notify_client current_user_email
     PaymentMailer.payment_notification_email(current_user_email, self.invoice.client, self.invoice.invoice_number, self).deliver if self.send_payment_notification
@@ -140,7 +116,7 @@ class Payment < ActiveRecord::Base
 
   def self.payments_history client
     ids = client.invoices.collect { |invoice| invoice.id }
-    where("invoice_id IN(?)", ids)
+    where('invoice_id IN(?)', ids)
   end
 
   def self.total_payments_amount
@@ -148,54 +124,14 @@ class Payment < ActiveRecord::Base
   end
 
   def self.partial_payments invoice_id
-    where("invoice_id = ?", invoice_id)
+    where('invoice_id = ?', invoice_id)
   end
 
   def self.is_credit_entry? ids
-    CreditPayment.where("payment_id IN(?)", ids).length > 0
+    CreditPayment.where('payment_id IN(?)', ids).length > 0
   end
 
   def self.payments_with_credit ids
-    where("payments.id IN(?)", ids).joins(:credit_payments).group("payments.id")
+    where('payments.id IN(?)', ids).joins(:credit_payments).group('payments.id')
   end
-
-  #def self.do_payment_amount_comparison invoice, payment_amount
-  #  remaining, collected = payment_amount, 0
-  #
-  #  # loop through all the credit payments of client
-  #  invoice.client.invoices.with_deleted.each do |client_invoice|
-  #    client_invoice.credit_payments.each do |credit_payment|
-  #
-  #      credit_amount, credit_applied =  credit_payment.payment_amount.to_f, credit_payment.credit_applied.to_f
-  #      credit_amount -= credit_applied
-  #
-  #      current = remaining >= credit_amount ? {:amount => credit_amount, :still_remaining => true} : {:amount => remaining, :still_remaining => false}
-  #
-  #      collected += current[:still_remaining] ? current[:amount] : remaining
-  #
-  #      credit_applied += current[:amount]
-  #
-  #      remaining = payment_amount - collected
-  #
-  #      credit_payment.update_attribute('credit_applied',credit_applied)
-  #      CreditPayment.create({:payment_id => credit_payment.id, :invoice_id => credit_payment.invoice_id, :amount => credit_applied})
-  #
-  #      break if remaining == 0
-  #    end unless client_invoice.credit_payments.blank?
-  #  end
-  #end
-
-  #def change_invoice_status
-
-  ## update invoice status when a payment is deleted
-  #case invoice.status
-  #  when "draft-partial" then invoice.draft! unless invoice.has_payments?
-  #  when "partial","paid" then (invoice.has_payments? ? invoice.partial! : invoice.sent! )
-  #  when "disputed" then (invoice.has_payments? ? invoice.partial! : invoice.disputed! )
-  #  else
-  #end if invoice.present?
-  #
-  #Rails.logger.debug "\e[1;31m Before After: #{invoice.status} \e[0m"
-  #end
-
 end

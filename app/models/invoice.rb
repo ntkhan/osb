@@ -1,6 +1,7 @@
 class Invoice < ActiveRecord::Base
   include ::OSB
 
+  # default scope
   default_scope order("#{self.table_name}.created_at DESC")
   scope :multiple, lambda { |ids_list| where("id in (?)", ids_list.is_a?(String) ? ids_list.split(',') : [*ids_list]) }
 
@@ -15,6 +16,7 @@ class Invoice < ActiveRecord::Base
       disputed: 'Client has disputed this invoice.',
   }
 
+  # attr
   attr_accessible :client_id, :discount_amount, :discount_type, :discount_percentage, :invoice_date, :invoice_number, :notes, :po_number, :status, :sub_total, :tax_amount, :terms, :invoice_total, :invoice_line_items_attributes, :archive_number, :archived_at, :deleted_at, :payment_terms_id, :due_date, :last_invoice_status
 
   # associations
@@ -28,18 +30,18 @@ class Invoice < ActiveRecord::Base
 
   accepts_nested_attributes_for :invoice_line_items, :reject_if => proc { |line_item| line_item['item_id'].blank? }, :allow_destroy => true
 
+  # validation
+
   # callbacks
-  #before_destroy :sent!
   before_create :set_invoice_number
   after_destroy :destroy_credit_payments
 
-  paginates_per 10
-
+  # archive and delete
   acts_as_archival
   acts_as_paranoid
   has_paper_trail :on => [:update], :only => [:last_invoice_status], :if => Proc.new {|invoice| invoice.last_invoice_status == 'disputed'}
 
-  #include ActionView::Helpers::NumberHelper
+  paginates_per 10
 
   def set_invoice_number
     self.invoice_number = Invoice.get_next_invoice_number(nil)
@@ -127,10 +129,6 @@ class Invoice < ActiveRecord::Base
     ((Invoice.with_deleted.maximum("id") || 0) + 1).to_s.rjust(5, "0")
   end
 
-  #def self.paid_invoices ids
-  #  where("id IN(?) AND status = 'paid'", ids)
-  #end
-
   def total
     self.invoice_line_items.sum { |li| (li.item_unit_cost || 0) *(li.item_quantity || 0) }
   end
@@ -148,37 +146,9 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.multiple_invoices ids
-    ids = ids.split(",") if ids and ids.class == String
-    where("id IN(?)", ids)
+    ids = ids.split(',') if ids and ids.class == String
+    where('id IN(?)', ids)
   end
-
-  #def self.archive_multiple ids
-  #  self.multiple_invoices(ids).each { |invoice| invoice.archive }
-  #end
-
-  #def self.delete_multiple ids
-  #  invoices_with_payments = []
-  #  self.multiple_invoices(ids).each do |invoice|
-  #    if invoice.payments.where("payment_type !='credit' or payment_type is null").blank?
-  #      invoice.destroy
-  #    else
-  #      invoices_with_payments << invoice
-  #    end
-  #  end
-  #  invoices_with_payments #if there are invoices with payments
-  #end
-
-  #def self.delete_invoices_with_payments ids, convert_to_credit
-  #  self.multiple_invoices(ids).each { |invoice|
-  #    if convert_to_credit
-  #      invoice.payments.with_deleted.where("payment_method = 'Credit'").each { |payment| payment.destroy! }
-  #      invoice_total_payments = invoice.payments.where("payment_type !='credit' or payment_type is null").sum('payment_amount')
-  #      self.add_credit_payment invoice, invoice_total_payments
-  #    end
-  #    invoice.delete_non_credit_payments
-  #    invoice.destroy
-  #  }
-  #end
 
   def self.recover_archived ids
     self.multiple_invoices(ids).each { |invoice| invoice.unarchive }
@@ -243,10 +213,6 @@ class Invoice < ActiveRecord::Base
     where("status = 'partial'")
   end
 
-  #def credit_payments
-  #  payments.where("payment_type = 'credit'")
-  #end
-
   def encrypted_id
     OSB::Util::encrypt(self.id)
   end
@@ -263,18 +229,7 @@ class Invoice < ActiveRecord::Base
         :item_name => "Test",
         :amount => invoice_total
     }
-    #item_discount = number_with_precision(-(discount_amount.to_d / (invoice_line_items.size.to_d)),:precision => 2).to_d
-    #invoice_line_items.each_with_index do |item, index|
-    #  values.merge!({
-    #                    "amount_#{index+1}" => item.item_unit_cost,
-    #                    "item_name_#{index+1}" => (item.item.item_name rescue ""),
-    #                    "item_number_#{index+1}" => item.id,
-    #                    "quantity_#{index+1}" => item.item_quantity,
-    #                    "tax_#{index+1}" => ((item.tax1.percentage rescue 0) + (item.tax2.percentage rescue 0))
-    #                    #"discount_amount_#{index+1}" => (index+1 == invoice_line_items.size ? last_invoice_discount(item_discount, discount_amount, invoice_line_items.size) : item_discount)
-    #                })
-    #end
-    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+    OSB::Paypal::URL + values.to_query
   end
 
   def update_dispute_invoice(current_user, id, response_to_client)

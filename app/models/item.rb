@@ -1,12 +1,20 @@
 class Item < ActiveRecord::Base
-  acts_as_archival
-  acts_as_paranoid
+  # default scop
+  default_scope order("#{self.table_name}.created_at DESC")
+
+  # attr
   attr_accessible :inventory, :item_description, :item_name, :quantity, :tax_1, :tax_2, :track_inventory, :unit_cost, :archive_number, :archived_at, :deleted_at
+
+  # associations
   has_many :invoice_line_items, :dependent => :destroy
   belongs_to :tax1, :foreign_key => "tax_1", :class_name => "Tax"
   belongs_to :tax2, :foreign_key => "tax_2", :class_name => "Tax"
+
+  # archive and delete
+  acts_as_archival
+  acts_as_paranoid
+
   paginates_per 10
-  default_scope order("#{self.table_name}.created_at DESC")
 
   def self.multiple_items ids
     ids = ids.split(",") if ids and ids.class == String
