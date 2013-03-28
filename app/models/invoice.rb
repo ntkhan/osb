@@ -247,20 +247,20 @@ class Invoice < ActiveRecord::Base
   #end
 
   def encrypted_id
-    OSB::Util::encrypt(self.id)
+    OSB::Util::encrypt(id)
   end
 
   def paypal_url(return_url, notify_url)
     values = {
+        :business => 'onlyfo_1362543783_biz@hotmail.com',
         #:business => 'onlyfo_1362112292_per@hotmail.com',
-        :business => 'onlyforarif-facilitator@gmail.com',
-        :cmd => '_cart',
+        :cmd => '_xclick',
         :upload => 1,
         :return => return_url,
         :notify_url => notify_url,
         :invoice => id,
-        :item_name => "Test",
-        :amount => invoice_total
+        :item_name => "Invoice",
+        :amount => unpaid_amount
     }
     #item_discount = number_with_precision(-(discount_amount.to_d / (invoice_line_items.size.to_d)),:precision => 2).to_d
     #invoice_line_items.each_with_index do |item, index|
