@@ -1,16 +1,30 @@
-<%= form_tag '/invoices/pay_with_credit_card',method: 'post',id: 'cc_form', novalidate: "" do  -%>
+<%= form_tag '/invoices/pay_with_credit_card',method: 'post',id: 'cc_form', novalidate: "", :remote => true do  -%>
     <div id="cc_popup" class="modal hide fad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="model_grey_container">
         <div class="modal-header">
 
-          <h1>Please enter you credit card details to pay invoice (<%= @invoice.invoice_number %>) of <%= number_to_currency(Payment.invoice_remaining_amount(@invoice.id)) %></h1>
-
+          <h1>Pay Invoice by Credit Card</h1>
+          <p>Please enter you credit card details to pay invoice (<%= @invoice.invoice_number %>) of <%= number_to_currency(@invoice.unpaid_amount) %></p>
           <div class="cross_btn">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
               <%= image_tag "cross.png", :size => "7x7", :alt => "" %>
             </button>
           </div>
         </div>
+
+        <div id="cc_popup_error" class="alert alert-error popup" style="display:none;">
+          <button class="close" type="button" style="margin:0px;">×</button>
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <span></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="modal-body">
 
           <div class="content_middle">
@@ -81,7 +95,7 @@
                   </div>
 
                   <!--field_row-->
-                  <p><b>Note:</b> We do not store your credit card information. We directly pass it to payment processor.</p>
+                  <p><b>Note:</b> We do not store your credit card information.</p>
                 </div>
                 <!--fields_content_data-->
               </div>
@@ -94,7 +108,7 @@
 
         </div>
         <div class="footer ">
-          <%= submit_tag "Enter Payment", :class => "btn_large submit" %>
+          <%= submit_tag "Pay Invoice", :class => "btn_large submit" %>
           <a href="#" data-dismiss="modal" class="btn_large grey">cancel</a>
         </div>
       </div>

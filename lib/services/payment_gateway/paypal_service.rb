@@ -21,7 +21,7 @@ class PaypalService
       if response.success?
         OSB::Paypal::gateway.capture(@amount, response.authorization)
         add_payment_on_success
-        {status: OSB::Paypal::TransStatus::SUCCESS, amount_in_cents: @amount, message: response.message}
+        {status: OSB::Paypal::TransStatus::SUCCESS, amount_in_cents: @amount, message: "Invoice has been paid successfully"}
       else
         {status: OSB::Paypal::TransStatus::FAILED, message: response.message}
       end
@@ -39,7 +39,7 @@ class PaypalService
   def add_payment_on_success
     @invoice.payments.create({
                                 :payment_method => "paypal",
-                                :payment_amount => @amount,
+                                :payment_amount => @amount / 100,
                                 :payment_date => Date.today,
                                 :paid_full => 1
                             })
