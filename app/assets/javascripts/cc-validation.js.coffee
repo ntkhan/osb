@@ -3,7 +3,8 @@ window.validateCreditCard = ->
 
   # all fields on credit card form are required
   jQuery("form#cc_form").submit ->
-    return validateForm(jQuery(this))
+    jQuery(this).find("input[type=submit]").attr("disabled","disabled") if validateForm(jQuery(this))
+    validateForm(jQuery(this))
 
   validateForm = (elem) ->
     valid_form = true

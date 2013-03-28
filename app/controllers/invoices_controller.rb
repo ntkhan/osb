@@ -176,11 +176,9 @@ class InvoicesController < ApplicationController
 
   def pay_with_credit_card
     paypal = PaypalService.new(params)
-    result = paypal.process_payment
+    @result = paypal.process_payment
 
-    # where to redirect after the payment process
-    response = result[:status].to_s != "SUCCESS" ? {alert: result[:message]}  : {notice: result[:message]}
-    redirect_to({controller: 'invoices', action: 'preview', inv_id: params[:invoice_id]}, response)
+    respond_to { |format| format.js }
   end
 
 

@@ -81,8 +81,7 @@ class Invoice < ActiveRecord::Base
 
 
   def unpaid_amount
-    #TODO: deduct the partial payment from invoice total if any
-    self.invoice_total
+    invoice_total - payments.where("payment_type is null || payment_type != 'credit'").sum(:payment_amount)
   end
 
   # This doesn't actually dispute the invoice. It just updates the invoice status to dispute.
@@ -307,6 +306,7 @@ class Invoice < ActiveRecord::Base
   def destroy_credit_payments
     credit_payments.map(&:destroy)
   end
+
    def send_note_only response_to_client, current_user
      InvoiceMailer.delay.send_note_email(response_to_client, self,self.client, current_user)
    end
