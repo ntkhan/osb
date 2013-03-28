@@ -16,7 +16,6 @@ class InvoiceMailer < ActionMailer::Base
 
   def send_note_email(response_to_client, invoice, client, current_user)
     @response_to_client, @invoice, @client, @current_user  = response_to_client, invoice , client, current_user
-    mail(:to => @client.email, :subject => "Send note only for dispute")
     invoice.sent_emails.create({
                                    :content => @response_to_client,
                                    :sender => @current_user.email, #User email
@@ -25,6 +24,7 @@ class InvoiceMailer < ActionMailer::Base
                                    :type => "Disputed",
                                    :date => Date.today
                                })
+    mail(:to => @client.email, :subject => "Send note only for dispute")
   end
 
   def due_date_reminder_email(invoice)

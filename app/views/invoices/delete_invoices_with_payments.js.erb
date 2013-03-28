@@ -4,5 +4,9 @@ jQuery('#invoices_with_payments').modal('hide')
 <%if !params[:invoice_ids].blank? %>
 jQuery(".alert.alert-success").show().find('span').html("<%= escape_javascript @message %>");
 jQuery('tbody#invoice_body').html('<%= escape_javascript render("invoice") %>');
+setTimeout(function(){
+    jQuery(".invoice_listing .text-overflow-class").ellipsis({row:1});
+},100);
+
 <%end%>
 
