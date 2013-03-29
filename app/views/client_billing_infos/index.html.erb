@@ -1,0 +1,43 @@
+<h1>Listing client_billing_infos</h1>
+
+<table>
+  <tr>
+    <th>Country</th>
+    <th>Street address 1</th>
+    <th>Street address 2</th>
+    <th>City</th>
+    <th>Province or state</th>
+    <th>Postal or zip code</th>
+    <th>Phone business</th>
+    <th>Phone mobile</th>
+    <th>Phone home</th>
+    <th>Fax</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @client_billing_infos.each do |client_billing_info| %>
+      <tr>
+        <td><%= client_billing_info.country %></td>
+        <td><%= client_billing_info.street_address_1 %></td>
+        <td><%= client_billing_info.street_address_2 %></td>
+        <td><%= client_billing_info.city %></td>
+        <td><%= client_billing_info.province_or_state %></td>
+        <td><%= client_billing_info.postal_or_zip_code %></td>
+        <td><%= client_billing_info.phone_business %></td>
+        <td><%= client_billing_info.phone_mobile %></td>
+        <td><%= client_billing_info.phone_home %></td>
+        <td><%= client_billing_info.fax %></td>
+        <td><%= client_billing_info.notes %></td>
+        <td><%= link_to 'Show', client_billing_info %></td>
+        <td><%= link_to 'Edit', edit_client_billing_info_path(client_billing_info) %></td>
+        <td><%= link_to 'Destroy', client_billing_info, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New Client billing info', new_client_billing_info_path %>

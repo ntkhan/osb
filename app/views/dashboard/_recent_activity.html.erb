@@ -1,0 +1,27 @@
+<div class="overview_box">
+
+  <div class="overview_box_heading">
+    <h1 class="small">Recent Activity</h1>
+  </div>
+  <div class="day_session">
+    <!--<div class="day_session_heading">-->
+    <!--<p>Yesterday</p>-->
+    <!--</div>-->
+    <div class="day_session_content">
+      <%- @recent_activity.each do |activity| %>
+          <div class="day_session_content_detail">
+            <ul>
+              <li class="day_session_title"><%= link_to activity[:activity_type].capitalize, activity[:activity_path] %></a></li>
+              <li class="day_session_amount"><%= number_to_currency(activity[:amount]) %></li>
+              <li class="day_session_currency">USD</li>
+            </ul>
+            <p><%= "#{activity[:activity_action]} #{activity[:client]} on #{activity[:activity_date].to_date}" %></p>
+          </div>
+      <% end %>
+      <script>$(".day_session_content_detail").last().css('border-bottom', 'none');</script>
+    </div>
+    <!--day_session_content-->
+
+  </div>
+  <!--day_session-->
+</div><!--overview_box-->

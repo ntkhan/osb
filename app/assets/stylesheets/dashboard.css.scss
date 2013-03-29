@@ -1,0 +1,206 @@
+.dashboard_style{
+    h1{
+            font-size: 22px;
+            color: #464646;
+    }
+    .row-fluid .span4 {
+            width: 32.924%;
+    }
+    .row-fluid .span8 {
+            width: 64.2%;
+            margin-left: 2.6641%;
+    }
+    .overview_box{
+            width: 100%;
+            background-color: #ffffff;
+            border: 1px solid #d7d7d7;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            padding: 13px 0 3px 0;
+            overflow: hidden;
+            margin: 0 0 20px 0;
+            box-shadow: 0 1px 2px #F0F0F0 inset;
+            *width: 99.8%;
+    }
+    .overview_box_heading{
+            float: left;
+            width: 100%
+    }
+    .overview_box_heading h1{
+            padding: 0 18px 5px 18px;
+            *padding-top: 12px;
+
+    }
+    /*Content Left Css Starts*/
+    .day_session{
+            float: left;
+            width: 100%;
+            padding: 0 0 3px 0;
+    }
+    .day_session_heading{
+            float: left;
+            width: 100%;
+            border-bottom: 1px solid #d7d7d7;
+    }
+    .day_session_heading p{
+            padding: 9px 20px 3px 20px;
+    }
+    .day_session_content{
+            float: left;
+            width: 84.6%;
+            padding: 0 19px 0 19px;
+    }
+    .day_session_content_detail{
+            float: left;
+            border-bottom: 1px solid #d7d7d7;
+            width: 100%;
+            padding: 5px 0 8px 0;
+    }
+    .day_session_content_detail:last-child{
+            border-bottom: none;
+    }
+    .day_session_content_detail ul{
+            margin: 0 0 -3px 0;
+            overflow: hidden;
+    }
+    .day_session_content_detail ul li{
+            float: left;
+    }
+    .day_session_title a{
+            color: #00ace5;
+            padding: 0 5px 0 0;
+    }
+    .day_session_title a:hover{
+            text-decoration: underline;
+    }
+    .day_session_amount{
+            color: #464646;
+            padding: 0 6px 0 0;
+    }
+    .day_session_currency{
+            font-size: 10px;
+            color: #959595;
+            text-transform: uppercase;
+            padding: 1px 0 0 0;
+    }
+    .day_session_content_detail p{
+            float: left;
+            width: 100%;
+            color: #959595;
+    }
+    .no_border{
+            border: none;
+    }
+    .osb_content{
+            float: left;
+            width: 100%;
+            text-align: center;
+            padding: 4px 0 16px 0;
+    }
+    .osb_content p{
+            color: #464646;
+            line-height: 1.7;
+            padding: 0 19px 17px 19px;
+            text-align: left;
+    }
+    .osb_content a:hover{
+            background-color: #00bde5;
+    text-decoration: none;
+    }
+    .getting_start{
+            float: left;
+            width: 100%;
+    }
+    .getting_start ul{
+            padding: 0 19px 10px 19px;
+    }
+    .getting_start ul li{
+             background: url("/assets/bullet.png") no-repeat left;
+             margin: 0 0 4px;
+    }
+    .getting_start ul li a{
+            display: block;
+            color: #00bde5;
+            text-decoration: none;
+            padding: 0 0 0 11px;
+    }
+    .getting_start ul li a:hover, .getting_start ul li:hover{
+            text-decoration: underline;
+    }
+    /*Content Left Css Ends*/
+
+    /*Content Right Css Starts*/
+    .graff_content{
+            float: left;
+            width: 100%;
+    }
+    .graff_highlight{
+            float: left;
+            width: 92.8%;
+            padding: 0 20px 30px 20px;
+            border-bottom: 1px solid #d7d7d7;
+            margin: 0 0 13px 0;
+    }
+    .graff_highlight img{
+            height: 191px;
+    }
+    .graff_description{
+            float: left;
+            width: 100%;
+            padding: 0 0 24px 0;
+    }
+    .graff_value{
+            float: left;
+            width: 308px;
+            text-align: center;
+    }
+    .graff_digit{
+            display: inline-block;
+    }
+    .digit_content{
+            font-family: 'Dosis Medium', sans-serif;
+            font-size: 42px;
+            color: #00bde5;
+            font-weight: normal;
+            padding: 35px 0 7px 0;
+            margin: 0 0 8px 0;
+            letter-spacing: 0.2px;
+            display: block;
+    }
+    .digit_description{
+            color: #464646;
+    }
+    .digit_description span{
+            font-size: 10px;
+    }
+    .graff_detail{
+            float: right;
+            padding: 5px 20px 0 0;
+    }
+    .graff_detail table tr{
+            height: 18px;
+    }
+    .graff_detail table tr td{
+            vertical-align: top;
+    }
+    .graff_detail table tr td:first-child{
+             text-align: left;
+    }
+    .graff_detail table tr td span{
+            float: right;
+            padding: 0 0 0 7px;
+    }
+    .graff_detail table tr td:last-child{
+            text-align: left;
+            padding: 0 0 0 7px;
+    }
+    .graff_detail a{
+            float: left;
+            margin: 12px 0 0 0;
+    }
+    td.jqplot-table-legend{
+            padding: 0 0 0 7px;
+    }
+	
+}
