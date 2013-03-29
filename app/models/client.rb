@@ -103,7 +103,7 @@ class Client < ActiveRecord::Base
     client_payments = Payment.where("payment_method = 'credit' AND invoice_id in (?)", invoice_ids).all
     client_avail_credit = client_payments.sum { |f| f.payment_amount }
     # Total available credit of client
-    client_total_credit - client_avail_credit + self.available_credit.to_i
+    client_total_credit - client_avail_credit #+ self.available_credit.to_i
   end
 end
 
