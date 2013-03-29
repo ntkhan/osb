@@ -237,25 +237,18 @@ jQuery ->
           tax1_value = jQuery("option:selected",tax1).val()
           tax2_value = jQuery("option:selected",tax2).val()
 
-          if parseFloat(cost.val()) <= 0
-            applyPopover(cost,"bottomLeft","topLeft","Unit cost should be greater then 0")
-            flag = false
-          else if not jQuery.isNumeric(cost.val()) and cost.val() isnt ""
+          if not jQuery.isNumeric(cost.val()) and cost.val() isnt ""
             applyPopover(cost,"bottomLeft","topLeft","Enter valid Item cost")
             flag = false
           else hidePopover(cost)
 
-          if parseFloat(qty.val()) <= 0
-            applyPopover(qty,"bottomLeft","topLeft","Quantity should be greater then 0")
-            flag = false
-          else if not jQuery.isNumeric(qty.val())  and qty.val() isnt ""
+          if not jQuery.isNumeric(qty.val())  and qty.val() isnt ""
             applyPopover(qty,"bottomLeft","topLeft","Enter valid Item quantity")
             flag = false
           else if (tax1_value is tax2_value) and (tax1_value isnt "" and tax2_value isnt "")
             applyPopover(tax2.next(),"bottomLeft","topLeft","Tax1 and Tax2 should be different")
             flag = false
           else hidePopover(qty)
-#          if parseFloat(cost.val()) <= 0 or not jQuery.isNumeric(cost.val()) or parseFloat(qty.val()) <= 0 or not jQuery.isNumeric(qty.val()) then flag = false
     flag
 
   applyPopover = (elem,position,corner,message) ->
