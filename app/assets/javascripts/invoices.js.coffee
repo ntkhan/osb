@@ -255,7 +255,6 @@ jQuery ->
             applyPopover(tax2.next(),"bottomLeft","topLeft","Tax1 and Tax2 should be different")
             flag = false
           else hidePopover(qty)
-#          if parseFloat(cost.val()) <= 0 or not jQuery.isNumeric(cost.val()) or parseFloat(qty.val()) <= 0 or not jQuery.isNumeric(qty.val()) then flag = false
     flag
 
   applyPopover = (elem,position,corner,message) ->
