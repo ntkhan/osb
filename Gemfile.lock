@@ -120,7 +120,7 @@ GEM
     paypal-sdk-rest (0.5.1)
       paypal-sdk-core (~> 0.2.0)
       uuidtools (~> 2.1)
-    pdfkit (0.5.2)
+    pdfkit (0.8.7)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
